@@ -1,0 +1,740 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red102\green0\blue204;
+\red128\green128\blue128;
+\red114\green179\blue114;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\b\fs48 Alexis Robinson - Meat - RAW\b0}
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ Nuh nuh. It don't take no three months. It really? No, no. Now, how long are we talking? Well, the good thing is FedRAMP also is very open about how long it takes. It could take from 12 months to 18 months. Some have done 36 months , like Jesus. Wow. Some people, it's been five years and they're still trying to figure it out.}
+{\pard  \line \par}
+{Like it's a lot. And part of it is if you're not architecting what your solution would be for customers with compliance in mind, with FedRAMP compliance in mind, it is way more difficult to do it. So if you just built something and just shipping it out, and then now you have to back in all these security controls and processes that you didn't think about, not even just the processes, but now there's resources you either have to hire, deal with new tools that you have to add on.}
+{\pard  \line \par}
+{Mm-hmm. if you're not monitoring things or you're not logging certain things, it's like, it just ends up backing itself up too, a longer timeframe. So the biggest thing is underestimating that process, not }
+{\cf2 [00:01:00]}
+{ just the gov. And everyone always blames the government. It's not the government, it's no, it's gonna take a while for you to get.}
+{\pard  \line \par}
+{ready It's gonna take about you to get ready. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ 20 million dollars. That's the amount you're looking at for a government project that you may win if you get FedRAMP compliant. Now, as easy as may sound, and as easy as compliance has become to automate in a regular context of ISO 27,001 or SOC2 or SOC1, however you gonna see other compliance standards.}
+{\pard  \line \par}
+{FedRAMP is not that straightforward. In this episode, we had Alexis Robinson, she's from AWS, works with the FedRAMP team over there, and she spoke about what are some of the challenges that as a cloud service provider they have to go through to get FedRAMP compliant? What customers of the cloud expect and how can they become FedRAMP compliant?}
+{\pard  \line \par}
+{Why should you care about FedRAMP compliance in the first place? Why is it complicated and unknown to a lot of people who think that they can have a FedRAMP compliance in three months? Why is that not even }
+{\cf2 [00:02:00]}
+{ practical, FedRAMP, what it is? Why should you care and why are so many people after it? What are some of the skillset you would need for the team?}
+{\pard  \line \par}
+{Why are some of the common anti patterns that have been found in other compliance frameworks may or may not apply in a FedRAMP context? A lot of compliance folks talk about how compliance is a revenue generating stream. the number $20 million kind of makes it obvious that it is a very revenue generating stream for at least from FedRAMP concept as well.}
+{\pard  \line \par}
+{So all that and a lot more about FedRAMP. If you are hearing FedRAMP for the first time and , you're not based outta the US or maybe you are based of the US and have not heard of FedRAMP before, maybe 20 million is a good way to start the conversation for why you may want to care about FedRAMP. And this was probably a dipping your toe into the world of FedRAMPMP, what it is and how maybe you can even consider just walking the path and maybe making us eligible for one of the government contracts in a gov cloud in AWS or }
+{\cf2 [00:03:00]}
+{ just the commercial cloud or the cloud that we all use. This is part of our builder series for AWS in the month of February, 2023.}
+{\pard  \line \par}
+{And we are talking about FedRAMP today. So if you are someone who's trying to learn about FedRAMP, how we can get it and maybe even know someone who's trying to get into the FedRAMP space. This is the episode for you. Alexis did a great job of explaining quite a bit about what the FedRAMP space is about.}
+{\pard  \line \par}
+{They have a lot of comments and specific people sharing their experience with FedRAMP as well. So I'll definitely check out the livestream of what we did as well. And overall, I think it was a great episode. I hope you get value from it as well. If you're here for the second and third time listening about cloud security, I would definitely recommend checking out cloud security podcasts, YouTube, LinkedIn, which is for video cuz we do video and audio on your popular audio platforms like Apple, Spotify, and Google Podcasts as well.}
+{\pard  \line \par}
+{If you're there you might as well leave us a review on rating if you like it, because that helps future guests know how amazing you have found the content to be and it also helps us grow. So thank you so much for the support and }
+{\cf2 [00:04:00]}
+{ thank you for the messages on LinkedIn and other social media.}
+{\pard  \line \par}
+{For how much the podcast has help you, it really means a lot. Thank you so much for doing it. I will let you enjoy this episode with FedRAMP on this builder series that we are doing in February, 2023, and I will see you next episode. I think it's gonna come out soon as well with the Netflix boys. I, I'm gonna say Netflix boys because well that's the hint for the next episode.}
+{\pard  \line \par}
+{I'll let you find out more about it when you get to it. But for the moment, enjoy this episode of FedRAMPMP and let us know in the comments or send us a DM just to let us know what other topics in cloud security space would you like us to cover. We would love to cover that for you and to then enjoy the rest of your week, and I'll talk to you in the next episode}
+{\pard  \line \par}
+{by bringing developers and security together, you don't have to choose between speed and security, develop fast, stay secure.}
+{\pard  \line \par}
+{I'll say this if you don't know her, but if you walk into a room, you'll know she's there. , like for the . }
+{\cf2 [00:05:00]}
+{ Is that, is that Welcome? Alexis . }
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ Hello, how are you? She's }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Gooding. That's awesome. Oh, wait, wait. Cause I think people haven't seen your personality is amazing. , I personally met, she was at re:inforce}
+{\pard  \line \par}
+{so I'm like, like, wow. The energy that this lady has is amazing. Aw. And then I find out it runs in your family apparently. So it's like they, everyone's just super energetic. Like your son, everyone. Yes. Every, everyone's super energetic in the family. I'm like, Jesus, this is this is a force to reckon with}
+{\pard  \line \par}
+{ I'm so glad you came in Alexis. Cause I think it's definitely a topic that I have been trying to cover for a while and such to see a lot of people are trying to talk about as well.}
+{\pard  \line \par}
+{But, for the one or two people who were not in that room where you were with the energy where, how would you describe your journey into the whole cloud security and compliance? }
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ Ooh. Accident actually. So , I always to tell three when that it was by accident. So I was on maternity leave }
+{\cf2 [00:06:00]}
+{ actually like 2018.}
+{\pard  \line \par}
+{And well before that I, I was working at EY Ernst & Young which is like a public accounting firm used, usually call it the big four. Yeah. Things like that. And I was doing IT audit assessments for a very long time, for a very long time. And I got involved with FISMA. And FISMA is like a federal Information Security Management Act.}
+{\pard  \line \par}
+{It's a very government, US government based law that requires every single agency to have an information security program and get assessed against it every year independently. Mm-hmm. . And so I did that. I had no clue what I was doing. I really didn't know what it was. And I knew I had to do that for standalone on-prem systems.}
+{\pard  \line \par}
+{Then when the government started getting interested in the cloud, that's when it started kind of to morph. And I was always on the fringe of it, but I didn't really know or understand what the cloud actually was. Mm-hmm. . So then when I was on maternity leave, after got promoted at EY, a friend of mine came to Amazon and the early, like I say the }
+{\cf2 [00:07:00]}
+{ early days, but it really is like 2018}
+{\pard  \line \par}
+{That's not really that really, but in Tech Talk, it's like, Ooh, that's a, that's ancient that you're a veteran . Really? Ok. So he was dealing with FedRAMP then and I, and honestly, if you have a kid in the first six months, they're not doing anything, just being real. Mm-hmm. , they're sitting there just trying to learn how to.}
+{\pard  \line \par}
+{And crawl. So I, besides Netflixing, I had a whole bunch of time on my hands to learn, to really learn FedRAMP and understand tangentially some aspects of the cloud that I could Right. And I was helping him with any information,, any research, things like that. And then when my maternity leave was ending, he literally was like, oh, why don't you just come over here and do exactly what you just did over there?}
+{\pard  \line \par}
+{Over here? Mm-hmm. . I was like, okay, I guess we'll see. And even though now it's like, duh, you should go and do this. At the time I was very scared, very nervous. I did not have a tech background. I mainly }
+{\cf2 [00:08:00]}
+{ dealt with government compliance and like, tech assessments in that way. Yeah. Yeah. I didn't know anything when I, I, I really was very, very scared.}
+{\pard  \line \par}
+{But when I got in, I realized, oh, it's just problem solving. and that's how I kind of got into it. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ That's pretty much it. And by the way, I must say I'm not the only one who's impressed by energy. A couple more people as well. Oh, and I'm so glad I got you do this as well. All right, so first question, because you're talking about FedRAMP, half the world would not like I normally feel.}
+{\pard  \line \par}
+{People outside of US don't even know what FedRAMP is and cause it's a global platform. So I'm curious, how would you describe FedRAMP and why do people care? }
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ So FedRAMP is a way to get, cloud services authorized in a seamless way. So the thing that's very specific about the US is that there are so many agencies and not only just like, okay, the 19 or 20, that people think of the big things like Department of Defense or Department of Education or Energy.}
+{\pard  \line \par}
+{There are sub-agencies within each of them. And when it comes to authorizing any products, like say if, say if a }
+{\cf2 [00:09:00]}
+{ I'm a person on the, on the side, I'm like, I'm bringing in the government and I'm saying, I want to purchase a service. Mm. I wanna go to the cloud, or I wanna, deal with the information system.}
+{\pard  \line \par}
+{In order to do that, there's all of these processes internal that are very specific to my department and my agency. We have our own procurement offices, we have our own procurement processes, and we have our own authorizing officials, our own CISOs, everything. And so if you were a cloud like security person or just have a cloud service in general, back in the day before 2013, if you're dealing with some tangential parts of the cloud, you have to court every single one of them in order to get them to approve it and then authorize it to for use, or what do we call authority to operate.}
+{\pard  \line \par}
+{Wow. Every single last one. . It was crazy. So FedRAMP is a way to do it once it's a consortium of multiple agencies coming together. Yeah. And once you get the authorization for, like, for all these different agencies coming }
+{\cf2 [00:10:00]}
+{ together through FedRAMP, it's pretty much like a, okay, , your check is pretty much cashed across.}
+{\pard  \line \par}
+{Everyone can be able to leverage you or be able to do smaller like pieces on the other end after you've been authorized to say, yes, I can grab you and I can use you. That's what FedRAMP Up is all about. One part of it. Once you're authorized, it's like a, oh, you're here. . But secondly, it's also an accountability agent.}
+{\pard  \line \par}
+{So all the agencies can say, oh, I know every month you have to produce certain things a certain way. Every month you have to report certain pieces to FedRAMP. You also, if there's any events, any incidents, any issues, you have to notify them. It's like, okay, great. I don't have to build up a shop to do that a hundred percent on my own.}
+{\pard  \line \par}
+{You're going through FedRAMPMP and I can just trust in that. So it's one, an authorization procurement process, but it's also a accountability from a security perspective to say, yes, I trust that you are complying and you have to continuously comply with FedRAMP. It's not a one }
+{\cf2 [00:11:00]}
+{ and done thing. You do it forever, pretty much, as long as you're in the program.}
+{\pard  \line \par}
+{So that's what it's }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ for for. Would that just be the government agencies or are there private sector Maybe. I guess, I don't know. Maybe how, how wide is the scope of the companies that are included in this? So, }
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ so it is, , all the government agencies buy into it, but all of the people that actually have to comply with it and do the things are all private companies.}
+{\pard  \line \par}
+{They're all cloud service providers. Ah, yeah. Yeah. So it's FedRAMP is like a gateway. It's kind of like a clearing house. Yeah. For cloud service providers, for their individual products and services. Mm-hmm. . So if you go on FedRAMP and you go to Marketplace, right? It's a listing of all the major cloud service providers and the products that are applicable to FedRAMP.}
+{\pard  \line \par}
+{And then any other agency can use it. But the funny thing is it's become now like a, a building block for other things. Yeah. So for instance, you could be on top of AWS or on top of Microsoft or on top of Google and have your own SaaS or past product, if in a will or a hybrid, depending on }
+{\cf2 [00:12:00]}
+{ what you want. , and another government agency is like, okay, great, you have a FedRAMP authorization and Google has one. And then it's like some people build on top of that. And now it's like, okay, this you, and this has the authorization and some people won't even touch you unless all layers of the building blocks are done.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Right, fair enough. And I think actually, fortunately, Stuthi has added a, a further definition as well. Term agency include any department, independent establishment, commission, administration, authority board, or clearly Stuthi. You work in this space. Like }
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ yes. Students by }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ girl. There you, wow. Really cool definition as she's actually covered everyone.}
+{\pard  \line \par}
+{So bureau of the United States, or any corporation in which this United States has a proprietary interest, this is for the non-US audience. Thank you for that. Stuthi. I can see why she's your girl. And of course Noel as well. You're making me sound like a footnote. I think. It's so probably a Fed person.}
+{\pard  \line \par}
+{I think it might be Noel Nazario. Thanks for comment, but I guess I'll let you explain it. }
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ Oh, ok. Sorry, sorry. . }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Oh, there you go. So }
+{\cf2 [00:13:00]}
+{ Noel is here as well. And got zero plus architecture of guard, Yolanda, zero trust architecture falls under all of those. layers these days. Yeah. Yeah.}
+{\pard  \line \par}
+{Wait, that's interesting. I mean, actually, so, okay. What }
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ she's meaning is when she's saying zero trust architecture, so it's kind of like the whole point of zero trust is that you don't trust nobody. Yeah. Yeah. So every, the whole point of it is making sure that every layer of your stack includes some level of assurance that either you know who it is, you can identify it, and that there's their, their access is limited.}
+{\pard  \line \par}
+{Now, there's certain tools that you'll need to be able to enforce that and do that, and for FedRAMP, if they're do, if you're doing that, if you're pr pretty much like pitching a zero trust architecture tool or service, you have to make sure that all layers of your architecture, Is also fFedRAMPauthorized too following this is also FedRAMP compliant, following the same guidelines, going by the same rules.}
+{\pard  \line \par}
+{If one is rogue, then you're pretty much not, not there. So there's a zero trust concept even in the assessment of the architecture }
+{\cf2 [00:14:00]}
+{ of solutions. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Wow. Ah, there you go. Yolanda, thank you so much that opens another can of worms which I want to go into as well, }
+{\pard  \line \par}
+{we've got Noel saying controls inheritance. That's pretty much it. Yes. So any comments on the controlled inheritance part? }
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ So, controls, inheritance, it's kind of like there's the house, there is the heater, there's the edge itself, right? There's the doors, but then there's inner doors and there's inner doors and there's inner doors, , right? , if you're in your bathroom, it's warm because of the fact that you're dealing with a whole house that also is insulated as well. So it's not just about your bathroom.}
+{\pard  \line \par}
+{So it's like, yeah. When you're a SaaS provider and you are on top of another cloud service provider or a couple other cloud service providers, you don't do everything that better requires honestly, because you, you only have a limited scope based on how , your architecture is built.}
+{\pard  \line \par}
+{You depend on the successful controls and, and authorization of all the other layers that you have. And so the bigger the infrastructure layer has controls that you }
+{\cf2 [00:15:00]}
+{ are inheriting, and then your platform, whatever layer you have, has controls that they have to report and deal with and, and certify in FedRAMP that you are also inheriting.}
+{\pard  \line \par}
+{And so the good thing about FedRAMP is it forces everyone to document how their controls are done the same way. Like you have to, everyone has to do a system security plan. Everyone has to do a customer responsibility matrix. Everyone has to do those things in order to explain to not only just the government, but also anyone leveraging you.}
+{\pard  \line \par}
+{Okay, this is what you're dealing with, this is what you have as your responsibility. All of it, it's there. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yep. Yep. And I think Noel also mentioned the fact that you can get FedRAMP compliant without zero Trust we don't have to mix the two. And Adbul Rahman has a question , with your role, are you constantly working with authorizing officials?}
+{\pard  \line \par}
+{aos. What is an AO, first of all, and do you possibly work with them? That's my question number. Oh, }
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ yeah. So an authorizing official is a designation in the government, and that's the person that is }
+{\cf2 [00:16:00]}
+{ responsible for any information system, any component, any piece that comes into government's use.}
+{\pard  \line \par}
+{Then they are the ones that have to review all the documentation, make sure it's good. They have proxies sometimes that does a lot of the analysis and different things for them, consultants or other people underneath them to be able to get certain things through. But there's always an ultimate authorizing official.}
+{\pard  \line \par}
+{Yeah. So there could be like ISSOs that are, that, you know, that deal with the, the, the maintenance of the, the boundary for different services. But there's always an authorizing official for that department that is the one that signs off, puts their name on the dotted line saying, yes, I attest to the security compliance or whatever for this service or suite of services or solutions that is coming in to the government.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Wait, so here's got another question. Are you working more with security control assessors? }
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ I don't necessarily, so they leverage the documentation that we provide.}
+{\pard  \line \par}
+{So AWS provides FedRAMP documentation obviously. In order to keep, make sure that our government agencies know what's going on we do }
+{\cf2 [00:17:00]}
+{ provide that and then they leverage that to do their assessments. Most of the time, if there is any security control assessors, it's usually the sales or the technical architect group that's working with them to get them over the hump, but it's not necessarily me.}
+{\pard  \line \par}
+{So think of, think of our roles from a security assurance perspective. There's a group, an organization within anti West security called Security Assurance, and we make sure that we are a testing to all certifications to get so FedRAMP soc, iso, high Trusts, pci, all that. That's what this group deals with, and we make sure that we, we maintain that.}
+{\pard  \line \par}
+{And then the security documentation that you need for that is there as well. But we are not the ones that guide you and say, yes, this is good, bad, or ugly. So that another group deals with that. Ah, }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ right. Okay. Cool. And hopefully to answer your question as well . Yes. I've got a question from Yolanda as well. She's asking what are the AO checklist steps to full compliance? Who has the best roadmap out there? AWS. Ooh, }
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ that's a hard one because I think the, the hard part for this is that is more so form.}
+{\cf2 [00:18:00]}
+{ }
+{\pard  \line \par}
+{It's kind of a secret sauce, I gotta be honest with you. Okay. So different AO's have their own steps in order to maintain compliance, and it also depends on the suite of products they're in charge of. And so even if someone gives you a checklist, it's very much customized to their environment. So even if I would say, oh, this is the best one to use, right?}
+{\pard  \line \par}
+{Yeah. It's very much dependent on their environment and what they're buying. And I can't say, okay, use this, use this checklist that that's used of DOD is, you should use it over a Department of Energy or take this checklist here and use it at commerce. I, I can't do that. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Interesting. Okay. That's, that's not even, it's not even }
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ possible.}
+{\pard  \line \par}
+{That's what I mean. It's not even, yeah, they're buying different products, they're doing different things. There's different security risks. Like the other thing too is everyone, steps for as an authorizing official also depends on the mission of their organization. So everyone's organization that we're dealing with is very different.}
+{\pard  \line \par}
+{Yeah. So what's important to the Department of Commerce that certain the tools, the services that }
+{\cf2 [00:19:00]}
+{ they, they're procuring and they're looking at is gonna be very different than what's necessary for the war fighter and the, and the Department of Defense. So it's, and war fighter is a general term because there's, there's so many different people that are actually out in the field from a, a military perspective.}
+{\pard  \line \par}
+{So it's always called in our sense, the war fighter. But yeah, it's very different things. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Interesting cuz I would imagine and thanks to the question of the Yolanda, that's a great one cuz I, I would even think that would be a lot of conflict as well, right? In terms of, it's not any, like, any compliance for that matter.}
+{\pard  \line \par}
+{I don't know of one compliance standard, which is basically literally us walking into a room wearing the same color tops and going, yay, I think we same color tops, so we should just basically get compliant. , what are some of the conflicts people see in FedRAMP. . }
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ Ooh. So actually one thing that I would recommend, and then I can answer your, your question Ashish here, it's like, one thing I would recommend there are FISMA metrics, and everyone knows in the government, if you're auditing for FISMA, everyone knows that these metrics come out every year and they are done by the Department of Homeland Security.}
+{\pard  \line \par}
+{There's OIG metrics, }
+{\cf2 [00:20:00]}
+{ which is Office of the Inspector General. Those are metrics for auditing or, or like assessing information security program. And then there's CIO metrics. And those are things that you should be looking at if you are thinking of being an authorizing official. , and they're refreshed every year.}
+{\pard  \line \par}
+{DHS comes out with them every year and because of the risk change mm-hmm. , and they all usually have different domains. It's usually instant response. It's usually gonna be configuration management. Some of the basic security domains that you deal with from NIST is gonna be in. and they have very pointed questions and very pointed metrics.}
+{\pard  \line \par}
+{That helps. But it's not, you gotta take it and you gotta tailor it. It's very dangerous to take it just blindly. So I'll give that recommendation out there. What's question? }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Common conflicts. }
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ Oh, so common conflicts with FedRAMP. Now , there's a couple layers to it.}
+{\pard  \line \par}
+{So there is conflicts between agencies about what's important from a FedRAMP perspective mm-hmm. . And then there is conflicts between the }
+{\cf2 [00:21:00]}
+{ risk profile of what cloud service providers deem is more important of a risk versus not. And then there is cloud service providers conflicts with FedRAMP. Like we have conflicts with how FedRAMP looks at the certain things too.}
+{\pard  \line \par}
+{Right. Which one are you more interested in? ? }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah, actually that's a good point because as a cloud, as a concept challenge a lot of the norm that we had before. So it's bound to have conflict from that perspective as well. Yes. Like there's the whole infrastructure going up and down, not being able to , keep a list of virtual machines at any given point in time.}
+{\pard  \line \par}
+{There's a lot that can be said just in that as }
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ well. Yes. It's also like making up rules or trying to leverage rules that are really for on-prem, for cloud service providers. Now FedRAMP is getting. Way better because of just the nature of what they do at really tailoring and really understanding how cloud providers have to do things and tailoring, their requirements.}
+{\pard  \line \par}
+{But there's always gonna be those conflicts. The other thing too is the conflicts that end up happening is when you're trying to take an AWS risk and say it's the same from Microsoft and a }
+{\cf2 [00:22:00]}
+{ Google risk. So we call those the hyper scales. So the AWSs, the Googles, the Oracles,, the big, the ones that have many authorizations that are really heavily invested in FedRAMP are the hyper skills.}
+{\pard  \line \par}
+{We have conflicts with each other of how we even view risk, and we talk to each other. We do, we do talk to each other as, you know, as partners in this, as cloud service providers servicing the government, there's also conflicts between hyper scales and smaller cloud service providers. So there's things that are easier for us to do because of the weight and scale and size of what we're able to do versus smaller cloud service providers.}
+{\pard  \line \par}
+{So we might not have the same problems. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah. Yeah. And I think, , we haven't even thrown in the private cloud into the mix as well. They, they will be that I mean, yeah, it gets really complex. Yes. }
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ It's really, really, really complex. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah. I was gonna go into the whole documentation control cause I think there's a question, so maybe we can go into that first.}
+{\pard  \line \par}
+{So, Clark pain is asking, which tool would you recommend developers use to }
+{\cf2 [00:23:00]}
+{ manage and document controls while utilizing control inheritance the FedRAMP packages will be so merging inherited controls for the SAAS product, body of evidence is }
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ done. Yes, it is. I can, I will say that there are a lot of, I guess a lot of organizations, a lot of companies that actually provide that.}
+{\pard  \line \par}
+{So I cannot endorse a tool . . That's one question I, I can't unfortunately answer because me saying what a tool would be would actually endorse a tool and then I get in trouble. So I can't say that , I can't say Oh, }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ right. I, what is, is that sensitive a subject? Yes. Not a subject, but, okay. }
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ Oh, no, it is. And the reason why, I'll tell you the reason why.}
+{\pard  \line \par}
+{So a s has a marketplace itself. Yeah. And it, there's a marketplace within AWSs console where you can see all the different providers that we either recommend, not really recommend, but more so is available that our AWS partners, they're partners of us that do some of the, either either do consulting or they actually provide tools on top of AWS to do exactly what you're talking about.}
+{\pard  \line \par}
+{\cf2 [00:24:00]}
+{ And unfortunately, if I say even one of them, I'm now saying it's better than the others. So I can't, I can't say , but there are. , I just can't tell you which one. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ may, maybe Clark should meet her on the dancing floor doing salsa salsa. And then she might tell you at that point }
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ in time. Now I can't say a couple things that would happen.}
+{\pard  \line \par}
+{Oh yeah, sure. So there's some things that will help that are cloud services that AWS has and that I can talk about. But you don't have to do this. , I'm not a salesperson. I am a security person, so I'm not Yeah. Now there is AWS audit manager that is a cloud service where you can not only document, have inheritance, but you can also show that evidence.}
+{\pard  \line \par}
+{It's made for showing evidence to auditors about what's going on in what you're inheriting. There is AWS config where you can use conformance packs to really like, and you can map them to NIST controls. Yeah. Where you're literally like tailor making your AWS environment based on what you need to do from }
+{\cf2 [00:25:00]}
+{ a.}
+{\pard  \line \par}
+{compliance perspective as well, at least mapping it out. So is those things that would help from a developer standpoint? Yeah. For, and that is only, the only use case for that would only be if you are already using AWS as a cloud provider. But I can't endorse any other tools for any other or anything.}
+{\pard  \line \par}
+{Fair enough. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ I, I think the developer conversation, I wanna peel a few more layers to it, oh. So Clark is a, another service you can use as AWS artifact. Yolanda used to work in the FISMA metrics on 5G mobility. There you go. Oh, that's awesome. Yeah. That's pretty cool. So I can understand why the question then makes sense as well. Stu basically mentioned Clock and Rise eight.}
+{\pard  \line \par}
+{You may want to look into the telos Ex. I'm trying to think which exact }
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ question. Exact 360. Yeah, I'm not endorsing, I am just repeating what Stuti listed. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ That's pretty much it. That's pretty, we're just following what she's saying. Alexis, do you touch upon the common pitfalls CSPs can avoid while undertaking the FedRAMP journey?}
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ Yes. }
+{\cf2 [00:26:00]}
+{ There are actually a lot of pitfalls that I really should talk about in this. The one thing is underestimating the journey. So a lot of people, so what ends up happening is that people end up spending a lot of time making their product, whatever it is, and then usually it's for a new cloud service provider, right?}
+{\pard  \line \par}
+{They're making their product and then like, Ooh, I wanna go after the government. and the most common pitfalls is that they go after the government and start the their FedRAMPMP journey too late. So it's like they're already talking to a government agency. Government agency is like, yes, I can give you money for that.}
+{\pard  \line \par}
+{And the thing that's different about the US government versus commercial and other in different industries, it's like when the government says they're gonna buy you, you pretty much have a check for at least like sometimes 20 million right then and there. Mm-hmm. It, it gets crazy when you get government endorsement to do something , and that could make your whole sales revenue targets for like, multiple years.}
+{\pard  \line \par}
+{Like that's why people end up go, }
+{\cf2 [00:27:00]}
+{ that's why we go to the government cuz it makes our sales targets. It's, it's good. Yeah. But then they'll say, oh yeah, just go through FedRAMP and then, and once you're through FedRAMPMP, then I'll talk to you. Right. People end up thinking, oh, well I wanna get to them in three months, and so I am gonna go through FedRAMP in three months.}
+{\pard  \line \par}
+{Nuh nuh. It don't take no three months. It really? No, no. Now, how long are we talking? Well, the good thing is FedRAMP also is very open about how long it takes. It could take from 12 months to 18 months. Some have done 36 months , like Jesus. Wow. Some people, it's been five years and they're still trying to figure it out.}
+{\pard  \line \par}
+{Like it's a lot. and part of it is if you're not architecting what your solution would be for customers with compliance in mind, with FedRAMP compliance in mind, it is way more difficult to do it. So if you just built something and just shipping it out, and then now you have to back in all these security controls and }
+{\cf2 [00:28:00]}
+{ processes that you didn't think about, not even, not even just the processes, but now there's resources you either have to hire, deal with new tools that you have to add on.}
+{\pard  \line \par}
+{Mm-hmm. if you're not monitoring things or you're not logging certain things, it's like, it just ends up backing itself up too, a longer timeframe. So the biggest thing is underestimating that process, and everyone always blames the government. It's not the government, it's no, it's gonna take a while for you to get ready.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Interesting. And thank you for putting that out there as well because I imagine because we live in a cloud world, we almost always how do I put this? , we always have that confidence that, well, I guess it's cloud ready first. So we are API driven. We should be able to do a lot of these really quickly.}
+{\pard  \line \par}
+{And and that's maybe where the blame to the government comes in rather than understanding, Hey, are we even meeting the control in the first place? }
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ Exactly. Do we have all the resources to do that? Do we want to Yeah, it's it's resourcing it too. It's like, okay, wait a minute. Does that mean , are you okay with that new cloud budget you're gonna have to deal with if you use all the tools from }
+{\cf2 [00:29:00]}
+{ the same places, , it's a lot that goes into it and not really having dedicated people that understand it, do it. And there's not that many people that have done FedRAMP, so. Mm-hmm. , you're also dealing with, how do I hire a person that actually knows this and understands this and can do it from beginning to end?}
+{\pard  \line \par}
+{It's a lot. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah. Wow. No, but , that's well answered as well. Thanks for that. Questions Stuti. Oh. }
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ Oh, the other the one other tip is that it is relationship based. So the people on the other side, if you're automatically, the person that is on that is gonna be the main person talking to the government for you, say you get everything done.}
+{\pard  \line \par}
+{Yeah. And you're ready to go. Yeah. It is definitely relationship. It is not an argument with the government. And if you are having the assumption that, oh, government doesn't understand the cloud, they're done. The people that are doing Fed rep Uhuh, they, they've, they're not only are you one of, I don't know how many other cloud service providers they've seen, they could even tell you, oh no, you should do this and you should do it in this way.}
+{\pard  \line \par}
+{And if you're going with the assumption, oh, I'm gonna teach }
+{\cf2 [00:30:00]}
+{ them, educate how this is gonna be it's not gonna work out for you }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ like Uhhuh. Good. Good to know. Well, so there you go. So I think I've got I got Clark saying, thanks for the tips. Abdu Ramana saying, l Alex's gonna get fined and Clark Yes.}
+{\pard  \line \par}
+{He, he understands you're not endorsing anything like so with a wink in the end, you're not endorsing anything. Wink not Dorsey. That's right. You're not endorsing anything, basically. Yolanda mentioned the formal process was cut in half a few years back. }
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ Oh, it is. But, but like, once again, I'm saying the pitfalls is for the, for like even before you even get to the government, this is all just preparation within the company.}
+{\pard  \line \par}
+{We're not even talking about what to do when you actually get to FedRAMP. Yet. They've gotten faster. But the rigor and the necessary like, I guess, components that you need to do for prepare for your solution for the government, yeah. That's the part that's gonna take a long time. If you're not planning, if you're not planning ahead }
+{\cf2 [00:31:00]}
+{ and planning accordingly.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Right. And I think our, another one from Stuti is one common issue I've seen in organization thinking you can port over your commercial product as is and have it FedRAMP compliant. There you go. Wow. Stuti yeah. People should definitely talk to her about about the whole FedRAMP stuff as well. I was also gonna say, cause we kind of touched on the whole developer thing, so, and this is, and I kind of take a leaf of the question that Clark asked about the developers and how can they, because it sounds like it's a fairly complex thing.}
+{\pard  \line \par}
+{It's a lot involved in this and people are also able to use this as a platform to work with the government, want the 20 million or whatever that comes with it, and maybe even more depending on how big the project is. Yeah. I sound like it's like a revenue generating stream as people don't even look at compliance as a revenue generating stream.}
+{\pard  \line \par}
+{So it is a revenue generating stream. , what are some of the common anti-patterns that you see people do when they go into, I mean, there's whole shared responsibility we can go into as well. Yeah. What are some of the anti-patterns you think exist in this space when people are trying to go down the path of }
+{\cf2 [00:32:00]}
+{ getting FedRAMP compliant , in a cloud AWS or whatever?}
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ I think the biggest thing is that you need to make sure that you have the right investment behind you when you're doing it. Mm-hmm. , and you have to do it right along with along the revenue targets they're trying to make. So the biggest thing is if you can't go through FedRAMP and then, oh, I wanna be able to get to the government, you have to have on the front end, like part of the major goals of the corporation or the company you're in, that we are trying to get government money and we have these other government agencies waiting on the other side once we get there.}
+{\pard  \line \par}
+{Like, you can't even start unless you have that. So, . That's, that's more so what I'm thinking of when you say, okay, what are the heavy things people should know when they're going into it? Is that, is that answering }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ the question? Yeah. It is. And I think also to your point about like, so people who get excited when they're hear they're gonna get money and I wanna get FedRAMP compliant in three months.}
+{\pard  \line \par}
+{A lot of them probably are thinking that they can probably go on the path of using some kind something cloud native and use that as a way to quickly get compliant to, and, }
+{\cf2 [00:33:00]}
+{ and I think you kind of touched on one of the other topics that I wanted to talk about as well, which was the whole FedRAMP com endorse services or compliance services versus.}
+{\pard  \line \par}
+{just services that exist in AWS doesn't make you compliant. Yeah. So would you, I mean, I would that be an anti-pattern as well? Oh, sorry. Maybe it's a common pitfall that people have in this space as well. Oh, it's a common }
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ pitfall. But the one thing I will say is that our customers are getting really good at understanding that roadmap.}
+{\pard  \line \par}
+{So, okay, we have something called the services and Scope page, and it's for every compliance framework. It's not just FedRAMP, but it's a service and scope. And I'll put it in the chat at some point and he would can can put it, put it in here. But it tells you not only, hey, here are all the services that are actually compliant and have been certified, but also here are the services that are going to be So in my time with FedRAMP, like I think early, early years, what we used to do is just put a check mark if it was ready.}
+{\pard  \line \par}
+{Now we actually tell you every stage of the process. So we say when we like, start off having a third party assessor, we tell you when it's }
+{\cf2 [00:34:00]}
+{ in the review process. , you know, like actually in the review process with FedRAMPMP, and then we tell you when it's done. So you can even roadmap map, and I know that people do this, a lot of, a lot of CIOs, a lot of different groups actually roadmap that out based on that page.}
+{\pard  \line \par}
+{So even if they're like building their solution, they build , their dream solution first, right? Then they're, okay, so which services are compliant or which parts of the stack are compliant? And they look around and like, okay, well at least if it's on the way or if it's, you know, a plan. And then sometimes they reach out to their, their tam, their support specialist, and they ask, and that's, and it's how we get questions about that too.}
+{\pard  \line \par}
+{They ask like, Hey, is this on the roadmap? We don't see it on here. And we tell them, mm, not yet. It's not even, not even close, whatever. And that's also part of our pitch. So the funny thing, when I first got into this fed when we were really starting out with FedRAMP really early, right? We only had about 25 services or so in FedRAMP.}
+{\cf2 [00:35:00]}
+{ }
+{\pard  \line \par}
+{Wow. And then it grew to, my first goal was get it to a hundred, and we did it in about two and a half years. We got it from 25 services in Gov Cloud, 32 services in, in the commercial region, east, west, all the way to a hundred . Now they're like 130 in East. It's crazy., it's gotten,, it's gotten crazy.}
+{\pard  \line \par}
+{But it was, was cause of that, it was cause of customers asking every, reinforced, every reinvent, every place we were at. It was, when is this thing gonna be ready? Because I wanna build this great solution and I can't, without having this go through FedRAMP two. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Oh. I think that kind of opened another can of worms, I think which I, I'm glad you opened it up for me as well.}
+{\pard  \line \par}
+{The Gov cloud versus is the commercial space. It's, yes. So different, two different. And for people, like I would've assume FedRAMP is just Gov Cloud. It's not just Gov Cloud. }
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ No, no. So FedRAMP moderate, there's different severity levels, I guess, or baselines. Moderate }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ high, I mean low, }
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ moderate, high. Exactly. And there's different }
+{\cf2 [00:36:00]}
+{ requirements.}
+{\pard  \line \par}
+{So like low is about 200 or so, like security controls that they adopted from NIST 853. Yeah. Moderate is about 320. 330. High is 440 like that. That's the The pickup. And then, right. Not only that within the controls, but there's also parameters. So every control has a parameter as well. So maybe , and FedRAMP sets it so in, maybe it's moderate, maybe something like an audit log could only needs to be there for 90 days.}
+{\pard  \line \par}
+{Yeah. If it's high has to be a year. So East West, the commercial region for us is FedRAMP moderate and that has the most services, because most services start off in the commercial region. Gov cloud is very different. It is a dedicated cloud. And it's for mostly the government customers.}
+{\pard  \line \par}
+{Yeah. Or. Partners that are servicing the federal government in some way, shape or form, or state and local governments that also wanna keep that high bar as well. }
+{\cf2 [00:37:00]}
+{ Yeah. And there's different requirements there. So the biggest thing that is most common for government agencies thinking of gov cloud one, you got US citizens there.}
+{\pard  \line \par}
+{Two, it doesn't leave the US Those are the two major things. Yeah. Physically, I, logically it's separated. That's Gov cloud. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ And when you say commercial, you mean commercial as in like the thing that normally the non-government star, like we, we go to console our aws.com. That's we're }
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ to console default.}
+{\pard  \line \par}
+{Exactly. Your default is EastWest generally, unless you select another region or select something else. It's the commercial. When we say commercial regions, it's east west. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Interesting cause, I guess for people who are listening in, they may choose to be, or they already been the US gov cloud, or you may be in commercial, there's option for both of them to go FedRAMP if they want you to go down the path.}
+{\pard  \line \par}
+{Yes. It doesn't matter. It's not just a, Hey, if you are in Gov Cloud only then you can be Fed ramp. It's like wider available to your services that anyone, to your point, if I start a startup tomorrow and }
+{\cf2 [00:38:00]}
+{ I, I heard about the opportunity in government, I want to go for it and I would be able to at least use that to, you know, build my I guess my own version of FedRAMP compliance services in AWS as well.}
+{\pard  \line \par}
+{So think , that's pretty awesome. The other thing I would probably ask in that, if that's the case then, is because we kind of mentioned compliance controls, 400 plus controls for high. And coming from someone who's done SOC2 and ISO 27,001, is that literally just like pasting screenshots till on 31st December and that'll be the end of, is that similar?}
+{\pard  \line \par}
+{Cause I'm hoping it's not. }
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ No, no, no, it's not. It's not, it's not at all. . There are requirements, so there's, I wanted the security documentation to testing to us doing that. Right? So it's not only just that, but remember there is continuous monitoring requirements and those are for both.}
+{\pard  \line \par}
+{Yeah, those are for both EastWest and gov cloud, there are continuous monitoring, so we have to send raw vulnerability scan information to the government every month they have to review it, we have to send poems, plan of actions and milestones, which are }
+{\cf2 [00:39:00]}
+{ pretty much like weakness, deviations, mm-hmm. Every month over to the government, including like, if they're like, you know, when we discovered them, when there's a scheduled completion date, milestones, all of that needs to be sent over every month as well.}
+{\pard  \line \par}
+{Yeah. Our inventory, like our actual raw inventory, that listing also sends over the government every single month. So that's part of being in FedRAMP. Now the controls will say, okay, you must do that. Right? Yeah. That's also another, and there, and it goes to, and all cloud service provider information goes to Department of Homeland Security and they analyze it and they review it and they be, and they make recommendations or they may able to say like a status like, Hey, it's satisfactory, we're good to go.}
+{\pard  \line \par}
+{Or, oh, there's some issues here }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ to where do these non conversation normally go wrong then? Because I mean, it sounds, to your point, there is a standard that we just need to follow. Yep. And we be able to, on our way to your point, may, maybe not as quickly as three months, but within a year or two year, }
+{\cf2 [00:40:00]}
+{ Or if you have someone who's credible to work with you where do people kind of fall short?}
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ It's a couple things. . So before you're able to do the assessment or actually like, actually go through the process, there is called a readiness assessment. It's called a RAR Readiness Assessment Report . And it has mandated requirements. There's some things that the government is not gonna budge on, and so you have to go fix it.}
+{\pard  \line \par}
+{And most people make the, that's the other pitfall. I should probably say that the pitfall that some people have is, oh, I can just not do this now, do it later. And the government was like, we'll wait. We'll be here , we're not going anywhere , so you must go do that. And you come back and tell, and most people end up saying, oh, it takes a long time.}
+{\pard  \line \par}
+{It's gonna take me a year, two years to do that. It's like, yeah, well it will uhhuh. Yeah. Wait. Let, let us know. . }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah, that is really interesting. I, I think, and maybe it's the right thing to do as well, because I guess when you're dealing }
+{\cf2 [00:41:00]}
+{ with the citizen data and you have this requirement, I mean, there's a lot running on the government in the first place if they sneeze Yeah.}
+{\pard  \line \par}
+{The entire Twitter world or what the social media is onto them. So not having the patience to deal with this is, is actually not fair as well. So, may maybe another one to kind of talk about this as well is in terms of developers. I kind of touched on this earlier, I, and clearly to what you said, it's not just about pasting screenshots.}
+{\pard  \line \par}
+{How can people make this more developer and engineering friendly? Because I f I find that normally when people talk about compliance, it's the first image that people get, at least people who've done experience have had some experience in this field is that I'm gonna be pasting screenshots, I've gotta have someone full-time just pasting screenshots and just maintaining a log to what you're saying every month.}
+{\pard  \line \par}
+{So is there a automated feature? I mean, we are talking cloud still. Yeah, we're still API driven. Like , what does that look like? }
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ So most of the time what we're dealing with, we're dealing with a third party assessor. Mm-hmm. FedRAMP }
+{\cf2 [00:42:00]}
+{ also approves who can be third party assessors.}
+{\pard  \line \par}
+{There's like the auditors. Oh yeah. So for our auditors, we do that. Like AWS we do that. We provide a lot of automation, automated pieces. We don't just screenshot everything. We also provide a lot of automation to be able to say, yes, we're good to go. And we provide that not just for FedRAMP, but for any other audit that we deal with.}
+{\pard  \line \par}
+{Like AWS is audited over 300 times a year, to be very honest with you. Like that's public. We are, we're fine with saying that we are audited over 300 times a year. It doesn't make sense for us to just continually just have a screenshot each time. 300 people come to us and ask us for it. And they usually, to be very honest with you, they're all asking for the same thing.}
+{\pard  \line \par}
+{You can pretend like you're not asking for the same thing, but. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Same thing. Yeah. }
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ So we do, we do do that. We do make sure that there is automation for either evidence seated from very common or core services. Like there are, there are core foundational services that are pretty much in the architecture for every single service that we deal with.}
+{\cf2 [00:43:00]}
+{ }
+{\pard  \line \par}
+{The S3s IAMs KMSs EC2, obviously Lambda does like, those are, those are services that can hit up all the time from audit just because of how pervasive and how Infras, like they're part of the infrastructure for every other service that comes out afterwards. Yeah. So obviously they're prioritized for automation of any evidence that's needed.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah. And to your point then So the, when you say automation, no screenshots, it's still things like Artifact Manager and like the AWS services you mentioned earlier or is it more }
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ automation? ? We, so the funny thing is every single service that comes out, majority, not majority of them, but a good portion of them are based on a internal betas that we use for our purposes.}
+{\pard  \line \par}
+{Audit manager is a little bit of one of them, so we use certain things internally all like on our own. And then the ends up we decide, oh, this is good to be and it's good to market this. Mm-hmm. externally. Mm-hmm. . So we'll do that and now it's a service that we're providing for someone else. So it won't }
+{\cf2 [00:44:00]}
+{ necessarily, it will always be, yes, we use some of the services ourselves, but it, the ones that we don't use are literally configured and created based on what we need.}
+{\pard  \line \par}
+{And it, it ends up being, oh, we're gonna make this a marketable service. We do. Yeah. And sometimes we don't. We just keep it internal and it's ours. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Interesting. Cuz. . And how different would this be in the gov cloud space? I mean, cause obviously we are talking about automating screenshot, no screenshots and everything.}
+{\pard  \line \par}
+{The, and I normally feel like there's a lot more information about the commercial side as you called out, like off AWS e test. Like everyone knows what's going on there. What access do I have? How different is it at the Gov cloud end? Same. Not }
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ too much different. Same thing really. Yeah. Not too much different.}
+{\pard  \line \par}
+{Like all, like remember most of the pieces I, well, I can't say where it is, but most of the pieces are gonna be localized anyway. So it's, it's kind of like if we're doing it for east West, it's not hard to do it for Gov cloud. It really isn't as hard. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ So I guess to your point, from a service perspective, someone has }
+{\cf2 [00:45:00]}
+{ done it in commercial side of aws, they should be able to easily transition that over to the Gov cloud side as well if they, yes.}
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ The other thing too is a lot of the services. When they're deploying all these different regions, there's not too many differences. Yeah. So if you're able to install an agent and pull certain things from one in one region, you're able to install an agent at the same place and pull it in another region, not in the same location, but the architecture is very similar.}
+{\pard  \line \par}
+{So they create it, it goes into east, west. Right. Yeah. And when every time you see a service in a different region, it's not drastically different from the original that's here. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Mm-hmm. , of course. And to your point then, people who are listening and getting excited, the fact that, hey, I can do this because I haven't done commercial before.}
+{\pard  \line \par}
+{I Would you say that people who are walking down the path of getting anything , FedRAMP and compliant, the if the control list is already public, they don't need Yeah. As an, like, they don't need a, I dunno, another }
+{\cf2 [00:46:00]}
+{ Ashish to come in and help them out. They basically, if they spend the time to go through the controls and see how they can match it, , anyone should be able to do it themselves.}
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ I won't say anyone. I think the issue is more so if you have the time and the bandwidth and you get pressure. So most of the time the issue is not anyone can do it. It's right. Can you do it to meet a revenue target by a certain date and that that's, you see what I'm saying? Like if you're trying to go for a government contract, you could get anyone to do those things.}
+{\pard  \line \par}
+{That's fine. And, and some people have and that's, that's what ends up happening a lot. Some people have already tried to just do it themselves and they missed their date cuz they, because you wouldn't know what they were doing. It's not just about knowing the security controls. It's also about PMing all of it level setting with leadership about their expectations, about how fast this is gonna be and the resources that are required to do it.}
+{\pard  \line \par}
+{Being able to do an assessment and say, okay, here's all the }
+{\cf2 [00:47:00]}
+{ changes that we'll have to make in order to get you to FedRAMP and., there's some wiggle room questions. People are like, oh, well can you do this? Can you, sometimes only experience can tell you that. So if you have no time limits and no constraints, of course I could say anyone can.}
+{\pard  \line \par}
+{Ah-huh. If you have them , you could try it }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ out. Yeah. You, it's uh, uh, it's gonna be a bit of a up uphill battle. And maybe to your point then, what kind of teams do you see that would be getting involved on? Like for say, for example, I'm thinking of people who are listening to this, they probably are considering FedRAMP.}
+{\pard  \line \par}
+{What kind of team skill sets would they have, would they need to have in their company to be able to kind of do this if, to your point, we have a revenue target, 20 million that I want that bag basically by the end of the year or this end of the second year mark. How would I configure my team? Like what kind of skillset do I need in my team to be able to get to that point?}
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ You would need a continuous monitoring function. So the one thing is you shouldn't have the same people implementing the control that's }
+{\cf2 [00:48:00]}
+{ dealing with FedRAMP to actually push things through and explain certain pieces. Like you shouldn't have the same group. So not only do you need the basic things for every security like organization to run and function and be able to say, okay, yes, I am secure.}
+{\pard  \line \par}
+{And that that is standard, you know? Yeah. But there's also the teams that spend the time pulling or creating the automation specifically for the evidence. Like there's, someone has to automate the evidence or automate what's needed. Someone has to do that. And that can't be the same person that's also doing the vulnerability scans.}
+{\pard  \line \par}
+{You can, you can if you wanna, but you probably shouldn't. So it's having dedicated support in the, and there also needs to be a. , like an actual pm pulling all of this together, you also need a, a actual regulatory oversight function. Someone that is responsible for doing that engagement work. Yeah. Like with the actual regulator.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Interesting. And I mean, I, I feel like it's one of those ones where one episode is not }
+{\cf2 [00:49:00]}
+{ enough to talk about FedRAMP. I think we can basically talk the entire time as well. But I, that was kind of like the towards the tail end of my technical question as well. Cause I, I just wanna ask one more, which is basically for individuals who are trying to get into the space as well.}
+{\pard  \line \par}
+{I think someone mentioned earlier about mentoring in this space as well. I would probably ask what kind of, is, is there an easy platform to go learn about this? And like, or is it literally for them to just go learn the controls in FedRAMP and hope and show that? Because the thing that used to be up with compliance earlier used to be, Hey, I just have a control.}
+{\pard  \line \par}
+{I need to match the control. . I feel like the conversation in a cloud context is very different. It's not just about just matching the control, matching the control in a way that you're reducing the number of manual steps that are involved in it. Like that's where the screenshot, for example, like back in the day I remember I would've team members who literally just would take screen shots once a month or every 31st December or whatever that time period used to be.}
+{\pard  \line \par}
+{Yeah. And that was enough because that's basically what was asked by the auditor. And now we're in a world where we }
+{\cf2 [00:50:00]}
+{ have cloud, which is API enabled, and a lot of auditors are even opening up to the idea that, hey, there are services for this sub. I don't have to like look at screenshots and like, no, for Exactly.}
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ Did you configure your S3 bucket this way? That's what I wanna know. Yeah. Yeah. Like that's exactly what they're, that's what they're asking. And, and }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ to your point, , how would you like, I guess, I imagine there are two kinds of people listening to this conversation.}
+{\pard  \line \par}
+{One maybe who are already well experienced in FedRAMP in the non-cloud space and people who are trying to get into it. people who are what would you advise be for both of them and how to think about this in the cloud space? So, }
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ okay. There's a couple of things. You have to understand, which area of FedRAMP you really wanna tackle.}
+{\pard  \line \par}
+{So a lot of people say just FedRAMP. FedRAMP is literally covering all the security domains of NIST. So you could be a GRC person like me, and there's a path for that. And that usually starts off with someone that's an IT auditor. Mm-hmm. . And there's like big four starts off you off that way. There's a whole bunch of consulting companies where all they do is just do a general and holistic assessment of different }
+{\cf2 [00:51:00]}
+{ companies from a security perspective.}
+{\pard  \line \par}
+{And again, you're not going that deep. You're just going at a very high level. Right. So it's the knowing the controls and then practicing it by assessing different organizations. That's, that's one aspect of FedRAMPMP. But then there's a lot of people that, that are in FedRAMP that really hone one part of it.}
+{\pard  \line \par}
+{Yeah. Like they're, and it's not that they're doing it for FedRAMP, they're doing it because it's the, it's a security discipline. So doing incident response for FedRAMP, it's no different than we would do it for any other group. Of course, yes. So that's like, that is literally a whole discipline of being someone in the soc, right?}
+{\pard  \line \par}
+{Mm-hmm. . Yeah. And so the, the people that I work with that are in the SOC are people that they just do their SOC thing. They didn't do, they're, they happen to now do it also for FedRAMP, but it wasn't their goal. So that's one piece of it. Then there is also just project managers to be able to, it's called product marketing groups.}
+{\pard  \line \par}
+{There's product marketing groups that I usually work with, that they work with }
+{\cf2 [00:52:00]}
+{ their like solution, their products. And their job is to get it through to whatever customers on the other side. And if it's, if FedRAMP is the way to go, then they'll do it. Yeah. So I know a lot of product marketers that have become experts at navigating their cloud services through FedRAMP.}
+{\pard  \line \par}
+{Like period, oops, . Like, that's their thing. I would say if you're trying to be a generalist for FedRAMPMP, , like understanding how to audit and assess it. Systems, there's disciplines for that is one piece of it. If you're trying to be an expert at FedRAMP in a certain domain, it really, if you, once you become an expert in that domain, it isn't hard to build on the necessary per, it's all just parameters.}
+{\pard  \line \par}
+{It's now just configuring things a certain way. For FedRAMP, FedRAMP is a means to an end. It's not the full end for most people. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ That very well said. Very well said. I was gonna and that's probably was one of the last few questions that I had, which was an engineering or technical or compliance related question.}
+{\pard  \line \par}
+{I've loved the engagement on it. Just basically, I, I'm, I don't even think I have time to go through all the comments, but Stuti and I think other people have been really quite engaging, sharing }
+{\cf2 [00:53:00]}
+{ other resources and conversation about it as well, so, no, they were . Yeah, I, I'll definitely ask people to check out all the comment section as well for the conversation that's going on there.}
+{\pard  \line \par}
+{I've got, , three questions for you, which is basically the last three questions, which is non-technical. First one being, what do you spend most time on when you're not working on FedRAMP or Cloud }
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ video games, , I }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ gotta be awesome. Video games. Oh, games. Oh, wait, which, which, which, }
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ Assassins Creed.}
+{\pard  \line \par}
+{Odyssey is what I am spending most of my time on now. Like that's lit. And then there is this other game that me and my husband play called, it Takes two. It's a marriage game. I don't, I don't know if you would know it's a marriage game, but you literally cannot. It's a co-op game on PS five, also on Nintendo and PS4 and on Xbox.}
+{\pard  \line \par}
+{And you literally can't get through it without talking to another person, like live right here. Oh. Like you have to do things together. And it is a great like partnering game. It's amazing. So love that. Interesting. And then for myself, assassins Create Odyssey. Right now I'm level }
+{\cf2 [00:54:00]}
+{ 1 92, so if anyone wants to come from me, }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ I'm sorry.}
+{\pard  \line \par}
+{I did Nott realize Assassins Creed is still still running. I think I remember, oh yeah, the first few parties, it's }
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ still running. I'm a loyal person, so it's like Assassins Creed, final Fantasy. Anything with querying. Anything with you? Ubisoft. I'm there. Division. No, it's like I, I stick with it. Whether good, bad or ugly, I will be there.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ And apparently Stuti mentioned you like K-Pop as well. Oh, }
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ I love K-Pop. Oh my gosh. K-Pop is the future. It is everything. I'm fully into it. New Sound }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ like my sister now is like . It's still good. The BTS band. Talk clearly. Wait, isn't that BTS a band with the whole 10,000 or not 10,000, sorry. Like a 10 people band team.}
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ No, there, there's only seven Now There is a group called 17 with 13 members. So . }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Alright, I'm gonna, I'm gonna stop keeping up with this K-pop group, but I think I, I, I'm glad you're into it and I, I know kind of like Adam in a }
+{\cf2 [00:55:00]}
+{ way that some assassins create games hit or miss for me as well, but but I, I can definitely see why people are interested in it as well.}
+{\pard  \line \par}
+{Alright, right. Next question. What is something that you're proud of but is not on your social media? Ooh, }
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ damn. Oh, oh, that's easy. Actually, I don't know why my son, I deliberately don't put him on social media, but just for, just because of course, I love him so much. He is the best light in my life.}
+{\pard  \line \par}
+{And seeing a manic, crazy k-pop loving kid run around my house, is everything. Like he dances, he loves K-pop, loves to swim. And I'm just like, he's, that's my heart. So, yes, that's the thing I'm }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ most proud of. I, well, I, I'm, I'm sure we'll we'll clip this up and I play this for him on his next birthday as well.}
+{\pard  \line \par}
+{So this is there you go. And well, sorry. So I did, didn't know know he was in the K-pop as well, so Good to know. He's on the K-pop more than }
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ me now. Really? I don't know how that happened. Well, no, no, I know how it happened. It's my fault. But the biggest thing. Kids love to repeat songs over and over again.}
+{\pard  \line \par}
+{Yeah. And we }
+{\cf2 [00:56:00]}
+{ just didn't wanna pick a song. We didn't wanna do Baby Shark, we hated it. So, of course, yeah, we gotta K-pop. And I, I think we're now regretting it a little bit, but it's okay. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Well, fair enough. I mean, KPop was so bad for people who are into it as well. Last question. What's your favorite cuisine or restaurant that you can share?}
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ Ooh. So I know where I'm going tonight. So there is, it's called Vermillion. I'm going to date night, actually, like right after this. . That's pretty awesome. Vermilion and Old Town. And it's Italian. I love Italian food. It's absolutely, yes. I, }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ that's very awesome. Well thank you for sharing that. Actually, and thank you for everyone else who commented and kind of need training in K-Pop.}
+{\pard  \line \par}
+{Dance and she's an amazing dancer. I think we definitely need to shoot. See you dance one day. Nope, next AWS party. We're definitely getting you on the floor for sure. But I just wanted to say thank you for joining us and thank you for answering all the questions as well. Where can people find you if they have more questions around the whole FedRAMP space and AWS and all that as }
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ well?}
+{\pard  \line \par}
+{My LinkedIn is probably the best thing. I actually am more responsive there than }
+{\cf2 [00:57:00]}
+{ anything play anywhere else. My Instagram is just me dancing and I barely respond to anyone, so it's like I am just posting my dancing for me. And then that's it. And I go away. I'm not giving you the handle though, Stuti has to do that.}
+{\pard  \line \par}
+{I'm not doing it, but LinkedIn is where I'm most active. So yeah, I }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ I'll need to do a troll hunt for your uh, Instagram now for this as well. But I, I thank you so much for joining us and I'll put the LinkedIn link onto the shownotes as well so people can find you there. But I'm definitely looking forward to having more conversations with you in the future as well.}
+{\pard  \line \par}
+{And thank you so much for coming in. Thank you everyone. Who else who joined in and made the chat engaged as well. And everyone who basically gave a shout out to Alexis as well. Definitely shout out to all of you as well. Thank you for thank you guys so much. Yeah, it's been awesome. I, I've been loving it, so I kind of feel like I should not stop the feed, . But unfortunately I have to.}
+{\pard  \line \par}
+{So yeah. Thanks everyone. I'll see you on the next one also. See the next one. Thank you. Thanks everyone. }
+{\pard  \line \par}
+{\b\cf1 Alexis Robinson:\b0}
+{ Bye.}
+}

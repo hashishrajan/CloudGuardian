@@ -1,0 +1,175 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2639
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 TimesNewRomanPS-BoldMT;\f1\froman\fcharset0 TimesNewRomanPSMT;}
+{\colortbl;\red255\green255\blue255;\red97\green167\blue95;\red0\green0\blue0;\red109\green109\blue109;
+\red81\green0\blue192;}
+{\*\expandedcolortbl;;\cssrgb\c44706\c70196\c44706;\cssrgb\c0\c0\c0;\cssrgb\c50196\c50196\c50196;
+\cssrgb\c40000\c0\c80000;}
+\paperw11900\paperh16840\margl1440\margr1440
+\pard\sa360\partightenfactor0
+
+\f0\b\fs28 \cf2 \up0 \nosupersub \ulnone Yotam Segev:
+\f1\b0 \cf3  \cf4 [00:00:00]\cf3  CISOs, we don't want to be the department of no. We don't want to be the ones that say what you can't do. We want to be the ones that are saying, go ahead, move fast. I've got your back. And when you focus on data, when you actually know what data the enterprise has, you're able to quantify risk. You're able to communicate risk in a manner that we haven't been able to before.\
+Right? Risk is not just about vulnerabilities. It's a critical vulnerability. It's, no, it's also about what's the impact. Should somebody exploit that vulnerability? What is going to be the impact to our business? And when you understand the data landscape, you understand the data impact. You can communicate that to your business stakeholders in a way that everybody understands.\
+People understand what it means for the organization to lose 100, 000 customer records. They don't necessarily understand what it means for some vulnerability in an EC2 instance to be exploited. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Have you tried looking at the data problem in your organization? And I know you might think that, Hey, I don't deal with data because I'm part of security or that's the responsibility of the data team, which is like in the big data project.\
+But I had this interesting conversation with Yotam from Cyera, and it \cf4 [00:01:00]\cf3  made me kind of think about this in a different way. A lot of us would know that there's a data sprawl problem in most organizations. I can't imagine an organization that does not have a data sprawl problem. For people who don't know what data sprawl is, data sprawl basically means that some data that you are aware of is expected to be just in one place in the organization, maybe AWS S3 bucket or Azure blob storage, but it may also exist on a developer's laptop or a network person's laptop or someone else's laptop or any other endpoint that you may not assume that the data should exist there because one day, for whatever reason, Ashish, the developer, decided to copy across some of that information so that they can always delete it later on, or maybe a data scientist did, but that was never removed from it.\
+So in this conversation with Yotam, who is the CEO of Cyera, we spoke about who is responsible for data security in an organization. Is it the big data team or is it the security people? Or why is data a problem today versus all these years of working on a data field? Why has data suddenly become top of mind \cf4 [00:02:00]\cf3  for a lot of people?\
+Data security has become a thing. Who should be running a data security project? Why do you even start a data security project in the first place? And a lot more conversation around why data security requires a lot more love than what it has been given for all these years, especially when you may already have an existing data policy, but do you really know if people are following it.\
+So all that and a lot more in this episode, as always, I would appreciate if you know someone who's working on a data or data security problem, if you share the episode with them, and as always, if you're here for the second or third time, I would really appreciate if you take a moment to just drop in a review on our iTunes podcast, or drop in a comment if you have a question.\
+If you're watching this on YouTube or LinkedIn, it definitely helps us know what should we be working on as well as how much you liked the episode and if you want us to do more of these episodes as well. But I hope you enjoy this episode and I hope you enjoy the rest of the day as well. Enjoy this conversation with Yotam from Cyera around data security.\
+And I look forward to talking to you online. Talk to you soon. Peace. Hello everyone. Welcome to another episode of Cloudfreeny Podcast. Today I'm with Yotam. Welcome to the show, Yotam. What was your path to your current role man? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Yotam Segev:
+\f1\b0 \cf3  \cf4 [00:03:00]\cf3  I'm Yotam Segev, I'm the co founder and CEO for Cyera. Yep. And glad to be here. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Thank you for having me. And what was your path to your current role, man?\
+Like, so, where you are today, what was the kind of background that you came from? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Yotam Segev:
+\f1\b0 \cf3  So, cyber security has been my passion for almost 15 years now. Wow. I think that for me, cyber security was a very complex problem, a problem that's made up of systems and systems, people, processes, technology. And it requires unique thinking and unique approaches in order to actually be able to drive an impact and solve these problems.\
+That was always my passion throughout my career in the Israeli military. And I think that specifically to the position that I'm in today, I would say that the most meaningful experience that I've had to prepare me for it was being an instructor. So I spent two years, two and a half years out of my military career being an instructor in Talpiot, Israel Technological Leadership Academy.\
+Yeah. Which I'm a graduate of. Yeah. And in 8,200 in the cyber \cf4 [00:04:00]\cf3  cybersecurity training courses. Nice. Spent my youth as a youth instructor for many years. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  What do you mean youth? You're still pretty young, man. Like you saw \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Yotam Segev:
+\f1\b0 \cf3  my ears. I'm in my teens, I did a year volunteer work before the military being a youth counselor.\
+Youth instructor. Yeah. Yeah. But that gave me the aptitude to understand that when you're building organizations, it's all about the people, right? And it's all about how you enable the people to get the maximum out of themselves. Yeah, yeah. You have to lead by example, but you also have to create the right atmosphere, the right climate, the right culture for your people to succeed and for your people to carry it forward.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Yeah, and maybe talking about carrying forward data security, why is that getting us so much attention these days, man?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Yotam Segev:
+\f1\b0 \cf3  I think that when we enter the data security space, we looked at a few changes that were happening in the world and said, okay, these changes are going to put the focus on data. It's inevitable.\
+Those changes were first of all, the cloud migration, the move from controlling our infrastructure to outsourcing our infrastructure. You move from a on premise \cf4 [00:05:00]\cf3  infrastructure to cloud infrastructure to PaaS platform as a service and to SaaS, software as a service. Yeah. And when you look at these new consumption models of technology of software.\
+Yeah. The only layer that is consistently the enterprise's responsibility to secure is the data itself. It is. What exactly are you responsible for in Office 365, in Salesforce, in Snowflake? You're responsible for the data. You're responsible for the access to that data. You're responsible for the configurations of the system.\
+That's all that's left. That's the unifying layer for the new world we live in. That's the layer that's going to be the most consistent across the enterprise stack. That's the layer that organizations today are focusing on. And regulators are focusing on. And hackers are focusing on. Everyone wants data.\
+It definitely deserves attention. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  What was traditionally done? I imagine to what you said, now people have cloud, people have SaaS, people have all these things. Now they're abstracted infrastructure. How was this done traditionally compared to like, well, the challenges you just spoke about?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Yotam Segev:
+\f1\b0 \cf3  So if we look at the old world, in \cf4 [00:06:00]\cf3  the old world, the king of data security was DLP, data loss prevention.\
+And DLP was all about, let's keep the data, the sensitive data within our four walls. Well, we don't have four walls anymore. We don't have a perimeter anymore. We have a presence in AWS. Yes, we have a presence in Azure. We have a presence in GCP. The data scientists want to use Snowflake. Office 365 is full of data and permissions.\
+Nobody can get their hands and feet around. That's the new reality. So keeping the data in is not enough. You have to know what data really makes the difference. You have to be able to classify, to contextualize the data, to understand what its value to your business is. Yeah. And only through that are you actually able to put the appropriate controls, policies, guardrails around it.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  To your point about guardrails, is there like native things in cloud that people can use? So, you know, cause DLP is, well, I think it's a gap in the cloud world, but I'm sure you have your opinion about as well. Is there a cloud native way of managing data at all? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Yotam Segev:
+\f1\b0 \cf3  So I think that we're the cloud native way of \cf4 [00:07:00]\cf3  managing data in many regards.\
+Cyera, and companies like us tackling this challenge. Yeah. I think that when you look at what's happening in the cloud space, the pace, the velocity of data, the complexity of data, the variety of data. Yeah, it's uncomprehendable, right? Organizations tell us, Oh, we think we have 100 terabytes of data in the cloud.\
+We come in, we connect, they have 10 petabytes. Oh, people just don't have a grasp on what's going on in their cloud environments from a data perspective. Yeah. The data sprawl is truly extraordinary. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  So what drives this? So what would be a reason for someone to start? Oh, I'm going to start a data security project.\
+Like what would trigger that? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Yotam Segev:
+\f1\b0 \cf3  So I think many people understand that in the past we had a garage and the garage had four walls And there's only so much junk you can pile up inside of your four walls. Yeah at some point it gets full, you have to build an extension to the garage, you have to do something, you have to renegotiate your contract with Oracle.\
+But in the cloud, everybody is welcoming your junk, as much of it as possible. Put more data \cf4 [00:08:00]\cf3  in, put more data in, copy it, replicate it, duplicate it. Have some ghost backups, have some ghost data stores, have some ghost snapshots. That's the reality in the cloud. Security people are trained, we're almost grown to think about risk.\
+Yep, that's right. And security people understand where the problems are going to come from. Yeah. And they have a sentiment that they understand that what's happening with data in these environments is not going to end up good for them. Whether it's on the privacy front with 4% annual GDP fines from GDPR or whether it's specific regulations to your industry, financial regulations, the New York DFS, health care regulations, whether it's your customer's trust in your brand, in your company, the ability to do business with you and having you keep their data safe, data has very high stakes to it.\
+And everybody understands that focusing security on it is the call of the day.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  And because I imagine a lot of people listening to this way, I also think that am I too late in this journey to start this or at what stage do you \cf4 [00:09:00]\cf3  recommend people should start looking at data security projects? Could to your point, the trigger point could be happening right now as well, but I mean, it could be a company that's been collecting data for years before that.\
+Is that a good time to start this?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Yotam Segev:
+\f1\b0 \cf3  So I think the best time is now. Okay. It's always the best time in my mind for many things, but specifically for this journey. And I think that we've all gotten a wake up call from the world of technology with chat GPT, with generative AI. I think that really changed the mentality for many CISOs, CIOs, CTOs that I've seen to understand that if they don't focus on data in their enterprise today, they're going to be left behind.\
+The organization is moving forward. Organizations are competing with each other based on their understanding of the data they have, their ability to monetize the data they have. That's the business advantage you have in the modern world. If you don't double down on understanding that data, securing that data and allowing your organization to be agile with it, to move fast, to innovate, to adapt to the new technologies.\
+If you don't do that, you're going to \cf4 [00:10:00]\cf3  be a straggler and it's a winner take all world. Yeah, stragglers are not going to have much left to eat. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Almost like when you're starting off on the data security project. Are there obvious, let's say they hear, Oh my God, Yotam is right. I need to start something today.\
+Are there any technical or non technical or maybe even both technical and non technical challenges you can think that people would face immediately as they start a data security project? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Yotam Segev:
+\f1\b0 \cf3  So I think cloud native companies have been able to make data security initiatives very accesible from a technology perspective.\
+Yeah, I think the biggest challenge is the organizational resistance people are afraid people don't want to know I'm hearing for many many of the practitioners that we're working with that their peers are concerned, they're worried that once we find out, we'll have to do something about it. And we won't necessarily have more resources to do something about it.\
+And I think that that's maybe one of the worst sentiments in our industry, like burying our head in the sand, ignoring the realities, like nothing is happening, nothing is happening, nothing is happening in order to not face them. And I think that \cf4 [00:11:00]\cf3  every leader in enterprises today, conservative as they may be.\
+Understand that it's better to know about risk and decide how we deal with it than to not know. Right? Yeah. And I think that it's our call as an industry. It's our place in society. Yeah. To protect our organizations, to improve the security. Yeah. We're not custodians of just policy. We have a job to actually improve our organization's security posture, to make a difference, and to make sure that the foundations of trust that society stands on, which is the fact that we can trust our banks, we can trust our hospitals, we can trust our...\
+Institutions to actually protect information and keep safeguarded well. Yeah, that's our job as an industry. So ignoring it is in my mind is unacceptable.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Actually, you're right. Because as a first principle, what most organizations care about is data. And people usually are scared of data breaches. They're not scared about I have a really old Windows Vista server that's running in my environment.\
+They're more concerned about the fact that is there any \cf4 [00:12:00]\cf3  production data that may end up in public or somewhere. And that's what's the scary part is.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Yotam Segev:
+\f1\b0 \cf3  That's the opportunity, what you're saying. Yeah. That's the opportunity of focusing on data from a security perspective. Yeah, yeah, yeah. CISOs, we don't want to be the department of no, we don't want to be the ones that say what you can do.\
+We want to be the ones that are saying, go ahead, move fast. I've got your back. And when you focus on data, when you actually know what data the enterprise has, you're able to quantify risk. You're able to communicate risk in a manner that we haven't been able to before, right? Risk is not just about vulnerabilities.\
+It's a critical vulnerability. No, it's also about what's the impact. Should somebody abuse. Should somebody exploit that vulnerability, what is going to be the impact to our business? And when you understand the data landscape, you understand the data impact, you can communicate that to your business stakeholders in a way that everybody understands.\
+People understand what it means for their organization to lose 100, 000 customer records. They don't necessarily understand what it means for some \cf4 [00:13:00]\cf3  vulnerability in an EC2 instance to be exploited. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Yeah what you're really trying to find out from a data security project is the probability of it.\
+Yes, at the onset, like, but how often does that happen? My data is going to be on the internet. There's a probability that you're trying to fight for whether as an organization, we're comfortable to say that I know where all my data is. I don't have a data sprawl or I understand that. Oh, I don't have anything PII in the cloud or whatever.\
+I think I love the direction we've taken. I also feel for people to have a vision for what this would look like ideally. What does success look like for a data security project? We can't save the world, but we definitely can make a dent big enough that we feel we made a difference.\
+So what would you say the success thing would be for a data security project? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Yotam Segev:
+\f1\b0 \cf3  So I think that a data security project or a data security program, maybe better said, is exactly like every other security program. It's built from the same foundations, from the same layers.\
+The first thing you want is an inventory. Yep. You want to understand what assets you have, which assets are more valuable. Yeah. You have to have that basic inventory. Yeah. The second stage is policy. What is our baseline? What does good look \cf4 [00:14:00]\cf3  like, right? And I think that once you have a good inventory, building that policy is not that hard.\
+No. You can really say, okay, European data shouldn't be in the U. S. We all understand that. We all understand that's a problem. Yeah. Now, let's eliminate, if we have any problems like that existing, let's take care of them. Yeah. Let's make sure that if it happens in the future, we're alerted about it and we're able to close up the loop on it in a timely fashion.\
+Yeah, okay. And the third stage is remediation and enforcement. Yeah, yeah. After you understand what good looks like, keep your environment in the state of good, even though it's very dynamic, even though data stores pop up and down, even though you're acquiring companies even though data is being collected in every application by every employee in the company, and it's moving all the time, right?\
+So you're taking care of something that's like liquid. It's like water. It's all over the place and it's moving all the time. But if you have automatic controls in place, you can actually do that. You can say what is critical, what shouldn't happen, and alert and be able to really find that needle in the haystack and alert only about the things that \cf4 [00:15:00]\cf3  make an impact for the organization.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  I love that. I love that. Actually, maybe that reminds me of one more thing that people are normally like, even with the cloud problem, it's normally the question of who owns this in a data security world. Who owns this? Like the whole concept of CDO or Chief Data Officer and what do you think should own data security?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Yotam Segev:
+\f1\b0 \cf3  So I think there's no doubt that the CISO owns data security. Okay. That doesn't mean that the CISO owns data. Right? Oh, yes. Okay. Data is an enterprise problem that It's a shared responsibility. That has many stakeholders in it, the chief data officer, the chief privacy officer, the CIO, the CTO, and the business units themselves.\
+Yep. I think that the CISO, through the ownership of data security, actually has an opportunity to be the hero. Yeah. Actually has an opportunity to bring in the best technology because that's what we have in the security space. Yeah. To be the one to supply the company with the best visibility. Yeah. Not only help protect the data, but help the company derive more value from the data it has.\
+Yeah. Help the company leverage the data for more users. Be the one that tells the business, \cf4 [00:16:00]\cf3  Hey, did you know we have all of this? We can really, we can do something with it.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Yeah. Yeah. And do you find that the right skill set does exist in a company? Like what would be your right way to look at the team skill set a CISO may have to look at if they're trying to solve this problem themselves. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Yotam Segev:
+\f1\b0 \cf3  So I think the security organizations are very well positioned to lead the charge in this because when I look at what Cyera is doing, we're trying to leverage the existing processes, workflows, and systems that already exist within the security organization in order to operationalize data security in a way that wasn't possible before.\
+Right. Vulnerability management, SOC, incident response. These are the processes that we're plugging into without changing them. Using the existing processes, using the existing workforce that you have, just plugging in more insight, more visibility, a new dimension, the data dimension. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  I love it, man. Oh, this has been really valuable conversation.\
+I think I'm sure a lot of people would walk away from this conversation with a lot of \cf4 [00:17:00]\cf3  insights. Where can people find you on the internet, know more about what you're up to, data security and all of that? Where can people find you on the internet? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Yotam Segev:
+\f1\b0 \cf3  Cyera Cyera.io \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  yeah, it's almost like a song, Cyera\
+like, haha, should write a song about it as well. But I'll put that in the show notes as well. But, dude, thanks so much for coming on the show, man. Thank you, Ashish. Thank you for having me. Thanks everyone for watching as well. See you in the next one. Peace.}

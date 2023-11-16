@@ -1,0 +1,270 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2639
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 TimesNewRomanPS-BoldMT;\f1\froman\fcharset0 TimesNewRomanPSMT;}
+{\colortbl;\red255\green255\blue255;\red97\green167\blue95;\red0\green0\blue0;\red109\green109\blue109;
+\red81\green0\blue192;}
+{\*\expandedcolortbl;;\cssrgb\c44706\c70196\c44706;\cssrgb\c0\c0\c0;\cssrgb\c50196\c50196\c50196;
+\cssrgb\c40000\c0\c80000;}
+\paperw11900\paperh16840\margl1440\margr1440
+\pard\sa360\partightenfactor0
+
+\f0\b\fs28 \cf2 \up0 \nosupersub \ulnone Nicholas McLaren:
+\f1\b0 \cf3  \cf4 [00:00:00]\cf3  You may be tasked with creating some type of report based around certificate authorities, right? So you did a lot of really cool stuff. You created the Python script. You then went ahead and went into a ECS and created a Fargate cluster. And you're happy about it. It works, but ultimately you have to think about what does the CISO think when that report finally hits his email?\
+What type of value is that bringing to him? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Why is it going to take two weeks for you to do something? Have you seen those challenges as well? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nicholas McLaren:
+\f1\b0 \cf3  Oh my goodness. That's a huge challenge within an enterprise. They may not have the knowledge of the technology.\
+So you would have to find a way to explain to them. Hey, it's going to take maybe two months to potentially onboard this particular tool using Python code. It's not as simple as, Oh, I'm just going to install this particular application on a VM and then all of a sudden it's going to work for our entire 400 plus accounts.\
+It doesn't work that way. One of the things I can say is that bit me in my tail as I came onto an enterprise. I was not a strong Python developer and I got tasked with doing some Python and it kicked my tail. Brought tears to my eyes as I \cf4 [00:01:00]\cf3  couldn't produce a solution. And I vowed to myself that I would never let that happen again.\
+I learned Python and got extremely good with it over time.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  If you're someone who's looking into the field of becoming a cloud security engineer or a senior cloud security engineer, I have an episode for you. I have Nick McLaren, who has been a cloud security engineer for a long time.\
+And now he's, these days, a senior cloud security engineer, and he started his journey in a startup, moved on to enterprise, and he was on the podcast to share how his journey has changed from working in a startup to an enterprise. What are some of the roles and responsibilities? What does a day look like in the world of senior cloud security engineer?\
+What does it look like in the prospect of the technologies you need to understand? What kind of understanding of a cloud, whether you need to know multi cloud, what kind of non technical skills you require, and maybe a lot more. And also things that help you get to that next level from a cloud security engineer to a senior cloud security engineer.\
+I hope you find this episode valuable. If you're here for the second or third time, definitely give us a follow, subscribe on your favorite social media, because we talk about cloud security and help you get better in your cloud security job in the industry you have \cf4 [00:02:00]\cf3  chosen. If you know someone who wants to become a senior cloud security engineer, definitely share this with them as well.\
+And as always, I appreciate your review and support. If you have been following us on cloud security bootcamp as well. So special shout out to you guys for joining us over here as well, but enjoy this episode with Nick McLaren and I'll see you in the next episode. Peace. \
+We interrupt this episode for a message from our episode sponsor. Growing a business that likely means more tools, third party vendors, and data sharing, aka way more risk. Vanta's market leading trust management platform brings GRC and security efforts together, integrate information from multiple systems, and reduce risk to your business and your brand, all without the need for additional staffing.\
+And by automating up to 90 percent of the work for SOC 2, ISO 27001, and more, You will be able to focus on strategy and security, not maintaining compliance. Join 5, 000 fast growing companies that leverage Vanta to manage risk and prove security in real time. Cloud security listeners get 1, 000 off Vanta.\
+Just go to vanta. com slash cloud to claim your discount. That's V A N T A \cf4 [00:03:00]\cf3  dot com slash C L O U D. Now back to the episode.\
+Hey Nick, welcome to the show again.\
+Hey, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nicholas McLaren:
+\f1\b0 \cf3  hey, how you doing today, man? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Good, man. Good. Thanks for coming in. And for the second time. And it feels like it's been a hot minute since I had you last time on the, you had the whole cloud engineer role, cloud security engineer role, you're working with a startup and now you're evolved to becoming a cloud security engineer, senior cloud security engineer.\
+But maybe for people who may have just started following us recently, how would you introduce yourself? Maybe a bit background about yourself would be great for them, people who just started following us recently.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nicholas McLaren:
+\f1\b0 \cf3  Yeah, sure. I'm Nick McLaren. I live in Atlanta, Georgia in the United States, a graduate of Georgia State University, where I got a computer information systems degree and also have a master's in cybersecurity from Kennesaw State. Got my start in cloud security at a startup named ByteCheck. Well, that's kind of where I put my boots on the ground and learned a lot of the operational side of cloud security as of now, as you can see, I'm a senior cloud security engineer. I'm now work for enterprise. The role is a lot more \cf4 [00:04:00]\cf3  expansive, but I'm enjoying it a lot. That's kind of the background of who I am and stuff like that. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Awesome. By the way, every time I, every time I hear anyone's from Atlanta, I remember the song.\
+Welcome to Atlanta by Ludacris.\
+I'm like that song is plays in my mind automatically throwback thursdays it should have been one of those though, but I'm glad you're here. I wanted to kind of go through this almost like starting up with the fact that as you've also called out, used to be part of a startup called ByteCheck, shout out to AJ Yawn back when it was a thing and now you're in the enterprise space. What's been the, I guess the difference between the two different stages of companies you've been working for? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nicholas McLaren:
+\f1\b0 \cf3  Man, I would say probably the biggest thing that I noticed when I came on was the segmentation of duties. So in startups you may be handling identity access management you may handle operations and you may potentially be tasked with handling automation of manual tasks within an enterprise. Your duties are going to be a lot more drilled down to specific areas. So say for example, within the enterprise that I work for now, \cf4 [00:05:00]\cf3  I have never touched anything associated with IAM.\
+So any identity access management things, I have never put my hands on that. Versus when I was at a startup, I had a pretty high level of autonomy being that I was a security manager. So anytime some permissions issues came up. People came to me or I have permissions issues myself. I would just change them not like that at all in an enterprise.\
+I have to submit a ticket and thoroughly explain why I need these modifications done to a role. But I have learned over time that these processes are really crucial to bigger companies because they're typically going to impact 10 people. As you may see at a startup, it's going to possibly impact hundreds of people.\
+A reason being is you're going to have your designated account owners. But the resources that are created inside of that account, they're going to be done by pretty much anybody that has access to a particular role that can go inside an account. So it's extremely important to have high levels of visibility for any type of changes to roles.\
+Another thing I would say, and man, \cf4 [00:06:00]\cf3  I'm still trying to get over it at times, would be the silos. I would definitely say it's due to the high levels of segmentation. So the willingness to share that information is kind of low at times, but I work with it. And this is ultimately just due to a lack of trust.\
+You don't work in their area. They may not have even heard of you before prior to you asking them to change a security group or something of that nature. And I don't blame them. I don't blame them. They should be skeptical. We all work in security. In the startup world. Hey, I may just be able to ping someone on Slack and get some information on some WAP configuration.\
+Doesn't work that way in the enterprise, everything needs to be extremely formal. You need to have someone that kind of has that skin in the game to be there for you. It kind of vouch for you so that you can get the ball rolling. I should say. Yeah. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  And I probably also add from a scale perspective as well.\
+A startup may work with say sometimes less than a hundred employees looking at hundreds of employees and just assuming that you can change one thing and not affect probably hundreds of people who are using that one thing. I think to your point about the responsibility \cf4 [00:07:00]\cf3  and the accountability is quite high in there.\
+So it's important to have those processes and important to have that layer to kind of segregate the fact that, Oh, okay, so now it's just not a matter of, I can just change my permission when I want, because the governance process is going to be affected by it or something else is going to be affected by it and someone's report is going to get backed up.\
+So I'm glad you called this out, but a lot of people would not even understand the, I mean, they understand, okay. Startup enterprise. I get it. The scale challenge is there. What about projects? Are the projects different as well? Like in terms of. You said you drill down quite a bit. How different is it?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nicholas McLaren:
+\f1\b0 \cf3  Oh yeah, absolutely. It's very different. If I start from the startup side, I would say that it depends on the stage of the startup. So say for instance, if you're in a startup, that's very new, you may have projects that involve setting up single sign on, you may even have to set up the initial compliance scans within an environment, or you could be possibly tasked with setting up those initial dashboards to show a high criticality finding within an environment.\
+Now at an enterprise, a lot of that stuff is already done. So your task really is to build upon a \cf4 [00:08:00]\cf3  lot of those baseline tools that are already set up. So you may be building features that will help bring better visibility data and security finding. I would say that that would be a pretty good example of how things work in enterprises.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Maybe just to add to that project piece as well. And thank you for sharing this because I almost feel the scale of the products are very different as well. Right? Cause there's a whole conversation on build versus buy, whether the company is going to buy a product to solve a problem at scale versus just, I'm not going to engineer my way through this as well.\
+Do you find that difference as well between a startup and enterprise as a senior person? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nicholas McLaren:
+\f1\b0 \cf3  Absolutely. Absolutely. Most in an enterprise, they're going to aim to try to lean on us as engineers to build things rather than using some type of third party solution. And the reason behind that is the tool that may be in question that they want to bring on that tool has to go through so many regulation checks to see if it's actually fit for that enterprise.\
+And that may take years before it actually gets cleared. So they rather lean on the engineers to possibly build Python scripts to build out a lot of the same things that these tools are doing. \cf4 [00:09:00]\cf3  Will the lift be a lot heavier than doing some click ops within a tool? Absolutely. But it's going to save the company money.\
+And ultimately it allows you to strut your wings a little bit and show some of the things that you're good at for your company. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Right. And maybe also worthwhile, because I think anyone who's listening to this is probably a cloud security engineer or probably starting to become a cloud security engineer and now looking for the next opportunity for a senior role.\
+Would you say the skills required for that is also a bit more nuanced as well? Cause to what you said a lot of people may learn online about, Hey, this is how you set up an AWS account. Oh, wait, I'm a good cloud engineer now. I'm like, I don't know if you're a cloud engineer, but sure. Like, and I know we kind of spoke about this in the first episode.\
+We spoke about the whole certification and all that as well. It's required. When you were talking about the example project, one of the things I was thinking about is like, oh wait, it's actually not just a, I can create an S3 bucket in AWS. It's almost like, how can you configure the S3 bucket to act a certain way, comply to a certain policy? Would that be also \cf4 [00:10:00]\cf3  examples of things like the understanding needs to be a bit more deeper than just the surface level, open S3 bucket. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nicholas McLaren:
+\f1\b0 \cf3  Absolutely. Absolutely, man. I would say one of the biggest pieces of being a senior level engineer is having the ability to translate those technical topics into business value.\
+So for instance, you may be tasked with creating some type of report based around certificate authorities, right? So you did a lot of really cool stuff. You created the Python script. You then went ahead and went into ECS and created Fargate cluster in order for you to containize that code and get it to run automatically.\
+And you're happy about it. It works, but ultimately you have to think about what does the CISO think when that report finally hits his email? What type of value is that bringing to him or her, you have to find a way to deliver that information to them through these different status calls.\
+Status calls are huge. As a senior engineer, you're going to constantly be talking to stakeholders who don't, they may not have any cloud \cf4 [00:11:00]\cf3  knowledge at all. They just know I need a report that's showing how many findings we have in our account. Can you do it or not? And they may not necessarily care about how you use SNS topics to deliver that report to them.\
+They may not care about how you had to go on Lambda and discover that, Hey, Lambda has a 15 minute timeout. I can't use that anymore. I need to find another way around this. They don't care about that. They just simply want to know. How can I use this report to go to my boss and tell him, Hey, we solved this issue.\
+This finding is now closed out. So I would say that's probably the biggest thing that you have to focus on when you're at the senior level. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Awesome. thank you for sharing that as well, because sometimes it's hard to share the nuance of a lot of people would ask you what's the difference?\
+Like, I mean, I'm doing the same thing that Nick is doing. Like why does he have a senior title, and why don't I have a senior a title? And I think a lot of people just say, oh, just a number of years of experience, but do what you just said. It's like the translation of something technical to help a potentially non-technical person understand. Or \cf4 [00:12:00]\cf3  even like, Oh, why is it going to take two weeks for you to do something? Oh, I mean, have you seen those challenges as well? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nicholas McLaren:
+\f1\b0 \cf3  Oh, my goodness. That's a huge challenge within an enterprise. Cause again, they may not have the knowledge of the cloud or let's just keep it simple.\
+They may not have the knowledge of the technology. So you would have to find a way to explain to them. Hey, it's going to take maybe two months to potentially onboard this particular tool using Python code. Cause there's so many different complexities that I'm going to have to battle along the way. It's not as simple as, Oh, I'm just going to install this particular application on a VM and then all of a sudden it's going to work for our entire 400 plus accounts. It doesn't work that way. So you have to find a way to, you know, let me say this. A lot of things that happen in enterprises that we have different MVP, so different levels of implementation, I should say. And with that, you could start off with something small. Maybe that Python script only searches S3 and gets the sensitive data out of that.\
+But maybe within the second implementation of that, you now expand it to find \cf4 [00:13:00]\cf3  out which particular services have sensitive data in it. So you have to find a way to get them to understand, Hey, we have to do this in increments rather than trying to get everything done within two weeks. That's a huge, huge thing within working at an enterprise because they want things to be done fast, but typically not that simple to get \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  done.\
+Two weeks is a, as you and I laugh about the two weeks part, but two weeks is like. Well, the new way of working with Agile and all of that is almost like and it's funny. I think it was worthwhile calling out why is two weeks important in this Agile world? What is Agile as well for people who may not even know what that is?\
+Cause I mean, when people look up cloud security skills or cloud or even general tech skills, they've been told, Oh, you should know Python. You should know AWS and you're amazing for the job. No one talks about the actual nuance of what happens in the project. So considering you've been spending some time on this as well.\
+What would you say is the importance of the, I guess, the day to day workflow with agile or like, why is two weeks so important as a keyword? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nicholas McLaren:
+\f1\b0 \cf3  You probably see me take a couple of deep \cf4 [00:14:00]\cf3  breaths. I'm not the hugest fan of agile, although it does bring value to enterprises, but having a great understanding of agile methodology is going to be huge for you.\
+ Especially at the senior level, because you're going to be expected on a Monday through Friday basis to give updates. And updates on the status of the work that you're working on. And unfortunately, your scrum master is not going to care as to why it didn't get done. They just want to know, did it get done or not?\
+Ultimately, it's up to you to figure out a way to get things done within that if they call it iterations now, rather than sprints, but nonetheless, it's up to you to figure out how can I deal with the silos? How can I get the stakeholders all in one team's meeting and find a way to get exactly what I need in order to build the solution that they want within two weeks.\
+It's typically never that simple. A lot of times things get moved to the next iteration, but it's kind of to be expected because there's so many different complexities, especially within cybersecurity that you have to \cf4 [00:15:00]\cf3  deal with to where it's not as simple as, Oh, I'm just building out an application. I think agile works extremely well with something like that. Hey, we're going to build a new feature for our website. That's a lot more simple. You know exactly what you're going to have to build and you'll go out and you have two weeks to accomplish that versus cybersecurity, we may start with our solution, but then come to find out that the bank or a company hasn't approved a particular service.\
+And now I need to go all the way back to the beginning and retool the solution that I'm making. And now I have to find a way to explain that to the scrum master. So agile as a lot of complexity to the day to day job. But it does have a way of bringing higher visibility into the work, so that again, the CISOs, the divisional CISOs, they have a way of seeing how the work is progressing over an iteration by iteration basis.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Yeah, it definitely helps in visibility. It also keeps the accountability quite high as well. Yeah. And maybe, well, I don't want to say it would just make people more accountable during remote times, but it definitely is something that, \cf4 [00:16:00]\cf3  say, as more people become senior, you can keep other people accountable for that as well.\
+Like, Hey, I'm just waiting for you to finish that part. Like, so you said, it's going to take two weeks. So I mean, if it's not done, that's okay. We can work out, but you just need to tell me beforehand, not on the 14th day that it's going to be like, no, it's going to be another two weeks. Like that, and so things like that.\
+I think the reason I bring that example up is because. Sometimes people who may have worked in the startup world would not realize the structure required for how they can function effectively in an enterprise world. So far, you mentioned, like we haven't even gone to the technical skills yet. We just basically went into the nuance of understanding something really deeply.\
+We also went into agile, having the different versions of MVP of the implementation so far, we haven't even gone into like. What do your day to day looks like? That's happened outside of it. And by the way, I do want to call it out that I don't think either you or me are against the idea of agile. We understand why it's required an organization, but it has its good days and bad days.\
+I \cf4 [00:17:00]\cf3  just say that. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nicholas McLaren:
+\f1\b0 \cf3  Oh yeah. Oh yeah, absolutely. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  :So maybe another good angle for this as well would be what was your day to day before as a regular cloud engineer, if you remember that much of that. Cause you kind of called out some of the projects you used to do for months or weeks versus these days as a senior person, maybe you or your friends or whoever senior as well.\
+What do you see as a day to day these days? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nicholas McLaren:
+\f1\b0 \cf3  Oh man. The day-to-day for a senior level engineer at an enterprise man, I would say a lot of my time is spent doing development of some nature, creating Python scripts to automate a particular manual task within one of the cloud vendors, whether that's Azure or AWS, because as you may know Ashish, a lot of the AWS tools are great.\
+But there are some gaps within them. One being Macie, Macie doesn't have the best reporting. In my opinion, you can't really get extremely granular. You kind of just have that, that initial dashboard of your findings, but you can't send out reports natively. You have to build that. Or for instance, even the same thing with a \cf4 [00:18:00]\cf3  certificate manager.\
+Something that I recently was working with there, there isn't any native reporting for that. And at enterprises, they care about reporting at the highest level. Why? Because they're often dealing with auditors. With that being said, a lot of my work is based around building some type of automation, making processes quicker so that we can get reports out faster, ultimately, because that's really what a lot of the enterprise environment is about.\
+Because you asked me about what I was doing in my previous role. Over there I was doing a lot of operations. I was configuring the WAF, I was setting up alerts, I was handling identity access management. Like I said, in the enterprise you have a lot more segmentation. And they're also expecting, as an engineer, that you don't do operations.\
+Like, that was one of the biggest things that I had learned when I came onto an enterprise. I think I was asking, he was a principal engineer at that time. I asked him, oh well, are we in charge of configuring the WAF? Are we in charge of handling identity access management? He told me flat out no. You are not doing operations here.\
+You are doing \cf4 [00:19:00]\cf3  engineering. You are going to develop. That is what your main task is going to be. And it took time to kind of adjust to that. Another piece that I often deal with still is Terraform deploying. So for instance, I may build a Lambda script that's going to create some type of reporting, but in order for it to be in the production environment, it needs to be deployed by Terraform.\
+So again, it kind of goes back to the initial implementation of, Hey, let's just get it out there. Let's just see if it works. But then the next one is, Hey. I need this to be automated. I needed this to be a template so I could put this across 200 plus accounts if I want to. So yeah, a lot of it is development for the most part.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Wait, talking about terraform and stuff as well, I imagine people who are listening to this also wondering, we've kind of named a few things. We spoke about AWS quite a bit, but these days people are saying you should know more than one cloud, multi cloud and all of that. Do you think there's a need for a senior engineer to know more than one cloud?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nicholas McLaren:
+\f1\b0 \cf3  One hundred percent. 100 percent especially at enterprises because they're more than likely using more than one cloud and typically they're even leaning on a third party tools. The reason behind that is because a lot of those third \cf4 [00:20:00]\cf3  party tools are vendor agnostic so they can go across AWS and go across Azure and GCP.\
+So it's extremely important to know more than one cloud. It's going to come up. One of the first things when I came over to my new company was that I had to learn Azure. Because I had all this AWS experience, but they threw me into a team where all they worked on was Azure DevOps. And I was like, Oh, well, I guess I'm going to have to learn Azure and had to go out and quickly get Azure fundamentals and start doing labs and understanding the names of the services.\
+Cause they're relatively the same to AWS, but understanding the names and how they function, how the services connect together to build certain solutions. It was extremely important when I first came onto an enterprise. So that's my long winded answer to say, absolutely. You need to know more than one cloud.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Actually, just on that, because I imagine a lot of people who would have been consuming just cloud security information, a lot of them are sent in the direction of AWS in the first way. And considering you actually moved over from AWS to start picking up Azure, do you remember what was like the learning path you took for learning Azure?\
+While being an \cf4 [00:21:00]\cf3  AWS person hands dirty with it, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nicholas McLaren:
+\f1\b0 \cf3  I would say I did the same thing. And I tell people all the time that I mentor, I think it's owned by Pluralsight now, acloud guru, cloud Academy. Use those do the labs. I think there's another site that I like for test dumps. That's a whizlabs just to practice so that you can learn the concepts.\
+You want to learn the theory so you want to find somewhere to learn a theory, and then you want to find somewhere to actually practice. You do the practical side of implementing these different tools and things of that nature. And ultimately, when I first came on to this company, we weren't doing agile at that time, so I had a little bit more time to take my time, learn these different tools and stuff, but if you don't have that amount of time on your hand, I would still say, Hey lean on these different sites that you can do a lot of different labs and get you up to speed a lot faster. That's going to be the easiest way to do it. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Awesome. And I think you touched on the whole third party tools earlier as well. As most of us, at least people who have been in this space for a while, we all have had to work with third party \cf4 [00:22:00]\cf3  products.\
+It's not just AWS. It's not just Azure. Security is a lot more than just AWS, Azure, Google Cloud. Yep. So what's your thoughts on people learning about, like, you know, when they see a free course to learn whatever product for cloud security is that should they go ahead with it and maybe learn that like what's the importance of a third party thing or a third party product in a company?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nicholas McLaren:
+\f1\b0 \cf3  Yeah, so I would definitely say to answer your first question. Absolutely. You want to have some type of knowledge of third party tools, especially as you go into the bigger companies and a lot of startups, they may leverage all native cloud tools, but kind of harping back to what I said earlier. In an enterprise, just because Security Hub can give you compliance scores on what's going on in your AWS environment doesn't mean that the company trusts that particular service.\
+They may want to use a service that has been around for 15 plus years that was working on premise servers and they have now implemented some type of cloud based version of that particular tool. So that's going to be extremely important because and harping \cf4 [00:23:00]\cf3  back to what I said previously again is you're going to typically be dealing with multi cloud if you're in an enterprise and a lot of these third party tools like Qualys that you can use Qualys to conduct some scans of your environment and does a lot of the same thing in security hub, but it allows you to connect to GCP, it allows you to connect to Azure and build reports really quickly versus Microsoft.\
+ I don't think you can make reports out of security of, and that's another constraint of some of the native tools is that they don't have the ability to build reports. Like I said, enterprises reports are at the top of the list. So I would definitely say it's important cloud guard. I think that was formerly known as a dome nine.\
+That's another tool. That's really similar to security hub, but again, it's vendor agnostic. So it can be used for multiple clouds. So it's gonna be important that you have some type of knowledge about it. You may not need to go into the interview and be able to say, Hey, I implemented this and implemented that with this particular third party tool, but you at least wanna know what it's, and how it helps an organization for sure.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Yeah. Yeah. And I think sometimes job description \cf4 [00:24:00]\cf3  even calls out that, Hey, you should have Palo Alto Prisma Cloud experience or Wiz experience, or whatever they can sometimes call it out, but not always. And it's always mentioned as a good to have rather than a must have. So like everyone understands, no one, I mean, maybe should we let the secret out that not everyone knows everything as well.\
+Like, even though we may have, like, I think the third party we've been working with for some time, they may decide to change tomorrow. Do you feel like, I wonder a lot of people kind of hold themselves back for, before applying for a senior at all. Cause they feel, I don't know everything, so I don't think I should go for it.\
+Like, I don't know what you tell people who are in that mindset at the moment where they don't feel they have learned enough, even after spending three, four years doing cloud security. Yeah. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nicholas McLaren:
+\f1\b0 \cf3  If I gave them any advice, I would say that cyber security is an ever evolving field. So at least in my opinion, you're never going to know everything you want to be able to know if I have it on a scale of one to a hundred, you want to be able to know maybe 80 to maybe 85 percent of stuff. And if you can do that, you're ahead of the game because that's the reason that you're typically on a team so that those other people could help fill in those gaps that you may have. \cf4 [00:25:00]\cf3  So I would definitely say, don't allow yourself to get shied away from senior roles just because it says, Oh, you need 10 years of experience or you feel to yourself, you haven't learned every single thing under the cloud, son, you're going to have time to pick up these technologies on the job. For instance, you talked about PaloAlto. There are some things that you can find out there for free, but in reality.\
+You're not going to be able to get a lot of experience with that until you're on the job at an enterprise where they have an enterprise subscription and you can actually use a tool at free will. So these things you don't want to harp on two much, but you do want to make sure you do know one of the cloud vendors, not even one, you want to make sure, you know, two cloud vendors that you're trying to get at a senior role within an enterprise, and you want to know those from top to bottom, front to back.\
+Because if you know that, and you show them that you know that they will trust you to go and learn the third party tool that they've been using for the past five years, because it's more than likely pretty similar to a lot of the AWS or Azure tools they have. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Yeah. Yeah. And I think maybe it has the same name as well\
+so maybe last question then, has it changed in terms of people are trying to get into cloud security now, because a lot of people feel that it's better \cf4 [00:26:00]\cf3  to ask a senior cloud security person rather than a cloud security person being a senior cloud security engineer, what advice do you give people to get into cloud security these days and should they go for the certification route?\
+I know we spoke about this last time as well, or should they go the university route? I I don't know which universities are doing cloud effectively at the moment, but considering cloud changing every day, every month, I mean, we are trying to keep up with it. I don't know how they're keeping up with it.\
+So what's your advice for people who are trying to get into cloud security now? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nicholas McLaren:
+\f1\b0 \cf3  Man, I would definitely say, you know, I went to university, so I'm going to always vouch for that, but there are quicker options to build that foundation in order to get in cybersecurity, you want to have the foundation of IT first.\
+So in order to get that, you're going to need, at least in my opinion, I became an instructor of bootcamps across universities. And I find extreme value in that you, you can do something over a 40 week period where you can learn about pen testing. You can learn about clouds, learn about Python, et cetera, et cetera.\
+Get something essentially that's going to build that foundation, then go out and get those certifications to kind of show, \cf4 [00:27:00]\cf3  Hey, this is what I like the most. I went to some type of bootcamp. I've went to some type of university to learn the basis of IT. But Hey, this is what I like to do. And this is what I want to specialize in.\
+I think certifications need to be used to show that you specialize in a particular area. Once you actually get my manager likes to call it skin in the game. Once you get skin in the game, the certs don't matter as much because you now have proof that you've used those particular services from those cloud vendors to build solutions.\
+So now you could talk about those particular solutions at high levels. If you happen to go interview somewhere else, you don't necessarily need to harp on, Hey, I passed the security speciality exam. That's great. I know, you know, the theory, but have you applied that theory in any practical way at a particular job before, in a lot of times when you're first coming in, you have it.\
+So you need to, and this goes back to what I said previously, you want to know that that cloud vendor from front to back, because if you do, they'll give you the opportunity to come in and apply a lot of that theory that you've learned and do some practical things. One thing I want to harp on as well is maybe I would say that the expectation \cf4 [00:28:00]\cf3  to know some type of coding language for automation.\
+It's extremely hot now. There is no room for, Oh, you don't know that. And I learned that on the job, man. One of the things I can say is that bit me in my tail. As I came onto an enterprise, I was not a strong Python developer and I got tasked with doing some Python and it kicked my tail, brought tears to my eyes as I couldn't produce a solution.\
+And I vowed to myself that I would never let that happen again. I learned Python and got extremely good with it over time, but I would definitely say learn from me, everyone. If you're watching this learn Python now. Because it's going to be needed if you want to be even a cloud security engineer, if you want to be a senior level engineer, they're going to expect that you can build all that code and troubleshoot it yourself.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Yeah, absolutely. And even I think I would say go one step further, maybe in Terraform as well. The expectation of going Terraform as a language is expected. Like, wait, what do you mean? What? You don't know Terraform anymore. That's all. Yes. Oh yeah. You should know the command line tools for AWS or Azure or Google cloud.\
+And on top of that, it should also know Terraform for IAC. And \cf4 [00:29:00]\cf3  on top of that, you probably should know about some security products. They're going to integrate into the CICD pipeline. There's a, I mean, once you kind of open that Pandora's box, you're like, Oh, wow. It's a lot to cover as you kind of go deep down in that journey.\
+Right. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nicholas McLaren:
+\f1\b0 \cf3  Absolutely. And I think one of the biggest things to combat that is to stay heavy on your research. A lot of times I may get tasked with something at work and I don't initially know how to do it, but you have to have the ability. I think anybody in this field, you have to be a self starter. So if you are a self starter, you're going to be fine as long as you keep that spirit, whenever projects come your way that you may not necessarily know how to do from the jump.\
+So I'll definitely say it's important to do that for sure. Awesome. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Yeah. Well, that's most of the technical questions I had, man. I do have my. Three favorite questions that I normally ask towards the end. I don't wonder if your answer has changed since the last time you came on the show. But when you're not working on these technology things, , what do you spend most time on man?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nicholas McLaren:
+\f1\b0 \cf3  Oh man, over time, I have recently became like a history buff and I don't know why. It's just one of the strangest things. \cf4 [00:30:00]\cf3  Like I really became interested in humanity overall. And just understanding like how we progress over the last thousands of thousand years and et cetera. That's something I'm really interested in at this moment.\
+Another thing that I'm really interested in now is just spending more time outside. Being at an enterprise now, I'm constantly wrapped up in the computer. So any chance I get to, you know, either go work out outside or just go outside and walk my dog. That is a huge win for me. So I would definitely say those things bring me a lot of happiness outside of working with these technologies on the day in and day out basis.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Awesome. Great. And definitely always a good time to just go outside in general as well. But what is something that you're proud of, but that is not on your social media \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nicholas McLaren:
+\f1\b0 \cf3  Oh something I'm proud of that's not on my social media. I would say just the overall perseverance. Ashish you met me when I first started in this journey.\
+And prior to that, you know, I couldn't find a job. I had a degree from Georgia state university, a top program. I had the CYSA from CompTIA under my belt at that time, and I still couldn't find a role. Man, I think \cf4 [00:31:00]\cf3  about how difficult it was to battle to get to this point. And even as I'm at this point now where I've learned, I've went through battles where I didn't know how to code really well, and I had to learn that on the job. I had to spend time outside of business hours and learn that and spend my time doing that. And even becoming a teacher, I would have never expected that I would have became an instructor of any kind, but I would definitely say just the perseverance, man. I don't talk about the journey so much.\
+I try to just, you know, let people who want to know about my journey ask and then I'll harp on it. But man, just the perseverance I think that I've shown in this process has been really good. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Yeah, man. I think I, and to your point. I remember the first job that you got by just networking as well, not just basically sitting in and just filling every empty job vacancy that comes up.\
+You actually were actively networking and talking to people, what should I do and all of that. That helped you get your first job. And now looking at where you are as a testament for how much hard work you're putting behind the scenes. And so I'm definitely super happy for you and all the personal growth that you've had in your life as well, man.\
+So I'm looking forward to like when the principal cloud \cf4 [00:32:00]\cf3  security engineer role happens as well. But thanks for coming in on the show, man. I think, and where can people find you on the internet? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nicholas McLaren:
+\f1\b0 \cf3  Yeah. So you can, you guys can find me on LinkedIn. I think you probably can just search this name. , I haven't shortened at Nick.\
+My full name is Nicholas, but you could search Nicholas McLaren on LinkedIn. You find me on there. And I would say that's pretty much it for the most part.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  All right. I'll leave the link on the show notes . as well, but I think there's only one way to close the show, man.\
+I appreciate you coming on the show, man. And for everyone else, feel free to reach out to Nick as well. If you have any questions, absolutely. about the cloud security field and how you want to make yourself, I guess, successful, especially if you're trying to go into cloud security space. It's definitely one of the person that I know who's lived through a journey and coming from a background of trying really hard persevering through it.\
+So yeah, man, I'll leave the links over there. I'm really happy for you. Looking forward to having you again on the show and for everyone else who's watching, we'll see you next episode. Thanks Nick. Thanks everyone. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nicholas McLaren:
+\f1\b0 \cf3  By bringing developers and security \cf4 [00:33:00]\cf3  together, you don't have to choose between speed and security.\
+Develop fast, stay secure.}

@@ -1,0 +1,488 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red216\green34\blue146;
+\red128\green128\blue128;
+\red250\green138\blue59;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ Hey, Hey, what's up? Yeah. }
+{\pard  \line \par}
+{Most people on my podcast who has been there from the beginning probably would know you already, like, I'm sure when you come and they would know you already, but a lot of people who may not know you since it's the first time you've come in.}
+{\pard  \line \par}
+{ If you can give us a quick intro about yourself and, how you got to where you are today. }
+{\pard  \line \par}
+{\b\cf3 Barak Schoster:\b0}
+{ Cool. So Barak Schoster, I'm from Tel Aviv. Two amazing children. And what I do for a living is I code I started very early on with open source projects and spend some time in startups in the cybersecurity space.}
+{\pard  \line \par}
+{UCBA space machine learning in cyber security was my first opportunity to meet cyber security market. After the defense force. Then I spent some time in RSA. Founded my own startup together with Guy Eisenkot and Idan Tendler; named BrigeCrew that was later acquired by Palo Alto networks.}
+{\pard  \line \par}
+{So today I am an architect at Prisma cloud }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ a lot from it. That's pretty awesome. So it's pretty interesting journey as well as Frankland defense forces, all the way going into the cyber security world. But. Today's topic is about SBOM and IBOM and I'm hoping you can probably dissect a }
+{\cf2 [00:01:00]}
+{ lot of these for us.}
+{\pard  \line \par}
+{Cause I think I keep hearing more I'm sure all the people do as well. But it seems very American concept as well. It's for the and I feel like it's only for a certain sector, but I would love for you to clarify what is S bomb and what the heck is IBOM }
+{\pard  \line \par}
+{\b\cf3 Barak Schoster:\b0}
+{ . So when you maintain your software, you build it from different components, right?}
+{\pard  \line \par}
+{Open source components, house built components, components that are maintained by different teams in your enterprise. And when you want to understand what's the recipe to building these kinds of application you can get a table like. Saying the bill of material of my software are those specific packages.}
+{\pard  \line \par}
+{Some of them are internal. Some of them are external and open source. Each one of them have different version, different license. Some of them are like open source license, like Apache to some are them are paid, some are internal and I'm knee next to the version. There, there is probably a set of vulnerabilities that exist within a set of open source.}
+{\pard  \line \par}
+{But today's software is not only built on open source packages. It's not the Monita anymore. }
+{\cf2 [00:02:00]}
+{ It's also been from services like third-party services of cloud providers or rest API of third party vendors. And those services are your infrastructure services. So when you try to understand, Hey, why does my software before.}
+{\pard  \line \par}
+{Actually it doesn't end in open source packages and their licenses and vulnerabilities. It also continues to their services that you're using within your cloud provider. So a little application is good from a database, probably RDS is also in the big bill of material and RDS has a version. And , one of the version might have a need for a patch or is not, does not have a specific compliance that you'd like to see.}
+{\pard  \line \par}
+{So when you want to understand, Hey, what are the different software? Why does the different parts have suffered? And I'm using you also need to take into account the third party services that are part of your infrastructure. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh, actually, that's an interesting one. So do you reckon this requires the support of your cloud service providers then?}
+{\pard  \line \par}
+{Because as you said, the software, I'm just making up an example. I make a website, www cuts for TV, and there's like a Lambda function in the background and S3 bucket in the background. }
+{\cf2 [00:03:00]}
+{ So I into, my SBOM apart from the software that's being actually used with all the open source libraries that I may be using.}
+{\pard  \line \par}
+{And you're talk about Lambda as well as S3 bucket, their versioning and stuff. }
+{\pard  \line \par}
+{\b\cf3 Barak Schoster:\b0}
+{ Correct. So the first opportunity that you'll have to meet this would probably be as part of the software report or a transition into the cloud. If you're in digital transformation, because under SOC two an auditory, we'd ask you what are the different services that you're using and is each one of those services?}
+{\pard  \line \par}
+{And then you create a manual bill of material. If your infrastructure, and you will expert from your cloud provider, whether it is AWS GCP or, or others, what is the different compliance for each and every service that you're using, and you would send that to your audit or as a. As a proof of compliance.}
+{\pard  \line \par}
+{Yep. So some of the services, if you want to go through a FedRAMP certification, for example, are still not bedroom certified. So you need to maintain this infrastructure bill of material to understand is all, are all of my services compliant. And also some of the services might be written }
+{\cf2 [00:04:00]}
+{ in Java and might be vulnerable to look for shell attacks or have different vulnerabilities.}
+{\pard  \line \par}
+{What's your account provider to disclose, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ right. So how is this related to IBOM and did you just coin the word IBOM? }
+{\pard  \line \par}
+{\b\cf3 Barak Schoster:\b0}
+{ No, I think that Coco Chanel once said that if you think you invented something, it's probably your memory. That is not that good. You probably heard it somewhere else. So I agree with COC chanel on the other about that.}
+{\pard  \line \par}
+{I probably heard it somewhere else in the internet. I don't know the source of it, but I, I really liked it and started to use it. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So, what is IBOM according to you then? }
+{\pard  \line \par}
+{\b\cf3 Barak Schoster:\b0}
+{ So the infrastructure build of material. It's a full dataset of inventory of what are the different services that I'm using as the infrastructure.}
+{\pard  \line \par}
+{It can be on-prem services. The servers in my data center with their IP name, DNS and last batch date, probably, Hey, it can also be my EC2. They are part of my infrastructure, my RDS services, my S3 buckets. You have a full list of inventory. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ It's a, quite a feat, right. Cause you almost, so when you're building a software then, so you will have an}
+{\pard  \line \par}
+{\b\cf3 Barak Schoster:\b0}
+{ I think they completed }
+{\cf2 [00:05:00]}
+{ each other. And. As time goes by the border between infrastructure and software gets really blurry because you starting to maintain infrastructure Incode infrastructure in the software methodology, whether you're maintaining it in Python, if you're using CDK or polluting or in Terraform, if you were using.}
+{\pard  \line \par}
+{Framework, it's getting to be part of your software. You even started getting the same repository as your application code. So it's getting }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ blurry. I think , it's funny because when I hear that and it always makes me feel that, oh, oh, it's not the same as one dashboard to rule them all.}
+{\pard  \line \par}
+{But how many dashboards we always ended up with? Cause I, because exactly what you said with the software bill of material, it's all usually like open source libraries and like what else, whatever the system are doing, it sounds like infrastructure is a lot more like, or these are my services that I'm using an Amazon or Azure or Google cloud.}
+{\pard  \line \par}
+{So you're saying this is going to be like complementing each other. So like the potentially in the next few years, and then people would go for a SOC two assessment. Not that I'm saying SOC is going to change, but just an example you were probably }
+{\cf2 [00:06:00]}
+{ produce both an SBOM and IBOM }
+{\pard  \line \par}
+{\b\cf3 Barak Schoster:\b0}
+{ correct? I think maybe let's change hats for a second and ask the question.}
+{\pard  \line \par}
+{So you've probably seen as a CSO application security engineers, starting to ask question about cloud infrastructure security. There's no way around. Do you, you probably heard dev ops. I think some questions about application security. Currently there are like two different titles for those positions.}
+{\pard  \line \par}
+{One title that the lofts will be consuming the infrastructure material and the other one, the APPSEC is consuming the software bill of material and the different licenses and vulnerabilities each piece of software has. But do you see those two roles? And our converged }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ into one. Actually the funny thing is in my team, I've got a product security role, which is both the roles combined.}
+{\pard  \line \par}
+{Cause it, it was inevitable. And but when we went multicloud, it was almost inevitable. Like the questions keep coming in here and more. But the challenge was there was no software to kind of build out things. So every time I would talk to someone does it. So there is a training piece for helping a DevOps person understand the AppSec part parts of }
+{\cf2 [00:07:00]}
+{ it.}
+{\pard  \line \par}
+{Cause they don't need to be an app sec engineer, but they just need to know enough to go, okay, what do I do with libraries? Same on the other end with the AppSec folks, they want to get to the root of the problem. They have actually the GitHub code, but they don't know where the influence was created and where they still wonderful or whatever.}
+{\pard  \line \par}
+{They're still you've worked kind of packages of using. So they, there was this always a disconnect I definitely went to the parts security bus, and maybe that's where the inspiration of the question came in from, because I saw it happened like almost six, seven months ago.}
+{\pard  \line \par}
+{And I was wondering if anyone else has, so it sounds like you're looking at this as well, where you find that SBOM IBOM are complimentary and when you want to see the entire picture of the software, you're probably looking at what that's kind of where the question came from. Is it. }
+{\pard  \line \par}
+{\b\cf3 Barak Schoster:\b0}
+{ Yeah. And I think that it doesn't and in infrastructure and application security I think, yeah, it's this bit of material can get wider.}
+{\pard  \line \par}
+{It can get him to run time. Like where are those infrastructure misconfigured and resources get manifested and also were, are those application security? Gets into running containers or running Lambdas or }
+{\cf2 [00:08:00]}
+{ easy tools. So it's actually infrastructure be off material software, meaning the application.}
+{\pard  \line \par}
+{Right. But it also gets into runtime, which is like host security and also to the deployment system itself to the CD system itself, because you need to say, all right, let's say that I have inventory of everything that I've fit. And you want to ask, who has access to a secret who has access to the connection string to the database and what open source packages are they using?}
+{\pard  \line \par}
+{Or in other words, can the secret big out via an open source? Can we secretly cult to a misconfigured CD pipeline. So you need your continuous deployment configuration to be part of the bill of material or CIA configuration to be as part of our bill of material, to be able to answer this question, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ it's just a very interesting way to look at it.}
+{\pard  \line \par}
+{And I think as you say that I'm going, yeah, actually there are a lot more moving parts that we haven't even started talking about. There's a secret and all, if you have a secret magic software that is that secret mode software, then }
+{\cf2 [00:09:00]}
+{ there was a whole separation of wonderful key management between application as well as}
+{\pard  \line \par}
+{And then there is this my eye, and you almost have to look at that and going, okay, but that doesn't stop there, but then it's identity as well. Which user, cause I mean, AWS can have, I am user, which is not technically . System user or a system manifesto, so, okay. So that could be a Pandora's box. I should not have opened before I get out.}
+{\pard  \line \par}
+{Now it's like all these like, oh, so how deep is the rabbit hole, is the question though. }
+{\pard  \line \par}
+{\b\cf3 Barak Schoster:\b0}
+{ So this is where I started to saying it's probably a simple table and it's, it's not really a table. It's more like a graph off connected. You have the infrastructure connected, let's say Terraform ease provision by a system, GitHub actions, for example, and it's provisioning into AWS, a server that has a container that these using an open source package that is vulnerable and is protected by whether or not so to be able to answer.}
+{\pard  \line \par}
+{Is my host running a vulnerable open source package and accessible. You need to ask a graph query that }
+{\cf2 [00:10:00]}
+{ combines all of those different bill of materials, infrastructure secrets into one huge graph that you can traverse on to get your }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ answer. Oh, interesting, man. . I agree with you. And I think I can see the vision of it, but there's something missing over here though, right?}
+{\pard  \line \par}
+{To your point, the context would be missing at that point in time, because then you're like, well, it's not just good enough for me to know. If I talk about it in a grocery list has to make simplify it for everyone. If I'm looking at some baking powder flour, unless I know I'm making a cake, all the things we don't make me make any sense to me.}
+{\pard  \line \par}
+{So the same way I imagine having a list of the software libraries being used, or the infrastructure being used or say something else. It would just be it would be great to know what the list is, but the context for what are you going to do with the list is what you're referring to as well here.}
+{\pard  \line \par}
+{Is that kind of the angle as well? }
+{\pard  \line \par}
+{\b\cf3 Barak Schoster:\b0}
+{ Yeah. I think that the different context or contextual question that you can ask is where is it provision? Is it development environment or production prioritized by that? And by who and of the }
+{\cf2 [00:11:00]}
+{ context gets lost to. Hey, probably the service account have provision those instances into production, probably it's Terraform or get her actions super user.}
+{\pard  \line \par}
+{But if you are able to track it into the file that sourced that like the actual commit already can answer who created a, when, when did they create it and why? Because you have so much contents within it. So you can. If you using an open source package, like your, you can get this, this context in the provisioning layer and a tag, the theme, the committer who lasted the change.}
+{\pard  \line \par}
+{Where's the five source from, and have these trays tracking you from code to the cloud environment, to be able to get all }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ of this. Yeah. Wow. We can, we can definitely go into it quite often. So going back to your kind of context of it, cause I think so are we already at that stage where we are using both SBOM and IBOM and the, should everyone cared about or is it certain industries? }
+{\pard  \line \par}
+{\b\cf3 Barak Schoster:\b0}
+{ I think that I think that everyone should care about it because the, the main goal of it is to help you gain visibility and reduce }
+{\cf2 [00:12:00]}
+{ your time to fix an issue in the cloud.}
+{\pard  \line \par}
+{The issue can be a security issue, a misconfigured vulnerability and you can change your priorities of handling an issue. If the context of. It's not that important. So let's say that you it's December a few months ago and you got a call. Hey, you're, we're running Java and we're using log for J we're using the bad version of it.}
+{\pard  \line \par}
+{Merry Christmas production, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ all the holidays.}
+{\pard  \line \par}
+{\b\cf3 Barak Schoster:\b0}
+{ And the first question that you ask yourself is where is this Java code running? Where do we have servers running Java? So you need the bill of material to answer that question. You need to list all of your servers and query whats installed those in them. What version and what are the open source packages that are deployed on each one?}
+{\pard  \line \par}
+{Yeah. Assuming you have this level of access and visibility. You want to ask contextual questions? Like which team maintains that? In which environment, when was the server last, last patched? If, if any, is it behind? It was because at the beginning you had some work rules that could prevent self the log for J attacks.}
+{\pard  \line \par}
+{And a }
+{\cf2 [00:13:00]}
+{ sophisticated attacker could go behind them. But is it behind the WiFi's is another contextual question and also is the server touching the crown jewel assets of my enterprise. Is it touching private data credit card, data, personal data or , healthcare related. So. Some of the context depends on what kind of data your enterprise stores within the servers, but the ownership can fully be automated and also the context can be automated }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ using tax.}
+{\pard  \line \par}
+{ At this current moment is obviously sounds like it's still very fairly , in this initial stages. So at the moment, are there specific industries that are already adopting? }
+{\pard  \line \par}
+{\b\cf3 Barak Schoster:\b0}
+{ I think that one of the early adopters are Google as a company they've came out with a new compliance framework named salsa SLSA and also the U S government is working to make it like a requirement , on large enterprises.}
+{\pard  \line \par}
+{So it's undecided yet, but it might be the new }
+{\cf2 [00:14:00]}
+{ NIST requirement. You have full visibility to your bill of material and you have a secure CICD pipeline. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Wow. If it becomes part of this. That can have a global impact, , because a lot of people around the world using this as a framework to build their cyber security, I don't think it's a bad thing, but I think it's a good thing to actually think about it from that perspective.}
+{\pard  \line \par}
+{But the amount of, , work required to collect them together. Cause even like, just thinking more of the kind of components you would require to move, and I know last time he came on, came and spoke about infrastructure as code . So there's one that one component and all these other moving parts that need to kind of.}
+{\pard  \line \par}
+{In synchrony, like could you give a few examples for the audience of what kind of component that could be thinking about letting you to combine together? I mean, we obviously spoke about the services and all that, but it seems like a few more moving parts, kind of like, I feel like we're in a way we are defining DevOps with our heads is what DevOps is like, but now they're talking about it, this a CIC pipeline, there's this username identity.}
+{\pard  \line \par}
+{So what are some of the moving parts of . }
+{\pard  \line \par}
+{\b\cf3 Barak Schoster:\b0}
+{ So let's start with the version control system have, or YouTube club or Bitbucket. Yeah. }
+{\cf2 [00:15:00]}
+{ If you want to make sure that your code is coming from a trusted source, you want to have some kind of brand protection rules, like making sure you have signed commits, making sure you have two approvers for each pull request, making sure that no one can push to the main branch.}
+{\pard  \line \par}
+{Stands for production without an approver or two. So having and also having a JIRA ID for every pull request or any kind of connection between the two to be able to track and understand every change. So making sure your version control system is configured correctly is the first step. The second step would be NCI making sure that you.}
+{\pard  \line \par}
+{Are not vulnerable to attacks like shell injection in your CIA making sure that you were using this code secrets and you're rotating your secrets because I }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ have always been }
+{\pard  \line \par}
+{\b\cf3 Barak Schoster:\b0}
+{ one of the most sensitive parts of our software because it needs admin credentials to provision new resources to our production environment.}
+{\pard  \line \par}
+{And if someone gains access to the CICB system, they haven't had. Yep. So I know that in the count security podcast, we talked a lot }
+{\cf2 [00:16:00]}
+{ about misconfigurations and cloud vulnerabilities. We charged super interesting. And we some in sometimes forget from the. Which is the CIC stem our old Jenkin that has had ignored }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Jenkins.}
+{\pard  \line \par}
+{Someone did not have a login page in the beginning and no one cared and you would put it wrong internet. Yeah, no. Yeah. I think we probably should talk more about that as well. That used to be a thing that's true. It's funny. I used to think that not many people using Jenkins anymore, but then I met a few people.}
+{\pard  \line \par}
+{I was training. And I think that was realized a couple of quite a few actually students that are taught a lot of them had Jenkins their environment and like, wow, it's still there. It hasn't left. So yeah, it is definitely something that is the bane of people's lives. So CICD pipeline with admin access.}
+{\pard  \line \par}
+{Yep. I'll definitely add that in. So what else? }
+{\pard  \line \par}
+{\b\cf3 Barak Schoster:\b0}
+{ The cloud providers themselves, I think that we haven't understood. Up until last year, we always thought that they are the most secure enterprises out there, but in one year we had three disclosures from all the different large cultural binders.}
+{\pard  \line \par}
+{And as a software maintainer, I would say it makes sense. Everybody makes mistakes and they }
+{\cf2 [00:17:00]}
+{ acted swiftly and remediated very fast. The different teams. But you understand that your data either might have multitenancy issues and my click between different tenants, different subscription in the cloud environment, or might be vulnerable to some different attacks and amazing companies have discovered those vulnerabilities.}
+{\pard  \line \par}
+{And you understand that you need to. Check. What is the security status of your cloud provider? And this is where infrastructure bill of material is starting, but also the software that is under your responsibility. For example, the buckets that you own, the servers that you own within the cloud provider, that's the space and the open source package does any internal packages.}
+{\pard  \line \par}
+{I mean, internal packages, you need to run tools like SAS to understand that you are not allowing a remote code execution from your code base. Or using an open source Spanish that }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ will allow that. Right. And I think it's as you kinda mentioned, it just makes me realize that yeah, there's a lot more moving parts.}
+{\pard  \line \par}
+{And in a lot of ways, the shared responsibility thing that was slapped by the cloud service provider may become applicable in }
+{\cf2 [00:18:00]}
+{ this world as well. Where suddenly, I mean, I imagine that's the first phase where there's a shared responsibility between multiple teams where, Hey, you guys manage SBOM and you girls manage Ibom, but there's a quote unquote shared responsibility, but ultimately it kind of becomes there will be more abstraction and more kind of a collection of them together.}
+{\pard  \line \par}
+{It, yeah, I definitely see that as a thing. And I'm, I'm so glad we're talking about this as well. Actually, the talking about things are coming up. I've got a few questions coming up as well. So Sushant has asked, are there tools available in the market that gives visibility to SBOM and IBOM }
+{\pard  \line \par}
+{\b\cf3 Barak Schoster:\b0}
+{ yeah, so I work for Palo Alto Prisma cloud, and obviously is the right tool to use for that.}
+{\pard  \line \par}
+{And you can start with our open source package Chekhov to start in math, your infrastructure, be off material. And in order to extend to the software bill of materials, you can sign up starting for free and then pay you. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Also to Checkov the open source tool that does as SBOM at the moment.}
+{\pard  \line \par}
+{\b\cf3 Barak Schoster:\b0}
+{ It does IBOM the infrastructure. If you'll sign up and use an API token, you can get a full asphalt }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ modality or, wow. It's an opensource. I can just have }
+{\cf2 [00:19:00]}
+{ IBOM . So would that be across the AWS services, GitHub and all that? }
+{\pard  \line \par}
+{\b\cf3 Barak Schoster:\b0}
+{ Yeah. Correct. And the containers that you're using, so it will generate.}
+{\pard  \line \par}
+{The different open source for the different open source packages that you're using within your container, it will pull them out and say, this is in your vulnerability report of your open source packages. Or if you're using a package manager like NPM, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Sweet by making it open. So it's pretty awesome.}
+{\pard  \line \par}
+{And I've got a question for Rama as well. Do we have any content to read through this confident to practice by taking an example or going through a graphical perspective, IBOM, SBOM and like, oh, I like XBOM for good one wrong. Are there any content for this?. }
+{\pard  \line \par}
+{\b\cf3 Barak Schoster:\b0}
+{ Yeah. So you can read about it in the last BridgeCrew blog post that came out two days ago by guy eyes and cut where he demonstrates with a nice chart video, how you can query the Ibom and IBOM }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ there you go, the open source tool that you guys have.}
+{\pard  \line \par}
+{Checkov would be a good start as well, , for }
+{\pard  \line \par}
+{\b\cf3 Barak Schoster:\b0}
+{ correct. But if you want the full visualization, that would be a. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Sweet. And so hopefully that, that helps her on my intuition good questions. Because I think to your point, it's going to be a really interesting cause }
+{\cf2 [00:20:00]}
+{ there were so many moving parts and so many different softwares being used, different kinds of languages being used as well.}
+{\pard  \line \par}
+{ It's a complex web of languages, libraries, some open source, some, some in-house some even going to the point of, well, how do I put this? Some requiring more context than the other at any game? It sounds like a lot of work. It doesn't sound like a thing you weren't finished off in a month.}
+{\pard  \line \par}
+{Right. }
+{\pard  \line \par}
+{\b\cf3 Barak Schoster:\b0}
+{ Right. And, and this is where. Thinking, I think the context into a helpful tool for prioritizing stuff is important. Prioritize public server, so are private, not access, not internet accessible ones. And, and these context is super important because if you want to use it as a security practitioner, you might work on the wrong things and also create burnout with.}
+{\pard  \line \par}
+{The engineering teams that are not always secured a cockpit store. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. And now quite a finding of not thinking about more Rama just mentioned about expon. So where do you draw the line then? Awesome. Thanks for sharing that. David appreciate that, man. So for everyone, everyone's going to steer this. }
+{\cf2 [00:21:00]}
+{ David has shared language.}
+{\pard  \line \par}
+{I'll probably put on the podcast show notes as well. But. To your point then, this is there already work being done in, do you actually see people already working towards, I'm going to use the example of Google as they're doing both IBOM and SBOM }
+{\pard  \line \par}
+{\b\cf3 Barak Schoster:\b0}
+{ so I use Google as the creators of SLSA.}
+{\pard  \line \par}
+{It's a new benchmark very similar to how CIA. Was created a bunch of smart people came together and said, Hey, you should really try a new way or think, I think differently on how you manage your CICD pipeline. And the Google came out with an open-source tool named. That you will use to scan all of your different actions, pipeline, for example, and verify that you have an SCA tool in your pipeline.}
+{\pard  \line \par}
+{You have an infrastructure it's code security. You have SAS too. You have a read me a contribution guide branch protection rules, et cetera. And this is only the beginning. It's only very fine that you have these tools. Then the next part would be, are you using them correctly? Are you actually fixing stuff that those tools }
+{\cf2 [00:22:00]}
+{ are showing you?}
+{\pard  \line \par}
+{And I think that salsa is, is a great beginning to start a dies thing that we call code security or CICD security. Yeah. In a structured manner. And it's basically the checklist that all of us have been waiting for for saying, Hey, this is what I need to do as an engineer to make sure that I have a secure.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right. And do you find that I mean, we want to talk about the moving parts as well, but the CICD pipeline, as well as all the, all the other moving parts that are getting involved. So she thinks like Jenkins still being used as well. I don't hate Jenkins, but I just feel like, I don't know. I, I almost lost my trust in Jenkins.}
+{\pard  \line \par}
+{The moment I have the day I found out that I didn't even have a login page. It's, it's really if it's catching movement as this morning, And clearly there is no real well-defined examples that you can use. I'll show you what, a question from David as well. What security roles would you use?}
+{\pard  \line \par}
+{The his intention to use the information, to do a more inept application threat analysis? }
+{\pard  \line \par}
+{\b\cf3 Barak Schoster:\b0}
+{ I think that they may be spot on threat modeling is usually happening very late in the game. When you have a provision infrastructure or }
+{\cf2 [00:23:00]}
+{ you at least have a drawing of your infrastructure But it's saving the game because it's probably after someone had written a few lines of code already for a POC or already have a standing application.}
+{\pard  \line \par}
+{And I think that once you have IBOM and SBOM , you can start doing threat modeling early on. You can query, do I have a vulnerable public . Based on code only without provisioning anything to production because they easy too easy in a Terraform code. The security groups of it is also opt-in networking configuration.}
+{\pard  \line \par}
+{So you can query the Terraform using Chekhov, for example, and ask is the C2 public. And you can say, all right, what Docker fine is running on the CC to where is there? Is there any graph connection in the Terraform graph? And you get a Docker. Fine. You've been the Docker and you ask is this Dockerfile running log for J or any other vulnerable package.}
+{\pard  \line \par}
+{So you can have a threat modeling of, do I have any public institutes tools that are running? Look for J they're not connected to a wall and are not patched for example. And you can do it in the build }
+{\cf2 [00:24:00]}
+{ phase before applying stuff to production. So you can block a build based on that. Threat and the different roles that we'll use the IBOM and SBOM }
+{\pard  \line \par}
+{I think that I bomb is for the architects threat modelers, infrastructure, developers, accessories, and the S bomb. This is only for full stack developers, people who were using }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ NPM packages that might be. All right. So you see them as, I mean, we come back to shared responsibility again, in that context, it would be a bit of separation there at this current point in time, as it stands until we kind of start moving all the server less and suddenly it's like only application go to the deal with no Ivonne, but actually, I don't know if he'll be sad anytime soon they're considering the adoption is quite low.}
+{\pard  \line \par}
+{A lot of things I buy. That's a great question. Hopefully that answered it as well. And to David's second part of the question is the intention for it to have an in-depth application for it analysis, which is kind of what you're referring to as well. There will be an in-depth sec turd analysis of the entire application, where again, I'm going to use a part of the, for example, part concept site, the services components that are used by it, the }
+{\cf2 [00:25:00]}
+{ potential open source libraries that are being used by it.}
+{\pard  \line \par}
+{And , what else would, we can probably consider examples of. Just to maybe have an example for what else would you do for hosting }
+{\pard  \line \par}
+{\b\cf3 Barak Schoster:\b0}
+{ this website somewhere, whether AWS or not have a CDN, probably your, it should be BS certificates.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ At some point too. Yeah. And then there is the whole to your point, whether the cookies, security policy and all that as well then is that, wow, you can, you can really, it could be like a whole menu or things that you kind of kind of, as you kind of go through this, you kind of figured out. Yeah, it }
+{\pard  \line \par}
+{\b\cf3 Barak Schoster:\b0}
+{ gets into a very big checklist for a three tier web application, like the cloud security podcast website.}
+{\pard  \line \par}
+{But if it's an enterprise that should run securely and he's running by multiple engineers run by multiple engineering teams, you really need to make sure that each one of them knows how to write code security and have a secure pipeline to do so. And if you nail down the pipeline, something that there is a centralized pipeline, you have a paved road to security deploying }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ to production.}
+{\pard  \line \par}
+{Yeah, well, yeah, that, it would be }
+{\cf2 [00:26:00]}
+{ great though. Do you think that we're being idealistic, but I think going down the spot in a lot of ways, it sounds like a lot of work, but also seems like. Is that really practical as well? Do you take, and I'm with you on the fact that I've made totally makes sense, but there's a whole aspect of practicality for how many people do I have to convince before, like you in court, on the spot.}
+{\pard  \line \par}
+{And if it's not a government mandate where people really cared, }
+{\pard  \line \par}
+{\b\cf3 Barak Schoster:\b0}
+{ I think that the vendors start caring. I see it have a, could have a year ago have created the advanced security. Where they tell you, Hey, those are the different issues that came from all of the different scanners into one tab that tells you those are the security issues.}
+{\pard  \line \par}
+{This is how to fix them. Those are the lines of code, the t-shirts. And this is the last user that have touched those lines of code. So good hobbies, really helping you to democratize this process in your engineering team. And I think that they have dependent bot that is also helping you with the.}
+{\pard  \line \par}
+{Obviously the Prisma cloud is trying to and succeeding to give a very comprehensive solution that tackles of those different points. And I think that more and more open source tools in that space }
+{\cf2 [00:27:00]}
+{ are becoming to be more and more popular. You have. Bended for Python, helping you to write secure Python.}
+{\pard  \line \par}
+{If you're not using it in your writing Python, you should start using it. And people are already starting to use linters since their standards. You don't see a lot of new projects without Lindt or pet aid or honorably and there's coming up. So I think that. And you, a generation of engineers is starting to write code }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ that is better.}
+{\pard  \line \par}
+{Yeah,}
+{\pard  \line \par}
+{I did not even know that LinkedIn was a thing until I started coding and I was like, holy shit, what is this? Like, I could have stopped so many mistakes I made beforehand if I was just doing the lending dual. But yeah. So to your point, the new generation of software, or in our case cloud security folks coming in, they probably would be living in a world where this linking is quite common.}
+{\pard  \line \par}
+{Integration of security things is quite common because it's already part of your data pipeline, . And because to your point about the tracking GitHub actions as well. Oh yeah, that's a good point by Gary as well here, Gary chaplain, that someone has to be the first to approve the concept.}
+{\pard  \line \par}
+{Government policy is not a lead factor as well. Yeah, that is definitely one the money Gary, cause it's, it's still almost like a }
+{\cf2 [00:28:00]}
+{ proof of con. Well, it sounds like a great idea. Everyone would get behind it. But to a point of, we had the salsa framework from Google as well, but are there any real examples that we can share that?}
+{\pard  \line \par}
+{I mean, it works and I'm to your point, go with the end to end because we even, we just in this, like what 45 minutes of conversation, you can go into a really deep rabbit hole with all of the. And like you, you don't know, like where do you stop? Do you stop at the developer then? Or do you stop to add the desktop of the developer?}
+{\pard  \line \par}
+{The laptop used by the developer? Did they have endpoint security that, or what software have their, }
+{\pard  \line \par}
+{\b\cf3 Barak Schoster:\b0}
+{ so I think that I would stop like it security, endpoint security. That's a different thing because Actually thinking about it out loud, is it a different thing that I would say that it is kind of a different thing because that's something that you got control over an end point of an engineer and the engineer can perform it commit.}
+{\pard  \line \par}
+{And the engineer would write that code either vulnerable or using bad open source package because it, the engineer had an account }
+{\cf2 [00:29:00]}
+{ takeover. It should be stopped by the supply chain CICD pipeline. CICD should scan. Is this new package vulnerable? If it is don't, don't push to master, don't allow pushing to pass.}
+{\pard  \line \par}
+{So it will break the build. So I would say it, and coding cloud are different aspects of security. You should secure over everything obviously. But I think that as you make. As you add more and more testing to your code, your code is probably better and more reliable and easier to collaborate on.}
+{\pard  \line \par}
+{And you should you should think of security tests, just like your unit tests or integration tests. And if you can replicate them to every step of the way, like having them in your IDE, in your RCI, in your CV and your production in your own, we should. Which is what we do. Checkov have plugins to all of those different steps.}
+{\pard  \line \par}
+{That's a great way to have the same experience for your engineering team and having hints to how to write secure code, the very air. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah, we have a hundred percent, I think the sooner you pick it up the better as well. Okay. If a proof of concept.}
+{\cf2 [00:30:00]}
+{ Almost makes sense. I'm a hundred percent sure to get support from the cybersecurity community as well. So what's required for the kickoff then I think one is the government policy piece, but it sounds like we almost need to start a movement to make it a. And, and kind of like talk more about it as well.}
+{\pard  \line \par}
+{Like, I don't know anything else you can think of that we should be doing two, or do you think the compliance frameworks that are, I think they are believed to be updated in 2022, like the ISO 27,001 is talked to they're both going through an uplift. At least that's what the rumor is. I don't know if I haven't heard the version, but if that's something I've read acquired.}
+{\pard  \line \par}
+{\b\cf3 Barak Schoster:\b0}
+{ I think that it's part of the shift left movement supply chain, securities a different take of it because we had a lot of attacks during the past two years concerning the supply chain, like easy to reliable software that is entering into my enterprise, starting with solar wings, which had vulnerable code injected code code, which was part of our CICD and leak secrets out.}
+{\pard  \line \par}
+{I say I had some issues and the list goes on and, and Log4J thing }
+{\cf2 [00:31:00]}
+{ and call providers burner be these, all of them are part of my supply chain and things that weren't taken care of, or we forgot to take her off in the past two years. He's the CIC pipeline itself. So shut injection is a very interesting.}
+{\pard  \line \par}
+{Where you can inject the remote code execution command either for stealing data or running crypto miners by opening an issue with arbitrary code with that in the title. And assuming your CIP vendor is not treating right, you can make it everything that's right in the issue title. So that's a shutter injection with that.}
+{\pard  \line \par}
+{And we haven't thought about this kind of scenario for awhile. I'm not saying do not use CICB I'm saying use those tools, use the ICD, use the cloud, do it securely by shifting left a lot of the detection and remediation of, of those }
+{\pard  \line \par}
+{different }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ pharmacies. Yeah. And it's funny, I might I'll add one more to the whole CICD pipeline thing, which I kind of was made aware of only recently the whole dependency poisoning thing as well, because independency poisoning the whole, to your point, the CSET }
+{\cf2 [00:32:00]}
+{ pipeline, they were downloading something from the internet.}
+{\pard  \line \par}
+{Like a lot of people download container straight from Docker hub. And that's, I think usually in more softwares, if over, even open source, they look at the internet source first and then the local source. So if your internet source is poisoned or it's using a really wonderful version of, for some, because to your point, our cloud service providers have not been doing the right thing.}
+{\pard  \line \par}
+{They've been downloading log for J as dependency on the main core. You download that on your machine and then you start doing everything else like, oh, accidentally or knowingly unknowingly, you have made yourself vulnerable to a log for J one repartee as well. So yeah, I think you can totally have a lot of examples that now are sort of slowly popping up as the industry's evolving into.}
+{\pard  \line \par}
+{What's the next phase of cloud security or what does that look like for us? So that's a good point. And of course, another comment from David here as well for enterprise, I see information being used to drive a value stream to prioritize security sort of stories. Yeah. Yeah, I think it would definitely be, but I wonder if something like a compliance or, , it's almost like security }
+{\cf2 [00:33:00]}
+{ is great, but would we need to go down the path of compliance changes or a, some kind of regulatory changes?}
+{\pard  \line \par}
+{Like what are your thoughts on this Barak ? }
+{\pard  \line \par}
+{\b\cf3 Barak Schoster:\b0}
+{ I don't think that it's only so one, yes, we do need compliance and regulatory changes, but I also also think that a. You can reduce, you can change the culture within your engineering group. You can reduce the burn burnout. Nobody was happy to get this call of PagerDuty on Christmas, on the log for J burner Pickety everybody was really pissed about it.}
+{\pard  \line \par}
+{And And there was a lot of pressure over a holiday day. And the thing that we would like to prevent is these kind of spikes at work. We want to create a, an environment that has worked I've thought, and to do that, you need to test things early and not in production and having those frameworks or those security tests as part of your CIS.}
+{\pard  \line \par}
+{We'll help you to be one more productive and prevent stuff from happening in production and remediate them while you code them and to prevent this PagerDuty calling your Friday }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ night. I think it's a good point. And I think too, I'm just }
+{\cf2 [00:34:00]}
+{ thinking if a lot of us already had. Some fan of SBOM or IBOM, or just asset management figured out earlier, a lot of the problems would not.}
+{\pard  \line \par}
+{Cause I think it's, it's not just when log Fuji happened. It wasn't just your own software. It was the software's used by a supply chain and some of them may not be as mature. Then you're just left in this limbo land falling up for days. Hey, have you figured it out yet? And maybe I wonder how many people would have added that as a criteria that you should have an asset management for your supply chain after the law, before.}
+{\pard  \line \par}
+{I imagine a lot of people were added that it could be, it would make sense, but as one would definitely fill that gap. If they kind of come up with that. So hopefully that happens, but thanks for the common David really appreciate them. Well, thanks so much for coming in, man. I appreciate this. This is kind of like the end of the episode as well. Hopefully everyone else was listening as well. Got some value, but people who may have more questions, about IBOM and SBOM we can then get in touch with you. }
+{\pard  \line \par}
+{\b\cf3 Barak Schoster:\b0}
+{ So you can either reach me out at Twitter at a Barack Shuster at LinkedIn, over email at Murdoch at Ritu IO and every other media did you find my handle?}
+{\pard  \line \par}
+{So. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Ah, online celebrity, man, , everywhere me on the internet, }
+{\cf2 [00:35:00]}
+{ the Googles of the world would know about me. Thank you. No problem, man. All right. And thanks for coming again, man. I appreciate this. And I appreciate you hanging out with this, talking about for everyone else. I will see you on the next weekend is full of AWS security again, but continuing our AWS security month.}
+{\pard  \line \par}
+{Thank you so much for your time and we'll see you all next weekend. Thanks. Thanks everyone else. }
+}

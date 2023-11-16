@@ -1,0 +1,439 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red114\green179\blue114;
+\red128\green128\blue128;
+\red102\green0\blue204;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\b\fs48 V1_Ashish and Phil Venables\b0}
+{\pard  \line \par}
+{\b\cf1 Phil Venables:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ When you think about a CISO and the CISO team does, they're like the keepers of the history of the company and all of the projects that went on all the risk mitigations in the past. You know, they're also like an explorer that they've got to understand everything that's going on with the company upstream to customers and downstream into the extended supply chain.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ What would be some of the three security metrics you would generally recommend? Obviously, it depends from business to business. }
+{\pard  \line \par}
+{\b\cf1 Phil Venables:\b0}
+{ I'll give you an example of three and these are classic Pareto metrics. So the first one, for example, is Have you ever }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ had to build security metrics for your organization? And you're confused about where to start?}
+{\pard  \line \par}
+{What are some of the top three things you could be looking at? We were fortunate enough to have Phil Venables, who's the CISO for Google Cloud and has been CISO for a little over 30 years in different industries and is a member of board for a lot of other organizations even till today. So we decided to have a conversation around the whole educating the board about cloud security, the cloud adoption.}
+{\pard  \line \par}
+{What are some of the metrics that you can take to your board or to your leaders to talk about why it's important for you to }
+{\cf2 [00:01:00]}
+{ talk about Software reproducibility. How quickly can you come up after a disaster has happened in terms of just a complete cold start? Or in the third one, maybe talk about the data management itself, especially with AI and LLM becoming a topic of conversation these days.}
+{\pard  \line \par}
+{How should you deal with the data and what can you do a strategy around it? What makes a security program successful versus the ones that are average? Or what is something as a skill set you should know that if you're trying to be a CISO, what should you care about and building a skill set so that you can get that role in the future as well.}
+{\pard  \line \par}
+{All that and a lot more with episode with Phil Venables from Google cloud. If you are someone who's trying to become a CISO in the future, or, you know, someone who wants to become a CISO in the near future, or is already a CISO. Definitely share this episode with them as I think they will definitely appreciate the advice that Phil has shared of his own experience on how he dealt with metrics and what he has found to be helpful while not just doing the CISO job himself, but also working with customers at Google cloud as well, all that, and a lot more in this episode, if you are watching this or listening to us for the second or third time, I really appreciate if you drop us a review or rating }
+{\cf2 [00:02:00]}
+{ on your favorite audio platform, like iTunes or Spotify, or maybe you subscribe on YouTube if you're watching us there.}
+{\pard  \line \par}
+{But I hope you enjoyed this episode with Phil Venables and I will look forward to talking to you on another episode of Google Cloud Security Month. Talk to you soon. Peace. }
+{\pard  \line \par}
+{\b\cf1 Phil Venables:\b0}
+{ By bringing developers and security together, you don't have to choose between speed and security. Develop fast, stay secure.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Hello and welcome to another episode of Cloud Security Podcast. Today, we are talking about security metrics and boardrooms. Yes, this is a different episode from a cloud security perspective, because we wanted to kind of talk about what executives should care about or can talk about when they're explaining cloud security adoption to their wider audience.}
+{\pard  \line \par}
+{Just not their typical tech audience. And for this. I have Phil. Hey Phil, thanks for coming on the show. Hey, pleasure to be here. Oh, I am looking forward to this conversation, especially after bumping into you on the streets of San Francisco, finally getting a chance to have you on one of the Cloud Security }
+{\cf2 [00:03:00]}
+{ Podcast episodes.}
+{\pard  \line \par}
+{I'm super excited about this, but for the one or two people on the internet who do not know who Phil is, if you can give us a brief intro about. What's your journey like into cybersecurity and where you are now? Yeah, sure. }
+{\pard  \line \par}
+{\b\cf1 Phil Venables:\b0}
+{ So I'm currently chief information security officer for Google cloud. That includes everything from security, privacy, compliance, all of the usual things that CISOs are now responsible for.}
+{\pard  \line \par}
+{And then in addition to that, I also. Spend a lot of time externally with our customers, helping customers in the secure digital transformations to the cloud. A bit of kind of background about me. I mean, if I go back long enough, I'm an engineer by background. I started off as a software engineer and like most people of my generation, kind of stumbled into doing security rather than set out as a that as a career goal, but it's certainly been a, you know, a very rewarding career and I've done a number of. different CISO roles. My last employer, Goldman Sachs, I was there for about 20 years before coming to Google. I was CISO there, then chief risk officer for enterprise risk, and then did some private equity work and was a board director for Goldman Sachs bank as well, and }
+{\cf2 [00:04:00]}
+{ then as I said, in the past two and a half years, I've been here at Google Cloud doing a number of different things and really enjoying it.}
+{\pard  \line \par}
+{Really good to be in the mix of all the cloud security }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ work. That's awesome. And I think the perfect conversation and the perfect experience to kind of bring your perspective onto the whole board conversation, and maybe this is the right way to ask the question. Is there a conversation about cloud security that is still going on at the board level?}
+{\pard  \line \par}
+{ Is there too much or not enough conversation about cloud security at the board level? Yeah, I mean, it }
+{\pard  \line \par}
+{\b\cf1 Phil Venables:\b0}
+{ really mixes it. I mean, we see and spend a lot of time with the boards of our customers and the boards of people. Prospective customers. And I would say it kind of boards typically fall into two camps.}
+{\pard  \line \par}
+{There's one board which is saying to its leadership, including the CIO and the CISO, are we moving fast enough into the cloud? Are we being agile enough? Are we digitally transforming our business? Are we making use of all the opportunities of the cloud? And can we get there quicker? And then there's another set of boards where management overall is driving to the cloud really quickly as part of }
+{\cf2 [00:05:00]}
+{ digital transformation.}
+{\pard  \line \par}
+{And again, this is not just. Things like infrastructure as a service to transform how they think about data centers. This is especially now everything from kind of high end services like AI, data analytics, a whole number of things. I mean, in those environments, you know, sometimes the board is saying, are we doing this in a risk managed enough?}
+{\pard  \line \par}
+{Are we being careful enough? But generally speaking, I find all boards now, and the same goes for a lot of regulators and auditors is starting to see cloud as being something that if you manage it well. It's a means of reducing risk as opposed to a risk in and of itself. But the key phrase there is the combination of the cloud provider and the customer moving or expanding in the cloud need to have that strong partnership to make sure they're doing that in a safe and secure way.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Oh, I love that. And I love the two camps that you divided the boards in. So it's a general conversation, but maybe something that is not too general is I think talking to most of the CISOs that I have had the fortune of and being in that role as well. Sometimes it's hard to translate a technical thing }
+{\cf2 [00:06:00]}
+{ into something which is, well, simplified business term.}
+{\pard  \line \par}
+{I probably would use that as a word, like maybe a good place to start is what's the importance of having a good cybersecurity metrics to show to a board in your opinion for CEOs and CTOs and stuff. }
+{\pard  \line \par}
+{\b\cf1 Phil Venables:\b0}
+{ Yeah, I mean, the main thing that the board need and this, you know, the same is true for executive level management in companies and risk committees and all of the other governance apparatus of which the board is, you know, is a special case of is ultimately the metrics are about describing what our current situation is, what our goals are, how close we are to those goals, but above all, it's to provide a foundation for just kind of having that situational awareness and understanding things.}
+{\pard  \line \par}
+{You know, when you think about risk management in general, And again, not just for cyber security or technology risk. It's all about knowing what your most critical assets and business services are, what risks those assets and services face, what controls you've got implemented to mitigate those risks, how effective those controls are in terms of being }
+{\cf2 [00:07:00]}
+{ continuously monitored for their adherence and effectiveness.}
+{\pard  \line \par}
+{And then finally, what residual risk exists that hasn't been mitigated and who, at what level in the organization has deemed that acceptable now in that entire paragraph, I never mentioned cyber or technology once that's just kind of board executive level, standard risk management for any strategic risk.}
+{\pard  \line \par}
+{And I think a lot of times the engagement with the board from the CISO. Or for that matter, the chief risk officer, if there is one that covers the broader set of operational risks is how do you kind of rationalize and be able to put some data behind that? How are we managing our risks effectively? Are the controls effective on what residual risk exists and every different business will have a different way of doing that, but ultimately it's also all about mapping that to business goals, not just technical }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ goals.}
+{\pard  \line \par}
+{Yeah. And maybe that's kind of where most people are going to struggle to map it to a business goal. Do you feel like metrics are. seasonal, like at the moment, AI is top of conversation for people quite a bit. And a lot of conversations that have being had around generative AI, what's the impact of that is in cybersecurity.}
+{\pard  \line \par}
+{Would you say }
+{\cf2 [00:08:00]}
+{ cybersecurity metrics or at least the priority on what's shown to the management should also align from a business perspective and the environment perspective as well. Like, I mean. Yes, the business is moving towards the direction of doing digital transformation, but then suddenly AI is coming up on the side as well, since November, because now everyone talks about generative AI and Chat GPT.}
+{\pard  \line \par}
+{Do you feel sometimes cybersecurity metrics can be seasonal as well, where people may have to }
+{\pard  \line \par}
+{\b\cf1 Phil Venables:\b0}
+{ pivot quickly? Absolutely. I mean, I think that there's almost like two paths to the risk and security programs engagement with the board. There's the steady, relentless march of progress set of metrics, which is, and again, just taking a step back, I think most.}
+{\pard  \line \par}
+{Boards that are on top of this as the same with most companies is they realize that the path to security is modernizing their technology. And so they're getting a more modern, defendable architecture where security is built in rather than bolted on, whether that's in the cloud or an on premise cloud like environment, boards are looking for technology and security leadership to kind of }
+{\cf2 [00:09:00]}
+{ evidence the fact that they're driving that modernization to get to a more defendable state rather than it being a perpetual tool set of.}
+{\pard  \line \par}
+{Singular cybersecurity program updates. And that's how I think they track that. Then separately, they're also expecting the CISO and the CTO and the CIO and other business leadership to be agile enough, to be able to cope with new things, new opportunities that the organization wants to seize, and then how they're going to manage the risks for that.}
+{\pard  \line \par}
+{So again, I think when you look in most boardrooms now, the conversation around AI is also about the risks, but it's also about the opportunities. And then making sure the opportunities are executed in a kind of safe, bold and responsible way, as we describe it, to make sure that they're taking advantage of this stuff while still making sure it's appropriately risk managed.}
+{\pard  \line \par}
+{And again, one of the things we spend a lot of time with our customers on is ensuring they've got that balance. And that's definitely true of generative AI. But also the previous generations of machine learning and other contexts }
+{\cf2 [00:10:00]}
+{ where we help customers a lot, finding that balance. So again, I think the CISOs have to be agile enough to drive their program, but agile enough to be responsive to these kind of episodic bursts of activity around specific new types of technology, new types of risks.}
+{\pard  \line \par}
+{And I }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ think the three words I'm going to reuse it. That's okay. It's the safe, bold and responsible. I love those easy for anyone to pick up and understand as well. Maybe if we kind of continue on that thread of building metrics as well. What should CISOs consider? Cause you've mentioned the fact that it should align with business goal. What do you think is the best way to kind of make sure that the goals are aligning with what the business wants not just the board, but the CEO or CTO is also in line with what you're trying to propose. And so that whatever money you want for the next interesting security project you have on, you get that budget.}
+{\pard  \line \par}
+{What do you see are some of the ways people can use to have an effective alignment with the business goals and the security goals. Well, like the, }
+{\pard  \line \par}
+{\b\cf1 Phil Venables:\b0}
+{ you know, the first perhaps obvious thing to do, although I see more people do this, but not everyone do this is for the CISOs to }
+{\cf2 [00:11:00]}
+{ really consider themselves first and foremost, a business executive. rather than a, just a security or technical executive and, you know, non business environments, like in the public sector or the military to be a kind of a mission centered executive. And a big part of this is to then think, you know, if they understand the business end to end and what drives the business and what drives revenue and what drives customer satisfaction.}
+{\pard  \line \par}
+{Then they're almost not going to help themselves in talking about the risks that they're identifying and wanting to mitigate in the context of business goals, but some specific example, you could say, if for example, the CSOs team has found a weakness in some technical system, the way you would go talk about that to the board.}
+{\pard  \line \par}
+{And I think your audience is. probably more than most gets this, but generally speaking, the way you go talk to the board about that is not that we've got a weakness in system XYZ, but we've got a weakness that might result in this system being impacted, which will cause these }
+{\cf2 [00:12:00]}
+{ losses, these other systems to be taken offline, which will halt production and cause X million dollars of revenue loss and might impact.}
+{\pard  \line \par}
+{The launch of next quarter's major new product release or may impact, see those other things that are going on. And if the CISO has taken time to understand the business or mission goals of the organization, that those becomes easy to articulate. The other thing as well is I'd also push back on some of the tone in the industry, and we've done some of this with our board horizons and board perspectives work that we're doing at Google cloud, but I would expect some higher sophistication of. boards, there seems to be a little bit of tone in some quarters that you've got to really dumb things down for the board. Now, again, we shouldn't expect boards to have an immense amount of deep technical appreciation of every part of the security role, but I think ultimately we should expect them to have a higher understanding, especially now every business is a digital business of how technology risks drive cybersecurity and the things that we need to do.}
+{\pard  \line \par}
+{And that may }
+{\cf2 [00:13:00]}
+{ involve a lot of. pre education of the board. And again, that's not unreasonable. I'll give you an example. So when I was a board director at Goldman Sachs bank, even though I'd worked at that organization for a long time, and I had a pretty good understanding of the environment T minus one week from starting on the board, I had a fairly intensive board induction program where various of the risk teams like credit risk and market risk and others took me through very, very deep education on some of those concepts and some of the intricacies of how to manage those.}
+{\pard  \line \par}
+{Quite sophisticated financial risks so that when I was in the board meeting, they didn't have to dumb things down. There was an expectation that we bring the board up to understand the concepts and the risks that are important to that organization. So again, while we do need to translate things into Business and board terms.}
+{\pard  \line \par}
+{I think in parallel, we also need to keep educating boards to be able to deal with digital security risks and the broader set of risks in more sophisticated ways. And so that's kind of educating up rather than dumbing down. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:14:00]}
+{ And even in the context of cloud, because I mean, to your point, Maybe the board has been involved in on premise conversation for a long time and have been used to that and may not be a new induction because I think you definitely had an opportunity to be inducted.}
+{\pard  \line \par}
+{I don't know how many other people may not. Is there any recommendation for people who may have a board that has been ongoing for some time and now they're trying to go through a digital transformation? Is it advisable that CISO should have like an induction program for them for, hey, This is why cloud should be important or cloud security should be important.}
+{\pard  \line \par}
+{I'm sure CEOs are doing it as well or thinking about doing it. Yeah, }
+{\pard  \line \par}
+{\b\cf1 Phil Venables:\b0}
+{ no, I mean, it's a fantastic question because I think in general, and again, a lot of organizations and I know a lot of CISOs do this is that the engagement with the board is not just the board meeting. It's the education of new board members.}
+{\pard  \line \par}
+{It's the occasional meeting of individual board members outside of the boardroom. You know, there's often a dinner on the evenings of board meetings where you bring in external speakers and that can include speakers the CISO brings in. I still participate in a lot of }
+{\cf2 [00:15:00]}
+{ board events where I'll go speak to the board about cloud security or AI risk and security or various other topics.}
+{\pard  \line \par}
+{Those are a part of educating the board ready for the. actual board meeting the next day on that topic. And that's a great use of time. When you think about most executives do, and this is where the CISO needs to do the same thing is the board relationship is just that it's a relationship that exists outside the board meeting.}
+{\pard  \line \par}
+{And that's the way it becomes most productive rather than it just being the presentation once a quarter or once every half year. to the board. It's a much deeper relationship than that that's needed. I love that. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ I'm glad you mentioned it as well, because not many people talk about the fact that it's not just the one slide that security is presenting onto the board.}
+{\pard  \line \par}
+{It's a bit more than that. Sometimes you see on the internet, people complain about the fact that I only get three bullet points and a NIST framework to kind of talk about what my metrics is doing. So talking about metrics as well, I think you mentioned something called Pareto metrics on one of your blogs and CISO should. Be more braver. Could you share some more light on what is Pareto }
+{\cf2 [00:16:00]}
+{ metrics and why should CISOs be more braver? }
+{\pard  \line \par}
+{\b\cf1 Phil Venables:\b0}
+{ You know, for anybody that's kind of read my blog over any period of time, you'll know I'm kind of a bit obsessed with the kind of the 80 20 rule, which is a rough paraphrasing of the Pareto distribution, but once you start looking for the 80 20s, you find them everywhere.}
+{\pard  \line \par}
+{Like. 20% of the effort can impact 80% of the outcome in many cases, when you look at risk reduction, there's a lot of things where if you find the right 20% of things to do, that can in effect, reduce 80% of the risk that you've got if you find those right things. And once you're looking for those 80 twenties, you get them anywhere.}
+{\pard  \line \par}
+{And I find the same thing. thing with metrics, and this is what I like to call some of these things, Pareto metrics, which is if you find the right leading rather than lagging indicators, and then find a small set of metrics. So you may have today in your metrics program, hundreds of metrics. And, and I bet you struggle, people struggle to manage them all equivalently, but if you could pull back and say, what's the small number of metrics that no matter how hard it is. to collect and manage these. }
+{\cf2 [00:17:00]}
+{ If I could do it, what an outsize effect that would have. And the other attribute of Pareto metrics as I describe it is, is the act of measuring itself has improvements in its own right. So a good example could be, imagine if you don't have a great inventory of what's in your environment.}
+{\pard  \line \par}
+{And you then hypothesize, well, wouldn't it be great if I had a metric that was, you know, what percentage of my managed inventory of things, it could be devices, it could be software, it could be suppliers, it could, you know, however you define the universe, what percentage of my universe of things is actually managed.}
+{\pard  \line \par}
+{Now, to get that metric, that's going to be really, really hard as most people know when they've driven an inventory program, but. The great thing about that metric is it causes you to understand what universe is, it causes you to define what is managed versus not, and it causes in the path of measurement for many people in the organization to probably react with a bit of horror initially that they don't have all of this under control and they don't really have a full view of what their entire }
+{\cf2 [00:18:00]}
+{ universe of things are.}
+{\pard  \line \par}
+{They don't have a definition of managed versus unmanaged. And so even without doing anything The act of measuring will cause a lot of self correction because of the visibility that that will provide. And again, I think a lot of these metrics, if you pick them in the right way, just the act of measuring drives a corrective behavior, even before you have to take the metrics and explicitly drive a corrective behavior.}
+{\pard  \line \par}
+{I }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ love that. Yeah, I'm sure people would have a lot more examples that they can think of after this conversation of the 80 20 because I think I've been following that for a while and definitely hits a mark every single time, especially to what you said, once you start looking for patterns, you see it everywhere.}
+{\pard  \line \par}
+{And I don't know if it's a bias you develop afterwards, but it definitely is everywhere after that. That's }
+{\pard  \line \par}
+{\b\cf1 Phil Venables:\b0}
+{ right, }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ that's right. In terms of security metrics examples, I wanted to give people at least a few examples that they can help jog their memory or their brain cells for, hey, these are some of the, maybe some example security metrics they can go for.}
+{\pard  \line \par}
+{If you just had to choose three, what would be some of the three security metrics you would generally }
+{\cf2 [00:19:00]}
+{ recommend? Obviously it depends from business to business, but what would you recommend as three general metrics people can. use as a starting point if they had no clue what to do and they've gone down the business conversation or whatever.}
+{\pard  \line \par}
+{Are there any three security metrics you think of that they can choose and why would you recommend those three? }
+{\pard  \line \par}
+{\b\cf1 Phil Venables:\b0}
+{ Yeah. I mean, you know, when you think about what metrics you need at any one time, it's all dependent on the maturity level of your program. And so I'll give you an example of three, and these are classic Pareto metrics that are very hard.}
+{\pard  \line \par}
+{to achieve, but once you've done them, it drives huge transformational change. And the organizations that are going down this path, find them immensely useful. So the first one, for example, is software reproducibility. So what percentage of your software in your entire organization is under some degree of control?}
+{\pard  \line \par}
+{It doesn't have to be in a single central repository, although that does make it easier, but at least under a managed repository, under control. with a repeatable, continuous }
+{\cf2 [00:20:00]}
+{ integration, continuous deployment approach with testing built into that pipeline. And if you want to get really advanced, some degree of end to end software lifecycle provenance, including the production of SBOMs and things like kind of, you know, what we describe as SLSA compliance to dictate how well you're kind of managing the.}
+{\pard  \line \par}
+{The security of the end to end software provenance, but essentially what percentage of your software is in a reproducibly built environment. Now, for most organizations, that's not necessarily a lot for some organizations it's nearing a hundred percent, but when you think about that metric is if you define that and measure I would suspect a board or a CEO level, when you explain what that metric truly means.}
+{\pard  \line \par}
+{They would be shocked at generally how low a percentage most organizations are on that. And the very act of measuring starts getting people clear visibility onto where their software is. Then it starts them to realize what knock on effects and improvements can be had if you do manage things in an end to end, reproducible }
+{\cf2 [00:21:00]}
+{ software environment.}
+{\pard  \line \par}
+{And this also includes things like configuration as code. And the kind of configuration reproducibility. And again, this is a classic one to bring to the board level because the example I always give, and some people have may have seen me write about this before is imagine if you're a CFO going in front of the board and the board asks the question, do we have all our finances under control?}
+{\pard  \line \par}
+{ Is everything in the general ledger? Do we know all of our accounts receivable? And if the CFO answered. Well, we've kind of got a few, bits in a few different places. We've got a few spreadsheets here and there. We don't really know. It's going to take me some time to kind of assess where we are. You'd be looking for a new CFO pretty quickly, but yet today, except for a few organizations, if the board asks the CIO or the CTO. is all of our software in one place and under control and under management in the same way as our financial assets are. And you think about it, software is just as, especially now, is just as an important asset as your finances and the other things that are on your balance sheet. Then, you know, there's an expectation that the board should be able to get that answer }
+{\cf2 [00:22:00]}
+{ from the CIO and a lot of companies are working hard towards that because it drives so many other things.}
+{\pard  \line \par}
+{A second one which again is hard. But also drive so many other benefits is thinking about what I call time to reboot your company, which is also what you could call cold start recovery time, which is, you know, imagine, and this is a particularly relevant in the context of ransomware, but many other scenarios as well, which is.}
+{\pard  \line \par}
+{Imagine if all your data was wiped and all your software was wiped and you've basically got a bunch of blank, you know, bare metal machines or a bunch of blank cloud instances, and then you've got a bunch of immutable backups, hopefully immutable, because that's how you'll define it to be. And then the question is, how long can you rebuild your company?}
+{\pard  \line \par}
+{From that backup on that bare metal or blank cloud environment. Now, a lot of organizations don't know the answer to that question. They understand how they could do a backup and restore, but that's not the same as kind of rebuilding your whole stack and re reconstituting your company. And again, the companies I've known.}
+{\pard  \line \par}
+{done }
+{\cf2 [00:23:00]}
+{ this have started off with kind of unknown and got themselves to quite a quick kind of cold start recovery time. And it's benefited them in major ways. And in the journey to do that, they found all sorts of configuration issues, inventory issues, issues with the backup systems. So again, that pure message of.}
+{\pard  \line \par}
+{Like what's the time to reboot your company or an individual business process is a real tangible metric. And then the third and final one I would do, which I won't spend a lot of time because this probably could be a whole podcast in itself is what you might call data governance coverage. So, you know, we talk about software reproducibility and how much your software is under management, but how much is your data under management?}
+{\pard  \line \par}
+{What's the lineage? Is it access controlled? Is the quality checks around the data? And this again becomes especially important in a generative AI world where you want to be able to have. Precise tracking of training data, model weights, the lineage of test data and various other things for safety and compliance purposes.}
+{\pard  \line \par}
+{But overall having an understanding of what percentage of your data is under some mature }
+{\cf2 [00:24:00]}
+{ governance framework is becoming an important thing for even more than just the standard critically regulated environments. So I think if you had those 3 metrics, software reproducibility understand the time to reboot your company and understand what percentage of your data you've got under governance control. If you had that, that's pretty much 80% of your risks managed there if you just nail those three things. As }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ you were saying this, I think one more thing that kind of resonated with me quite a bit is because these are metrics that can be used not just by security, but by product business as well.}
+{\pard  \line \par}
+{So it's not to what you said, it's not, there's no security in there. But if you just talk about from a perspective of can you reproduce the software, can you recover from a complete cold start? And is there a data sprawl anywhere? Do I need to worry about like, those are questions which are way beyond cyber security, but involves the entire business overall.}
+{\pard  \line \par}
+{And everyone, I mean, at least the board would care about. Yeah, these are really amazing examples. Thank you for sharing them. }
+{\pard  \line \par}
+{\b\cf1 Phil Venables:\b0}
+{ Yeah. Well, and the interesting thing as well, you know, you often get a lot of valid pushback on these things because they're really, really hard. The way I look at this in this day and age with the risks that we face.}
+{\cf2 [00:25:00]}
+{ }
+{\pard  \line \par}
+{Is there any alternative, but to be able to answer those questions in reliable ways, we as an industry can't have it both ways. We can't say this is a hard problem and it's really hard to fix. And are we ever going to have our defenses like reliable enough to defeat most attacks? And then on the flip side, when we've got answers to that, we then go, well, those answers are really, really hard. have we got the energy to do that? You got to pick, you can't have it both ways. Yeah. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah. But to your point, if everyone's involved in the decision, at least everyone's aware of why a particular call was made and for whatever reason, if things do go bad, at least everyone is unanimous in the decision.}
+{\pard  \line \par}
+{And it's not like what the industry calls it. The CISO is on the line for losing the job because they never called it out or something as well. So I think }
+{\pard  \line \par}
+{\b\cf1 Phil Venables:\b0}
+{ definitely goes away. No, that's exactly right. And it's interesting you bring that up because it back to the board point gives the board a dial of kind of risk appetite to set.}
+{\pard  \line \par}
+{So let's say for example, and I've been through this in a prior organization where you start off and saying time to reboot your company. Okay. So like pick all of your desktop and. }
+{\cf2 [00:26:00]}
+{ standard server infrastructure and say, how quickly can you reboot all of that from nothing? And the journey you go through is to start off with, don't know, you then find out and it's like a few weeks and then you show that to the board and they go, we're not happy with a few weeks.}
+{\pard  \line \par}
+{What can you do? And then you present them. And it's basically a diminishing returns curve where you say, well, like I can get a few weeks to a few days for 10 million. a few weeks to a few hours for 50 million, or you can have it in like a minute, but it'll cost us 500 million. And the board can then go, you know what, we could probably be okay with like a day.}
+{\pard  \line \par}
+{And we're willing to sanction this amount of money for that. And then that becomes a project you can get on ahead with. And again, on software reproducibility, it might be to say, you know what, we're going to have all of our critical software, a hundred percent reproducible, but the rest of it, we're going to do that over a longer period of time.}
+{\pard  \line \par}
+{But you've then got an engagement with the board where you can set that risk dial according to the resources and priorities you }
+{\cf2 [00:27:00]}
+{ have. And then to your point, there's no surprises at the end of it. Yeah, 100%. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ I think I feel like communication is such a hard thing. We sometimes assume everyone knows why we made a certain calls.}
+{\pard  \line \par}
+{I mean, over communication is never bad. I think I also wanted to kind of get your, because you've had such a broad experience of being CISO yourself for different organizations. I wanted to get your opinion on the whole attributes for CISOs as well. I can, it definitely has changed quite a bit now with cloud and other AI.}
+{\pard  \line \par}
+{Has it changed? You kind of had, I guess, one of your blog posts about archaeologists, historian, explorer. Do you still feel they're relevant? Or maybe even what are they? And do you still feel those are essential attributes for CISOs now? }
+{\pard  \line \par}
+{\b\cf1 Phil Venables:\b0}
+{ Yeah, no, it's interesting when you think about the CISO and the CISO team does, they're like the keepers of the history of the company and all of the projects that went on, all the risk mitigations in the past.}
+{\pard  \line \par}
+{You know, they're also like a, an explorer that they've got to understand everything that's going on with the company upstream to customers and downstream into the extended supply chain. And so they've got to do }
+{\cf2 [00:28:00]}
+{ all of these things. They've also got to be a bit of a librarian. They've got to kind of have a record of everything and document everything. The analogy I always like is the, you know, the CISO is the archaeologist, because one of the things That always amazes people, but how difficult some things are to change. And so you look and say, well, how hard can it be to change this security control in this system? And then you actually look at doing that change.}
+{\pard  \line \par}
+{And then you look at the dependency tree underneath that, that doing that change requires you to change this other system. And then the other system needs to be changed because of that chain, then you've got to recompile all the code because of this new control. And then, so that one thing. has to step down these kind of archeological layers of all of the I.}
+{\pard  \line \par}
+{T. That's been built over the past decade or so. And then you've got to understand that. And so often a big part of the communication and goal of a CISO is to figure out that kind of industrial archeology of the organization, how to simplify it so that changes to make are a lot easier in the future.}
+{\pard  \line \par}
+{Yeah. So the }
+{\cf2 [00:29:00]}
+{ CISO has to be a bit of all things, including kind of anthropologist of like understanding the social structures of the organization to find the path of incentives to get people what you need to do. So I think that's why it's almost a uniquely challenging role because you've got to be all of those things.}
+{\pard  \line \par}
+{To }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ your point, multifaceted, but I was also going to say a lot of people, I think they have books on this as well, like the first 30 days or first 45 days or something for a CISO and people kind of normally think about, I want to be able to at least have a security program that can be successful.}
+{\pard  \line \par}
+{successful by the end of the 30 day mark or a 45 day mark. Now, I don't know how realistic it is depending on how large your organization is, you obviously will take longer, but what do you recommend as when people think about building a security program, what are some of the things that make it successful versus just like, eh, what was a good effort?}
+{\pard  \line \par}
+{Yeah. I }
+{\pard  \line \par}
+{\b\cf1 Phil Venables:\b0}
+{ mean, for me, it's again, it's this kind of two track thing, which is the most security programs are reasonably good at. This, which is they identify risks, they define controls, they go implement some controls, they }
+{\cf2 [00:30:00]}
+{ get better and better at kind of relentlessly driving implementation, relentlessly getting things closer to a hundred percent conformance, driving a great operational cadence, you know, so there's that very, very important iterative approach to the security program.}
+{\pard  \line \par}
+{I think the other thing though, some programs don't manage to get to, and the greatest security programs have both of these. And this second one is these. Big bets on the future. And these could be very well funded multi year programs to just transform the operation of the organization. And that could be a big zero trust implementation, for example, that radically transforms how you think about end points.}
+{\pard  \line \par}
+{So stronger authentication for people, device integrity checks, software allow listing, a bunch of least privilege in your edge environment. So all of that kind of stuff can have a transformative effect. I mean, it's a lot of work to do that, but once you're through it, you're almost immune from many type }
+{\cf2 [00:31:00]}
+{ of threats that other organizations see.}
+{\pard  \line \par}
+{Similarly, adopting least privilege in production environments through the adoption of service mesh type technology, the adoption of immutable infrastructure patterns, whether it's in the cloud or by making your on premise infrastructure more cloud like, there's a whole array of things. Including what we talked about before, which is bringing more of your software into a reproducible, continuously integrated, continuously deployed state with end to end software provenance.}
+{\pard  \line \par}
+{Again, hard work. It delivers a bunch of business benefits, but it delivers transformative security benefits, but you can only do. You know, one, maybe two of those things per year. So educating the board and others that you need resources to do this kind of regular iterative improvement, but you're going to need wider organizational transformative programs, one to two a year.}
+{\pard  \line \par}
+{Executed over multiple years are really what take your program and your risk reduction across the enterprise to a step function }
+{\cf2 [00:32:00]}
+{ difference as opposed to that kind of iterative progression. So in reality, you need to do both, but picking those big bets, every great security program I've seen has really been founded on both of those, that iterative discipline, but one or two big bets per year that have significant management sponsorship to get them done. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ And kind of goes back to the metrics thing so that you can educate the board for why big bets are required as well Yeah, awesome No, thank you And I imagine a lot of the people who would be watching or listening to this conversation would also be of the ethos that They want to get to a CISO position sometime in the future.}
+{\pard  \line \par}
+{I wonder if you have some recommendations on that Where do you see from a skillset perspective? We kind of spoke about essential attributes, but for people who want to be a CISO, what should they think about building as a skillset? And I'm sure you can come from a different background, but most of our audience would be technical audience coming from a technical background.}
+{\pard  \line \par}
+{Like we have VPs and directors of cloud security coming from that perspective. What do you think is a skill set that some of those people should focus on to kind of walk on to that CISO path? The main }
+{\cf2 [00:33:00]}
+{ thing }
+{\pard  \line \par}
+{\b\cf1 Phil Venables:\b0}
+{ is something I mentioned earlier, which is just understand your organization's mission or business, how it actually operates and how it succeeds or how it makes money or how it keeps customers happy, because you ultimately.}
+{\pard  \line \par}
+{As you rise up through the ranks to become CISO, you get that by having support, not just from your immediate boss, but from the wider environment. So, for example, if you're a CISO and you're looking for a successor, in most organizations, that's not a decision that is only up to you. That is, peer executives or the board or the business executive team will have an opinion on that.}
+{\pard  \line \par}
+{And the more they've seen somebody rising through the ranks that have engaged in the business or shown an understanding for the environment are going to be seen as a viable successor. So knowing what your organization's mission and businesses is vital. The second thing is just kind of cultivating the relationship management skills with all of those.}
+{\pard  \line \par}
+{Other business or technology areas. And that }
+{\cf2 [00:34:00]}
+{ comes down to innately having an understanding of the other person's point of view. So again, one of the other things it always kind of annoys me is the tone in the industry from some quarters that the business don't care about security. I've never met anybody that doesn't care about security.}
+{\pard  \line \par}
+{Now, they may not express that care in the way that we as security people would, but it's absolutely a priority for them. But when you understand their point of view and understand their context, and you engage with them about what they need to do as part of all their other activities to implement the required security controls, engaging with them from their perspective is often going to get them to the right place.}
+{\pard  \line \par}
+{Because generally speaking, they absolutely do care about this. They may not care for the specific recommendation you have, but partnering with them, they're going to absolutely care about getting to the right outcome. And so when you start understanding the other person's perspective and all the challenges that they've got going on, and then how to slip stream your work into their work is going to have a more }
+{\cf2 [00:35:00]}
+{ positive outcome.}
+{\pard  \line \par}
+{And then the final thing is, I think one of the great disciplines for most security people is it's kind of relentlessness. And so the fact that sometimes Some problems are not ready to be solved, but it doesn't mean they never will be ready to be solved when the right environment, the right tooling, the right capabilities come across.}
+{\pard  \line \par}
+{And so I think again, the great security people, they never kind of accept no as a permanent thing. They will say they may want to implement something and the organization will say, well, look, we'd love to do that. But at the moment we've got resources we have to focus here. And then instead of getting too upset about that.}
+{\pard  \line \par}
+{Then just make sure that in t plus six months, you're reproposing it, perhaps in a slightly more efficient, integratable way. And then the environment may say yes, or it may not say yes for 12 months. And having that kind of library of things where you're ready to go and you're perpetually pushing them is again, most of the great security people I know have got what they needed to get done.}
+{\pard  \line \par}
+{And got where they wanted to be in their career just }
+{\cf2 [00:36:00]}
+{ by pure relentlessness of driving this mission and kind of never taking no for an answer and keeping pushing and pushing and everything they want to get done ultimately gets done. It just may not be in the initial timing. They thought it would. Yeah.}
+{\pard  \line \par}
+{And I }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ love that also because it goes back to what you were saying about putting the business hat on as well, because as board, it's not just a security is the only priority. It's the CTO going, Hey, I need budget, CEO going, I need budget, someone else going, I need more budget and security also, I need budget as well.}
+{\pard  \line \par}
+{So they're dealing with everyone. And it's not that everyone has an endless pool of money as well. It's just basically someone is borrowing from somewhere to do something so that we actually have a bigger pot so we can repay the person in the first place. But I love that analogy of the fact that you called out, it's never a forever.}
+{\pard  \line \par}
+{No, it's just that for the moment, I think there's something else which needs a bit more priority than based on the resources we have at the moment. So I love that analogy. I know this is kind of like the technical questions I had. I have three non technical questions, which are just. Totally just to get to know you a bit.}
+{\pard  \line \par}
+{It's more about first question. What do you spend most time on when you're not working on a }
+{\cf2 [00:37:00]}
+{ cloud or technology? It could be professional, personal, whatever you spend time on outside of talking about cloud security or talking to board. I don't know whether this }
+{\pard  \line \par}
+{\b\cf1 Phil Venables:\b0}
+{ is a good or a bad thing. My kind of quote unquote hobbies at the moment are all kind of work related.}
+{\pard  \line \par}
+{So I do quite a lot of government service. So I'm on. President Biden's council advisors for science and technology. I'm on the board at NIST, the information security privacy advisory board. And I do some work for a few other government agencies. And that is not in the context of Google as just me being part of kind of various government advisory boards.}
+{\pard  \line \par}
+{And I spend some time on that. And then I'm also on three private boards Interos , which is a supply chain risk company, HackerOne, which I think most people will know is the bug bounty company. And I just joined the board of. Veza systems, which is, an identity and access and authorization company.}
+{\pard  \line \par}
+{So I have some kind of home life stuff, but most of the time at the moment is dominated by those things, which I'll probably subside a little bit next year. And I'll get some personal time back. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Fair enough. And what is something that you're proud of, but that is not only }
+{\cf2 [00:38:00]}
+{ social }
+{\pard  \line \par}
+{\b\cf1 Phil Venables:\b0}
+{ media. Interestingly, one of the things that when you look back, and I think most CISOs would say this now, that the most rewarding thing when they look back is not the incidents avoided or the incidents managed or the risks mitigated, but it's the people they've helped and the teams they've helped.}
+{\pard  \line \par}
+{build. And so slightly depressingly kind of, I'm getting on the old side now. I've been a CISO on and off for probably 30 years now. And you know, one of my proudest things is there is a large number of people that work for me at various levels that are now CISOs in their own right. And now many of them have also developed people that have become CISOs.}
+{\pard  \line \par}
+{So I think we should have like a CISO kind of grandparent index of like, not only how many CISOs have you helped coach and develop over the years, but how many of them have coached and developed CISOs that we know we should, that could be our industry metric. for CISO success is like how many CISOs and CISOs they've helped kind of mentor and coach to create as we build the industry.}
+{\pard  \line \par}
+{So I look back and there's just so many }
+{\cf2 [00:39:00]}
+{ people that have worked for me that have gone on and done amazing things as CISOs and other roles that, you know, I'm very pleased for them and very happy to kind of help in my small way on that journey. The }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ ripple effect I've seen for centuries and generations as well.}
+{\pard  \line \par}
+{Yeah, for sure. Third and final question. What's your favorite cuisine or restaurant that you can share? }
+{\pard  \line \par}
+{\b\cf1 Phil Venables:\b0}
+{ This sounds a bit weird. Coming from England originally, I'm a big fan of Indian cuisine. Oh, yeah. Yeah, fair enough. One of the things I miss lately, in my prior life, I used to get to India quite a bit, which I don't get to do as much in my current role, but I'm looking forward to getting back at some point.}
+{\pard  \line \par}
+{And when I get back to England, you know, there's reasonably good Indian cuisine here in the U. S., but when I get back to England, most of what I eat is Indian. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Perfect. I can tell you right now. So I only moved to London three months ago and already, I'm amazed at the number of Indian options that are very much like Indian food as an Indian food, not like the westernized version of Indian food.}
+{\pard  \line \par}
+{That to me was very, I mean, even Sunday roast is like sometimes curries as well. No, that's right. That was most of the questions I had. Where can people find you on the internet? They want to know more about CISOs and boards and what can they do }
+{\cf2 [00:40:00]}
+{ to be better as }
+{\pard  \line \par}
+{\b\cf1 Phil Venables:\b0}
+{ CISOs? Yeah, so my blog is philvenables.Com so which I put out something pretty religiously every two weeks on mostly kind of management, leadership, risk management topics, occasionally some more kind of technical topics.}
+{\pard  \line \par}
+{And then I'm at Phil Venables on pretty much all the socials, mostly use Twitter. I've not quite decided what to do with threads and anything else yet. So I'm mostly still on Twitter, although X is, it's never been. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah. I would put them in the show notes as well. So thank you so much for taking the time out.}
+{\pard  \line \par}
+{I really appreciate this and all the knowledge you've shared. I'm definitely looking forward to having you again. But for everyone else, this is part of our Google Cloud Security Month. Thank you for joining, and we will see you in the next episode. Thank }
+{\pard  \line \par}
+{\b\cf1 Phil Venables:\b0}
+{ you. All right. Thanks, and thanks, everybody.}
+}

@@ -1,0 +1,690 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red250\green138\blue59;
+\red128\green128\blue128;
+\red216\green34\blue146;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\b\fs48 Cassandra Young\b0}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ Hey Cassandra, how are you? Good. How are you? Good. So glad to have you here. And hopefully the phone came through as. }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ Just a little bit there, the full blast wasn't there, but it's metal. So }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ that's oh, well I'm glad. I'm glad. I was like I hope I'm doing a decent job, but for, for, for a few folks who maybe on the internet, who may not know who you are, could you just do a quick intro about who Cassandra is?}
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ Oh man, that's a, that's a tough sell. Cassandra is, well, it's me. Crazy blue haired engineer that gets dropped into to zoom calls to scare off clients, or just tell them what they should be doing. So I am I'm insecurity consulting as kind of a cloud security architect, engineer ish kind of nebulous title.}
+{\pard  \line \par}
+{But my background's actually in it Just systems, administration, things like that, just got a master's in computer science, which I'm very glad to be done with. And my spare time, I help organize blue team village, which is one of the villages that you're gonna be visiting at DEFCON. I also love travel.}
+{\pard  \line \par}
+{\cf2 [00:01:00]}
+{ Good beer, good drinks, scuba diving, photography, heavy metal. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Sounds like a great mix of an individual. You would like to know more of . Actually, maybe it's a good. To transition to we are talking about fundamentals or AWS cloud security assessment as well. Maybe. How, what, what is a cloud security assessment?}
+{\pard  \line \par}
+{Let's just start there first. What is it when people say, oh, I wanna do a cloud secure assessment. What what's, what does that mean for you? }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ So I work in consulting and one of the things that we offer our clients is an assessment of their cloud security architecture. What they have deployed sometimes and evolves assessing plans before something goes into production.}
+{\pard  \line \par}
+{Mm-hmm , but it can either be something like a series of conversations around What their approach is to different areas of their cloud security posture, whether it's, you know, what are the, what is their incident response protocols you know, how do they have, like, how are users federated into the environment if they are and kind of looking at all of these different }
+{\cf2 [00:02:00]}
+{ pieces to give recommendations about what they could be doing better.}
+{\pard  \line \par}
+{Or in some cases, that's, it's more on the configuration side where we actually use open source and internally develop tools to actually probe the environment and see if they're you know, if the, if they have security holes in their actual implementation. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh, right. So wait, it sounds almost like bench testing.}
+{\pard  \line \par}
+{Is it the same as bench testing? }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ I wouldn't say so. Because most of what we do is informational. And a lot of it's also more on the high level side. Right? So oftentimes we'll sit down and have a conversation with a network, you know, the networks. Team to get an idea of how they're doing things in the environment, or, you know, we'll go and kind of just get a list of like what network infrastructure they have deployed compare, you know, pull firewall rules and kind of see if there are any gaps.}
+{\pard  \line \par}
+{It's probably more something like a like gap analysis. In some way. Yeah. If we're not actually usually executing to the point of actually trying to get like, you know, the, the domain admin equivalent in the }
+{\cf2 [00:03:00]}
+{ cloud side. Oh, right. So a little different. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So it's not like you're trying to do like a, I don't know, like a cross scripting or a se congestion to basically to your point about the gap analysis part where it's more like architecturally, is this built correctly?}
+{\pard  \line \par}
+{Is it an obvious misconfiguration? Is that, did I get that right? }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ Yeah. I, I think what you're one thing you hit on was staple injection. So there's kind of different pieces that we look at the application side is only one part of those. So part of it would be, I'm gonna look at your you know, your, your pipeline, your, your C I C D pipeline, and see kinda how you have it set up.}
+{\pard  \line \par}
+{Like if you've got, you know, Jenkins running on an E C two instance, In a VBC and it's kind of opened, and that kind of provides an opportunity for someone to actually inject malicious code into, into the pipeline as it's deployed, you know, how are your get repo set up? You know, do you have least privilege implemented correctly?}
+{\pard  \line \par}
+{Things like that. And on the other side, especially for a SQL injection, which is actually one of my, my favorite things, cuz }
+{\cf2 [00:04:00]}
+{ little side story, which I'm sure I'll yeah. Do a lot of, but when I was in my master's program, I took a database class. And literally the example that the professor and TA showed of like how to use, like how, how you would set up, how you would write JavaScript to like, do a sequel query had injection.}
+{\pard  \line \par}
+{Like, it wasn't like parameterized any or sanitized input. And I was just like, no, but }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ no way as when they were teaching that example in the class. Yeah. oh my God. And it was really sad. Everyone kind of went ahead and just assumed this is how it is done. }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ Yeah. I actually made like a forum post and I was like, don't do this.}
+{\pard  \line \par}
+{This is bad, but I, hopefully they listen to me. Oh. But, but as you know, to, to really bring it back to the actual topic at hand you know, one of the things that we would talk about in our assessment is, you know when we, when we talk about secure pipeline, we're gonna ask, like, what tools do you have that are scanning code for potential issues?}
+{\pard  \line \par}
+{Like you know, SQL injection. }
+{\cf2 [00:05:00]}
+{ Or dependency issues, things like that. So it's kind of the, the assessment part is the process of asking those questions and identifying things that they may wanna tighten up a little bit. And in something like a config assessment that we'd probably like, you know, look at, like how, how is this tool set up?}
+{\pard  \line \par}
+{But is it actually, is it actually checking the thing that it's intended to check? }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right. And to your point then. The way I see it. How would you describe it? U for people who know people from pen testing backgrounds, obviously it's gonna just understand that now. Okay. It's not really pen testing, but more of a vulnerability assessment, like for what's the value to people when they get a vulnerability assessment done.}
+{\pard  \line \par}
+{What, what's the value that I guess is being provided from, is it just to find out what the current state is or is it more like pre-deployment cause a lot of people, maybe this for the first. Because this is fundamentals, just so that we, we, we don't leave them. Leave the newbies in the dark. What's a value of a cloud security }
+{\cf2 [00:06:00]}
+{ assessment provides to a customer.}
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ I mean, I think it can be done at any stage. We've had we've had clients that are, that actually have us come in while they're still planning and then they can adjust the planning to compensate for issues. Like we'll have lengthy discussions about what tools they wanna use at what points you know, how they, how they should be setting up their network in the cloud, you know, what's their plan for SSO.}
+{\pard  \line \par}
+{How is SSO being controlled from the very. All the way to the end. And then, you know, we will come in and also do assessments for clients who already have infrastructure running. And it's really, I mean, it's, it's informational, but it's also, you don't know what's vulnerable until it gets popped. If you, if you aren't like kind of, if you aren't in a position where you have a full-time team dedicated to security that has the specific skillset for looking at cloud security, then you might need to have an extra external pair of eyes.}
+{\pard  \line \par}
+{You know, several pairs of eyes, look at all the different }
+{\cf2 [00:07:00]}
+{ pieces. That's a }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ good point. And maybe it's a good segue into my next question then. What are some of the building blocks for running a cloud security as. }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ I think the first, the first building block is actually buy-in you kind of have to have this, this agreement that we're actually gonna do that.}
+{\pard  \line \par}
+{And to, to be able to have those conversations around, you know, discussing different areas and different perspectives on the same infrastructure. And I mean the main building blocks are honestly just having a robust sense of like, what are the components? What are all the areas that we're looking at?}
+{\pard  \line \par}
+{Because you know, like if we were gonna just gonna do, you know, an application analysis. That would be completely different. That's not even something I do. I, you know, I, I kind of like, I like Absec and I wanna learn about more about it, but I'm not, you know, I'm definitely not an expert, so I wouldn't like sell myself for that.}
+{\pard  \line \par}
+{But you know, I think. We wanna make sure that we have this like, okay, here here's, we're gonna look at the secure pipeline section and we're also gonna look at the IM section. We're gonna look at overall architecture. And I know we we've talked about }
+{\cf2 [00:08:00]}
+{ this. You and I about the different talks I'm doing, but you know, I've done a lot recently talking about AWS organizations and organizations is, you know, essentially let's take all these different AWS accounts and you.}
+{\pard  \line \par}
+{Put them in a, in a logical hierarchy and then impose rules based on the purpose of those accounts. And you know, so we always, we try to have those conversations with customers and some of them aren't at the point where they're even using organizations where they have everything in one account. And that's not really, I hate to use a buzz word, but it's not scalable.}
+{\pard  \line \par}
+{so. So we kind of have all these different areas that we, that we look at. And and then we can map tools benchmarks and processes to match that, like, you know, there's Azure benchmarks. I'm sure CSA has some CIS benchmarks, just, you know, compliance frameworks, things like that. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yep. Yep. And I think I was my calling minute, a moment there, cause we've got about 20, 30 people online.}
+{\pard  \line \par}
+{If you, if you folks have any questions, feel free to drop them in the comments as. And will be hybrid them as well. Now, to }
+{\cf2 [00:09:00]}
+{ your point, then there are benchmarks that exist. What are some of the low hanging fruits that you see as quite common across the assessment that you run? }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ I've actually seen quite a range.}
+{\pard  \line \par}
+{Actually. There was one I did a few months ago that was like, I found it really hard. And I was still like, it was one of the first ones they did. And I was like, oh my God, are they all gonna meet this hard? And it's cuz the client was so good. Yeah. So good. And then, you know, I had, I I've had another one recently that like there were, there was a lot of low hanging fruit, so I don't think there's any average.}
+{\pard  \line \par}
+{It just depends on the maturity of the client. Right. But like MFA, securing root accounts, not using root accounts and proper IM are all kind of things that should be foundational. Really definitely be misinterpreted or, or not set up correctly. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Interesting. We were Stan walking in as well. So that's interesting a rude account with, without MFA and people use still using root account.}
+{\cf2 [00:10:00]}
+{ }
+{\pard  \line \par}
+{Interesting. Yeah. So, and people for I am is hard. But so to your point then, I guess it's also like, are there any tools and stuff that you use to do all these assessments for yourself? Or how does that work? }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ So we have internally developed tools that would do configuration assessment. So it's really using Boto three Python library, mm-hmm SDK to kind of pull resources and just do some validation against, against different settings.}
+{\pard  \line \par}
+{The main one we use that we try to run is Prowler, which is just probably the most. Robust out of all the tools. Yeah. Yeah. I mean, like you do a scan, you've got like more results than, you know, what to do with, so I'd say it's, it's definitely challenging cuz you can have all the best tools in the world, but if you don't know how to interpret the results, you're kind of gonna be stuck between a rock and a hard }
+{\pard  \line \par}
+{place.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. And shout out to Tony, Tony di Fu as well, who I met at the reinforcer is a creator of Pola, great person. Great. I think they are expanding more capabilities within Pola as well. So definitely people should check that. I have opinions on that. oh, }
+{\cf2 [00:11:00]}
+{ okay. I'm curious. So, cause I know they have PR pro, but what's your opinion on the proa?}
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ Well I love it, but there are some things that are not worded very well oh. And also, I, I feel like at some point I'm trying to, I don't know. So we have like a, our internal tool has an integration where it actually runs Prowler. But I don't know if Prowler natively handles multiple accounts. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ I, I have to look, I have to check this cause I don't wanna I don't wanna just like insult the tool without, you know, knowing it and that's not insult at all.}
+{\pard  \line \par}
+{It's just, again, we're always looking at, yeah, we're, we're always looking at environments where there are multiple accounts. So like being able to have tools that provide some amount of automation for For actually like separating out different accounts and running all the scans against that in the, yeah.}
+{\pard  \line \par}
+{You know, you have an environment with 25 different AWS accounts. You don't wanna have to run something. that many times, like, I think I, there was another, there's another tool I forgot to mention too. That's PKU. Oh, Paco's }
+{\cf2 [00:12:00]}
+{ good. PKU. I went up like writing a bash script to like import the account numbers and credentials to like run it repeatedly.}
+{\pard  \line \par}
+{Cuz you can only do like one account at a time. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ oh my God. I mean, and people have like hundreds of accounts as well. Sometimes these days, right? }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ Probably I I've only seen upwards of like 20 something, but I'm still, that's still quite a bit, I'm still transitioning over from like more of the cloud engineering side into, into this.}
+{\pard  \line \par}
+{So }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ yeah. Wow. So 20 accounts as well, still quite a bit then, I mean, and, and talking about automation as well, because to your point then, if majority of the conversations you're having about cloud security assessments are around multiple account in AWS scaling that across. So if you were to talk about one.}
+{\pard  \line \par}
+{People can use tools like Ola. Paco seems like I do a good job and add their own flavor on top of it for however they want to contextualize whatever is being identified, I guess when it comes to scaling to multiple accounts, how does that work? So would that again, a rapper on top of this or people have, are there better, are there better ways that you've identified that people can use to do scale it }
+{\cf2 [00:13:00]}
+{ across multiple accounts?}
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ I mean, that's kind of a, that that's a dangerous question because I have a, you know, programming background you know, computer science, masters. I got to do some programming. Yeah. And like, I look at all these tools, I'm like, oh, I should, I could do it this way. And I, you know, I have opinion about that because I could literally jump in and, and do it.}
+{\pard  \line \par}
+{And, you know, and Python, or probably not bash my bash is not that great. but yeah, I mean, they're absolutely ways to scale it and I. One thing that I'm, that I'm interested in exploring, and I have started actually exploring is doing assessments at enumeration based on organizations. So actually like, you know, if you kind of get read only access and you could see what an organization looks like, you've got, okay.}
+{\pard  \line \par}
+{Wow. My, my hands are like, , I'm I'm mirrored. So my hands are backwards. You know, you've got your like top management account that is basically the root of all the roots. Yeah. Root to rule them all or, or whatever. Yeah. So you've got that account and then you've got, you know, maybe like a. Child accounts or OU with, you know, more accounts underneath them.}
+{\pard  \line \par}
+{So it's just this kind of, }
+{\cf2 [00:14:00]}
+{ I }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ mean, like a tree structure, }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ I guess. Yeah, exactly, exactly. Reverse the binary tree, all that fun stuff. Oh yeah. Yep. So I think, but but when you, when you have that kind of structure, you know, the idea of having a tool that can go in and enumerate that, and also enumerate like what service control policies are in place to actually like lock down the maximum permissions of each account within a certain OU.}
+{\pard  \line \par}
+{that's a really interesting space that I'm, I'm digging into now. And it's, it's, it's really fun. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Interesting. And I think I've got a question here from Roderick as well. Do you use any AWS tools? }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ We mostly, when we do assessments, sometimes we play around with some of the AWS stuff, but it's really about looking from the outside to see what the client is actually using.}
+{\pard  \line \par}
+{So, you know, it, actually, one of the things that we assess is what native AWS tools like security tools, mm-hmm, like, you know, guard duty inspector, things like that. Like. }
+{\cf2 [00:15:00]}
+{ What tools is the client actually using. And that can be something in our findings. Like if, if they think that they're gonna put most of the, you know, most of the security tools, like close to the source and, and in AWS, then we wanna know kind of, is that running?}
+{\pard  \line \par}
+{Is it running in all the different accounts in the organization? Is it maybe running in some but not others? Things like that. So it's really, when we do assessments, it's usually more about enumeration and. Translating that data, not necessarily using the AWS environment itself to do that work. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right.}
+{\pard  \line \par}
+{So maybe I think that answers, it does answer the question, but I think maybe I'll come back to the medication cuz this kind of goes into the medication as well. So is there a and thanks for that question, Rick. Do is there like a methodology that you follow for? Say, I come to you, Cassandra need do an assessment right now.}
+{\pard  \line \par}
+{What, what's kind of the first few things that goes to your mind or the methodology that you have to approach a cloud secure assessment. Cause a lot of people would be interested to know the }
+{\cf2 [00:16:00]}
+{ thinking process behind it and how do they kind of approach it. So how do you approach a, any as assessment? }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ I kind of have a template.}
+{\pard  \line \par}
+{There are patterns and sort of existing templates that, that we use, you know, I'm, I'm not the first person in my organization to do this. So I've relied on kind of learning what other people's processes are and pulling templates and stuff. So that kind of gives us that, that list of the different areas that we look at.}
+{\pard  \line \par}
+{So we, you know, looking at IM and, and all of that, but I think one important process, part of the process as well is to think. What is the purpose of this, of this organization? What are they doing in the cloud? What are their objectives? Mm-hmm because one thing I find myself asking a lot and this probably applies to everything else in life too, is what is the problem you're trying to solve?}
+{\pard  \line \par}
+{So, as an example I was digging into one where the client was talking about. They were, I think they were I would say they were using like, like a static. Set of parameters that they had stored, like in, in a file, in, in like S3, which }
+{\cf2 [00:17:00]}
+{ sounds kind of crazy. And the, the first instinct, just to be like, why would you do that?}
+{\pard  \line \par}
+{If you have an application running, why would you reach out to S3 and pull this information? It might have been something not, it might have not been an S3, but it was something similar. Like it wasn't like a native tool for that. Right. And we would wanna say like, you need to move everything like that to secrets manager.}
+{\pard  \line \par}
+{Yeah. But I. But we having this conversation, I stopped and I was like, wait a minute. What, what are you actually pulling from this? And the thing is, it turned out that 90% of what was in there, it was not actually important. It was stuff that was, that could have been public information. Anyways. It was just like, you know, a normal config file that didn't have any sensitive information so that the actual answer was yeah, only you only need to move 10% of this into, into secrets manager.}
+{\pard  \line \par}
+{You don't actually need to go through you. Whatever their development process was to literally change every single call into a call to secrets manager. So it's really about knowing what the purpose is, and also knowing how valuable the data }
+{\cf2 [00:18:00]}
+{ is. You're gonna treat you know, a healthcare client much differently than you're gonna treat someone running a static webpage.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right. And actually that's a good point because that would also encourage the conversation for what would someone use a particular service for the S3 bucket for storage? Yeah. Makes sense. But if they're hosting a website that maybe even more juicy content over there, I guess }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ depends on what it is. Yeah.}
+{\pard  \line \par}
+{I mean, it could be like my favorite cat photos.com, which yeah. It can }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ be as well. I think that makes you think of a question as well in the conversations that you. What are some of the common services that you have? I guess you come across from AWS perspective. What are people using most of these days, E C two S3 RDS?}
+{\pard  \line \par}
+{Like what do you come across more often? }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ I have definitely seen a lot of those. A lot of the notification services as well, SNS, SQS, SES, somewhat. Trying to think, what else? What have I like just looked at? I just }
+{\cf2 [00:19:00]}
+{ seen more like Kafka recently, like those kind of }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ services, right? Like an open source solution hosted on C two or }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ so.}
+{\pard  \line \par}
+{It's a AWS service. That's like managed streaming for Apache Kafka. So it's kind of like integrated, right. There's also like, I think one confusing point is, you know, RDS is actually the basis of so many different services that you give clients that are like, oh, I'm using Aurora or, you know post SERE.}
+{\pard  \line \par}
+{Yeah. And then you're like, oh my God, what? You know, I haven't even heard of that. And then you find out it's just basically RDS with some extra toppings or something. Yep. So lot lots of different things there. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. Actually that makes me think of another question then like, cause there would be people who would be using managed services versus unmanaged services as well.}
+{\pard  \line \par}
+{So how does an assessment kind of separate that out, I guess, is there a way to, misconfigure an RDS? What would be an example of a misconfigured RDS? }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ I think the most obvious thing to me that I always flag is if you're running RDS, it's not just about the control plane. Mm-hmm , it's not the data }
+{\cf2 [00:20:00]}
+{ plane, so you can have something look completely fine from a management perspective, like, you know, you've restricted access to who can actually, you know, control the top level, you know?}
+{\pard  \line \par}
+{Things about the database, but when you get down to the, the actual data plane, you know, people don't even realize that you can use like AWS SSO, which you, you know, maybe have connected with your Azure ad credentials to actually access the data plane, like the actual data. So maybe you have an exposed database that's pretty well controlled on the control plane side, but you still have like, you know, default like SQL admin credentials or something like that that are probably easy to crack and publicly access.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I see that's that brings me to another question because you're talking about fundamentals. A lot of people would not even know what a control plane or data plane is. that's a }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ really good point. Thank you for mentioning that. Yeah. So how, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ how, what is the control plane according to you and what is the data plane in the AWS cloud landscape?}
+{\pard  \line \par}
+{I feel }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ like that. That's like half a talk right there. And you know, }
+{\cf2 [00:21:00]}
+{ it's like something you kind of like instinctively know, and I, I don't know how long I'm gonna put into words. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I know what essentially, but half people don't even know that're same like, oh, control plane. Yeah. I know }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ the, probably the simplest example I would use is not actually RSS, but S three.}
+{\pard  \line \par}
+{So control plane would be like, who gets to create and delete buckets who gets to set, you know, What can access these files mm-hmm and then data plan is like, what are the files who has access to, or like who can share them and can, you know, can people download them or something like that. So that's kind of the best.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I think that's a good way to put it. And I guess would, would that also, cause you know, how people told the shared responsibility thing in there as well, and it's kind of just easier to just slap on shared responsibility to every conversation for, for cloud. One of the reason why my question for the managed part and non-managed part was that as well, to your point, con some of the control plane may not be under your, your control.}
+{\pard  \line \par}
+{You may just have the data, plane access, which is }
+{\cf2 [00:22:00]}
+{ kind of like the example of ideas you can't, you can tell Amazon, I want Postgres or I want Aurora, but I can't really tell them I want this specialized version of this really old ass Aurora, for whatever reason I just had, it would always be the latest.}
+{\pard  \line \par}
+{So, how does the assessment change for that kind of a thing? }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ I think at some point we kind of have to set some scope. Yeah. You know, there's only certain, there's only so much that we can see, like, I can see that you've got, you know Alaska cash or Redis or, you know, Postgres or whatever, but I can't see what's, you know, what's in the database and how.}
+{\pard  \line \par}
+{Postgres is configured specifically, unless }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ you just literally copy the database entire idea, which is kind of like fantastic database right there as well. My, so you want me to commit a breach and then tell you how bad this is or that's a good point. I think so your point scope is maybe that's probably one of the fundamental things as well then.}
+{\pard  \line \par}
+{Well, before you even kind of like }
+{\cf2 [00:23:00]}
+{ what we did, I mean, I'm not, I'm gonna compare to pen again, but just the scope conversation is very similar in that regard for how wide. Do you want to go cause to your point, if you're looking at 20, 30 Aw accounts and each one of them has like a mix of managed services and unmanaged services.}
+{\pard  \line \par}
+{Oh, that's a lot of work. How long do these co I guess engagements go on }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ for you know, it depends on how deep we wanna go. So we've had some words, you know could be a couple weeks. Some of them just like one week, couple days of work, maybe, you know, where we just take kind of the low hanging. and the highest, most critical one week for }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ 20 AWS accounts.}
+{\pard  \line \par}
+{Yeah. Holy shit. Wow. Yeah, }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ like automation is }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ wonderful. yeah. I mean, even with automation, cause you had to put some context on top of it as well. Right. It's not just like, Hey, here's the result. Cause you, I imagine similar to app apprentice, you have to write a report, put some context, like the example that you mentioned earlier, where the static files that were an S3 bucket.}
+{\pard  \line \par}
+{As you kind of dig into it. That's a, }
+{\cf2 [00:24:00]}
+{ I mean that, I imagine that's like a half a day conversation right there by then we found it, find the right person to talk to about it as well. So is the same kind of challenges exist in assessment world as well, where it's like, I'm gonna, the mirror thing is gone again.}
+{\pard  \line \par}
+{Is that the same conversation there as well? Where it's almost similar to pen test and the, I mean, I can understand why people misunderstand it because pen testing is similar. You get very limited. Do, what do your verse is? What they tell you, but you're like, well, you haven't given me the time to do my verse, but sure.}
+{\pard  \line \par}
+{I'll try and do it in this limited budget and limited scope that I have, whatever I can in the limited time that you've offered me. }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ Yeah. I mean, we also go in stages too. So sometimes we'll do a set of scans, interpret results, put 'em in a report. And honestly, I hate doing reports. I don't feel like clients should be spending that much money for me to like yell at Excel and power.}
+{\pard  \line \par}
+{Or God forbid, Microsoft word. It's the worst. Oh, oh my God. So I, I mean, we try to keep it as that }
+{\cf2 [00:25:00]}
+{ part, as straightforward as possible. Doesn't always work, you know, depends on the client, but you know, oftentimes it can be like, we're gonna run a bunch of scans and then we're gonna come talk to. The team's involved about what the results are.}
+{\pard  \line \par}
+{And then we get some clarification from them. A lot of it is we put the onus on them to actually do the clarifying mm-hmm , you know, we'll say, okay, you have this many exposed IP addresses, like, is this intentional or not? If it is intentional, is this something that's an exception that's already been approved?}
+{\pard  \line \par}
+{And if so, then you kind of assume the risk of doing so. Yeah. So a lot of it is really just kind of this back and forth. And then we may also have things where we're working with a team that actually does some of the re remediation. And then we rescan. Kind of refresh the results of the assessment. You know, we may or may not do something like you know, a more thorough network review where we look at like firewalls and rules and things like that.}
+{\pard  \line \par}
+{So it's, it's variable, but it's not like it's not like full weeks of work. It's usually just that like a burst and then hand off in a discussion and }
+{\cf2 [00:26:00]}
+{ then waiting for. So it just drags on for a long time. Yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. And, and I, and I appreciate you being patient with me as I'm trying to like peel out the layers for people who maybe do hearing about these terms for the first time as well.}
+{\pard  \line \par}
+{So to your point, then you've run the scan. You've identified things, you've identified external IPS as well, and the whole in scope for what what's actually in scope versus what's on in scope. I'm assuming they, they would, it would be like a, for lack of a better word, a gray box. Like you would get credentials to the accounts, like some kind of an IM user.}
+{\pard  \line \par}
+{Is it completely black box where it, you don't have access apart from just saying, Hey this is our IP. Like, I don't know how, how what's the kind of usual things you're provided. }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ So we usually wind up with some some type of credentials and a, a read only role within the environment. So again, you know, it's not a pen test where we're actually trying to do anything in the environment.}
+{\pard  \line \par}
+{We're just looking at it. Right. So it's basically, if, if, if. For anyone familiar with, you know, all the different }
+{\cf2 [00:27:00]}
+{ IM rules for every service it's basically like list or, well, not list, actually that might be wrong. That might be data plane, but, you know, get, describe a lot of get and describe. So we're saying let's get your S3 buckets.}
+{\pard  \line \par}
+{Let's describe them. Yeah. You know, is account level, block, public access enabled or not. And that's like what we would look for. Yeah. But that can all be done with read only credentials. Right. And that's usually what we're given. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Interesting. And let let's talk, maybe switch gears and talk about mitigation as well.}
+{\pard  \line \par}
+{Cause I think that's definitely a lot of information for people to digest from a, Hey, I've got my fresh start in cloud security assessment. What I, what I would per personally get how I can approach it. And you can probably look at the tools as well. So from a mitigation perspective as well. So all the blue teamers who are put of blue hair as well, so it kind of Ted really well where of all the blue, blue teamers, who would be probably.}
+{\pard  \line \par}
+{Expecting. Okay. What's the riot thing to approach this? Cause this could technically be }
+{\cf2 [00:28:00]}
+{ a fundamental for mitigation as well. We mentioned the root account earlier. You kind of talk a lot about AWS organizations quite publicly as well on how they could be done better. So what are some of the foundational pieces that you feel people could be doing?}
+{\pard  \line \par}
+{Right? Especially in like a large scale 28 Ws account kind. }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ I mean, I think the main thing is, is securing those root credentials. That's just, you. MFA, you wanna be doing everything from a different user account. Ideally if you're in an organizational environment, you should be using SSO to get into the environment in the first place.}
+{\pard  \line \par}
+{And making sure that your security on the originating side is, is good. Like if your're using Azure ad to get into yours environment, then your Azure ad account should have MFA on it. As an example you know, for, for the root account credentials themselves, you know, MFA at. Lock it away. Don't throw away the key, cuz unfortunately you do need that.}
+{\pard  \line \par}
+{Like for very rare occasions, you know, have, have like a small set of }
+{\cf2 [00:29:00]}
+{ people as a, you know, as a backup that have access to it and make sure that access to the email accounts that all of these are registered under is actually secured as well. Cause I've seen that before, too. Right. And I, in my past life was, you know, an O 365 admins.}
+{\pard  \line \par}
+{So you know, a, a Tying your entire organization's route account to a mailbox running on old exchange, an old exchange server with basic authentication is probably not a good idea. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ so don't do that basic cause is definitely, I think we should have got no, our basic ages ago, but here we are still our basic }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ yeah, that's a whole other conversation.}
+{\pard  \line \par}
+{Yeah. Yeah, I mean, other other essentials. Just understanding and using I am implementing least privilege, definitely very important. You know, thinking about your encryption in transit and encryption at rest for each individual service that you're using, if you're using organizations, you should be doing centralized cloud trail it's way easier.}
+{\pard  \line \par}
+{Yeah. If you're using }
+{\cf2 [00:30:00]}
+{ control tower, which is it, control tower is kind of another layer on top of organizations. It's definitely a whole another holder, their conversation, right. You know, you wanna make sure you have logging enabled in those environments, send it to a SIM. Hopefully after that point, you'll figure out what to do with the logs once you get them.}
+{\pard  \line \par}
+{Cuz it's a fire hose. Yep. Yep. I have an upcoming panel talk where we're gonna get into that a little bit. So, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ so there's a panel. Talk for this at the village as well. Oh, that's }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ awesome. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ oh, and is that gonna be streamed anywhere? So people can, who listen to this may not be attending AppSec village, but can they listen in on the conversation as well?}
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ So the one I'm doing is blue team village, and we are not able to stream any of the in-person talks. Do have some virtual content though, but I did not manage to get any cloud cloud stuff in that one next year. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ next year, next year. So for people who probably attend, they should definitely attend that session as well.}
+{\pard  \line \par}
+{So to your point, coming back to the mitigation. So make sure root count with MFA, actually. Where, where do you stand on the whole, when you have 20 AWS accounts and 20 root }
+{\cf2 [00:31:00]}
+{ accounts, do you have like, because some people believe in the industry should just re just reset the password for root and just delete it or just, you know, delete the password because.}
+{\pard  \line \par}
+{or some people just go, well, I'm not gonna do anything with it. I'm just gonna control access to it. So where do you stand on that one? Usually }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ that's a really good question. I personally haven't messed around enough with the, that whole setup to have broken it badly enough to have a strong opinion. oh, fair enough.}
+{\pard  \line \par}
+{But I think so with organizations. When you have that like top management account. Yeah. That one you would always wanna keep access to because there are some billing functions that are tied to that or that you can only use within there. Other than that, I, I would probably save and secure them, but, you know, put them in, you know, a shared, shared with very few people you know, safe somewhere.}
+{\pard  \line \par}
+{like, I mean, literally like, you know, if you have multiple root accounts, That are extreme, }
+{\cf2 [00:32:00]}
+{ extremely important than having a hardware MFA token that's in, locked in a fire, safe in an office is not actually the worst plan. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ actually definitely actually talking about fire safe as well. Like the whole the substructure that they have kind of like a container or like a, I mean, my mind is like a safe where you have organization and when you have organizing units underneath it as well and you can kind of, so there's a whole SCP conversation to be had over here as.}
+{\pard  \line \par}
+{I'm do even talk about that. Oh yeah. Yeah. There you go. So like, how would you kind of, and what is it, first of all, for people who do not know fundamentals, what is it and why is it relevant for organizations? }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ So service control policy is basically a higher level IM policy that basically sets kind of the maximum permissions allowed.}
+{\pard  \line \par}
+{And it is applied to an OU or an AWS account within an organization. Mm-hmm so. Let's let's say we've got, you know, another, another key thing to do is if you've got, you know, a production environment or a dev environment, you absolutely wanna keep those }
+{\cf2 [00:33:00]}
+{ separate. And that's a reason to use multiple AWS accounts because that is absolutely the security boundary is an AWS account.}
+{\pard  \line \par}
+{So what you would do in that case is say like, okay, you maybe. Your dev environment is only accessible from, you know, from your organization, whether it's a certain set of IPS or users, or however you wanna do it. So you know, maybe it doesn't ever need any external facing access. Yeah. So in SCP you could actually use it to, to restrict the creation of any, you know, public IP addresses, for example a couple key ones, which I'm gonna talk about in my Diane initiative talk are restricting.}
+{\pard  \line \par}
+{Where you can create resources. So, you know, if you know, you're only using us east one, what you should do is create a service control policy that basically doesn't allow anyone to create anything outside of that region. You know, if I were, if I were a smart attacker, I'd probably be like, let me hide this.}
+{\pard  \line \par}
+{So no one can see it until it's too late. And I've already like run a crypto minor for, you know, 72 hours or, or whatever the }
+{\cf2 [00:34:00]}
+{ case may be. Other ones are I think one that's, it might be a default for control tower. Not sure is basically saying a user, a new user to the, to the account or to a, to a role or to their, a federated user.}
+{\pard  \line \par}
+{Essentially can't do anything until they've configured, MFA for their account. Like they literally can't even, they can't do anything except for configure MSA. Wow. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That's pretty, that's a pretty cool SAP. Yeah, }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ cool. It's a great guardrail to have. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. And what, what are guardrails on what you want?}
+{\pard  \line \par}
+{People don't even know that like, }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ well, there's two, well, okay. That's a little trick question. So there's actually a feature in in control tower. That's called guardrails, like the capital G. Oh. And it's essentially like kind of a. I think it actually is just ISCP is under the hood. Right. But then we use the, we use the general term guardrails to basically indicate you know, what are the, the absolute boundaries that someone should, that someone has }
+{\cf2 [00:35:00]}
+{ to stay within, you know, kind of just to keep everything like reasonably on track.}
+{\pard  \line \par}
+{Right? }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I mean, maybe it's, that's what actually, I didn't realize kind of meant on the path of saying godless and the control towers. So what is control tower and is, can anyone access. }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ Control tower is actually a paid service. It basically takes organizations and adds functionality to it and not gonna lie.}
+{\pard  \line \par}
+{I know way more about organizations than about control tower. But there are some weird things that they do differently that I. That tripped me up a little bit. Right. On the other hand, organizations is completely free. So I actually ran a training at, besides charm that involved setting up different accounts and working with OUS and SEPs in AWS organizations.}
+{\pard  \line \par}
+{Yep. Yeah. And you can do the whole thing within free tier. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Interesting. You can do the whole, and is this like gonna be published later in the year? Somewhere as well? So people can, }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ That one's, it's actually up already. I can drop your link. Oh yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That'd be awesome if you already up. So people can use the free resource for it.}
+{\pard  \line \par}
+{So trying to figure }
+{\cf2 [00:36:00]}
+{ out heartbeat, use the paid control tower to do it. So it sounds like, and you can pretty much get the same kind of control using free open source. I mean, not open source, but as the, as ANCP in organizations, you don't have to really go. Cloud control tower. Is that right? Yeah. }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ Yeah.}
+{\pard  \line \par}
+{That's correct. Yeah. Control towers is extra on top of that. Interesting as an organization, I think that's, you know, if your organization is looking to, to use. If your organization is looking to use AWS organizations, that is always so confusing to say, thanks, AWS, for the really obvious names for the guardrails }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ as well.}
+{\pard  \line \par}
+{Like, and if they wanna use young guardrails, like it's impossible. }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ Yeah. You know, if your company is, is moving to the cloud and is considering using. Organizations and, or, or control tower. Yeah, I would absolutely suggest that they investigate first and decide whether or not to use control tower because it does centralize logging in a different way.}
+{\pard  \line \par}
+{And it does not appear to be very easy to convert just from organizations over to control tower. }
+{\cf2 [00:37:00]}
+{ }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh, so it centralizes logging as in centralized to security hub or guard duty or so. }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ So basically creating tr cloud trail trails to collect logs in every account. Yeah. And then putting them into a an SD bucket in a separate log archive account.}
+{\pard  \line \par}
+{So AWS actually has recommendations for structuring your company's assets. And it's, it's literally like their recommendations are you have an account that's dedicated to security tooling. You have an account that's dedicated to collecting logs, like this log archive account. Yep. You know, you have a production, you know, you have non-prod.}
+{\pard  \line \par}
+{Dev, whatever stage sometimes plays in there. So they actually have extensive documentation on with recommendations, for patterns that you can use to structure your organization's deployment to the cloud, which is really cool. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Interesting. I might take that link from you as well. So I can put that on the show notes.}
+{\pard  \line \par}
+{Maybe one final question then as well. }
+{\cf2 [00:38:00]}
+{ What do you think people should be skilled in if for future cloud security assessors who maybe listening to this convers. Or on that journey like, oh, Cassandra said it so well, I'm super excited. I wanna be part of this work, this bandwagon of cloud security assessors out there.}
+{\pard  \line \par}
+{How can someone learn about this? I guess what needs to be done and tooling and all that as well. What has been helpful for you to kind of walk that path that the others can follow as well? }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ I mean, I think the first thing is just a willingness to learn. Mm-hmm and hand on hand with that is not being completely wedded to the things that you already know.}
+{\pard  \line \par}
+{So, you know, I, I come from an it background and some of, you know, a lot of that is completely on premise and there's a lot of things that you, that you would default to. You know, things that you think, you know, on premise that just don't work in the cloud because that's just not how it's supposed to work.}
+{\pard  \line \par}
+{And you know, kind of like making sure that you're, that you're taking it from the start is, is definitely, }
+{\cf2 [00:39:00]}
+{ definitely a good thing. But generally speaking for actual skill sets, I think just playing around with it, getting some familiarity, a little bit of programming helps. I might get some shit for saying that maybe but under understanding how APIs work, because under the hood, AWS is all just APIs.}
+{\pard  \line \par}
+{And when you, when you're, when you get to like intermediate level in, in your cloud experience, you need to understand how to use, you know, CLI and, and know that there's, it's just a lot of API calls under the hood, and that's kind of fundamental information to know. Yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So programming helps. That's what I'm it does.}
+{\pard  \line \par}
+{It really does. especially if you're looking at like more than one AWS account, you definitely feel like you definitely need to have that. }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ Yeah. And, and basic, like, you know, a basic set of it, skills is always gonna be helpful }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ for that sounds good. That was pretty much the time that I had for all the technical questions.}
+{\pard  \line \par}
+{I got three surprise questions for you just to get your, so }
+{\cf2 [00:40:00]}
+{ that so these are basically just to get to know you a bit more for the audience as. So first one, just three ones, not too many. Where do you spend most time on many not working on technology or cloud. }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ Oh so, but pre pandemic, I traveled very extensively.}
+{\pard  \line \par}
+{I've been over 50 countries. Wow. I love travel. Like I am obsess of travel. I'm literally just working so I can retire early in travel. Oh, just 20, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ 50 countries. How many countries are they? Isn't there? Like 56 or something that total, }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ oh no. I said over. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ You've or of, sorry, I got that wrong. who I have no idea what you, so wait, but how many countries are they in total?}
+{\pard  \line \par}
+{Around the world? Is there like 50 something or }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ it depends on which list you check and that's kind of gets to be a little political . Oh, okay. I've been to some that, that meet, like depends on how you count. I've been to like between 48 and 51 countries. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ right. Okay, cool. Well, that's a great hobby to have.}
+{\pard  \line \par}
+{So what has that. Post, well, it's not really post pandemic, but like I think }
+{\cf2 [00:41:00]}
+{ whatever stage we are in, in the post pandemic, pre pandemic kind of world or not post yeah. Whatev what, whatever midyear world we are in living in post }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ pandemic start yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Post pandemic start. Let's just call that. So what are you spending most time on the now?}
+{\pard  \line \par}
+{I }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ mean, honestly, in, in, in early 20, 20, I bought a house, got COVID right after moving in and then spent a lot of time online. And I'd been volunteering with blue team village, which is a blue teamer security, you know Hacking village at DEFCON. And I I've been a volunteer since the beginning and it's turning five this year.}
+{\pard  \line \par}
+{Oh, wow. And I just kind of dug in and started doing more with the village. Started a mentoring program that's now in its second year had started doing a lot of presentations online, like a ton. So , I'm actually, you know, going to DEFCON, I'll be. Two talks and a panel. Wow. And then another talk later in the month, too, blue team con }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ just, just your casual speaking month, I guess.}
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ Yeah. but also jigsaw }
+{\cf2 [00:42:00]}
+{ puzzles and, and baking now that I have an actual kitchen, so, oh, not just, not just online }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ stuff. Cool. Congrat stations on new houses. Well, by the way, now you can make all your big, big to your heart content. Yep. fair enough. The second question that I have is what is something that you're proud of, but is not on your social media?}
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ Oh my God. That's a good one.}
+{\pard  \line \par}
+{I, I, I don't know. I feel like I talk about everything on social media. like go to my Twitter. It's just, I'm, I'm a pretty open book. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Like all, all your achievements are on Twitter. }
+{\pard  \line \par}
+{Yeah, }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ basically, or fair enough. So, okay. Funny story about that though. If you look back far enough in my Twitter history, I actually created Twitter initially to keep track of my travel when I was doing a year and a half long round the world trip.}
+{\pard  \line \par}
+{So I have some really interesting tweets early on there. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ we should probably I'm I'm gonna leave you our Twitter handle on the show notes as well. So we can find that out. I, and I'm, I'm looking forward to rating some of that content as well from one year of world travel that would've been. }
+{\cf2 [00:43:00]}
+{ }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ Oh, my God.}
+{\pard  \line \par}
+{It, the only reason I came back is cuz I ran outta money }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ as, as all of us do, unfortunately, if only I hope Jeff Bezos are listening and gave us some money, I guess. Oh, the AWS product we are having. The final question on, on this is what's your favorite cuisine or restaurant that you can share? }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ Mm I'm fortunate enough to live in a neighborhood that has amazing Ethiopian food.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Ooh, like bread and like }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ robot. All of it. It's great. And I, I was actually, I had planned to go to Ethiopia in summer 2020, and then the pandemic happened. It's really sad. Yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Well hopefully I think to open up, you get to do that now, but I think that that was interesting and it makes me feel like I should have Ethiopia for dinner tonight.}
+{\pard  \line \par}
+{Apparently Boston has really good Ethiopia food as well. So I'm gonna check that out. Nice. But nice. Thank you so much for your time. Where, where can people find you to have any answer any follow up questions? Anything they wanna want, at least from a cloud assessment perspective, they want to reach out to you }
+{\cf2 [00:44:00]}
+{ for where can they find.}
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ So Twitter is definitely the best bet I'm at mu Teche underscore RTW, which I'm sure will get posted. Mm-hmm LinkedIn to, I, I don't check it nearly as much as Twitter, so I definitely would, would point you at Twitter. Oh and then I'm again, speaking at at summer camp. So I'm speaking about AWS organizations and those, those guard rails that I talked about, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ the control dog guard rails are the actual guard rails, }
+{\pard  \line \par}
+{\b\cf3 Cassandra Young:\b0}
+{ the actual guard rails yep.}
+{\pard  \line \par}
+{So that's at Diana initiative. One of the two days I, I forget when it's scheduled for and then at Dcon itself, I'll be speaking about securing pipelines at cloud village, just sharing some of the things I've learned from doing assessments and all the interesting stuff I've seen. And then Friday, At blue team village, my village I'm actually leading a a panel that where we're gonna get into not just getting into the cloud and about cloud, but how we actually.}
+{\pard  \line \par}
+{Blue blue team, the cloud in taking that what we have already and making it better. So, you know, what do we do with the }
+{\cf2 [00:45:00]}
+{ logs once we have have them, what are incident responders looking for in those logs? So we're, we're hoping that we get a, a good audience for that and it should be. Pretty interesting.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Well, you talking about the right right place, so you can definitely get the right audience for that as well. So I'll make sure I read about it as well. But thank you so much for your time. I really enjoyed our conversation and I think thank you to everyone else who participated. And I'll say question as well.}
+{\pard  \line \par}
+{I, I'm looking forward to having you again, but thank you so much for your time, Cassandra, and thank you everyone else who kind of joined us as well. Talk to you soon. Enjoy the feed. Thanks everyone. Bye.}
+}

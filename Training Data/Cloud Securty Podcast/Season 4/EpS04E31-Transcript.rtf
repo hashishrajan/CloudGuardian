@@ -1,0 +1,410 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2639
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 TimesNewRomanPS-BoldMT;\f1\froman\fcharset0 TimesNewRomanPSMT;}
+{\colortbl;\red255\green255\blue255;\red97\green167\blue95;\red0\green0\blue0;\red109\green109\blue109;
+\red81\green0\blue192;}
+{\*\expandedcolortbl;;\cssrgb\c44706\c70196\c44706;\cssrgb\c0\c0\c0;\cssrgb\c50196\c50196\c50196;
+\cssrgb\c40000\c0\c80000;}
+\paperw11900\paperh16840\margl1440\margr1440
+\pard\sa360\partightenfactor0
+
+\f0\b\fs28 \cf2 \up0 \nosupersub \ulnone Ashish Rajan:
+\f1\b0 \cf3  \cf4 [00:00:00]\cf3  Is there a way to scale cloud pentest the same way people scale deployments in cloud?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Seth Art:
+\f1\b0 \cf3  I'll give you two answers. The first one is let's say a company has a hundred applications, but it's a smaller company and they don't have the budget to do a hundred application pentest. It's kind of, they prioritize an external pentest is like, let's just look at the ones that are public and let's just see, we're not going to see what like an employee can do, but like, what can an internet person do?\
+And that's kind of the approach I would take for if you have a lot of cloud accounts, subscriptions, resources in your accounts. I would say you need to do cloud configuration review, right? CSPM. Now the second approach is for like a large enterprise. If you're a large enterprise and you have a hundred accounts because you have like 50 application teams, you're at the size where you have like.\
+Five people working on this app and then five people working on this app, you actually might have the budget, or you might have to start thinking about every app that you're doing an app test on. You might want to do a cloud pentest on the infrastructure that supports that app. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Are you someone who used to do network security, the traditional way.\
+When I say traditional way, I mean, what it used to be in the on premise \cf4 [00:01:00]\cf3  environment, and I tried to apply the same thing into the cloud environment. I was on a BlackHat conference or Defcon conference last week, and we spoke about why cloud security pentest is not just to config view. Why network security as it used to be is now become more of a cloud security where you have infrastructure in the cloud and network security pentest in general has also migrated on to become almost the same as cloud security pentest.\
+Now, granted, there's shared responsibility on who can access what part of the network and how much can you pentest and what can you pentest. And it can get really confusing. So just me talking about why the way I think cloud pentesting is working today is almost like the next evolution of network pentesting.\
+I've got a few of my friends who came in who talk about this and to talk about how cloud pentesting, how they do it. And instead of just doing a config review, it's a lot more than that. In this episode, we had Seth Art from BishopFox. He is a principal pentester with them. And we spoke about. What is cloud pentesting?\
+What is the approach you should use \cf4 [00:02:00]\cf3  to do cloud pentest where it's a bit more objective based rather than just looking at the config review and just going, Hey, there's nothing over here. I'm just going to go back to the web app pentest. We also spoke about some of the examples that he has seen in real life, where this is how cloud security pentest is beyond just a config review.\
+We have answered a few questions online around the fact that has there been instances where people have identified things where the responsibility for the cloud is. How far can you go? What's the difference between a security research in the cloud space versus cloud security pentest? As you can see, this is a very interesting conversation, especially because I was kind of happy to know that it wasn't just me who believed that cloud security pentest as it stands is more than just a config review.\
+But there are a lot more people out there who are already ahead of that curve. So I did a prediction post on this on LinkedIn, just on the same topic. And if the, if you are connected with me on LinkedIn or just go on my LinkedIn profile, you probably see this question being asked over there. And the responses are interesting as well.\
+So I'll definitely encourage you to share your opinion there. But in the meanwhile, I have Seth Art for you from BishopFox for us to talk about how some \cf4 [00:03:00]\cf3  of us are looking at the cloud pentesting world with a different lens than beyond just what a CSPM or a CNAPP or CWPP or any other vulnerability management or posture management tool would provide you.\
+So if you know someone who's looking at doing some cloud security pentest or trying to get into the field and just wants to understand the differences between it and everything else I spoke about right now, feel free to share this episode with your friends, colleagues, who may be into the space and maybe looking into becoming more of a offensive security in cloud kind of person, instead of just a web app person or a mobile person.\
+But want to add this into the repertoire. In case you're coming here for the second or third time to watch or listen to this episode or any other episodes that I've had so far on Cloud Security Podcast, I would really appreciate if you could take a moment to leave us a review on iTunes or give us a follow on your favorite social media, whether it's YouTube, LinkedIn, Spotify, so that People who are coming on as guests get to know that there's going to be value in for them to come to the podcast.\
+And that also helps us grow and find out more people that we can bring on to the podcast, but also find out how we can help a lot more of you. By the talking \cf4 [00:04:00]\cf3  about others on the community who are listening or watching this, thank you so much for coming and saying hello to me and Shilpi while we were at Blackhat and Defcon.\
+It was really valuable to kind of hear how we have been able to help a lot of you and the things that you would like us to introduce into the podcast and as well as the YouTube channels. Thank you so much for the feedback and also thank you to folks who were part of the Cloud Security Bootcamp as well who were there.\
+So thank you and really appreciate all the love and support that you're showing to the podcast, the training we do and the pentesting we spoke about. So thank you so much for all of that. And I definitely came out of the BlackHat experience with a lot more gratitude than I had walked into. So thank you for making me feel more humble and honored to be able to give back to everyone who has been helpful for me so far by bringing in guests like Seth and others in the past as well, who've been able to add a lot more value to everyone. So I hope you enjoy this episode and this is a continuation of our offensive security in cloud month. I will see you in the next episode.\
+Peace. Hello and welcome to another episode of cloud security podcast. This is the continuation of our offensive security in cloud month. \cf4 [00:05:00]\cf3  And today we have a guest coming up, which I've come on the podcast before, but unfortunately we caught him again to talk about the, well, let me just bring him on first.\
+And then we can talk about the topic , I'm quite excited about this topic and I think it's going to be very eyeopening for people. Hey Seth, thanks for coming on the show, man. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Seth Art:
+\f1\b0 \cf3  Hey Ashish good to be back.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Awesome. Well, actually maybe we should start off as for people who don't know who Seth is, could you tell us a bit about yourself and how you got to where you are today, man?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Seth Art:
+\f1\b0 \cf3  Sure. I guess I'll start where I am now. I'm a principal at Bishop Fox, a pentesting consulting company. And the way I got here, I started out in help desk. It was my first job. And then I kind of went and did defensive security. So I worked at semantic managed security service for five years and I learned all sorts of awesome stuff about Linux and networking and firewalls and IDSs.\
+But I just had that itch to be offensive. Partially, I was sick of being on call. And so I was like, Hey, these offensive guys are never on call. So that sounds fun. But really I just wanted to hack stuff. So I really got into web app pentesting for a while. And then eventually made this \cf4 [00:06:00]\cf3  switch to network and infrastructure testing.\
+So internal pentests, external pentests, physical pentests. And then once I got to Bishop. Fox, I was trying to get as many internal pentests as I could. And then I started to realize that some of the internal pentests I was getting like entirely cloud infrastructure. And so all of the attack methodologies that I knew about active directory and just kind of that traditional network testing, a lot of that was out the window and I had to like learn really quickly about how to attack, you know, cloud native services, containers, Kubernetes, things like that.\
+So that's what I've been doing for the last three years now, and I've been kind of, you know, leading this cloud pentesting practice at Bishop Fox. And I'm happy to be back talking with you. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Awesome. And we're happy to have you as well. And you said you did some network pentesting as well as infrastructure pentesting as well it's probably good to kind of call out what was it traditionally before you started seeing more cloud?\
+Like what, what would be an example of a network security pentest or an infrastructure security pentest? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Seth Art:
+\f1\b0 \cf3  Yeah, \cf4 [00:07:00]\cf3  right. So, and actually I'll go back one step further. So with app testing, you think it's just web applications, right? But as an application pentester, I was often asked to do things like mobile testing, and thick client testing and of course, web applications. So then when I switched to network pentesting or added that to my repertoire, it's really baked into external pentests and internal pentests. And that was, you know, for a long time, the two main ones, as I mentioned back when I was doing that, there was also social engineering tests and there was physical tests and wireless tests.\
+But mainly. Internal pentests, which is a kind of an assumed breach, you're saying something on the internal network is going to get compromised and attacker will get there one day. And so what's the worst that can happen? And then external pentests is like, you know, we have all this public infrastructure we use, you know, have a WordPress site here, we have our data center, and we have all of our microservices there, you know, how can somebody with no access, no credentials potentially gain a foothold into our environment. Mm-hmm. . And so those are the two big \cf4 [00:08:00]\cf3  ones by far. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Is that the one where I think for people who may have done the offsec course, offensive security, the Nmap minus a, I just, you know, well hopefully you're not doing Nmap minus A, but the intent is to do it silently.\
+But a lot of the script kitty I remember 'cause I was one of them, but basically the moment you go into this environment, you're suddenly going N Map minus A, and finding out every port that's open on the network or what IPs you have, what would be to your point, the difference between internal or external network pentests?\
+I guess, is the objective still the same? Is the objective to kind of find out, I guess, vulnerabilities? Or what would be an example of an objective you would have from a network security pentest perspective?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Seth Art:
+\f1\b0 \cf3  Okay, no, this is great. So we're going to go... With external pentest, your objective is really proving that seeing, is there a way that somebody without any credentials, without social engineering, can they get into the network?\
+And so the ways we would do that is number one, we're doing vulnerability scanning and looking for, you know, vulnerable software. And then we're doing manual testing. So we're looking for, is there anything publicly \cf4 [00:09:00]\cf3  facing that's missing authentication that has default credentials that has a public, you know, vulnerability that isn't in a vulnerability scanner?\
+Yeah. Those things that I talked about are kind of the difference between somebody who just runs the vulnerability scan and stops. Yeah. Who kind of tries harder, right? It even extends to the point of password spraying on an external pentest. If I can get a list of all the employees somehow, or guests, or just, you know, take a wild guess at the naming convention, then I could try summer 2023 against every employee.\
+And that might be my way into the organization from an external pentest. Oh, the way it works with external pentest is usually if you find a way in, you do get to kind of like dabble in that internal pentest side as like you're following the thread that you pulled. You know, you talk to the client, can I pull this thread more and see what the impact is?\
+But with an internal pentest, you don't have to find your way in. Right? It's a more efficient way to say, let's say somebody will get in one day. Yeah, an \cf4 [00:10:00]\cf3  employee is going to act maliciously, an employee might get compromised or, you know, social engineered, like, or, you know, something there's, or we call it the evil maid attack.\
+What if somebody just walks into the building, plugs into the network jack and like, what's the worst that can happen in that case? And so that's. You're trying to, the objective there is if one of those things happen, if you get in, what's the worst that can happen? Where's the most sensitive data and is there a path to get to it?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  And you also mentioned assume breach and objective based and just as well, what's the relevance of that in the cloud pentest context, I guess, and for people who may not know what assumed breach is, or what objective based cloud pentest is, what's the difference, I guess, and how would you describe it to people who don't know what that is?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Seth Art:
+\f1\b0 \cf3  Yeah, I guess I'll start with traditional. So with assumed breach, it's kind of the, that is the difference between internal and external, right? With internal, you're starting from the assumed breach. You're assuming a breach, that's what gives you your internal foothold. Now, objective based, so this is the, I've always treated internal \cf4 [00:11:00]\cf3  pentest is objective based and actually Shannon McHale was just talking about this in your in a recent interview where the first step of a good penetration test is to talk with your client and say, you know, what are you concerned about? Where's the most sensitive data? And then that becomes your objective or at Bishop Fox, we call it the trophy target, and then the test is designed to try to get to the objective to accomplish the objective.\
+And then a good penetration tester will write the report if they are successful. And they'll say, from the perspective of this type of user, I was able to complete the objective and get to this type of data. A lot of times it's a pet peeve of mine when pentesters say an attacker got to this type of data.\
+Well, like who's the attacker, right? Is it an employee? Is it the like CEO who, you know, of course, you know, yes, they have access to the important data. That's okay. So when it turns in the cloud, it's really the same, right? So cloud penetration testing is kind of a combination of that internal pentesting and external pentesting.\
+But I think the right way to do it is assumed \cf4 [00:12:00]\cf3  breach. And well, the internal portion should be assumed breach and it should always be objective based. You know, the whole point of this is we're coming into your organization as a consultancy or as your internal pentest team. And you know, it's really important to know.\
+What you're looking for at the beginning of the test, because that guides what you're going to do in your time box, right? Pentesters don't have unlimited time attackers do, but so it's really important for pentesters, whether they're internal or consultants to kind of get as much white box access as possible.\
+Yeah, work with the client, like we shouldn't have to figure out where the important data is. That's a question that you should talk to with your stakeholders.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Yeah, yeah. And I think to your point about limited time versus limited budget as well. So sometimes you have to cut scope just because the limited budget on the client side.\
+ I think we're all like running against something either against time or the budget that is allocated to us as well. So making the most of what we would have. I was watching this the other day and someone said network pentest at the moment is dead.\
+Would you kind of feel it is dead or would you say, I think the way I see \cf4 [00:13:00]\cf3  the traditional version is dead maybe, but would you say, when was the last time you heard someone do a network pentest or an infrastructure pentest? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Seth Art:
+\f1\b0 \cf3  I think it's not dead. One of the things that attracted me to cloud pentest was that I always loved Active Directory internal pentests. And I realized that more and more organizations were moving away from Active Directory to the cloud, at least for their infrastructure, you know, maybe their corporate side is still Active Directory. And now we're seeing a kind of an uptick. Organizations are finally going to Azure Active Directory. So I wanted to learn this skill set to kind of future proof myself, right?\
+This cloud, like more and more infrastructure is moving to the cloud. I realized early on the techniques, the technologies are very different. So I wanted to learn that. But by no means is internal pentesting in the traditional sense dead. It's just on the decline. So, I mean, I think at least we'll be doing Active Directory pentests for 10 years, you know, probably 20 years.\
+There's still AS400s around. Like we're really, yeah, this is not going anywhere. It's just \cf4 [00:14:00]\cf3  that cloud pentest is certainly growing at a much faster race in my rate, in my opinion. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Fair enough. And I think that kind of is another question that I had because my, at least the thought that does exist based on the conversation that I had at Black Hat last week and with Red Teamers and otherwise, a lot of people have called out.\
+The fact that I'll actually, including one of the episodes I'm going to come out this weekend with Karl, who wrote the book on the whole Azure pentesting piece, there is a general understanding that the next evolution of network security is more your cloud pentest in a lot of ways, because if that most of the infrastructure is in the cloud, whether it's your IaaS, PaaS or SaaS or whatever, that's where the next level of network pentesting is coming.\
+Because right now in traditional environment, it's really hard to get in, like all the firewall rules and IPS and IDS, all of that kind of done really well and for done for so many years, the weakest spot seems to be where the cloud misconfiguration comes in, which kind of brings me to the point there.\
+How would you approach a network pentest or a cloud pentest? Would you kind of say they're the same at the moment? Or would you say, Hey, \cf4 [00:15:00]\cf3  I would do a network pentest and a cloud security pentest. And how would you approach it kind of that? Sorry, I've got a multi loaded question for you, but you can pick whichever one you answer first.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Seth Art:
+\f1\b0 \cf3  Yeah, no, no, this is a question I deal with all the time when we're trying to scope work for our clients. And I can tell you how I or how we solve it at Bishop Fox, but I think other places can solve it differently. So. It depends on the objective and it depends on where your infrastructure is. As I mentioned, I've done lots of work for companies, like newer companies that don't have any data center, don't have any active directory.\
+All their employee identities are in Google Workspace or Azure Active Directory. And then all of their workloads, they're kind of things that used to be in the data center are all in Azure or GCP or AWS, so no corporate infrastructure that would just be a cloud penetration test, right? And then you could focus on the external and the internal.\
+Now, a lot of companies are migrating. So they still have their data center. They still have their corporate network, maybe even their VPN, but they're moving their infrastructure, their services, their databases, all the data into the \cf4 [00:16:00]\cf3  cloud. And so then it's a case of they might need a Bishop Fox, we would say you might need an internal pentest and a cloud pentest. And sometimes clients are very specific. They say, we want to make sure that nobody can from the internal network can get to the cloud. Or sometimes they say, we have contractors that have access to the cloud, we want to make sure they cannot get to our corporate network because you make those bridged connections.\
+And now you're exposing risk. And so those are my favorite clients to work with the ones that are kind of like, this is specifically our concern. Like, can you hack it? You know, that's the most fun. And the clients that come to us without the specific concern, they just say, we just want to make sure things are secure.\
+We try to lead them towards that. Like let's work together and think of what are the things that are most concerning to you, the things that you don't want to have happen. And we'll see if we can make that happen or not.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  I love the objective based approach, man. I think it definitely makes more sense because that makes the client or the person on the other end whose basically paying money for this, get more value out of it as well, because then anyone they're calling in to do the cloud \cf4 [00:17:00]\cf3  pentest, they know exactly what the mission was. It puts pressure on the pentesting company as well, because then you're like, Oh, if you don't hit that target, like, Oh, I do I give an empty report with zero results. So it's, I guess, puts both sides on some kind of pressure at that point in time.\
+Talking about the whole approach as well. Are there any examples of findings or attacks that you can share on the whole cloud pentest side? I mean, you and I have been talking for some time and you've been in this field for a while as well. We'd love to know if there are any examples that you can share for things you might have found or attacks you've used.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Seth Art:
+\f1\b0 \cf3  I appreciate you asking that because like, I think that makes it click for a lot of people, right? Like reading sample pentest reports when I was beginning as a pentester, it was really helpful to me, right? It's like it opens your eyes to what's possible. So I would love to share some stories.\
+Okay. So the first one is something that could be caught in a configuration review. Actually, we were probably would be cloud configuration review, but what share the story of kind of what happens next and where all the things that happened after the normal configuration review might end. So in this one \cf4 [00:18:00]\cf3  test, this is an AWS and we found a role that it looks like they accidentally allowed anybody to assume the role.\
+It was kind of like a test. Like you could actually see kind of like commented out, or maybe not even commented on the next section. And the next stanza, it was supposed to be just like Lambda was supposed to be able to assume the role, but like, you know, the troubleshooting one was still, the debug one was still there.\
+So anybody could assume the role and now that's bad, but what is required to assume a role? You need to know the name of the role. Right. So it's not as bad as it seems because anybody in the internet isn't automatically going to know the name of this role, but it's kind of a good exercise. Who can assume that role?\
+Who knows the name of that role? Any current employee, any previous employee, right? So now you have a role that says, you know, Bob, who used to work here two years ago, he can just assume this role and do anything that that role can do. And so what we found is that role could invoke lambdas, but it could not edit them or change them.\
+\pard\sa360\partightenfactor0
+\cf4 [00:19:00]\cf3  Okay. So, okay. Now here's another place in pentesting where you're kind of stuck. Like I can invoke a lambda, but how am I going to get that to do something malicious? Because on our Cloud Pentest, we asked for read only access and we kind of used that white box approach. So we had read only access, so we could read all of the Lambda functions.\
+And we found a Lambda function kind of combing through every single one that had a remote code execution vulnerability. So now we can invoke the Lambda and have it do a callback back to our like hacker attack box, kind of like OSCP style, you know, so now we went from, okay, now we have this, you know, you know, pretend Bob can assume the role.\
+Get a callback from the Lambda and guess what permissions that Lambda had access to? Read all the secrets and secrets manager, right? And so once we access secrets manager, now it's a question of, well, which of these secrets is the coolest? And we found that they had an admin API token for their backend service, like with all their most sensitive data in the secrets manager.\
+So that can kind of completes that process. And it's just a really cool process, right? Like a config review might \cf4 [00:20:00]\cf3  flag that. But this is where you want an experienced pentester kind of walk through this multi step approach and say, actually I turned this into somebody who used to work with this company could gain access to the production API.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  It's funny because as you kind of was saying that of made me think that a lot of people kind of stop at the config review part for cloud pentest. You and I spoke about this and I've spoken to other people about this as well. And you're clearly with that example, you went beyond the, it's one thing to know that there's an IAM role that can be assumed by anyone.\
+And another to use that skill set and the knowledge of cloud and how cloud works to be able to go, okay, how do I trigger the Lambda? How do I take it to the next step? And maybe I know you would have answered this before, but how would you describe a cloud pentest these days? So, cause I feel like a lot of people kind of just go, Oh, it's not just config review.\
+And I, it's funny. I think I did a post yesterday and the general understanding is, Oh, it's usually identity and service review. of access, because, you know, the shared responsibility model, Hey, primarily is IAM, but then you kind of \cf4 [00:21:00]\cf3  like start adding more layers to it. go oh! There's a PaaS service where, I mean, I could have data in there.\
+How would you describe a cloud pentest for people listening to this conversation going, Oh, I'm traditionally a network security pentest. I don't know what the hell a cloud security pentest is. How would you describe that? If you do believe it's more than config review.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Seth Art:
+\f1\b0 \cf3  Oh, yeah. Well, I'll answer that. Let's go back to, because I like that we're talking about network pentesting. I don't think about, you know, traditional network pentesting as much these days. But, okay, so we talked about in a traditional network pentest, you might have a person or a consultancy just run a vuln scan for you and give you the report, right?\
+And everybody's been laughing at that approach for, you know, decades. I have had friends that worked for kind of like PCI pentest shops where they called a pentest, they'd run the vulnerability scan, but they were only allowed to hack on the things that were in the vulnerability scan. So they could like go further, but their scope was limited to the results in the vulnerability scan.\
+So they weren't doing things like active directory attacks with like Kerberos thing and like, you know, \cf4 [00:22:00]\cf3  things like that, right. Or, you know, NTM relay, like that's just, they weren't doing that. And I think that's a mistake. And then you have your full scale, full scope, right. pentest. It's still not a red team.\
+It's I view it as a pentest where it's objective based pentests. You're kind of defining the path of least resistance. You're trying to be as efficient with your time to get to the objective. So to cloud, I think it's the same, right? You can have, I strongly believe in config review and CSPM. I don't think anybody should be doing point in time config reviews anymore.\
+The CSPM tools let you do it like daily and you know. Like, I think that is an amazing technology, but there are limitations. That's your, I like to say like crawl, walk, run, right? Config review is your crawl. I view objective based cloud pentesting, kind of like the finding I just explained as your walk and then red teaming as your run.\
+And I think kind of too many people, you know, jump right to red teaming and say, we need a red team and the differentiator. Both of them are objective based. Red teams have to be objective based. Pentest, I think, should be \cf4 [00:23:00]\cf3  objective based. But the difference to me is if you have a blue team. If you have defenders, then you're at the point where you're ready to test their response capabilities, their detection capabilities. And so that's where you're ready for red team. But most organizations don't even have, you know, a dedicated blue team. So you're probably not ready for the red team yet. That's where you're still in the walk area. You're in the pentest. Find as many, you know, attack paths as you can. And then one day you can mature to get to the point to you're ready for red teamers.\
+So that's how I view is like, I didn't kind of answer the cloud pentest methodology, but I kind of wanted to frame it into, that's where I feel it belongs in the maturity scale. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  And I love the angle you took as well, because we have pentesters who are from different disciplines as well.\
+So, and for security, I mean, I met a few pentesters in Black Hat who were just mobile app pentesters. When you ask them, Oh, I just do mobile apps, nothing else. And it, cause each one of them is like a specialization. It's like being a Java expert versus a Python expert, completely \cf4 [00:24:00]\cf3  different. Yeah. It sounds like the same programming language, but very different perspective.\
+I'm curious, do you have any more examples to share as well? Cause I feel like that was a good example. Are there any other examples to kind of further solidify the differentiation? Cause I love the example where you almost feel like, Oh, config review would have been enough. Any more examples that you can share with us as well?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Seth Art:
+\f1\b0 \cf3  Oh yeah, yeah, yeah. So actually just this last month, one of our testers found, it was an Azure pentest, and they found a bastion host, like an SSH service that allowed, so this is an assumed breach test. So they gave us the credentials of an employee. With the Azure Active Directory, right? And so he found that he could log into SSH with his Azure Active Directory credentials, his domain credentials, his email address, essentially.\
+Once he got to the bastion host in the cloud, he realized this is kind of more like that lift and shift methodology. This is kind of that network approach, but it just happens that everything's in the cloud. So he got onto the bastion host, it's a Linux box. One of the users on that host made their home directory \cf4 [00:25:00]\cf3  world readable for everybody.\
+And so he just rifled through that user's directory, found that that user had Snowflake credentials, like a third party database service. And so he was able to use those credentials to connect to a third party, that company's Snowflake database. And it looked at first like it was the file that he got the credentials from was labeled like dev or testing or something.\
+But it turns out once he connected to the Snowflake database, it was production data. Yeah. So, right. It doesn't make, we've seen that a couple of times where we get into a development account and we're like, Oh man, it's not prod, you know, we're in development, but then there's just production data in the development account or the development account has credentials to the production.\
+So that's another one where it's kind of like very similar to the way it always has been, but you know, this is a little different because you're SSH ing with domain credentials to a cloud, an Azure VM. I have another one where it doesn't start from the compromised user. So one client wanted to know if we start you from a compromised EC2 instance with no \cf4 [00:26:00]\cf3  IAM credentials, just network access to our internal VPC, what's the worst that can happen there?\
+So then we're doing that kind of like Nmapping, like you mentioned, what we did is we used white box access and we got a list of all of the DNS, like host names, the internal zone. So we scanned and we found a Kubernetes dashboard and in the Kubernetes dashboard. We had this, like, it looked like a read only profile.\
+We couldn't make any changes, but what we found is an environment variable that was called like GitHub token and digging deeply in there. I thought it was like a token to the GitHub repositories, but it wasn't. It was actually a token to a GitHub self hosted runner. So like when you run a GitHub action, it usually runs on GitHub's like containers.\
+That's right. But if you're security conscious, you can self host those runners. So you can have your GitHub actions run on your. These guys had it running on their Kubernetes cluster, but I had the token to register a new rogue runner. So on like Bishop Fox infrastructure, I created an instance, registered a runner.\
+Next time they \cf4 [00:27:00]\cf3  ran that action, I got the AWS credentials, like the admin AWS credentials for their whole account. Oh, yeah. So that was a really cool attack that went from just network access to the VPC and a little bit of, you know, read out on the access. Yeah. To, you know, full admin access to their account.\
+So like, these are the kind of fun things that you get in a cloud pentest that you just don't get in configuration review. That's why I basically talk to anybody who will listen that like, I love configuration review, but it's only the first step.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Yeah. I'm curious. Are there any more examples? Almost like that even further validate the point about the fact that people who think cloud security pentest is just a config review, it kind of helps shed more light onto it. Any more examples that you can think of, or I don't know, I'm putting a lot of last minute pressure on you, but if you don't have one, that's totally okay as well. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Seth Art:
+\f1\b0 \cf3  I have one more. That's a fun one. So we'll talk to you about cloudfox and cloudfoxable, these tools that we kind of worked on to kind of help people learn this process.\
+But before I did that, I worked on, I am vulnerable. So I \cf4 [00:28:00]\cf3  am vulnerable is a list that Spencer Gietzen created a long time ago. of like these 30 AWS permissions that if you get these, you most likely have a prevest path to admin. Like a single IAM permission or maybe two IAM permissions get you a path. So the classic one is like EC2 instance and pass role.\
+Well, sometimes you find that you don't have IAM pass role. So in this one case, a colleague of mine had EC2 star. Okay. But no pass role. So he could start an EC2 instance. He could stop one. And so you might say, well, how do you prevest in that case? Right? So using CloudFox, what he did is he listed all the like hundred EC2 instances.\
+He found one of the EC2 instances that had admin permission. Yeah. And so this is a kind of a lesser known technique, but still well known that you can modify the user data script in a special way. That if you restart the instance, it'll do a reverse shell, a callback back to you. Oh, so basically, yeah, so you don't have to pass a role.\
+You're basically finding a target \cf4 [00:29:00]\cf3  and then you modify the user data script. And if you put in this like special kind of intro section and reboot it. It will do the callback to you. It'll execute any command you want, but it's easy to have it do a callback to you. And then we just, you know, use those credentials, like, you know, the metadata service and got admin access to the account.\
+And so this is one that Pmapper won't find. Pmapper is a cool tool that also helps you find automatically, like, all of those prevest paths. But this one's a little bit different because it depends, like, this attack wouldn't have actually done much if none of the EC2 instances that were, you know, available had a highly privileged role.\
+But because one did have a highly privileged role, we were able to get full admin on the account and then get access to the sensitive data.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  I did not know that it was possible to have like a callback made for an EC2 instance because I mean, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Seth Art:
+\f1\b0 \cf3  yeah, like, so user data script is supposed to just run like the first time you run the instance, but there is a way to trick it to run on a reboot.\
+And so you can kind of just have it send the credentials to you. You can have it do a callback. You can have it, you know, \cf4 [00:30:00]\cf3  modify the SSH daemon to accept your public key, you can do a bunch of different things, but yeah, that's pretty awesome. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  That makes me think that, you know, how these days, and this is probably where the challenge of Cloud Pentest comes in , so traditionally when you get that two week period for doing a pentest or however much the budget allows for, usually people scope it out to like, Hey, only do these.\
+I don't know this application, this particular window, or to what your case, maybe might have an objective, find the trophy targets, I guess, for lack of a better word. In the cloud context, most people these days, I think I spoke to someone, they had, I don't know, over a hundred AWS accounts. Or multiple subscriptions, multiple tenancies in Azure.\
+And how do you even scale pentesting? Like, you know, how you obviously, you created a free tool. The CloudFox, there's others out there. I think we had a conversation with Prowler and I think a few other people who are coming on the show later this month have their own open source tool as well, but those seem to work really well when the target \cf4 [00:31:00]\cf3  size is quite small.\
+Like if you have one AWS account or maybe less than 10, how does it like scale out to hundreds of AWS account? Cause I mean, that's the promised land that people are going to go on for. Is there a way to scale cloud pentest the same way people scale deployments in cloud?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Seth Art:
+\f1\b0 \cf3  Yeah, that's a great question. I'll give you two answers. The first one is. So like an external pentest, right. It's kind of an answer to the same question, right? Like, let's say a company has a hundred applications, but it's a smaller company and they don't have the budget to do a hundred application pentests. It's kind of, they prioritize an external pentest is like, let's just look at the ones that are public and let's just see, we're not going to see what an employee can do, but like, what can an internet person do, right.\
+And that's kind of the approach I would take for. If you have a lot of cloud accounts, subscriptions, resources in your accounts, I would say you need to do cloud configuration review, right? CSPM. So I think like that's how you get the breath really quickly. The problem is even those tools like can drown a small team of \cf4 [00:32:00]\cf3  like one or two people responding that, right?\
+That could be six months of backlog, you know, doing CSPM tools, even the better ones on a hundred accounts. And then what you want to do is you want to. Pick selectively, which accounts are the most important to do a cloud pentest on. And so you could do, you know, one account or one subscription, or you could group a couple that are like an logically related together.\
+So maybe they have a hundred accounts, but maybe there's one big like prod. There's one big dev. And there's like a shared where they kind of use like that's the buckets and that's the images. Like maybe I would say pick those three. Now the second approach is for like a large enterprise. So if you're a large enterprise and you have 100 accounts because you have like 50 application teams, you're at the size where you have like five people working on this app and then five people working on this app.\
+You actually might have the budget or you might have to start thinking about every app that you're doing an app test on, you might want to do a cloud pentest on the infrastructure that supports that app. That's the kind of the trend we're seeing at Bishop Fox where it makes a lot of sense. Think about it like \cf4 [00:33:00]\cf3  with DevOps, right?\
+And with DevSecOps, like you have for a while, devs just had to write their app code and then the IT administrators, the sysadmins did the infra now you have devs writing their own Terraform code. So they're writing their app code. They're writing their Terraform code. And so really the app team owns the infrastructure a lot more than it used to, so it makes sense to kind of pair an app test with a cloud test of your app infrastructure, in my opinion.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Yep. , I'm more of the same opinion as well. So most of the conversations on the work that we're doing for cloud pentest similar as well. I love the fact that the scaling can happen because another example that I hear of, and I think Ben did a good talk at CloudVillage DEF CON for this around the fact that he's scanned for thousands of IPs on the internet just to see, Oh, look at this, this is from AWS, this is from Azure, this is from GCP.\
+Is that, I guess that's probably more of the research side, but are those kind of tactics usually applied at a company level as well? And I don't know if you've seen this, but. Can there be a use case for \cf4 [00:34:00]\cf3  a person, well, I guess, A, I'll call it out as a warning that people should not hack things that they don't have permission to.\
+So just, just keeping, yeah, putting it out there on the internet. It's like the same thing as accountant, but do you find that for people who are trying to work on this themselves, what's a good approach for them? Cause I think maybe. Slightly related, Zinet has a question as well, which is great conversation.\
+Ashishan and Seth, would you say the skills are different from traditional for someone who wants to build skills in cloud? And she's kind of put my question in a very succinct way. So I'm grateful to Zinet. So how would you describe the traditional skill set, whether that can be used to in the cloud context, she's put it really well. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Seth Art:
+\f1\b0 \cf3  Yeah. So the skills are definitely different, right? I've been a pentesting consultant for 10 years and it took me six months at least to get comfortable in the cloud. And I, you know, three years in and I'm still learning, you know, every day. So there's a lot of cloud specific skills.\
+I learned a lot about AWS and then I felt like I kind of only half of that transferred when I started learning about Azure and \cf4 [00:35:00]\cf3  GCP, because some of it's the same and a lot of it's different. One of the big differences kind of more to your question is just that in the cloud, there is APIs for everything.\
+So in traditional. Your first step is to run that Nmap, right. And to run that vulnerability scan or to do kind of like the active directory type playbook tests. But in the cloud, a lot of those things don't even apply, or you'd be wasting your time scanning a slash 16 in a cloud providers VPC for things because they have an API that'll just give you all of the live IPs.\
+So why scan, you know, however many IPs are in a slash 16 when you can scan like 200. So learning those kind of shortcuts is a big part of, of switching your, your cloud mindset. But yeah, the hard part is, I mean, this is every, for any penetration tester, right? Part of being a penetration tester is learning on the fly.\
+I had never registered a rogue GitHub self hosted runner before I came across that token. In fact, I didn't even know what that token was. I kind of had to spend a couple of hours realizing that that wasn't just \cf4 [00:36:00]\cf3  like a personal access token. So, but now I know that, and now I share that with my colleagues.\
+So yeah, there's definitely a lot of like, knowledge bases that give you kind of hints and methodology. And there's also, it's a big reason that I created CloudFox the way I did. So CloudFox is one of a couple of different, you know, cloud enumeration and attack path enumeration tools. But the thing that I'm really proud about with CloudFox is that it kind of tells you, okay, these are the EC2 instances, or these are the Lambda functions, or these are the SNS topics.\
+But it gives you the commands to then do the next step of exploitation if you have the permission, right? And it's kind of like teaching you how to fish. And this is something that I kind of really loved from AWS PX, a tool. It was like a graphical tool that was in this space. And I just love that approach.\
+ And so I built it into CloudFox in every way that I could. Well, long answer, but hopefully I got somewhere close to the question. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Yeah. And hopefully that answers your question as well, Zinet, so talking about the skillset as well, then taking this a step further, how do you kind of recommend people learn about this then, I guess, the same approach? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Seth Art:
+\f1\b0 \cf3  Yeah. So I \cf4 [00:37:00]\cf3  created CloudFox because I wanted to teach people how to find things more quickly and exploit them. But then I realized that I actually needed to teach people how to use CloudFox more efficiently. So for the last six months, I've been working on Cloud Foxable, which is an intentionally vulnerable environment. A lot of people are familiar with CloudGoat and CloudGoat has easy, medium and hard challenges, but even the easy ones aren't so easy, right?\
+If you're brand new into app testing, it still might be too much flAWS and flAWS 2 were much better for like really entry level. So it kind of took the best of both of those. I love how flAWS kind of like walks you through from like, I've never really even thought about attacking an S3 bucket to here I am.\
+I just kind of attacked an S3 bucket in four different ways. And so that's how I built Cloud Foxable. So like the very first challenge is. It's Terraform. So you create the Terraform environment in your own AWS account, but all of the gamification, the flags, the \cf4 [00:38:00]\cf3  hints, the scoreboard happens at cloudfoxable. bishopfox. com. So you just kind of register there. But the first challenge is as simple as you deploy your Terraform, you access the starting user and you just have permission to access a single secret. And then you get a flag, right? And then the next challenge is, okay, from my starting user, I realized that I have the ability to assume another role.\
+And then that role has access to the second flag. And it kind of works up and like from that very simple complexity to, you know, quite complex to the point where you get to like cloud goat. So I'm hoping that, and I've heard really good feedback that it really helps you kind of with very little cloud offensive security knowledge, kind of get to the point where you start to really understand like these attack paths that I, and kind of some of the stories that I talked about earlier.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  And these are free to use for people, right? It's not like this.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Seth Art:
+\f1\b0 \cf3  Yep. Completely free. In fact, you probably don't even need to register for Cloud Foxable. The only thing you don't get if you don't register for the website is the hints. But like the GitHub \cf4 [00:39:00]\cf3  repo is, you know, at Bishop Fox, Cloud Foxable, you can just download it, deploy it to your own playground account.\
+And then you can kind of go to cloudfoxworld. bishopfox. com for the gamification, but it's completely free. And yeah, there's been eight people that have completed the whole thing. There are, I think 80 people have started at least one flag at this point. And I really want to, there's like 18 challenges.\
+I'm trying to make them not so complex that it takes forever to add more. Like I already have a, you know, another couple that I'm kind of getting ready to push out. So I'm pretty excited. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  And I've got a question here from Elias. Do the clients apply Zero Trust strategy? It doesn't look so. Yeah. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Seth Art:
+\f1\b0 \cf3  Yeah. We test a lot of clients that use Zero Trust.\
+The idea is that zero trust solves a lot of things, but you still need defense in depth, or maybe they apply partial, you know, partial zero trust, right? There's zero trust is for their authentication and authorization to get in, but maybe not every service applies zero trust, or sometimes we're talking about the malicious \cf4 [00:40:00]\cf3  employee aspect.\
+So then you are kind of going zero trust, but like even with zero trust, you still don't want your malicious employee who's a developer to access the production data. Right. So that's what we find a lot that it's not always just hacking in the sense, you know, in the more obvious sense, it's more like trying to detect, are we doing least privilege properly?\
+Right. Like a lot of organizations, if they're midsize they give their developers read only access to production, but then like often that read only access to production. Well, number one, you have to make the decision in your company, is there data in production that developers shouldn't have access to, right?\
+Like take the IRS, every developer in the IRS does not have access to all of our tax returns. The developers should maybe have no access to productions in some environments, right? So if you are giving them read only or something else. You just got to make sure that even with zero trust that they can't do more than you think they can do.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Yeah. Awesome. Question from Victor. Hey Victor. Nice to see you again, man. How do you stay ahead of the curve for \cf4 [00:41:00]\cf3  new services being released daily by the CSPs?\
+Please include research or. Any undocumented APIs, if applicable. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Seth Art:
+\f1\b0 \cf3  Yeah, that's a great question. And we talked a little bit about this last time I was on the show. There's two areas in CSP kind of security and pentesting. There are the things that are kind of like mistakes that the CSPs like the, you know, Amazon, Google, Azure make that a researcher like Nick Frichette or, you know, somebody like from one of the big kind of CSPM vendors, they find a bug, they alert the CSP and they fix it. And it's really cool because that's fixed for everybody. The world that I live in is more looking for ways our clients have misconfigured this stuff that will never get fixed. And yeah, sometimes if we find an undocumented API, we might alert the vendor and they might say, well, that's actually, it's okay.\
+And then it's fair game for us, but you know, normally if we find like an undocumented API, we would also kind of alert the vendor and they'd fix it. So it's not something we'd be kind of be using continuously, but yeah, you should look at Nick Frichette \cf4 [00:42:00]\cf3  like recent fwd:cloudsec and DEF CON and Black Hat talk about that area about undocumented APIs and that kind of stuff.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Yeah, awesome. And funny enough, Nick Frichette is coming as a guest as well. So Victor, you might see him. But hopefully that answers your question, Victor.\
+How do you do a network pentest on a public cloud? That's the hyperscalers responsibility. As in AWS's side is how I read that.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Seth Art:
+\f1\b0 \cf3  Yeah. Yeah. I think this is similar to the answer that I just gave that in a network pentest, I'm not really trying to find vulnerabilities on AWS's. hyperscaler. Like if you found something like that, that would not go in a specific client report, that would be something you'd report right to the vendor.\
+So I think to do that, you kind of do the research that like Nick and Christophe at Datadog and you know, a bunch of those guys do where you're kind of just spending like a month or more like attacking like one specific piece of technology. And hopefully you get lucky and find something cool that you can talk about at a conference.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  I think this is kind of where a good point to talk about the whole shared responsibility as well, right? I think that \cf4 [00:43:00]\cf3  line that is drawn, unfortunately, which blurs out as the more PaaS and SaaS you go, and that's kind of where it gets lost. But if you are using a PaaS service to a large extent, or even IaaS, the network that People talk about as a VPC, I guess, in an AWS context or a virtual network in an Azure context or whatever, or even Google Cloud is VPC, that is still our responsibility from a network pentest.\
+But if we're talking about how AWS does the networking, that is totally out of our scope and to your point. If you stumble upon something that maybe, yes, it's something that you can report back to AWS or Azure or Google Cloud, but from a network point of test, would you say most of your networking site is primarily around what's created by the customer themselves rather than what's done by the CSP. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Seth Art:
+\f1\b0 \cf3  Yeah, exactly. And even if you're talking about, you know, multi layers deep, right. The stuff in Lambdas or the stuff in Kubernetes or the stuff in ECS containers, that's kind of where we're working. If like the stuff that the client has configured. \cf4 [00:44:00]\cf3  Yeah. But yeah, so it is scary, right?\
+We're all using. These three big cloud providers. Of course, there's like, you know, more like IBM, Oracle, et cetera. And it is important for us all to put pressure on them. Right? Like Wiz and Orca have just been beating up these cloud providers, but for the good of everybody, right? Like they're finding these cross tenant vulnerabilities that are super scary.\
+And it's our responsibility to kind of keep on them as a community. But as an individual pentester, you don't have to like stress about that stuff. You mostly are just helping your clients make sure that their assumptions are correct. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  And I think one more example, just to add to that, where the shared responsibility and supply chain kind of mixed was, I recently read about the GitHub actions piece.\
+I don't know if you've heard of that one, where people would have authentication between the GitHub action as well as the AWS account. But if you don't specify the repository that you should be working with, you're technically allowing every GitHub repository or every GitHub user out there to be able to connect to your AWS account.\
+So, like something like that, it's not \cf4 [00:45:00]\cf3  Amazon's fault at that point in time. It's not even GitHub's fault at that point in time because, I mean, the same way Amazon has made it almost, well, next to impossible to have an S3 bucket open to the internet, like it's a few hoops that you have to jump through. I wonder there's responsibilities, not just in the CSP side, but third party vendors that integrate into the cloud as well, if they should make the job easy for people who are trying to , do the right thing, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Seth Art:
+\f1\b0 \cf3  yeah, that brings up so many things. I know we're going for a long time now, but. So that's actually a great example of public research versus what we do. So absolutely there are a lot of GitHub actions that are misconfigured and that's not something as a pentester for like, you know, consultancy, I'm not going to do that for my clients, but I might do that for fun, you know, for research.\
+But there's a lot of people that are looking at that and saying they can publish a report. These are the. 10, 000 GitHub Actions that anybody in the world can assume. And that's horrifying. Right? But I will tell you, I can find that same exact problem on a cloud pentest. So I had a one where it wasn't public \cf4 [00:46:00]\cf3  to the internet.\
+So that research that I just talked about wouldn't have found it. But every developer of the company could modify the GitHub Actions in 50 repositories. You know, so if you can modify the GitHub Action, then you can do anything that if that GitHub Action is assuming a role in AWS. Now you have your pick of 50 different roles.\
+And so what we did was we demonstrated that all the developers could modify the action and basically, you know, get admin in their account, even in production, which again, you don't want your developers to have admin in production. So that's a classic example of like CSPMs. We'll detect the stuff that's like public.\
+Yeah. But the same misconfiguration could be misconfigured in a way where it's not public, but it's still overly permissive within your organization. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Also, maybe, what's I calling out? I, I don't think either you or me are saying that C S P M don't have a space like people should. Oh, I love, I love, yeah.\
+They definitely should have they have a space that they should be used, I guess, by people if the free or paid Absolutely. Everybody. Yeah. Yeah. Yeah. So I think I wanted to put it out there because I'm like, I \cf4 [00:47:00]\cf3  know you and I talking about how we do cloud pentest, but I don't want to call out the fact that yes, people should still go for a CSPM, whether it's a paid or a free one because there is no other way to have a continuous monitoring done. I mean, you may do cloud pentest like once a month, well not once a month, but once a quarter or once every six months or once every year, what happens in the rest of the time? Like, well, nobody knows. So on that note, I just want to spoke about what people can learn.\
+The final one we've already answered is the learning process as well. And I'll put the link for cloud foxable and cloud fox and put them in the show notes as well. This is basically, that was the end of the technical question about the three. You've kind of done the fun question before, but I'll ask them again.\
+Cause I'm assuming there's a different answer to it now. The first one being what do you spend most time on when you're not working on cloud pentest, man? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Seth Art:
+\f1\b0 \cf3  Okay. So it's not really most of my time, but I have a new hobby since the last time we spoke, which is disc golf. Yeah. It's like Frisbee golf. So it's like frisbee, but you're just walking around the woods, throwing frisbees into these like baskets.\
+And it's quite fun. I've never played golf in \cf4 [00:48:00]\cf3  my life. I never even understood why people play golf. Now I get it. Now I understand. It's just kind of walking in the woods with some friends and you know, are \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  you fitting it in a hole or are you just basically, it's like \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Seth Art:
+\f1\b0 \cf3  a basket with chains. So you basically just like throw it like waist height.\
+It hits the chains and goes into the basket. And that's kind of like a hole in golf. I don't know. All right. Okay. My new hobby. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Or is it still nine holes or can you have as many goals as \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Seth Art:
+\f1\b0 \cf3  you want? No, they have courses like the nine or 18. It's kind of like, you know, I don't know if you've ever seen, like they have like corn hole on ESPN sometimes like disc golf on ESPN, like it's, it's up and coming.\
+There you go.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Actually, so I've got another question. Maybe we should switch gears and answer this one more. Where do you put the boundaries in Cloud Pentest just to ensure we're entering the CSPM territory, which is part of their shared responsibility? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Seth Art:
+\f1\b0 \cf3  Yeah. Generally, if you're using, so think about, are you using the CSPs APIs?\
+As a user would use them, but in a kind of a malicious way, right? So there is an IAM permission to create an EC2 \cf4 [00:49:00]\cf3  instance. So if I want to create an EC2 instance, that's kind of like a Cali or something. That's totally fine. Or like using that IAM permission to update the metadata. Like that's in a malicious way.\
+That's totally fine. What I'm not going to do is try to like, let's say, you know, there's the metadata service. That's like on an IP address. I'm not going to try to like vul scan the metadata service. I'm not going to try to like find a web app vulnerability. I can SSRF in the metadata service. Yeah.\
+That's something that's more like, I mean, you can do that, but that's more like security research and you might want to let your, you know, Amazon know you're doing that, like kind of things like that. So that's kind of where you're living in the world of if a client can do it, you could probably do it.\
+It's kind of hard to go to the CSP side, right? Because like that stuff is kind of abstracted from you. I know it's not a great answer, but I don't have like a. Oh, an easy answer, but it's, you generally will know when you're not in the kind of client side configuration side of the cloud account. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Yeah. I think maybe a good \cf4 [00:50:00]\cf3  delineation.\
+And if I can use the similar analogy to what you did as well, is that the Amazon IPs on the internet are very well known and people would know what they are. If you're trying to go for any of those, that is totally Amazon territory or Microsoft territory or Google cloud territory, and you'd probably get pinged by them as well.\
+So. Definitely don't do that. Even if you're doing research, cause I think there's a talk at Cloud Village by Ben, who's also known as nahamsec online, and he scanned the internet for what are the public IPs of cloud that he can scan. He obviously scanned not just for the AWS one, but just a broad internet scan.\
+And he obviously hit a few AWS, Microsoft and Google cloud IPs, which he got dinged for, of course, but is that, Hey, what are you doing on our network kind of a thing? But I think it's the best practice just to understand that to what Seth was saying as well. The boundary that you would see is if it's a service that is available for a customer, you would probably be able to use it and say, do some research on it.\
+You still would not run an Nmap on it, I would say, right? Like you're not running like a pentesting \cf4 [00:51:00]\cf3  tool against a IAM service. Or you don't use it against a KMS service.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Seth Art:
+\f1\b0 \cf3  Not against their services, right. But you can run EC2 instance, no problem, right? Or if you have an RDS database, you can do a password brute force on the RDS database.\
+And you know, like, that's all fair because that's what an attacker would do. But there's just like an attacker. That's trying to target a client is rarely going to, or if they do find a, that, yeah, that's just the security research side of things where the attackers, if they find those, they keep them close to vest.\
+And that's why it's so important when researchers find those kinds of vulnerabilities and alert the CSPs. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  I feel like this used to be a lot more easier when earlier on the cloud pentest, you kind of had to get approval from AWS for, Hey, I'm going to do a pentest and you had to fill out a form and all of that.\
+Now there is no form they filled out. So now maybe it's a bit more abstracted. So people don't would find it hard to know the boundary, especially if you go into the territory of undocumented API. I don't know if it'd be easy to identify. Is it undocumented API or like, I don't know how the deep research would be, but hopefully that answers the question for Pramod, but \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Seth Art:
+\f1\b0 \cf3  actually maybe the best answer \cf4 [00:52:00]\cf3  is just wait for Nick to come back out and ask him.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Yeah. Actually Nick Frichette is going to come on the show in the coming weeks or so. He's a very well known cloud security researcher. So he can definitely answer all these questions because. His entire job is focused on finding security research. So on like specifically feels like AWS sometimes because he finds so much on AWS, but he definitely does across the board.\
+ So back to the last two questions that I have, which is the not so technical questions. What is something that you're proud of that is not on your social media? Hmm. I don't \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Seth Art:
+\f1\b0 \cf3  know. I don't know if I have one for that. Nothing's really on my social media. I really just use social media these days for sharing my work and kind of tech related stuff.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Cool. Oh, well, if you don't have one, that's okay as well. Yeah. So I'll probably go back to the previous answer you had and last question. What's your favorite cuisine or restaurant that you can share? All \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Seth Art:
+\f1\b0 \cf3  right. So last, last time I was on the show, I told you like my general cuisine is like Asian, anything Asian flavors, any food, but I would say if I could eat one meal, it would be like blue crabs, like Maryland blue crabs.\
+Yeah, \cf4 [00:53:00]\cf3  with some Old Bay, like I could just sit there and eat crabs, steamed crabs for hours. Wait, so what \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  makes the blue crabs different to regular crabs? I mean, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Seth Art:
+\f1\b0 \cf3  the blue crab is just the type. They're kind of just like, maybe like that big. Like Dungeness crabs are bigger. The crab legs are like really long.\
+So they're like these guys. So you don't really get a ton of meat per crab. So it's not a question of like you finish when you're full. Like you finish when you like. Give up. I like that challenge. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Oh, okay. Fair enough. All right. I'm going to hopefully try that one day, but where can people find you on the internet to talk about more cloud pentest and just around that field?\
+Like where can they find you on the internet to talk about this? Yeah. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Seth Art:
+\f1\b0 \cf3  Yeah. You could always talk to me at Bishop Fox, but I use LinkedIn the most these days. I'm at SethArt, but you can find me at SethSec on Twitter or Mastodon. Yeah, I go by SethSec in the hacker community. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  I can put the link on the show notes as well, but dude, thanks so much for coming on the show, man, and answering these questions as well.\
+It means a lot. Sounds like a lot of people got value as well. So thank you so much for doing this and hopefully we can have a part two of this on there as Zinet has requested. So thanks so much again for this \cf4 [00:54:00]\cf3  and thank you everyone who's watching as well. Thank you for joining and I'll see you in the next episode.}

@@ -1,0 +1,492 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red250\green138\blue59;
+\red128\green128\blue128;
+\red216\green34\blue146;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ Hey, welcome Sunil. Thanks for coming in, }
+{\pard  \line \par}
+{\b\cf3 Sunil Potti:\b0}
+{ man. Yeah, Ashish great to be on. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I'm glad you came in, man.}
+{\pard  \line \par}
+{ I know you and I can start off with the whole intro thing, but I would love to kind of shed a bit of insight about yourself.}
+{\pard  \line \par}
+{If you can share where kind of your journey started and how you landed in, where you control is and developing amazing Google cloud security products. }
+{\pard  \line \par}
+{\b\cf3 Sunil Potti:\b0}
+{ Oh yeah. I mean, and, and thanks for, by the way, giving me the opportunity and, , I've looked up a bunch of stuff that you guys have been doing for awhile.}
+{\pard  \line \par}
+{ It's, , sort of like a exciting, in some ways with like core nuggets, , , I mean, I listened to it the first full 60 minutes, but, , just to be very clear, I'm not a security practitioner by any means of need depth. , I have colleagues. Various folks inside our team who are really good.}
+{\pard  \line \par}
+{I mean, some of you might know a person called Phil Venables, who is the CISO, . Goldman Sachs. And, , he works in our teams. We've got Heather Adkins, who's been on the frontline of threat intelligence and incident response for many years. So we've got lots of good people. So most of my thing is to make sure that we could make progress materially on two dimensions.}
+{\pard  \line \par}
+{One is }
+{\cf2 [00:01:00]}
+{ generally Google tends to be a much more of a missionary company. Obviously we have to build a business around ads and , all the usual stuff, but the core of it, a lot of the people that work inside Google are all about end customer impact, . From a non-mandatory site first.}
+{\pard  \line \par}
+{ And then of course alongside it, look, you can't, , there's to be. I don't know how many folks know this, but Larry, , one of the founders of Google many years ago in the, , every time you have an annual letter of some sort, you write a letter from the CEO and the guys letter, like for a company that was built with a lot of missionaries in I'm ad-libbing it here.}
+{\pard  \line \par}
+{But basically mission orientation was big, which is like, search was about organizing the world's information. , . To make it . It wasn't about let's go sell ads. . Even though that's what we do. . As one of the yeah. , but the idea was look, the best way that we could operationalize missionary work is when you don't have to look for money.}
+{\pard  \line \par}
+{Because if you look at normal, some of the biggest missions or whatever, they always go look for money and all. But, but imagine if you had an awesome business funding, And that's really how }
+{\cf2 [00:02:00]}
+{ we rationalize, frankly, how it's important to be both, in a mission oriented from a consumer and an enterprise site, but also be, , responsible from building a good business that can support that mission.}
+{\pard  \line \par}
+{And so that's really where we are, is my role is more around, I guess, being the, being the person who can ship her, the the funding required to support the long-term. Maybe have a lot of people that's really what cloud security , is it's a business within the Google cloud, one of three or four big businesses.}
+{\pard  \line \par}
+{And we take our thing, Google cloud and Google as well as obviously providing tools and building a }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ business around it. Yep. Yep. Sweet. And so what, but I'm curious was journey kind of like, how did you kind of come across.}
+{\pard  \line \par}
+{\b\cf3 Sunil Potti:\b0}
+{ Yeah. Yeah, exactly. So most of my background, Ashish just, as some people would know, I'm mostly a technologist by training model, classical software engineer moved up, the stack became a product owner then became a business owner shunted around between mostly infrastructure. . Even though I had a few falls into, into apps.}
+{\pard  \line \par}
+{And I think it's an interesting story about how I ended up at Google is like a }
+{\cf2 [00:03:00]}
+{ lot of people don't know. I mean, everybody knows Larry and Sergey are the two key folks at Google, but there's actually my opinion, the third founder behind the scene. And it's a guy called , who was, who's my sort of manager.}
+{\pard  \line \par}
+{. But was the first person who essentially built, I guess, the first rack for Google in nine, really? . Like, but he was the first week of engineering. He was a professor, , we, , Google, there's a nice, interesting story by the way. Like, , so for folks who really know Google from the beginning, and even today, he's one of the few people still.}
+{\pard  \line \par}
+{Not only at Google, but still like, , leading a change in a secular way. And, and by the way, coincidentally, I know you're a Sydney and she's really based in Melbourne Australia. Okay. So it was actually moved to New Zealand last year. And but what happened was about two and a half years ago when I'd finished a stint at this company called Nutanix and, , we'd done well pre IPO and all that.}
+{\pard  \line \par}
+{So I was actually thinking of how to, , just basically hanging up my guns and just helping others in. And there was an, I took some long walks and he said, look, , come in, , we're trying to transform the world, but do it from an enterprise side. We've done a good thing on that. And I said, okay.}
+{\pard  \line \par}
+{I said, okay, , we kinda }
+{\cf2 [00:04:00]}
+{ like each other. We kind of like two people. So let me try this out. And, and it's all coincidentally happened. The security happened to be something that was a juicy. Okay. And okay. I got to tell you that the one interesting area was all I could say was that, even though I could, , I knew about security as a second tier because when you build infrastructure, obviously the security and all, but but what I could sense even then was, and I'll give you my 2 cents on how some of that has, has come out.}
+{\pard  \line \par}
+{So the patients correct is I felt like it would be used interesting to work on areas which are going to be big macro tailwinds, where Google has some core IP, even though a lot more to build around ourselves with our partners or whatever it is. But it was something that was going to be very top of mind, even at an alphabet level, not just at a Google cloud level and obviously, , cyber in the last two years, , especially with the recent incidents and so forth, things have already jacked up, but two and a half years ago, that was the spirit behind me getting into.}
+{\pard  \line \par}
+{Leading Google cloud security, because we had compute storage and infamous infrastructure already being run. We had apps }
+{\cf2 [00:05:00]}
+{ like workspace meet, , things like that. Then we had data at Mel and then we up-leveled security knowing that. And I think some of this is what we'll talk about is I generally believe that now, cyber insecurity tends to be a feature or a sub category of cloud let's say, or something like that.}
+{\pard  \line \par}
+{But just like will, was viewed 15 years ago as a subcategory of desktop, until Zuckerberg said, look, we're going to stop Facebook app and only have Facebook mobile. . You remember that one that became Facebook? Yeah, that's . Yeah. And I actually think, anyway, we'll get into this, but I actually think cyber will be at an arc of elevation the same as cloud or mobile, but let's say.}
+{\pard  \line \par}
+{Yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Interesting. So, okay. Yeah, because it's kind of, it's a good segway into my first question as well, because I think the, when I was researching for this interview, one of the first things that came across was that announcement that you were doing for Google next last year, invisible security as well.}
+{\pard  \line \par}
+{And the thinking behind it aligns really well with what you were saying here as well. In terms of starting to build that arc, I guess, for lack of a better word. So what's the thinking behind the whole }
+{\cf2 [00:06:00]}
+{ invisible security approach. }
+{\pard  \line \par}
+{\b\cf3 Sunil Potti:\b0}
+{ Yeah. So invisible security , is, , sometimes when you are blessed with both a team and a platform that can genuinely look for the longterm, }
+{\pard  \line \par}
+{so you're not worried about trends one quarter, six months at a time or a year, and not everybody has that luxury, but at the same time, you have to be responsible to show. Remember to my first point to actually show outcomes along the way. You normally need to have a real true north and the true north for us and what we've seen inside Google as well, because a lot of the learnings is coming from inside Google, which everybody will think, oh, Google is Marta.}
+{\pard  \line \par}
+{And it doesn't have the problems that say a bank in a Melbourne has trust me, , over the last 20 years, there's like three, four stages of legacy still. . And we don't have mainframes, but we have quite a bit of legacy. . And so they are, I think there's always security. So to simply say, look, I mean, if you drive a Tesla today as an example, now it's not for everyone and so forth.}
+{\pard  \line \par}
+{But the initial reason why we all drove Tesla was for obviously the emissions, , all electric, , the mission alignment and the mission orientation. Of course, you got great acceleration }
+{\cf2 [00:07:00]}
+{ along the way and all that good stuff. But, but in reality, the reason why, if you really say, why are people sticking with.}
+{\pard  \line \par}
+{But then other things is because of the fact that they've actually used software to drive the car. And many of the things that were visible is what I call it. Like, how do you actually worry about lane control, forget about auto driving. But a lot of things that were like visibly in human judgment are now being optimized with some intelligence.}
+{\pard  \line \par}
+{And so the fact that over time, of course, it's a little dangerous to kind of just delegate everything. But if you really did the same analogy to like the world of security and so forth, like you have to be, because if you think about, , we still have this analogy that like most of these innovations and security were being done to fix issues with other innovations insecure, as in more insecurity, I'm being built to fix problems with other tools insecurity.}
+{\pard  \line \par}
+{. And I think in every market, there's a little bit of that. But so anyway, the point that we lose security securities could take a full step back and think through what does it mean do, and again, a lot of people will hesitate when we use this word, but do }
+{\cf2 [00:08:00]}
+{ not take security for granted, but to be very intentional, that extra 12 months, you're not making up for mistakes over the last 12 months.}
+{\pard  \line \par}
+{But in fact, if you're moving the ball forward and to do that, what invisible security is all about is saying, look, , you have to do this in like three, four vectors. The first vector is, , everybody knows this. Like you can't have security built it, , bolted on, it needs to be what we call design.}
+{\pard  \line \par}
+{Then our engineer then, and we talk about operations. I saw hunters now as an ad, , great, great founder that, but , you'll see a lot of activity here, but in our opinion, SOCs of the future ultimately have to be up autonomous , not just automated. And we can talk a little bit about what that means, }
+{\pard  \line \par}
+{yeah. And then similarly, if you did the first two, which is if you were able to really engineer in security controls, . To left shift way and all that good stuff and operations to be autonomic, then you get the third angle, which is, look, we all know the talent problem is a big problem now with security and you get it .}
+{\pard  \line \par}
+{And just , like jobs got democratized with dev ops and so forth. So, and if you did those three, which is engineering and }
+{\cf2 [00:09:00]}
+{ security, if you made operations at anomic and then third, if you were able to democratised talent. Okay. For second. Then you can actually change the dynamics of risk, especially in cloud.}
+{\pard  \line \par}
+{And this is a longer discussion, but I just stated that the last vector renewal security is like everybody says, oh, come to cloud, we'll make it more secure, blah, blah, blah. . Which fundamentally is, is this true? But it's still a shared responsibility model. Okay. Bank runs on a cloud provider, bank gets breached.}
+{\pard  \line \par}
+{Nobody really gets fired at the cloud. . A lot of people get affected. . So how do you think from a shared responsibility model to what we call a shared fate model? . So the aspect of digital security is to solve for all four of those dimensions from people. Risk management operation side, as well as the actual tooling.}
+{\pard  \line \par}
+{So, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ and I think you touched on the whole automation side of things, as well as to how that can probably to your point in a Tesla as well. You don't really see what happens. You're just like, oh, it's just a feature. You've done it on. And next thing , you have lane control next year and you have self-driving.}
+{\pard  \line \par}
+{So how important do you feel as the automation component in the, in making }
+{\cf2 [00:10:00]}
+{ security truly invisible, I guess your point. }
+{\pard  \line \par}
+{\b\cf3 Sunil Potti:\b0}
+{ Yeah. I mean, I think generally speaking this, if we just think about the Tesla example is just, , people use the word software defined data centers. That's essentially a software defined card, .}
+{\pard  \line \par}
+{In a loosely defined way. And then over time, it's just not software it's intelligence, because they're using usage metrics, data metrics, obviously there's a level of like, , whatever you want to call it. It's simple learning, deep learning where whatever mechanisms are, it's able to kind of, you use some, some things beyond just automated software.}
+{\pard  \line \par}
+{I have a little bit more intelligence, . In terms of like control and so forth. So same things with security in my opinion is I think we're still probably, , like if you think about the, the analogy to that industry, I think cloud is equal into going into electric vehicles as in that, that required a core architectural change, }
+{\pard  \line \par}
+{yeah. You're the waves of this thing and all , so that takes years, I mean, it takes a decade and cloud in my opinion, because without element of that, and when I say electric, the way it was designed was it was just not electric. . They designed it to be driven by software. It so happened that }
+{\cf2 [00:11:00]}
+{ electric aspects were like the compelling event to come over from the old school.}
+{\pard  \line \par}
+{. So we closed that, which is, there was some compelling, initial moments like, oh, start small, start quickly scale it scale as you go, but you couldn't do on. But in reality, the bigger elements of this is the fact that you can afford to become data driven, more intelligence driven in anything that you do.}
+{\pard  \line \par}
+{And security is just a good example of that. Okay. So in operations, in particularly what I mean by that is, so the reality is that if I'm a customer, who's all in, on cloud. As in like all I operate, all my workloads are in cloud life. In some ways it's still complex because you still didn't hit. Does the taxis still get hit by breaches and all, but you're already a couple of decades ahead of the traditional mainstream enterprise, because the main set of enterprise, , the risk is defined as your lowest, , your weakest link, }
+{\pard  \line \par}
+{and your weakest link will be mapped up on premise, ? so one of the ways we have thought about operations is that it cannot be something that is only available when you are only a cloud user. It operations, in our opinion, the way we think about, , the classical world, that a }
+{\cf2 [00:12:00]}
+{ lot of buzzword, bingo of XDR and so forth, but ultimately what it comes down to is you have to be able to first start with detecting everything.}
+{\pard  \line \par}
+{And what I mean by that is whether it's a DNS record update, whether it's an endpoint, detailed, whatever it is, you should be able to take all that events and throw it to a data lake, not worry about cost because the moment, yeah, the moment you start, you can't respond to things that you can detect. .}
+{\pard  \line \par}
+{ What I mean? . So, , operations and so many of the issues that has happened is that people , are, , sort of like over the last decade of architectures, you can store more data for more than three miles. It's just too expensive. And then do my SOC queries when they run on data, that's more than a few months.}
+{\pard  \line \par}
+{It takes forever. So if I'm a SOC analyst sitting there and so really painful exercise, . So, yeah, so that's one of the foundational things we've tried to solve in Google cloud is if you really think security operations, you have to start with these new generation building blocks. And one of the building blocks is to detect everything without, , sort of penalizing you on cost.}
+{\pard  \line \par}
+{So whether it's a petabyte or a terabyte of data, you should }
+{\cf2 [00:13:00]}
+{ be able to throw it into this and it will suck it up, but it's a couple of years worth of data, whatever, and you're not penalized by costs. And then two, you need to be able to search on top of that in the way that you currently are used to searching for gold.}
+{\pard  \line \par}
+{In both of those Google knows something about storing lots of data and searching across lots of data, so we're bringing that competency into security operations, and then overlaid on that core building. Is the ability that if you can track, you're not just automating using a workflow for detection and response, you're actually infusing through machine learning from a modeling perspective.}
+{\pard  \line \par}
+{So that both the data elements of like usage and, , all the associated things that allow us to predict, , events and so forth, but more importantly, this building block of detecting everything, searching for everything between those two. And the next generation SOC platform can be built or a Sox solution.}
+{\pard  \line \par}
+{And that's not just as customers partners and a bunch of, let me pause there because there's a lot that, yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. I was going to say it's actually really interesting because the whole security operation, almost like a first principle thinking of how and why we do security operation in the first place.}
+{\pard  \line \par}
+{And a lot of times the }
+{\cf2 [00:14:00]}
+{ conversation kind of ends with, well, we can't really detect everything in cloud, or we have to pay so-and-so to the SIEM provider or kind of gets to make some sense of so a hundred percent on the money there. If that was not a problem, I can imagine a lot more people would be, I guess, leaning more towards the whole machine learning angle as well, to be able to provide, because then you can just focus on asking intelligent questions in your query instead of how much this is going to cost me.}
+{\pard  \line \par}
+{And I'm injecting everywhere because this just basic question, you can't go beyond. }
+{\pard  \line \par}
+{\b\cf3 Sunil Potti:\b0}
+{ Yeah, exactly, exactly. I mean, again, going back to the analogy of Tesla and others, so you're getting all these features as updates. Yeah. So that means for it to do more things or, , take, , I'm doing more while I'm driving now than I've ever done five years ago.}
+{\pard  \line \par}
+{. It's not step function costing. So that's what I think you hit it on the head is, and Google does this quite relevant because remember I said, we had this luxury of thinking a little bit long term is to apply first principles to figure out what were the core building blocks that need to be retaught.}
+{\pard  \line \par}
+{And if you remove some of those constraints or you simplified some assumptions, then you can unlock a lot of potential that }
+{\cf2 [00:15:00]}
+{ otherwise was increment. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. Yeah. A hundred percent. And do you find that enterprise usually, or maybe I guess. People who are consuming Google cloud in general customers, you, your team may be talking to as well.}
+{\pard  \line \par}
+{Do that, realize, I guess, are thinking about cloud security the way. Cause , to your point, we're talking long-term a lot of people are still stuck with mainframe and unfortunately, or fortunately mainframe still doesn't have any coolant in the cloud space from a compute perspective. But do you find that people are thinking about this the way?}
+{\pard  \line \par}
+{And if it's, if they're not, how should they be thinking about cloud security? }
+{\pard  \line \par}
+{\b\cf3 Sunil Potti:\b0}
+{ I guess I actually think the general ecosystem of security is relatively savvy now compared to like other silos I've seen in the industry, whether it be infrastructure of what partly because, , I use this analogy when I give this to our own like, , exec staff and all is like, everybody talks about silos of technology, from apps.}
+{\pard  \line \par}
+{This thing. And every year there is innovation in each area, like, , storage goes through some innovations, , analytics goes through some innovations, , whatever, . And security is also going through some }
+{\cf2 [00:16:00]}
+{ market innovations. But other than all of them, security is different. In one other way.}
+{\pard  \line \par}
+{It is also being prodded by adversities activity. What I mean by that is this market oriented innovations. Nobody's waking up in the morning, somewhere in the world and saying, let me reduce the number of IOPS that blue cloud or Amazon's S3 buckets are serving. Now nobody's doing that. . Whereas in the world of security, we all know this, like, , you have to work with both, but the point behind that is what I'm trying to say is that if you think about helping customers.}
+{\pard  \line \par}
+{On this journey in this era where it's, , feeding of both market and diver in adversaries. . And when I receive this could be whether it's nation state, or like traditional actors and so forth. . But if you love each other, the only way you get ahead of it is to use this new phone building blocks.}
+{\pard  \line \par}
+{That's what I meant. That's why it's super important. Like you have to be able to throw events into a daylight without having to worry about costs. You need to be able to index and search that and, , plan a scale speeds, , things like that, yeah. Yeah. But with the one caveat that you can't, when we say cloud security, you can't assume that everybody will have to }
+{\cf2 [00:17:00]}
+{ be on cloud.}
+{\pard  \line \par}
+{And that is one of the big changes we've done over the last few years is it's very easy. Like we were like Amazon or somebody like, , you can afford to like, have you come to Amazon, you build a lot of products. Then I can use like 20 other services to protect those services. . But Google, what we have done.}
+{\pard  \line \par}
+{If you come to Google cloud, yes. You have a lot of like posture management all the way from low level chipsets and tightened to all the way to like governance controls. It's sort of like in my phone, this is an opinion, a full-stack device, between software camera, all the way to like the chips.}
+{\pard  \line \par}
+{There's a level of trusted boundaries and so forth. And that's what we can offer in a full stack ECB environment. but we also know that unlike consumers, every enterprise has a bit of, I can use cloud, but also have a lot of prep, . Or other clouds on prem. . So a lot of way we want to deliver this first principles approach to cloud security is to actually deliver it as a SAS offering so that you can modernize security in place wherever you are.}
+{\pard  \line \par}
+{You're having to actually do this only when you are on cloud. And a good example. Like, I don't know if this. One }
+{\cf2 [00:18:00]}
+{ of the things that Google does really well was we collect a lot of data because there's Chrome is deployed everywhere. , as you can imagine, and from a good healthy signals, we collect phishing attack issues and all that.}
+{\pard  \line \par}
+{And , if you've noticed the squiggly lines of recapture that used to be out there and now it becomes traffic signals and now it's morphing even to something more. And so that's a good example of that whole backend is powered on a Google scale infrastructure. We don't charge customers for the data that we collect and all because it's about the mission, but either for free or nominal costs you as a customer on every digital property that you have.}
+{\pard  \line \par}
+{Can you use recapture for an deficient? So that's an example of I'm getting protection. The way that I would get protection, if all of my workloads were on cloud, but I'm not on cloud when I can still consume. So those are examples. So for example, Chronicle is another good example of, Hey, can I reimagine my next generation security analytics or security operations solution, but in a way that I don't have to be on Google, }
+{\pard  \line \par}
+{as in like, , I could be completely }
+{\cf2 [00:19:00]}
+{ on premise and still use it as a SAS offering. So that's going to be an important thing of cloud security is to, is to build it with cloud architectural principles and capabilities, but have the flexibility to deliver them as a traditional offering. If what I mean, as an, or at least meet customers where they are, you don't have to be on cloud all the time.}
+{\pard  \line \par}
+{So that's the stuff about, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So that's the way the SAS line kind of comes in at that, because then it doesn't matter if the thing is on premise or in know. Yeah, }
+{\pard  \line \par}
+{\b\cf3 Sunil Potti:\b0}
+{ It's almost like Tesla, or even I'm just making this up now. They said all of this, but the only way you can charge your car is to go back to the factory or something like, , , there's such a tie in to where things were built or orchestrated.}
+{\pard  \line \par}
+{ so because of the fact that we were able to bottle up cloud capabilities, cloud delivered capabilities, but manifest them for consumption wherever customers are, whatever the environment, it helps the customer situation, the posture, everything else become more modernized way sooner because the arc of consumption on cloud is going to take a long time and like security modernization can precede that in mind.}
+{\pard  \line \par}
+{Because you can now }
+{\cf2 [00:20:00]}
+{ recognize in place. And so therefore you can get more smarter, more hip, more secure, even without having to wait to come to the cloud. And in many cases we know it's not going to ever be a hundred percent cloud. So that's a good point. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. }
+{\pard  \line \par}
+{\b\cf3 Sunil Potti:\b0}
+{ That's one of the reasons we go back to my first point, excuse that why I think security or cyber cannot be stuck as a feature of cloud because cloud as an arc will take a long time. As , it will, it's fast to take a long. We never be a hundred percent, . You notice, . There'll be stuff.}
+{\pard  \line \par}
+{That's all. If you always get awesome security as a capability just of cloud, then you're missing the broader mission aspect of modernizing security for the world. So that's why if you decouple it as a SAAS offering, and then of course, look, you can do everything as SAS. Like you could, you could do some things.}
+{\pard  \line \par}
+{If you have chip sets of things, But it allows you, in my opinion, to think about cyber and security, therefore has a separate arc than club for that piece. Does that make sense? I don't know if that means it does. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And I think it's really interesting how you put it because I was just thinking about that by the way, I have a great analogy with Tesla going back to the factory thing as well.}
+{\pard  \line \par}
+{Cause that's for thanks to happen with }
+{\cf2 [00:21:00]}
+{ the whole IAAS and PAAS as bad at this point in time for everything kind of have to go to the mothership. Well, whether it's Amazon or Azure or whatever, you're gonna have to go to the mothership kind of change configuration or change, whatever. But if it's a SAAS offering, everyone knows what the standard catalog is.}
+{\pard  \line \par}
+{And you can make a few changes here and there, but to a large extent, it's. It flexible enough that it can be used by anyone. I think I'm where I'm going with. That is like, kind of what that means is there's normal quantitation in the industry about hope I'm going to be multi cloud or hybrid. And like, I don't know, like six types of cloud, but security tends to get this challenge even now.}
+{\pard  \line \par}
+{Where, how do we have a security, which is across the board because to add to what he said, funds first principle, thinking on the whole security aspect, you don't really care if it's Google cloud, Azure, AWS, whatever the cloud, maybe for you, security is it's like, I'm wanting to protect this asset. I want this to be available 24 7, because that's what the business runs on of availability is important.}
+{\pard  \line \par}
+{The confidentiality is important. Integrity is important. So I should be able to maintain that and manage that without thinking about wanting to go to the mothership. }
+{\cf2 [00:22:00]}
+{ So maybe I can make this little change and then come back. Oh, there's another one. So I'm going to make another change over there. And I wonder if, how many people are thinking that.}
+{\pard  \line \par}
+{So I love the way you kind of approach the whole. Almost like standardizing security, the poly, how I would explain it. I at least having the ability to standardize security. }
+{\pard  \line \par}
+{\b\cf3 Sunil Potti:\b0}
+{ Yeah, no, I think, I think in, in general, , obviously standardization , by the way, these are all words and , these things, as you can imagine, like, , it'll soak in and we'll have to show some outcomes and then eventually some customer, some practitioners somewhere we'll really come up with the , in my opinion word.}
+{\pard  \line \par}
+{And then everybody else, , copy paste it. But I actually look, actually, this is the whole point of a news security man is about making things simple, not simple. I think those are two separate things, the more, I mean, the definition of making things simple is to reduce the number of moving parts, }
+{\pard  \line \par}
+{like in design, they'll teach the people, teach us like, , the one way to make a thing much more simpler is to actually look more than moving parts. . And that might actually mean removing features. That's why on a phone, you can do a lot of things that you can do on other }
+{\cf2 [00:23:00]}
+{ devices, but then that's why this is more secure than some of these devices.}
+{\pard  \line \par}
+{. And so, so I think by an intentional approach that doesn't take away functionality because this, this gives a lot of functionality, but in search. And like I said, some good practices such as when you build a new app, this is the kind of capabilities you need. If you deploy an app, that's already built somewhere onto cloud, you can get.}
+{\pard  \line \par}
+{Secure container of some sort of breath practices. And oh, by the way, if you happen to have an old lab it's sitting on premise, then you can get all of these, but you still need to get some level of next-generation security. A good example of that is zero trust, like I'm in the word gets zero trust washed as often as cloud washed, but , Google based on its own experiences, we, I won't say I wrote the book, but we wrote the paper on beyond Corp, like three, four years ago, and how other companies are now implementing it.}
+{\pard  \line \par}
+{But the point of that is to say, Hey, what? We leverage our network. We leverage this capabilities of delivering a series of these global proxies that allow you as a }
+{\cf2 [00:24:00]}
+{ customer anywhere you are to say, look, I don't have to rely on my network security. I just have users wherever they are connect to apps, wherever they are, it could be inside outside, but I'm not able to trust all the weak links of the network.}
+{\pard  \line \par}
+{ I mean, so that's an example of where. Without you having to even move a workload to cloud you used cloud to better secure itself, if that makes sense. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. Yeah. And I think maybe this is where you were referring to the whole detect everything and trust nothing as well. Yeah, }
+{\pard  \line \par}
+{\b\cf3 Sunil Potti:\b0}
+{ yeah. Yeah. So that's the yin and yang now, }
+{\pard  \line \par}
+{is that if you're in our opinion, like, , there are these vectors of like, , security operations and, , battle and things, endpoint detection and response, , there's big markets, . But these are like a functional markets and this there's something good about those because they are very targeted.}
+{\pard  \line \par}
+{Like I need to replace a V well, I don't want to do that with like a SOC solution. . I mean, it has to be a dedicated solution. Yes, you should do it better. And that's what EDR was born and so forth. But, but in my opinion, just as a matter of priority, like again, really wanted to up-level security within an organization.}
+{\pard  \line \par}
+{If you applied first principles to say, look, you should be able to detect everything. And }
+{\cf2 [00:25:00]}
+{ then also be able to trust. . So a customer can bring their own device into it. So I should be able to say, every employee should be in environment. Like, , those funds should all be inherently baked into your security architecture.}
+{\pard  \line \par}
+{So, so that's what we brought it down to those two simple words of you need building blocks or solutions that allow you to detect everything, which is the next of security operations and trust nothing. And then if you're at least at that baseline of those two, then you can start building a whole bunch of other things on top to kind of accelerate moment.}
+{\pard  \line \par}
+{. So }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ where do you see software supply chain got to fit into all this then? Cause you mentioned the zero trust as well. Where does that kind of }
+{\pard  \line \par}
+{\b\cf3 Sunil Potti:\b0}
+{ fit into this? Yeah, it's a good segway. I mean, in the recent times, I would say Ashish, that has emerged to become at least from a rhetoric perspective and obviously in a reality, .}
+{\pard  \line \par}
+{It's it's. And we Log4j but also before that, , it's starting to emerge as a first-class thing. I think it is not as CloudWatch zero trust yet or whatever, but genuinely, I think you see that what is the matter? Why for it, if you believe that every company is becoming a software company, generally speaking, that's a true statement, }
+{\pard  \line \par}
+{like who's the new }
+{\cf2 [00:26:00]}
+{ software company and so forth. That means that just like you would have protected your traditional IP, a lot of their IP code. . And so are you taking an intentional approach to protect code the way you are done for the rest of your infrastructure, like customer data? . So, and in fact it took us 20 years to build a good environment in any security, propitious environment, around personal data, .}
+{\pard  \line \par}
+{Business data. And so, but of course is now equally important. We need the same level of rigor or something. That's the. Okay. And especially with this new age of like vulnerabilities, like what we saw in law for J it's hard and the more, every cut, every enterprise is now leveraging open source in particular where it's a free for all .}
+{\pard  \line \par}
+{And, and that can manifest everywhere. So in our opinion, again, Google does this quite often as we first, whenever we want to get into a top of mind market, we first enlist whether we ourselves had a problem and whether our problem was representative of the mainstream market, because sometimes we have problems that very few people see.}
+{\pard  \line \par}
+{. And we have to be careful not to kind of impose that to the world. Okay. And, and we heard that for a lot of big, oh yeah. There's Google guys. They come and they talk about stuff }
+{\cf2 [00:27:00]}
+{ and man, it only works at Google, but for us. So just, just be aware that look, , , we've moved on from some of that, but in supply chain is a good example.}
+{\pard  \line \par}
+{. We use open source libraries everywhere. We. Create binaries. We put them in artifact registries. We push them out. , anybody, any developer could be sitting in a Starbucks yeah. With all the zero trust and all, but anything is possible, . To kind of get in either through the open source, not our own supply chain.}
+{\pard  \line \par}
+{So we came up with something called and then you can go look it up. SLSA but it's a fancy name. We call it a salsa, but essentially software lifecycle. But it's a blueprint like we did for beyond Corp five years ago. . We wrote the paper on it. You have some tools. And, but the goal is everybody in the open source world or everybody in the community should be able to adopt those best practices without requiring our tools.}
+{\pard  \line \par}
+{So the simple answer to that is, in my opinion, that is something that I would rather not become as big as zero trust or something. That means that we have failed to actually contain that problem. . When, when you actually have a $10 billion. Technology industry around it. So I would urge most people to kind of up-level that in the simplest case, sometimes you have to do it by hiring one }
+{\cf2 [00:28:00]}
+{ person or making one person responsible for your software supply chain.}
+{\pard  \line \par}
+{Let them go figure out best practices initially on your existing staff. Well, forget our OSS libraries to use or not, , some basic stuff with some responsibility. So it's, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ It's such an interesting point because one of the guests would come in and basically there was a stat that came out that almost 80 to 90% of the code that is written by most organizations.}
+{\pard  \line \par}
+{These days is someone else's. Because of the open source libraries being used, you think that you were probably made something really unique, but a lot of times, because of the open source libraries being used, someone like that could be another Sunil or another part of the world has written it and was probably the most easier }
+{\pard  \line \par}
+{\b\cf3 Sunil Potti:\b0}
+{ third party, third party as well.}
+{\pard  \line \par}
+{It was Google chord. Let's just say you're using technology. We, the scene, Google technology using open source tool. So the dependency is pretty high. Yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. Wow. And I think it's it is definitely becoming a reality for a lot of security folks. You kind of like, almost like to your point, have a few buckets.}
+{\pard  \line \par}
+{And I wonder how this would affect the whole security modernization, but the whole supply chain software supply chain, then you have the zero trust, which obviously with the whole COVID of the world has gone even }
+{\cf2 [00:29:00]}
+{ more. I think pre COVID. If you talk about the Zero Trust people just rolled their eyes like, oh, there's another guy was like, he wants to talk about zero trust, but now people are actually considering, oh, zero trust should be.}
+{\pard  \line \par}
+{Yeah. So do you feel in that the whole COVID thing has affected anything else has that, I mean, there, there was a whole digital transformation thing that was kind of going on with the Covid World you find that. }
+{\pard  \line \par}
+{\b\cf3 Sunil Potti:\b0}
+{ Yeah. I think, , it's a great question. Look, my sense is for sure a hybrid work environment is there forever now.}
+{\pard  \line \par}
+{. We just know it. . So that means by default building blocks, like zero trust have to happen. . Because you can't like there's no campus network, , things like that. . So, yeah. So by it means that some building blocks will happen. It's just a matter of time. so the whole zero trust, , broader bandwagon is for sure something that'll happen.}
+{\pard  \line \par}
+{Second is anybody's endpoint. Isn't any location accessing anything independent, zero trust. So that's another reason why everybody's into the whole endpoint detection response. I think that is a, it has to morph into something that protects that endpoint. And then I think there'll be these, like }
+{\cf2 [00:30:00]}
+{ if, is to take a full step back, if the word was architected on these few building blocks, which was you detect everything, you trust nothing, }
+{\pard  \line \par}
+{meaning as a runtime, you don't have to trust anything. And then what I would is happening there from endpoint, your apps to databases, anything, everything is being logged from a security perspective and very low. It can be accessed at very high speeds and being made available for triaging or whatever.}
+{\pard  \line \par}
+{ If you add those two core platform building. What are the functional areas that really then manifest are obviously you need a turnkey thing on the end point, like, , everything around because that's one key area you need definitely need something around my cloud. Does a scholar, my cloud workloads as a container, }
+{\pard  \line \par}
+{so whether it'd be Google, Amazon, whatever, and that's what you have cloud security, posture management, cloud, workload protection, , there's a lot of buzzwords there, but my point is, that's like another virtual , sort of AIDEA folks that should become a big, , intentional area. But then at the same time, you have obviously, , constant things like identity, , the usual supporting pillars of it.}
+{\pard  \line \par}
+{But the area, in my opinion, }
+{\cf2 [00:31:00]}
+{ that we just talked about that is not as intentionally done, that needs more intention is just like your workloads and your data security. Your code security needs to be elevated at the same level that you're spending on apps or data and so forth. So that's one area that I would push people to move up because there's a lot of innovation and integration happening at all levels, man, like, I mean, , this data governance is a big deal, especially if you're in Europe or Asia Pacific sovereignty is becoming bigger and bigger data regionalization people don't want data to travel back to us countries.}
+{\pard  \line \par}
+{How do you realize, , all that? So I'm saying is that all these market movements are all horizontal layers of capabilities that inevitably we will add into app security, data security and all, but we just need to make sure that like, just like endpoint app data and then of course network and all is all zero trust.}
+{\pard  \line \par}
+{And all . Code is removed is all I'm trying to say at that level of visibility. Yep. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And to your point then cause I think this kind of the one of the questions that had come in when we had posted this thing. What was it, the whole driving forces behind certain acquisitions that kind of Google has kind of }
+{\cf2 [00:32:00]}
+{ done to place themselves in a , better place to be in this kind of space, cyber security space.}
+{\pard  \line \par}
+{I think the question specifically was around the whole Siemplify acquisition and what meant for GCP customers. But I had a two point now met a question where, why partner, because to your point, Google has enough resources, enough talented, smart people. Why partner, instead of just building yourself, I }
+{\pard  \line \par}
+{\b\cf3 Sunil Potti:\b0}
+{ guess.}
+{\pard  \line \par}
+{I mean, maybe I'll talk about the second question first, which is more like a, why the decision on what did we acquire, . But why did you do in that quadrant? So generally speaking though, I mean, obviously all companies, like generally that pride themselves on building it natively and organically, and Google tends to be one of them.}
+{\pard  \line \par}
+{And over the. We've started, like, we both Google out with like lots of acquisitions and some companies have dealt with acquisitions. Oh yeah, of course. Yeah. Yeah. And this is or wrong one way or the other it's it's more about like, , we genuinely believe one of the things that Google has, not just, it's not like, okay.}
+{\pard  \line \par}
+{Yeah. People think it's, there's some smart people and all that stuff. But one of the things that Google has is, and it's a little bit like our friends at Amazon also, but very few companies have that is when }
+{\cf2 [00:33:00]}
+{ you yourself are running one of the world's largest enterprise, whatever you build organically to support that large enterprise naturally can become something that you can make available to the world.}
+{\pard  \line \par}
+{So the fact that google.com. It's one of the world's top three things, just in terms of surface area of attack, you name it, man. I mean, the way we've had to do DDoS as an architecture, by the way, now it's known for everybody, but just, I mean, that, the point is that we tried, we always use external things first and we don't, we scale past, and then we go build it ourselves and then we it's a virtual cycle.}
+{\pard  \line \par}
+{ so one of the things that we've always felt was that look there's enough that we have to do at scale organically. And it's hard to find others that do it at that scale. So therefore we have to do more organically, but in some areas targeted areas, not just for time to market, for functional completeness, that we believe things were built from first principles correctly, then that can become a very synergistic thing into our portfolio.}
+{\pard  \line \par}
+{So. Rather than just acquiring things for functionality. We acquire things for obviously functionality and time to market, but we also }
+{\cf2 [00:34:00]}
+{ look for, , synergistic architectural capabilities that compliment our first principles of architecture. So that's one of the biggest things that we saw in, , if you think about reimagining security operations, as I said, you have to be able to, , start with capturing all your events.}
+{\pard  \line \par}
+{You need to be able to search and investigate at scale something milliseconds. But then at the same time, you need to have a, or an automation fabric that fundamentally is much simpler. Like it's much more, and it is not like an old school business process, workflow wrapped up into something . Where it requires expert rules and all that.}
+{\pard  \line \par}
+{So somebody had to have reimagined that we could have done it, and then we've done some version of that in cycle. And that's what we found in the architectural principles that Siemplify had frankly. , . And so that's really how. The synergy came out, was that okay. In addition to time to market, , we need obviously a level of automation orchestration.}
+{\pard  \line \par}
+{It's just that the way that we approach the problem, we believe is much more enduring than say some of the tactical solutions. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Awesome. And I think it, the talking about priority also makes me realize that a lot of our listeners may be from }
+{\cf2 [00:35:00]}
+{ some of the other cloud providers and maybe have started there.}
+{\pard  \line \par}
+{They are. Everyone's watching Google cloud from a distance as well. And being number three doesn't mean that you can click clearly ignore the person. Like there's obviously a reason why lot of customers have gone down the Google cloud path as well. So I'm curious, what can people expect in 2022 and beyond, I guess, from your vision perspective for, for Cloud security from Google cloud, }
+{\pard  \line \par}
+{\b\cf3 Sunil Potti:\b0}
+{ I think some of this, we hit this a little bit before Ashish between, I generally think most of next generation. , security technologies, but all technologies like analytics has to be genuinely cloud native. So just make sure my advice to most people is like, shake the tree on your partners that are genuinely cloud native, like architecturally first principles, or are there like sham layers where they just racked a few VMs and moved it into GCB or Amazon.}
+{\pard  \line \par}
+{And a lot of people are like that by the way. Okay. But especially for Google cloud, what we're focused on is I just, , I just be very direct about this because I've been transparent on this is like, , all three of the cloud providers are taking security quite }
+{\cf2 [00:36:00]}
+{ seriously, which is good for the ecosystem.}
+{\pard  \line \par}
+{We're taking slightly different approaches. Amazon, as I said is doing a good job. They're a first class company in cloud. So if you're in a building on Amazon, I have a bunch of tools that use that I can use. . But if I'm an enterprise customer that's using. One cloud like Amazon, I still have my own cloud, which is on-prem, but it's a cloud or not.}
+{\pard  \line \par}
+{. So what do you do? . It's always an open question. And on the other hand, it's been very clear that look, they really are, in some ways, similar to us, in the sense they want to embrace , security as a first party thing. , and by the way, that idea of products, but they also want to be like viewed as the primary security vendor, .}
+{\pard  \line \par}
+{And identity you way that your base endpoint and everything we have done is not necessarily in the middle. It's a little bit more diagonally. Different is it's similar to both, but it's different. Let me tell you what I mean, one is like Amazon, we want to take a much more than Google tends to do this way more than even any other cloud provider is much more of a long-term view, architecturally that whatever we might be a year late, but it's much }
+{\cf2 [00:37:00]}
+{ more than.}
+{\pard  \line \par}
+{Okay. Now sometimes that hurts us because you need to get things to market very quickly. And it great. But and that's a little bit of an arc that we're perfect. But the second thing that we also do is that we have chosen only a few areas to offer services, to modernize in place is what I call it.}
+{\pard  \line \par}
+{Remember like zero trust, security, operations, payment, fraud, , those are the kinds of areas, like, like if you do something in secure supply chain, it'll be done in a way so that you don't have to come to GCP to build your code. You can just generate it. You can be in your own build areas.}
+{\pard  \line \par}
+{Yeah. CICD pipelines and still consume awesome stuff from Google on the source side. So that is core differentiation is that we have chosen four or five areas where you can modernize security without having to come to GCP, unlike Amazon. But unlike that, we also realized that there are other best in class partners.}
+{\pard  \line \par}
+{That we have to create a one plus one equals three solution. Whether it'd be on endpoint is a good example because a lot of that events come from endpoint systems that are best in class providers. They're like ad strike or Sentinel one or cyber reason or whatever it is. And so similarly, in other pockets, we want to take an open }
+{\cf2 [00:38:00]}
+{ approach, }
+{\pard  \line \par}
+{so that we can actually, , sort of like provide the flexibility to leverage what a customer may have chosen with some of these other best in class, while still having an opinionated stack on zero trust on security operations, like the main things we want to be like a full stack solution. }
+{\pard  \line \par}
+{So that's the big thing that you can envision from us is again, going back to , our, my first point on Google security, one of the core themes is we have to find ways to make security invisible by left, shifting it by burning it in. Both from a data layer and app layer. And then as I said, , so you should see more and more on that for sure.}
+{\pard  \line \par}
+{Okay. From, from this. And then in addition, we should be able to talk about operations, making that simple as, as much as possible and last but not least, it's this whole ability that if you do consume cloud, how can we help you mitigate risk? . And this whole cyber insurance is a big fork for us.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So it's pretty awesome. And I think it's I love the fact that you guys don't use the whole plug and play approach in a way where it doesn't matter where you are in his blood. I mean, I guess, okay. Universal socket for people who may are traveling, I guess you can just, it doesn't matter }
+{\cf2 [00:39:00]}
+{ where they, if you are on premise or any of the provider, if you have the way you envision this, you should be just plug and play a Google cloud service, a security service, and not have to feel that, oh, I have to be on Google cloud to use this service.}
+{\pard  \line \par}
+{It's kind of what }
+{\pard  \line \par}
+{\b\cf3 Sunil Potti:\b0}
+{ exactly. And I think that thing has really helped. , if people talk about it, the, I, we are number three or whatever, but in many conversations a few years ago, she's used to be far now. Like, I'll give you a simple, nuanced way to think about it in digital leaders. Like dotcoms companies, it's actually one in two, between as an Amazon in enterprises, internationally, it's one to do, but Microsoft and Google, .}
+{\pard  \line \par}
+{Just because of our sheer presence now in many things. . And if we think about online commerce, we are probably number one, because obviously if you have an online commerce vendor, , you wouldn't want to go to Amazon, it's competitive or not. And so, so all I'm trying to say is that in the grand scheme of things, at one point, we used to care about three versus two, and it is important, but more importantly, you have to keep in mind is if you add up all the revenue from all three cloud providers between Amazon, Microsoft, and us, .}
+{\pard  \line \par}
+{It's only $110 billion. And if you add so-called 10 for }
+{\cf2 [00:40:00]}
+{ cloud over the next five years, people throw it on big numbers, like half a trillion, 1 trillion, 2 trillion still. So all that matters is really how fast does that transition to this cloud. . But the moment of the arc that I was telling you, and that's why security being split apart so that people don't have to wait for all of their workloads to be in cloud, to be better protected is our mission in Google, at least that's what does it does from say an Amazon or somebody?}
+{\pard  \line \par}
+{So, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ yeah, that's a, that's a good way to kind of close off this conversation as well. Cause I think I'd love the vision and I love how you started with the first conversation. Just being our mission mission. And kind of bring it back to like, this is kind of where the mission is. Like, you don't have to wait for the adoption curve to kind of go reach it, speak.}
+{\pard  \line \par}
+{You should be able to do this things beforehand. So I love the long-term approach over that. }
+{\pard  \line \par}
+{ Any last piece of kind of commentary from your side on the whole Google cloud space, what can, I mean, I know you've been in this for quite a bit, what's the one question that you think I should have asked you?}
+{\pard  \line \par}
+{I guess it's probably pretty good one to ask. }
+{\pard  \line \par}
+{\b\cf3 Sunil Potti:\b0}
+{ You covered a lot of grounds, so I wouldn't get in there, but I'll answer the question that you }
+{\cf2 [00:41:00]}
+{ asked, which is, Hey, so what's something for the audience. And I do think, look, especially if the audience is heavily security oriented, I do believe that the next seven, eight years folks will up-level cyber to become as big as cloud.}
+{\pard  \line \par}
+{ So, so it won't be like pulled , into Into mobile, or it won't be pulled into cloud it'll require its own arc. So the more I would advocate for the community to lean in on each other to, to build that because remember how the mobile ecosystem has been built. . And people think crypto and I think crypto obviously has leapfrogged a little bit with lots of noise and all, but I actually think the real real there that is cuts across everybody is actually, so just, just to make sure that you don't lose sight of that, there's a lot of good things going around in your area.}
+{\pard  \line \par}
+{So invest more in learning, and , growing yourself. And I think, , from a career side of things, if I'm a security practitioner, I think some of the best years are ahead of us. So, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ oh, that's good. That's good to hear. And I think I've got a few more people as well. Thank you so much for tuning in, and hopefully we can kind of have you again and talk about the broader vision and maybe next time you can talk about it.}
+{\pard  \line \par}
+{ The next level }
+{\cf2 [00:42:00]}
+{ of the metaconversation with Google cloud security, that'd be pretty awesome as well. So thank you so much for tuning in. }
+{\pard  \line \par}
+{\b\cf3 Sunil Potti:\b0}
+{ I appreciate that. Likewise ashish and maybe next time we'll do it while I'm walking Rocky or something. Perfect. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I would love that obviously had the offer for , someone doing a talk when they were on a treadmill have had offers for when they were doing a bike ride, like one of those, , the stationary bike, you can actually do that.}
+{\pard  \line \par}
+{So I would take you it if, if on their offer, I think it be pretty awesome. So maybe next time we can do that for sure. Thanks everyone else as well for your time. I'll see you in the next episode. Thank you. }
+}

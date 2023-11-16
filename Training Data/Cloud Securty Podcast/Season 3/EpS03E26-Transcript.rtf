@@ -1,0 +1,445 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red128\green128\blue128;
+\red250\green138\blue59;
+\red216\green34\blue146;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\pard  \line \par}
+{\cf1 [00:00:00]}
+{ }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ hey, welcome Steve }
+{\pard  \line \par}
+{\b\cf3 Steve Orrin:\b0}
+{ How are you?. Good to be here. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Thanks for coming in. And I am all excited about the confidential data and the Azure space. But maybe you do start off with, for people who do not know Steve Orrin this, could you tell us a bit about yourself and where you are your professional background?}
+{\pard  \line \par}
+{\b\cf3 Steve Orrin:\b0}
+{ Absolutely. So I'm the federal chief technology officer for Intel corporation. And in that role, I drive all of our technology engagements solution architectures and technologies. For the U S federal government and the broader public sector. My background is in cybersecurity having run both security startups in my early career, as well as running security, pathfinding and product development for Intel for a number of years, as well prior to coming to the CTO role.}
+{\pard  \line \par}
+{So I straddled both sides of the cybersecurity problem, as well as specifically looking at how can we help the federal government achieve their. With technology and technology architectures. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ That's awesome. And worthwhile calling out as well. I think you're definitely the right person for talking about federal government.}
+{\pard  \line \par}
+{Cause a lot of people would not even know why people }
+{\cf1 [00:01:00]}
+{ talk about federal government separately and why is there a need for even them to be addressed separately. So maybe that could be a good point. Cause I imagine people who are thinking into this going, I can trust Azure with confidential data, but there will be people out there who, I mean, I would obviously agree that there's a chain, there's a different kinds of data.}
+{\pard  \line \par}
+{It's also, before we get into all of that, why are federal organizations different from the regular organizations that we interact and see on our day to day basis? }
+{\pard  \line \par}
+{\b\cf3 Steve Orrin:\b0}
+{ So there's a lot to unpack with that one.}
+{\pard  \line \par}
+{But it's a very foundational question. , what's different about government applications, government. So on the one hand, there's definitely a regulatory requirement from the government, as far as how you handle applications, how you handle data how the systems are authorized to be able to operate.}
+{\pard  \line \par}
+{And it goes down to at the core it's around security. It's around. And the reason being is that government data is, has a criticality to it, whether it be citizen services, making sure that transportation happens, the water treatment to be able to share a regulatory regimes are able to operate to the military and intelligence }
+{\cf1 [00:02:00]}
+{ community that have sensitive data and critical data to the security of the nation that have to be protected from targeted adversaries.}
+{\pard  \line \par}
+{And so the level of threat on government systems and labor day, but really global. Any government has the same set of type of requirements that are different than what you find in the, private sector. In financial services, health care, they all have sensitive data. They all have regulatory requirements.}
+{\pard  \line \par}
+{That the federal government typically has a much higher bar for the systems. And they also have a lot more organization around the control that are put in place. There's laws in place, the FISMA, which is the federal inflation. Security and management act that was passionate number of years ago sets forth a set of guidelines of how you protect systems, applications, and data for the federal government.}
+{\pard  \line \par}
+{And so there's, there are legal requirements that the government has to adhere to that go beyond just, well, is it somebody I can get. Now the providers of services to the government adhere to those regulations. So you have federal versions of the Azure cloud and of the other cloud providers in order to be able to host cloud }
+{\cf1 [00:03:00]}
+{ workloads on behalf of the government.}
+{\pard  \line \par}
+{And it's a separate environment, that's been certified with their proper security controls and overviews and audits to meet those higher level requirements. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Right. And maybe another one for this. And I guess to your point, For people who are, or maybe organizations that are working with the federal government, they obviously have to ideate a failure of federal science as well.}
+{\pard  \line \par}
+{And people normally use government agencies and federal very interchangeably, other. }
+{\pard  \line \par}
+{\b\cf3 Steve Orrin:\b0}
+{ So, yes. I mean, if some ways you think about the, the government is the body that encompasses everything Federal is , typically the marketplace or the vertical is when you talk about the federal market, because the federal encompass, not just the government itself, the agencies, the departments, the services, but also the ecosystem.}
+{\pard  \line \par}
+{So the large system integrators, the service providers are part of the sort of federal market. Sometimes they're referred to the defense industrial. It's a broader than that, because that also includes people who organizations that service department of commerce or department of treasury are also part of the federal market.}
+{\pard  \line \par}
+{And so a lot of times you'll think about federal our public sectors. Another term that's often used is the overall marketplace }
+{\cf1 [00:04:00]}
+{ and all the different players in that market. And then government is, , the actual government, the agencies themselves, and you find in most, whether it be the U S UK, Germany, , any other India, they'll say similar model, there's the government agencies themselves.}
+{\pard  \line \par}
+{And then there's the service providers and and system integrators that service the federal, federal government in that specific geolocation. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Right. And what makes them different when moving to the cloud compared to say a private company. }
+{\pard  \line \par}
+{\b\cf3 Steve Orrin:\b0}
+{ So there's a couple of different things and it really in the early days, the government couldn't adopt cloud because the cloud could not meet the security and trust requirements, as well as the contractual requirement.}
+{\pard  \line \par}
+{Of how applications operate in the cloud. Think about the cover, the standard application. You run a cloud, it's a service model. It's a subscription. You don't buy a system. You buy time, or if you will, you buy the availability of your service for 20 minutes while you have it up and running. And you're buying compute as a service buying application servicing as a.}
+{\pard  \line \par}
+{Most federal agencies and government back }
+{\cf1 [00:05:00]}
+{ pre-cloud the way they bought things was they buy a thing. It's a server in a box that they then deploy. It's a airplane that gets put onto a base. And so the way the contracts were stood up was that's how they had to buy things. And so there was one part was changing the way the government buys things to be more service oriented that took a fundamental shift in the contract language.}
+{\pard  \line \par}
+{Then marrying that with the government has specific security requirements that are much more stringent than you find in the public markets. And so having that codified and what fed ramp, which was the standard that was put forth by the U S government and really FedRAMP became the model that many other global governments have used for their own security standards, did three very important.}
+{\pard  \line \par}
+{It created a contract structure to do services as a contract vehicle so that a Amazon or a Microsoft or Google or Oracle could sell their cloud services as opposed to selling a server or a piece of software. And then they also codafide, , 153 odd controls that had to be in place to be able to operate }
+{\cf1 [00:06:00]}
+{ a secure cloud on behalf of the government, everything from not being connected to the internet for certain aspects or.}
+{\pard  \line \par}
+{, certain, , default passwords, it was a pretty robust set of controls that NIST the national Institute of standards and technology put out around how do you secure a cloud to meet the, the government requirements? And then the last piece was how do you then operate a cloud? And that's what the authorities to run that service with those security, the give the cloud provider, the authority to do that on behalf of the government.}
+{\pard  \line \par}
+{And here's the key trick that I think was most recent. In the most government places. If I were to go buy an application or buy a system, I need to certify it, that it's secure and that I can run it. And I did that for my program. So I'm the department of treasury, this sub unit that does fraud detection.}
+{\pard  \line \par}
+{I bought that if the next agency or over wanting to buy the exact same software, they'd have to go through the same process all over again. It could take six more months that does not how the cloud works. It's the same thing for every. And so what fed rep introduced was this authority to operate where as long as you've }
+{\cf1 [00:07:00]}
+{ gotten it done, once you can reuse that authority across different agencies.}
+{\pard  \line \par}
+{So it's sped the time to market so that once we figured out how to get our application into the cloud, then that same application in that same cloud provider could work for any of the services in that organism. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Oh, that is really fascinating by the way. And I love how you put it across. Cause I did not even realize the foundational changes to the service model.}
+{\pard  \line \par}
+{And now, since you explained that totally makes sense. Yep. Yep. That's government wanted, oh, I want our, not just making it up, but I want a barrel of oil from somewhere and oh, how many battles you want? 50,000 battles of $50 million. You don't want to say, I just want one liter right now, or one, one gallon right now.}
+{\pard  \line \par}
+{But because that's what I want to use. I don't, you can come back to me later for the whole battle and be like doesn't work like that. }
+{\pard  \line \par}
+{\b\cf3 Steve Orrin:\b0}
+{ And I'll give you a fun example. In the early days when the cloud was taking off and some of the agencies wanted to buy cloud before this was all. I won't name the agency, but there was a particular agency that bought cloud.}
+{\pard  \line \par}
+{They bought 36 of them. They basically had cloud }
+{\cf1 [00:08:00]}
+{ architectures running in a hosted environment and each one was their own separate cloud. But cause they had a virtualized environment, but they didn't have a cloud. What they had was a bunch of virtualized data centers across most well, multiple hosting providers on different contracts.}
+{\pard  \line \par}
+{It was very ineffective. Because that was the only way their financial systems allowed them to buy. They couldn't buy a service. They had to buy a thing that they could put someplace. They knew how to get somebody else to host it. So that was allowed. But you had to, you had to buy a new one every time.}
+{\pard  \line \par}
+{And that was just in, , that was part of what FedRAMP solved that really opened the door for the big cloud providers and even tier two cloud providers to service the federal government. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ That's pretty interesting because to what you were saying earlier, where. Federal government or government agency would have a lot more stringent requirement for what data can go in.}
+{\pard  \line \par}
+{They can also have a lot of stringent requirement for how the infrastructure is structured and how data goes in and goes out. I would have thought they would have been probably the first ones to go into clarity for it as possible. And I mean, }
+{\cf1 [00:09:00]}
+{ that's just me thinking out loud because the way it was so weird, at least to the private industry, the cloud has elasticity and all these other things.}
+{\pard  \line \par}
+{Outside of the whole service from it. Do you feel that the government would have, I mean, if this was already solved before government would have been the first ones and they were like, because I mean, I guess why would they go to the cloud even now even cause what was their reasoning for going into cloud versus the private industry?}
+{\pard  \line \par}
+{\b\cf3 Steve Orrin:\b0}
+{ So I think, and you'll see it now where there's a huge government contracts for cloud and there's, , a billion, $10 billion size contracts. They're all in. Part of the challenges, like you said, is understanding how do you operate your application in the cloud? They were early in the sense that they had this cloud first that under the Obama administration had put forth a budgetary incentive to going to some form of cloud to try to get them off the ground.}
+{\pard  \line \par}
+{But there still were late. And a lot of times when you think about it, is that at the end of the day, The same reason why a bank wants to go to the cloud for operational efficiency, reducing infrastructure, saving costs, reusability. Those same benefits are why the }
+{\cf1 [00:10:00]}
+{ government wants to go to the cloud. The challenge that a lot of times is, is the government applications.}
+{\pard  \line \par}
+{The data isn't open, it's not like in some S3 , database. I can just sort of grab it's in protected site. My application development is oftentimes happening in a custom environment. And so there took a lot of legacy infrastructure monitorization to get their systems ready, to be able to operate with the cloud.}
+{\pard  \line \par}
+{Even little things like thinking about how do you transfer the data from, , a ship to the cloud when your pipe is this. And so thinking about how you structure the applications to make them ready. And that's where a lot of the past several years, and a great example of this is the work being done in the air force with what they call platform run and a program called Kessel run.}
+{\pard  \line \par}
+{And what those two did is created an, a pass environment for building cloud apps. And then they drove an agile process. To actually be able to take their existing, , mission applications and Cloudify them, but it took an, a, a concerted effort to do that. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Wow. Wait, so have you heard of something called cloud center of excellence by any chance?}
+{\pard  \line \par}
+{Is this phase similar to that? Like }
+{\cf1 [00:11:00]}
+{ the, basically the air force made a version of cloud center of excellence for themselves, but this is mission critical applications }
+{\pard  \line \par}
+{\b\cf3 Steve Orrin:\b0}
+{ exactly. For everything across what the air force mission was. And so , they built their own cloud infrastructure. As, , center of excellence, but they also had the Berry with, at the agile processes for doing application development, a pass environment that had not just the, the API APIs, but also then the marketplace to drive the tools that they wanted to leverage.}
+{\pard  \line \par}
+{And so third-party vendors would then bring their products similar to like an Azure marketplace to the platform. One market. That then they could drive that application you'd have usability across it. It was a fairly, there's a lot of papers written about how that the success of the initial phase. Of course now the big challenge is how do you then operationalize that at scale?}
+{\pard  \line \par}
+{It works great within the boundaries. Now the next phase of that is okay, let's make that enterprise wide. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Yeah. And another layer to add to this as a data space as well, because I guess a customer of a government agency, people like you, me and everyone else, who's listening in probably non-government employees as well.}
+{\pard  \line \par}
+{All our confidential data are going into, }
+{\cf1 [00:12:00]}
+{ well, I guess I'm not going to go into how many people first government of the data, but let's just assume some people do. And it also begs the question. Well, the gaps in the way cloud we're handling data, is that why? And I want to get into the whole, the computing side to the confrontation computing side of Azure as well.}
+{\pard  \line \par}
+{So coming from that perspective, with the confidential data, was there a gap already existing? And that's why the, , the CSPs of the world kind of went in that direction. So maybe the first question is. How good were they in handling data in cloud considering they were a bit delayed, but they had other challenges from a security perspective.}
+{\pard  \line \par}
+{How was , confidential data being handled by federal agencies in the cloud to begin with? And what was the gaps? }
+{\pard  \line \par}
+{\b\cf3 Steve Orrin:\b0}
+{ So you make a good point and let's sort of look back at what was the challenge that led to confidential computing. If you look at data security, they're sort of what we call the three, three legs to that stool there's data and right.}
+{\pard  \line \par}
+{And that's typically full disk encryption file encryption, those kinds of technologies to protect data when it's being stored. There's data in transit, which is your TLS }
+{\cf1 [00:13:00]}
+{ sessions for web your IP sec VPN tunnels, point to point encryption. That's how you protect data as it's moving around the last piece of the puzzle that was not well solved is in use.}
+{\pard  \line \par}
+{How do I protect data while it's being transacted? Now that is a problem set. Now here's the thing going back. Pre-cloud the way I protect the data in use is I had, , in a room with a system that I controlled with a guard, with a gun and locks on the doors. And therefore I didn't have to worry about someone physically accessing the system or some piece of malware getting in and scanning the memory because I own the system.}
+{\pard  \line \par}
+{So I was responsible for the secure. And so therefore I could protect the data on that system when it's being transacted, when it was turned off and I leave the room, data encryption when I'm sending it to you, data and Trent. But the old model of a siloed sort of on-prem system sort of dealt with at least enough of the risk to justify what the lack of extra security we had technologies and for the high insecurity things, where there is a strong threat, you'd have HSMs, that's a great example of a hardware }
+{\cf1 [00:14:00]}
+{ security module so that you could have the keys, even when they're being used, always encrypted in a protected space.}
+{\pard  \line \par}
+{Because even you don't want to trust the guard on the front door, to the keys, to the kingdom. Well, now we moved to the cloud and now it's not my system in my data center with my guards and my guns. It's somebody else's data center. And it's not only that, it's not just my stuff. It's everyone else that I'm sharing that environment with.}
+{\pard  \line \par}
+{So now suddenly I need to have an elevated level of security for the data as it's being worked on in my. Even though, cause my VM is sharing resources, network infrastructure, and sometimes the server with other, even in the government that may have different policies or different security for their application, no one wants to trust everything about everyone else.}
+{\pard  \line \par}
+{And then also trusting you the cloud provider, , I'm trusting Azure, I'm trusting. And from a liability perspective, Azure doesn't want to have access to the top secret information. That's that's, , mission critical for the government. And so really elucidated the. For having a different way of approaching data and use protection.}
+{\pard  \line \par}
+{And that's where companies like Intel came in with a hardware based technology that provided that }
+{\cf1 [00:15:00]}
+{ confidential computing and at its core, it's, the industry term we call is a trusted execution environment or T E. And what that is, is a. Physical hardware security feature that will encrypt and control memory for an application while it's running the application.}
+{\pard  \line \par}
+{So while your application is running, its memory is being encrypted by the CPU and access to the memory is being controlled and locked down by the CPU. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Interesting. And you've touched on an interesting point. So when I started the whole cloud space, six, seven years ago, I remember people would ask about data address as well, in terms of when it's on a volume on your AWS or Azure or wherever.}
+{\pard  \line \par}
+{Is it really being encrypted and I could never get a straight answer from Azure, AWS for, is it really encrypted because we, unless we tick the box, but it is what's really happening at the back because there's this level of trust. Yes. You have said that it's a tick the box and you are encrypted, but to what you said about data in use, because you still can't do that for meant for processing this happening in the memory even today and how this right.}
+{\pard  \line \par}
+{How do you even go down the path of }
+{\cf1 [00:16:00]}
+{ trusting this? And trust is really a very strong word for it, as well as to the like, imagine it's different when it's, oh, my choices for what movie do I want to watch? Or what food I want versus all my passport information or my driving license like that, that is like life-changing things.}
+{\pard  \line \par}
+{Right. And you don't really just want that to be hanging around somewhere. So from that perspective, then I love the fact that there was a hardware component created and changing the way. Data in useless or moving. So is that something that has changed the opinion of trust between cloud service provider and the government?}
+{\pard  \line \par}
+{Do you feel that's the reason that now we have Azure confidential computing and other services that are }
+{\pard  \line \par}
+{\b\cf3 Steve Orrin:\b0}
+{ there? I think that's a key part. I think there's one other piece and there's a term that's used called at testing. Okay. And that's an important piece of the puzzle because using the hardware feature is important and good, and you can select it in the check box on your VM subscription, but how do what's actually doing that before you give it?}
+{\pard  \line \par}
+{The secret after station comes in, it's the old notion of trust. But verify is what add to station does is when you }
+{\cf1 [00:17:00]}
+{ put your VM in into a confidential computing service container. The enclave as we call it, the hardware will attest. We'll basically sign and measure that container and the test to you as the relying party as the agency or as the application owner that yes, your workload is running in that secure space.}
+{\pard  \line \par}
+{So you can trust it now to do, to access the data. Did decrypt the things in memory, and that's a piece of the puzzle. And so when you deploy confidential computing and how you do it at scale, you're also deploying an attestation service it's built into the way Azure does. So that you get that quote that meant that at the station that allows you to then verify that your application and data are running in that secure environment.}
+{\pard  \line \par}
+{And that's a key piece of then how you can use. Of trust the cloud with your super sensitive data, because you have that piece of a verification along with the check box that you did subscribe to it. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Yeah. Almost like a chain of custody for you're going. So we spoke about trust. We spoke about the gap for data and use as well. And I've been going to dilli dalling on the whole Azure }
+{\cf1 [00:18:00]}
+{ compute and Azure confidential computing. What is Azure confidential computing. And how does it fit into the fall federal organization then the security needs of a federal organization?}
+{\pard  \line \par}
+{\b\cf3 Steve Orrin:\b0}
+{ Sure. So let's start with Azure confidential computing and to be clear, it's available for everybody. So average or confidence computing is our HCCs avid Azure confidential computing service is an offering from Microsoft Azure. That's available in the public. Okay. And so you can subscribe to it for whether it be PCI data, , in a credit card environment, HIPAA medical records, you've got sensitive IP that you want to protect, and you want to keep secure.}
+{\pard  \line \par}
+{You can use confidential computing from Azure in your normal public cloud, no matter whether you're government or not. The government side also has in their cloud from Azure, a government version of confidentiality. Specifically because the government has those higher level of requirements as, as part of their mandate to protect data and to be able to protect it at various different sensitivity levels.}
+{\pard  \line \par}
+{So unlike the private industries that may have regulated data, , financial information PII, or, , heavy metal }
+{\cf1 [00:19:00]}
+{ records, which are all sensitive, you're in the governance space, you typically have multiple layers of classification. Secret classified top secret those kinds of, of designation. So there's additional controls that you want to do, including confidential computing as a service.}
+{\pard  \line \par}
+{One of the reasons it's so important to have confidence in computing in Azure and in the cloud in general for the federal side, is it allows them to open the door, to move those data sets into the. What's prevented a lot of the mass adoption of cloud by a lot of the government agencies is they could do, , sort of citizen services, a lot of, sort of the notification kind of stuff.}
+{\pard  \line \par}
+{Like if you want to go to NASA and see the cool pictures from Hubble, you can go to NASA and see the Copeland for the Hubble, but the really sensitive data, like the launch information, they kept that on prem, but they kept that in a private cloud by having these additional security controls in the federal cloud.}
+{\pard  \line \par}
+{It allows them to now open the door to move more of those applications, the more sensitive ones into the cloud, and that opens the door to possibilities that they didn't have before. A lot of the interagency }
+{\cf1 [00:20:00]}
+{ collaboration requires sharing of data, sharing of applications, sharing of API APIs. It's very hard to do that in a closed on-prem system.}
+{\pard  \line \par}
+{The cloud isn't. But in order to be able to take my application into the cloud, that has to be able to secure that application for both of our agencies. So one great example of where confidential computing is used is what's called multi-party analytics. So being able to have a secure data, set that each part and can go in and query without exposing each other to what they're querying or what the data.}
+{\pard  \line \par}
+{And that allows for that collaboration in the cloud environment, using confidential computing that opens a door to wholly new applications and capabilities that they couldn't really do other than a manual call somebody on the phone and say, Hey, do you see this information on your screen? I mean, that's what we're breaking with being able to do in the cloud now.}
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Wow. And well, I guess to your point, I would want a toward about this that much, but now, since you mentioned it, the collaboration aspect is quite important as well. One of the reasons why. I guess some people were sensitive or about going to the Cloud also this as well. I like, for example, }
+{\cf1 [00:21:00]}
+{ Walmart would not want their data to be visible to Amazon.}
+{\pard  \line \par}
+{Right. So they would go to Azure. And, but how do you even like say, what if Amazon has some kind of tenterhooks into Azure or whatever, but to your point, something like this as a service allows you to have that destination and trust. Oh, as long as I have the chain of custody, I know my data is secure and it's within the boundaries that I'll be able to find over here.}
+{\pard  \line \par}
+{And the more I think about Azure confidential computing, the more I imagined these days, people want to have applications that are global, obviously. And as you said, Azure allows the service. I'm assuming they go beyond just the region or beyond just the country as well, because nowadays collaboration could also mean that Australia has a great relationship with.}
+{\pard  \line \par}
+{So it was freight in the army. They want to have some kind of a software relationship. Let's just say you use the word collaboration with the us army or USA. Can this happen on a global level as well as is it sharing, having that level as well? }
+{\pard  \line \par}
+{\b\cf3 Steve Orrin:\b0}
+{ So again, th the, the Azure cloud environment does not one region only their government cloud spans the world and, }
+{\cf1 [00:22:00]}
+{ and they have the ability, , the nice thing about it is using confidentiality.}
+{\pard  \line \par}
+{It could be the Australian government, , military talking to the U S military. It could also be, , a and Z bank talking to Barclays and being able to share data in the of confidential data amongst themselves in a cloud environment. It doesn't have to just be government collaboration. You think about cross domain fraud detection.}
+{\pard  \line \par}
+{Having the ability for Barclays bank and a and Z bank and city to be able to collaborate on a fraud piece of information, but at the same time, not exposing their own customer data, which they can expose, but being able to share, Hey, I'm seeing this kind of fraud activity on a global scale, allows them to collaborate, identifying, , fraud and money laundering and other kinds of nefarious activities that they normally would have to do manually.}
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Yeah. Yeah. And I think that may make me think of another question then with the data that they're dealing with, sometimes some of that data would be. I just say, can I leave the country? Cause I'm not even gonna leave the state. So how are, how are those kinds of scenarios dealt with in such a confidential computing kind of a thing in Azure?}
+{\pard  \line \par}
+{\b\cf3 Steve Orrin:\b0}
+{ So it's an interesting, the idea of }
+{\cf1 [00:23:00]}
+{ data sovereignty is, is a key thing. And you find this in most governments around the world, whether it be the U S as part of the FISMA requirements says that us government data has to operate and exist inside the boundaries of the U S similarly in the EU. The EU individual countries have data sovereignty requirements.}
+{\pard  \line \par}
+{So German citizen data has to stay in Germany. Australian citizen data has to stay in Australia. Those are requirements that don't really fit well with the whole global cloud ID. What some of the controls that you've had and actually one of the standards that NIST put out early. And I was one of the coauthors of, is a what's called how to do trust the cloud, which you look up.}
+{\pard  \line \par}
+{And so it's an architecture for how you can trust the cloud and use attestation at the hardware level, paired with geolocation data, to be able to say my workload is, , say the German workload, it has to stay in Germany. And so I can verify the server with geolocation information, physical server information, and be able to generate a unique code and unique measurement that I can bind my workload to so that it can only decrypt and only }
+{\cf1 [00:24:00]}
+{ be provisioned.}
+{\pard  \line \par}
+{The environment that matches those properties. And so you can enforce data sovereignty from a technical level and their standards and architectures, and many of the cloud providers adopt that standard for their infrastructure. Often times what they do is they do that behind the scenes. And then your web interface where you say I wanted my data sovereignty for this vocation, it's kicking off that technology on the backend.}
+{\pard  \line \par}
+{There are other cloud providers that actually took it a step further and said, I'm going to give you access to make your own, to actually do that direct trust relationship and verify it. So cloud providers have taken multiple approaches. One is that IBM cloud, the SoftLayer cloud gives the user, the attendant, the ability to verify the server infrastructure in the geolocation.}
+{\pard  \line \par}
+{Other cloud providers use the same technology, but they do it on your behalf of you again from a simplicity and scale perspective. Yeah. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Yeah. He was, he was love the easy thing. Just give me a tick box. I'll put the tick box then I'll just go on. I don't want to say. }
+{\pard  \line \par}
+{\b\cf3 Steve Orrin:\b0}
+{ And just for those that are interested, it's the NIST inter-agency report 79.}
+{\pard  \line \par}
+{Is the trusted geolocation and the cloud architecture that }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ was }
+{\cf1 [00:25:00]}
+{ called. I'll put that in the show notes as well. I love the collaboration angle. I love the angle that now they have come up with, Hey, we can do a test station. So exactly where this is going. To your point then if I am able to do a geo location pinning or tagging, how does that work in the context of, cause I'm thinking about leaders who are listing in other CSOs, who are listening, going.}
+{\pard  \line \par}
+{Okay. That's great. But what if someone accidentally. The eggs or shares for some reason, the Australian military and us meant we started talking and someone in Australia, I don't know, maybe had a moment of weakness for lack of a better word, and accidentally clicked on a button which gave access to Australian citizen information on that one particular window.}
+{\pard  \line \par}
+{Now, would the geo meaning, would that prevent that or do they need to think about control? Because I'm thinking about. Like, are we actively making controls for this as well? Or does Azure take care of all of that as well that, Hey, you're having a moment of weakness stop this. This is not right. Right.}
+{\pard  \line \par}
+{What's the play }
+{\pard  \line \par}
+{\b\cf3 Steve Orrin:\b0}
+{ here. So there's, there's a couple answer ways to answer that. Part of the way, when, when government agencies set up their cloud }
+{\cf1 [00:26:00]}
+{ environment and they put their controls in place, they also put in, or policy controls about how, , what what's allowed changes and they can set policies that say certain things can't be changed.}
+{\pard  \line \par}
+{Or they need to sit in one of the things that a lot of the government agents said is a, to be called two man rule two person rule. So that for instance, changing the requirement on where something can go from a geolocation requires to authentic to individuals thought to check that box so that someone can admin and that happens, admins make mistake, but it's much less likely that to add.}
+{\pard  \line \par}
+{And then backing into that is of course the audit log that when that change is made, it's not just made in the ether. There's an, a log in an event. And because it's outside of policy, it would show up on our dashboard. But here's the really interesting thing about when you pair that geolocation pinning with confidential.}
+{\pard  \line \par}
+{Because because the data is encrypted, even when it's being transacted upon. If someone were to do something and say, I'm going to put my data. And I think I'm going to put it into the Australia and accidentally clicked New Zealand instead, because it looked close on the map. And if they're using confidential computing, both places, even though it's }
+{\cf1 [00:27:00]}
+{ physically moved to another location, the data was never exposed in that location because it's encrypted.}
+{\pard  \line \par}
+{And so there's a secondary control you can use. To protect the exposure of the data while you fix the policy issue about data boom, and across domains. And so by using these kinds of technologies in tandem with each other, you actually build backups for the controls. So even if somebody were to, , one example is you worry about what about an insider threat at one of the cloud providers?}
+{\pard  \line \par}
+{So an admin gets paid a lot of money to go walk over to a system and pull the memory or put a probe on it or tap. That is a risk. What confidential computing does is it doesn't matter. They can't physically see the data because it's encrypted from the CPU out. Even if they put a probe on the, on the memory bus, it's going to be encrypted.}
+{\pard  \line \par}
+{If they took the memory away, it's encrypted with a key that only works on that server because even if I plugged the memory in another server, I don't get anything. And so it's technology and policy work in tandem so that you have the policies for the doing the right thing. And when things don't go right, you have the technology to serve.}
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Awesome. And that, well, hopefully not knows having a bachelor }
+{\cf1 [00:28:00]}
+{ party together as no two, two people don't end up having, oh yeah. This makes a good idea. Let's do that. Talking about all the challenges in this space for leaders who may be listening to this and going okay as your confidence competing, sounds like a great place to go at the session.}
+{\pard  \line \par}
+{Great. I love the fact that I can locally encrypt something as well. So my data in use is also in. Where do you see as some of the challenges that leaders face when going down the path of using something like this for sensitive data or expanding global operations and stuff. So what are some of the common challenges that you come across that maybe some of my listeners may be interested in?}
+{\pard  \line \par}
+{\b\cf3 Steve Orrin:\b0}
+{ So I think some of the things we've heard from customers that are looking at it, number one is a certain amount of education. So knowing that you can take advantage of this service. It is a little different. It's not like you just throw your app into the cloud and you're done with confidential community.}
+{\pard  \line \par}
+{I think about what part of my app or how much of my app do I want to put in the confidential computing service versus the standard cloud. And so it's taking an architectural view and most of the time it's either I'm going to put my data into the confidential competing, or I'm going to run my query in the competition.}
+{\pard  \line \par}
+{So it's thinking }
+{\cf1 [00:29:00]}
+{ about what part of your application, because it's not like the old school of where I've just take a VM from on-prem and throw it in the cloud and magic. It's done. You can put your whole application into confidence going to be more often than not though. People think about what aspect of the transaction makes sense for that.}
+{\pard  \line \par}
+{So there's a little bit of thought, right? The other is then thinking about the more holistic. So it's one thing. If I have one application or a hundred applications, and I'm going to put them into Azure cloud and use competition bidding, I'm good to go. And in that simple case, you're, you're done. The challenge comes in where people are struggling, , sort of having to do a little bit more thought is the multicloud and the hybrid.}
+{\pard  \line \par}
+{So now I've got two different cloud providers. They may both have confidential computing, but how do I link those two together? And so that's an area that Intel has been working on is sort of how do you do at testation cross cross-cloud? And so we actually announced at our vision conference a couple of weeks ago, something we calling project Amber, which is sort of an act gestation service.}
+{\pard  \line \par}
+{It's the idea of providing a central service that can cross cloud. So that you can verify an Azure and an IBM cloud with the same rest API and same quoting mechanism to allow you to do }
+{\cf1 [00:30:00]}
+{ multi-cloud similarly that same capabilities we have open source tools that help you on this to be able to do on-prem at gestation and cloud.}
+{\pard  \line \par}
+{So when you do from the on-prem to the cloud and backup. You can maintain that secure at the station as your data moves from those instants. So that's where the confidential company moving to the hyper scale is where I think the next wave of both challenge and opportunity is as people look at applications that don't the world, isn't a simple everything in the cloud.}
+{\pard  \line \par}
+{It's a hybrid cloud. It's a, multi-cloud, it's a services, , a SAS services coming from a variety of places. And you look at the more interesting applications being built in these industries. It is a multi-cloud environment. And that's where the opportunity for competency computing across cloud domains becomes really interesting.}
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Do you feel that the cloud service providers would be open to the idea of this? I mean, it's different when it's Australian, military and American military and german military, I feel like cloud service providers being private organizations, maybe government can drive this that'd be great. But do you feel like they would be open to the idea of collaborating between.}
+{\pard  \line \par}
+{\cf1 [00:31:00]}
+{ Themselves for something like this. Cause I imagine at a station standard, I may say if I'm Amazon, but I have my own attestation standard and Azure might fail or we have our own which standard. And there is no, I guess, benchmark and maybe that's what Intel is working towards. Do you find that they will be more open to this?}
+{\pard  \line \par}
+{So I }
+{\pard  \line \par}
+{\b\cf3 Steve Orrin:\b0}
+{ think , there are a couple of different drivers. One is the idea of having an open standard will allow for application portability and that's one of the key asks from all customers, government finances, everyone wants application portables. And so open standards around that attestation is the right approach.}
+{\pard  \line \par}
+{The good news is the government's actually making it a mandate because they're when they're big, , the, the $10 billion government contract that was announced, GWCC or joint war fighter cloud computing service. It's got four cloud providers as the providers of Sr. So by definition, they've got to figure out how to inter-operate enough to be able to service that one government.}
+{\pard  \line \par}
+{And so the government, and we're seeing this also in financial services, you don't want to have a situation where one bank and another bank who chose different cloud providers, can't do transaction processing with each other. That's just not going to fly. So the customers are driving the cloud }
+{\cf1 [00:32:00]}
+{ providers to drive towards a set of open standards and API APIs.}
+{\pard  \line \par}
+{The good news is there are APIs for everything. And so whether it be cloud service, the cloud brokers and the cloud CSPs, the cloud security. Are able to provide the sort of multicloud approaches to whether it be at gestation, like in what Intel's building, or even the idea of having a multi-cloud view of your security settings, your controls, your policies, and to be able to push them out.}
+{\pard  \line \par}
+{There's a whole industry of security companies that provide that on behalf of the cloud provider. So the waves are happening to get us there and there's more. Companies and government agencies started adopting cloud. It's going to become a foundational requirement for that interoperability, the car providers that will be successful.}
+{\pard  \line \par}
+{The ones that recognize how to leverage their services and to be able to push that onto other clouds so that I could use Azure confidential computing on an Amazon workload. I mean, that gives you Amazon a play, but it also gives Azure a plane. So there's going to be that cross domain part. And I think security probably we will be one of those things that drives more of that collaboration.}
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ }
+{\cf1 [00:33:00]}
+{ Yep. And I guess then, then we are on the line. I imagine people would change minds as well. Everything will faster than for billions of dollars in lane, I guess. So it's kinda like towards the tail end as well. So what a couple more questions and one thing that keeps coming up now with the current wave of people working from home and everything, zero trust also comes up quite often as well.}
+{\pard  \line \par}
+{What role does your trust play between data and Azure confidentially? }
+{\pard  \line \par}
+{\b\cf3 Steve Orrin:\b0}
+{ So it's a really good point and zero trust is the topic dessert. If you actually look at the recent executive order that came out on cybersecurity from the U S government right there and cleaning, or should it says, thou shalt do zero trust.}
+{\pard  \line \par}
+{Every agency has to have a plan, has to have a timeline and has to do zero trust. One of the key things that when you peel back the onion, understand what does it mean to do zero trust? It's not just, I need better authentication on my firewalls. That's not what we're talking. Really what is at the core is a data centric approach to security.}
+{\pard  \line \par}
+{It's not Ashish we've authenticated you. You're in good. End of story. It's ashish Ive authenticated you for this piece of data at this }
+{\cf1 [00:34:00]}
+{ moment in time, based on your current role. And so it's date, it's taking a D a data profile post, because again, the data could live anywhere. It could be in my domain where I've got authentication, it could be external, it could be in the cloud, it could be generated on the man.}
+{\pard  \line \par}
+{And so having a policy in a data centric view, Drives a zero trust approach because now I'm authenticating you for this data, not the system you're logging in from or to confidential. Competing is a key component of that because now I can employ one of the major tenants of zero trust, which is default deny by having it in a confidential container and verifying your access at that modern time, I'm saying, do I want to give you access to the data or to the output of the enclave?}
+{\pard  \line \par}
+{And if I get give up, if I take away your access, I don't break the. And so allows me to have a self-contained security module for the data independent of the authentication of the user that enables the zero trust approach. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Okay. And that case , maybe I should move on to the maturity scale because I feel like there's a lot to digest here for a lot of the lessons over here and it could be overwhelming to go, oh, I had to do so much.}
+{\pard  \line \par}
+{Maybe if we. Strip that down to what is like a }
+{\cf1 [00:35:00]}
+{ level one, like a level of 10, or what do you see as a maturity benchmark that people can, can go for people listening in for the first time? All right. I've heard about Azure confidential computing from Steve. Sounds like a great idea. I would love to encrypt some things are in transit and in use as well.}
+{\pard  \line \par}
+{So what is level one for where can they start? And maybe what do you feel would be a maturity that they can go for it, but they will be pretty advanced }
+{\pard  \line \par}
+{\b\cf3 Steve Orrin:\b0}
+{ at that point. So it's a, it's a great question. And the good news is that Azure has done a great job of providing easy to integrate }
+{\pard  \line \par}
+{capabilities for avid, as your competence can be to the average they have on the Azure confidential computing service website, they have multiple models.}
+{\pard  \line \par}
+{And if you want to do, for instance, multi-party analytics that were referenced guide to how to set that up. If you want to just do data security for application workloads and just do an enclave, there's a tool that we helped generate for the industry called Grammy. It's an source tool that basically take your existing app and dump it into Grammy.}
+{\pard  \line \par}
+{And you don't have to worry about it. It handles all the backend of how to connect to an Azure confidential computing in an open source way. And so the }
+{\cf1 [00:36:00]}
+{ easy button is to go to the two things. The one go to the Azure confidential insight, it's select the, the confidential computing service as one of your VMs.}
+{\pard  \line \par}
+{And then take advantage of one of their templates, basically to move your application in there. And again, from a developer, from a DevOps perspective and dev sec, Grameen is the fast, , is what I call the easy button. It basically, you pull that into your development environment. You can put your application in there and then do the dev ops without having to understand.}
+{\pard  \line \par}
+{Well, what about what part is confidential? None. It just put your whole app in there. That's so phase one, toss your app into Grameen, and you're good to go as you mature and start thinking about how your application, especially in those services applications that are inter-operating amongst multiple applicants.}
+{\pard  \line \par}
+{Yeah, that's the next level of maturity. When you start taking an architect, an enterprise architecture view, an application architecture view of putting my data into this confidential computing enclave, putting my transaction into a separate one and then putting the UI in a third and having them talk to each other.}
+{\pard  \line \par}
+{So each one is there a separate entity? It's a more advanced approach. But definitely a lot of, and by the way, a lot of government customers take the easy button, just put my application in Grameen }
+{\cf1 [00:37:00]}
+{ and let it go because that, again, fast time to market it's secure. I get my checkbox not going to go do my mission.}
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Yeah. Yeah. That would definitely be a changing life for a lot of people as well, because then you don't have to worry about all the complexity that comes with it. Cause I imagine. A lot of complexity also needs a lot of processes that have to be followed and it just slows down the whole thing. So great way for people who are trying to learn about this as well, we can learn about confidential computing in the cloud space and security in the cloud space.}
+{\pard  \line \par}
+{Where can they find more information about this? }
+{\pard  \line \par}
+{\b\cf3 Steve Orrin:\b0}
+{ So I'd give you three places to start. One is obviously Azure confidential computing or HCCs is a great starting point. There's a consortium now of all the cloud providers and technology vendors called the confidential computing consortium. And, and they have a lot of data on all of the different cloud providers and how they're doing confidential computing.}
+{\pard  \line \par}
+{And then it definitely come to Intel and look at Intel confidential computing on our website. I'll tell you a bit about technology and also have direct links to the, GitHub, to get Grameen and be able to start trying this stuff. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Awesome. Thank you so much for this Steve. That was pretty much more we had from a questions perspective. Where can people find you and connect }
+{\cf1 [00:38:00]}
+{ with you if they had follow up questions that aren't confidential computing and what Intel is doing in this space?}
+{\pard  \line \par}
+{\b\cf3 Steve Orrin:\b0}
+{ So there are two ways to reach out to me. Number one you can find me on LinkedIn at Soren. So it's linkedin.com/s O R R I N. And then the other is, , if you go to intel.com. Public sector. It will, you'll see all of my content, podcasts, articles, and the like that myself and my team have put out there to learn more }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ awesome.}
+{\pard  \line \par}
+{And I'll put them in the shownotes as well, but thank you so much for this. This is really. I think I found it really valuable. So thank you so much for doing this for us as well. I can't wait to have you again, to talk more about the whole confidential space and how this is evolving. So thank you so much for doing that and thank you everyone who is currently, and then I'll see everyone tomorrow for the next episode, but for today have a good one and enjoy the weekend.}
+{\pard  \line \par}
+{\b\cf3 Steve Orrin:\b0}
+{ Thank you very much. }
+}

@@ -1,0 +1,434 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2639
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 TimesNewRomanPS-BoldMT;\f1\froman\fcharset0 TimesNewRomanPSMT;}
+{\colortbl;\red255\green255\blue255;\red97\green167\blue95;\red0\green0\blue0;\red109\green109\blue109;
+\red81\green0\blue192;}
+{\*\expandedcolortbl;;\cssrgb\c44706\c70196\c44706;\cssrgb\c0\c0\c0;\cssrgb\c50196\c50196\c50196;
+\cssrgb\c40000\c0\c80000;}
+\paperw11900\paperh16840\margl1440\margr1440
+\pard\sa360\partightenfactor0
+
+\f0\b\fs28 \cf2 \up0 \nosupersub \ulnone Caleb Tennis:
+\f1\b0 \cf3  \cf4 [00:00:00]\cf3  We were very surprised when our team started diving in and that's what forced us to really learn. I am Google security center, you know, all the bits and pieces because we had to, if you asked me today, what's your Google cloud workload, the answer is very small. We're not a Google cloud shop. And I think most places, Oh, no, we're an AWS shop.\
+We use AWS. Have you explored your Google cloud? Because you may actually be using it and you may not be aware of it. And if you're not aware of it, then you don't have any security practices wrapped around it, thats for sure.. Are \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  you someone who thinks that Google cloud is not a thing in your organization, or you have a really small presence of Google cloud in your organization?\
+Then maybe let me share some stats that came out of this conversation that I had just now with Caleb Tennis from Sequoia Capital, Google Workspace. When you have that big query, think about most of the Google applications out there, including Google analytics. depending on the kind of services using in the Google docs or whatever you want to say it, you would find that a, you are having at least some presence in Google cloud.\
+If you're using any of the services, I mean, if you're using Google workspace, you begin with you already in Google cloud, just by the nature of that. But if you're not a Google workspace shop, but you happen \cf4 [00:01:00]\cf3  to be in AWS or somewhere else, you're still definitely using Google cloud. If you're using any service from them.. So from that perspective, I was like, okay, this is definitely super interesting.\
+And I obviously, for me, when I started learning about cloud, the first cloud that I learned was AWS, and then I moved on to Azure, Google cloud and all of that, that came in later, but this was a super interesting conversation that I had with Caleb Chenis. He is an information security principal at Sequoia Capital\
+and he was similar to me. He had an experience in AWS for a long time, and then he slowly started finding out. Oh wait, we actually use a lot of Google cloud, which I didn't realize we were using a lot of Google cloud. And at least in the beginning, they used to think that they are an AWS shop, but they realized actually we do use a lot of Google cloud.\
+Now, granted the Google cloud is different for different people, depending on how much you're using it, and you may be a Google cloud shop. So this was really interesting to kind of bring an AWS perspective to Google cloudware, which is probably still the largest cloud provider, but a lot of people know AWS cloud, but they may or may not understand.\
+And how do you kind of segway into Google cloud? What are the challenges from it? What kind of services are probably \cf4 [00:02:00]\cf3  bad in Google cloud or what are the proper services that are really good? We focus our attention on Google cloud identity piece specifically, because one was to understand, Hey, how do I start day one or day zero on Google cloud coming from AWS background, but then once I have inventory.\
+What am I doing after? Like, do I use my AWS identity? Do I use my another identity that I have all that and a lot more conversation that I had with Caleb. And I think this is really interesting because especially coming from AWS land, I can connect it with a lot of things. He said, I'm sure all of you would as well.\
+If you have someone who probably is from an AWS land and trying to get a hold of what Google cloud security looks like, definitely get an episode for them. Listen to, and if you are someone who's probably. Trying to understand Google cloud security, maybe starting to, this will be a good one as well, because I definitely find the conversation to be at least from the challenges perspective was really cool.\
+And we got to hear a lot about this as well. So if you enjoyed this conversation and maybe you're here for the second or third time, definitely consider leaving us a review or rating on iTunes or Spotify, or maybe if you're watching YouTube or LinkedIn, definitely give us subscribe or follow. By the way, recently I passed my AWS \cf4 [00:03:00]\cf3  security specialty exam. probably one of the first people in the world to pass a new SC02 exam, which has just got released on the day. I gave it on the day and I got my result the next day. And for someone who probably has not given an AWS security specialty exam before, I was definitely surprised by the exam and I'll do a whole video.\
+The cloud security newsletter should cover this as well. CloudSecurityNewsletter. com. And I think we have the CloudSecurityBootcamp. com running a bootcamp session later this month on the whole conversation about what to expect on the security speciality exam. By the way, I'm thinking of doing a security speciality YouTube video, which is just dedicated for, you don't have to think about.\
+Go to multiple places, just have one YouTube video. We can actually do the entire thing. Definitely let me know if that would be of interest. If that is of interest, definitely consider subscribing to the YouTube channel as well. But for now, definitely enjoy this episode with Caleb Tennis, who shared a lot of gems about coming from an AWS land into Google Cloud and where to start.\
+Enjoy. I'll talk to you in the next episode. Peace. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Caleb Tennis:
+\f1\b0 \cf3  When you're developing an app. Security might be treated as an afterthought. With functionality requirements and tight deadlines, it's easy to accidentally write \cf4 [00:04:00]\cf3  vulnerable code, or use a vulnerable dependency. But Snyk can help you secure your code in real time, so you don't need to slow down to build securely.\
+Develop fast, stay secure. Good developer.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Hello, welcome to another episode of Cloud Security Podcast. This is continuation of our Google Cloud Security Month. And today's topic is an interesting one. Like I think I have started my cloud journey in AWS and I'm always a little bit scared of the whole conversation that it comes to other cloud providers because you're just more more like, yeah, I know what it is, but I don't know if it would translate really well.\
+Fortunately, we have Caleb today, so I'm going to bring him on stage. Hey Caleb, how's it going, man? Hey Ashish, how are you? Good. I was gonna say, I think for someone who's coming from an AWS background into the Google Cloud world, so glad I have you today. For people probably who may not know who Caleb is, could you share a bit about your journey with the current role that you're at today?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Caleb Tennis:
+\f1\b0 \cf3  Sure. I actually started off in the automotive industry. I went to engineering school \cf4 [00:05:00]\cf3  and after that did hardware and software for diesel engines for a number of years. And then kind of pivoted into doing consulting and contracting work in the software side. And in the late 2000s, found myself staring into the cloud as a way of managing these large amounts of data that we were generating.\
+This was a time when AWS was S3 and EC2 and SQS, which nobody was really using at the time, I don't think, but it was kind of this new fascinating concept of a place that you could run some compute workloads and also store a lot of data. Ended up doing some work for a. Email archiving and consulting company who was using S3 very heavily at the time.\
+And in this case, it was petabytes, which probably isn't super large today, but that time it was very large scale S3 implementation. And this was just a few years after the Enron scandal happened. So archiving email and doing preservation and discovery was a big deal. And then from there pivoted to doing a lot of cloud related stuff in AWS.\
+Over the years, OpenStack became a thing kind of in the early 2010s. I did a lot of work with that, standing up things for people who didn't want to go cloud, but wanted to like build their own clouds, learned a lot in that process. Eventually ended up \cf4 [00:06:00]\cf3  working for a storage vendor, building a solution around S3, object store type stuff on premise, pivoted back into the security space, which is something I'd done early on.\
+Ultimately landed at a company called Reverb, which was an online auction site for musical instruments, used music gear acquired by Etsy. So did a short stint at Etsy and then ended up doing here at Sequoia Capital among those information security teams at Global. Oh, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  sweet. You've definitely come a long way from when, I guess I wasn't in the cloud space in the beginning with the SQS and SEC, so you definitely were quite in the \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Caleb Tennis:
+\f1\b0 \cf3  weed.\
+Yeah, I'm sure I'm showing my age. And the funny anecdote I remember from that time was. It was a few years after AWS started, you know, it was a very slow ramp for them, right? Like they didn't offer new services every month like they do now. And so they had just started offering support, which was a big deal.\
+They had email and then phone support. You paid more to be able to call a phone number. And I remember we signed up for phone support, which was pretty expensive at the time, and I remember having to call that number two or three different times when things didn't work right. And I got the exact same person \cf4 [00:07:00]\cf3  each time,\
+And so at that point I was thinking, you know what? When they created their phone support, they just had one person who answered that phone twenty four seven. You know, some engineer on call or whatever who just had a cell phone with him. Certainly not like it is today. But yeah, it's like anything they, you know, they launch and you launch with as small as you can, right.\
+And then you grow it over time. And so, yeah, I remember talking to that guy three different times for three different things. And you know, sometimes it was two o'clock in the morning. Sometimes it was, you know, during the day he answered the phone every time. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Oh, and from that to now Google cloud, what was your first impression?\
+Now coming from like that kind of an AWS, so you were quite deep in AWS at that point in time. To Google cloud, what was the first impression of Google cloud? Well, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Caleb Tennis:
+\f1\b0 \cf3  like anything it's different. And so when you're so used to one vendor's way of doing things, and then you come in and see how another vendor has done it, you always have a healthy dose of skepticism around, Oh my gosh, now I've got this new thing I have to learn.\
+Why did they do it this way? At the same time though, you know, you can come with an open mind and say, okay, well maybe because they had a fresh \cf4 [00:08:00]\cf3  perspective. They're not layering on previous year's releases of software or whatever. Like they can innovate and kind of come up with a different way of doing stuff.\
+But my real learning of Google cloud was just how pervasive it actually is in our environment. And when I realized that I began to realize that I think that's the case for many other people out there using the cloud. They may not realize how much Google cloud stuff they actually have in their organization and the security teams, at least we were very surprised when I started diving in and that's what forced us to really learn IAM Google security center, you know, all the pieces and pieces because we had to, if you ask me today.\
+What's your Google Cloud workload? And the answer is very small. We're not a Google Cloud shop. And I think most places, Oh, no, we're an AWS shop. We use AWS. Have you explored your Google Cloud? Because you may actually be using it and you may not be aware of it. And if you're not aware of it, then you don't have any security practices wrapped around it.\
+That's for sure. So what's \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  an example that I, when you say there might be a blind spot of how much Google Cloud you already use, like what are some examples that people \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Caleb Tennis:
+\f1\b0 \cf3  should \cf4 [00:09:00]\cf3  think of? Yeah. Let me give you a list. It's not an exhaustive list, but let me give you a list here. So first of all, does your company or organization use Google workspace, right?\
+Do you use email, Google docs, Google drive? Is that what handles your email and document solution? If so, you're using Google cloud, whether you realize it or not, there is Google cloud running in the background with data in it that is there. And not only that, that's also the IAM service into Google cloud, your identity and Google workspace.\
+And so your users who have an email address. can easily just pivot over to Google cloud and do things in it, use certain types of workloads, certain types of services without any activation or administration required. And so if you're using Google workspace, you're using Google cloud, whether you realize it or not APIs.\
+If you're developing any software that talks with Google APIs. And one example of that, that we found was the Google maps API. We have a website that, you know, it's like a marketing site, but it has a map on it. That kind of shows locations of things. Right. And that's just a hook into the Google maps API with some open source libraries.\
+Well, to use that, you'd have to activate API services \cf4 [00:10:00]\cf3  within your Google cloud tenant. And so somebody did that years ago, following a set of instructions, go click this and do this and whatever that site lives will now we're using Google cloud because this third party site is activated, you know, running the Google maps API, do you have any mobile apps that you develop and are you developing for Android and on top of iOS, if you have any Android development, you've got Google cloud services running in your organization, right?\
+It's a requirement in order to be able to build and deploy Android apps. So there's Google cloud stuff. How about Chrome extensions? Do you manage or build any custom Chrome extensions? Maybe in the enterprise we do. We have custom Chrome extensions we deploy out for our users. Yeah, build and manage those Google cloud on the back end.\
+Any other Google apps, spreadsheets, docs? Do you use the interactive like macro features? Sometimes you might download a shared doc and it's got a Google app script on the background. That's kind of like custom JavaScript. You can use to do kind of the equivalent of visual basic script in the Microsoft world.\
+That all runs in the Google cloud. It runs in your tenant, right? Firebase. We have an entire team of people who build a mobile and web application. It's all lives in Firebase \cf4 [00:11:00]\cf3  because that was an easy. Easy place for them to go and build this thing. Well, Google cloud owns Firebase and your Firebase installation runs within your Google cloud and uses other services in it.\
+So if you went to that team and said, Hey, do you use Google? Okay. So you use Google cloud? Nope. Do you use Firebase? Yep. Okay. Well, then you're using Google cloud, right? BigQuery is another one. It's the data warehousing service that Google provides. There's a lot of services out there that shove data into BigQuery.\
+Kind of the equivalent of a Redshift or something like that on the AWS side. Well, you got BigQuery, then you're using Google Cloud and App Engine. Developed any apps maybe in the past five or six years using Google App Engine, real easy way to build and deploy. Again, you can like click buttons and just deploy the stuff.\
+If you got that, you're using Google Cloud. Any of those things, you've got a Google Cloud tenant out there running services in \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  I wouldn't be surprised if many people don't use at least one of those services. Totally. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Caleb Tennis:
+\f1\b0 \cf3  Totally. We use like five or six. But if you \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  ask, wait, the analytics, is that when \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Caleb Tennis:
+\f1\b0 \cf3  someone, yes.\
+If you activate certain features, so you can fire up and use Google Analytics just with your Google workspace, you still have to have something of \cf4 [00:12:00]\cf3  Google Identity, right? You have to have a Google login tied to something to get into use analytics. So if you're using Google Workspace that's tied to that, and then it can activate some Google Cloud related services, kind of depending on what you've done in the background.\
+Wow. However, what's be more interesting about that is if you're not using Google Workspace, if you're not a Google Shop, then the only way that works. is people have to use their personal Gmail addresses to use Google analytics. And so then all of your Google analytics users are just their own personal Gmail boxes that they've set up, right?\
+Now you've got a very insecure setup because how do you remove and users when they leave the organization, if it's tied to their personal accounts? Yeah. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Wow. I didn't realize, . So wait, clearly if there is so much Google Cloud in most organizations without some people knowing about and so much blind spot as well, what does day zero look like? So as an in terms of if I'm starting today, I may have had some AWS background like yourself.\
+What am I doing today to start securing what potential Google Cloud \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Caleb Tennis:
+\f1\b0 \cf3  is in my opinion? That's a great question. For me, it was inventory and analysis. First of all, understanding how to get into Google Cloud, the console, right? If \cf4 [00:13:00]\cf3  you've never done that before, you need to know how to pivot over to the UI of Google Cloud as some kind of administrator.\
+And let me just say this. One thing that's also very surprising, a lot of people don't know. Your Google Workspace administrators, whoever on your team is an Admin of Google workspace is automatically an admin of Google cloud. It's a one to one. And so we've run into issues where we have it people who are admins of Google workspace, who manage email inboxes.\
+Then a request comes in, Hey, I need this new thing stood up in Google cloud. They just go do it, even though they don't know the policy or procedure around it. So imagine if your help desk folks are also your AWS administrators, and they just go do stuff and they may not understand, Oh, but we use Terraform to manage that, or all this IAM has done a certain account, like they just automatically get that access.\
+So if you're an admin, you just pivot over into Google cloud inventory and analysis. So the hierarchy of Google cloud, there's a lot of parallels between AWS in terms of accounts and AWS or projects in Google cloud, there's IAM identities, a lot of parallels, but the organizational structure is quite a bit different.\
+Everything in Google Cloud is done in a project, which is kind of the equivalent of an AWS account, and there's tons of those \cf4 [00:14:00]\cf3  projects. There could be 10, 50, 100. There are a lot more fungible coming and going than AWS accounts are. It's very easy to create a new one, it's very easy to throw an old one away in the Google Cloud world.\
+Because of that life cycle, you can manage your blast radius better by just making things very more constrained to a specific project. As a result, and you may not realize this before you set up, you end up having tons of projects that you didn't create that got created on the back end, you know, by these things automatically.\
+And so getting that initial inventory of what actually exists in my tenant, what projects are there, Going into each one and saying, okay, what users are assigned at the ability to do things in this and getting that mapping going. And the reason that's important is because you can go back and make that a hierarchy.\
+You can nest projects together. You can have higher level folders. In our case, we did it by geography. So we have teams that manage Southeast Asia. We have a team that manages our China region, a team that manages the US. And so we were able to move those in a hierarchy. So the management of those is done by a dedicated team who can access all the sub resources therein.\
+But it takes a while to get that inventory analysis going. That's where you really need to start. You need to wrap your head around, \cf4 [00:15:00]\cf3  what do I have? And how widespread is it? And what services are each of those projects using to get that in an inventory? There are tools that can help you do this. All of the cloud vendors who sell cloud inventory solutions or cloud health solutions, they hook into Google Cloud.\
+So they can give you better visibility besides just going in. But if you've never done it before, the UI and the console. Easy to get started, easy to go through and just start poking around. And basically you just need to do some investigation. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Wow. So inventory analysis, what's after that? Cause you mentioned identity as well.\
+We kind of touched on Google identity. There is a whole concept of AWS IAM user and all of that. But you guys are AWS shop to what you said in the beginning. Yeah. But you're also using Google Cloud, which is this hidden thing. What was the thinking there with identity? Because kind of like that's the pillar \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Caleb Tennis:
+\f1\b0 \cf3  to get in.\
+Identity is the one that, as I started doing my investigation a couple of years ago, scared me the most because it was the one I felt like we had the least handle on. So in the end, you know, if you have all these other Google Cloud resources, you have compute, you have storage. Obviously, those are things that users, our users are using because they find valuable.\
+So it's not like we're \cf4 [00:16:00]\cf3  just going to come and say, no, you can't use. This service, because it's not the blessed service. Like we want them to be empowered to do this stuff, but the IAM piece, which is kind of the wrapper around all of this, that all exists. None of our users care about like how that's set up.\
+They just care that it works. Yeah. Our security team cares how that's set up. Right. We want to make sure it's done securely and by default, it's kind of done AWS.\
+But Google Cloud fundamentally IAM is really around the user. And so all IAM identities in Google Cloud basically are email addresses, right? It may not actually have an email that goes to it, but you know, it's a username at a domain. And so your Google Cloud identity and me as a particular user is one to one tied with my Google Workspace login, right?\
+So that is my identity in Google Cloud. And that pervades across the entire Google Cloud tenant, right? All the projects, everything, everything is done around that one identity. First, it's kind of like AWS SSO, where if you pivot in from some SSO provider, you can use that to pivot to different \cf4 [00:17:00]\cf3  accounts, you know, with what your identity is.\
+This just works across all accounts based on what your identity is. So whether you're blessed or not to do certain operations is just defined by their policies definition, but it's all tied back to my particular user identity. And then you have service accounts and machine accounts, right? So machine accounts being services that Google Cloud provides, like compute, Kubernetes, all these things that need to do work on your behalf or on behalf of the service.\
+They have identities too. Yeah. Just like IAM Identities tied to ec2 instances, for example. Yeah, yeah, yeah. Same type of thing. So you can bless them to do the same types of things. You can give 'em certain services. Again, most of the time that's just, I clicked a button or I ran a thing and like that got set up automatically and all the roles got assigned, you know, so you're not dealing with setting that up.\
+But for people who maybe use Terraform, who would like to have all of that control kind of done, like you'll have to wrap your head around either having a way to stand all that up ahead of time or importing that back into Terraform because Google did all that on your behalf. And then lastly are like these third party service accounts, right?\
+The IAM users of the world where you have to create some kind of static credential. You can create those. They're tied to projects and \cf4 [00:18:00]\cf3  then you can give them permission to do things either within a project or within other projects or kind of throughout the entire Google cloud tenant as a whole. Again, they have an email address as their identity or something that looks like an email address, as opposed to just a username in the AWS world.\
+But what we found. Again, I think this parallels with a lot of other people is when you start doing inventory, you will find a lot of these IAM user accounts, these service accounts across your entire Google Cloud tenant that you are not aware of off the bat. And you need to basically go get that inventory and then figure out what it is, who created it.\
+Is it even still being used? When was the key last rotated? You know, all those types of things. AWS has a, on their security guide, they have a page of all the best practices that AWS. It's like their top 20 IAM practices.\
+And one of them they very, very much talk about is workloads using temporary credentials in IAM as opposed to static. Yeah, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  that's, that's \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Caleb Tennis:
+\f1\b0 \cf3  like the golden standard for years, get rid of those static credentials, use temporary credentials where you can, and almost like shame vendors who still require you to copy and paste static \cf4 [00:19:00]\cf3  credentials in, right?\
+Like there's mechanisms for them not to have to do that. AWS goes very, very far. Google has no equivalent of services they provide that allow you to do that. There's no equivalent of them saying you should do it this way. And so every document you go see, every guide you go out there, every vendor you interact with, their steps are create a service account.\
+Create a static credential and copy and paste it and give it to us. And so as a result, you end up with dozens, in our case, a couple hundred of these static credentials in your Google Cloud tenant that are scary when you're coming from the AWS world, and you spend all this time trying to clean all that up, right?\
+And make it around it. So again, another thing you really need to inventory and understand Going back to \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  your day zero then, as part of the inventory, you're not just looking at projects and folders and I guess how many accounts you have, but you're also looking at what kind of identities are there, not just the identities like you and I, but also identities of service accounts as well as third \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Caleb Tennis:
+\f1\b0 \cf3  party.\
+That's right. And Google Cloud actually has a tool built in that makes that very easy to do. They actually have an identity. Inventorying service or a generic inventory service that you can focus on identity \cf4 [00:20:00]\cf3  across all your Google projects and specifically keys. And so you can get all that in one static report where all the identities are, what are all the keys associated with them when they were created?\
+And you can export that, you know, as a spreadsheet or whatever, and then go and start kind of iterating on figuring out what those are and if you still need them, or if you can get rid of some of them, right. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  And that's a lot of identities. And I think the fact that. Wait, is there like a temporary credential, you know, how in AWS you can actually have, so you and I as individuals, we may have IAM users, or we may have a federated user, we can still get SDS tokens.\
+So which is a temporary token for people who may not know what AWS or what that means. It just basically, we get temporary credentials to use API keys and CLI or whatever. Is there an equivalent in Google cloud as well? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Caleb Tennis:
+\f1\b0 \cf3  There is. I will say that the documentation and explanation of what it is and how to use it is not front and center.\
+And so when we started exploring this and we realized this thing actually exists, there is not a lot of information around how to actually make use of it. Fundamentally, like everything Google Cloud has documentation, but you know, it was very high level. \cf4 [00:21:00]\cf3  Go use this. It's a good idea to use this as opposed to static credentials.\
+When you start diving in, you realize how difficult it is to actually use. Google calls their service workload identity. Federation. And so the idea is having the ability to take workloads, things that would need to use these static IM credentials and federate their identity through some other service to be able to generate these temporary credentials that you can then use within the Google cloud ecosystem, as opposed to static credentials.\
+We can dive into that. It's actually interesting because some services make use of it. Some don't. Some have certain requirements around like how you have to craft the credentials, again, not documented. You find out the hard way where things don't work. The one thing I would say about it that's interesting, though, is you still have to start from somewhere, right?\
+In order to make use of that, if you think about temporary credentials in the IAM of the AWS, you still have to start from something. So if you're on an instance, right, the instance has some service that's like talking in AWS and generates these for you. Google Cloud has the same. In Google Cloud Compute, they have a metadata service that also will generate you temporary credentials on those instances.\
+But outside of that, there has to be some identity thing that you have to start with, some kind of \cf4 [00:22:00]\cf3  credential you have to start with in order to pivot. Into the temporary world. So that could be aws. Like if you start on the AWS side, you could have some kind of AWS identity. You can set up Google to be able to pivot from an AWS identity to a Google Cloud identity.\
+Oh. Which is really nice. Right? And Google Cloud supports that very natively out of the box. So if you already have that built in aws. And you can create identities in AWS. Great. Let's use \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  that to kind of peel a layer of that, basically what we're saying is AWS IAM user can be used as your identity for Google Cloud.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Caleb Tennis:
+\f1\b0 \cf3  Yes. And not only that, it doesn't have to be an IAM user. It could be an AWS IAM role. It's something that's already temporary in AWS. You can pivot to that. If you had SSO configured in AWS and use that to get in, you know, you have like a temporary SSO identity on your AWS Cloud. You can pivot to Google with that.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Natively. Yeah, absolutely. Wow. Wait. So as in, from a user experience perspective, I have my credentials and whatever AWS, my username, IAM username password on Google cloud. If I go, there's actually some like an identity center that you kind of mentioned or the workload, the federation thing, \cf4 [00:23:00]\cf3  or that you can just say, Oh, my credentials come from AWS \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Caleb Tennis:
+\f1\b0 \cf3  and \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  these are my \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Caleb Tennis:
+\f1\b0 \cf3  credentials.\
+And you can figure it and say, okay, here's the format of credential incoming that I'm allowing. AWS has a specific or Google has a specific way of formatting the AWS. It says, okay, for this AWS account number, the style of role, allow it to assume a role in Google cloud that matches this assertion.\
+Interesting, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  because this is really fascinating for me, because one thing, you know, as someone who's done identity access management at the beginning of my career, one thing I always used to think that it's just username and password. How can it be so complicated, right? But it's like over the years, I realized how complicated this is and how complicated it can be.\
+So if I was, and for people who are listening is, and maybe I would love for them to share their experience with identity in Google cloud, but for people starting today in Google cloud and they just have one account, what does that identity look like? Do you kind of recommend people should just start with the AWS credential if they have one, or should they just use the Gmail credential that they \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Caleb Tennis:
+\f1\b0 \cf3  get?\
+If you are a Google workspace user, use your Google workspace identity for user access into the system. It's so much \cf4 [00:24:00]\cf3  easier. Now I'm thinking of like a small company, right? Of course. Yeah. There are companies who use Google workspace, but still even have some kind of other identity, Okta or whatever that kind of sits in front of that.\
+And maybe the two are tied together. And so ultimately if Okta or some other identity provider is your real active directory is, your real provider of choice, you can also tie that in with Google cloud. So there's kind of this one to one mapping of all these identities between AWS, your identity provider, Google.\
+Google Cloud. That's fairly easily done. Where it gets a little more gray is when you start talking about these service accounts, the IAM user accounts, where some identity has to back it. That's where you can be creative and do what is best for you, whether it's tied back to your main identity provider, whether it's tied to your third party, whether it's some independent thing you set up.\
+And that really probably comes from the sophistication of how big your organization is and how much. Overhead you can manage, you know, to make it more secure. If you're a five person startup, certainly start securely, but also start assembly because you don't want to deal with all that other cruft.\
+Wow. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Cause I also feel it's just such a unique space, right? Service account, the whole machine role user thing that people used \cf4 [00:25:00]\cf3  to talk about.\
+But then when you go multi cloud. So we're talking about startup. We started to say, Oh, okay. If you have Google workspace, go ahead and just use your existing Google workspace. But if you're like an AWS shop, but expanding into Google, probably still stick to AWS, but in this context of multi cloud quote unquote, where identity to your point is probably the most important thing anyone can think about more than storage, more than compute, more than anything else.\
+That's what gives you access. And that's what if breached is potentially the one that one scary thing people have scared of. Is there a recommendation on how this scales? Because my thinking over here is that most people who use AWS at the moment, some of them, larger ones are over a hundred accounts or 180.\
+Like a lot, I imagine it's the same in Google cloud as well. And over time this is growing and you're saying, Oh wow, these are two big bubbles just growing on their site. Does your opinion on identity change at that point in time? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Caleb Tennis:
+\f1\b0 \cf3  It does. And I think one of the reasons is, I don't know if this is unique to us, Or extrapolates a little bit is most of our Google cloud usage is actually for projects that are internal to \cf4 [00:26:00]\cf3  us, right?\
+So our AWS workloads really are compute storage, you know kind of traditional things that you think of as the cloud and they're very generic across the organization where google cloud comes in is really Google specific workloads that we're trying to manage, right? These APIs I was talking about, Firebase, all those services that are Google specific.\
+And so because of that, we're not storing like generic workload data in the Google cloud. It goes in AWS. We're storing like Google cloud specific application data in the Google cloud side. And so the data storage, the compute that you're using, at least in our case is very tied heavily to like, because it has to be in Google cloud.\
+And so as a result, you don't have to be as sophisticated with all of the IAM stuff. Because these very specific workloads and it's a very specific set of people who are kind of using them. And so we try and keep it as simple as possible with maintaining that parody around just using Google workspace identity, because it's a smaller subset of users who actually need to get in there directly and use it now, where that falls apart a little bit again, is on the service accounts, \cf4 [00:27:00]\cf3  because there just ends up being so many of them kind of like IAM users, if people were left to just run with it, like they would just create IAM users.\
+Create a static credential, put it on their laptop and use that to interact with all the services. So that's where you have to be a little more focused on ensuring that people using that system or that need access to that can't shoot themselves in the foot by accidentally creating this stuff and kind of running with it, getting out of control.\
+What we found is that it's very difficult to reign that stuff back in once it's already out there. You know, example, if we find a user created a static credential and is using it, maybe just on their laptop, for example, or some workload to interact with APIs, we're not going to just go turn that off and say, okay, well, sorry, you have to stop using this.\
+And we're going to break what you're doing and you can't use it anymore. Like we have to work with them directly to get them off of that and migrate it over to some other solution, be it pivoting through roles, working with federation, whatever. And that takes time, you know, it's effortful to do that. And not only that, there's times where you may have think you have done that.\
+And then you find out that they've copied and pasted that credential six different places. And so just because you solved one, there's five other ones you have to go \cf4 [00:28:00]\cf3  find. And it's that balancing act of, okay, well, we're the security team. We're just going to shut access off to everything, deal with it.\
+Versus I'm the person providing value to the business. And if you stop the work that I'm doing, it's impactful and could cause a disruption, right? There's always that balancing act. And so it's easier if you never let that get out in the first place, you'd reign that in and show people the right way of doing it, as opposed to having to solve the problem after the fact, you start that blue sky and have that opinion early on, then it never gets out of control and you never have to deal with that situation.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Right. But once the cat's out of the bag, I guess. You basically you're fighting a harder battle because I think Daniel kind of mentioned the same thing as you were trying to say, which is basically trying to get a handle on the same things that Caleb mentioned, trying to keep tabs on service accounts and to avoid generating static credentials and keys and figuring out workload identity federation.\
+Yeah. He's definitely agreeing with you as well there. Thanks for that. Yeah. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Caleb Tennis:
+\f1\b0 \cf3  Run that inventory, like I was saying, and get a handle on it. Now, one thing, and we talked about this a little earlier, people create service accounts and then create the static credential for those service accounts because they're using a third party \cf4 [00:29:00]\cf3  service that told them to.\
+And their third party service hooks into Google Cloud. Maybe it's a security scanning service. Maybe, you know, a vendor who has the ability to do stuff, read data on your behalf. And their instructions are create a service account, create a static credential and give it to us. And we use that to access your Google Cloud environment.\
+Well, what do you do about that? There's no solution to that other than going to the vendor and and asking them to support workload identity federation as an option of how they interact with your Google cloud environment. In fact, what happened last year, when I gave a talk at fwdcloudsec and talked about this, I called out one of the big vendors, Wiz on their Google cloud integration.\
+And a few weeks later, they changed it, right? It's workload identity federated now. As an option, you can still do static credential if you want, but there's not that equivalent. There's no, at least I don't know of a Scott Piper equivalent in the Google Cloud world who can have the visibility of making sure the vendors who want to interact with Google Cloud do it securely like the AWS side where vendors are.\
+At least increasingly now more and more supporting IAM roles, as opposed to IAM users, Google cloud is not the same. There's a lot of static credentialing generation. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  \cf4 [00:30:00]\cf3  Yeah. Well, I guess one of the reasons why we don't see the wall of shame, I guess, for vendors who are probably not following this is possibly because is there not enough usage?\
+Cause I imagine to what you said, if people are going to Google cloud more for Google cloud specific workload. Is that still applicable or if you're \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Caleb Tennis:
+\f1\b0 \cf3  using third party? I think that there is quite a bit of usage. I think where it falls apart is there's not enough security oversight from the security teams because we fall in this area of we don't think we have a Google Cloud.\
+And so we're not managing Google Cloud, right? It goes all the way back to the beginning. I think if more people were aware of the Google cloud environments, they actually have in the organization and they got more involved in and saw this. And then more and more, we've become aware that it's actually a problem that they have to deal with.\
+It's a cycle that needs to get started. And just the ball hasn't gotten rolling enough yet across the space of all the users. Oh, wow. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  So if it starts over there, where it's a static credential, I imagine the reason for Google cloud to not mention anything otherwise is also because that's what goes into auditing, that's what goes into logging and all of that.\
+Because technically AWS does not \cf4 [00:31:00]\cf3  record your SGS credential being created as well. Right? Isn't that like a thing where you can still see that, Hey, Ashish is doing whatever things, but I could be using my temporary tokens instead of actually using my IAM user to make the call. Are there nuances to something like that in Google cloud as \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Caleb Tennis:
+\f1\b0 \cf3  well?\
+I would say that in my experience, Google cloud auditing and logging is actually really good. Almost to the point of too much information. And in fact, I know that the audit trails that we receive from Google cloud and Google workspace, also very heavily tied to that in terms of their audit trail is so verbose that we actually have different tiers of where we send those to based on the value of the report.\
+So it's kind of like in cloud trail, it was cloud trail, where if you turn on data logging, Lambda logging, all these extra things, the. Feed can just be so overwhelming that you may have to figure out how you put the lower value stuff in the cheaper storage and the higher value stuff and the more faster to scan storage, Google Cloud is the same way because they do almost every single little thing that happens.\
+Whether that's actually useful in hindsight, I don't know, because the volume is so high, sometimes it's hard to find the signal \cf4 [00:32:00]\cf3  in the noise, but they are, where that actually gets a little interesting and another anecdote that we have found is all of the Google Cloud services that provide these audit logging and Google Workspace provides audit logging.\
+Do it to Google services, right? Don't like you'd expect on the AWS side, when you do various audit logins, right? Where does it go? It goes to some SQS queue or maybe it goes into Redshift. AWS supports logging all that into AWS services. Well, Google does the same, right? All these Google logs go to Google services.\
+Well, if you're an AWS shop. How do you get those over into your AWS stuff, right? Maybe you've built all of your architecture around long term archiving of this data at S3. Well, that data is not going to S3. So now you've got to support some way of getting it over there. There's ways to do it, but if you're unaware that it actually exists, you're not pulling it over, then it's not alongside all your other data.\
+Various SIEM vendors, various logging vendors have different levels of support for how they deal with Google Cloud stuff. Some of them, you give them a service account credential. \cf4 [00:33:00]\cf3  And then they go pull the data out of Google cloud for you into their platform. Some of them maybe as a push model where you have to create a Google pub subscription that funnels requests off to a webhook and then they receive that and can pull data directly.\
+It just varies across the board, but make sure that you know where all that data is and where it goes. Biggest for us was big query. All the Google workspace data goes into big query and Google cloud getting data out of there. Very difficult into another service where you'd want to scan or use it, a send service.\
+It's actually very difficult to get that data out. We had to write a bunch of custom software \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  to do that. I think that explains why most security people are not even concerned about it. They just don't want to deal with it, I imagine, because to what you said earlier, A, the nuance of Google Cloud itself would be the fact that people would not even know that they're using Google Cloud because they would not be aware of Google Workspace, BigQuery, all of that.\
+Yeah. We have very small presence in Google Cloud. I think it was funny. I can't remember who I was talking to, but they said they're an AWS shop, but we've got really small presence in Azure and Google Cloud, but we don't \cf4 [00:34:00]\cf3  really look at that as much. And you kind of like, Oh, wait, but are they mission critical things in there in Azure GCP?\
+I don't know, but it's a very small presence. My biggest concern is to be in AWS. So I imagine how many organizations out there are just making a call to not look at any of that log from Google cloud or maybe even Azure as well. Just because they believe it's a small presence, but it's like a Trojan horse in a way.\
+It's like, it has all this stuff in the belly, but no one really is looking at it. And that to me feels like, is there a positive news from a security perspective for Google cloud? It feels like a bit scary \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Caleb Tennis:
+\f1\b0 \cf3  place. Well, I mean, I don't think you should be worried that the sky is falling like anything else.\
+I think security teams have come across many surprises even outside the cloud as they operate, right? They learn about shadow it or other resources that didn't exist before. We deal with issues where we have a vendor or a service that we use and we provide all of our users. And then we find out five or six people have still been using it personally on their credit card outside of that, right?\
+Like that just happens from time to time. And so it's easy to say, Oh my gosh, I'm so scared of this thing. Or like, I realize how bad it is. Let \cf4 [00:35:00]\cf3  me just. Pretend it doesn't exist. It's important to like, go get a handle on it. Right. And find out, and I don't think it's ever going to be as bad as you think.\
+Right. Like it's all solvable. It's really just getting a handle around inventorying. Like we talked about getting the analysis done, making sure the logging is all turned on and going somewhere. So you have that historical data and then just having a plan for like, how do we make this best practice? I mean, I will tell you, we are not a hundred percent, no service account, no service account keys.\
+Right. Like that's a great goal. But we're not there. We know we have that. Everybody's probably going to still have that to some degree. And so well, what's our plan for making sure we understand the provenance? We can rotate them periodically. We know who uses them and where, what services, you know, just getting that in place, you're light years ahead of the people who haven't started even thinking about it yet, because they still have their head in the sand.\
+Right. So just dive into it, figure it out. Maybe it's not as bad as you think. , maybe you're not really using it. And you can move on to think about something else, but you need to at least take a look. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Wait, so when people say large scale Google cloud, and maybe you've had conversations or you experienced this for people coming from an AWS side, where I was saying that people have hundreds of AWS account, what does big scale look like in Google \cf4 [00:36:00]\cf3  cloud?\
+I just have a really big, big query presence, or what does that look like? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Caleb Tennis:
+\f1\b0 \cf3  It probably equates to your monthly bill more than anything, right? Because it seems like the data presence is probably tied to how much you're spending. Interestingly enough, an anecdote about that is your bill can go to multiple.\
+Different people within Google. And it can be paid by multiple different folks as opposed to kind of like back to one central organization. And so you may not even have that visibility because billing is handled separately and IAM than administrative permissions. So you may not even be able to see how some of the bills are being routed.\
+And they're paid by the Google cloud. Our experience was our data presence was wide, but it wasn't super deep in terms of petabytes in terms of hundreds of machines or Kubernetes instances, but even just one or two was enough that we needed to go and. Figure out, well, who's using it. And in some cases, are they still using it?\
+Like it was a project that got stood up and never got terminated. I've had experiences before where we've run machines or instances that have gotten hacked other companies because they were just forgotten about, there's no data of any value there, but when your bill comes in one month, because somebody started mining Bitcoin on a machine, you know, that \cf4 [00:37:00]\cf3  was of no value, but nobody forgot to turn off or somebody forgot to turn off, you know, that gets noticed.\
+And so you want to get a handle on those. So that type of thing doesn't exist, regardless the size of your bill. Yeah. My guess is if you are approaching large scale AWS style stuff on the Google Cloud side, you probably already know you're using Google Cloud and have some administrative ground and expertise on it, hopefully.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Cause I feel like most people, when they say they have a significant Google Cloud presence, I wonder if they actually just mean that they have a really large Datasets that's on Google cloud. And that's what makes them instead of what you said. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Caleb Tennis:
+\f1\b0 \cf3  Kubernetes is the one, I know a lot of people who do hardcore Kubernetes really liked the Google cloud offering more than the AWS offering.\
+You know, it's a lot more native centric supports , a lot more stuff out of the box. It caught up, but in years past Google was way ahead of them on that. Yeah. Yeah. So \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  that's offering and Kubernetes probably is another one where people just go, I don't want to deal with this. It was like, there's definitely a lot of that.\
+So maybe a good place to start this is also could be, they might obviously be listening to this conversation. There would be a lot of people who might be from an AWS background \cf4 [00:38:00]\cf3  like you and I. And what was the hardest thing for you to learn as you were kind of starting that journey in the whole Google cloud space?\
+Cause we kind of spoke about getting inventory, identity, and then based on the workload and the production or whatever environment you're in, what was the biggest challenge when he was trying to work with Google cloud in the beginning as coming from an AWS \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Caleb Tennis:
+\f1\b0 \cf3  background, just figuring out. How their IAM role and policy assignment works compared to the AWS side.\
+It's different, I guess I would say. Not different in a bad way, just different. And Google Cloud and particularly the documentation that they write is much more centered around you clicking and doing things in their UI than doing it at a CLI or through a Terraform. Certainly you can do all those things through CLI.\
+You can use an SDK. You can use a Terraform. There's documentation for it. I'm not saying none of that exists, but all of the examples out there are click, do this, add this check box, click this box. And so you find yourself doing things that you may not realize on the backend have like five or six different effects, right?\
+Cause you just clicked a single button. And so then when you go behind the scenes and start doing \cf4 [00:39:00]\cf3  some of this stuff at the CLI or whatever, you realize that's actually six different CLI commands that I have to run to like, do this one thing that I clicked in the UI. You start realizing like they've automated some of the magic to make the experience better.\
+But when you're a developer, an engineer, who's used to like explicit instructions, that can be hard to swallow sometimes. Well, gosh, I wanted to know like all those things, cause it helps me understand it better. They also tend to use prebuilt policy to allow users to do things. As an example, when I want to go add a user in a project, a Google workspace user to do stuff within Google cloud, I might go and assign them a role of folder administrator.\
+Right. Well, behind the scenes, that's 436 different IAM things that that user can do, right? So it's kind of the equivalent of prebuilt policies in AWS, where you can give somebody the administrator policy or the policy that allows them to use the service and like attach it to their role. The same type of idea, but all those things are way over permission on the AWS side.\
+They've gotten better with like tying it to more specific stuff on the Google cloud side. It's very over permission. And so they support custom \cf4 [00:40:00]\cf3  policy. There is very little information How to really build tight custom policy to just do the things that the user needs to do. That is very lacking. And because it's lacking, I'm not going to go spend the time to figure it out.\
+I want somebody to write a blog post on it and show me what to do. So in the meantime, I'm going to give them full folder admin access button and just let them go. Obviously that's not great from a security perspective. That definitely needs some improvement. So \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  is there no concept of RBAC or role based access control then?\
+There's \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Caleb Tennis:
+\f1\b0 \cf3  role-based access control, and it's very granular. Can be very granular, but I have not seen where it gets done granularly down to the someone, one has to go through \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  the 400 plus services to actually understand \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Caleb Tennis:
+\f1\b0 \cf3  what Yes, yes. They support it. In fact, they support custom policy language and almost everything.\
+So there's a lot of conditions you can write, you can add conditional language, you can do the same thing in aws, but Google Cloud language is even a little more flexible around IP address restrictions or being in certain VPCs, or adding dates. Similar stuff, but the examples of how to do that are not far and wide, and you're not going to find a lot of people actually doing it from what I can tell.\
+It's a chicken and egg scenario, right? Like we \cf4 [00:41:00]\cf3  need a Google Cloud security expert out there who's like leading the charge on all of this and like showing people the way. Right now it's just documentation in the Google Cloud docs. So what \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  about learning this then? Like, so people who may want to learn about Google Cloud, as you might have done at a certain point, how did you start and what do you recommend people do?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Caleb Tennis:
+\f1\b0 \cf3  Well, I mean, Google does make quite a bit of resources available. The Google cloud security center, which is a product in Google cloud that can do your scanning kind of similar to AWS services around inspector and all those other types of things. One has good findings, but also a lot of documentation around best practices.\
+Google has videos. I know you've done other videos in the past with people talking about this type of stuff. Like there's good resources out there. There's no central place, right? Like it's pulling a lot of different information together, seeing experts who have talked about it. And that's just really where my journey started was doing that.\
+And then also, frankly, it was just diving in one area. We hadn't talked about much that really I spent a lot of time on was. The Google admin APIs or the Google Workspace Administrator APIs, which are the APIs you use to interact with Google Workspace services when you want to do things like interact with users calendars or do things with their email \cf4 [00:42:00]\cf3  or stuff like that on particular users.\
+We have a lot of services that we build internally. That we want to value add to our internal users in Google workspace. And so they use those APIs and those APIs are part of Google cloud. They're also part of Google workspace. So they sit in this gray area between the two, the identity you use to interact with them varies depending on which API you want to use and what service calls you want to use.\
+And in some cases. Even if you're a service account interacting with them or a user, some things you have to be an administrator of Google Workspace in order to do certain things. And so just being able to like provide services internally requires somebody to really wrap their head around how all of that IAM stuff ties together for any software you're going to write that needs to call in and like do stuff on behalf of those users.\
+That's what required somebody, me in this case. to really jump off the diving board and just figure it out because we had so many different users who had had to do a little bit here and there and just enough to make their software work. And then they were back writing software, not worrying about IAM anymore.\
+And that's where I had to pull it all together and \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  figure that out. Thank you for sharing that. But that was the last. Technical question that I \cf4 [00:43:00]\cf3  had. I have three fun questions that people get to know you a bit more, but this was really interesting conversation so far. First one that I have is what do you spend most time on when you're not working on technology, Google cloud?\
+Oh, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Caleb Tennis:
+\f1\b0 \cf3  that's fine. So a number of years ago, I picked up a hobby of aviation and then in the past six or seven years have actually built an airplane from a kit. And so that's really what we spend a lot of time on. My whole family does that. We have a YouTube channel called HowShotAero, A E R O, where we document our flying and airplane building adventures.\
+And it's been a fun process right now. My 13 year old son is working on building an airplane. So hopefully in a couple of years, when he's 16 and he can solo, he'll be able to solo an airplane that he built. And so it's a great hobby. We love it. I would wholeheartedly recommend everybody stay away from it because it's a complete money pit in terms of throwing dollars away.\
+But it's certainly a very fun way of enjoying seeing the country fly around all the place and also enjoying time with the family. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Yeah. But cause is that one of those single engine, double it? Like what's it called? It's a \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Caleb Tennis:
+\f1\b0 \cf3  single engine. We have two, we have one that's a two seater that does acrobatics.\
+You can go upside down and loops and rolls. And then we have one that's a four place that our \cf4 [00:44:00]\cf3  family goes in and it's a big SUV that you can get somewhere across the country pretty \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  quickly. Wow. Wow. That's pretty awesome. Yeah, obviously you have your license and everything as well. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Caleb Tennis:
+\f1\b0 \cf3  Yep. Learned to fly about 13 years ago.\
+And \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  what is something that you're proud of, but that is not on your social media? I \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Caleb Tennis:
+\f1\b0 \cf3  don't know that it's on my social media, but I do have a little bit of a presence on it. So our family does a lot of travel. And one of the things we're trying to do is hit all the national parks. And so just this past week, we hit, I think it was number 21.\
+There's like 64 national parks in the United States. We're at number 21 now. So we have a ways to go, but it's a great way to see the United States, because it's all over the place. all over the country. And so you get to see unique aspects of different areas of the country. Meet great people, learn about geography of that area of the country and how it differs so much from other places and hopefully expose my kids to travel and culture and let them enjoy the world. That's pretty \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  awesome, man. I think it's a good hobby to have as well. What's your favorite cuisine or restaurant that \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Caleb Tennis:
+\f1\b0 \cf3  you can share?\
+We are into Thai food right now. It's one thing that everybody in the family can agree on is delicious. And so whenever we travel, we Try and find a Thai restaurant to, I would say we \cf4 [00:45:00]\cf3  order new dishes. My son loves pad Thai. My daughter loves typically a noodle soup, you know, Pho, which isn't really Thai, but some, some equivalent of that at various restaurants.\
+And so they differ greatly between where you're at and who's cooking them. And so we love seeing how different people put different spins on a lot of these Thai dishes, where we go. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  That's pretty awesome, man. And thank you for sharing that as well. Thai is definitely an interesting cuisine as well.\
+So where can people find you on the internet if they want to connect with you on the whole? AWS view of \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Caleb Tennis:
+\f1\b0 \cf3  Google cloud. Yeah. My website is actually my name. So it's Caleb. tennis. I'm one of the few people who has a last name. That's also a top level domain name. So it's pretty cool to have that as a domain name, but also it throws a lot of people off because they want to see a.\
+com on the end. So you can go there. It's got my contact information and some stuff about, I \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  would definitely that in the show notes as well, but thank you so much for coming on the show. And thank you for everyone who tuned in as well, ask their questions and share their knowledge as well. \
+Hopefully I'll see you soon, Caleb. Thanks for coming and all right. Thanks everyone. I'll see you next episode of Google Cloud Security month. See ya. Peace.}

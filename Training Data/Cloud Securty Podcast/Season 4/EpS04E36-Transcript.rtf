@@ -1,0 +1,259 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2639
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 TimesNewRomanPS-BoldMT;\f1\froman\fcharset0 TimesNewRomanPSMT;}
+{\colortbl;\red255\green255\blue255;\red97\green167\blue95;\red0\green0\blue0;\red109\green109\blue109;
+\red81\green0\blue192;}
+{\*\expandedcolortbl;;\cssrgb\c44706\c70196\c44706;\cssrgb\c0\c0\c0;\cssrgb\c50196\c50196\c50196;
+\cssrgb\c40000\c0\c80000;}
+\paperw11900\paperh16840\margl1440\margr1440
+\pard\sa360\partightenfactor0
+
+\f0\b\fs28 \cf2 \up0 \nosupersub \ulnone Harshil Parikh:
+\f1\b0 \cf3  \cf4 [00:00:00]\cf3  I don't know if most security teams are quite there yet because I mean the challenges are real. If you have software development in Java, Python, Go, Ruby, whatever, it's hard enough for security people to just be really good at those things and then be also able to understand all the complexities that come with AWS and GCP and Azure.\
+I mean it's not easy for an individual or group of individuals to be really good at all of those things. These are complex problems. We used to have bug bounty programs and every once in a while we would have researchers come in and say, Hey, there's this misconfiguration on AWS or this S3 bucket is open and so on and so forth.\
+And the traditional software security people I had in my team, when we would get these AWS related things, they're like, I had no idea how AWS works. I don't know the difference between a Lambda function and S3 bucket. What do I do with this? Then we started asking that question, like, okay, do we just educate these folks and uplevel them with an AWS skill set?\
+Or we build a team that consists of people with different types of skill set that's now responsible for bug bounty response and all of those things, right? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Is it code to cloud or cloud to code? If you're building a cloud security program and you're a \cf4 [00:01:00]\cf3  leader, you're probably looking for directions. And you keep saying these words, code to cloud, cloud to code.\
+Sometimes you wonder what is code to cloud and why is it such an important thing right now? Fortunately, I had a conversation with Harshal who is the CEO of Tromzo and also a former CISO. who came and spoke about at what point do organizations, should they consider code to cloud or cloud to code and their cloud security program or whatever stage of the journey that they might be in as an enterprise or large company.\
+And what are the transitions that some of the organizations going through as they kind of mature in their cloud cycle where application security teams, as well as your cloud security teams are almost starting to merge. Now, it's a pattern that's been recognized by a broader industry. Harshal spoke about this aswell, a lot more other people are talking about the code to cloud and cloud to code.\
+And should we be on the right? Should we be on the left? A lot more related questions, as well as some gems being dropped by Harshal on the episode. I really encourage you to watch it and hear it. If you're watching this on the YouTubes of the world or listening to this on Spotify or iTunes or \cf4 [00:02:00]\cf3  any popular podcast platform.\
+But if you know someone who's actually working through a cloud security program and thinking about should they consider code to cloud or cloud to code? Definitely share this episode with them because I think it'll be valuable. And if you're here for the second or third time or maybe more, I would really appreciate if you can spend a few moments to just drop us a review or rating or maybe give us a follow on your favorite social media, because we seem to be everywhere on YouTube, LinkedIn, twitter and on the audio platforms like Spotify as well as iTunes. So I appreciate your support in this and I look forward to getting your feedback on the episode and your thoughts on code to cloud and cloud to code. Which one would you go for? Let me know in the comments below if you're watching this, but otherwise send me an email and I would love to hear what you think about this as well.\
+All right, enjoy this episode and I'll see you next one. Peace. \
+Welcome to another episode of Cloud Security Podcast. Today we're talking about code to cloud or cloud to code. I don't know.\
+Hopefully you can help me answer this, Harshal. So, welcome to the show. Thank you for coming over. How would you describe your current path into cybersecurity? What was your role and where are you now? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Harshil Parikh:
+\f1\b0 \cf3  Yeah, you know my path has been interesting because I wanted to get into \cf4 [00:03:00]\cf3  cyber security from before cyber security was a thing meaning like a major that you could take in college, right?\
+So I grew up when I was in high school I used to read these books from Kevin Mitnick that he wrote the OG. He just passed away unfortunately a few weeks ago, but he was sort of my inspiration growing up that I wanted to just learn more about it That's how I got excited about cyber security in the first place So you couldn't study that in college.\
+There was no such thing as cyber security in college. So I majored in networking and then I started working in networking industry, but I always knew that I wanted to get into cyber. So my first opportunity I got, it was in network security. I was deploying firewalls in data centers back in the day.\
+So that was my start and then got into pen testing and other things. And eventually I realized that, you know, all these people are making these amazing decisions in cybersecurity about technology and things. But how are you actually making those decisions? Like what are the business reasons I went into advisory consulting and then eventually I became a security in a corporate job, became a CISO and saw multiple problems happen again and again.\
+So I \cf4 [00:04:00]\cf3  decided to solve them myself as a founder So in a nutshell, that's my journey into cybersecurity. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Wow, and quite varied as well because some of the people Probably would not even remember that cybersecurity was information security before. Yeah. And then before that it was just network security.\
+And before that it was just not even security, it was just IT. Yes. Yeah, so coming from that as well, it's pretty experienced, man. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Harshil Parikh:
+\f1\b0 \cf3  Yeah, it was just security. There was no such thing as, you know, software security. There was no cloud, obviously, at that time. At least they didn't call it the cloud, it was just somebody else's server.\
+Yeah. But yeah, it has changed quite a bit in the past 20 years. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  So talking about cloud as well, and something that keeps coming up in the industries quite often is like the whole code to cloud and cloud to code. I'll start with code to cloud. How do you see code to cloud? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Harshil Parikh:
+\f1\b0 \cf3  Yeah. So the reason people say go to cloud, in my opinion, is mostly because they start with the perspective that we should do things right.\
+We should build things correctly rather than going back and fixing them. So the hypothesis is, if you're building everything as cloud infrastructure as code, you have your cloud artifacts as code. Everything \cf4 [00:05:00]\cf3  has been written as code. Then you write things correctly as code. And so when it gets deployed in cloud, it actually confirms to the security principles that you have.\
+So do things right from the beginning. That's your code to cloud story. And you connect those pieces together, right? So you have traceability, you have auditability in terms of who actually did what and you're doing things correctly from the get go. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  What about flipping it around cloud to code because there's a whole circle that comes up.\
+What's that about then?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Harshil Parikh:
+\f1\b0 \cf3  Yeah, so it's that's another interesting angle of looking at it because typically as a security professional ,you have to respond to things like in an ideal world, you know, every developer produces bug free software security issue free software and Infrastructure is built hundred percent following security practices, but that's not reality, right?\
+So typically most security teams do have to respond to things that happen in the cloud. So Let's say you have an incident or you have a cloud artifact that has some security risks, vulnerability issues, what have you, misconfigurations. You don't have to fix it. How do you actually fix it? You can look at each individual issue in a \cf4 [00:06:00]\cf3  silo.\
+Or you can say, well, all of these things originated from this piece of code. It's a terraform configuration or it's a container configuration or what have you. Yeah. The origins of it is in the code, right? So when you actually want to fix an issue in the cloud, the root cause fix in a lot of cases is in the code.\
+So you go from cloud to code to actually go fix it at the root cause rather than think of it as tactical things that might come up again and again. You go back to the code. Fix the root cause and solve the problem, at least for that time being. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  So, how was this done traditionally? Because, you know, obviously we spoke about network security, information security, cyber security, and cloud security and beyond.\
+How was this done traditionally? Was there a code before or how was it done before? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Harshil Parikh:
+\f1\b0 \cf3  Yeah, so, you know, before cloud or infrastructure as code came up, it was just... configurations or things that were sitting in your production, you know, data centers or cloud or what have you.\
+So then the fixes were sort of different in a way. It was not a code repo or code file in GitHub that you could go fix. It was more about. Your \cf4 [00:07:00]\cf3  windows configurations that you would have a separate system to push those configurations separately at the end of the day. It's all code, but it's not stored in what we call his code today in a code repository, right?\
+It was done separately. A lot of times people would go into individual servers or systems and make those changes uniquely. But then you have a new update that gets pushed and it overwrites those configurations. You don't have persistence. It's a whole different can of worms, but at least a good thing we have with infrastructure as code is there is consistency.\
+You know, you define a certain configuration, a way that artifact should be deployed. That's what happens in the cloud. So it's much nicer world we live in, right? Where infrastructure is actually defined as code and you can see that artifact in a GitHub code repo, for example. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  It's funny, it reminds me of the whole pets versus cattle conversation as well, where traditionally, sysadmins used to remember each server.\
+It's like, oh yeah, that's the battleship star or whatever the server name, they would remember the IP address and it's just to your point, it's literally a config file. Yeah. And sort of central repository is basically \cf4 [00:08:00]\cf3  a folder somewhere that's created for it as well. Is that how you remember it as well?\
+That's exactly what it was, yeah. Yeah. I think remember, and I know the current notion of code to cloud and cloud to code kind of challenges that norm for, hey, we look at security differently in the cloud. How should CISOs look at this whole problem? Because to what you said, nine out of ten times you might find that the problem is actually in the code somewhere.\
+Yeah. Where do you think they should focus their energy on? Sounds like both sides sounds like the right thing to approach, but where do you stand on this? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Harshil Parikh:
+\f1\b0 \cf3  Yeah, I mean, it goes back to the fundamental question of what do you do with all of this data that you find in the code or in the cloud? Because typically what you would have is, you know, you would have a CSPM, CNAPP, whatever solution in the cloud that's telling you all these problems that exist in your, you know, AWS, GCP, Azure, what have you.\
+So the step one is for CISOs or security teams rather to find those problems. And it's great. Like we have amazing solutions out there to find this problem. What do you do with that data, right? So knowing the risk and identifying the risk is step one of the problem. And actually mitigating that risk or managing that risk \cf4 [00:09:00]\cf3  somehow, that's the second very important piece of the problem.\
+Now, that is where this code to cloud or cloud to code story comes together, which is, what do you do with that data? Do you just create a PDF file of issues and hope and pray that somebody will go do something about it? Or do you actually help the cloud team, the dev team, the platform team to go back and fix it, right?\
+So if you actually want to fix it, the fix is in the code. Like, if you're thinking about remediation of issues, if you're thinking about managing that risk or understanding and managing that posture, then you have to think about that connection between where is this issue originating from, which is likely in the code.\
+So you've got to go, go fix that or go make the change. So you not only mitigate that particular issue, but also fix it at the root cause. It doesn't come up again and again. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Oh, I love it. And I think to your point, I'm glad you didn't mention Excel sheet because I imagine that made me think of registers traditionally and people put the Excel sheet.\
+Oh, yeah. Oh, cloud problem number one blah and it ends up in just an Excel sheet somewhere. No one looks at it because it's a harder problem to solve. Because you don't want to talk to the \cf4 [00:10:00]\cf3  developer and all of that. Is this something that you find every company would have? Like at what stage do you find that people kind of start at that point where Oh, I've got too much data from the CSPM and all of that.\
+Is that like a broader problem or is that like specific sectors you find? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Harshil Parikh:
+\f1\b0 \cf3  Yeah, it is a very broad problem and it's more related to =scale rather than specific sectors. So what we see is if you have More than a certain volume of, you know, cloud assets or code assets or what have you, then at some point it becomes really hard for the security team to remember or keep it all in their head or a spreadsheet that doesn't take several minutes to just open up, right?\
+It becomes a data problem where you have all of these IPs or domain names and host names and things that you can't remember off the top of your mind what exactly it is. So you've got to take a very data driven approach. You have to have some way of automation, some way of bringing all that context in to tell you what actually it is.\
+So it's a scale related issue. So once you hit a certain size, then you need some way to manage that problem. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Right, and I imagine a lot of the audience members are from \cf4 [00:11:00]\cf3  large enterprise where they may be looking at this already and they would not even know where to start. Cause you almost feel like should I start from code to cloud or should I start from cloud to code or what's the right way to move?\
+Is there some advice on, at least based on the experience you've had as a CISO and otherwise as well, where should people kind of focus their energy on? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Harshil Parikh:
+\f1\b0 \cf3  Yeah, I mean it really depends on where in the maturity curve your security organization sits. Like I think of if you start in the cloud, which obviously you have to figure out because it's like the faucet in my kitchen sink is leaking, right?\
+Now, one alternative for me is to go back and fix all the pipes and everything to make sure that it never happens again in any other faucet at all, or I can stop that leak first and then go back and fix everything else, right? So if you have risks that you are obviously aware of in your cloud platform or in your runtime, rather.\
+The obvious thing to do is, is manage that risk first and then put in controls and practices so that it doesn't happen again. So you start from a reactive way, assuming that you have security debt that you need to manage, right? If you don't \cf4 [00:12:00]\cf3  have any security debt that you need to manage, then that's great.\
+You know, you're living in a really, really nice, beautiful world. But if you have things and risks that you have to manage, you have to start from your runtime, figure out how to actually go back and fix it. Who owns it? Which risks need to be mitigated first? Go back and fix those things. And then as you're doing it, you're putting controls in your build environment, dev environment, your, you know, infrastructure as code environment so that they don't get reintroduced or other similar things don't get pushed into production.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  I love it. And I think to what you said about the, like, it's a leaking boat in a way that you kind of, are you going to fix the boat leak first so you don't drown versus just trying to, Oh, I want to make the best boat possible. Yes. And like make sure all the kinks are off the table for lack of a better word.\
+That's good advice. I also feel like there's a conversation around the fact that I have a good starting point. What do you see as the general challenge in this space. Like I talk about cloud security and application security kind of blending into some organizations as well. And that happens at scale at some point.\cf4 [00:13:00]\cf3  \
+Do you feel that's coming? And I mean, maybe what's your opinion on the whole application security and cloud security and product security? What's your opinion there? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Harshil Parikh:
+\f1\b0 \cf3  Yeah, it's a good question, right? And I asked that question to a lot of people as well. So there are different terminologies, different buckets of, you know, how you label a certain function within security.\
+It's almost irrelevant. But what we do actually see is because of this phenomenon of infrastructure as cloud and storing container configurations, which is Docker files in your repos and whatnot. A lot of the infrastructure is actually being managed by sort of a similar team who understand, from a security perspective, it's becoming the same team that builds these controls from a software security perspective, but also They would start, you know, taking care of infrastructure as code security, container security, all of those things in more of the build time, right?\
+Like if it happens before deployment, then it's sort of the similar team that takes care of these things. But if it happens in runtime, then you need a different skill \cf4 [00:14:00]\cf3  set, which typically tends towards. I have this issue in runtime. I need to go investigate this, run an incident, incident response, all of those kinds of things, or even monitoring, SIEM, all of those operational functions are different because you have a different group of people who are really good at running operations, responding to things on time, being very disciplined about data and investigations and correlations and things like that's a different skill set as compared to a team that can read code and understand what this is.\
+How to actually fix it, what's wrong with this, right? So it's a different skill set. Now, that traditionally used to be what we call that as application security or software security, but that definition has expanded to include software infrastructure as code, container configurations, you know, Kubernetes configurations and things like that.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Right. And do you find that at that point where, depending on to your point about the maturity of the organization, you might be at that point where suddenly application security is primarily being driven by can you look at a product outside of it not being a part of cloud? Like every application being \cf4 [00:15:00]\cf3  built in cloud has to consider the infrastructure element as well.\
+Is there an S3 bucket open right there, which we should consider into this conversation? And AppSec is great. It solves my SQL injection and cross site scripting and everything else. But if my bucket is open, it doesn't really matter at that point in time. Is there like a, almost like a natural transition that's coming in that field as well?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Harshil Parikh:
+\f1\b0 \cf3  Yeah, you know, it is the need of the hour. I don't know if most security teams are quite there yet. Because, I mean, the challenges are real, you know. I mean, each of these, like, if you have software development in Java, Python, Go, Ruby, whatever, it's hard enough for security people to just be really good at those things.\
+Yeah. And then be also able to understand. All the complexities that come with AWS, GCP and Azure. I mean, it's not easy for an individual or group of individuals to be really good at all of those things. These are complex problems. And to your point, I mean, one of the examples that I have in my previous life is we used to have bug bounty programs and every once in a while we would have researchers come in and say, hey, there's this misconfiguration in AWS or this S3 bucket is open.\
+And so on and so \cf4 [00:16:00]\cf3  forth. And the traditional software security people I had in my team, technically they were handing all the bug bounty because most of the bugs would be related to, you know, XSS and CSRF and all those things. And when we would get these AWS related things, they're like, I have no idea how AWS works.\
+I don't know the difference between a Lambda function and S3 bucket. What do I do with this? Yep. So then we started asking that question, like, okay, do we just educate these folks and up level them with an AWS skillset? Or we build a team that consists of people with different types of skill set that's now responsible for bug bounty response and all of those things, right?\
+Uhhuh. So those are very practical questions that you have to deal with as a security practitioner. Yeah, and I don't know if anyone has a really good answer other than finding that unicorn individual or group of individuals who are really good at everything. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Really goodat like Java, Python, everything else, and also AWS, Azure, Google Cloud as well.\
+That would truly be unique. By the way, if you're there, you should definitely say hello. Yeah. Because like, I would love to meet this unicorn on the internet. How would you describe the maturity? I guess we spoke about code to cloud and cloud to code as well. How would you describe \cf4 [00:17:00]\cf3  people who are listening in?\
+Okay, you've done this as a CISO yourself as well. Where do you see as the different milestones for maturity? Like, where do you start? If you kind of put that on a scale? For people who have not done this at all and listen to this conversation and go, Oh, Harsh was right. I just need to probably look at this. Where does this start now and what would be like a mature curve for them? How would you describe that? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Harshil Parikh:
+\f1\b0 \cf3  Yeah, look, I think we as security professionals are helping the rest of the organization build better, more secure product systems, services, things, right? So the trend that we are seeing on the dev side is dev teams, earlier they used to just write software, through it over to a QA team who would do the testing, throw that over to another team who would do the deployment and manage operations and response and stuff like that. Right? But that has consolidated on the dev side to a dev team that manages the full stack, right? They write their own software, they test their own software, they deploy their own software, they monitor their own software for performance, scale, reliability, all of those things.\
+Yeah. So security on the other hand, should also transform itself in a similar way where there is one group of people, \cf4 [00:18:00]\cf3  individuals, who are helping the same dev teams across that full stack. They're helping them write secure software, testing it, validating them, helping them fix issues, but also helping them deploy it correctly, helping them with your cloud configurations and how to do that correctly.\
+Because the same problem of complexity in tech stack also exists for developers, right? When developers are deploying their code, they can be really good Python or Go developers. They're not going to be experts at AWS, right? But they're expected to deploy their services. So they know a little bit about a lot of things, but they're really good at one thing.\
+So maybe that's an idea that we can adopt as a security profession. We would have more security engineers who are really good at specific things. But also know a little bit about a lot of other things to be able to be, you know, dangerous enough to help your dev teams across the full stack. Yeah.\
+Potentially, just an idea.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  What would you say would be a more mature organization that is doing, like, is there an example that comes to mind where, hey, that kind of deployment is a lot more mature than \cf4 [00:19:00]\cf3  like, you know, starting off with, let's just do IAC first and see what happens.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Harshil Parikh:
+\f1\b0 \cf3  I live in the Bay Area, so we have quite a few tech companies, modern tech companies and security teams, at least the ones I know of, they are fairly modern, you know, they've built security guardrails and security controls that are very well integrated into the entire DevOps pipeline or CI CD pipelines rather that helps developers make the right decisions at every single step. Right? And then what I realized is, as I talked to those teams.\
+They're also technically very proficient in the sense that they're not just pure play security people, they can also write code, they can also understand pipelines, they can also understand AWS configurations, they can understand Terraform, they can understand Kubernetes, and almost every one of them knows how to write Python scripts and things like that.\
+So it is a little bit different skill set as compared to a team that is is really, really good at just architecture reviews, are really, really good at just pentesting. We do need those resources as well. But how we think about a composition of a security \cf4 [00:20:00]\cf3  team that is designed to help developers build and deploy things more securely end to end, that changes a little bit in terms of what type of talent you hire in the security team, which is more software oriented, be able to write code, be able to write things that gets involved in the CI CD pipeline and be able to help the developers across a full stack.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Wow. Interesting. So that's most of the technical questions I have. I have three fun questions for you, which we ask all of our guests. All right. Totally fun question. Non technical. First one being, what do you spend your time doing when you're not doing cyber security? What's your life hobbies like?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Harshil Parikh:
+\f1\b0 \cf3  So I typically do two things when I don't want to think much when I don't want to exercise my brain cells, then I watch old movies, a lot of good, interesting movies, especially I'm a big fan of war movies, so I spend a lot of time doing that.\
+I'm running out of them very, very quickly. But then the other thing that I'm very passionate about is it's just making really good pizzas and like wood fried pizzas or Yeah, yeah. Multiple different types of things, so, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  oh, wow. You're like speciality level, like, oh, wood fire is okay. \cf4 [00:21:00]\cf3  Like I go higher. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Harshil Parikh:
+\f1\b0 \cf3  Yeah. I mean, you know, I love carbs.\
+I love cheese. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Like, what would be like a best pizza that you would make? Like what \
+would also's your, I, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Harshil Parikh:
+\f1\b0 \cf3  that's a loaded question. It depends on who you talk to, but you know, there's, there's really good Neapolitan pizza, there's really good New York style or deep dish Chicago style, or there's. I recently, I'm getting more into a Detroit style pizza.\
+I need to perfect that one. So I spend a lot of time doing that. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  How would you differentiate between, I know we kind of going sideways, but how would you differentiate between? A New York style pizza and a Detroit style pizza. Oh, it's totally different.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Harshil Parikh:
+\f1\b0 \cf3  It's like apples and oranges. Really? Yeah. Oh, wow. You have to taste them.\
+You have to taste them. There's some good pizza here in Vegas. But Detroit style, I mean, the history behind all of that is in Detroit, when a lot of the Italian immigrants came, they started making pizza in these oil pans because you had a lot of the factories in Detroit and you had oil pans. So Detroit pizza is usually rectangular.\
+It uses a different kind of cheese, especially on the edge as well. It's thicker, it's rectangular, it's almost closer to a Sicilian style pizza. But yeah, I can talk a lot more about that. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  I can see that. But I mean, I should probably \cf4 [00:22:00]\cf3  talk more. It tastes really good. That's all you need to know. I'll talk more about pizza after the show as well.\
+The second question being, what is something that you're proud of that is not on your social media? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Harshil Parikh:
+\f1\b0 \cf3  Yeah. So, you know, the only social media I use is LinkedIn, so I don't have any social media for my personal family life, but I'm very much of a family person, like a lot of people are. One of the things that I'm really proud of is I have a mentor who keeps me grounded, who helps me think holistically about, you know, a lot of different things other than just work.\
+And one incredible thing that he mentioned, and I remember it very clearly, is that as an individual, you have many different roles to play in your life. A lot of times, you know, when you have kids, when you're married and things, you have, you're acting as a husband, you're acting as a father and, or a spouse and a father, you have different roles to play, but you should also take some time and be the son or the daughter or the child of your parents, right?\
+Yeah. Which is, if you think about it, like every year, what I do is I personally take a week or two weeks every year to just be that, and during that time, I'm not spending time as a husband or as a father. I'm just spending time with \cf4 [00:23:00]\cf3  my parents and being their son. And that has really changed the way my relationships with a lot of people and in my family.\
+So it's just, you know, just something very nuanced, but it's so powerful in the way you think about it. Yeah. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  And I think maybe everyone else should take a lesson from that as well. Because I think a lot of times it's all about go, go, go for most things in life. Because I guess, oh, I'm too busy being a husband or a wife or a spouse or...\
+Whatever else, all these other roles we're trying to fill, but sometimes we just forget the most intimate ones that are supposed to be more meaningful. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Harshil Parikh:
+\f1\b0 \cf3  Yeah. Yeah, because you don't want to regret something after several decades and think about it and say, oh, I wish I would have done that. Ah, fair enough.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  And talking about more deep conversations, what's your favorite cuisine or restaurant that you can share?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Harshil Parikh:
+\f1\b0 \cf3  I don't know. There's just so many. It depends on what day. So these days, I'm getting a lot into good ramen. Oh, there's really good ramen in the Bay Area, as some of my colleagues have mentioned and pointed me towards, but there's some really good ramen spots in the Bay Area, at least.\
+And Hawaii, Hawaii has a really good ramen spot as well. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Hawaii? Yes. \cf4 [00:24:00]\cf3  For a hot country to have, or a hot state to have hot food. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Harshil Parikh:
+\f1\b0 \cf3  Yeah. Interesting. I'm sure we can talk a lot about that, that history after this.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Yeah, I would definitely be curious about that as well. I mean, I always thought of Hawaii as a poke bowl place, like poke bowl.\
+Yeah, yeah. I'm like, refreshing. Cold salmon and everything, but like not Ramen, but I appreciate that. So where can people find you on the internet? They want to connect on the whole code to cloud and cloud to code pieces \
+yeah. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Harshil Parikh:
+\f1\b0 \cf3  So the best way is LinkedIn. You can go LinkedIn slash in slash Harshil.\
+My first name. That's a great way to connect. And look, I'm incredibly passionate about this entire space and really to fundamentally solve this problem of like, you know, what do we do? Is it code? Is it cloud? Does it really matter. At the end of the day, it's all the risks that you need to manage. Right.\
+Yeah. And that passion has led me to start Tromzo at the end of the day, which is really solving this problem that I personally felt in my previous life. But yeah, Im reachable on LinkedIn. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  I'll put that on the show notes as well. But thank you so much for coming on the show, man. Thank you everyone for watching.\
+Thank you so much. Thanks so much, man. Thanks for coming on the show. Appreciate that. Thank you, everyone.}

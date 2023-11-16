@@ -1,0 +1,701 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red102\green0\blue204;
+\red128\green128\blue128;
+\red114\green179\blue114;
+\red222\green74\blue29;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\b\fs48 Netflix Boys - Meat\b0}
+{\pard  \line \par}
+{\b\cf1 Patrick Sanders:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ That's a great question. And also , my lack of security background will show through here, but , I'll give it a shot. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ I love it how you're held down to earth. You are like, you basically do entire security thing. Like I'm not from security people dont judge me }
+{\pard  \line \par}
+{\b\cf1 Patrick Sanders:\b0}
+{ I, I still feel new. Yeah. }
+{\pard  \line \par}
+{\b\cf4 Joseph Kjar:\b0}
+{ Patrick is humble to a fault. . I show up to work every day and I'm like, oh my gosh, this guy is incredible. I can't believe he's my peer. Don't, don't buy it. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ He's, yeah. I'm , like people who hang out with Patrick, I've hung out with both of you. That's why, I'm like, he keeps saying I'm not a security person.}
+{\pard  \line \par}
+{I'm like, but I'm pretty sure most conversations you're like, we would have is like, dude, you sound like a pretty security person right there. , if you're pretending to be one, you're doing a great job pretending to be one. }
+{\pard  \line \par}
+{If you're thinking of building an AWS infrastructure to the size of Netflix while maintaining developer experience where you don't have to ask developers to do a lot of things and your security is seamless, that is the ideal present that some people at Netflix were able to create. And we had Patrick Sanders and Joseph }
+{\cf2 [00:01:00]}
+{ Kjar from Netflix to share what they did and how to solve that problem while keeping developer experience in mind so that they could still do security without asking a lot from the developers.}
+{\pard  \line \par}
+{Now, this is one of the examples where a security is looked as an enabler, not as a blocker, as a huge proponent of developer first security, as well as going on the path of how do we make sure that we are able to security in a way that it's seamless, that people don't even realize that there is security going on in the background, or at least we have guardrails.}
+{\pard  \line \par}
+{not security Gates. This was a great episode and if you are someone who's probably interested in how. Engineering works at a large scale company like Netflix, or why is developer experience important for a company like Netflix, which works on a global scale? This is definitely an episode. I would love for you to hear out.}
+{\pard  \line \par}
+{Patrick and Joseph did a great job explaining their thought process, how they worked on that. IAM problem when migrating from the single account structure to a large account structure }
+{\cf2 [00:02:00]}
+{ and then to multi account. And what were some of the thinkings around why do we need to have identity managed separately?}
+{\pard  \line \par}
+{Now, that's enough of a hint for what the actual problem was they were solving. There was a lot of questions that came through as well that were answered by them, and I'm grateful that they were spending the time with us to share the knowledge and the learning that they had. If you are someone who's trying to be a cloud engineer or wants to become a cloud engineer who's solving problems that are at global scale, and that's my dog in the background.}
+{\pard  \line \par}
+{If you're watching the video for people who are trying to solve a global problem or know or about to face a global problem, developer experience, maybe something that you might have to consider when you're trying to build solutions for your overall organization for from a cloud perspective. And if you're listening to this on Apple Podcast or Spotify, feel free to drop us a review or a rating if you're watching us on YouTube one, LinkedIn.}
+{\pard  \line \par}
+{Thank you. There is timeline for the questions being asked. Definitely check out the timeline if you'd want to just go straight to the question. And if you have any follow up, feel free to drop this as a comment as well. I hope you enjoy this episode and I will see you on the next episode on our }
+{\cf2 [00:03:00]}
+{ AWS Builder security series, which you're running on the February of 2023.}
+{\pard  \line \par}
+{Next episode. }
+{\pard  \line \par}
+{When you're developing an app, security might be treated as an afterthought with functionality, requirements and tight deadlines. It's easy to accidentally write vulnerable code or use a vulnerable dependency, but Snyk can help you secure your code in real time. So you don't need to slow down to build securely, develop fast, stay secure.}
+{\pard  \line \par}
+{Good. Developer Snyk .}
+{\pard  \line \par}
+{Hey Patrick. Hey Joseph. So thanks for coming to the }
+{\pard  \line \par}
+{\b\cf4 Joseph Kjar:\b0}
+{ show. }
+{\pard  \line \par}
+{\b\cf1 Patrick Sanders:\b0}
+{ Hey, thanks for having }
+{\pard  \line \par}
+{\b\cf4 Joseph Kjar:\b0}
+{ us. Yeah, it's great to be here. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ No a problem. I'm really looking forward to this conversation now I'm super excited cause I met you guys at the AWS event and you guys had a great talk over there as well.}
+{\pard  \line \par}
+{I'm so glad I could get you both onto the show as well. Maybe to set the scene. And to start off, could you just share how do you guys get into the whole cloud security space? And Patrick, maybe you can start first. }
+{\pard  \line \par}
+{\b\cf1 Patrick Sanders:\b0}
+{ Yeah, sure. So I }
+{\cf2 [00:04:00]}
+{ don't actually come from a security background. I started my career doing some Navy contract work in Florida.}
+{\pard  \line \par}
+{And then I moved to Atlanta to work for a startup as a a backend software engineer. And in that time I got involved with the local BSides and became an organizer and kind of started getting involved in the community and figured out that I actually really like this security stuff. And then one day Netflix came knocking on the door looking for a software engineer for the cloud infrastructure security team.}
+{\pard  \line \par}
+{And I was like, you know what? I'll interview, why not, you know, just for the experience at least. And then I ended up getting hired and I've been on the team for three years now and I have built up a way more security knowledge than I had before, specifically around AWS security. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ That's pretty awesome. And thanks for sharing that as well. Joseph, over to you, }
+{\pard  \line \par}
+{\b\cf4 Joseph Kjar:\b0}
+{ Yeah, so I've been a computer nut my whole life. But it wasn't until around college that I started to take an interest in security. Even with }
+{\cf2 [00:05:00]}
+{ that my first job was not a security job, it was more of a systems administration type of operational role.}
+{\pard  \line \par}
+{Mm-hmm. , managing Windows servers, active directory, and a little bit of PKI infrastructure. And then from there I transitioned into more of a traditional SOC role doing incident response building detections. And at that time, . I was approached by my manager with a really awesome opportunity to kind of spearhead a lot of our cloud security efforts in the detection space and, and IR space.}
+{\pard  \line \par}
+{And so that was kind of my initial foray into it and really kind of got, got hooked on it and that led me to take a security architecture role with Veracode software security company looking at all sorts of AWS security things within their environment. And so, yeah, ever since then, AWS security has been, been my focus and that's what brought me to Netflix.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Awesome. And I'm so glad both of you are here for such a varied experience. Someone coming from a non-security background, someone from a sys admin background as well. It's actually is a great breadth. }
+{\cf2 [00:06:00]}
+{ Now, the topic being building AWS infrastructure, with security and speed. Maybe I was gonna start off, what are some of the.}
+{\pard  \line \par}
+{Like maybe the few things that you think of , when you think about like, you know, AWS infrastructure with speed, insecurity at scale. Are there like common, what's the word for it? Like building blocks that you think are important for it. Like, I mean, clearly a skill team like yourself would definitely be a part of it, but what are some of the things that you've, now, since you've done, I'm kind of like starting from the back instead of starting to build from it.}
+{\pard  \line \par}
+{Keen to know from you guys. Like what are some of the top two things that come to mind when you think part building blocks for a, you know scalable. AWS infrastructure. I think Patrick can go first if you like. }
+{\pard  \line \par}
+{\b\cf1 Patrick Sanders:\b0}
+{ That's a hard question cuz there are so many pieces that that have }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ to}
+{\pard  \line \par}
+{Yeah. I also like any tool that kind of, you feel, cause I know we can't, cause it depends on a lot of things as well where people, depending on the application, blah, blah blah. So maybe top two things, could that come to your mind? Like, I mean, even the account structure itself this for me. Like, don't even, like, I don't know how many people even know }
+{\cf2 [00:07:00]}
+{ that you can have multi account people.}
+{\pard  \line \par}
+{Only people just think it's like, oh, I just one account for everything. And that's alright. Sorry Joseph, you go. }
+{\pard  \line \par}
+{\b\cf1 Patrick Sanders:\b0}
+{ That's, oh yeah, so go ahead Joseph. }
+{\pard  \line \par}
+{\b\cf4 Joseph Kjar:\b0}
+{ Yeah, I think it is an incredibly difficult and broad question. But I, I think one way to think about it is in terms of capabilities rather than necessarily building blocks, because there are many, many building blocks.}
+{\pard  \line \par}
+{Mm. the core capabilities a lot of times boil down to the ability to deploy stuff, right? I need to provision workloads, I need to run things in the cloud and. on the other side of that governance. Hmm. Right. I need the capability to exercise some degree of control over what's happening in that environment in order to meet my security risk. , and oftentimes regulatory requirements. So, every business is different in terms of what their requirements are within each of those realms. You know, what they need to build, what they need to deploy, and what their governance }
+{\cf2 [00:08:00]}
+{ or their approach to governance is. Yeah. But in my mind, those are kind of the two overarching capabilities.}
+{\pard  \line \par}
+{And the building blocks you pick. Really are derived from your requirements in each of those of those areas. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ No, that's awesome, man. That's Patrick, do you have something to add as well? }
+{\pard  \line \par}
+{\b\cf1 Patrick Sanders:\b0}
+{ Yeah, I, I mean, I, I think that Joseph said it really well, and you'll see this throughout this this conversation, that Joseph will definitely be able to flex his security background more than me}
+{\pard  \line \par}
+{Which is, I think is why are you important too, man ? No, I, I think it's why we work well together, because, you know, I, I have a different background in than Joseph and we can really team up and, and tackle a lot of problems. So for me, coming from a non-security background I, I think that it's really helpful to just be really familiar with what you're trying to protect and, and what your risks are. And then from there you can start to figure out, you know,, where do I need boundaries? Where do I need to make sure things can't cross over and, you know, end up being exposed }
+{\cf2 [00:09:00]}
+{ or, you know, in the wrong hands internally and things like that.}
+{\pard  \line \par}
+{So that's kind of an abstract approach, but it's been really effective for shaping my thinking of mm-hmm. , which problems are important to }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ solve. Yeah. Awesome. And I, I've got a question here from Danielle, the team as well. Do you prefer having a separate account for IR teams or should we baked into regular production accounts specifically for things like forensic?}
+{\pard  \line \par}
+{Any thoughts on this }
+{\pard  \line \par}
+{\b\cf1 Patrick Sanders:\b0}
+{ as you'll see later in this conversation? We believe in having as many accounts as possible. So , just generally, I, I think that it's nice to, to be able to separate things by accounts. Joseph what do you think? }
+{\pard  \line \par}
+{\b\cf4 Joseph Kjar:\b0}
+{ Yeah. Having a, a dedicated IR slash forensics account can be a really helpful practice.}
+{\pard  \line \par}
+{Of course, you'll need to have some sort of mechanism enabling IAM principles from that IR account to access all of your other organization's accounts and get the data or, things that they need out of there }
+{\cf2 [00:10:00]}
+{ and into that environment. But generally it's very, very helpful to keep it separately because then you, you never have to worry about people stepping on, on each other's toes or things happening to resources that are critical for maintaining an incident response timeline.}
+{\pard  \line \par}
+{Mm-hmm. and a very strict auditing that goes along with that. Yeah, compared to like a shared multi-tenant account where everyone's doing stuff all the time. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah. And I think to your point is also helpful from maintaining a chain of custody as well for when it started and where, what happened at that point in time.}
+{\pard  \line \par}
+{If you're already there,, your chain of custody is already compromised, assumed to be compromised already, so there's no point kind of having it in there. Right. Yeah. }
+{\pard  \line \par}
+{\b\cf4 Joseph Kjar:\b0}
+{ And, and I've seen use cases as well where certain organizations will actually spin up dedicated accounts per incident. Mm-hmm.}
+{\pard  \line \par}
+{especially for, for forensics type use cases where they're copying like compromised images of compromised instances into that account. They wanna make sure nothing has ever been in their, that's not specifically related to }
+{\cf2 [00:11:00]}
+{ what they're investigating. Mm-hmm. So all sorts of different patterns, but in general, yes.}
+{\pard  \line \par}
+{Good idea to have that as a separate }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ capability. Yeah. Yeah. And thanks for that question. As Danielle, feel free to ask a follow up question if you have one. I think that's totally a good segway into what I would kind of lead this conversation towards as well. The whole. idea. Maybe we can start off with the the blanket statement that I made that, Hey, maybe a single AWS account is not a great idea.}
+{\pard  \line \par}
+{Considering a lot of us started like what I imagine Netflix has been in this AWS for a long time. Like a lot of us everyone started with one single AWS account. Then you add more, then it becomes hard to manage. The AWS releases AWS organization. And then there's a whole concept of organization now.}
+{\pard  \line \par}
+{And because , they don't charge you for accounts. You can just keep adding them. I, I feel like maybe a good place to start building this could be if you just build a startup over here, it's a hypothetical startup, but at least that would help people of all different business sizes kind of figure out how do you scale.}
+{\pard  \line \par}
+{Cause I think we're talking about building AWS infrastructure for }
+{\cf2 [00:12:00]}
+{ speed and security. But my intention would also , be to be able to scale like a small startup called Cloud Security podcast dot TV into like a big. Behemoth, like a social media site for cloud security people. Made a company over there actually.}
+{\pard  \line \par}
+{Someone starts a company. This is . Are we doing this? Is this what we're doing? I know. I'm like, maybe I should do this. They'll be a great idea cuz we have cloud security advocates. Maybe we should become a whole social media space for our cloud security people. But considering from stage one this year in 2023 actually I've got another question as well.}
+{\pard  \line \par}
+{For Vineet, do you use like non-prod and product counts for resources? I think we're gonna answer something similar in a bit later. I'll pin this for now cause I think we have, I have a question specifically for. Do you consider two root accounts in different AWS organizations like dev and prod this is kind where people kind get into fights, man.}
+{\pard  \line \par}
+{So}
+{\pard  \line \par}
+{\b\cf4 Joseph Kjar:\b0}
+{ this one I think, I think we can take pretty well though in avoid having }
+{\cf2 [00:13:00]}
+{ to manage a separate AWS organizations if at all possible. Mm-hmm. Right. You may be in a situation where you've had a big merger or some or something like that, but as a rule of thumb, avoid trying to have multiple AWS organizations.}
+{\pard  \line \par}
+{It's a very, very messy thing to try and manage. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yep. And Patrick, did you have some thoughts as well? }
+{\pard  \line \par}
+{\b\cf1 Patrick Sanders:\b0}
+{ Nope. Can't say it any better. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ ah, awesome. I, I was gonna add one more thing as well. I think a lot of people do this where if in case the concern is coming from. having multiple root accounts within the same organization.}
+{\pard  \line \par}
+{I think AWS, SCP allows you to block root account access or have an alert for it as well. Maybe if you, if you feel that your concern is coming from root account, you can probably use that as a way as well. There is a follow up question from Danielle as well, which is, how can we ensure that dedicated IR account is secure and audited as the IR account if Compromised, may also have a lot of admin permissions to do bad things in the environment.}
+{\pard  \line \par}
+{I think you kind of answered it with the whole per }
+{\cf2 [00:14:00]}
+{ incident. You just spin up a new resource rather than having it always on. But did you have any additional thoughts on this, Joseph? }
+{\pard  \line \par}
+{\b\cf4 Joseph Kjar:\b0}
+{ Yeah, I, in general the. Amount of usage that your IR account will have is generally extremely low. So it's pretty easy to audit, like if you're looking through the cloud trail logs associated with your IR account, the volume of events in there isn't gonna be anything near what your, like dev or production accounts will be.}
+{\pard  \line \par}
+{And so it, it becomes pretty easy to implement detections and other auditing mechanisms to, to ensure that you know what's going on in there and, and are alerted if, if that account is misused. . Awesome. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Anything to add, Patrick? I think }
+{\pard  \line \par}
+{\b\cf1 Patrick Sanders:\b0}
+{ I, I think that it's worth mentioning service control policy here too. Mm-hmm.}
+{\pard  \line \par}
+{you know, if you have a good organization set up, then you can create policies at the organization level that can't be modified by any child account with some asterisks ah, yeah. , . And, and you can use that to protect the assets, }
+{\cf2 [00:15:00]}
+{ in the IR account or in any account for that. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Awesome. Yeah.}
+{\pard  \line \par}
+{Thank you for that. And , Danielle just said thank you as well. So this question answered and I think Vineet just thank for your patience. We'll just come back to your question as well. So we're building a startup cloud security podcast or tv, which is just a podcast at the moment. We're gonna take it all the way to a social media company like Facebook.}
+{\pard  \line \par}
+{So what would be the first thought process for people trying to build I guess the first version of cloudsecuritypodcast.Tv? Single AWS account? Possibly. But what's the thought process there to start building it, building the product that, that this is.}
+{\pard  \line \par}
+{\b\cf1 Patrick Sanders:\b0}
+{ Yeah., in the year 2023, I believe that there's no reason an organization should start with a single AWS account unless that single account is your organization root and you immediately start making more accounts to actually do things in . }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Oh, fair enough. Yeah. Wait, actually, why is that, that you recommend multiple accounts?}
+{\pard  \line \par}
+{\b\cf1 Patrick Sanders:\b0}
+{ It's once you end up in a situation where everything is built in a single account, even with a very small company, the longer you go with that, the harder it will be to }
+{\cf2 [00:16:00]}
+{ unwind because you get certain types of resources in this account that are impossible to move, like an S3 bucket. You can't migrate that to another account.}
+{\pard  \line \par}
+{And there are some other types of resources that , are just really difficult , to move around. Also kind of separate from that, you want an isolated account to be your organization route. You don't want your production account to be your org route because you can't apply service control policy to the org route.}
+{\pard  \line \par}
+{So you can't protect your production account. So one of the tendencies that I see is that a company will start, have a single account, and then they're like, oh, AWS organizations looks cool. Let me turn that on in this prod account. And that is when things start to really go wrong. , }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ I, I laugh because I've been in that one of those companies, , they're like, oh my God, that's a nightmare to have.}
+{\pard  \line \par}
+{You said it right. Sorry. I'll let you finish your thought. . }
+{\pard  \line \par}
+{\b\cf1 Patrick Sanders:\b0}
+{ Yeah. That's, I, I'll stop there. Joseph, do you wanna add in some? No, }
+{\pard  \line \par}
+{\b\cf4 Joseph Kjar:\b0}
+{ I mean, amen }
+{\cf2 [00:17:00]}
+{ to, to all of that. It. It just gets really, really, really ugly. The longer you go with a single account. So if, you know, if we were starting, this startup today, we would definitely be building out, a handful of accounts , to get up and running.}
+{\pard  \line \par}
+{And AWS has published, a pretty good white paper outlining best practices for multi account management. And as part of that they explain kind of your handful of core accounts that you should start with. And so I'd point people to that. I don't have a link right off the top of my head but it's, relatively easy to find.}
+{\pard  \line \par}
+{And that's, that'll give you a good idea of, okay, these are the bare minimum things that I want to separate out even from the very, very }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ beginning. Mm-hmm. . Right. And cause that kind of goes to the question that Vineet was asking over here as well, like, would you say then non-prod prod accounts for resources should be. Separate or would you just have them like, Hey, you know how like a lot of people have different ways In your talk as well. You guys have this thing where it was like the account structure for organization unit was set in a way that it's like a pool of a }
+{\cf2 [00:18:00]}
+{ collection, whereas a lot of people tend to just go down the path saying, I'm just gonna go, hey I have a business unit HR for looking after all the new cloud security advocates coming in, and they would just be able to just go in and use that.}
+{\pard  \line \par}
+{So I want to have a HR as a separate one. My finances separate one versus, oh, it's the entire company , with one product dev in one account, prod in another account. There are multiple patterns to this, but do you find, is there a pattern that you normally recommend for people starting today? }
+{\pard  \line \par}
+{\b\cf4 Joseph Kjar:\b0}
+{ Yeah. The, the test prod distinction can get pretty nuanced with how people manage their deployments, but generally speaking, yes, it's a good idea to have separate accounts for test and for prod.}
+{\pard  \line \par}
+{Yeah. And as far as the OU structure goes, I think that's a very, very interesting conversation. You know, as you're scaling up , your company or your AWS environment, how do you organize accounts into, }
+{\cf2 [00:19:00]}
+{ organizational units within AWS organizations? And the need, your reaction, to solving that problem is often to copy your org chart}
+{\pard  \line \par}
+{But , it's not effective . Your org changes way too often and it doesn't align with the purpose of OU in the first place. Mm. Right. And OU exists as a vehicle for applying policy. Mm. So when you're trying to decide, do I need an OU for this or not, should I organize my accounts into an OU In this way, you can ask yourself, does this group of accounts represent a unique policy need in my environment?}
+{\pard  \line \par}
+{If so, I know you makes sense. If not, probably, you know, find another way to manage that, that grouping. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah. Cause to your point, I mean, it's a logical representation anyways. It's not like , you actually have, like, unless they were starting to give owners of each OU because technically that's kind }
+{\cf2 [00:20:00]}
+{ of where a lot of people just basically struggle when accounts don't have an owner.}
+{\pard  \line \par}
+{And doesn't matter what OU, put them in, it's just for us, we are putting them in HR business. But for everyone else, it's like, I don't know, I don't look after this. I'm not HR. So might maybe a different conversation. Any, anything to add there, Patrick? }
+{\pard  \line \par}
+{\b\cf1 Patrick Sanders:\b0}
+{ I think that one temptation that leads people to mimicking their org chart with their OU structure is to use it to inform like billing and cost tracking.}
+{\pard  \line \par}
+{And there are I, that's not something that we deal with so much, so I, I don't really have good recommendations on that specifically, but I know that there are other approaches that you can take. So just something to consider when you're thinking about your OU setup. }
+{\pard  \line \par}
+{\b\cf4 Joseph Kjar:\b0}
+{ I I think that's a fantastic point.}
+{\pard  \line \par}
+{A lot of the needs. that people try to use OUs to solve for,, like Patrick is saying, are really more asset inventory and account metadata type concerns that are best managed in using a separate system. So, you know, not to }
+{\cf2 [00:21:00]}
+{ get too far off, off track, but for example, at Netflix we built our own AWS account inventory system to keep track of our accounts record metadata about them.}
+{\pard  \line \par}
+{I know plenty of other organizations have done the same. Highly recommend that as a way to solve some of those problems, Patrick, was alluding to and avoid falling, into the OU trap. . }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Fair enough. That kind of ties in , with the question that came in with how do you ensure visibility into AWS organizations CSP tools or, what's your thinking there?}
+{\pard  \line \par}
+{\b\cf1 Patrick Sanders:\b0}
+{ That's a great question. And also , my lack of security background will show through here, but , I'll give it a shot. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ I love it how down to earth. You are like, you basically do entire security thing. Like I'm not from security people dont judge me ,}
+{\pard  \line \par}
+{\b\cf1 Patrick Sanders:\b0}
+{ I, I still feel new. Yeah. }
+{\pard  \line \par}
+{\b\cf4 Joseph Kjar:\b0}
+{ Patrick is humble to a fault. . I show up to work every day and I'm like, oh my gosh, this guy is incredible. I can't believe he's my. Don't, don't buy it. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ He's, yeah. I'm like people who hang out with Patrick, , I've hung out with both of you. That's, why I'm like, he keeps saying I'm not a }
+{\cf2 [00:22:00]}
+{ security person.}
+{\pard  \line \par}
+{I'm like, but I'm pretty sure most conversations you're like, we would have is like, dude, you sound like a pretty security person right there. if you're pretending to be one, you're doing a great job }
+{\pard  \line \par}
+{pretending to be one. }
+{\pard  \line \par}
+{\b\cf1 Patrick Sanders:\b0}
+{ Okay, well, I'm faking it really well, so I'll just stop saying that. Really.}
+{\pard  \line \par}
+{Well, I'll the question mark. So. This is gonna be a, a pretty Netflix specific answer because that's where most of my experience is. So this is where we use some automation tooling to make sure that we have, for example, event bridge rules set up to centralize all of our CloudWatch into our security accounts.}
+{\pard  \line \par}
+{And then we use SCPs to make sure that none of that can be modified by anybody who isn't our team. So I think that that's kind of a, a core piece is to get your data flowing where it needs to be, and then from there you can hook it into, you know, some kind of sim or what whatever solutions you end up choosing.}
+{\pard  \line \par}
+{CSPM tools are great. There are a lot of really great ones out there. Unfortunately, they don't fit }
+{\cf2 [00:23:00]}
+{ our scale or our use cases very well, so we don't really have much insight into the, or, I don't, at least Joseph might , from previous gigs. . }
+{\pard  \line \par}
+{\b\cf4 Joseph Kjar:\b0}
+{ Yeah, I, I've used a couple of the, of the C S P M tools before you know, have experience with, with Dome nine, red Lock now, Prisma Cloud.}
+{\pard  \line \par}
+{Mm-hmm. . And, and they can definitely be helpful. I think the challenge with visibility in this case is that what you're looking for is so, so, so broad. When we say visibility into our AWS organization, there are so many critical slices of that, and each slice may require a bit of a different approach or solution.}
+{\pard  \line \par}
+{So if our visibility need within our AWS org is specifically audit trail, we want to know who did what, where and when. Right now we're talking about Cloud Trail. How are you going to centralize collection of your cloud trail logs for all of your accounts, ingest them into something that makes them consumable and then start doing stuff with them.}
+{\pard  \line \par}
+{, you more interested in visibility of workloads }
+{\cf2 [00:24:00]}
+{ themselves within your organization? Right. You want to know what apps are doing Well, this is a, all of a sudden, a very, very different conversation. So I think being very clear about your requirements for exactly what you're looking for can really, really help when it comes to looking at the vast landscape of security tools and services available to choose, you know, which path actually fits your needs best.}
+{\pard  \line \par}
+{Because there are many, many, many tools all good at solving pieces of that pie. But the, the piece that you need is probably fairly unique to you. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ See, that's a good point because a lot of the conversations are easily diverted to what the marketing is saying, where you need a CSPM tool, you need this, you need that.}
+{\pard  \line \par}
+{And this probably would be a good thing about the whole developer experience as well as you kind of scale a company. But I think so hopefully that answered your question as well. Francisco I've got another comment here. I was more concerned about asset, asset, inventory scale, unknown resources.}
+{\pard  \line \par}
+{So no, I think that kind of, we still answered the question, I guess. So maybe if }
+{\cf2 [00:25:00]}
+{ that's the way to structure it that's the goal you're going with. Maybe some of the form visibility you might help as well. I'm almost saying with a good practice to segregate the workload in the cloud environment as it is suggested by AWS well architected framework. Yeah, that's, I would agree to it as well. I don't think anyone's gonna disagree with that. To comply for PCI-DSS control requirement, how do you implement FIM in aws?}
+{\pard  \line \par}
+{File integrity management. I don't know if any of you have experience in this?. To }
+{\pard  \line \par}
+{\b\cf1 Patrick Sanders:\b0}
+{ answer that question are you referring to like on instance or to like in N S3 or some other data stores like Cloud Native Data stores? }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Maybe? Do you wanna just share whatever you thought, whichever you have the thoughts on, I guess maybe that way?}
+{\pard  \line \par}
+{\b\cf1 Patrick Sanders:\b0}
+{ So I, I have the most experience on the on instance file integrity monitoring. And, we used to use a vendor product for that, but it wasn't scaling very well. So we ended up switching to something based off of OS query. So we're able to do stateless file }
+{\cf2 [00:26:00]}
+{ integrity monitoring, and it's been looking good so far.}
+{\pard  \line \par}
+{And it's all built off of open source technologies, which I, I think is really cool. For S3, I don't really have much experience with that. }
+{\pard  \line \par}
+{\b\cf4 Joseph Kjar:\b0}
+{ This also, you know, starts I think going into a different security domain than like some of the account architecture type stuff that, that we're talking about today.}
+{\pard  \line \par}
+{Though it is an, an interesting space and so don't wanna make you feel, you know, that we're just dismissing it out, right? }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah, of course. And I think I is a good point as well. All right, so we are building our startup just going back to the actual startup that we are building and now we are scaling it up as well. So just to scale up to a multi account, structure as you guys said in 2023. We should not be thinking of a single AWS account. So thinking of multiple AW accounts.}
+{\pard  \line \par}
+{So what's the approach? What, what's the step two here? As you kind as company is growing I've taken you multi account strategy and I've gone, okay. I think we are at a stage where we were a social media company doing this podcast. Now we have a community we are building. So new }
+{\cf2 [00:27:00]}
+{ products coming in.}
+{\pard  \line \par}
+{Well, sounds like it's a good idea to go begin with. What are some of the layers that I would have to think about from a multi account perspective that you think would help kind of, you know, go to that , next scale? And maybe Joseph, if you go first on this one. }
+{\pard  \line \par}
+{\b\cf4 Joseph Kjar:\b0}
+{ Sure. So, if I had to identify those layers as you put it, as I'm scaling up, I think I I would say you need to solve compute network data and identity.}
+{\pard  \line \par}
+{right?, those are kind of , the key layers that are going to span your accounts and they're going to inform all of the design choices that you make in terms of how you manage your multi account infrastructure. And the way that organizations address each of these domains is vastly varied.}
+{\pard  \line \par}
+{There's probably infinite variations, on how people choose to address each of those things. But putting together a cohesive strategy for how you want to scale each of those layers as you build out more and more accounts, I think is absolutely crucial. }
+{\pard  \line \par}
+{\b\cf1 Patrick Sanders:\b0}
+{ I do want to just plug real quick that }
+{\cf2 [00:28:00]}
+{ we have some really incredible teams at Netflix and I, I mentioned this during our reinvent talk to o there's so much of this stuff that we already have a really great foundation on.}
+{\pard  \line \par}
+{So we've been able to really push the envelope in how we approach multi account architecture and, and I think that we've come up with, a really fascinating solution to to bring better isolation to our workloads. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Oh, awesome. So wait, so you know how we kind of touched on this earlier as well, where the, we could have accounts like what if I started off with one AWS account for everything because I clearly didn't have access to Joseph and Patrick and I decided to just go down the path of one account for everything or one ring to rule them all.}
+{\pard  \line \par}
+{And now I've kind of gone, I think I heard Patrick and Joseph talk about the advantages of multi account. What are some of the challenges you find would cuz kind of. There could be many, but, are there any top two or three challenges that you think of that people would face in moving from a single legacy account account structure to now Multi account organization led multiple organization, unit account structure?}
+{\pard  \line \par}
+{\b\cf4 Joseph Kjar:\b0}
+{ Sure. }
+{\cf2 [00:29:00]}
+{ So there are kind of two classes of multi account problems but you know, from the question that you asked, one is what are things that are inherently difficult about multi account?}
+{\pard  \line \par}
+{And then the other side of it is what makes migrating to multi account from like a single or few? Oh yeah, very big ones. What makes migrating hard? So in general, multi account is hard because it does increase resource sprawl. There are more things in more different places. , it's hard because it increases, in some ways your operational overhead.}
+{\pard  \line \par}
+{You know, if you're not very careful about how you do it existing processes might become more difficult. Other, you know, challenges associated with migrating because accounts play such an important role in access schemes within AWS, migrating applications or workloads from one account to another one, for example, as part of a multi account initiative, is very, very, }
+{\cf2 [00:30:00]}
+{ very painful.}
+{\pard  \line \par}
+{You have to fully unwind all of the access dependencies. That application relies on. Make sure that you rebuild those in the proper way so that it'll continue to work in the other account. And that's just one of all the challenges you have to solve for this one workload. Right. You also need to figure out it's networking.}
+{\pard  \line \par}
+{Mm-hmm. It's resources. Like is it using, or depending on things like a shared database in the account where it lives today. All of those things have to be unraveled, solved, addressed, tested, validated, like it's a process. And to have to do that for, you know, potentially hundreds of applications as your organization grows, it's just remarkably difficult.}
+{\pard  \line \par}
+{Netflix tried it. We were not successful. . }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Right. Wow. And wait, so to your point then multi-cloud is still good, even though there's a resource sprawl, there are challenges with it, but it's def it's not. Challenge that cannot be solved, but it just }
+{\cf2 [00:31:00]}
+{ requires time. }
+{\pard  \line \par}
+{\b\cf1 Patrick Sanders:\b0}
+{ Yeah. And I, I think that now is an important time to bring up, you know, why bother, you know,, why are we talking about why multi account is so good?}
+{\pard  \line \par}
+{And for our particular situation, we have just a, a big old pile of risk in, in our one big account, we have all these, you know, operational risks with service quotas and rate limit exhaustions and things like that. So, if one application is doing something bad, it can affect the availability of other applications.}
+{\pard  \line \par}
+{There's, you know, it's, it's really hard to control access the right way. So we spend a lot of time putting together all these IAM policies that are, you know, trying to narrowly focus in a least privileged way for each application. So, Instead, we just said, what if we can split out these applications into their own accounts so that they can have, you know, pretty open access to all the resources in their own account.}
+{\pard  \line \par}
+{And }
+{\cf2 [00:32:00]}
+{ then everything else has to be explicit because of the cross account boundary. So you need, the two side policy updates to allow access to an S3 bucket in another account, for example. So it, it really just changes the shape of the risks that we're dealing with. And also basically eliminates, the rate limit and service quota issues except for, you know, really large applications.}
+{\pard  \line \par}
+{\b\cf4 Joseph Kjar:\b0}
+{ Yeah., and to build on, what Patrick was saying, it's like we, we really want these benefits of separate accounts, the scalability, the security isolation the developer speed. That we gain by virtue of being able to grant them more access in these tiny isolated accounts. Right? We want those benefits, but, you know, how do we capture them without taking on those burdensome migrations that, that I was talking about earlier?}
+{\pard  \line \par}
+{And so, you know, to what Patrick was saying it was how can we, move }
+{\cf2 [00:33:00]}
+{ each application to its own account without having to bring all that cruft along with us? Mm-hmm. . And, that's kind of the secret sauce, behind the talk that we gave that at reinvent this year was basically finding a way to bring just the application identity over to the new.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yep. I think maybe we should time to get into that as well, but I'm quickly gonna address one thing that came up is cost a factor with multi account from Roderick. I think well, accounts are still free as of 2023 in case you have here in the future, but as of February, 2023 creating accounts is free in AWS.}
+{\pard  \line \par}
+{You can have as many as you want, as long as you can manage them, I guess. So they'll just tell you, just keep creating them. Anything else you guys wanna add to this }
+{\pard  \line \par}
+{\b\cf1 Patrick Sanders:\b0}
+{ statement? Yeah, I, I would say that cost isn't a direct factor, but it is very much an indirect factor. And, you know,, the cost of building tooling to manage all of your accounts and manage access to accounts and everything like that is, is not negligible.}
+{\pard  \line \par}
+{And that's, you know, part of why our team exists at Netflix is to, }
+{\cf2 [00:34:00]}
+{ to handle those concern. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Awesome. Thank you for the question as well, Roderick. I guess just to your point about the unique approach you guys took about bringing identity of the application, could you just walk us through the thinking over there and how did you guys solve that?}
+{\pard  \line \par}
+{The whole IAM proxy and everything, so that'll be awesome and maybe Patrick, feel free to just drop in gems as you do in between . }
+{\pard  \line \par}
+{\b\cf4 Joseph Kjar:\b0}
+{ Yeah, sure., so I think I kind of laid, the foundation of our thinking going into it, which was, you know, how do we capture the benefits without the insane pain of, of full-blown migrate everything out?}
+{\pard  \line \par}
+{And so in asking ourselves that question, can we isolate application identities and move just those things out, it really got us thinking bigger picture. about managing , those layers that we talked about earlier, right? The compute network data and identity. So in this case, the way we're choosing to approach the identity layer is put every application identity in its own account.}
+{\pard  \line \par}
+{Mm-hmm. . Now }
+{\cf2 [00:35:00]}
+{ to go along with that, we wanted to keep our compute and network layers centralized because we figured that splitting those pieces out into multiple accounts really is what led to some of the most painful, and challenging parts of our failed migration in the past. So we wanted to leave those things where they are.}
+{\pard  \line \par}
+{We have robust platforms that manage that infrastructure, let them keep doing their thing. Mm-hmm. . And then as far as data goes, that one is still like less solved, I guess, on, on our part, but we also like the idea of keeping shared data. Centralized and controlled while still granting application owners and, you know, workload owners, the freedom to manage data specific to their applications in whatever way that they deem, you know, the best.}
+{\pard  \line \par}
+{So, you know, when this led to some really interesting technical challenges, because if I have an EC2 instance running my application in a prod account today, }
+{\cf2 [00:36:00]}
+{ how do I all of a sudden magically make it so that it's instance profile, it's, IAM role all of a sudden lives over in this dedicated separate AWS account.}
+{\pard  \line \par}
+{Yeah,, that's not something supported by AWS out of the box. But led to some really fun engineering work, which Patrick can talk at length about. }
+{\pard  \line \par}
+{\b\cf1 Patrick Sanders:\b0}
+{ Yeah. This is where I've been spending most of my brain time over the past almost year, I think. , so the, the problem was that we needed to get credentials, from a different account onto an instance, in one account.}
+{\pard  \line \par}
+{And we didn't want to make our application owners update code or, you know, assume a role during their app initialization, because that would be an, just an impossible migration. We would have to, you know, make every team at Netflix make a change, and that's not something we like to do. So instead of that, we, we, , maybe there's a way for us to just kind of get in between the application }
+{\cf2 [00:37:00]}
+{ and where the application gets its credentials and where the application gets its credentials.}
+{\pard  \line \par}
+{Is the EC2 instance metadata service or I M D S? Mm-hmm. . So what happens is , the a AWS SDKs know to look for a certain IP address and a certain path to request credentials from at runtime from the, IMDs. So what we decided to do is to intercept those requests with a small proxy and then replace the returned credentials with credentials that we get from doing an STS assume role with web identity.}
+{\pard  \line \par}
+{So using an O I D C token that's issued by our identity management system. So. The effect of that is that with no change from the application owners, we can decide which role an application should get credentials for at runtime, which means that we're no longer stuck in the same }
+{\cf2 [00:38:00]}
+{ account where the instance lives.}
+{\pard  \line \par}
+{We can use any identity that we have, a token that we can use to access. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Right. And cause you know how there are different kinds of identities in AWS, the whole people going down the path of IAM users as well. Does this work for IAM users as well or is it only for IMDS? }
+{\pard  \line \par}
+{\b\cf1 Patrick Sanders:\b0}
+{ I mean you could technically use it for IAM users, but.}
+{\pard  \line \par}
+{You }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Joseph. Like, nah, don't use his approach for IAM user . Yeah. Yeah. So to your point then and this is a good problem to talk about from an EC2 instance perspective as well, is the use of IMDS. A lot of people would not even know like what it is and why is it used for , why is it important in this context?}
+{\pard  \line \par}
+{Like, I think cuz you mentioned I MDs you can talk about the whole template, credentials and everything as well. If you don't mind, why is it important or IMDs and why not just do extension of IAM user or the extent the user of Ashish over to the, other end? }
+{\pard  \line \par}
+{\b\cf1 Patrick Sanders:\b0}
+{ Yeah, that's a good question.}
+{\pard  \line \par}
+{So if we decided to use IAM users, we would basically be making a commitment to have . }
+{\cf2 [00:39:00]}
+{ Static long live credentials somewhere in our infrastructure for every application, and we are allergic to that , we, that's not a, a thing that, that we're okay with. So the benefit of using roles and, and getting temporary credentials through IMDS is that those credentials are temporary. They live for one to six hours or, you know, somewhere around there, depending on how you have things configured. So, by using temporary credentials, if a credential does get compromised or leaked, somehow, it's only useful for, the lifetime of that credential. Whereas with IAM user credentials, if that gets leaked, you now have to deal with a key rotation and you probably don't know all the places those credentials have ended up and you're gonna break something.}
+{\pard  \line \par}
+{Almost definitely. . }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah. Any thoughts on this? Joseph? Yeah. }
+{\pard  \line \par}
+{\b\cf4 Joseph Kjar:\b0}
+{ Like just to try and bring this home for people, because it's a, it's kind of a hard thing to explain, you know, without a whiteboard and }
+{\cf2 [00:40:00]}
+{ really like sitting down and like going through it all. Like, imagine that you're launching an EC2 instance in the AWS web console today, right?}
+{\pard  \line \par}
+{You're clicking the buttons, create, launch an instance. I want like a t2, micro server, whatever. There's that option to select an IAM role. Mm. Right? That you launch your instance with whether you're using the command line or the console, or the sdk, however you want to do it, that IAM role today has to live in the same AWS account where you're spinning up your compute instance, right?}
+{\pard  \line \par}
+{You can only pick a role that lives in that account. That's, so you pick it, you hit, go. instance deploys. What's the significance of that? IAM role, right? Well, that IAM role is what governs that instance. , entire security model. Mm-hmm. , the things that that EC2 instance is allowed to do are all tied to that IAM role.}
+{\pard  \line \par}
+{Yep. Going down one step farther. }
+{\cf2 [00:41:00]}
+{ Well, if I'm running my application on that EC2 instance, how does my application gain access to do things like get an object out of s3? Well, it has to get credentials from the instance that it's running on. And how does it do that through the IMDS? Hmm. So, that's kind of the like top to bottom chain, of how it works today and where we've decided to insert ourselves.}
+{\pard  \line \par}
+{Right? So, with this approach that Patrick just outlined now, when the application goes to get. Credentials. We're not forced to give it the role credentials from that same account. We can give it credentials from whatever account we want, and by doing so, completely change the security model for how these applications run, what our risk is.}
+{\pard  \line \par}
+{If that application is vulnerable and gets popped by, you know, a bad actor. Now the purview of what they can do with that application's, AWS credentials is entirely different. }
+{\cf2 [00:42:00]}
+{ So, it just changes so many conversations, about, you know, the risk, posture and security of our environment.}
+{\pard  \line \par}
+{And so it's, it's been really, really exciting . }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ What would be a security benefit to your point? Because the, IAM role itself is no longer limited to the account. Cause a lot of people might just go flip and go, eh, doesn't that extend the permission? Cause you can get anything you want, isn't it like, so where or how do you manage that expectation, I guess?}
+{\pard  \line \par}
+{Cause when people ask you that doesn't not open up to the entire world. I can go to Ashish's account, to Patrick's account to Joseph's account to wherever I want. Like what's the thing in there?\\ }
+{\pard  \line \par}
+{\b\cf1 Patrick Sanders:\b0}
+{ So what we have right now, and, our big multi-tenant account is, , although we've put a lot of work into least privilege , and have spent so much time and engineering effort trying, to solve that problem, it's still not perfect and, it never , will be realistically, there are going to be identities or roles that have access to resources that they don't need access to.}
+{\pard  \line \par}
+{And that just kind of happens over the years, as }
+{\cf2 [00:43:00]}
+{ policies change and, you know, teams churn and everything, is different , over the course of, , 14 years we've been in, in AWS now, something like that. I don't know. So instead of trying to do the really tedious work, of coming up with the right guardrails or, or the right perfectly scoped identity and resource policies to try to solve that in this one account.}
+{\pard  \line \par}
+{By using an identity in a different account, it kind of hits a reset button. Mm-hmm. And that identity no longer has any implicit access to other resources and our big multitenant account. But if it still needs access to an S3 bucket that it's been using for years, that, like I mentioned before, we can't move to another account, we can create that policy relationship so that the application can access that bucket in the old account.}
+{\pard  \line \par}
+{So, the application ends up getting kind of a sandbox in its own account where it can create, manage, use, }
+{\cf2 [00:44:00]}
+{ whatever resources it wants within reason, and then Breaking out of that sandbox is an explicit policy decision that we can make along with the application owners, to enable what they need for their business purposes.}
+{\pard  \line \par}
+{Yeah. }
+{\pard  \line \par}
+{\b\cf4 Joseph Kjar:\b0}
+{ And, and Ashish, to address one other part of your, your question you know, as a, as a big plus one to everything that Patrick said, another critical control that we have is, even though we have the ability to inject, you know, arbitrary role credentials onto the host for, for a given application, we scope it so that there is only one role that can be set.}
+{\pard  \line \par}
+{Right. And the, the technical side of that is controlled, by the token that Patrick was alluding to earlier. But basically, you know, we, we ensure that a given application is only allowed to receive credentials. For a very specific remote IAM role. So }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Awesome. We don't yet. }
+{\cf2 [00:45:00]}
+{ Yeah. Cause I think that it's a great answer and I think the follow up question was asked by Vineet over here as well, is there a concept of managed identity in aws?}
+{\pard  \line \par}
+{I probably open ended question, but in terms of like the, you know, how you mentioned IAM proxy was the reason because, your scope is limited to the account. Like things like Cognito and all the other ones, were there an options considered? Cause I think when I think of managed identity, AWS's like, oh, idp, like your whole SAML federated structure, which O I D C can extend to a applications as well or versus I don't know anything else which is like a standard based authentication.}
+{\pard  \line \par}
+{Why not go down that path?}
+{\pard  \line \par}
+{]}
+{\pard  \line \par}
+{\b\cf1 Patrick Sanders:\b0}
+{ Sure. I, I don't really know for sure, but I'll, I'll kind of talk about some of our considerations and what we did. So , there are things like AWS SSO or sorry, it's not AWS SSO anymore. Identity center? IAM Identity Center. Yeah. That's formerly AWS SSO. So that can be used.}
+{\pard  \line \par}
+{But as far as I know, that's more focused on, on human access than on }
+{\cf2 [00:46:00]}
+{ like application access, like we're doing. Yeah., another new capability that we looked at really deeply and our kind of still looking at is IAM roles anywhere, which is, a really cool way that you can use X 5 0 9 certs.}
+{\pard  \line \par}
+{So, you know, your, your typical P K I certs to Create a session to get credentials for an IAM role. There were, some limitations to that like, the session length and some of the rate limits , were kind of concerning to us, but it's a new service and it's something that they're working on really actively.}
+{\pard  \line \par}
+{So I think that it could be a viable solution for us in the future. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Awesome. Thank you. And hopefully that answered your question as well. Vineet I think throughout the conversation we've had so far, you kind of , alluded to the part where you've mentioned developer experience as well, and you mentioned the fact that you don't want a lot of things to change for the application side.}
+{\pard  \line \par}
+{I guess, how do you both describe, developer experience and why is it important? Like why, I mean, I'm gonna quote Patrick here, why should we care. }
+{\cf2 [00:47:00]}
+{ No, no pun intended for your last name Joseph by the way }
+{\pard  \line \par}
+{\b\cf1 Patrick Sanders:\b0}
+{ nice. }
+{\pard  \line \par}
+{\b\cf4 Joseph Kjar:\b0}
+{ So , if you're an AWS security engineer, you know, you probably spend a huge portion of your time worried about IAM , because the IAM service ends up controlling who has access to what misconfigured IAM policies result in massive, you know, risk exposure.}
+{\pard  \line \par}
+{And at the same time it's often IAM policies and resource policies that end up getting in developer's way. And poorly managed AWS IAM is a tremendous pain point for anyone actually trying to get work done. And as the stewards of IAM at Netflix, you know, we, we try to be very, very empathetic to that. , it feels really bad when, what's stopping you from making progress, as a developer or a user of the cloud within an organization is something , as mundane as an IAM policy., that's not letting you do your job. }
+{\cf2 [00:48:00]}
+{ And so when it comes to developer experience, from where we sit, that's probably the lever, that we have the most control over and where we can exercise the most leverage.}
+{\pard  \line \par}
+{There are a lot of other things that play into developer experience, but for, you know, our roles specifically, , that's kind of , the really big one. }
+{\pard  \line \par}
+{\b\cf1 Patrick Sanders:\b0}
+{ . Yeah. , that's a really well put overview. I, I think that one additional point I would add is that kind of our, our philosophy of security at Netflix is guardrails over gates.}
+{\pard  \line \par}
+{We don't want to be the team blocking somebody from getting their work done, because that makes a lot of work for us. And, it frustrates, our developers. So if, if we can create a, you know, a safe sandbox to, use the word that I used earlier for our developers to play in, then they don't have to come to us to ask if we can give access to this service.}
+{\pard  \line \par}
+{They can just do it. Mm-hmm. . And, you know, there are cases where if they need to break outside of }
+{\cf2 [00:49:00]}
+{ that sandbox, they'll need to, to come to us or use like a self-service flow or something like that. But yeah, so I think that. User experience or developer experience and and ease of migration, which is also kind of tied into developer experience.}
+{\pard  \line \par}
+{Were two of , the primary considerations for how we decided to approach this. And, I'm really happy with how it's turned out because we're asking for almost no work from our developers . To accomplish this migration. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah, I think that's definitely a huge plus point as well, cuz I think that's where most security solutions fail.}
+{\pard  \line \par}
+{And we kind of touched on this whole marketing thing before. It's easy to implement a tool but then, you know, no developer accepts it in your, like basically you don't have any work with. So definitely to be where you don't, we still get what you need, but without having to just change a lot of them in the last minute that we have, I wanted to kind of ask a question around how, cause we get a lot of questions around what do cloud security engineers use?}
+{\pard  \line \par}
+{This is for people who probably. New in the field have, }
+{\cf2 [00:50:00]}
+{ they would look at Joseph and Patrick and go, Patrick is pretending to be a security person, but . So for people who are looking to pretend to be a cloud security person in the future, , where somehow they're knowledgeable, but they're still pretend to be, I'm not security.}
+{\pard  \line \par}
+{, what do cloud security engineers normally do? And I, because I think it's such a broad role in a lot of organization means many things for many people, like, but generally, how do you describe what cloud security engineers do as the last thing? }
+{\pard  \line \par}
+{\b\cf1 Patrick Sanders:\b0}
+{ Yeah, I, man, that's a good question. So I would say that looking at our team and, and like kind of how we operate, one of the most consistent traits I see is curiosity , and people just wanting to, Know how things work, wanting to make things better. And, and along with that being just like really, really intimately familiar with , the risky parts of our environment.}
+{\pard  \line \par}
+{And those two things together. If }
+{\cf2 [00:51:00]}
+{ we're trying to be more aware of risk , and drive down that risk in a way that's good for our developers, and we can do that with curiosity and empathy, then it, it just creates this, I don't know, magic that makes our team so fun to work on. . }
+{\pard  \line \par}
+{\b\cf4 Joseph Kjar:\b0}
+{ I think a lot of what Patrick said are some of the most enjoyable parts about being a security engineer. You know, if I, if I had to take a more like dictionary type approach, I'd say that, you know, cloud security engineers are an enablement function.}
+{\pard  \line \par}
+{They enable their organizations to use the cloud in a way that furthers their business objectives without taking on undue risk. And that encompasses so many things, right? It encompasses knowledge of, \\ infrastructure, engineering and architecture, right? Oftentimes, cloud security engineers are involved in systems design.}
+{\pard  \line \par}
+{How do we architect these systems so that they're built in a secure way? It encompasses a lot of software }
+{\cf2 [00:52:00]}
+{ development, work, writing, security tooling, building detections you know, so, so many things. As an organization gets bigger, like with Netflix, our team has the luxury of being a little bit more specialized.}
+{\pard  \line \par}
+{We are able to spend a lot of time specifically in the I am space. Mm-hmm. and, and in the you know, cloud resource management space focus a lot on initiatives related to those two problem areas as well as, you know, greater architectural problems, with the cloud in general. So, you know, , what an organization wants from a cloud security engineer can vary dramatically, but I will say that , for the cloud security engineers , that we all look up to, one of their greatest traits is, is flexibility.}
+{\pard  \line \par}
+{And that curiosity that Patrick just mentioned, always being willing and able to get into whatever the problem is, figure it out and, and get the job. Yeah, absolutely. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Well, like this, clearly experienced talking over here, Patrick, I think you and I is basically like this, like, }
+{\cf2 [00:53:00]}
+{ oh my god, Joseph, you're so welcome no, but I think that was like the tail end. But I think that's pretty much what we have the time for and what can we, can people find you? }
+{\pard  \line \par}
+{\b\cf1 Patrick Sanders:\b0}
+{ I'm on the Fed averse. I'm patrickSanders@infosec.exchange, so look me up there. Oh my God. Is that still a thing? Oh yeah, absolutely. . }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Are you the only person there who like, hi guys. I'm not, no. There, }
+{\pard  \line \par}
+{\b\cf1 Patrick Sanders:\b0}
+{ there are dozens of us. It's }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ people, you know that right? ? }
+{\pard  \line \par}
+{\b\cf1 Patrick Sanders:\b0}
+{ Yeah. It, it's a great community.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Oh, okay. Cool. I I'll put link in there there as well. Joseph, what about yourself, man? Where can people connect with you? Yeah, }
+{\pard  \line \par}
+{\b\cf4 Joseph Kjar:\b0}
+{ also, also on there oh my God. josephkjar@infosec.exchange. Also on, on LinkedIn. Yeah, you know, o obviously it, it can be hard to keep up with, with all the messages and things on there, but, you know, related, if it's related to this, I'll, I'll do my best to to get back to you.}
+{\pard  \line \par}
+{Yeah, }
+{\pard  \line \par}
+{\b\cf1 Patrick Sanders:\b0}
+{ and I would be remiss if I didn't mention the Cloud }
+{\cf2 [00:54:00]}
+{ Security Forum Slack work. Oh yeah, workspace. Yes. It's a, a really great place. So if you want an invite get in contact with me. And also the fwdcloudsec Conference, which yeah, I am an organizer for this year, so, Yeah, yeah. Come come }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ hang out now.}
+{\pard  \line \par}
+{Definitely sound now when you say it like that. . Now we definitely sound like cult. We have a group, we have a Slack forum. We have a conference that we run like, but I, I, I definitely would give a shout out to fwdcloudsec as well as the cloud security forum. That's been really valuable. And as Patrick mentioned, feel reach out either to me or to Patrick and we'll be happy to add you to that group as well, as long as you wanna provide value to people from there.}
+{\pard  \line \par}
+{Yes, it's a , non spamy, non scammy kind of place as well. So definitely join in. But I just wanted to say thank you so to both of you coming on the show, really appreciate the conversation. I think there's another conversation in here somewhere, which I'm pretty sure we can peel out for a future episode.}
+{\pard  \line \par}
+{That'd be great time and looking forward to having you boys again, }
+{\pard  \line \par}
+{\b\cf1 Patrick Sanders:\b0}
+{ thank you so much for having us. This was a lot of fun. Thanks, }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:55:00]}
+{ Ashish. No problem. All right, thanks everyone. We'll see you next episode.}
+}

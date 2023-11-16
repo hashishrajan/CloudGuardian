@@ -1,0 +1,600 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red102\green0\blue204;
+\red128\green128\blue128;
+\red114\green179\blue114;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\b\fs48 Andrew Martin\b0}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ A lot of people get confused, especially when you have, I guess kubecon is also kubecon plus cloud native con and like, wait, what's the difference here?}
+{\pard  \line \par}
+{\b\cf3 Andrew Martin:\b0}
+{ The two are closely tenanted and intermingled for sure. cloud native didn't really exist until Kubernetes came along. }
+{\pard  \line \par}
+{When you're developing an app, security might be treated as an afterthought with functionality, requirements and tight deadlines. It's easy to accidentally write vulnerable code or use a vulnerable dependency, but Snyk can help you secure your code in real time so you don't need to slow down to build securely, develop fast, stay secure, good developer Snyk}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Kubernetes security has been really popular, like it's like everywhere. But one thing that we don't talk about is kubernetes serverless. Why is it that people are more leaning towards kubernetes versus serverless? It doesn't explain why there's a conference called kubecon and cloud native con together. Why is conference }
+{\cf2 [00:01:00]}
+{ security and kubernetes security spoken about as two different things.}
+{\pard  \line \par}
+{We basically spoke a lot about all of this, and how difficult is it to do security? What are some of the common vectors of kubernetes in general when you look at deploying them in managed kubernetes or unmanaged kubernetes? For this conversation we had Andrew Martin from Control Plane. He came and spoke about his book, which is hacking kubernetes, and he spoke about some of the attack vectors.}
+{\pard  \line \par}
+{Where should you really consider using kubernetes and where should you not use kubernetes? We also spoke about why is there popular kubernetes security controls that you could be using and deploying on your applications so you can actually prevent something wrong from going on. So if you are someone who's trying to learn about Kubernetes, security and maybe some of the attack vectors that go with kubernetes Security as well, definitely check out this episode.}
+{\pard  \line \par}
+{And if you're listening or watching this for the second or third time, we are available on your socials like the Apple Podcast. So Spotify podcast. LinkedIn, YouTube for videos as well. Definitely give us a follower Subscribe. Also leave us the review rating on iTunes and Spotify because it definitely helps us find more amazing guests like Andrew Martin, who are book authors }
+{\cf2 [00:02:00]}
+{ sharing the knowledge free as well to for everyone to learn from.}
+{\pard  \line \par}
+{Also, just in fyi, we are also media partners for the. kubecon EU So you would definitely see us over there. You probably would see LinkedIn post or Twitter post from the cloud Security podcast team for when we are there. If you're there and if you see us, definitely give us a hello and I would love to take pictures with you.}
+{\pard  \line \par}
+{We're also attending RSA, which is the largest cybersecurity conference happens in San Francisco. And if you're there again, I would love for you to come and say hello and take pictures with me because I run this thing called the RSA Fashion Week and last year, it was an amazing experience to show the other side of cybersecurity beyond just us talking about technical things and abbreviation.}
+{\pard  \line \par}
+{So I look forward to saying hello to everyone who's gonna be attending the conferences and for everyone else enjoy the episode and definitely look out for the episodes where we cover our highlights from those conferences as well. Alright, enjoy the episode. Andrew, for the first few people probably don't know who you are, how would you describe yourself and what are you up to these days}
+{\pard  \line \par}
+{\b\cf3 Andrew Martin:\b0}
+{ hello. Well, thank you very much for having me on. I am CEO }
+{\cf2 [00:03:00]}
+{ and founder at Control Plane. My background is in everything from development through operations and security of course. And we focus on conference security that is unlocking cloud and cloud customized developments and deployments like containers, Kubernetes and custom run times for regulated industries, difficult problems and we love security CTFs running training sessions auditing and building and all that good stuff.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I think that's kind of where I first met you when you were running a CTF on one of those cloud native Security conferences as well. And maybe the right person to ask about this as well, cuz you hear the word you use cloud native Security. How would you describe cloud native Security?}
+{\pard  \line \par}
+{Because a lot of people would. Depending on who you talk to, they just kind of relate more to the CSP side. But how do you describe cloud native Security? When someone asks you, }
+{\pard  \line \par}
+{\b\cf3 Andrew Martin:\b0}
+{ There's a really useful compound view of this from the Kubernetes doc themselves. It the four Cs from code container cluster and cloud. Yeah. And so cloud native security is the }
+{\cf2 [00:04:00]}
+{ holistic overview of all of those things. We assume that the application running in the container at some point will become insecure, be that through an existing zero day or something developing in the future. It's very rare that something that runs for months or years maintains , its baseline level of security.}
+{\pard  \line \par}
+{So outside of that, the configuration of the container that holds the code is really important. That is the runtime, invocation of the process. Those are things like dropping capabilities, not running as roots, applying setcom or Linux security modules. To tighten down the set of privileges that that application has.}
+{\pard  \line \par}
+{Outside of that, once we can be reasonably safe in the knowledge that if somebody gets remote code execution into the container, they still have a very limited amount of functionality available to them only what's required for the application to run. Then if that attacker can't break out of the container, let's say, which is difficult in itself, they will look at the orchestrator, they will look at the the cluster orchestrator to try and figure out how to pivot.}
+{\pard  \line \par}
+{Maybe the }
+{\cf2 [00:05:00]}
+{ visible horizon also includes data stores or queues or other VMs that are sat on the network and addressable via network from that pod. So at that point, it's about the network policy, it's about admission control to make sure that things come into the cluster with Correct consider. It's about running intrusion detection because anomalous behavior is reasonably easy to identify.}
+{\pard  \line \par}
+{But that there are sort of subversive and quiet methods of emulating application traffic in order to do discovery. And finally, at that point, the largest reason for cloud compromise is misconfiguration. So looking at the entire cloud account. So while cloud native really focuses in on the containers, the atomic units of compute, it still sits in a topology, sits in a cloud, or in a co-located data center.}
+{\pard  \line \par}
+{And in order for something to be secure, our approach is to threat model the whole thing. So cloud native security is the same as cloud security. It's the same as some extent application security. But we have a declarative interface by which we can configure }
+{\cf2 [00:06:00]}
+{ these things and that leads itself to testability.}
+{\pard  \line \par}
+{So we then have all that good stuff, static analysis and dynamic testing and pipelines. And hopefully full reproducibility, of the behavior of the workload. So cloud security, cloud native security and security are just moments on the same sort of spectral paradigm of security. And }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I'm glad it's coming from you as well.}
+{\pard  \line \par}
+{Cause a lot of people are asking, why do I talk about cloud native security on cloud security podcasts? I've kind of answered my question for them as well. I'm wanna clip this up and just use that as a, this is why I talk about cloud native Security on cloud security podcast as well. And just an extension of that same thing as well, because you mentioned the four Cs cluster being the one that I probably relate to with the kubernetes context.}
+{\pard  \line \par}
+{How do you describe kubernetes security as well then? Is that, how different is that? }
+{\pard  \line \par}
+{\b\cf3 Andrew Martin:\b0}
+{ Well, I deeply appreciate all the effort that maintainers and contributors have put into building out Kubernetes. And when I wrote the book Hacking Kubernetes with my esteemed co-author, Mr. Michael Hausenblas, one of the first things that we start off by saying is huge.}
+{\pard  \line \par}
+{Thanks, kudos and }
+{\cf2 [00:07:00]}
+{ respect to everybody who's given us the opportunity to examine this thing in the first place. Kubernetes from its genesis was built for developers. It was built in order to win developer mindshare to rapidly accelerate the growth of containers and orchestration. And it gave us these primitives that a single container could not, which included things like service discovery, multi-host networking, centralized control plane, if you like, with, with the with the high availability API server, API extensions like the CRDs that were introduced.}
+{\pard  \line \par}
+{These things were very developer and operator focused, and rightly so, because Kubernetes then steamrolled all the competition and snowballed into the second biggest open source project on GitHub. But these things came at some cost of security. Because we don't have default network policies. We can still address everything on the network from a pod.}
+{\pard  \line \par}
+{The pod security policy and pod security is now was not turned on by default. And it makes some sense if we developer focused to not constrict behavior because it's less confusing for a developer, but it doesn't play to the secure }
+{\cf2 [00:08:00]}
+{ by default, secured by design mentality. Now a huge amount of work has gone in to fixing this.}
+{\pard  \line \par}
+{One of the things that sort of still exists as a primary. Or a fundamental primitive is nodes are not name spaced. Nodes can take any workload, and that's because of the fundamental dissonance between bin packing and maximizing the compute and the resource usage of a cluster to save money for an operator versus isolating workloads.}
+{\pard  \line \par}
+{Now, there are other mechanisms. We can apply node pools, we can tag things and delineate them via admission control and, and scheduling. But again, it's not quite the same. So when it comes to securing Kubernetes itself, it's first of all about considering do we run one cluster or many clusters? What level of multi-tenancy do we think is safe?}
+{\pard  \line \par}
+{And the hard multitenancy in Kubernetes is difficult. There are things, again, by default that a developer facing, like injecting all the environment variables for service discovery into a container. That is an immediate sort of intelligence gift to an attacker that you can suddenly see where everything }
+{\cf2 [00:09:00]}
+{ is.}
+{\pard  \line \par}
+{Dns has been historically easy to enumerate from that perspective as well. So Kubenetes security sits in a kind of transcendent view between ensuring that the development team are able to do what they need to do in a timely and unhindered manner on that spectrum, again, to the security and observability.}
+{\pard  \line \par}
+{Who will kind of tighten knobs and dials or just purely delineate the topology of, of how multiple clusters are deployed based upon classification of data and sensitivity environment type. For example, we wouldn't want production and dev on the same cluster for anything sensitive or serious. , and then cost of course because if we're a startup and we're doing something heavy AI/ML perhaps we probably don't want to get too many GPUs attached to things and we're probably more likely to multi-tenant.}
+{\pard  \line \par}
+{Yes. So as with everything Teflon shouldered answer, everything is a compromise and it's based on usage. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So maybe to your point then, cuz you're also the co-chair for CNCF technical advisory group as well }
+{\cf2 [00:10:00]}
+{ for security. I'm just curious, what is the difference, cuz you kind of mentioned cloud air security is a four Cs clusters, containers, cloud, and all of that.}
+{\pard  \line \par}
+{And then we're talking about kubernetes security, but. A lot of people get confused, especially when you have, I guess kubecon is also kubecon plus cloud native con and like, wait, what's the difference here? Like, I think, and we like, I think a also because maybe kubenetes is popular, a why is it popular and if it, why, what's the difference between the straight up , kubernetes security and cloud native security?}
+{\pard  \line \par}
+{\b\cf3 Andrew Martin:\b0}
+{ the two are closely tenanted and intermingled for sure. cloud native didn't really exist until Kubernetes came along. The Cloud Native Computing Foundation was birthed under the Linux Foundation to provide a home for the IP for Kubernetes. Because Google built this thing and they realized that if, if you love something, let it go. In order to ensure an open governance model, , they needed an independent foundation to prove to the world that they were serious about the success of this technology. And they were not going to gate keep, they were not going to apply the veneer of }
+{\cf2 [00:11:00]}
+{ private interest to something that ultimately could be a public good.}
+{\pard  \line \par}
+{Which I, I mean, it it's proven itself to be. Yeah. So the Cloud Native Computing Foundation wrapped Kubernetes initially and then brought on in other initial projects like Prometheus and Container D and, and run C and, and eventually at cryo all the run times, so many of the supporting applications that run on top.}
+{\pard  \line \par}
+{So in terms of what is Kubernetes security and what is cloud native broadly, they sit in the same sphere. However, because of the proliferation of Kubernetes, because of its, Place in critical infrastructure at this point. It runs on some US jets. It runs on on various edge places. I've got a feeling that it ended up in space at one point and, and yeah, I heard proof.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. In submarine meat factories, like think of like the most obscure places and like what they use kubernetes like, but left to rock. Yeah. But to, to your point then, if kubernetes came before the conference, why was there, and I know we are going into a bit of a history lesson here, but I'm just curious what }
+{\cf2 [00:12:00]}
+{ makes it so popular?}
+{\pard  \line \par}
+{Like I think, I'm sure this cloud native capability in the cloud itself now, cloud service providers, like AWS has a version, Azure has a version, GCP has a version to what you call out as well. Why is so popular? Because I think I spoke to a few people, they all said they, the one new year resolution that a lot of people had for learning something new was kubernetes for 2023.}
+{\pard  \line \par}
+{And I'm going, wow, clearly there hasn't been enough of it. I've already had two months of this last year. I'm going, holy shit, I have to have another month. So like why is it so popular? Man? }
+{\pard  \line \par}
+{\b\cf3 Andrew Martin:\b0}
+{ There was a dream when Terraform was released in oof 2015, I'm gonna guess 1415, yeah. Yeah, that's, it would be cross cloud.}
+{\pard  \line \par}
+{It would enable hybrid cloud infrastructure. Now, hybrid cloud by definition is extremely difficult to achieve, bursting a workload into a cloud. Makes sense. Cuz clouds are by virtue elastic. Yeah. But running high available master data stores across a distance comes with latency that comes with conflict resolution.}
+{\pard  \line \par}
+{, there are useful data types like CDTs, conflict resolution }
+{\cf2 [00:13:00]}
+{ conflict, resolving data types, something like this that kind of encapsulate the data. And this is how Google Docs works, for example. Yeah. If people make offline edits, then the whole thing will deterministically merge down.}
+{\pard  \line \par}
+{But these things really difficult and running a database across multiple clouds is very tricky. So hybrid infrastructure in itself is a questionable thing. Some regulations for, for banks for example, require multiple cloud availability, but it's not necessarily cross cloud. It's re-implementation of the stove pipe in those clouds.}
+{\pard  \line \par}
+{Yep. So we go from terraform and everyone's still sort of holding this dream of Right once deploy everywhere, I suppose, into containers and then containers turn up and, and they promise this ubiquity of runtime we can package and build on, on my local machine. There are some, it should run everywhere uniformly.}
+{\pard  \line \par}
+{Of course, if your kernel version's different, you're using different APIs. If your configuration that's injected environment variables or conflict maps , are different, then , you'll follow different code paths in the application. But broadly, this container should run everywhere. At that point, people }
+{\cf2 [00:14:00]}
+{ start to think, okay, well how do I take this atomic unit of the container and run it on AWS and G C P and Azure?}
+{\pard  \line \par}
+{And the answer for a long time was, well, you stand up a, a Google Kubernetes engine, A G K E cluster. And you run it there, or you go into Amazon and you run Kops K O P S which was the, the original distribution because Amazon used to have ECS, the Elastic Container Service as that only container offering , for many moons.}
+{\pard  \line \par}
+{So e k s didn't turn up for a good couple of years. And a K s I think then turned up kind of contemporaneously ish with that as well. Yeah. So the reason that it's so popular is firstly, , it provides a uniform abstraction above the hardware and to some extent above the cloud. But in the same way that Terraform is supposed to be uniform across clouds, there are specificities, especially when it comes down to the way that, for example, the network is constructed, that there are three very different network technologies in AWS G C P }
+{\cf2 [00:15:00]}
+{ and Azure.}
+{\pard  \line \par}
+{Yeah. Mixing Pure T C P I P encapsulation, b g P. There there's other various sort of magical tunnels that Azure has as well that you can use. So fundamentally, the building blocks upon which the infrastructure is built differs. And while the runtime of Kubernetes is broadly the same admission control service identity and workload interaction with the cloud itself all differ.}
+{\pard  \line \par}
+{So while Kubernetes is a platform platform designed for building a top, there are still differences in the clouds that kind of muddy those waters ultimately, really. Developers are the new king makers. Yeah. And the reason Kubernetes really is so popular is because somebody can learn the skills to administer a Kubernetes deployment at one organization, change jobs and come with the requisite skills.}
+{\pard  \line \par}
+{You don't any longer have to learn why are we deploying like this? What's my custom packaging? How are we spinning VMs up and down with our base images? You just deploy onto a common sea of orchestration. And so, so really I think giving }
+{\cf2 [00:16:00]}
+{ that uniformity of job opportunity to operators and developers is almost more important than the uniform cloud deployment.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh, cause the same skill set across the board. It is. Like, where you go is the same kube, I mean kube cuddle you're talking to, you're not really talking to like a new kube cuddle, I guess, for lack of a better word. Yeah, exactly. Okay. That's interesting man. So, so cuz you know how I think one of the initial thoughts for.}
+{\pard  \line \par}
+{Episode was also around the fact of the whole continued security aspect of kubernetes as well for people probably are listening to this for the first time and are alreadyand some of them had resolutions for learning Kubernetes in 2023. How will you describe the components of kubernetes security? Are they different to regular security?}
+{\pard  \line \par}
+{Cuz you just called out, there's different kind of tunnel and CSPs that people look at all kinds of regions and I don't know what else you can totally go down the path of, but in the Kubernetes context, you have this, well for people call it a data center within a data center as well sometimes.}
+{\pard  \line \par}
+{What are some of the components for kubernetes security? And then maybe you can then , }
+{\cf2 [00:17:00]}
+{ start transitioning into the whole container security side. What are some of the components for kubernetes security? For someone who's basically has never done security on kubernetes before. }
+{\pard  \line \par}
+{\b\cf3 Andrew Martin:\b0}
+{ The way that we deconstruct security in the book is starting with the pod concept. So a pod is one or more containers. The container is the bundled application and dependencies, , and there's two parts to a container. There's the container image, which is the file system just bundled up into a tabul, and then there's the container at runtime, which is that image untard onto a machine.}
+{\pard  \line \par}
+{, the primary process started and the security controls and name spacing and resource accounting created around. So , the first thing for somebody who who wants to learn about Kubernetes security to look at is Linux security, because a container is just a microcosm of Linux. And this is really one of my favorite things about Kubernetes, because it was built by a team of such experience and }
+{\cf2 [00:18:00]}
+{ understanding they didn't try and reinvent the wheel.}
+{\pard  \line \par}
+{So when we talk about Kubernetes security, the initial security context for a pod is just Linux kernel security APIs. So we're talking about no new privileges, for example, that's a flag that you can turn on that's supported directly by the kernel. You can turn that on in system D, you can enable it for any binary or process that's running on your on your server.}
+{\pard  \line \par}
+{So fundamentally, there's this, this wonderful intersection of if you start to peel back the layers, well then there's a huge amount of. Corpus of existing information. You can go and read kernel code to figure out, oh, okay, well that's actually just directly a flag that you can apply to the process.}
+{\pard  \line \par}
+{So first of all, there's that kernel deep dive you can do around the security context itself. Beyond that, again, sort of expanding out , to understand the layers, Kubernetes cluster security comes down to a lot of Kubernetes. Networking is just IP tables. Mm-hmm. And it's the same for container networking in general.}
+{\pard  \line \par}
+{So what }
+{\cf2 [00:19:00]}
+{ we're talking about there is just taking the IP concept, which used to be the Anchorage for fire walling . So you'd actually link identity to an IP address? Yeah. Because things would never change. And we'd have WANs going between data centers and you'd know that someone coming in on there is going, you can firewall that IP address.}
+{\pard  \line \par}
+{And then you expect 'em to do a, a certificate exchange , and off you go in containers because things churn so quickly And based upon the same elastic computes concepts that AWS popularized, which are scale something out, expect things to fail and recover quickly, cuz then you, you build elasticity and resilience into your distributed system.}
+{\pard  \line \par}
+{Those concepts still apply to Kubernetes. And so when those IP addresses change so frequently, the IP tables rules that root packets have to change with some frequency. What has happened from that very reasonably simple routing is that we now have a proliferation of container network interface plugins.}
+{\pard  \line \par}
+{They all use a }
+{\cf2 [00:20:00]}
+{ slightly different technology, some similar to as you mentioned, the, the all the different clouds networking stacks being difficult to understand or learn sometimes. We have, again, sort of encapsulation B G p raw packet networking different types of vpn n tunneling, symmetric encryption even service meshes, which kind of overlay on an over software to find overlay network to give you a layer seven as, as well as the kind of layer of four and five encryption.}
+{\pard  \line \par}
+{, the point of me sort of enumerating all of those complexities is to learn one of these things because everything is based upon existing technologies, it makes sense to anchor , your learning path on the technologies you already know. So if somebody wants to build a cluster from scratch and do Kubernetes the hard way and has traditional B G P rooting experience, well Calico operates on A B G P.}
+{\pard  \line \par}
+{Actually, I'll put in two, two modes, but one of them is PGP based. Yep. And debugging those things, intentionally breaking them to see where the rough edges are and how your }
+{\cf2 [00:21:00]}
+{ alerting responds. For example, it is far easier when taking a technology that, you know, , and I'm finding that the relevant paradigm , in kubernetes.}
+{\pard  \line \par}
+{Mm-hmm. Yes. Really the landscape of Kubernetes is so wide because it's a generalized tool. , it started off reasonably specialized in terms of, well, let's try and run web application workloads. And then immediately people said, well, let's do e tl. Let's try and run telephony. Let's build this multi-region.}
+{\pard  \line \par}
+{And so it, it's just about zeroing in , with a laser focus on the applicability of , the sort of pegs that one can hang their understanding on. Yeah. And then finding the way to apply that to Kubernetes. And then, and then just persevering with the complexity of the distributed system.}
+{\pard  \line \par}
+{Interesting. So }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ to extending that to continuous security then where there's the whole ISC and CI CD pipeline and all of that. Kind of going into it as well, how would you describe components for container security in kubernetes landscape? }
+{\pard  \line \par}
+{\b\cf3 Andrew Martin:\b0}
+{ Yes. So the elements of container security , comes back to this }
+{\cf2 [00:22:00]}
+{ assumption that we make a control plane that the application is or will be compromised.}
+{\pard  \line \par}
+{And so first of all, we expect that there is a solid AppSec pipeline behind any deployments. So we know the shift left mentality from application delivery. We're talking about IDEs , that hint for security. Errors we're talking about abstract syntax, 3D composition. So maybe there's a sql injection here, maybe there's an XSS here.}
+{\pard  \line \par}
+{But those things actually, we assume at some point there'll be a compromise. So, For continuous Kubernetes security, it's about applying the runtime controls that the cluster is subjected to back into the pipeline, even on the developer's machine. If, if they can. It's that same shift left mentality that we've taken for applications and we're now applying to the transcendent boundary between development and operations.}
+{\pard  \line \par}
+{So hesitate to say DevOps, , but it's kind of in that space. So , we have static analysis for infrastructure when we deploy Terraform , or, and any of the other applications that use }
+{\cf2 [00:23:00]}
+{ those providers. We have a statically generated manifest that the plan, the differential between the current and the expected state.}
+{\pard  \line \par}
+{And we can then statically analyze that and say, oh, this will open a security group to the world. We're gonna block this. We can't deploy this. So we have that for infrastructure. For applications we have some of that , for the abstract Syntax tree and the vulnerability and supply chain scanning for dependencies for Kubernetes.}
+{\pard  \line \par}
+{ It's between the two. It's the configuration of the application at runtime on the orchestrator. So we're talking static analysis again for the pod security context. Control plane built a tool called kubesec about five years ago that that does this. There's now so many tools that do this. Your cluster can be scanned at runtime or admission control time, but you can use exactly that same container that does , the validation , of the security context and just give it to the developer, put it into the C I C D workflow.}
+{\pard  \line \par}
+{What this does is it breaks down the barrier between security and the operation and development teams because there's no longer somebody in an ivory tower. }
+{\cf2 [00:24:00]}
+{ This didn't pass an unknown scan that I will not give you access to. But instead it says, here we go, we're enabling you to, we trust our static analysis.}
+{\pard  \line \par}
+{We trust our policies and controls, and we're enabling you to perform debugging in an environment that you have full access to, which really is the problem with latter stage security gates. If I try and deploy something and it escalates through dev u a t towards production, maybe it's in pre-prod, or in staging, and it's blocked by security control.}
+{\pard  \line \par}
+{If as a developer I can't get into that system, there are, for whatever reason, I don't have the right level of access that constricts me, , that prevents me from doing my job ultimately. And that encourages intelligent developers to work around security controls and policies. So this whole shift left mentality applied to everything.}
+{\pard  \line \par}
+{Including the static analysis of the declarative configurations that Kubernetes thrives on because it is an eventually consistent distributed system. We as Tabitha Sabel said, once we tell the }
+{\cf2 [00:25:00]}
+{ Kubernetes robots, our hopes and dreams, and pray that it enacts them for us.}
+{\pard  \line \par}
+{ And we see this sometimes when you apply something and you just wait for the, the API server or CICDs under load , and you wait for it to actually resolve. So yes, to draw all those bits back together the orchestrator at large for continuous security, pushing all of those declarative configuration parts through a pipeline that runs the same admission control as , the final container on the production cluster.}
+{\pard  \line \par}
+{Gives you this, this continuous security. And then if we change any of the policy one of my colleagues, Chris Nesbe Smith, has a talk he's doing at the moment called Policy as Versioned Code. And the goal here is that if we have open policy agent or kyverno or something like this and we want to introduce a new policy, we version that policy.}
+{\pard  \line \par}
+{We apply the new policy in tandem with the old policy and we annotate the resources that are being applied to the cluster to say they're compliant with this policy. If they're not, we get a notification. So instead of a very hard stop where there is no facility }
+{\cf2 [00:26:00]}
+{ to, or there is no window of opportunity to upgrade our configuration to match policy, really the, the final icing on the cherry on the cake for continuous security is diversion the policy as we change it, expose that to the developer as far left in the pipeline as possible, and give them a reasonable window of time to react to that policy.}
+{\pard  \line \par}
+{And ensure that they're compliant. And then we achieve the ultimate goal of consistent uptime and ultimately generating business value so that we all get paid and we can feed our families or our cake addiction, whatever it might be. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Or our dogs, I guess. Yeah. But I guess to add, cause you know, you literally wrote the book on hacking kubernetes.}
+{\pard  \line \par}
+{What are some of the common entry points or attack factors that you come across quite often? And have they evolved since the beginning? Because you've been in the space for a long time as well. Have they changed much? Oh, I guess maybe let's start with what are they commonly }
+{\pard  \line \par}
+{\b\cf3 Andrew Martin:\b0}
+{ The most common cause of cloud compromise is misconfiguration.}
+{\pard  \line \par}
+{So anything that allows access to the cluster, it is generally a bad day for somebody. }
+{\cf2 [00:27:00]}
+{ The API server should never be on the public internet. There is no need for that to happen. There have been API server bypasses before of a varying. Complexity and sort of damaged impact potential unless there is a very good specific reason.}
+{\pard  \line \par}
+{API servers should be privately addressable via Bastian or in via V P N. Secondarily, we should never leak version information. The banner information that we can get from the slash version restful endpoint on the API server leaks, well, I mean, intentionally reveals the version of the API server that's running.}
+{\pard  \line \par}
+{We've learned to turn off banners on web servers. Engine X, Apache, yeah, , we don't do this by default, but it's again, just part of the paradigm shift. So , once, we're sure that the API server is not accessible, that closes off a whole direct impact point, notably SHOWDAN and various other enumerating , and port scanning services will still list a huge number , of clusters , that exist on the public internet with very old versions.}
+{\pard  \line \par}
+{So don't be one of those clusters is probably the, primary recommendation at that point. How does an attacker }
+{\cf2 [00:28:00]}
+{ get into a cluster? It, again, it falls back to commonly used attack patterns. One of those applications on the cluster is probably web facing, so that means that an attacker or a legitimate user can start with a d n s name, a host name or an IP address, and get their packet rooted through the edge via multiple hops to a, a socket running in that container.}
+{\pard  \line \par}
+{So there's engine X running in a container, maybe proxying to a web app, or it's a Golan app that has its own HTTP server. That then becomes the public point of risk and potential compromise. Anything that can generate remote codes, execution in that context is then the first foothold for an attacker. And we're talking things like Log4Shell for example.}
+{\pard  \line \par}
+{If, if we have a JVM app running that faces the web and somebody can inject arbitrary code that fires off this reverse shell back to , an attacker controlled endpoint to establish commander control in the container at that point, we are then, and this is the expectation of how we model systems, }
+{\cf2 [00:29:00]}
+{ at that point, there is the expectation that the network is at risk.}
+{\pard  \line \par}
+{And so the functionality afforded to the attacker should be that same minimal set of privileges afforded to , the application itself. Of course those are very traditional, I say traditional, that's hacking in a nutshell, if you like. Yeah. What we see increasingly these days is.}
+{\pard  \line \par}
+{Proliferation of supply chain attacks. So we're not going in via the front door. We're coming in via the development process via a trusted ingestion process. This really blew up with SolarWinds. There have been US and various other governmental responses to this requiring SBOMs, et cetera. This doesn't really fix the nature of the problem for open source software.}
+{\pard  \line \par}
+{And SBOM doesn't get us anywhere that vulnerability and dependency scanning can't do already. Yeah. For closed source software, it's a very different proposition because we have no introspection or insight into the composition of those artifacts. And we have something called vex coming out as well. The vulnerability exploitability exchange format where vendors can indicate that even }
+{\cf2 [00:30:00]}
+{ though they're using Log4J J somewhere, it's , the particular method signature is not reachable.}
+{\pard  \line \par}
+{So they're using a vulnerable version, but it's not reachable and they can distribute that along with their closed source software to indicate it is safe to run this, even though. As we've told you, there's something vulnerable. These things come down to a huge question of trust, and really the level of trust is as an enterprise, do I trust this vendor enough to run their application?}
+{\pard  \line \par}
+{And from there, do we trust if they provide a true SBOM and VEX? The point being is that for a compromised open source package, the SBOM may not represent anything like what is inside it. And so we still need to trust our software composition scanning tools. The reason for this being is that the attack, there might be something like I install an open source package to my local machine as a developer, and if it's a a node JS package, an NPM package, for example, I can run a pre-commit.}
+{\pard  \line \par}
+{That pre-commit hook can contain, for example }
+{\cf2 [00:31:00]}
+{ key loggers data steelers, something that would go into my home directory and tarbull all up my SSH keys, my GPG keys. They should both be password protected. GPG keys should be on , a hardware UBI key hopefully. But if I've just authenticated via Oauth into something, there are session tokens that may have one to 24 hours expiration.}
+{\pard  \line \par}
+{There's also probably a kube config there. So a supply chain attack against a developer who can then which either gifts cluster access, again, it, if that cluster is publicly suitable, then you straight in with whatever level of credentials are provided there. Or maybe a more nefarious and insidious assault where the commit keys are used to then inject theoretically benevolent code.}
+{\pard  \line \par}
+{From a trusted commit maintainer or committer just by virtue again of the supply chain foothold. It can also be dropping an Easter egg or an implant in that doesn't trigger until some certain set of conditions, which is a little bit more like the, the SolarWinds }
+{\cf2 [00:32:00]}
+{ attack. So yes, , the API server perfect facing web socket and the whole supply chain.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Wow. , what's left then i's like, isn't that the entire thing? }
+{\pard  \line \par}
+{\b\cf3 Andrew Martin:\b0}
+{ I'm like, oh, well }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Switch off computer and walk away at that point. Mm-hmm. }
+{\pard  \line \par}
+{\b\cf3 Andrew Martin:\b0}
+{ Moon walk back slowly. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. So cuz we kind of touched on the whole cluster API thing as well and just kind of reel that back in for people who are probably getting into this space and going, Jesus, that sounds like the entire pipeline is at risk.}
+{\pard  \line \par}
+{You also mentioned. You know, it, he, it's something which is managed unmanaged, which is a cloud version and non-cloud version. How different are these attack vectors compared to, say, someone might be using an AWS version, or Azure AKs or EKS, or whatever acronym you gonna go for. Is that the same threats are applicable or are they a lot less because cloud has taken some more of them away?}
+{\pard  \line \par}
+{\b\cf3 Andrew Martin:\b0}
+{ Yeah, this is the key question for deployment, isn't it? We have a shared responsibility model with a cloud provider. Yeah, which says for a managed platform, the CSP }
+{\cf2 [00:33:00]}
+{ will take some of the risk. They will, for example, manage the patch hygiene of , the base operating system.}
+{\pard  \line \par}
+{They will manage the network security for traffic rooted in, as in it will be encrypted up to the point that it lands in the cluster. And, that shared responsibility model is incredibly useful because it means that we can rely upon data access patterns and data center management that we don't have to deal with ourselves.}
+{\pard  \line \par}
+{ The physical compromise of these devices, of course is game over in many cases. Yeah. Very interesting stuff happening with confidential computing and containers that will help to protect against. Malevolent root users or hardware compromise, but I digress. The goal there of that shared responsibility is to offload as much risk as possible from the user onto the cloud provider.}
+{\pard  \line \par}
+{And as we know from, again, the supply chain question from Log4Shell generally , the greatest risk is misconfiguration because of all the other risk is transferred, but coming up quite close behind that is }
+{\cf2 [00:34:00]}
+{ the, the use of old unpatched and outdated software. So when we deploy a cluster and it sits outside of the maintenance window, that then falls out of support , from the cloud.}
+{\pard  \line \par}
+{And there's an intrinsic incentive there , to make sure that that's updated. In the same way the base operating system will continue to receive security patches. We have things like Google's costs and bottle Rocket and AWS and Flat Car and Azure, which are all broadly based upon , the old Core OS model.}
+{\pard  \line \par}
+{Yep. Which is built from actually gen two and then sort of Chrome OS bizarrely. And then Core OS is, this is what came afterwards. And that's an immutable base operating system upon which a package manager has no ability to write and then running custom , or additional software as a container, which is incredibly powerful because it means you can mark all of your mount points as non-exec read only, and as an attacker it makes it a lot more difficult to run default script drop implants.}
+{\pard  \line \par}
+{Now there's always somewhere to run something. But }
+{\cf2 [00:35:00]}
+{ it's a , whole new paradigm that makes it more difficult. So it is definitely better to use the hardened cloud provider managed services. They go a huge way to in ensuring workloads run by default, more securely compare and contrast to running Kubernetes natively on, on a custom set of VMs.}
+{\pard  \line \par}
+{You do get some more control. Yeah, it's a powerful thing and for a lot of the time, probably not necessary. There is also the opportunity to find economies of scale with sort of home rolled super high throughput clusters than there is on on the managed. But in general, we would always recommend people go for managed services unless they have a data center based requirement.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right. So just kind of like what general recommendation in general? Well, in general, recommendation general is also as well. The the other question that I also have, because we spoke about kind of like the entry points, the attack vectors we also spoke about what are some of the advantages of going for a managed service on instead of going for an unmanaged service, are there controls also practical?}
+{\pard  \line \par}
+{Cause I, I imagine if someone just goes to a }
+{\cf2 [00:36:00]}
+{ kubernetes documentation, just looking at standard kubernetes way of solving or having security controls in there, how different would that be from a, I guess a managed Kubernetes perspective? And what are some of the examples that you can suggest? People can actually, maybe once they listen to the episode, they can go and look whether they're actually doing that or not.}
+{\pard  \line \par}
+{\b\cf3 Andrew Martin:\b0}
+{ I think in terms of the security of the cluster, that sort of minimum viable cloud native security is scanning for vulnerable dependencies. Because ultimately we can layer these controls, but , we don't want an attacker to get into our application in the first place. Beyond that, it's the admission control configuration and some of the admission control additions that are offered by the clouds , are super nifty.}
+{\pard  \line \par}
+{One that I really love is Google's binary authorization, which allows us to sign containers and say this container is authorized for usage based on these signatures from these maintainers, and it will only be admitted , under those terms. Building out that policy of a mission control is really the delineating factor , for a secure }
+{\cf2 [00:37:00]}
+{ cluster deployment.}
+{\pard  \line \par}
+{And the nuance there again, we have OPA open policy agent. We have gatekeeper to support that as well, which is super nice. Cause open policy agent can apply policy uniformly across multiple different domains. It can be used in process for an application, for a distributed system for admission into Kubernetes itself.}
+{\pard  \line \par}
+{Then we've got something like kyverno, which is scoped very specifically , into a admission control into a cluster. So yeah, really it's about tuning those things. , the managed services offer some extra sort of bits from Bobs around those, but those are uniformly deployable across managed or unmanaged services.}
+{\pard  \line \par}
+{And the final point always is the last line of defense has to be intrusion detection because humans are fallible. We can't be sure that what's secure today will be secure tomorrow. And the last line of defense really has to be alerting an observation for those things. I love to talk about canary tokens as well.}
+{\pard  \line \par}
+{Dropping essentially trip wires across the infrastructure is a really helpful way of, even if intrusion detection , is bypassed or turned off somehow }
+{\cf2 [00:38:00]}
+{ leaving nuggets of digital hand grenades spread across the infrastructure. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I love that description of canary tokens. I probably should use that for, instead of calling it honey pots, I should probably just go for that.}
+{\pard  \line \par}
+{Hand grenades just dropped around every pulled out. That's pretty awesome. So wait, I think maybe extending that a bit more from a Kubernetes perspective , as people deploy and some of the common usage patterns people come across with. I think there are restrictions in managed communities where some of them only allow for one cluster at a time, but then people say you should go multi cluster.}
+{\pard  \line \par}
+{What's the recommendation here in terms of what's the reason for people to go multi cluster. }
+{\pard  \line \par}
+{\b\cf3 Andrew Martin:\b0}
+{ Multi cluster in terms of running different applications on different clusters is a question of drawing the security boundary really. So multi tenanting, multiple applications on the same cluster suggests that perhaps we, if one of those applications is compromised, the data classification of the others is within our same level of risk management.}
+{\pard  \line \par}
+{Yeah. Yeah. So if we're happy for , the }
+{\cf2 [00:39:00]}
+{ full takeover of a cluster to reveal secrets across the whole board, then a single cluster is fine. When it comes to delineating customer data, for example, then that might not be acceptable. And this is a fine balance that has to be risk managed. And this is where , we would threat model everything.}
+{\pard  \line \par}
+{Yeah. In order to quantify the decision and leave a paper trail for auditors , or people in the future. So multi cluster generally is when , we don't trust that the controls that we have are suitable. So a good example would be the speculative execution vulnerabilities of the last few years. If I was running my financial services application with p i I for multiple different financial service customers on the same cluster and the speculative execution vulnerability, select spectra meltdown come out, and suddenly an attacker from within a container can start reading data for other customers.}
+{\pard  \line \par}
+{Well, that is beyond my level of risk tolerance. That is an existential threat for my theoretical organization. And so I }
+{\cf2 [00:40:00]}
+{ can't allow that to happen. So what I would do there is do physical hardware separation of the clusters in order to ensure that in the event of compromise, The data leak is restricted to that cluster.}
+{\pard  \line \par}
+{Mm-hmm. When there are multiple clusters, so it's the delineation between the operational complexity of a user running multiple clusters, having to manage multiple dashboards, access remediations, which requires more human complexity versus. Easier runtime maintenance and and deployment of a single larger cluster, but balanced against the security risks.}
+{\pard  \line \par}
+{Mm. And as always, I go back to , the sliding spectrum. Everything is a compromise , and there is no one true way. I agree. I think, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ and to add to this complexity as well, the whole multi cluster. Single cluster, it's also, I guess, how much flexibility do you get from a cloud service provider as well?}
+{\pard  \line \par}
+{Because just because you read documentation of kubernetes can work a certain way, that option may not be available for you in the cloud service provider as }
+{\cf2 [00:41:00]}
+{ well. So there is that complexity added as well. Mm-hmm. Yeah, it's going from an Android vs the iPhone, I guess you probably never get access to the iPhone OS.}
+{\pard  \line \par}
+{So it's probably gonna start a few war over there, but I'm gonna pull over there. But to add another layer to all this as well is the added complexity for. A lot of people would ask at the end of the day, you call it dependency as well for application. There's dependencies of containers being used for the kubernetes part as well.}
+{\pard  \line \par}
+{Should everyone go for kubernetes? I, I get it. It's really popular, but is it for everyone? Like, I think it feels like, you know, when you have Hammer, everything is a nail. It's conversation where if I know kubernetes and it's good for my job flexibility, I'm just gonna say you should Kubernetes that. I don't know why you're not doing that.}
+{\pard  \line \par}
+{So is there an element where honestly people should just not put kubernetes if the other use cases for that? }
+{\pard  \line \par}
+{\b\cf3 Andrew Martin:\b0}
+{ Absolutely. The birth of next generation run times has accelerated this as well. So I adore Google Cloud Run, for example. Google Cloud Run takes a single container, }
+{\cf2 [00:42:00]}
+{ it runs it in a K native, like functions of service harness.}
+{\pard  \line \par}
+{That's actually it's K native compatible running on an app engine, Borg style cell. But you can also run K native on sdo, on plain kubernetes. There's also things like Fargate mm-hmm. Which are great ways to orchestrate that fargate under the hood. Firecracker, which is a micro VM that combines containerization around the virtual machine manager with a super, super trimmed down Q M U implementation, that basically just boots with like an escape key instead of a full keyboard or control delete, I think.}
+{\pard  \line \par}
+{, and those kind of very minimal attack services , , and startup times. So for any given application, considering its runtime behavior and patterns and scalability requirements and ease of developer access , are really paramount because, No one got fired for buying ibm. No one's been fired for running Kubernetes in the past few years, and that Gartner quadrant keeps on pushing it, but really there are multiple ways to run containers.}
+{\pard  \line \par}
+{Looking at things coming up like again, confidential computing, }
+{\cf2 [00:43:00]}
+{ confidential containers, pieces they can run in Kubernetes. They can also run just on metal around a VM with containers inside. Obviously that's for , a secure computing use case. Yeah. But probably the other end of of that discussion is Kubernetes really accelerated towards the edge and instead of sort of heterogeneous set of deployment styles running Kubernetes on , the sort of disparate collection of edge computing hardware has become significantly easier , for operators.}
+{\pard  \line \par}
+{So , it is a huge scale. Really, as with anything, once you consider who's going to maintain this system, , what are their capabilities? Especially as a consultancy, if we're delivering something, we want to be sure that it will have longevity and utility long into its life for a client. Yeah.}
+{\pard  \line \par}
+{But also what are those runtime behaviors that we're actually looking for? Is this something that should scale to zero? In which case keeping a Kubernetes cluster up the whole time to run it probably makes no sense. That would sit nicely in a cloud run, for example. Or, or a lambda like }
+{\cf2 [00:44:00]}
+{ invocation.}
+{\pard  \line \par}
+{Is it something that requires high availability? Well then maybe we want regional clusters and global routing and and then figure out how we do our data store reconciliation between them. Maybe there's the different caching layer, et cetera. So I, I mean, you're completely right when one has a Kubernetes, everything looks like a container shaped nail with which the bash it , }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ oh, well I was gonna also probably bring another spanner into the work with the whole serverless.}
+{\pard  \line \par}
+{You mentioned lambda as well. There is this whole, I think for people who have been in the space long enough, they kind of saw the movement. There was a whole container, first movement then became like a serverless first movement. Now, I feel serverless first has become almost like a backend thing. It's not really like a frontend thing where kubernetes seems to be more like everyone's back, backend, front end.}
+{\pard  \line \par}
+{The whole entire shabang , is basically Kubernetes. Do you feel this, do you see the same pattern or do you feel Cuz I, I, I would've thought based on definition of cloud native you called out serverless kind of fits our category as well, where minimum attack surface comes up and downs really quickly.}
+{\pard  \line \par}
+{Very easy. You can configure just to pull the application. A, do }
+{\cf2 [00:45:00]}
+{ you feel it's still relevant and b I'll follow up another one, but do still feel it's relevant? }
+{\pard  \line \par}
+{\b\cf3 Andrew Martin:\b0}
+{ Yes. Serverless definitely fits within , the sort of broad cloud native paradigm now, not officially because , K native , is a kind of function as a service based app, which , is in the cncf, but , the core lambda technology, for example, is not, yeah.}
+{\pard  \line \par}
+{The issues that we had with Lambda V1 were things like latency cold starts , were very slow. Yeah. Yeah. So we had to do things like constantly ping the endpoint so that it would would respond in a timely manner. When a user turned up Lambda V two then assumed a container like overlay FS file system structure.}
+{\pard  \line \par}
+{Yep. Which looks very suspiciously like they could have just given it an OCI compatible container interface. Then cloud run turns up, which does exactly that. Fixes the cold start latency times. But still we have problems when it comes , to those lambda functions of service, purely hosted single compute unit entities of introspection.}
+{\pard  \line \par}
+{So observability, debugging these things, }
+{\cf2 [00:46:00]}
+{ forensics for a postmortem, if someone breaches them, they're not things that are easy when you have no ability to run a sidecar, no holistic observation of the system because you don't control the infrastructure. Again, Lambda started to address these things with security sidecars.}
+{\pard  \line \par}
+{They're not called sidecars, , but whatever they are, that's where , the limit of those systems hits for me at the point that you have a serious organization looking to do something that's not just an extract, transform load perhaps or running heavily asynchronous jobs for which those batch system or batch jobs, which those systems are super useful.}
+{\pard  \line \par}
+{ The paradigms gets difficult to apply enterprise level controls to where there's a happy medium , and something that I quite like is, and it's a stack of complexity, so I don't recommend it necessarily, , but again, if we run K native function as a service on top of istio on top of Kubernetes, we can use our native Kubernetes observability and security tooling to get full stack visibility of, of everything in the way that we would do traditionally while }
+{\cf2 [00:47:00]}
+{ exposing a function-based interface to the developer, which gives them whatever they need there that scale to zero.}
+{\pard  \line \par}
+{The kind of distributed system decomposition into functional units of containers. Yeah. It does also play slightly into the microservices question, which is at what point is a microservice too decomposed? And the answer is, is generally if you are introducing way more network calls than you, than you have time to fulfill ultimately.}
+{\pard  \line \par}
+{Yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. There's a thing called too many microservices as well. So , there's a whole another can of worm for another conversation. Now, since you've kind of I think one last question before we kind of move on to the non-technical part of it as well. Where can people learn more about this as well?}
+{\pard  \line \par}
+{Obviously they can sign for the book and get the Hacking kubernetes book, but is there a wider collection? I feel like there's a whole angle of. Unlearning what people have learned so far, if they have been in the IT space for a long time. Like I think I show my age, I guess with the beard and everything.}
+{\pard  \line \par}
+{I'm sure you do as well. You've been in the IT space for a long time, so I'm sure when you walked into the space, you had to }
+{\cf2 [00:48:00]}
+{ unlearn a lot of the thinking that you've had or lessons you had learned. Transitioning from a traditional world to say cloud native and cloud world where do you normally recommend people go and how do they kind of start learning about kubernetes and kubernetes security?}
+{\pard  \line \par}
+{\b\cf3 Andrew Martin:\b0}
+{ I often consider how lucky I am to have gone from bare metal through the initial evolution of public cloud into the cloud native renaissance, , where those initial cloud lessons were learned and new technologies and platforms built as a result. Now that we find ourselves , at infrastructure as code as a thing, now we find ourselves in next generation run times.}
+{\pard  \line \par}
+{I do worry about the complexity for , new learners , in the industry. Certainly , and I speak from a position of survivorship bias suppose. Mm-hmm. But certainly from my perspective, everything fundamentally is still silicon to Linux and then Linux doing various things. So yeah, from my perspective, making sure those fundamentals of why does a file system have users and groups }
+{\cf2 [00:49:00]}
+{ and mandatory and discretionary access control, everything is a file.}
+{\pard  \line \par}
+{Well, actually everything is a stream of bites, but, but those fundamental single responsibility per process that those foundational concepts as a philosophical basis upon which to build learning are or have been super useful for me. Where would I go to to extend that knowledge? I mean, I, again, perhaps I'm showing my age, but I love keeping up with with kernel mailing lists.}
+{\pard  \line \par}
+{L w n.net is a great place just to pick up discussion from kernel Maintainers incredibly open, and that paraphrases hundreds of thousands of words that go into the Linux kernel mailing list. For security philosophy, I think it's difficult directly sort of instruct perhaps but.}
+{\pard  \line \par}
+{Again, I'm falling back on the book. There's a huge number of references in the book. Some of them, I dunno if I can just pull stuff straight off the bookshelf. The stuff around. Here we go. This is one of my favorite books. Threat modeling. Adam Shostak, designing for Security.}
+{\pard  \line \par}
+{Yeah. This is all about }
+{\cf2 [00:50:00]}
+{ how to decompose our abstract logical views of a system in order to secure the components. And they should be secured in an impact based order of precedence. So rather than just saying Right constrictive straight jacket for everything, no one can move. That's very much the old world security mindset.}
+{\pard  \line \par}
+{Applying risk based controls and remediations makes everybody's life easier and ensures the longevity of the controls themselves. Once we've moved past the, kind of the philosophy of, how we skill things the Linux Foundation has a huge amount of awesome free training that helps to build up to the Kubernetes certified administrator and developer and security specialist examinations.}
+{\pard  \line \par}
+{They really are a fantastic place to learn. Of course, it's very dear to my heart as well. Control plane , have written a huge amount of training, especially the advanced security training for Kubernetes. We also have a capture the flag later. So we run this to all the Linux Foundation events.}
+{\pard  \line \par}
+{If you're at kubecon in Amsterdam, do come and }
+{\cf2 [00:51:00]}
+{ play? We've got three increasingly nefarious scenarios that guide people through the fundamentals of kubernetes security and then off the deep end. The benefit of those is that, While sitting and learning , is useful, actually getting hands on keyboards and digging into learning from a practitioner first perspective is the way to cement that knowledge.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah, a hundred percent agree. And I maybe should check on the CTF at that kubecon eu as well. Would they be guide on if people are stuck you know how sometimes I find myself on ctf, you stuck on level one and you're like just banging your head for an hour. Then you're like, I just wish someone just telling me what to do.}
+{\pard  \line \par}
+{I'm just gonna move. Would they be guided that sort for people who are gonna lose the point, but that's okay. }
+{\pard  \line \par}
+{\b\cf3 Andrew Martin:\b0}
+{ Yes, absolutely. We have not only some of my venerable colleagues wandering around and helping to guide gently in the direction of, of the solution, but also we tear down the whole thing afterwards , and run step by step through the compromise, through the rationale, through , the various mechanisms and techniques }
+{\cf2 [00:52:00]}
+{ used.}
+{\pard  \line \par}
+{There's also this wonderful because of the sort of nexus of minds who come and play the game. Often we find that people have found unusual bypasses that we didn't expect when we built these intentionally vulnerable scenarios. So it's always a reciprocal learning experience and yeah, we aim to be as dispersive and open as possible.}
+{\pard  \line \par}
+{So often in security, there is this slightly elitist perception of, well, , if you don't understand it, then it's on you to go and find out. , we do this from the opposite extreme. We really want people to, we want to lower the barrier to entry for security as an industry because , we lack the volume of colleagues that we need , to secure , the world, let's say.}
+{\pard  \line \par}
+{And, and also I'm so infinitely grateful for the amount of open source information that I've been able to ingest over the years. And open source security information has taken a long time to escalate from sort of underground forums, let's say. So we're just looking to help proliferate. I, I think knowledge is power and }
+{\cf2 [00:53:00]}
+{ as much of it I agree. Awesome. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That was the technical question that I had. I've got three more questions to }
+{\pard  \line \par}
+{just basically get, so that people get to know a bit more about you. , first one being, what do you spend most time on when you not working on cloud native or kubernetes ? }
+{\pard  \line \par}
+{\b\cf3 Andrew Martin:\b0}
+{ Ooh, that's a very good question.}
+{\pard  \line \par}
+{, my passions are I love to cycle I love playing the bass guitar. I have a collection of funky, jazzy and punky tunes in the repertoire , that I like to rip through. I, I really enjoy just meandering around London. Oh, nice. I, I do quite a lot of travel, but yeah, London is a rich city of much opportunity, so it is reasonably busy.}
+{\pard  \line \par}
+{Running control plane. We have excellent colleagues around the world at this point. We've just opened up in New York and then New Zealand as well. So while I'm not talking to friends and colleagues around the world, and I find those, those glorious moments of time, yeah. It's really about centering and, and remembering to get out into nature and , and doing so in the most in the way that raises the heart rate most efficiently.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I love how you okay, cool. Snowboarding }
+{\cf2 [00:54:00]}
+{ is probably one of them, I guess. I imagine Then }
+{\pard  \line \par}
+{\b\cf3 Andrew Martin:\b0}
+{ snowboarding. Yeah. I can't ski, but I can't snowboard. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah, there. Cool. All right, so next question probably would come around this topic as well. Then what is something that you're proud of but is not on your social media?}
+{\pard  \line \par}
+{Ooh, }
+{\pard  \line \par}
+{\b\cf3 Andrew Martin:\b0}
+{ that's a good question. Well, my social media tends to be very. Professional. And I, I don't mean in delivery, , but in subject matter, I'm on LinkedIn. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Thank you very much. Not on Twitter. I was never on Twitter. }
+{\pard  \line \par}
+{\b\cf3 Andrew Martin:\b0}
+{ Well, I, I mean, it's, it's really changed on Twitter. It has in the past few years for sure.}
+{\pard  \line \par}
+{And LinkedIn is a more verdant source of information in many cases. I would say it's probably I'm very proud to be to be an uncle to , my two new nieces. , we didn't have any younger generation in my branch of the family until the last couple of years. So , it's been a very kind of late entry in, into life.}
+{\pard  \line \par}
+{But yeah, , it's a real delight to see the vibrant energy , of the of new life and the family. So, yeah, that's never made it on social media, but they're yeah, it, it's very invigorating to see them grow. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Well, congratulations to yourself and I }
+{\cf2 [00:55:00]}
+{ think, and the rest of the family as well.}
+{\pard  \line \par}
+{Thank you. , so my third, final question. What's your favorite cuisine or restaurant that you can share with us? Ooh. I imagine you have a lot of food right next }
+{\pard  \line \par}
+{\b\cf3 Andrew Martin:\b0}
+{ to you. I, I mean it's, it is the two extremes probably. I adore steak and sushi, but together normally at, at different times I'm }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ like, you have them together, or like, 100 sushi, }
+{\pard  \line \par}
+{\b\cf3 Andrew Martin:\b0}
+{ although I imagine someone would make a dish. Yeah. It, it's almost surf and turf, isn't it? But yeah, the uh, I, I mean there, there are so many fantastic Japanese restaurants.}
+{\pard  \line \par}
+{Yeah, I, a a, a prime cut of, of sushi just going in for the, for the strange sahimi. Oh, nice. It is, it's an absolute passion of mine and. Yeah, there are some fantastic places around the back of Tottenham Court Road, which actually one of my favorite haunts to sneak out to. And from a steak perspective I don't think you can beat Hawks more, although that's hugely contentious.}
+{\pard  \line \par}
+{There's hawks more goucho or blacklock would, would be the, the favorites. And all Hawks more is reasonably priced. }
+{\cf2 [00:56:00]}
+{ And deliciously juicy. I, I also do enjoy a lot of vegan food as well, that to balance the balance, the three outs. Oh, and there's so, so many places to, to eat in London.}
+{\pard  \line \par}
+{Yeah, especially around soho. So , that's my interesting emotional }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ anchors for food. Wow. You just went from steaks sushi to vegan. It's like you just kind of named every, well, I guess maybe you should put some paleo diet covered, vegan covered pescatarian. Maybe you just, oh, there fish is covered as well.}
+{\pard  \line \par}
+{So there you go. But }
+{\pard  \line \par}
+{\b\cf3 Andrew Martin:\b0}
+{ dude, yeah, I, I mean, I try and eat low carb, , so that's the ah, yeah, the reason for the extremity, I suppose. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. Yeah. Fair. And that's, that's a, that's a good way to look at it as well. Think. I try and do the same as well, man. But dude, this was awesome. Where can people find you if they want to have more conversations?}
+{\pard  \line \par}
+{Obviously you're coming to Kubecon eu as well, so they see you there and attend the ctf. I wanna keep talking about it for the rest of the month as well, for April until we get there. And maybe after that as well. And hopefully we can have you for the panel conversation on the 19th of April as well at the meetup.}
+{\pard  \line \par}
+{If we just talk about what was your kubecon, experience so far, and what you're looking forward to kind of a }
+{\cf2 [00:57:00]}
+{ thing. But we can be finding you outside of all that, man. }
+{\pard  \line \par}
+{\b\cf3 Andrew Martin:\b0}
+{ Absolutely. I, I'm looking forward to kubecon so much. I am up on Twitter. Dms are open if ever, there's. A tricky incisive, cloud native security question that people want to publicly humiliate me with.}
+{\pard  \line \par}
+{So yeah, I, I spend a bit of time there and again, trying to keep it professional and, not , too socially blasting. Then around London, I'm always at meetups, really love really love community events. I spend a lot of time at things like DevOps days. I've, I've been to quite a few K CDs albeit KC D Israel next month.}
+{\pard  \line \par}
+{Sorry, next week, KCD Amsterdam , was a couple of weeks ago. And then, yeah, just around the London Meetup scene. So , do please interrupt me with whatever I'm doing and say hello. I always enjoy having a chat. Awesome. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I'll definitely put them on the show notes as well. But thank you so much for coming on the show, man, and looking forward to seeing you in person at kubecon eu as well as otherwise in person as well in London.}
+{\pard  \line \par}
+{\b\cf3 Andrew Martin:\b0}
+{ A hundred percent. Yeah. Thank you so much for having me }
+{\cf2 [00:58:00]}
+{ on. Really enjoyed it.}
+}

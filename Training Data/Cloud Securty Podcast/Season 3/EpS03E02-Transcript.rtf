@@ -1,0 +1,523 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red250\green138\blue59;
+\red128\green128\blue128;
+\red216\green34\blue146;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ I'm curious get to know you as well and get the audience to know you a bit as well. So maybe a great place to start would be. So you've been in cybersecurity for a while. What was your journey into cybersecurity and specifically to where you are today?}
+{\pard  \line \par}
+{\b\cf3 Fred Wilmont:\b0}
+{ So I think everybody, it's always interesting to hear anybody's origin story. , me or anybody has always has an interesting origin story for security. I wound up, I was working at I was in the Navy for a bit. I got, I went to work for IBM. I was managing a data center. I went to go work at a startup.}
+{\pard  \line \par}
+{I'm doing, , at that time circuits routers, switches, configuration, ethernet, all the, , old school things after you build the internet. And I wound up working with some guys that were sort of, we'll say, XCA work-release guys phenomenally talented. And I sorta realized this was really the place that I wanted to spend my time super humbling every day, a different problem to work on a lot of chess and lots of stuff to learn as much as I wanted to get my hands on and do so did that was where the. Actually happened. This was at a, basically the foundering stages of a managed service provider ship there. During the time of maybe you remember this project, China, , }
+{\cf2 [00:01:00]}
+{ timeframe, which is, , there was the first sort of hacktivism happening in these things. And out of that, , I probably went to do a bunch of different disciplines.}
+{\pard  \line \par}
+{So that was a lot of SOC work. That was a lot of intrusion detection, network, traffic analysis, all that kind of good stuff. When looking at 500 megabytes of data was a significant problem, right. To do. And then , I went to work at a bunch of other places that that's a big and small that did, , some level of assessment at Symantec , and hardening of, , wireless systems and so on.}
+{\pard  \line \par}
+{And then I got into the startup universe again and kept going back and forth and. Really the dimensions of that are the entire litany today. There's like 64 competencies. If you think about what cybersecurity is and have that right, I've tried to make it my job to go through every aspect and collect enough of those things to be competent in each area.}
+{\pard  \line \par}
+{There's plenty more for me to do here, but I came to my current sort of place after building, doing products, doing services work and all of the other things, being a practitioner and then building some products and just doing CISO work. , now, like you'd like to think about it as one job, but it's many.}
+{\pard  \line \par}
+{And so it , it keeps me interested. My son's here was }
+{\cf2 [00:02:00]}
+{ an identity provider, for example, there's no better place to think about defending the crown jewels, right. Identity is ultimately the crown jewel. So I thought it'd be an interesting challenge. It's been. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And by the way, thank you for your service as well.}
+{\pard  \line \par}
+{Andrew let's you have spent some in the Navy as well , and talking about identity as well. Probably a good time to kind of get into the, I guess, the crux of this as well. So IAM is such a deep topic to go into to be able to spend the years just doingIAM and in some instances, still not being able to do it.}
+{\pard  \line \par}
+{Right. So what, what does an IAM system according to you, and I guess the relevance of an IAM roadmap, the kind of the topic of the episode, especially from a leadership perspective, , and feel free to go into the whole pre COVID post COVID world as well. Cause I think we definitely have a very interesting mix today.}
+{\pard  \line \par}
+{\b\cf3 Fred Wilmont:\b0}
+{ Awesome. Yeah. Happy to,IAM is sort of a nebulous topic and in the broader sense, the way that, , we think about it is, , you want to have a way for you to be able to access resources. You need a way to verify who you are. And you need a way to think about that broadly across a set of roles.}
+{\pard  \line \par}
+{And so when we think about identity and access management, }
+{\cf2 [00:03:00]}
+{ we need to match a roles with a system or a user that wants to get access to a particular resource. And that fundamentally is the basis of what IAM is now, how does that turn into, , software process, all these are the things that's where the roadmap comes into place, because that's not a trivial problem or we'd all know what it is, have it solved, and we wouldn't be talking about it still.}
+{\pard  \line \par}
+{Right? Yeah. So some of the things I think about here, when we talk about what makes the most sense to consider, , fundamentally we look at things like, how do I want to get access to in the cloud infrastructure? Right. I have, , maybe I have O 365 and, but I use Google apps and, , then I have Evernote or Dropbox or some of these are things where I have credentials for all kinds of things.}
+{\pard  \line \par}
+{This notion of authentication. And I have this notion of authorization and somewhere in between there, I've got to figure out how to build a process that allows people to do whatever it is they need to do to do work, and do that in a way that allows me to layer this functionality of role based access control as a construct across those things in some policy-driven and }
+{\cf2 [00:04:00]}
+{ manageable way.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yep. And do you reckon, what is the importance of an IAM roadmap for, I guess from a leadership perspective and I guess, especially if that has changed pre COVID post COVID. }
+{\pard  \line \par}
+{\b\cf3 Fred Wilmont:\b0}
+{ Absolutely. So, , first and foremost, we would say, yeah, it's interesting to make sure we have the ability to manage all of our applications in this sense, but , we have offices and we can VPN and do all these other things.}
+{\pard  \line \par}
+{None of that now. And fundamentally our identity management is the basis for us to determine whether or not we're securing our environment, whether or not people can do work. And it's changed from, Hey, I'm going to submit a ticket to IT . And 15 minutes is fine too. Literally it's last cycle time, if it's not immediate response.}
+{\pard  \line \par}
+{And it's every single thing that we do. So access outside the bounds of your devices, to the methods of authentication, to brokering that with other vendors that do that authentication or authorization, because not everybody is unified and , things like, I need to make sure that all the policies that I want to push are also managed in a way that allows them to be.}
+{\pard  \line \par}
+{Controls that are operating, which is also new and }
+{\cf2 [00:05:00]}
+{ interesting in the cloud driven purity of the world we live in now. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. And to your point, it's interesting because I think the whole five minute conversation about Hey, I have an identity issue or someone reset my password. I just walk up as a person, but even from a support perspective as well, that's changed quite a bit because support may not have access to the same kind of resources to help you in five minutes on a remote concept.}
+{\pard  \line \par}
+{But , I'm sure after 2 years is of it, I guess may have they have figured it out, I imagine. But, it definitely has brought up interesting new challenges. So, I'm curious from a, IAM road perspective. What do you feel, especially in the cloud world, what are some of the identity roadmap challenges that you would think someone may come across when they building for }
+{\pard  \line \par}
+{\b\cf3 Fred Wilmont:\b0}
+{ first thing is I think a lot of people are still dealing with this.}
+{\pard  \line \par}
+{The common term of cloud transformation or digital transformation, some of the challenges there are, Hey, I've got active directory or, Hey, I've got, , some other arcane method of dealing with infrastructure as a function of IAM or users. And I've got to figure out how to migrate that. All right. I need to broaden that to all my cloud applications.}
+{\pard  \line \par}
+{So, I }
+{\cf2 [00:06:00]}
+{ mean, integration is the first and foremost single sign-on and multifactor are critical components here. Again, the authenticity and the authorization pieces have to go hand in hand, well, how do we do that? What's the basis of that? Well, it's a role based access control. It's a matrix of what do I need to do my job, which changes from time to time and the challenges also from a mapping perspective, do I have the tools that allow me to tie that to what my role is at the company, my HR, I S system, or, , whatever, whatever it is that I'm using to, to justify an employee or a contract basis to do.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yep. And to your point, I think it's an interesting one. Do you feel people understand the importance of, IAM , people like you, me and others who are in the industry understand identity is kind of like your, I guess it's your secret key log for anyone to access everything in the organization, depending how integrated everything is.}
+{\pard  \line \par}
+{Do you feel people understand this like a different teams when you go and we'll talk to them, in the vast experience, you've had people have an understanding towards what identity access management is and why it's important. I }
+{\pard  \line \par}
+{\b\cf3 Fred Wilmont:\b0}
+{ think what people understand is when it doesn't work, right?}
+{\pard  \line \par}
+{\cf2 [00:07:00]}
+{ Fundamentally because it stops work totally. Right. It's a great point to bring up because the challenge is in order to understand how that can be utilized as a method to enable when someone starts at a company, their first day experience is they have already been entitled to everything, no tickets to IT whatever the case may be, but it also means.}
+{\pard  \line \par}
+{The policy has been set to govern and broker that access appropriately for what they need. Right. I mean, the other challenge with IAM is what happens when something gets difficult? What do we do? We overly permiss somebody and we give them all the entitlements, cause it just needs to work. And so when that happens, do we take those entitlements back?}
+{\pard  \line \par}
+{, a lot of times we don't, it's a fundamental flaw , in most of the security programs that, , I've wound up or had the pleasure to be a part of just because that's how organizations grow. So over time it even gets more challenging. So if you consider all of those factors together and that the vast majority of people are starting to use sassy services because , your laptop can install everything in the universe.}
+{\pard  \line \par}
+{It makes a lot more sense for this to be a central theme, to the way that we talk about it, both from a security }
+{\cf2 [00:08:00]}
+{ and an ITP. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. And you touched on such an interesting point there because nowadays it's not about, , how, I guess, for some of us who may have been there for a long time where every software had to be installed in a laptop these days, majority surface are SASS applications.}
+{\pard  \line \par}
+{You not even installing anything you, all you need is literally just a browser on your machine. As long as that can well handle like 30, 40 tabs that people have opened up, I guess, a }
+{\pard  \line \par}
+{\b\cf3 Fred Wilmont:\b0}
+{ 400. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And when you're restarting a laptop because your Google Chrome had doesn't have enough memory.}
+{\pard  \line \par}
+{Then, , you have a tab challenge at that point, I guess. Absolutely. I've been definitely been guilty of that as well., I find that really interesting because I have always struggled with the conversation where, how do I make someone understand why identity is important?}
+{\pard  \line \par}
+{What you said is so true that the moment you can't access that. How do I resolve this? Like, cause, and that's what costs money to people. I think even, I don't know if you've seen this, but I find that in some cases, every support calls are source of like a charge for a reset password as well.}
+{\pard  \line \par}
+{And I remember in my consulting days, we would talk about, Hey, you can save money if you go for an identity and }
+{\cf2 [00:09:00]}
+{ access management system, if, because you can save your, I can let the users reset password themselves. Like some of the basic things that people expect right now, the forgot password thing, even that people had to pay money for that kind of a thing.}
+{\pard  \line \par}
+{Like, wow, like, I'm curious, based on that, what are some of the building blocks that people should be kind of looking at? So I imagine people listening to this conversation and going, oh, wow, identity is important because day one new employee or day 551 employee number a hundred is still experiencing the same challenges.}
+{\pard  \line \par}
+{What are some of the building blocks that they should be looking at for an IAM roadmap, if they are. That's smart. }
+{\pard  \line \par}
+{\b\cf3 Fred Wilmont:\b0}
+{ Yeah. So you're right. The importance drives an awful lot of this, given that it touches everything we do well, there's a handful of things that I think are really critical. The first is this, , sort of understanding of.}
+{\pard  \line \par}
+{Matrix of an org, right. And that can be as simple as what department do you belong to, or it can be as detailed as you want, but an overall understanding of what it is that you have. Things like mobile device management become really important in that dialogue, because part of the things that we have to make sure we can do is be able to push policy and configure and }
+{\cf2 [00:10:00]}
+{ distribute patching and all the things across our systems to make sure we stay current with our hygiene and all these other components and the infrastructure that is your home office.}
+{\pard  \line \par}
+{Right. , I'm not trying to defend against your low power, Bluetooth, light bulbs. I'm really trying to make sure your workout sets work appropriately. And that's a fundamental part of how we think about that too. So if you're out of policy in that construct more, maybe we shouldn't let you have access to specific resources.}
+{\pard  \line \par}
+{Multiple directory services. Right? So being able to bind to multiple directories is critical. So if, , for example, if you can't use and integrate with say, , Google's off, but I am , I use Google as a, as a main domain, right? For all of the things that I do, that's going to be impactful if you're trying to tie that to other things, single sign-on and then, , single sign on the basis that if you can tie that to a dashboard or a method to get involved every time you want to access a resource, that is the right way to broker to, because the revocation of this is just the same.}
+{\pard  \line \par}
+{And we're talking about SAML assertions here that, , allow you to do the right thing from a security. And then there's a real }
+{\cf2 [00:11:00]}
+{ big piece here and it's called passwordless right. So, , this is still sort of bandied about quite a bit in the industry as to what passwordless means and how do we quantify a risk thing around it and, , so on and so forth , functionally, multifactor authentication, single sign-on capabilities, these are all great, but , if I'm on my phone, which I tend to trust more because it's my phone.}
+{\pard  \line \par}
+{And so Instagram here versus I don't use Instagram on my laptop and I might have some different risk profiles based on device, but I'm the same me, so that I have a measure of step up or step down authentication based on the likelihood of my risk to my organization or myself. That's a fundamental tenant.}
+{\pard  \line \par}
+{Historically, we talk about this as like user or entity behavioral analysis, right. To characterize that. but fact of the matter is this is the risk thing that everybody always talked about, but now it's real. So now we need to do it. So this is a fundamental building block for. Anyway, we think about it, merge these, , the industry jargon around CASB , conditional access stuff, and, , zero trustee stuff and this identity and access management, that's where everything becomes the centrifuges identity and }
+{\cf2 [00:12:00]}
+{ access management.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. It funny, it comes back to the same thing where identity is what gives you access to everything in your organization. So it is the number one thing you should be looking at, but for some reason in the industry, a lot of people, because it happens so seamlessly in the background as well.}
+{\pard  \line \par}
+{The only time you realize you have an identity access management system is when it stops working. It's like, oh, I can't access. I dunno, like the Salesforce software over here, the single sign on doesn't work like, oh, we have an identity access manager system. I had no idea like places know until then you just log in with your username password or do single sign on.}
+{\pard  \line \par}
+{And you're just like, no one even cares as an identity access management system and the. }
+{\pard  \line \par}
+{\b\cf3 Fred Wilmont:\b0}
+{ There's another part of that too, which is exactly a lead into what you're suggesting this notion of persistence versus a femoral, right. And the way we think about secrets management, historically, I've a username and password.}
+{\pard  \line \par}
+{I log into a thing. My username and password is the same, always when I authenticate to a thing. That's great. Okay. But it's pretty static. And so some of the benefits of thinking about this is I don't have }
+{\cf2 [00:13:00]}
+{ to try to remember the dynamic capabilities or, , secrets management that happens through an identity provider.}
+{\pard  \line \par}
+{That gives me the benefit of not only not having to remember passwords, but knowing that every set of authentication becomes a femoral and I'm still a, me and I still have entitlements to what I need to do. But the process of that being the same thing, every single time is dramatically changed. So yes, Super helpful in the sense that when we think about this, it's really critical to, to think about the way that that affects the rest of our systems.}
+{\pard  \line \par}
+{What else can we utilize to make this more femoral, to make this more permissive in a way that allows us the on-ramp to be much more available to us, right. Because that's really what it boils down to security must equal availability securely available, right. Or do work securely. Yup. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yup. And I think I'll take this leaf one secret management as well.}
+{\pard  \line \par}
+{Cause I've got a whole episode on this next week because it serves as a big topic as well. Cause , it's insane. Like some things which are so simple have become so complex these days. And I feel identity }
+{\cf2 [00:14:00]}
+{ access management is one of them where people were all whenever I started talking about,IAM because my career started my and I think my understanding at that point was just using it.}
+{\pard  \line \par}
+{I know what my username is. I know what my password is and that's all I care about, but then you start adding more systems like, oh, now I have two systems. Oh, that's okay. I'll, I'll use the same password or a different password. And then you start adding more at your point about the secret managing that point.}
+{\pard  \line \par}
+{Password manager is so hard, especially if you, well, if you don't live in a password less world of first, which is which has come up, I feel like it's a bit of a time before we kind of go down that path, but even the whole thing around changing a password. And I know I'm sure you've seen those memes going around as well for common passwords and they keep adding them the number in the end.}
+{\pard  \line \par}
+{Like I know one word I'm just gonna remember that just have different numbers in the end keeper, keep rotating it like and do what is your stand on the whole need for a password change versus no need for a password to be changed. }
+{\pard  \line \par}
+{\b\cf3 Fred Wilmont:\b0}
+{ Complexity versus rotation. That could be that old Chestnut. Sure. I think complexity wins over rotation every time with }
+{\cf2 [00:15:00]}
+{ multifactor.}
+{\pard  \line \par}
+{Right. Without it they're , both of those decisions are probably not optimal. I've done by themselves. Right. But, , there's a great thing to hold us accountable to this. Right. you wind up on Troy's mailing list, right? Hey look, my, have I been poned is popping model my credentials.}
+{\pard  \line \par}
+{Right. And then they're like, okay, so we have a couple of basis here and that's why the password manager space is interesting to converge with. IAM because until we get to passwordless it's a requirement. So if it is okay, great. Let me make sure that I reduce the blast radius of whatever that might look like is something very small.}
+{\pard  \line \par}
+{And so also I don't have to remember things there are many ways to do that part with respect to that master passwords and so on are probably not optimal either. But the construct of a user having that level of protection is terrific because then, I mean, the level of lift as an admin is dramatically smaller and you brought this up earlier, everybody's geared towards product, , a product driven, , user driven experience.}
+{\pard  \line \par}
+{And so how many admins need to reset a thousand passwords a day? Like how wasted is that level of effort? It's massive. And so take that off the table, but make us more secure, but make those credentials ephemeral, }
+{\cf2 [00:16:00]}
+{ those are the requirements. Right. And that's very different than it was just a few years ago.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. And maybe it's a good point to bring up as well. Cause I think we can't, I feel where I love where the conversation is going as well. We kind of spoke about the,IAM roadmap spoke for different components of identity, access management roadmaps as well. We spoke about I guess the challenges that people come across.}
+{\pard  \line \par}
+{But now, since we kind of at that point where we have, oh, Ashish doesn't only have one application. Now we have hundreds of application . How do you see a lot of companies manage identity at the moment? And I guess, yeah. What do you see people doing at the moment? }
+{\pard  \line \par}
+{\b\cf3 Fred Wilmont:\b0}
+{ Yeah. That is for depending on the size of company, obviously that answer differs, right?}
+{\pard  \line \par}
+{Yeah. What I've seen, we spent a lot of time in the small and medium sized enterprise. Most of that is, and it depends what you have. Do you have an IT staff? Do you have a security staff? And a lot of cases, you might have one or not both. And so the challenge for administration here is if that application doesn't have a single sign-on capability.}
+{\pard  \line \par}
+{Now I have bespoke methods for dealing with all of this. So a fundamental requirement is, and this is, I mean, this is true. My company, now we're }
+{\cf2 [00:17:00]}
+{ not bringing in software that isn't not going to do that. I need everything managed by one directory. And whether it's an assertion for another bind that's.}
+{\pard  \line \par}
+{But everything is going to be managed as a provision and de-provision exercise by role. That's it. We can't do it in a way. And some of the larger places where they're actually doing a federated identity management internally, right. There's a lot more surface area, but I see this going away because it has a massive amount of complexity and, , sort of diffused it problems waiting to happen, and it doesn't provide additional value.}
+{\pard  \line \par}
+{So ultimately, , we're a cloud service provider, , helps you deal with the. Basically the accounts sprawl , , because people typically install somewhere between, or organizations will have somewhere between 50 and 200 applications that they use depending on size. That's incredible. Yeah.}
+{\pard  \line \par}
+{And why have a department to manage passwords? I mean, it doesn't make a lot of sense. So ultimately that's where I think people start getting into that notion of how do I create this one on ramp? How do I get to this notion of Federation across the different types of things that I have? So if you have it, and most people typically have three or four different identity }
+{\cf2 [00:18:00]}
+{ providers in some capacity, whether it's, , a cloud service that does it like a Google, right.}
+{\pard  \line \par}
+{Or an Amazon or a pick a thing, and then tie in, like I need access to Workday maybe, or, , whatever HRIF system or something like this. And I also need to tie that to a method or process for ticketing. And maybe I write software, I need to tie that to, , GitLab GitHub , some packaging thing like MPM.}
+{\pard  \line \par}
+{That's where things get really interesting. So the basis of what we do today is dramatically shifted into you. Can't just operate in two or three things and you don't have office probably on your laptop. So, the benefit of that is you have the opportunity to tie the sprawl together in one place, because most of the technology exists today to do it that way.}
+{\pard  \line \par}
+{The challenge is that's a culture shift. That's a, whereas all of my current data around users and systems, how do I have asset inventory? Right? That's a requirement too. And if you're, , following along in your hymnals about what the executive order of the president suggested in the U S last year around software bill of materials, right?}
+{\pard  \line \par}
+{Then you have a, yet another set of constructs that you have to maintain and manifest. So IAM becomes more important because there's no other }
+{\cf2 [00:19:00]}
+{ way to do that, unless you have, , not only the approachability of a directory service, but you have the entire story of the manifest of how you build things.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ There's so much to unpack there where I was going to try and focus on one at a time as well. The directory space is interesting as well as a, to your point about identity sprawl, because a lot of people would not even know what what identify sprawl is?, what's your definition of identity sprawl and how does that relate to multiple directories and like yeah, I'm sure that you've got to get the hint of where I'm going with this.}
+{\pard  \line \par}
+{\b\cf3 Fred Wilmont:\b0}
+{ You bet. You bet. So, , first thing is as a small business or a large business, I have to, , do things like email and communicate with people. Typically that's a set of identities in today's universe, , maybe I use Google for this in specifics because Gmail is so easy and approachable and , also all the great security controls already built in.}
+{\pard  \line \par}
+{No I don't, I don't work for Google, but , the concept behind that is one that I have all of the critical resources that I use to operate my business and maybe that's compute and maybe that storage and maybe these other things and what that credential is different for Amazon.}
+{\pard  \line \par}
+{It has to be because those aren't federated }
+{\cf2 [00:20:00]}
+{ together, me,, that's a challenge for people. And then, , maybe I use office 365 because I don't want to download things to my laptop. I do want to be up to date most of the time. , and so this is a way for us to do that. Those three things alone, right there means that's three different identity and access management requirements set, and then roles for each of those.}
+{\pard  \line \par}
+{Right. That's problematic. I mean, a lot of people don't understand how to build out the IAM profile for what you need at ADP. I'll just grab that thing. Well, again, what happens? What always happens, this isn't working. Give me more permissions. Okay. So when you get to a place where you can tie to a directory, single sign-on, that's brokered by role, it gives me access to just the things I need and AWS, just the things I need for, , Microsoft to get me the ability to communicate with other humans or, with Google, it gives me the, the other capacity, which is like for email, for documents, whatever it is that I need.}
+{\pard  \line \par}
+{And so that's where sprawl happens. That's just the big three, everything else outside of that. Right. And then the CISO says, Hey you've installed an application here. I don't know what that is. It's on your laptop question, mark. Right? My endpoint detection response says this is not our }
+{\cf2 [00:21:00]}
+{ acceptable use policy.}
+{\pard  \line \par}
+{ what's the deal. It's not federated. , so now we have to take action. Imagine on a thousand systems, 10,000. So. Right. So obviously, , we don't have the same vehicles to deal with that. Like we would, if we said in this data center or, , I'm going to push this group policy objects that does X, Y, or Z, by the way, max winning.}
+{\pard  \line \par}
+{So it's also not the same problem. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And I do want you to touch on active directory as well. I personally have a legit say a love, hate relationship with active directory. I think it was built for something else. Now it's become this kitchen sink of all the other things that cannot do, but people are trying to just have some kind of attachment or contraction into it.}
+{\pard  \line \par}
+{But what's your thought on active directory for this modern world of modern apps in the cloud and SAAS and everything? }
+{\pard  \line \par}
+{\b\cf3 Fred Wilmont:\b0}
+{ Well, I mean, it's definitely I'll speak as a CISO it's long in the tooth for my use. Right. The level of complexity to solve the problem that I have today, it's not even something to consider.}
+{\pard  \line \par}
+{Right. I would consider, , Hey does Azure AD do you do the things that I needed to do? Okay. But then I still have to tie it into the, , other things that I do. And it's not }
+{\cf2 [00:22:00]}
+{ where I need it to be, to make one thing, one ring to rule them all, if you will. And the complexity is high, right?}
+{\pard  \line \par}
+{And the level of effort is also high. So when we think about what those things mean, chances are good. If you're trying to implement an identity and access management solution of some variety, you don't have nine months to like go figure it all out or hire 20 consultants to, , sit on the bench that are, , 80 certified and all the things.}
+{\pard  \line \par}
+{Now I need something that really reduces the surface tension, and I also need to be able to get deep pretty quickly. So, , I need you to tell me, I don't want to have to register every device in the catalog in some capacity, just to capture the methods to authentic. I want to be able to do that in a way that, , my provider knows what this thing is, knows whatIAM and associates the relationships, right.}
+{\pard  \line \par}
+{Browsers systems, devices, identities. And those are the things that I think. So , when we talk about what active directory was 15, 20 years ago. Sure. It made sense. Now }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ it's a new age. Yeah. And I also feel like in the world of API APIs, and also the levels of SAAS applications, I mean, yeah, they've }
+{\cf2 [00:23:00]}
+{ added a lot of attachment to ADFS and all that as well, but you can kind of go in and make it work, but you almost have to wonder, because I don't know if you remember, but the original use case for active directory when it was created, this was not the original plan.}
+{\pard  \line \par}
+{It's like the way I describe it is imagine if we still had the first PC that was built and we were still using that in 2020. It's like that with active directory, it hasn't changed. Now. I'm just trying to add some attachment to it hopefully add a few more floppy drives for people who know what are floppy drives}
+{\pard  \line \par}
+{I guess it's kind of feels like that active directory, but that also comes another question because active directory was considered as a source of truth for what Fred's permission or what Ashish's should have permission. What does that look like in this new world of cloud and SAAS and all these things?}
+{\pard  \line \par}
+{\b\cf3 Fred Wilmont:\b0}
+{ Super good question. This is one of those challenges. When we think about building blocks, everyone still needs a single source of truth, right? Whether you're a CISO or a CIO or you're just trying to basically produce some audit reports at the end of the week, I need to know what everything is, whether it's online or not.}
+{\pard  \line \par}
+{I need to know where it is. And I also need to understand why this person has these }
+{\cf2 [00:24:00]}
+{ entitlements. You still need a single source of truth, but. Don't make me dump the entire catalog and then figure out how to parse it to just to look at those simple things. Right? So , the efficacy of getting access to the data, by the way, you've done these implementations, what happens when I add a new thing to the directory?}
+{\pard  \line \par}
+{What happens when I try to build a connector to it and the schema doesn't work. Right. And , what happens to your directory? Right? All of it's polluted. It's not the same problem. So the basis of this becoming more ephemeral and more populated in a universal way is really the only way to do it now.}
+{\pard  \line \par}
+{So when we talk about, , this how do you verify who you are? How do you give a high level of confidence on your identity? It's multiple methods now, and it doesn't have directly to do just with the. So give me my entitlements, make sure that I can authenticate. Absolutely. But help me make authorization so much more easy, right.}
+{\pard  \line \par}
+{Is really where I think we run into that. No more building Adam things or, , other crazy connectors in order to just make specific types of integrations work. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Wow. Adam schema, all these words that, I }
+{\cf2 [00:25:00]}
+{ mean, may not make sense to a lot of people, but they are some of the nightmares that people had to deal with.}
+{\pard  \line \par}
+{Whenever you're trying to add, introduce an application. Yeah, it's funny. I, I did like three years of identity access management. It's still gives me shivers. I think we did, which did try going down the path of indictment stores. This was before SAS became a thing, but now it's not more complexity around it, as well.}
+{\pard  \line \par}
+{So a , great points so now we kind of spoke about source of truth for active directory is probably not the best source of truth at this point in time.}
+{\pard  \line \par}
+{But , the way identity has to be dealt with in a cloud world seems like there's a lot more, I guess in terms of not just compute, but the kind of applications, , the number of applications people are dealing with as well. But these cloud providers and others, they sometimes they have their own identity systems as well.}
+{\pard  \line \par}
+{And it may be tempting to kind of go down the path of, to your point about the AWS example. Well, AWS has an identity. Why am I trying to make active directory or whatever else has. Sort, , what are your thoughts on that in terms of like using an identity provider from a CSP, for lack of a better word as a source of truth }
+{\cf2 [00:26:00]}
+{ versus something else.}
+{\pard  \line \par}
+{\b\cf3 Fred Wilmont:\b0}
+{ The way that I think about it in what we're sort of doing is each of those are a source of truth. And then, , I mean, I work at JumpCloud.JumpCloud is now the source of Truthit's Meta , right? So we can import and operate on all of those, , directory services, because that is one that is not just going to be bespoke attached to that.}
+{\pard  \line \par}
+{Why? Well, my identity as a AWS person is different than my identity because my role might be different. What I do. And so what I need is I need my entitlements to be, , all inclusive with respect to that. So it's a great thing to be able to manage that via a single site. , connection to that.}
+{\pard  \line \par}
+{And so, but the way to think about it as whatever the asset owner might be helps to find the role. Okay. But leave it to the it or security and or security team to basically broker that roll out with entitlements and then allow you to access it. So typically it's not, it can't be just one. It's gotta be many.}
+{\pard  \line \par}
+{And that's a primary reason why anybody roadmapping, this has got to start with that premise if they want to be successful down the road. Cause then you won't be limited. Just getting one thing dealt with from the ease of use of like a }
+{\cf2 [00:27:00]}
+{ Google. Great. But tie that to everything else that you do Google, isn't probably the most risky application that you use is my guess.}
+{\pard  \line \par}
+{Right? And so a lot of times we think about how do I make sure that I have the coverage model to allow those entitlements to be all inclusive? It's the. You have to be able to federate. And so you've gotta be able , to look at different bind the ends that you can pull in and associate those with your profile, because that's the only way that we can manage credentials in both directions.}
+{\pard  \line \par}
+{And it's gotta be tied to, , HR. I work at this company today and tomorrow if I don't, I want all of my entitlements revoked. I want all my keys, my credentials, my secrets, whatever revoked in one step, please. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yep. And to your point, that's an interesting one as well, where, HR systems like this page up this Workday, there's a lot of these HII assistance providers as well.}
+{\pard  \line \par}
+{And even though technically they're supposed to be the source of truth for, Hey, who Ashish's or Fred is, but they necessarily may not have all our entitlements because those entitlements may be defined by each application application owner. You kind of go down that rabbit hole of complexity that. I imagine in a }
+{\cf2 [00:28:00]}
+{ large company we were talking about small to medium size is moment, but in a large company that within our departments, that's dedicated for IAM does a lot more complex challenges with identity.}
+{\pard  \line \par}
+{Do you find that I guess the problems are quite different to what a small to medium size business would see in a cloud world for a small company,vs large company. I }
+{\pard  \line \par}
+{\b\cf3 Fred Wilmont:\b0}
+{ think the delts are that you move a team of people you would use as a provider in the small and medium sauce, and you move that internally into a company.}
+{\pard  \line \par}
+{So now you have, like, my whole team is sitting in some office, right. Or distributed offices or at home, basically making sure they manage passwords, they manage integration, they manage the schema of the directory. They make sure that , anybody that's got access or roles or issues around that get transferred.}
+{\pard  \line \par}
+{A number of different service dependencies on this too though. Right. And so, , the first thing is like, I can't get access to a thing. Okay. Maybe it's, , often or see, but maybe that services down. Right. How do we know? And so you wind up sort of dealing with all of these }
+{\cf2 [00:29:00]}
+{ other relationships as part of a runbook to say, okay, well, when this happens and this happens, I'm already checking in, , my instrumented, , permit this or whatever my thing is, Kubota, or, or, or , Grafana to figure out like, is there an operational outage that I have to be concerned with in a service provider or notifications or whatever.}
+{\pard  \line \par}
+{It we'll wind up doing a lot of that in addition to just trying to understand and manage, , identity. And I think that's were very difficult for people that work in that space to know everything about everything at your business. Yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And the point of the I guess the cloud angle to it as well go multi cloud.}
+{\pard  \line \par}
+{We had a conversation with one of the guests and we were talking about how identity is complex while between on-premise and cloud. But when you start putting in multi cloud as well, where do you put your, like the source of truth? Do you trust the, H H R I S system? Or do you trust each individual cloud provider?}
+{\pard  \line \par}
+{I mean, to your point about the Meta approach you were talking about where you kind of almost need like a centralized and entitlement store. Yep. HRI system remains a source of Truth for way who Fred is and what Fed's position }
+{\cf2 [00:30:00]}
+{ or, any of the detail about him is, but for entitlement, you kind of need like a, almost like a separate store to to manage entitlements across the board, especially when the person is offboarding.}
+{\pard  \line \par}
+{I mean, we haven't even gone into the identity lifecycle. From the time you've joined in the number of roles you've changed. And then it's like, I almost feel like the, the whole work from home thing has added more, lot more complexity to this, not to your point earlier where you said the example of hate sort of five minute condensation to reset your password or change my access for something.}
+{\pard  \line \par}
+{Do you find that work from home is adding more complexity? Like I'm imagining people who are CISOs and head of security, as well as coming to this conversation and thinking about building a roadmap, maybe today's the day one of building an IAM roadmap. What does that look from? A, I guess, a large organization, but a cloud perspective.}
+{\pard  \line \par}
+{Should they be to your point? , what do you recommend is the source of truth that they should kind of work with and what's your general approach for. Laying out some of the building foundations for, , I said, well, I wasn't, I was going to say a post covid , but there's no post covid to the point that we're still in COVID.}
+{\pard  \line \par}
+{Yeah. So }
+{\cf2 [00:31:00]}
+{ in this kind of world of primarily online folks, what is the building block? AndIAM roadmap would look like if they're starting today from a leadership perspective. Yeah. }
+{\pard  \line \par}
+{\b\cf3 Fred Wilmont:\b0}
+{ Okay. Great question. So, , fundamentally you got to figure out a way to secure a laptop. So there's some zero trusty things in here, right?}
+{\pard  \line \par}
+{The trust, but verify construct. But every time somebody wants to authenticate to something, we should behave as though we're going to see them for the first time, even though I know who you are and what you do. And so when I do that, that also allows me to invoke some policy on whatever that system is.}
+{\pard  \line \par}
+{So you can't connect to corporate assets irrespective of where they are. If you don't have, , an end point detection turned on, for example, or you don't have description turned on, or your browser hasn't been updated in five days, , with the types of browser in the middle of attacks that are available today and all the other things that go with it, cause most of that access is going to be, , through your browser.}
+{\pard  \line \par}
+{Right? And so that's a fundamental piece. A lot of people are talking about this as zero trust and CTA and , the NIST framework around this, all good things to read up on right in your spare time. And there's a lot there, but fundamentally this is the concept that you want to enable. The second part of that }
+{\cf2 [00:32:00]}
+{ is I need to make sure that there is some conduit for me to do that visa via network.}
+{\pard  \line \par}
+{And I need to have some parameters around this, right? We there's a market segment for this called CASB or whatever, their folks in this market segment that do things around both this and an access control as a function of authorization, an example might be like a SalePoint or something like this. And that's getting folded into the con the conversation around identity.}
+{\pard  \line \par}
+{And so when we look at something like an auth zero ping, or, , somebody that has the ability to meta , it's gotta be able to have the binds to most things. That's a fundamental premise for me. If you can't connect those three, , directory, service, identity managed, , cloud service providers, then, , right away, that's 50% of my problem.}
+{\pard  \line \par}
+{So if you can't solve the first 50%, don't bother going down the rest of the path. The second part of it is, is like, if you don't have folks that can do that work, make it super easy for my admins to be able to do those things through a managed service or whatever the capacity is. And that is attach it to my HR system, because today I'm getting a paycheck tomorrow.}
+{\pard  \line \par}
+{I'm not getting a paycheck. It means I also shouldn't have }
+{\cf2 [00:33:00]}
+{ credentials or keys or entitlements to anything that we do. And it's very difficult, , shadow. IT is simple when you work for. And there's a cloud, a public cloud that I could just build stuff in, , with , my business domain email.}
+{\pard  \line \par}
+{And then all of a sudden, right now I'm susceptible to things like phishing attacks and smishing attacks and all of the things. So I think those are three really big pillars, but I'm a big advocate when I got here. And when I get to any particular place, the first thing I do is build an access control matrix.}
+{\pard  \line \par}
+{I need to understand what everybody does and why, but then also when I look at the data flows, when I characterize what people are using from a work stream perspective, now I know why that is important from an impact perspective. And that helps me understand it, to find a risk. So it's fundamental if you've done a business impact analysis, if you've done any of the privacy requirements, which is a whole thing in and of itself, as she used to talk about.}
+{\pard  \line \par}
+{How much of your, , private infrastructure is mine to look at as a CISO , right? All of that stuff takes its shape, especially in the global nature of the environment, to make sure to consider that you have the appropriate amount of controls that you can, , sort of invoke }
+{\cf2 [00:34:00]}
+{ policy, but not overreach, those steps to get an areas you don't need to be just, you allow access in the on-ramp.}
+{\pard  \line \par}
+{Right. Yup. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And I think it's probably a good segway into my next question then, because people who might be building a roadmap, they're also looking at benchmarks as well. What would be different kinds of maturity, more they should be aiming for? What are some of the I guess starting points? I probably wouldn't even with total the question in the.}
+{\pard  \line \par}
+{Recommendation for make your own identity and access management system versus using an existing framework. Cause I think a lot of people assume, Hey, if I make this IAM system clearly, I'm the only one who know how to crack this. So I don't have to worry about this. The age old Chestnut of should I use a standard I make my own standard.}
+{\pard  \line \par}
+{What's your stand on that one? Yeah, }
+{\pard  \line \par}
+{\b\cf3 Fred Wilmont:\b0}
+{ no, it's a good question. I think the market maturity is good enough not to build your own. I am absolutely. And the difference between that and the method for using one is really the interesting implication, right? So, , if I have a ton of employees and they use a ton of }
+{\cf2 [00:35:00]}
+{ devices and maybe I allow people to use , their phones or their own devices or whatever, and I'm not providing work assets because gosh, by the way, try to get an M one chips at apple delivered to somebody's house on time.}
+{\pard  \line \par}
+{Good luck. Yeah. , , the intrinsic risk of somebody specific system, , now becomes the translation of how do I characterize that for, , access and management. And so I've got to believe that every asset for this particular identity is what it's meant to be. So. Mobile device management.}
+{\pard  \line \par}
+{Sure. It sounds great, but you've got to be able to allow that method for access by way of any device that someone chooses. And that's also, , a critical piece. So when you're talking about how do you plug that into your IAM roadmap, right. Fundamentally your MDM, whatever it is, has to integrate has to whether they provide an MDM that goes with it.}
+{\pard  \line \par}
+{A lot of them do, you have to make sure that that's the case and then choose your method of MFA. The only way to fly these days is MFA. That's it right. If we want to talk about man in the middle, we want to talk about popping any credentials, credential stuffing, like all these things kind of, there are still certainly identity attacks available, }
+{\cf2 [00:36:00]}
+{ but now we're talking as , distributed denial of service attacks and things like that on a woman on service, which is.}
+{\pard  \line \par}
+{That problem space was solved. Right. So, yeah. , just worried about how to focus on getting the devices and the types of activity you provide as the on-ramp to your,IAM that's really the key. So if it's convenient, , using MDM provider that gets you there, Use , , , some of the identity and access management solutions have their own authenticator as well, which makes it easier.}
+{\pard  \line \par}
+{Now I don't have, , everything is a Google authenticator. Okay. Well, if you don't use Google or you don't want to use a Google authenticator, what do you do? Maybe I've got a fight. Maybe I've got a, , a YubiKey or, , a Titan or something like this. I have physical security requirements that require me to put something in my particular device.}
+{\pard  \line \par}
+{Gotta be able to. Right. And then lay your choices down about how you want to manage it because the authenticity is the primary focus, the entitlements, we know how to solve that problem. That's already here. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yep. And to your point about, I guess, maturity graph from a implementation perspective, I guess the very lowest maturity benchmark being you have at least authentication, it's not an unprotected authentication to, I guess, whatever that }
+{\cf2 [00:37:00]}
+{ next stages, what are some of the phases you would see as maturity for people that they can aim for?}
+{\pard  \line \par}
+{Like they listen to this conversation and going, oh, I think I heard so many interesting things from Fred. I probably should look into my, IAM roadmap , but what are they building towards ? Like what's the next level of maturity after say a basic auth onwards? }
+{\pard  \line \par}
+{\b\cf3 Fred Wilmont:\b0}
+{ Yeah. So that's a good question. So one of the things to consider is while I have sort of the set of understandings of how to get.}
+{\pard  \line \par}
+{And authenticate that's on off. Okay, great. Yeah. Gives me some qualification around cohort analysis. Give me some behavior, help me understand , my identity risk in the sense whether it's my devices or it's me, or it's this browser link them together for me, make it easier. Tell me, , help me understand how what I'm doing today is more or less interesting than yesterday or at last hour or over these devices for this application.}
+{\pard  \line \par}
+{And give me a method to think about how to deal with that challenge forced me to authenticate in an additional way, if I'm more risky or super-well trusted advice to look at, , certificates and things like this, right? The future isn't passwords and certificates of }
+{\cf2 [00:38:00]}
+{ some capacity, right. And the method for providing, generating provoking and the ephemeral nature of those things.}
+{\pard  \line \par}
+{, that's the next level as well. Right? I don't just want to authorize my. To do things I want to authorize these specific things on my laptop. I want to make sure that, , this is the VPN, , application that we're allowed to use for this particular case. And these credentials are this, and it's tied to this certain, I have the right chain across my infrastructure.}
+{\pard  \line \par}
+{That's the next level. And then the binding of those things to, , that, which I can also revoke is okay, , we're done using that cloud service provider and I'm using this other cloud service provider now. Well, that shouldn't wreck my directory. So we evolve past the, , single directory and maybe some bind for off into, , the meta directory that allows you to do those things.}
+{\pard  \line \par}
+{So you can start with one, but obviously, to not get locked in and just like , you think you don't want to get locked into one cloud service provider. We'll leave that one alone, but it tends to happen , to get to the ephemeral nature is really what we're after, which is. I don't have a problem about, we don't have dialogues about password rotation or key rotations or things like this.}
+{\pard  \line \par}
+{Everything's a femoral that sort of a third stage, which is, it's not hard for somebody to figure out how to change their password. }
+{\cf2 [00:39:00]}
+{ Cause there aren't any, right. We simply automatically do that by way of request, whether it's key exchanging, , plus some encryption plus, certificates, all of that stuff is doable right now.}
+{\pard  \line \par}
+{Okay. But it is not, when we think about maturity, that's a high level of maturity for that type of thing. So that's where I see. There's also a lot of growth in the market. , Hey , it'd be great to be able to do those types of things and, and focus on a way for end users to not even really think about identities right now.}
+{\pard  \line \par}
+{We're still sort of like, let me take my first name and I'll swap it with my last name and I'll do some substitution to these things and maybe I'll use a passphrase, right? That's our fundamental, , lowest, common denominator problem. Right now, this will alleviate that. Not only because, , time, what you are, all of these other normal things we talk about and the frequency of the types of authentication that are required also become super burdensome.}
+{\pard  \line \par}
+{So don't make me reauthenticate for every single thing that I do, just because we don't trust, , Yeah. Find a way to establish the trust in this way. And that's the top level. Right. And that's, that's a hard thing. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. And I think I love the fact that you mentioned and I think maybe it's also been a }
+{\cf2 [00:40:00]}
+{ theme went on , for the episode.}
+{\pard  \line \par}
+{So far has been ephemeral is a future for identity passwords, in a cloud implementation, we always talk about the fact that, Hey, I should be able to move from one provider to another provider, even if it's just to my CSPM or whatever, it should be an easy transition.}
+{\pard  \line \par}
+{The same goes for our identity as well. If you change your IAM system, it doesn't mean that everyone in the company has to be informed of. I mean, maybe they have to do a password reset if you're in that second year of maturity, but it's not like , it's such a huge project that you spending six, seven months doing it again.}
+{\pard  \line \par}
+{It just should be like, it would be smooth. }
+{\pard  \line \par}
+{\b\cf3 Fred Wilmont:\b0}
+{ Absolutely. Because again, , the timeline for things not working. , how much tolerance do you have to not have access to critical system functionality for you to do your job at home? 30 minutes? Probably not. Right. , when IT tickets used to be what it could be, four hours could be eight hours.}
+{\pard  \line \par}
+{Hey, the printer, I can't print to the printer. Yeah. That could be eight hours. Who knows. But now if you don't have access, that's a real time problem and work }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ possible. Yeah. As for working from home and imagining, well, I guess if it's a CEO or some C-level executive probably get looked at very quickly, }
+{\cf2 [00:41:00]}
+{ but for even any of the average Joe or a gen out there, I guess there'll be, oh we should probably find some way to prioritize.}
+{\pard  \line \par}
+{And there are people who would not be having access to system for almost eight hours in a day. That's a lot of money is wasted by the organisation . }
+{\pard  \line \par}
+{\b\cf3 Fred Wilmont:\b0}
+{ If we also think about the rest of the requirements of an org, , my SOC analysts work at home, right? My cloud service guys work at home SREs work at home when they don't have access to infrastructure, when they don't have access to critical components, maybe that means we can't ship product.}
+{\pard  \line \par}
+{Maybe that means we can't patch systems. Maybe that means dot, dot, dot. And that's really where things get real. When you decide that you're going to tie everything to one directory service, it's gotta be, , ring zero. It's gotta be absolutely Bulletproof. It's gotta be resilient available.}
+{\pard  \line \par}
+{, it has confidentiality. All of the things that we talk about from all of the audit requirements of every compliance framework ever, it has to have those things. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yep. I agree. I did want to take a moment to answer Aditi's question as well who wants to have a career in IAM i guess }
+{\pard  \line \par}
+{what }
+{\cf2 [00:42:00]}
+{ are your thoughts on for , people who are building or at least looking toward building a career in IAM and where should they start and what they can be kind of working towards to get there. First IAM role. And what does that look like? }
+{\pard  \line \par}
+{\b\cf3 Fred Wilmont:\b0}
+{ I have a couple of different opinions about this that may be different than most other people.}
+{\pard  \line \par}
+{The place where you learn the most about critical systems, users and identity, my opinion insecurity, some of that can be through pen testing, right? Because in this process I have a scope. I have an internal or external, whatever. I have a scope to understand and assess this set of infrastructure from network on up to application, , and really gives me a good sense of what it means to do these things.}
+{\pard  \line \par}
+{And what am I trying to break? Trust models of all kinds. I want to look for privileges. Absolutely great exercise, right? I'm going to look for a lateral movement. I want to see what, , passing the hash looks like. I want to, all of these types of things are really, really helpful to get a an understanding of why at any is really critical, by the way, you're starting to see a lot of the identity management also includes things like vulnerability management.}
+{\pard  \line \par}
+{Why? Well, because we are going to go out and look for }
+{\cf2 [00:43:00]}
+{ credentials. We are going to see whether or not these things are leaked. And I do want to make sure that we're testing for those things. Yeah. So it's critical. That's one avenue. Another avenue also is when you think about, , service providers things like this, the IT staff at a service provider guarantee, you're going to learn all about those types of things.}
+{\pard  \line \par}
+{So an easy on ramp there is whether it's a service integrator system integrator, or, , evaluated. A lot of times the brokering of those types of products that do that work for the product side of that, through those occurrences, or you work for a service provider that does that work directly, and those are good opportunities there.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And I guess you can also join a consulting company as like, that's where I got my start with the consulting company was just doing,IAM, IAM Produc t slash because there's usually a vendor involved in identity access management. Yeah. Getting an entry in there as well. That's pretty another strategy.}
+{\pard  \line \par}
+{. I appreciate you coming in and I hope everyone got some, a lot of value from the episode as well, from an IAM perspective. I think if someone, if you guys are here for the first time, make sure to check out the, IAM episode and IAM month. If you're doing over here }
+{\cf2 [00:44:00]}
+{ as well, should be pretty cool.}
+{\pard  \line \par}
+{But for the moment, I just wanted to say, thank you to you, Fred, where can people find you for if they have follow up questions around the space and probably even harder to get down the path, maybe an ex veteran or a current veteran is looking to get in cyber security, how we can reach out to you, man. }
+{\pard  \line \par}
+{\b\cf3 Fred Wilmont:\b0}
+{ Great question.}
+{\pard  \line \par}
+{So first and foremost, Ashish honored to be on your podcast. Thank you. I love what you've done. Super awesome way to get people into the right kinds of dialogues. Yeah. So if there's a lot of things that I would say people to get ahold of me, , you can hit me on LinkedIn. I'd love to participate there.}
+{\pard  \line \par}
+{You can get me on Twitter, I'm at few desk and then there's a host of folks on my team that are also super competent, that would gladly help folks out too. So, , reach out to me and I'm happy to also put you in touch with, , people that are smarter than me. So, hit me there.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Awesome. And thank you so much for this Fred. I'm looking forward to going to bringing you again, man. I think I definitely found that in the vast experience you've had, we only touched one topic as well, , so we can findother topics . We should tap into to bring you back onto the shore as well.}
+{\pard  \line \par}
+{And then, and it seems like a lot of people enjoy the show as well. So, thank you so much for doing this and to everyone. We will see you on the }
+{\cf2 [00:45:00]}
+{ next episode, but thanks again, Fred.}
+{\pard  \line \par}
+{Thanks. }
+{\pard  \line \par}
+{\b\cf3 Fred Wilmont:\b0}
+{ Take care. Everybody }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ take care. }
+}

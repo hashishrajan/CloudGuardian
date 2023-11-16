@@ -1,0 +1,580 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red102\green0\blue204;
+\red128\green128\blue128;
+\red114\green179\blue114;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\b\fs48 Chad Lorenc\b0}
+{\pard  \line \par}
+{\b\cf1 Chad Lorenc:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ this concept of I'm gonna let go of a little control. I'm gonna push a little bit more security visibility down to a developer. I'm gonna let him see in my WAF tool, I'm gonna let him see in my security hub tool. I'm gonna let him run static code a analysis in his pipeline and fix things or on his desktop, even before the pipeline and, and fix these things without me having to tell them what to do and how to do it.}
+{\pard  \line \par}
+{I don't think any of us security people are gonna have not enough work. I, I think we have the job security that, that we need help. We need more security owners in the business. But that mind shift, especially for CISOs and security people, Of, I'm gonna let go of control, I'm gonna push visibility down to the edges. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ You heard that right. Giving up control is the number one responsibility that security should have in cloud. Let me explain. Today we spoke with Chad Lorenc from AWS Professional Services, and he spoke about how you can mature your organization in the cloud doing the whole crawl, walk, }
+{\cf2 [00:01:00]}
+{ run. Now, as easy as it sounds by just saying , crawl, walk, run, there's a lot of complexity that comes in based on the organization you might be working in.}
+{\pard  \line \par}
+{But fortunately, there are a lot of tools available, but tooling can only go so far. At some point, you have to get involved with the application team, the platform engineers, or the developers who are actually building the thing to be able to improve your security. Overall tooling helps you identify the problem, helps us all become police officers, and we can barricade the crime scene, which is the breach of impact, however you wanna call it.}
+{\pard  \line \par}
+{It works to an extent, but sooner or later you have to get involved, be more proactive, have more shift left kind of thinking as Chad also called out. I have been a huge believer of DevSecOps in shifting left for a long time, and it has been the case for a long time. Way before even I was talking about this.}
+{\pard  \line \par}
+{As Chad mentioned, he gave a 45 minute podcast episode on just why, when people were talking about WAF or web application firewall for the first time. And he spoke about how developers can }
+{\cf2 [00:02:00]}
+{ help solve that problem in the first place before we get to the WAF for 45 minutes as well. This is back when WAF was still a new thing and now people talk about WAF as if it's nothing.}
+{\pard  \line \par}
+{So overall it was a great episode. We spoke about some of the frameworks that you can use to map your own maturity, whether you're a CISO, whether you're an architect, or whether you are a startup, starting. today on doing cloud security. I hope you enjoy this episode. And if you know someone who's probably trying to build a roadmap for their security maturity model this would be a great episode.}
+{\pard  \line \par}
+{I would also link up the multi-cloud roadmap that we're trying to build towards. But this was part of the AWS builder series that we are running on February, 2023. Hopefully enjoyed it and if you know someone who's trying to learn the space or work in the space, definitely feel free to share that with them.}
+{\pard  \line \par}
+{And if you're here for the second or third time, definitely leave us a review or rating If you are listening to this on Apple or Spotify. And if you're watching this on YouTube, definitely feel free to subscribe. It. Be awesome if you can subscribe and follow us on our video platforms like LinkedIn, on YouTube as well, because that helps other people know that hey, we are doing something }
+{\cf2 [00:03:00]}
+{ right and comments from you or reviews from you aren't the way they find out that this is how valuable it is and they should come out of the show as well.}
+{\pard  \line \par}
+{So thank you so much for all the support and thank you for. Sharing all the resources of Cloud Security podcast and myself on LinkedIn and other places as well. Thank you so much. I hope you enjoyed this episode with Chad Lorenc from AWS and I will see you on the next episode, which is gonna be the new series start starting soon.}
+{\pard  \line \par}
+{So which is the leadership month and we have some interesting talks lined for you. Alright, thats it for my intro. I will let you go into the episode and I'll talk to you next week }
+{\pard  \line \par}
+{by bringing developers and security together. You don't have to choose between speed and security, develop fast, stay secure.}
+{\pard  \line \par}
+{Hey Chad, }
+{\pard  \line \par}
+{\b\cf1 Chad Lorenc:\b0}
+{ thanks for coming in. Thank you for having me. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Not a problem. Well, for the few people on the internet who have not seen your talk at aws how did you get into the whole AWS cloud security? }
+{\pard  \line \par}
+{\b\cf1 Chad Lorenc:\b0}
+{ Yeah, , I've been }
+{\cf2 [00:04:00]}
+{ a security veteran since back in the.com days. I was helping bring people online and all my customers that I hooked up with routers and T one s called me and said, Hey, people are breaking into my stuff.}
+{\pard  \line \par}
+{And that's when we, we called Cisco and said, what do we do about this? And they said, well, there's this new thing we're gonna do called firewalls. That was kinda the start of it. I built firewalls and then VPNs and eventually actually launched my. ASP company, which was kind of early cloud, right.}
+{\pard  \line \par}
+{We called the application security provider, and I provided security services through the cloud , to my customers, through my I S P. Yeah. And then eventually kind of rolled into just got more and more passionate about security, rolled into being the ISO of financial services company. Mm-hmm.}
+{\pard  \line \par}
+{and built out their Gramm-Leach Bliley Program and did a lot of early PCI 1.1 work. Wow. And built an online banking platform. So started kind of get that developer bug a little bit. Right. And then from there, I, I rolled into fortune 500 company and was kind of their chief security architect and }
+{\cf2 [00:05:00]}
+{ played a lot of roles there and got to do a lot of global things at scale and.}
+{\pard  \line \par}
+{I was actually looking for kind of a director of CISO job and AWS called me and, and you know, it was kind of the fun of the.com and the leveraging at scale that I liked and , the innovation that I did when I had my own company and still getting to have a global impact. And I went, wow, this kind of checks all my boxes.}
+{\pard  \line \par}
+{And so I jumped in both feet. I'd had some experiences, a chief architect in the cloud and had stubbed my toes on a lot of bricks in the cloud, but hadn't had as much success as I wanted and really wanted to learn it. And so it was just kind of the perfect opportunity at the perfect time. And just went in deep once I got in a few years ago.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ that's pretty awesome and quite a varied experience as well. I also, because you mentioned firewall as you know, I dunno how many people realize that firewall was like a hardware thing that you buy and, you know, fear it's actually something you can touch and feel. how different, like, I mean, for, to get such set some context of people who probably listening to the first time and may not even be aware of all this, how }
+{\cf2 [00:06:00]}
+{ different is the cloud world to what it used to be?}
+{\pard  \line \par}
+{Cause you know, we talking about maturity, it's worthwhile calling out. There's so many organizations that are there 30, 40, 50 years old trying to get into cloud. Like what are the , two extremes of this? }
+{\pard  \line \par}
+{\b\cf1 Chad Lorenc:\b0}
+{ Yeah, I mean the, the whole focus, right? In the early days, right, we all talked about OSI model and you were looking at the stacks and you started right at the physical security level and you were trying to figure out what do I do at physical?}
+{\pard  \line \par}
+{And you're working through the data link, right? And so, , you're not just putting in a firewall, you're trying to figure out why it's not negotiating, its duplex and you're trying to figure out the TCP ports and so many things that just kind of happened magically in the background. Right? And you were worried, you know, about if your cable run was too long or, or if your cable was bad or your patch was bad.}
+{\pard  \line \par}
+{I mean, it was just, it was a whole different world. And then everything shifts in the cloud. , and that all becomes, you know, this kind of ethereal thing , that sits out there and it does these functions. What I, I love about that is not having to worry }
+{\cf2 [00:07:00]}
+{ about, you know, water pouring out on your firewall and taking your firewall out.}
+{\pard  \line \par}
+{Right. , some of those things. But I also love the flexibility of,, if your firewall isn't doing what you want it to, you're like, well, shoot, you know, by the time you get to Global, I just dumped a half million dollars into this one firewall. It's not doing one of the things I need to, maybe in three to five years I'll get a chance to refresh it, right?}
+{\pard  \line \par}
+{Or I'm gonna add a bolt on product. And so now my security stack on the edge grows. It's so much easier in the cloud to add that functionality and , not even have to wait for a vendor, right? Yeah., it's so easy to build and plug holes. My favorite joke at AWS is Lambda is the duct tape of AWS , but it really is from a security standpoint, the power of being able to.}
+{\pard  \line \par}
+{Boy, I really wish the tool did this. And the guy next to you go, oh, I can code that in a couple minutes here. Yeah. You're like, oh yeah, that's why, why wouldn't I do that? You know? And so that, that not being bound by a a half million dollar anchor that you're stuck in for three to five years, I really love that about the cloud.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:08:00]}
+{ Wow. Yeah, and I think it's a great reminder for everyone as well that you know, how much abstraction that there has come through over the years, that nowadays to your point, I can just basically switch on a firewall budget, just a few clicks and not worry about water pouring over it while I'm just happen to have some coffee, I guess.}
+{\pard  \line \par}
+{But it's pretty interesting to hear that. But I would also add on to that with the whole scale of maturity nowadays with customers building , in aws, you know, just multiple times scaling it globally as well. , what is kind of like the scale that you'd explain this and I think you did a great job when your talk, so if you probably.}
+{\pard  \line \par}
+{give us an explanation of how do you think about the whole maturity framework for customers of }
+{\pard  \line \par}
+{\b\cf1 Chad Lorenc:\b0}
+{ AWS? Yeah. So, you know, everybody's in a different journey and everybody's path looks a little bit different, but we do kind of see some patterns that emerge as customers go through the cloud, right? And there's to, to oversimplify it, maybe we, we do kind of a crawl, walk, run, right?}
+{\pard  \line \par}
+{And yeah, the, the first customers are kind of, that, they're just, they're }
+{\cf2 [00:09:00]}
+{ getting into it, right? Either they're a greenfield customer and they're like, okay, let's do this cloud thing. Or more often , they're IT playing catch up, right? , they're shadow it, they're business, it their early adopters already out in the cloud and now they're trying to figure out, oh my gosh, how do we secure this?}
+{\pard  \line \par}
+{How do we catch up? Right? And so that's kind of the first phase that, that cloud discovery phase. At first it can feel a little slow and painful and overwhelming. . And so a lot of strategies we try to focus on to help people through that is kind of the early planning and building and assessing phases.}
+{\pard  \line \par}
+{Like how do you get your arms around it, right? And then yeah, kind of our, our next customer is, takes another step and they're kind of moving in the cloud, but they're not moving quickly. They've just kind of figured out, okay, I I, I'm starting to operationalize, I'm trying to figure out how to mature and manage this.}
+{\pard  \line \par}
+{But by that point, you start to see the pain points and the gaps and you're, you're understanding, okay, I see the pain points, but maybe I don't always know how to get through those blockers and how to }
+{\cf2 [00:10:00]}
+{ accelerate through that. So we do a lot of working with customers helping them figure out how to operationalize, how to manage and how to mature some of, their frameworks and their thinking in that area.}
+{\pard  \line \par}
+{And then last of all is like these cloud native companies, right? That are already moving quickly. They're kind of in that run phase. , they're cloud integrated into their operations. But the great thing about the cloud one, it's always changing. So there's always new opportunities to optimize.}
+{\pard  \line \par}
+{But they're also, as you grow as a company and as your business and operations change, there's an opportunity to kind of move at the speed of cloud and have the cloud mirror what you're trying to accomplish and figure out how to automate those components as they come along. Versus the start over and build from scratch.}
+{\pard  \line \par}
+{Go buy a new vendor, go buy a new tool to solve every problem, right? And so that's, we love to do the optimize. Sometimes you hear a lot of the conferences, we talk about all the cool optimizes and we get those crawl customers going, yes, auto remediate all my }
+{\cf2 [00:11:00]}
+{ security stuff and isolate all my instances instantly and do all that stuff.}
+{\pard  \line \par}
+{And we're like, oh, well, , let's, let's walk through the steps, right? Let's build the framework and some of that. So part of it is to also help customers understand that cloud is a journey, right? You don't say we're gonna cloud, and all of a sudden you're doing all this cool stuff. There's a lot of overlay of the people, process and technologies.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ That's pretty awesome., as you were saying, you know how we kind of mentioned the firewall earlier, is there like a similar level of I guess intensity of maturity as it kind of go from crawl, walk, run? And obviously it's a fairly broad question, I understand that, but just to kind of dip our toes into it, there's a maturity scale also kind of grow as you kind of go from crawl, walk around.}
+{\pard  \line \par}
+{Like it does get complex. }
+{\pard  \line \par}
+{\b\cf1 Chad Lorenc:\b0}
+{ It does get complex, but because it's mirroring your systems, it actually gets simpler. It's making your life simpler. So, oh, but I do, I do see a huge parallel from firewalls, right? When we did firewalls, , we had this TCP gate, right? That we threw out there, and then all of a sudden we're }
+{\cf2 [00:12:00]}
+{ like, oh, but doesn't really do web filtering.}
+{\pard  \line \par}
+{So we bolted on a web filter and like, ooh, you know what? Everything's going through that , we need a sandbox , to watch stuff come in and detonate it. We put that on there and you're like, Ooh, you know, we're still seeing stuff. We should really put an i p s that intelligently sees this stuff and blocks it.}
+{\pard  \line \par}
+{And later that you got all these layers. And then, and that was kind of the going from crawl firewall to walk. You build all these pieces, but now you've got this hot stack mess on the edge, right? Yeah. You're doing a lot of cool things. You've helped a lot with your security posture, but now you got a million dollars stack on the edge of every environment, right?}
+{\pard  \line \par}
+{Yeah. And cloud was kind of similar to what Pan did, where they came in and said, you know what? We're gonna drop a box here. And you could see everybody eventually followed that next generation firewall model and, and solved all those problems and simplified it and put it in a pretty interface, let you interact between the pieces and drove the cost down.}
+{\pard  \line \par}
+{Yeah. That very similar to what you }
+{\cf2 [00:13:00]}
+{ see the cloud does for you as far as you hit that run phase and all of a sudden you figure out how to really optimize all those pieces of working together and it becomes a simple, fast moving process where, you're getting the high value, but, you're not spending all the time trying to piece together components and figure out what you're }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ doing.}
+{\pard  \line \par}
+{I, I think that you've explained quite well as well. Cause I think it also makes me think about the anti-pattern as well for this space. Cause you know, I, I think you mentioned the firewall example. I love how you kind of just stacked it up as well. Mm-hmm. . Cause I, for people like who used to see images of those racks in in data centers, probably don't even realize it.}
+{\pard  \line \par}
+{But that used to be a thing. And. as we kind of matured from it., have there been many anti platforms that have emerged when building maturity in cloud as well? }
+{\pard  \line \par}
+{\b\cf1 Chad Lorenc:\b0}
+{ , it is so hard because cloud , is a technology, but , it's really a whole way of thinking, right?, you have to shift your paradigm and, that's challenging.}
+{\pard  \line \par}
+{And so , we see a lot of what we call lift and shift where I'm not gonna change my paradigm. I'm }
+{\cf2 [00:14:00]}
+{ just gonna take my security tools and put them in the cloud. And of course, every, every tool out there will say, oh, we're cloud friendly. But, you know, mileage will vary based on that, right? And so you really have to sit back and think about , what tools do I really need?}
+{\pard  \line \par}
+{Where do I need them? And do some cost analysis and stuff, right? It's, it, there is a little bit of , a hill that first set of assessment and really, Thinking through what you want to do, but the shift for that is to start thinking as security as a service versus I've gotta peanut butter spread these controls everywhere and cover everything, and do everything right.}
+{\pard  \line \par}
+{And yeah, when I say security as a service, now you're starting to be able to think in , a risk model instead of, I have to cover the whole enterprise with all of this. I'm gonna build specific services that are attached to business functionality that match the risk of the business, match the function of the business, and the cost is }
+{\cf2 [00:15:00]}
+{ related directly to that business, or that tower, or that application or that function.}
+{\pard  \line \par}
+{It's really, like I said, security as service is the best way to think of it, but it's a really powerful shift for a CISO to be able to make. But you, you don't usually make that by saying, I'm gonna pick up this hardware firewall and throw it in the cloud. Right. It, it doesn't quite work that way.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ and I kind of love , the transition of lift and shift as well. Because to your point, I'm sure you would've noticed it as well, initially everyone was talking about I can use my existing backup plan as well. Not just the security product, but backup plan, my tooling that I have for CICD all of that.}
+{\pard  \line \par}
+{And like, well, actually that doesn't really go well on your cloud world. Cause, but actually talking about cloud, you know how we were talking about how a lot of abstraction has come in. Does that come with this, , I guess from a cloud native perspective, and I guess a, how do you define cloud native and what roles do you see a cloud native playing in the whole maturity graph of people trying to build security maturity in aws? , I think say }
+{\cf2 [00:16:00]}
+{ for example, maybe a better way to put this is like , do you have any, framework examples on how people can build a maturity model? Yeah. }
+{\pard  \line \par}
+{\b\cf1 Chad Lorenc:\b0}
+{ You know, , there's a few, , and it depends on what perspective you're coming from, right?}
+{\pard  \line \par}
+{You have to understand both who your audience is and what your intended outcomes are. Hmm. So you don't necessarily just run and grab a plan and implement it. You do have to still kind of do that exercise of what are my business objectives, who's my audience? But for example, if, if you're trying to talk to a set of architects or to a, an IT organization governance structure, right?}
+{\pard  \line \par}
+{As a CISO we have a thing called the security reference architecture, and it's kind of like, Hey, this is what good cloud security looks like. These are all the pieces, you know, and I always say, you can scratch off the AWS service and put in your own piece, but you, it kind of gives you that idea of. , oh, these are the pieces I want to cover.}
+{\pard  \line \par}
+{And this is what that looks like from a governance model and how it interacts with the other accounts. So security reference architecture, }
+{\cf2 [00:17:00]}
+{ great architecture overview picture that AWS provides for free hits at that CISO architect level. But you mentioned the backups, which I really, one of the things I like about what I call kind of our governance model, it's, it's a little bit more focused on CIO and audit and compliance is put out by our cloud foundation team.}
+{\pard  \line \par}
+{It's our cloud foundation model. It is, a more holistic picture across IT so then you're talking about backups, you're talking about cost control but then you're overlaying and tying in all the security components with that, right? And some of those become really interesting with a threat model, right?}
+{\pard  \line \par}
+{If you're talking, say, ransomware, those cost controls become alerts., those backups between become critical recovery, right? And so, yeah, I do like that broad model. It tends to appeal to a technical CIO and some of those governance focused areas. But , the other models, there's kind of two other models.}
+{\pard  \line \par}
+{One }
+{\cf2 [00:18:00]}
+{ is, man, if , you're a security guy and you're just stressed about the cloud, you're like, I gotta drive the risk down. I'm scared about the cloud. We have a security maturity model, literally called security maturity model. And it's, Hey, here's the quick wins. You know, here's the tactical things you do to drive down risk.}
+{\pard  \line \par}
+{Here's the fundamental building blocks you put in place to get to a longer term security maturity. And it kind of goes through that security maturity thing phase. But very, very, very kind of security focused, right? It's not business focused at all. But overlaying any one of those three models, is what I've like to talk about is security business objectives.}
+{\pard  \line \par}
+{Mm-hmm. , how are you as a security person enabling the business in the cloud? Right? So nobody wants to hear, I implemented IAM and guardrails , and like,, what does that mean, ? But if you say, Hey, I accelerated user and account provisioning in a secure way with high visibility in order to enable speed of business in the cloud.}
+{\pard  \line \par}
+{Well that's a }
+{\cf2 [00:19:00]}
+{ CISO goes, yeah, I like those things. A CIO goes, yeah, I like those things. Board of director goes, yeah, I might throw money at that, right? Yeah. Yeah. So learning, to get not stuck in architecture or governance or even risk and be able to bring it up to another level and understand how you are enabling your business.}
+{\pard  \line \par}
+{It's just really a, a powerful step that a security person can do and it will help drive you to the right models if you know what your objectives are. That's }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ pretty awesome. And can the maturity model that you refer to where there are quick wins, can that be mapped onto this as well? You know, to, I, I love what you said about referring it to business objective.}
+{\pard  \line \par}
+{Sounds like it can be applied anywhere. Like I think all of those can be applied to, cause I mean, isn't that why they're paying us? Yes. , }
+{\pard  \line \par}
+{\b\cf1 Chad Lorenc:\b0}
+{ you can actually use all three models, right? If you have different audiences, you can map them across to each other. You can figure out which it is. Most companies will come in from a particular bias we found.}
+{\pard  \line \par}
+{Yeah. You know, highly technical companies will want that }
+{\cf2 [00:20:00]}
+{ architecture. Strong governance companies? Yes. Either like the security reference architecture because you can overlay compliance directly on it, or they like that bigger governance structure that talks about all of IT, right? Right. So just it depends on, on the bend of your company or if you're all about buying down risk, then boom, you go for security maturity model.}
+{\pard  \line \par}
+{Awesome. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ And I think, you know how you refer to that. You can use your you can map your existing on-premise tool onto the cloud world as well. Like that is backup or whatever. Do you feel cloud native tools can play a role here as well? And by cloud native, I means services provided by AWS, which are I guess, easily available for people to use to, would, in your mind, when you think about building a maturity.}
+{\pard  \line \par}
+{Do you feel that cloud native plays an important role there for or should just be like, Hey, make the best call for what you have right now? }
+{\pard  \line \par}
+{\b\cf1 Chad Lorenc:\b0}
+{ So we, we've found that it's sometimes difficult to embrace cloud native all at once. I think there's some really good cloud native tools }
+{\cf2 [00:21:00]}
+{ that significantly improve both your cloud posture, but your overall security and visibility.}
+{\pard  \line \par}
+{And so it's kind of interesting depending on where they are in that crawl, walk, run phase, we kind of have different native tools we focus on where we say, Hey, that you're gonna get a big win here, right? Yeah. This is gonna, this is gonna be any tool you can beat to the, bring to the cloud. And some of 'em are, are even processed, so in, in our crawl phase, right?}
+{\pard  \line \par}
+{You just gotta get some basic monitoring and detection in there. Yeah. Guard duty covers. Almost everything. , it's increasing what it's uncovering every day in the cloud. There's not really a, a point product that you can buy that touches all those pieces. And none of them, of course, have all, the AI ML backend intelligence working on AWS threat data, right?}
+{\pard  \line \par}
+{Mm-hmm. . So, it's just, it's almost impossible to match it's low cost, and every single person wants to integrate with this tool. So you have an on-premise siem or even threat detection. The first }
+{\cf2 [00:22:00]}
+{ thing they'll tell you in their guidance is dump the guard duty data out to us, right? So it's an easy win, easy integration, turn on guard duty, push it out to your siem or your other tools that you're doing threat detection with, and you get visibility right away.}
+{\pard  \line \par}
+{Another crazy easy one that we do in crawl is updating your account alternative contacts, specifically your security contact. because your account contact is what AWS security internal team reaches out to when they see an issue in your account. And so you've already got data that's been vetted, actionable, and detailed, and you have basically an AWS security analyst feeding this information to you.}
+{\pard  \line \par}
+{So there's a no cost solution that immediately ties you into threat data. And we,, it's just not done because people don't think of it, right? They think of the, the account numbers as, oh, well, that's, who's gonna pay for it? Well, the CFO or somebody in his staff that gets something that says, }
+{\cf2 [00:23:00]}
+{ Hey, you have ransomware on account, da da da da in EC two, blah, blah, blah.}
+{\pard  \line \par}
+{They're like, what? What is ransomware? Yeah, I say that. Do I? Right? You know that they're not gonna be in that mindset. And so those, those key notifications can get lost. So that's another, that's a huge win. . And then in the crawl phase, you can't do anything in cloud without, IAM right. IAM is the base for everything.}
+{\pard  \line \par}
+{So getting that base understanding of IAM, of your access analyzer that can build you some policies, some of those things really key out of the gate introducing some of those, or even some of the managed policies that go with it. But when you get into the walk phase, this is where you're starting to really operationalize, right?}
+{\pard  \line \par}
+{And so the big wins that we see in that space are Amazon inspector. So every EC2 instance spins up with inspection, right? Which is kind of your vulnerability management component. AWS security hub, which looks at all your cloud posture management stuff can even boil it up to a dashboard that reports on controls.}
+{\pard  \line \par}
+{\cf2 [00:24:00]}
+{ So, and then AWS config. Asset management, right? I think CIS controls number one, right? Asset management. Asset management. So tagging in asset management. And then last of all, now you're getting those guard duty alerts in the crawl. You get to walk and you're like, okay, oh gosh, what do I do now? Like, how do I know if this person pivoted?}
+{\pard  \line \par}
+{How do I know anything? Amazon detectives kind of that next piece that we see on walk. And then again, walk is kind of your operationalizing. So the other piece, we talk about in this is your DevSecOps which may be outside the cloud, maybe in the cloud, but making sure that you're doing code scanning not only of your traditional languages like Python, but the cloud is actually all built on IAC or infrastructure's code.}
+{\pard  \line \par}
+{So understanding what infrastructure code you use, you know, whether it be terraform, whether it be cloud formation, cdk, you wanna scan that infrastructure before you deploy it. So that you have that, what we call shift left, right, where you're seeing it before you create the }
+{\cf2 [00:25:00]}
+{ vulnerabilities. So there's a lot of those native tools tend to really accelerate people in the walk function, right?}
+{\pard  \line \par}
+{Interesting enough, when we shift to the run function, it's less about tools, right?, it's not so much here's an AWS native tool you should be using., it's looking at how can we build automation. So now you might be talking about step functions. You might be talking about lambdas, you might be talking about CloudWatch alarms, but you're now using kind of the intelligence that's built into the system to pipe out to you information or to automate actions on your behalf.}
+{\pard  \line \par}
+{And, that's where security gets really exciting in the cloud, right? That's where you can do things that you never dreamed. . My favorite example is right? Incident response. I spent a painful part of my security career being incident response. And how many times are you like, you didn't reboot the server, did you?}
+{\pard  \line \par}
+{Of course. That's the first thing they do every time. Server, right? Of course. But if you could capture that server, }
+{\cf2 [00:26:00]}
+{ isolate it, spin up an gold image for them, and have your forensics collection already done before anything else happens, I mean, that's like a security pipe dream, right? Yeah. That you can do that in the cloud, right?}
+{\pard  \line \par}
+{And so that's where, that's where run is. Things really start getting exciting in the cloud. Things , you've never been able to achieve on premise, you suddenly can do in the cloud. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ That, and I think I'm glad you kind of called out the cloud native services as well, because I, I normally find that, There's especially moving from enterprise to like a cloud, like, you know, we spoke about the conversation started with firewall with a physical 20, 30 year old, and now we're talking about these companies trying to get into the cloud space.}
+{\pard  \line \par}
+{In AWS specifically, what do you see as like some of the patterns that are, you know, like a, maybe people can actually watch out for that. Hey, what is called our, for as an example. Don't just use the tool that you have from your on-premise onto the cloud. Are there other things that you notice }
+{\cf2 [00:27:00]}
+{ as maybe in general across the board where, oh, maybe these top three things that come to mind when moving into cloud.}
+{\pard  \line \par}
+{Just make sure these, these are on,, in check. Other things like that in your mind? }
+{\pard  \line \par}
+{\b\cf1 Chad Lorenc:\b0}
+{ There are, so a, another pitfall we see is what we call replicated controls, right? Where you have a controls checklist, and a lot of us are compliance driven, so that's understandable. Yeah. But to try to build your cloud security and go.}
+{\pard  \line \par}
+{That control on premise is this control here. That control here is this control here. It's good to make sure you have all your controls covered. Yeah. But if you're taking a control perspective, you're gonna lose the benefit of some of the things in the cloud. You really want to shift to that threat modeling perspective.}
+{\pard  \line \par}
+{And here's why. In the cloud I can encrypt everything and it's easy, easy. Mm-hmm. , I mean, go to your Oracle DB admin and say, could you encrypt the Oracle database for me? And make sure someone films that because I'd love to see it . But I tried that once. You know, you, there's certain things that }
+{\cf2 [00:28:00]}
+{ don't work on premise and controls that we don't necessarily think about as a security practitioner, cuz they haven't been available to us.}
+{\pard  \line \par}
+{Yeah. Right. And so encryption is, is a great example of a control that. , you're not going to be using probably on-premise in the way you can in a cloud, and it adds a layer of security protection to your defense in depth. That solves a lot of problems, right? But, you have to be aware of it, and you have to get out of that.}
+{\pard  \line \par}
+{I'm gonna check box controls across and say,, what threat am I trying to protect against? Let's map that out and let's put in the correct controls to mitigate the threats I'm worried about versus going through a checklist. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah, and I'm glad you mentioned it as well, because whole control mapping thing is step one for a lot of people. I also understand it because you're trying to find something known. Mm-hmm. that, Hey, I know this. I just need to know what does this equal e equal to into the cloud world. That's pretty much it. Right. And I think another one, maybe from a leadership perspective as well, do you find that as in customers' database, are }
+{\cf2 [00:29:00]}
+{ there patterns for.}
+{\pard  \line \par}
+{like maybe that you find that, okay, people, you know how visibility is a word that's used quite often. Like, I think everyone just talks about visibility and you almost like, there's so many tools in the market that actually talk about visibility. And I love that you kind of talked about DevSecOps and shifting left as well because there is that side that not many people are talking about.}
+{\pard  \line \par}
+{Where do you see, I guess, , the bigger challenges for leaders in this space that come in who are trying to go into the cloud space, security leaders, where do they struggle with this the most? }
+{\pard  \line \par}
+{\b\cf1 Chad Lorenc:\b0}
+{ Yeah. So there's a few unfortunately, right? Again,, you're doing this huge paradigm shift and you're trying to figure out, okay, how do I move into the cloud?}
+{\pard  \line \par}
+{Yeah. And the first thing is this whole shift left mentality Yeah. Requires security people to let go of some control. No, }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ don't say that. mind }
+{\pard  \line \par}
+{\b\cf1 Chad Lorenc:\b0}
+{ numbing. Right? That's terrifying for a security person, . But check, but trust, but verify. Right? , we never get away from trust but verify, but that's }
+{\cf2 [00:30:00]}
+{ fine. Yeah.}
+{\pard  \line \par}
+{It, so I'll use Security Hub as an example, right? If, if you lay down a control tower where you, you have visibility into all your accounts and you're feeding up all that security data Yeah. And it's telling you how everyone's doing. That's traditional IT security thinking. Yeah. But in each one of those accounts, you can also enable security hub.}
+{\pard  \line \par}
+{Yeah. So that every time a developer does something, it pops an alert to him saying, Hey, you just made an S3 bucket public and it has this data in it. , are you sure you wanna do that? Well, that's gonna be a lot more effective than three weeks later. me running back and trying to figure out how confidential in information got on the internet and chased that down and solved that.}
+{\pard  \line \par}
+{And it's too late then, right? Yep. And so,, this concept of I'm gonna let go of a little control. I'm gonna push a little bit more security visibility down to a developer. I'm gonna let }
+{\cf2 [00:31:00]}
+{ him see in my WAF tool, I'm gonna let him see in my security hub tool. I'm gonna let him run static code a analysis in his pipeline and fix things or on his desktop, even before the pipeline and, and fix these things without me having to tell them what to do and how to do it.}
+{\pard  \line \par}
+{I don't think any of us security people are gonna have not enough work. I, I think we have the job security that, that we need help. We need more security owners in the business. But that mind shift, especially for CISOs and security people, Of, I'm gonna let go of control, I'm gonna push visibility down to the edges.}
+{\pard  \line \par}
+{It can be scary, right? It, it can be a, hard paradigm to wrestle with. Yeah. The, the other one that I just, I can't help but talk about is on the people side, right? Most security guys are working at about 120% of capacity. Mm-hmm. , so I'm gonna bolt security responsibilities onto your job doesn't really work.}
+{\pard  \line \par}
+{And so sometimes you hear things like, oh, the cloud is so complex, right? And as a security }
+{\cf2 [00:32:00]}
+{ person, I was in a corporation, I'm like, you want me to learn three clouds on top of my job? Right. , seriously. And they're always changing too, right? Like you Yeah, yeah. That's right. As soon as you learn, it all changes anyway.}
+{\pard  \line \par}
+{So it's not that cloud security is hard. And that was what I learned when I got into aws. If I, I'm working on cloud security. , it maps to a lot of security mindsets and frameworks and paradigms. You pick it up pretty quickly, but you have to have the time, to learn it and understand, you know, even understand some of the names.}
+{\pard  \line \par}
+{Sorry about that from an AWS perspective, but to understand what that really means, like, oh, guard duty is kind of my IDS, but it's everywhere. It's not network based. And yeah, you'll begin to kinda get those mental maps built for yourself. But it just doesn't happen. You, it when you try to bolt it on to a guy that's already working 120% capacity.}
+{\pard  \line \par}
+{So taking the time to help security people. Most }
+{\cf2 [00:33:00]}
+{ security people like new technology, right? Yeah. That's what you do is you're, you go out there and try to figure out how to secure the newest. , right? Back in my day, the newest thing was an iPhone or a VM box that they wanted to put on the internet. You know, now }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ it's next, next generation firewall as well.}
+{\pard  \line \par}
+{Every time there's a next generation firewall coming in, you're like, is it another next generation after that . }
+{\pard  \line \par}
+{\b\cf1 Chad Lorenc:\b0}
+{ So, I mean, you, you've gotta do that. And AWS knows this and they provide so many opportunities, activation days, security builder circles, workshops, immersion days, free health checks, security blogs, tabletop.}
+{\pard  \line \par}
+{I love doing security, incident response tabletop exercises after we've gone in and helped the company put in playbooks and all those things. But you, you gotta do 'em, right? You don't just become an incident responder in the cloud or even a network, right? Network in the cloud is slightly different than network on premise, right?}
+{\pard  \line \par}
+{You have to understand the caveats. You have to give your people enough time and training that they can come up to }
+{\cf2 [00:34:00]}
+{ speed. Yeah. And we're all, we're all running at break net speeds. So there, there is a A very, the companies that are successful in the cloud make a very deliberate all stop and shift and make sure that those people have enough capacity to, to make that paradigm shift and that they're not trying to do it, you know, with a couple free brain cycles once a month.}
+{\pard  \line \par}
+{Right. And it just doesn't happen. Yeah. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ And I, I love it, man. I'm grateful you kind of called it out as well because we can try and implement all the tools in the world, but if the people who are trying to create the problem for us are not pre made aware of it, it's just like, I think we are just fighting a losing battle to begin with, I guess.}
+{\pard  \line \par}
+{Mm-hmm. and with the whole devsecops thing as well, the losing control part, I think I wanna clip that up and for repost it, because I think it definitely is something that I keep talking about, but somehow people are scared they're gonna lose their jobs or lose control, and everything's gonna be on the internet and.}
+{\pard  \line \par}
+{Like, no, I mean, these are responsible people as well, but because you're }
+{\cf2 [00:35:00]}
+{ talking about maturity model and I think I'm so glad we kind of touched on the crawl, walk, and run. We spoke about some of the patterns you've seen as well. Mm-hmm. . I wanted to also give value to people who probably listening to this and want to kind of build up that whole maturity in their organization.}
+{\pard  \line \par}
+{Now, obviously we can talk about people, process, technology as well. And you kind of touched on those, some of them already in terms of mapping them from on-premise to cloud and what kind of process can exist. I'm also curious if someone wants to start today, like, I don't know, cloudsecuritypodcast.tv is a new company that started today and day zero we're gonna build into the cloud.}
+{\pard  \line \par}
+{Cuz we are trying to build this whole social media community where all cloud security advocates community people can, can come and hang. , what do you recommend for Day Zero or from a foundational perspective? }
+{\pard  \line \par}
+{\b\cf1 Chad Lorenc:\b0}
+{ Yeah, so it's funny,, the same pitfall that it is for every single project ever in IT.}
+{\pard  \line \par}
+{You can't bolt on security after the fact, right? You actually have to plan for security ahead of time. Which is hard because it means one of two things. Either security has to be the first into the cloud, }
+{\cf2 [00:36:00]}
+{ or security's gonna have to, to build a secure environment and migrate those early adopters into it, right?}
+{\pard  \line \par}
+{Yep. So , what that really is in an AWS speak is we call it control tower. Mm-hmm. , which is part of our organization structure where it allows you to do a multi account environment, right? And when I say multi account environment, I mean security control over a multi account environment, right? Yeah.}
+{\pard  \line \par}
+{Where you're gonna have some key things. You're gonna have identity federated access management, right? With whatever your favorite identity. Manager is right? Yeah. You're gonna have centralized log archive, right? So these are, I mean,, this is the kind of stuff that every security person wants, right?}
+{\pard  \line \par}
+{You're gonna have cross account audit access, you're gonna have end user account provisioning and account vending where you can build a baseline account and say, this is the security services and the protections you have to deploy as you deploy an }
+{\cf2 [00:37:00]}
+{ account. These are the permissions that you get as a developer and, and they're probably not giving you root keys and any, any access, right?}
+{\pard  \line \par}
+{Yeah. Yeah. But those all take time to figure out. But it, it's so much simpler if you kind of put this control tower, we call it that. Cause you kind of, you snap it on top of all the accounts and you put them under them and, it gives you the ability to control all those accounts and manage that. Those IAM roles, those provisioning.}
+{\pard  \line \par}
+{That logs those visibility. So day zero, build the baseline, lay the groundwork and put in a control tower. It doesn't have to be AWS's control tower, as long as you have those functions right, that you have the secure, scalable, multi account environment and you wanna be able to push out best practice blueprints through that, whether that's for IAM, whether that's for logging or any other compliance and standards you need to follow.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Would you say you can take parts of cloud control tower and apply them as well? You know how, some people may already have some controls, like they got, I don't know, free AWS credit and like }
+{\cf2 [00:38:00]}
+{ some of them did not. Some of them did, and they're trying to see where they can fit some of those. Are there parts of it that are just Well, I guess, there's a default which is a cloud native which you can just, to what you call our enable as you kind of now mature, do they all stack up?}
+{\pard  \line \par}
+{Like, you know, I'm just trying to think from a perspective that some organization, may already have a, we spoke about the whole backup provider for some reason they got like a really great startup deal and this started go on that path of doing it. As you kind of build that company and become like the day 365 how does this change from a maturity perspective?}
+{\pard  \line \par}
+{So control tower, do I need to have the entire component or can I just take parts of it and apply it as well on day zero and then grow on it? Like, I'm trying to like build layers to it as well, because you know how startup are different. Or maybe even mid large to mid tier companies are also different layers as well.}
+{\pard  \line \par}
+{They may already have an existing backup system. Can parts of control tower be applied independently or does it have to be like, Hey, you need to have the entire control tower every time? }
+{\pard  \line \par}
+{\b\cf1 Chad Lorenc:\b0}
+{ Yeah. So , it's a central }
+{\cf2 [00:39:00]}
+{ point of control. You can customize it, manipulate it quite a bit so that you can decide how you want to do that and even how you want to nest towers and everything under it to, to match your organization structure.}
+{\pard  \line \par}
+{Yeah. You can move accounts in it, but you can also have accounts existing outside of it. Okay. Which is unfortunate, right? You're starting to build kind of legacy debt in the cloud. But you can do that, right? But you can also, everything that control tower does is just rolling it up in a quick, easy, accelerated package.}
+{\pard  \line \par}
+{Right? Right. So you can even build the individual pieces of control tower yourself and highly customize them. Control tower is ideally to make it simpler, lower cost, faster, easier for you. And the concepts are really the key, right? Again, I like to focus on outcomes, not on tools. If you can get multi account management that IAM federated management log access that central monitoring, then you're, you're getting the benefits, right?}
+{\pard  \line \par}
+{Yeah. So if you can get to those outcomes it's definitely }
+{\cf2 [00:40:00]}
+{ not the only way to do it. And I've definitely seen other patterns that are successful than control tower. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Is it possible to have the shift left that early in stage? You know how we kind of, I mean, at least you and I are both proponents of shift left and a lot of other people are as well.}
+{\pard  \line \par}
+{Is that possible to do things on that in the first few phases of building cloud? }
+{\pard  \line \par}
+{\b\cf1 Chad Lorenc:\b0}
+{ Yeah. So , our dream , right? If we're Greenfield customer. Is even the control tower deployment, we want to set up a pipeline for you to deliver that, right? And so that you're constantly pushing through a pipeline that's doing the scanning, the checking, the assessing.}
+{\pard  \line \par}
+{And so we, we assess all our security stuff before we ever deploy it. Right? Because we want to be in that habit of always assessing and, and we start sometimes with kind of static assessments. But then the goal is to move to a continuous assessment, right? And so whether that's and again, I think of shifting left in layers just like we do with everything else.}
+{\cf2 [00:41:00]}
+{ }
+{\pard  \line \par}
+{Security, right? You want to shift left by getting static code analyzers in your pipeline. Yeah. You wanna shift even further left and get good desktop systems that are doing some kind of code checking for your people right? Yeah. But then you also want to have another layer so that when they deploy to the cloud security hub, AWS config, whatever is alarming and saying,}
+{\pard  \line \par}
+{Yeah. That was bad. I don't know if you figured out how to bypass all your pipelines or what, but what you just did, you don't want, and this kind of gets back to again, the difference in cloud thinking because one of the things that we do with pipelines, right, is we do a dev and a test and a U A T or a beta and a production.}
+{\pard  \line \par}
+{Yeah. And now you have a lot of flexibility to deploy and test through that before it becomes production. Those layers are not very realistic in most corporate environments. Cuz I've tried to implement them in a number of Fortune 500 s. Right, right. And even financial services sometimes struggle }
+{\cf2 [00:42:00]}
+{ even with some of their bigger funding for some of the, to build out a full environment.}
+{\pard  \line \par}
+{But it becomes very easy in the cloud to build up spin and only pay for what you use in these layers. And so having those layers is another control that we don't really think of. So kind of going back to that, my control mindset. , they say, well, who has access to the data? Your answer in the perfect environment is nobody has access to the data.}
+{\pard  \line \par}
+{Right. That's an on-premise thinking. , my production data, nobody has access. My u a t I only have three administrators, and then I have fuzzy data for people to play with. And that's what everybody else has, right? Is some kind of mass data or fake data that they test in those dev n test environments. So, I mean, , that's a mind blowing shift for a number of our security standards.}
+{\pard  \line \par}
+{If you're like, what? No, people, people don't touch the data. There's no attestation, you know, we don't need to spend three months digging all this up and putting it in spreadsheets. It }
+{\cf2 [00:43:00]}
+{ doesn't happen, right? And so that's another one of those huge shifts of, of thinking that it takes a while to wrap your brain around when you're first trying to get into the cloud.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Because I guess another thing that I hear quite often is when people talk about the whole well, developers should have freedom in AWS and how does even one start doing that? Like we are still talking about the startup example that went for it, but there are now their medium size, they have about a hundred odd developers.}
+{\pard  \line \par}
+{How does the whole freedom for developers kind of come into the cloud space as well? Cause what he called out is kind of foundational toward, because the whole idea in on-premise was there's Dev Test QA Prod, it's just like a slow staged progress between each one of them takes six months or whatever.}
+{\pard  \line \par}
+{But now with DevOps, you want to be there in production day one if you can help it. So how do you see that play out with and we kind of obviously shift left as well. How do you kind of see people can actually enable developers to be a bit more free in cloud? But at the same time too, what you said, the production environment }
+{\cf2 [00:44:00]}
+{ still remains intact.}
+{\pard  \line \par}
+{So what's your thinking there? }
+{\pard  \line \par}
+{\b\cf1 Chad Lorenc:\b0}
+{ the first thing, you have to build the environment and improve the controls, right? Yeah. To the people that are concerned about. And so it is that multi-stage environment. It is getting all the data out of your lower environments and keeping them in your top environments.}
+{\pard  \line \par}
+{Yeah. And then it's, it's limiting that access. But what you have to overcome, first of all, old school change management process, right. That hurts developers and speed to market more than anything. The old IT change management school of thought is ineffective. Hmm. And, and you have to figure out how do I achieve my intention outcomes in change management in the cloud.}
+{\pard  \line \par}
+{Yeah. And so some of that is, do I need change management? If I'm testing all that in a pipeline and then I'm testing it in a test environment. or have I just proven out my change management? Right. Because what was change management doing? It was }
+{\cf2 [00:45:00]}
+{ driving down operational risk. Yeah. Right. So looking at ways to drive down operational risk without slowing down the process.}
+{\pard  \line \par}
+{Again, why did that, I I didn't have a half million dollar firewall to test my data center on, right? Yep. It was throw it live in the middle of the night on Christmas and hope it works. Right? That those environments don't work. You don't have to spin up an application and production and call it test and have people test it, right?}
+{\pard  \line \par}
+{Yeah. You, you actually stage that environment. So change management process is the first thing. The other thing is identity and access management, right? There is, you can enable developers by doing IAM well, . And some of that has to do with really thinking through your account strategies, right? Like what, what team should be in this account?}
+{\pard  \line \par}
+{What access should they have? How much freedom should I give them to stub their toe in their own account? How many of those layers and who }
+{\cf2 [00:46:00]}
+{ is trusted at those correct layers to different access points, right? And, and I would even argue not only should nobody have access to production data and the only people that have UAT that maybe has , some small sets of production data, those people should be alarmed and monitored, right?}
+{\pard  \line \par}
+{So you're driving out that risk. So it, it's really a shift. Again, I I'm getting back to threat modeling, right? What are your outcomes and how do you model your controls against that? And realizing that in the cloud, things that you couldn't do it, that were not cost efficient on premise, suddenly the paradigm has shifted on your cost.}
+{\pard  \line \par}
+{And so even the ability to analyze what are you doing on a day-to-day in your job, that's really hard when I'm looking across a hundred thousand node environment with, you know, 250,000 network devices mm-hmm. . But if you are in an account and I'm pulling a cloud trail, I have a pretty darn good idea of what you're doing in your day-to-day job.}
+{\pard  \line \par}
+{Yeah. Right? Yeah. And I can build a pretty good }
+{\cf2 [00:47:00]}
+{ policy that fits what you need. And I've even seen some neat automations where I build an IAM policy and you said in the A request say, gosh, I just built this, I need access for this. And we said, oh, we'll give you access that and review it on the backend.}
+{\pard  \line \par}
+{Right? Because I know you are in your test environment and there's no data., you might be building some cost, right? Maybe, maybe you're building your own Bitcoin server, but you know, I can review that a week later and shut down your Bitcoin server. I you're not directly putting the company at risk.}
+{\pard  \line \par}
+{So really understanding those risk balance is important. So, }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ I'm love the direction you, we've taken from maturity model. We went from the whole crawl, walk, run, and now we're talking about like the softer parts of it as well, like the change management, bringing developers into the picture as well as to , they will be helping us drive success as well.}
+{\pard  \line \par}
+{You mentioned control tower and how parts of those can be taken out and put, I, I guess kinda like a jigsaw puzzle. You can take the parts which are relevant and see maybe that's the way you wanna go forward with the maturity, as it }
+{\cf2 [00:48:00]}
+{ scales so that people have a benchmark. and maybe if you were to put it at a scale, what do you see as basic maturity and what do you see as like, I don't know, like super mature organization from a security perspective, where do you see that scale?}
+{\pard  \line \par}
+{And I think cuz that way people kind of know, hey, you know, how people look for NIST CSF or something else in their mind. Is it like a similar scale that you normally have in mind for when you see an organization go, oh, okay, these are very fairly basic foundational pieces and towards the end are quite advanced.}
+{\pard  \line \par}
+{What are some of the examples in the two ends of the scale? The }
+{\pard  \line \par}
+{\b\cf1 Chad Lorenc:\b0}
+{ scale? Yeah. So I'd probably refer back to my cloud adoption framework with AWS for that in our pillars. Right? So you're looking for an IAM that is and, This is a security rule, not an AWS rule. Yeah. The security person, I think you always aim for 80 20.}
+{\pard  \line \par}
+{That's why we do defense in depth that last 20% is super expensive to solve. Mm. And if you can layer on other protections, , then you don't always have to be a, have a hundred percent perfect control. Right. But if I'm }
+{\cf2 [00:49:00]}
+{ 80% of the way to lease privilege on IAM, then I, I've got a maturity model , that's getting there, right?}
+{\pard  \line \par}
+{Yeah. Yeah. If on my threat detection, I can detect threats in every account, and I can report that out to a soc that can respond to those and knows how to respond, hopefully has playbooks to match that. Yeah. Then I'm gonna say that now that one you start to maybe measure on how fast can I respond, right?}
+{\pard  \line \par}
+{Meantime to detection, meantime to response, those kind of things. Yeah. But, you know, in the cloud, those responses can be instantaneous on threat detection, right? Yes. Where you have automatic remediations that kick in. So if you're moving towards instantaneous response, then , you're pretty mature.}
+{\pard  \line \par}
+{Data protection. Seems like the world's easiest pillar to me. Encrypt everything. Like there should not be anything. You're not encrypting., there's no significant cost to encrypting an AWS. And , it's the world's easiest and a super strong }
+{\cf2 [00:50:00]}
+{ control. You know, , it meets on your maturity model, high impact, low cost, you know, adopt yesterday kind of quadrant.}
+{\pard  \line \par}
+{So, yeah. And then probably the more complicated one is infrastructure services, right? Because if you're doing containers, it's gonna look different than if you're still trying to work your way out of, I need to have a choke point on the network and run everything through it, which is an anti pattern.}
+{\pard  \line \par}
+{But again, you often have to move in phases, right? So in what ways we see people doing choke point still but really working through on infrastructure protection. That one becomes, a little more challenging and, that one is where I start asking what are our outcomes with infrastructure?}
+{\pard  \line \par}
+{Right? Are you worried about protecting your app? We should be talking about WAFs. Are you actually worried about resiliency? Right? And there's overlaps, right? Your resiliency may also make your instant response 10 times easier. Cuz I got a gold AMI, I just throw in there every time you get compromised, right?}
+{\pard  \line \par}
+{\cf2 [00:51:00]}
+{ Yeah. So, there is overlay between these ones, but understanding your infrastructure tells a lot about your organization and it tends to be fairly organizationally specific as compared to some of the other pillars. And so I would struggle, I guess, a little bit more to tell you when you're mature on that, but more I would be looking, well, can you tell me what your outcomes are?}
+{\pard  \line \par}
+{Are you achieving that? And then look at, does that make sense from a cost and a scale standpoint? }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Awesome. That was a great answer by the way. Thank you. Last question, are there any resources that people can reach out and find out for on the whole maturity roadmap thing as like a, sounds like a lot more complexity and people have to add layers of their own personal organization as well.}
+{\pard  \line \par}
+{Are there any resources that you normally refer to people just to go and do some deep dive? }
+{\pard  \line \par}
+{\b\cf1 Chad Lorenc:\b0}
+{ Yeah, so I mean, obviously if you have an AWS account team, you have a whole set of resources that would gladly help you with a lot of these things and provide a lot of these services for free as far as introducing you to and connecting them.}
+{\pard  \line \par}
+{As far as personal research }
+{\cf2 [00:52:00]}
+{ online, I really do recommend you look up the security reference architecture and it's a great place to start. Actually, I mentioned the cloud adoption framework great way to understand the bigger IT and then how that pulls down to security. So a cloud adoption framework would be another great one.}
+{\pard  \line \par}
+{And again, the foundations design love that you can look up cloud foundations AWS it'll take you to their landing page. Security maturity models hidden a little bit deeper. It, it's not on the official AWS website, but it's really popular with customers cause of that risk approach. So it's at, I think a.dev site under aws, so Right.}
+{\pard  \line \par}
+{You can find it if you search it on the internet. For SEC, AWS security maturity model I would definitely start with those models and. There's, a huge benefit of using the cloud adoption framework, right? Because if, if AWS or somebody else has come in and sold cloud to your CTO or some other strategic person in your organization and you're a }
+{\cf2 [00:53:00]}
+{ security person trying to figure out how to talk cloud back to them and translate the CAF tells you those bridges Oh, that you want to speak in, in connecting the cloud strategy with the security strategy.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Oh, right. Okay. Also, it's actually quite useful for CSOs as well then for CSOs refer }
+{\pard  \line \par}
+{\b\cf1 Chad Lorenc:\b0}
+{ to that. Yeah, the cloud adoption framework and we just released 3.0 earlier this year, or late last year, I can't remember which, but really good. It actually pulls in a couple other pillars and the five I mentioned.}
+{\pard  \line \par}
+{Yeah. Really deep diving on application security and some of the governance pieces as well, }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ so, awesome. And maybe some threat modeling sprinkle in there as well. And that should be, }
+{\pard  \line \par}
+{\b\cf1 Chad Lorenc:\b0}
+{ yes, actually we built the threat modeling. Right now it's under application security is, is kind of a thought process, but I use threat modeling for anything I do in security to really make sure , I'm putting in the most cost effective controls to, to help my organization.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah. Yeah. And I think it's already visible in the industry, the pattern where it's almost becoming , application security people and cloud security people that kind of have }
+{\cf2 [00:54:00]}
+{ to work together. Cuz it's like, it's, I won't say it's like merging, but they're definitely like a product security kind of a thing.}
+{\pard  \line \par}
+{Emerging over there }
+{\pard  \line \par}
+{\b\cf1 Chad Lorenc:\b0}
+{ though. Well, I think it's interesting because traditionally in, in a lot of ways security has been more aligned to the business than any other group. Yeah. They're the least allowed to be siloed cuz they have to understand everything. Right? Yeah. You're, you know, today you're working over here on trying to secure an iot manufacturing device.}
+{\pard  \line \par}
+{Tomorrow you're trying to secure the e r p, the next day you're trying to figure out how to secure this new iPhone that came out, right? I mean, you're just all over the place as a security professional, but that also gives you a broad view of the business. And interesting enough application people, although their view isn't as broad, they really understand a part of the business intricately is, which is their customer.}
+{\pard  \line \par}
+{And they're, I think security and app people are two of the biggest IT business enablers in your IT organization. So it's not that shocking to me that you would start seeing }
+{\cf2 [00:55:00]}
+{ them have a closer alliance and be more effective working together. In fact I did a hugely popular podcast way back when WAF was a brand new thing and, and my whole pitch. Yeah, WAF , it works better if you work with the developers, right? I mean, it's a, it's a 45 minutes of me saying, yeah, security people be, the developers are gonna actually have to help you with this, right? You're gonna need their certificates, you're gonna need to understand their changes and how that affects their application flow.}
+{\pard  \line \par}
+{And so it hasn't really changed any right. Since then. , they really are key to understanding what's happening in your environment. And once we abstract out all those other underlying layers, you're really left with the app, right? Yeah. That's enabling the business. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ And clearly a security person you would not know deep dive into what the app does or is expected to do, but the developer, the platform engineer who's worked on it, they will definitely know about it as well.}
+{\pard  \line \par}
+{Great. So now this is, this is definitely a great last question for me. So thank you so much for answering that. And for people who wanna reach out to you and maybe }
+{\cf2 [00:56:00]}
+{ clarify more on the whole security maturity thing as well, or learn more about the AWS parts, where can they find you on social media?}
+{\pard  \line \par}
+{\b\cf1 Chad Lorenc:\b0}
+{ Yeah, I am on LinkedIn as Chad Lorenc. Also highly available. I am a a delivery practice manager, so I manage the proser organization for the US West delivering to our commercial account space. So you can always reach me. It's my email is actually CL for Chad Lawrence and then AWS and then s e c for security.}
+{\pard  \line \par}
+{So clsec at AWS or sorry@amazon.com. And you can get hold me that way as well. So yeah, , always happy to connect to people on LinkedIn and always happy to interact with customers. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ I will definitely leave those link over there as well. So thank you so much for this and thank you everyone else who's tuned in.}
+{\pard  \line \par}
+{We'll see you on the next episode, but this is also part of the AWS builder series. So thank you Chad, for coming in and I will see everyone else on the next episode. Thanks everyone.}
+}

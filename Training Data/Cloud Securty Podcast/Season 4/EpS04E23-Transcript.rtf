@@ -1,0 +1,409 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2639
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 TimesNewRomanPS-BoldMT;\f1\froman\fcharset0 TimesNewRomanPSMT;}
+{\colortbl;\red255\green255\blue255;\red97\green167\blue95;\red0\green0\blue0;\red109\green109\blue109;
+\red81\green0\blue192;}
+{\*\expandedcolortbl;;\cssrgb\c44706\c70196\c44706;\cssrgb\c0\c0\c0;\cssrgb\c50196\c50196\c50196;
+\cssrgb\c40000\c0\c80000;}
+\paperw11900\paperh16840\margl1440\margr1440
+\pard\sa360\partightenfactor0
+
+\f0\b\fs28 \cf2 \up0 \nosupersub \ulnone John Burgess:
+\f1\b0 \cf3  \cf4 [00:00:00]\cf3  And so the AWS data perimeter is that set of controls that lets you essentially control access through the value of your AWS organization. You're afraid of your principles being used to exfiltrate data. You want to make sure that they're only interacting with resources that you trust. You can make it so that your principles are not allowed to access.\
+Any resources outside of your AWS organization. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  If the credentials are being used without IMDSv2, they should just not work. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 John Burgess:
+\f1\b0 \cf3  So yeah the control has nothing to do with IMDSv1 or IMDSv2 it's a control on principle that says we only expect this principle to be used. From this VPC, oh, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  I just wanted to give a quick shout out to everyone who celebrated Independence Day over the last week or weekend, depending on whether you took a long weekend or an entire week holiday, and enjoyed the break with family and friends, which is well needed and definitely should be done.\
+So I saw a lot of pictures online on social media, so I am really happy for everyone celebrated. And now it's time to come back to the episode. Are you still using traditional ways of detecting controls instead of using preventive controls in aws? Well, maybe this episode will change your mind. For this episode, we had \cf4 [00:01:00]\cf3  John Burgess from Stripe.\
+He has been using data perimeter to basically prevent things from going wrong instead of trying to stop them from the first place. That makes sense. You're still stopping the bad things happening, but in a way that's actually more positive than, Hey, you've done something bad. I've detected this and I'm gonna come after you for this.\
+I like the approach personally, and I think you would also like it as well once you hear the conversation around how external parties interact with. Your entire AWS organization, as well as how anyone inside your AWS organization interacts with anyone outside of the AWS organization. In this episode with John, we also spoke about how you can implement something like a data perimeter in your organization.\
+How do you even start? What are some of the prerequisites for it? What are some of the common examples of things you can actually include as part of a data perimeter? Whether defense in depth is a thing. That you should care about if you are using data perimeter. All that and a lot more in this episode with John, and I'm super grateful that even though he had a talk about this exact topic in fwd:cloudsec, he was happy to kind of come on the episode and talk about the entire thing.\
+By the way, if you haven't already, definitely check \cf4 [00:02:00]\cf3  out John's talk at fwd:cloudsec, where he spoke about data perimeter and had a few more examples with all the flow charts. So I would definitely check that episode out and I'll leave a link for that in the show notes as well. But in this episode, we got to know how you can have developers do mostly everything that they want to in within an organization in a safe manner. Without having you as a security team be worried about, oh my God, what if there an external third party that gets access to all the information? Or what if there's an SS RF possibility? And if you know someone who's working on building data controls or specifically security controls in their A WS account, this may be an episode that may help them build the data perimeters. around it in a way that they're doing prevention rather than detection in the first place, which is probably, you know, prevention is better than cure as someone who has always said. So definitely check that out. And if you're listening or watching this episode for the second or third time, definitely consider leaving us a review rating on your favorite podcast platform, because that helps.\
+The future guests know that they're coming to a platform which has an engaged community, which is gonna get value from them coming over to our podcast as well as the YouTube channel to talk about the specific problem they have solving cloud \cf4 [00:03:00]\cf3  security so you can actually do your job better. So you can do more things at your job in a much more creative way by learning from other professionals who are out there solving cloud security problems in a more creative way.\
+So enjoy this episode with John Burgess and I'll see you in the next. So enjoy peace by bringing developers and security together. You don't have to choose between speed and security. Develop fast, stay secure.\
+ Hey John, welcome to the show. Hi, how's it going? Good, and thank you for coming on the show, man. I think I'm really excited about this conversation cuz we haven't spoken about data perimeter in general in the space of cloud, and I'm glad I'm getting to bring this over as well with yourself. But to start off, for people who don't know, John, what was your path to your current role, man?\
+Yeah, outta \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 John Burgess:
+\f1\b0 \cf3  college I joined Amazon. I worked in the Alexa organization. Oh. I was a sort of backend generalist and I was working on an internal product that was. A secure machine learning platform. So it was what all the Alexa data scientists use to process the Alexa voice data. And so it \cf4 [00:04:00]\cf3  was building infrastructure, but we cared a lot about security and it was built on aws.\
+And so I. Kind of acquired those skills to do that. And so when I was looking for my next role, I realized that that was something that I really liked doing is building security within aws. Mm-hmm. And I wanted an opportunity to build something that would help the entire company instead of one specific tool within a company.\
+And so I joined Stripe as a cloud security engineer. And then one of the things that I've been doing at Stripe is helping them build an AWS data perimeter \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  and talking about AWS data perimeter. How would you describe, cause I, I think. The first time I heard you talk at fwd:cloudsec, and then I was having a conversation with you as well.\
+I had this question, I'm pretty sure a lot of people do. How would you describe the data perimeter in the cloud context? Yeah, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 John Burgess:
+\f1\b0 \cf3  it's a set of guardrails to control access through the organizational boundary. So when you set up an AWS organization, You generally want to trust your own accounts more than external accounts.\
+If there's an external principle accessing your resources or your principles, accessing an external resource, that's something that you want to \cf4 [00:05:00]\cf3  care about and probably want to block by default and only allow list in specific scenarios. And so the AWS data perimeter is that set of controls that lets you essentially control access through the boundary of your \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  AWS organization.\
+Now that you know what a data perimeter is, you kind of mentioned organization and principle in terms of some of the examples. That people may not even think about from a data perimeter perspective, what would be some of the common examples that they can use to define data perimeter in aws? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 John Burgess:
+\f1\b0 \cf3  Right, so some of the most important features of the data perimeter is it enables you to make it so that your credentials can be tied to your network, and so that even if your credentials are stolen, they cannot be used outside of your network.\
+Another thing that it can do is that it can block external principles from interacting with your resources. So even if a developer accidentally misconfigures one of your resources to trust some external account, it'll be blocked \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  by the perimeter. All right, so I can actually block external, I'm just gonna use an example, actually I'll just use cloud security podcast as an example.\
+Cause I don't wanna call out a \cf4 [00:06:00]\cf3  company, but, so if I make a data perimeter to. Say, oh, only employees of Cloud Security podcast AWS account should be able to access any resources in there. But because John doesn't belong to , the organization, he or she should not be able to access anything in this.\
+I can actually call that out as the data perimeter. Yes, you \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 John Burgess:
+\f1\b0 \cf3  can do that and might be difficult to do, but it's It's possible to do. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Yes. Right. And to your point also, like what are some of the common examples you can think of that, I mean, maybe simpler ones, maybe I thought of a complicated example.\
+What's a simple example of data perimeter that people can think of? I guess jog their memory. Yeah. One, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 John Burgess:
+\f1\b0 \cf3  one example of something that you can do is that if you're afraid of your principles being used to exfiltrate data, you want to make sure that they're only interacting with resources that you trust.\
+You can make it so that. Your principles are not allowed to access any resources outside of your \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  AWS organization. Yeah. Cause I think I'm gonna ask the AWS organization question later, but I think maybe the first question to start off with, how does one even start making the data perimeter?\
+Because you mentioned organization and you can use that. So would that just be through scp? \cf4 [00:07:00]\cf3  Yes. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 John Burgess:
+\f1\b0 \cf3  So there are six sort of controls that make up the AWS data perimeter. Two of them are service control policies to BPC endpoint policies, and two, are resource policies. But to get started, I'd recommend, you know, AWS has blog posts that they publish about this.\
+So I, I'd recommend looking at that within the controls. The ones that I find easiest to implement are the ones that are based on service control \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  policies. And like, so an example would be do not log in with root kind of, I mean, I guess cause the, the reason I ask this is because sometimes, You know how a lot of companies would have examples that, hey, you use scp for blocking all root accounts to mm-hmm.\
+Access any of the sub-accounts, or they might be root accounts to basically say, oh, you cannot use another region. But would that still be an example of data perimeter or is that \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 John Burgess:
+\f1\b0 \cf3  different? That's different. That's sort of like, would be within the set of your most basic SCPs. Okay. And, and data perimeter stuff is more about, I kind of think of it as.\
+Establishing a zone of distrust outside of your AWS organization. So it's really looking at any sort of relationships or actions that are coming \cf4 [00:08:00]\cf3  from outside of the organization com coming in or originating within the organization and going out. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Oh, right, right, right. Okay, cool. So, so these are still relevant control, but they, you would not classify them as data ones because they're still within the organization instead of coming out from outside in.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 John Burgess:
+\f1\b0 \cf3  Right. Yeah, I, I would put these in within best practices and there's something that you should do very quickly and they provide good value and they're very, Simple to implement. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  It's an interesting one because a lot of people talk about the whole traditional approach or defense in depth in this kind of approach as well.\
+So cuz people would say that, oh, I'm trying to protect my organization from external attackers by using defense in depth. So you have first layer, second layer, third layer, and kind of so on and so on. Is that different or is that same then? Yeah, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 John Burgess:
+\f1\b0 \cf3  that's the same thing. And like the AWS data perimeter could be something that you use as sort of one layer as defense in depth. The thing about the AWS data perimeter is that it's not totally comprehensive. Like there's a lot of paths into and out of your organization and it's very difficult to block most of them or to block all of them. And so it's something that just reduces your risk, but it doesn't \cf4 [00:09:00]\cf3  eliminate it.\
+Right. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Okay. So it's almost like complimentary to the defense in depth strategy. You should still do all of it to what you said. There are best practices, so follow the best practice. But this is a complimentary feature , cause to your point is the intent with the data perimeter also to enable developers as well, because that's probably comes up quite often where most of security controls, you talk about, they usually to block people, but yours seems like it's a bit inclusive for hey.\
+You can do whatever you want in this boundary. Is that kinda like a thinking over here? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 John Burgess:
+\f1\b0 \cf3  This is the positive spin that I like to put on it. So they are blocking controls. You know, you are reducing the number of actions that can be executed within your organization. But the positive spin is that, you know, now that I have this kind of like bubble around my organization, that means that I can make it so that we trust our developers more, we give them more autonomy, we let them, you know, modify IAM policies because I know that.\
+They don't have the ability to set up these really dangerous trust relationships, for example. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  All right. Okay. Yeah, you're right. So, wait, do you guys give access to change? IAM \cf4 [00:10:00]\cf3  roles for developers Yes. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 John Burgess:
+\f1\b0 \cf3  In specific capacities. I see it as sort of like a north star, like I would like to let developers do as much as possible.\
+We have to put kind of reasonable boundaries. We have some sensitive environments where we don't feel comfortable doing it yet. Right, right. But I think that that's a really great North star for sort of in the cloud security team, is to give developers freedom naturally gives you the question of like, how can I do that?\
+What are the sort of like large upper bound controls that I can put on the organization no matter really what they put within the policy? I can trust what they're doing. Wow. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Yeah. Well, I. Totally support that kind of northern star because they're the ones who are basically, I guess, sometimes so close to the problem to be solved in the first place in doing it in a seamless way sounds like a good idea.\
+So if listening to you at the moment people get excited and go, oh, I want to make a data perimeter. Is there a good starting point or are there like prerequisites? Cause sounds like no one would. Immediately start opening up their accounts to developers to change. What's all kinda like a prerequisite that you think, I mean, especially maybe \cf4 [00:11:00]\cf3  another way to ask this question, what was your thought process as you was trying to build the data perimeter in your organization?\
+Yeah, so \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 John Burgess:
+\f1\b0 \cf3  the data perimeter. It's something that you should tackle kind of like midway through your cloud security journey. Okay. So there are specific fundamentals that are hard requirements, like you need to have AWS organizations set up. You need to have cloud trail enabled so you know, what sort of access is happening within your organization.\
+And then in addition to that, you mentioned. SCPs for denying root user, sort of fundamental SCPs, like that should be implemented first before you reach for the data perimeter. and you should do all the best practices like enabling S3 block public access. Once you get the really easy stuff out of the way then you could start reaching \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  for these tools.\
+Interesting. Am I thinking is just too good to be true? I'm sure there's some limitation to data perimeter, right? is there a limitation to this or is this like , anything works within the organization? Yeah. There \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 John Burgess:
+\f1\b0 \cf3  are limitations and I could talk about them for a while. So the first limitation is that these are preventative AWS IAM controls.\
+Okay? So what you're trying to block is not an IAM action. Then they're not \cf4 [00:12:00]\cf3  applicable if it's something that, where the policies cannot express a way to block it. Then it's also not applicable and you're going to have to reach for a detective control. The other thing is that there are some rough edges.\
+So I mentioned that you need to use VPC endpoint policies in order to implement this. Some VPC endpoints don't support custom policies, and so AWS hasn't really given us the tools to completely implement the \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  data perimeter yet. Oh, right. Cause yeah, I think you did mention the components of it. So could you just state them again, the building blocks.\
+So that was the SCP, the VPC endpoint. What else for that And the resource policies. The resource policies, and actually the way I also see this is that was it documentation enough to kind of go down this path of implementing data perimeter? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 John Burgess:
+\f1\b0 \cf3  Yes, it's enough to get started and it's enough to give you the theory.\
+The only kind of problems that I ran into is that Stripe has existed for 10 years and we have a sort of very complicated cloud footprint, and so how can I safely deploy these controls to this environment? That's something where the AWS documentation \cf4 [00:13:00]\cf3  wasn't very helpful and so I had to kind of figure out.\
+On my own, how I can incrementally deploy these very powerful controls. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Ah, okay. Cause I mean, as I kind of think about this, one more segregation that I often think about is people would have separate ous within a organization. They would have different kinds of separation for sandbox environment, build environment.\
+They might have separations for prod accounts. How does data perimeter help with that? Cause you mentioned IAM action is kind of what , you're going for prevention rather than detection. Mm-hmm. What kind of an example would be for there, I guess, should you use OU or account? Like, where do you stand on that?\
+Implementing data perimeters for segregation? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 John Burgess:
+\f1\b0 \cf3  Yeah. I think that that's a really great idea and sort of like a natural extension of the data perimeter is to start carving up accounts and ous within your organization. You're going to have some accounts, maybe test accounts. That have more lack security controls, and you don't want the possibility of those accounts being compromised, giving attackers an opportunity to pivot to sort of more secure accounts.\
+And so you can use the sort of same \cf4 [00:14:00]\cf3  template, the same set of controls to control access within your accounts within your organization. Right? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  And. It's an interesting one, man. Cause I, every time I hear data perimeter, I always think of like there is no dlp, like there's no data leakage prevention kind of a thing in aws.\
+If I want to take out data, I can take out data, which is kind of where a lot of people kind of think, oh, I wanna have controls that I can stop this from happening. Mm-hmm. The segregation you're referring to, because you would block the data perimeter, would stop anyone from outside accessing in it. \
+Can that be used for the other way around as well? Where I can stop? Developers from I guess doing something outside or is that Not at the moment. That's probably not the right way to think about data perimeter, but no, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 John Burgess:
+\f1\b0 \cf3  you can, yeah, you can stop your principles within your AWS organization from directly like pushing data to external resources.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Oh, you can do that as well also. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 John Burgess:
+\f1\b0 \cf3  And that's actually much easier to do. So the thing is that with service control policies, They affect only your own principles. Yeah, and so the controls that are on your own principles, like making sure they only interact with \cf4 [00:15:00]\cf3  resources within your organization, that's really easy to implement.\
+The harder thing to implement is making it so that your resources cannot be accessed by external principles, because that means that for every resource, I have thousands of resources, I need to add a new statement to the resource policy. Explicitly blocks external access. Oh, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  right. Also, you would have to think of some kind of automation as well to this, enable that across, I mean, I'm thinking, cause some people have hundreds of AWS accounts, each one of them may have hundreds of resources.\
+So that's definitely some kind of an automation cause or can you still do that at an SCP level? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 John Burgess:
+\f1\b0 \cf3  You cannot do it at the SCP level. So this is kind of like a known gap in the IAM space is it's much easier to control what your principles can do. Yeah. And what external principles can do to your resource, which is kind of confusing.\
+But yes, it means that you need to have maybe infrastructure as code, you need to have common modules. You need to have a way of enforcing the developers use those \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  modules. Oh, right. And when you say modules, like do you mean terraform modules? Like for automation? Cause I think. I've heard this a few times.\
+\pard\sa360\partightenfactor0
+\cf4 [00:16:00]\cf3  And do you find that it was easy to make modules for AWS in terms of like the way you were thinking about it? Okay, so resource policies for certain resources in certain accounts should have certain kinds of restrictions or prevention, for lack of better word. Do you what you called out was that easy to do with Terraform?\
+And AWS cli or APIs, I guess. Yeah. I found \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 John Burgess:
+\f1\b0 \cf3  it pretty easy to do within Terraform, and that's the thing is that the statements that I'm adding to resource policies are really simple. Okay. It's just , the hard part is, like you said, you know, I've, all of these accounts and all of these resources, so scaling into all of them is, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Okay, cool.\
+And yeah, when me, if you just use an example I think you had a few in your talk and I'll definitely recommend people to check out the talk that you gave at fwd:cloudsec. You kind of had some of the examples over there, which was IMDSv2 preventing credential attacks, prevention of bringing your own BYOC attacks.\
+Like could you share a bit about like what was the thinking around them as you were kind of putting some of those pre prevention rules, like what was the goal behind some of those data perimeter controls? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 John Burgess:
+\f1\b0 \cf3  Right. So like you mentioned, we \cf4 [00:17:00]\cf3  targeted a control that prevents specific IAM roles from being used outside of our network.\
+The goal there is that it's quite a sort of powerful control is that regardless of how an attacker gets our credentials and exfiltrate them, they can't be used. The example that I give within the talk is an SSRF attack, stealing credentials from an instance running, IMDSv1. This is like a really common way that IAM role credentials are stolen from people's environments. And so thinking was, okay, we can upgrade to IMDSv2 and we should in, you know, all of that. But at the same time, this is just one specific way that our credentials can get stolen. Like how can we target the root cause here? How can we make it so that even if our credentials get stolen, however they get stolen, they can't be used outside of our environment.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  So can you actually call that out in a data perimeter control? That if the credentials are being used without, IMDSv2, they should just not work. The control \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 John Burgess:
+\f1\b0 \cf3  has nothing to do with IMDSv1 or v2. It's a control on the principle that says we only expect this principle to be used from this \cf4 [00:18:00]\cf3  VPC oh. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Oh, right. Okay. So there's another, to your point, stepping back to the defense and layer part, there's already upgrades done so that you don't have any IMDSv1. Mm-hmm. So it should not really matter, but just cause my credentials are lost, they should not get SSRF in the first place because there's another layer outside of it, which prevents, I mean, which means there is no IMDSv1 to begin with in the first place.\
+Right, exactly. But you add another layer of. Prevention to say in case there was one. Mm-hmm. Which you are not aware of. It still doesn't work. Right, exactly. Ah, okay. Cool. That makes sense. I feel like if you were to implement this, the, you kind of mentioned trust relationship a few times and trust relationship is usually referred to third party.\
+Is there some thoughts around, I guess, I mean, I know there's a best practice from AWS to kind of use the whole instance role and external id, all of that. Was there some thought given from what could be a proactive detection for, I guess, third party? Is there one possible, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 John Burgess:
+\f1\b0 \cf3  you mean sort of like your resources trusting third parties \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  or, yeah.\
+Yeah. Like cuz I mean, I don't know, I might need some kind of monitoring service \cf4 [00:19:00]\cf3  or something, or like a siem service or something or the other like, cause I don't imagine any organization can operate without having some of those, cuz cloud doesn't provide them. So what was your thinking for those?\
+Yeah, I think that this \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 John Burgess:
+\f1\b0 \cf3  is like, one of my favorite things about implementing AWS data perimeter is that it, like, it requires you to define and establish and manage your vendors, your, like, who you trust, what third parties. Now we have a specific place where we say, okay, we trust these accounts and if we want to trust somebody new, we have to add it to this list.\
+And it's something that only cloud security can modify. So means that. Developer in our organization cannot by themselves like create this new trust \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  relationship. That kind of makes sense as well, because to your point then, that's probably the biggest value people have when think about that.\
+Oh, people can do whatever they want. the first scenario I imagine a security person is thinking of. Oh, someone takes over my machine and the first thing they do is go have an external connection to the internet. But because the VPC endpoint is already covered, you've already covered from an account level perspective, the IAM roles, who can execute and whatever.\
+That's kind of already covered. So people should not \cf4 [00:20:00]\cf3  be worried. But sounds like this can be applied across other CSPs as well. Is that right? Because that's, Sounds like a very simple thinking. I mean, and I don't wanna over simplify the hard work you put in, but sounds like it can be applicable to other cloud service providers as well.\
+Yes. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 John Burgess:
+\f1\b0 \cf3  I think that other cloud service providers give you similar tools for implementing a data perimeter. I don't really have familiarity with them. Yeah, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  yeah. And that's okay. But I think the thinking process that you had is kind of, I imagine can be applied there. Oh, , I know what my quote unquote trusted relationships are.\
+I only work with them, and \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 John Burgess:
+\f1\b0 \cf3  that's pretty much it. Right. And it, and that's the thing is that it, like I said, it's like a zone of distrust. Like everything outside of your organization should be blocked by default. And then you should have a relatively small allow list that can only be modified by cloud security.\
+Interesting. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Yeah. Well, what was the biggest challenge in going through the data perimeter part man? Sounds like it's the right thing to do. But I imagine a lot of organization would have cultural challenges with the way the organization operates and otherwise in the way you were working on it, was there any technical challenges or were there \cf4 [00:21:00]\cf3  any, maybe if you're open to sharing non-technical challenges as well, were there any challenges that you faced as you were kind of walking on this path that people should be aware of or they can learn from?\
+Yes. I, I \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 John Burgess:
+\f1\b0 \cf3  think the hardest part about. These controls is deploying them safely. I think the theories is very simple, and I think they're very powerful. I found that there were exceptions like during deployment, that I could not have predicted, and this is something that I talk about in my talk and I tell people about them so that they can avoid the same pitfalls that I did.\
+And so for me, that meant. Okay, so a service control policy by default targets an entire account. Yeah. You know, I don't want to break an entire account at a time, and so I had to sort of shave this down to like a minimum set of principles, deploy it, see if it works, see what broke. I add a fix incrementally deploy over and over again.\
+So it required a lot of patience, a little bit of imagination and a lot of manipulation of \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  IAM policy. Wait, did you end up creating the SCP limit by any chance? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 John Burgess:
+\f1\b0 \cf3  We have not. the thing about the SCP limits, Well, so we did hit the SCP limit and then we bypassed it. Okay? So if you have an account that has five SCPs \cf4 [00:22:00]\cf3  attached to it, you can create a new ou, you can put the account in the ou, and then you have five more SEPs so you can manipulate your organizational structure.\
+To avoid the SEP limits. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Ah, okay. Yeah. Cause I'm like, most people get stuck with, oh, I don't have enough SCPs. But you guys found a hack. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 John Burgess:
+\f1\b0 \cf3  Yes. I think that people are sometimes afraid to like, mess with their ou, but I would say just absolutely go for it. Like \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  in order to not, is it like a logical operation?\
+Is it literally like your, I mean when I say logical operation, is it literally just a logical separation? It's not like you're breaking down the entire system where if you just move or use, it's literally just saying, oh, I'm just labeling this as something else. It's not doing anything else apart from that.\
+I mean, unless obviously if you have SCP applied to that organisation unit, it's literally a different kind of labeling. Mm-hmm. That's right. Okay. So that's maybe where people get scared. Cause I think most of the time my team was scared, which was just like, oh I don't wanna break anything. And like, I, I don't know what's gonna break, but something's gonna break.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 John Burgess:
+\f1\b0 \cf3  I totally understand that fear and empathy where I say like, So this OU has a set of SCPs, this \cf4 [00:23:00]\cf3  other one has the same set. Moving the account still feels kind of scary, but you know, it's all worked out for the best. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Yeah. Wait, have you had to deal with multiple organizations yet?\
+No, not yet. Okay, cool. All right. I think that would be interesting cause I think I had a challenge once where, We were moving organization and I think I was talking to someone at fwd:cloudsec about this as well and hopefully we can have that conversation on the podcast. But it'd be really interesting cuz in my mind I always thought it's a logical operation that I moved an account from one organization to another.\
+But apparently there's a lot more things that happened over there, but no, maybe not at an organization unit level. With that said, people who are listening to this, where can they find information about building a set of data perimeter? And maybe I don't know where you learned it, how you learned it, if you're open to share how you learned it and maybe other people can go down that path as well, or if you find a better path to learn about.\
+Yeah, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 John Burgess:
+\f1\b0 \cf3  I think that. AWS has a few blog posts that are really helpful for introducing the concept, and they also have a GitHub repo where they publish example policies. \cf4 [00:24:00]\cf3  Okay. So that's a really great place to start. Oh, all right. I'll \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  probably take the, the GitHub policy link from you as well later on.\
+Then I'll just put that in the show notes. So that's kind of most the. Technical questions I had, I've got three fun questions for you, just so that people get to know you a bit more. And the first one is, what do you spend most time on when you are , not working on cloud and technology and guardrails and data \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 John Burgess:
+\f1\b0 \cf3  perimeter?\
+I do origami. So I do modular origami and I do tessellation origami. Oh, really? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Oh, wait, as in like the really small ones or like, do you go for bigger ones? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 John Burgess:
+\f1\b0 \cf3  So modular origami is like, sometimes I have like a hundred different pieces of paper. And I do the same folding sequence and then I put them together and create this kind of like weird.\
+Team metric structure and then tessellation is, I have a specific piece of paper and I make a repeating pattern in it and it takes hours and hours. It's a great way to consume my time. Wow. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  I did not even know that was Well, thank you for educating me on this. I didn't know there was much more, a few more layers of origami as well, but I appreciate it sharing that.\
+So what is something that you're proud of that is not \cf4 [00:25:00]\cf3  on your social media? Yeah, I'm \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 John Burgess:
+\f1\b0 \cf3  really proud of, I didn't really have formal training in security and it's something that I picked up over time and I've really enjoyed it. And so I'm really happy that I found something that fit me so well and that I've been able to pick up over time and the community has really welcoming, which has really helped.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Whoa, wait, so you actually gave you a talk as well. So, I mean, kudos to you for. Learning without a formal training and also giving a talk as well publically, that too at fwd:cloudsec, which is a very popular cloud security conference. So that's pretty awesome, man. Congratulations. Third question, what's your favorite cuisine or restaurant that you can share?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 John Burgess:
+\f1\b0 \cf3  I really love lasagna. I could eat like any amount of lasagna if it's in front of me. And I, sometimes I don't even like dessert. Cause when I eat dessert, I just like think that I'd rather be eating lasagna. Wait, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  any, any kind or with a special filling \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 John Burgess:
+\f1\b0 \cf3  or just like the like meat. Like red \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  lasagna?\
+Yeah. Oh, okay. Fair enough. Yeah, those are good. Those are good. But I don't know if it's good enough that you would, if if you had to have it every day, you would be happy. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 John Burgess:
+\f1\b0 \cf3  I think so. I haven't tried it out. But Okay, \cf4 [00:26:00]\cf3  cool. I suspect that I would be for probably longer than the normal. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Fair enough. I mean, yeah.\
+So that's definitely an interesting cause I think I would've thought, yeah, I think I would definitely be a pasta fan , or a wood fried pizza fan as well. But I had someone one of my previous guests basically said they can even have a cold pizza, and they would love that. Would you have a cold lasagne?\
+It's sometimes \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 John Burgess:
+\f1\b0 \cf3  better cold. It's sometimes better cold the next day, so, oh, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  oh. I, I kind of knew that one. That's why I asked you the question that's really interesting cuz I need to try the cold pizza and cold lasagna thing. I haven't given that a short yet, so I'm gonna give that a short one day.\
+But that's kind of most of the questions we had, man. Where can people find you on the internet if they have any follow up questions about the whole data perimeter? They're trying to to implement it and want to talk to you about it. Where can they find you on the internet? I'm on \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 John Burgess:
+\f1\b0 \cf3  LinkedIn, Sean Burgess. Feel free to connect and ask me \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  questions.\
+I will share that link on the show notes as well. But that was pretty much the episode and thanks so much for taking the time out as well. And thank you everyone for tuning in. But yeah, I'll see you all in the next episode. Thanks John. We'll see you in the next episode as well, man.\
+Thank you for having me. Bye.}

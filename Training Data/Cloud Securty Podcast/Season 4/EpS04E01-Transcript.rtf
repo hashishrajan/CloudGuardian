@@ -1,0 +1,596 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red102\green0\blue204;
+\red128\green128\blue128;
+\red114\green179\blue114;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\b\fs48 Nick Frichette\b0}
+{\pard  \line \par}
+{\b\cf1 Nick Frichette:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ For 2023, some of the research focus that I have is really trying to dive deep into those undocumented APIs that I mentioned.}
+{\pard  \line \par}
+{There has been a lot of success lately and even historically with abusing those. Most recently there was the Lightspin ECR vulnerability that came to light where. Turns out you could just replace any container that was in the, the public gallery, which is terrifying. So focusing in on those undocumented APIs to perform unintended functionality or to evade detection is a major focus for me. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Happy New Year everyone. Welcome to Cloud Security Podcast, season four. We've been running for three years now. This is our fourth year of running. Thank you so much for all the support. We recently won the podcast of the year from SANS Institute. That was pretty amazing and this would not have been possible without his support that we continue.}
+{\pard  \line \par}
+{rank top hundred everywhere. Alright, I just wanted to say thank you and I did not take too much of your time and get you straight value. Last month we had AWS re:invent, where we covered what was discovered, what was announced at AWS re:invent, what was relevant from a cloud security perspective, and moving forward to 2023.}
+{\pard  \line \par}
+{\cf2 [00:01:00]}
+{ This month we're talking about breaking the AWS cloud. Yes. We've been thinking about building so much. I just wanted to make sure we understand how we can break the cloud and specifically break the AWS by breaking the AWS, I mean finding misconfiguration and vulnerabilities. So we've got researchers who've been discovering vulnerabilities in AWS space coming throughout the month.}
+{\pard  \line \par}
+{To kick things off, we had Nick Frichette. He's a senior security researcher at Datadog who discovered the vulnerability. for confused deputy with AWS Apps Sync. We spoke about what was his thought process, how maybe you can use a thought process to discover your own misconfigurations in AWS as well. How easy or hard it is to become a cloud security researcher because we definitely need a lot more than the 10, 20 people that work in this space at the moment.}
+{\pard  \line \par}
+{So if you are someone who's interested in doing cloud security research, this is the episode for you. We spoke about a lot more things around the vulnerability that could be discovered what were some of the common attack scenarios that used to be a thing in the past or maybe are still a thing and you may be able to discover }
+{\cf2 [00:02:00]}
+{ some yourself as well.}
+{\pard  \line \par}
+{Now if you're watching or listening to cloud, security podcast for the second or third time, I would really appreciate if you could give us a follow on our socials. We are on all the popular audio and video platform, and if you're listening to this on the audio platform, I would really appreciate if you could drop us the review or rating.}
+{\pard  \line \par}
+{If you have any questions, you can drop them here as well. Or feel free to reach out to us with your cloud security question and we would be more than happy to help you out. Thank you so much for your time. I hope you enjoy episode with Nick about hacking the AWS Cloud and how you could become one as well.}
+{\pard  \line \par}
+{And I will see you in next episode as we are continuing the breaking the AWS cloud month towards the remaining of January. Talk to you next episode. }
+{\pard  \line \par}
+{When you're developing an app, security might be treated as an afterthought with functionality, requirements and tight deadlines. It's easy to accidentally write vulnerable code or use a vulnerable dependency, but Snyk can help you secure your code in real time so you don't need to slow down to build securely.}
+{\pard  \line \par}
+{Develop fast, stay secure. Good developer }
+{\cf2 [00:03:00]}
+{ Snyk.}
+{\pard  \line \par}
+{Nick, welcome man. Welcome. Thanks for coming in. }
+{\pard  \line \par}
+{\b\cf1 Nick Frichette:\b0}
+{ Hey, thank you so much for inviting me. Happy to be here. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Oh my God, I think I'm super excited about this, man. I think I've wanted to kick off the year by talking about breaking the cloud, and I could not think of someone who can kick off these things, but you,}
+{\pard  \line \par}
+{it's super awesome that you're here. }
+{\pard  \line \par}
+{Right. So the first one, I think , people who, I guess the one or two people on the internet who don't know who you are, man, could you just give us a brief intro about yourself and what do you do for a living?}
+{\pard  \line \par}
+{\b\cf1 Nick Frichette:\b0}
+{ Yeah, for sure. So hi everyone. My name's Nick Frichette. I currently work as a senior security researcher at Datadog, where I try to improve our cloud security products.}
+{\pard  \line \par}
+{I do a lot of offensive security research in aws, trying to figure out how an adversary can more effectively attack a cloud environment. What are the misconfigurations they might abuse or what are the techniques they might use? And then from all that, try and. Ways to detect that behavior and how can we sort of notify customers of misconfigurations or risks.}
+{\pard  \line \par}
+{As a result of doing a lot of that research sometimes I stumble }
+{\cf2 [00:04:00]}
+{ into vulnerabilities in the cloud services themselves and in those situations work with cloud service providers to ensure the vulnerabilities are remediated. My background is mostly in penetration testing and software development, which tends to be pretty helpful when it comes to security research.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Wait, and because you mentioned pen testing as well. I think a lot of people kind of assume this cloud security research is pen testing and maybe a good place to start also is, When people ask you, what do you really do when you're doing research? Cause you know, there's like this, so many subsets of research as well.}
+{\pard  \line \par}
+{There's the whole bug bounty. There's a, Hey, I'm a researcher, for fun. Hey, I'm pentester. So could you just like throw some light on each one of these, as I say? And how would that relate to from a cloud context?}
+{\pard  \line \par}
+{. }
+{\pard  \line \par}
+{\b\cf1 Nick Frichette:\b0}
+{ Sure. Yeah. So in general, pentesting is a point in time security assessment of an environment or an application.}
+{\pard  \line \par}
+{Typically you're only interested in if we were to use cloud terminology the customer side of the }
+{\cf2 [00:05:00]}
+{ shared responsibility model. So the customer's responsible for the infrastructure that they deploy, the software that they use, and. things like that whereas the cloud service provider is responsible for the security of the cloud of the underlying resources and services.}
+{\pard  \line \par}
+{As a pen tester, you're really only focused on that customer side and you're trying to ensure that your clients are secure to the best of their abilities. As a researcher like you mentioned, there's a ton of different areas of research that you can be involved in. I have colleagues who work in threat research tracking real world adversaries and stuff like that.}
+{\pard  \line \par}
+{I have other colleagues who work in supply chain security research, so trying to figure out how adversaries can abuse supply chain and do attacks in those. For me personally, I get to do a lot of the offensive security stuff, so it's. Hypothetical, I'm not actually targeting individual environments.}
+{\pard  \line \par}
+{But from that research, trying to then apply those to real environments to make sure that customers are secure as well as trying to prevent hopefully somebody from abusing those cloud resources. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Think you kind of mentioned that, like the hypothesis that you come up with and assumptions that you would use }
+{\cf2 [00:06:00]}
+{ because what's the thinking there?}
+{\pard  \line \par}
+{Because you almost have. , like, you know how a lot of us, probably people who are listening in as well, all tuned in when we read about an AWS service that is released, we just look at that, oh, it's an S3 bucket , I can use it as a Dropbox. I can drop my files in there. It'll be amazing. Like we always think of the positive workflow.}
+{\pard  \line \par}
+{We never think about how would I break this? And maybe, I don't know if that's the right word to use for it, but how do you normally approach research and the hypothesis that you kind of, you know, use as a foundation to, I'm gonna keep researching on this and see where I come. }
+{\pard  \line \par}
+{\b\cf1 Nick Frichette:\b0}
+{ Yeah, sure. So in general, my process for security research is largely in two phases.}
+{\pard  \line \par}
+{In phase one I just try to understand as much as I can about a particular service as possible. So reading, documentation you building like small test projects with it, just to try to see how it works. Figure out what the, default configuration is if you were to create with the console and things like that.}
+{\pard  \line \par}
+{Once I have a really good understanding of like how it works and what the fundamental }
+{\cf2 [00:07:00]}
+{ underpinnings are that's when in phase two I start asking questions about like, Hey, how does this service authenticate to something else? Or, you know, did the developers consider what would happen if. Use a particular type of input and if they did, how do we get around any sort of validation or checks they might have implemented.}
+{\pard  \line \par}
+{So it's a lot of trying to understand things very fundamentally and then trying to abuse those services in ways that probably weren't intended. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Ah, right. I guess you're not really actively to your point, say building a service and breaking it, I guess. Cause you a lot of person would be Hey, I use S3 bucket for, I don't uploading files.}
+{\pard  \line \par}
+{I guess so, and that's what my team needs. And a lot of times I think to your point, there are new services that come in. Would, this approach be applicable for, you know, AWS re:invent just went by in the last month. now many new services came in. Have you been able to use some of these kind of thinking for newer services as well?}
+{\pard  \line \par}
+{Or usually would you pick like a popular services because you know, there's like a lot of use cases for people are }
+{\cf2 [00:08:00]}
+{ using it for, cuz there's this whole thinking that, well actually it's a MVP service, so it's not really full-fledged usable service as well from AWS. Is there like something like that in your thinking as well when you're looking for research on what kind of hypothesis and what services you would go for?.}
+{\pard  \line \par}
+{\b\cf1 Nick Frichette:\b0}
+{ Yeah, so that's a really good question. It sort of depends on what exactly we're trying to do. So for work we try to prioritize different research projects based on customer need. So for example, if we don't have any customers using say for example, something. Kind of esoteric, like AWS personalize, we're probably not going to schedule a project for it.}
+{\pard  \line \par}
+{But if it's something more popular, something that , they use a lot of we will be incentivized to do a research project on it. That's why, for example, on AWS AppSync, that was one of our research projects just because it was pretty popular within the community. It was something we wanted to try and understand better to build products.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah. And I think that's a good segway into my next question about the AppSync vulnerability, which was the confused deputy vulnerability that you had identified. }
+{\cf2 [00:09:00]}
+{ That's, yeah. Could you explain the thinking behind it and maybe even like, for people who don't know what Apps Sync is, maybe it just like a, I dunno, five second, ten second version of what it is and what do people use it for?}
+{\pard  \line \par}
+{\b\cf1 Nick Frichette:\b0}
+{ Yeah, for sure. So AWS AppSync is a GraphQL service from AWS. It makes it very easy for you to create GraphQL web. And it has all sorts of fun and useful features to be able to create your schema. It'll build all the resources for you. It'll create the roles and whatnot. So it's a great service in that sense.}
+{\pard  \line \par}
+{As for the confused deputy vulnerability, what that is a confused deputy vulnerability is a vulnerability in which a lower privileged entity. Typically the attacker is able to convince a much more higher privileged entity to perform some action on their behalf. So essentially we're just trying to trick a service to do something for us now, in most cases, and in on-prem security.}
+{\pard  \line \par}
+{This situation doesn't typically arise. It, well, I remember the first time that I heard it back when I was doing more on-prem pen testing. I was }
+{\cf2 [00:10:00]}
+{ kind of like thoroughly unimpressed. Like, why is this an issue? But in the cloud, the confused deputy vulnerability is actually super, super applicable because there is a lot of services that will exhibit this behavior of, I need to ask, say, for example, the AppSync service to do something.}
+{\pard  \line \par}
+{As for the vulnerability itself in very much the same way that I described with two separate phases. In phase one, we came to understand how Appy worked. And to oversimplify just a little bit the way it works is that when you interact with the GraphQL AppSync API, AppSync, the service will then assume a rule in an account and then perform some action.}
+{\pard  \line \par}
+{So if you create an API to interact with, say DynamoDB for example. They would assume a role and then talk to DynamoDB. And in phase two that behavior seemed pretty interesting because how does apps sync know which role to assume? And we quickly came to realize, oh, it's just an API call. You pass in a role and it will execute for you.}
+{\pard  \line \par}
+{And so the second question was, okay, what happens if I talk to or I point }
+{\cf2 [00:11:00]}
+{ you to a rule in a different account? And so we did that and unsurprising. It failed. There was an error and AWS did, you know, the same threat modeling that we did. And came to the same conclusion that if you were able to specify arbitrary rules, that would be pretty dangerous.}
+{\pard  \line \par}
+{And so now, and. To be fair, that was pretty expected. nothing too surprising there. So the question now became how do we get past that validation? And what we very quickly found was that the API, what was interesting about it was that it was case insensitive. You could pass in JSON objects where the keys could be of any casing, upper case, lower case.}
+{\pard  \line \par}
+{Somewhere in between and it would still function, which is a bit odd. And ultimately from that, we found that if you passed in that role with a unique casing or in a slightly different casing than what they were expecting, that validation step wouldn't occur. And so what we're able to do is just change that pass in any role we wanted.}
+{\pard  \line \par}
+{And now suddenly AppSync would do our bidding and assume any role that had a trust relationship with that service. So if you used AppSync for any of your APIs or your }
+{\cf2 [00:12:00]}
+{ services, We could just point to that role and have AppSync assume the role and do whatever , we wanted to and we did report this to AWS and they have since remediated the issue, }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ right.}
+{\pard  \line \par}
+{So, and, and maybe just to understand the gravity of this way a bit more as well. Cause people who are listening in, probably some of them are builders, some of them are breakers. When I say builders and breakers, I mean builders who are building solutions on AWS breakers who are pentesters or researchers as well. It's almost like when you say that, yeah. Okay. You can use cross account. Some people may not even know the gravity of what that cross account means for could you kind of, let me peel another layer for why cross account is such a big thing in aws. }
+{\pard  \line \par}
+{\b\cf1 Nick Frichette:\b0}
+{ Yeah, so cross account issues is one of the more severe types of vulnerabilities that's possible.}
+{\pard  \line \par}
+{Essentially what that means is that theoretically I would've been able to take over, interact with destroy, steal . Any other AWS AppSync customers resources. I could just convince the }
+{\cf2 [00:13:00]}
+{ AppSync service to do my bidding in a sense and go after another customer without any other authorization or authentication needed.}
+{\pard  \line \par}
+{I just needed to know the role to have it assume which is terrifying. And that's why these types of vulnerabilities get such sort of huge notice within the community because of their potential. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ For another context as well, for people who are building like maybe solution architects or trying to go down that path as well.}
+{\pard  \line \par}
+{For for this, the other half is also that when you are told to build a solution, people always pick your standard, oh, account is the highest level of segregation you can have. So you should use that as a way to separate accounts or separate resources, separate environments as well.}
+{\pard  \line \par}
+{So I think that's pretty cool what you found, man. So I've got a question here and I just realized that was Jonathan. Hey . Nick, do you have a minimum level of blue teaming detective controls in place when conducting your red teaming? }
+{\pard  \line \par}
+{\b\cf1 Nick Frichette:\b0}
+{ Ah, gotcha. So I don't do any red teaming. Back in the day I was a penetration tester and I did assist with some red teaming type stuff.}
+{\pard  \line \par}
+{But these days I just do pure security research. }
+{\cf2 [00:14:00]}
+{ And do I use Blue Team controls while doing research? Absolutely. In fact, I actually hook up the account just like you would to a sim. Same way that you would do with your own resources. And I use that to monitor what's going on and see if if I'm being noticed or if I'm being seen.}
+{\pard  \line \par}
+{Sometimes I'm not. And that's where we sort of need to explore what more controls do we need or what sort of resources do we need. Awesome. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Thank you. , if I were to add another layer to it, because a lot of builders may even be curious about every time I look at a service now, is there a set of. Minimum or like a high level detective controls, I should be thinking about like, again, how and I don't know how many people would be aware of this, but people who do architecture, they kind of think about, okay, what are we doing for key management. What are we doing for identity management? What are we doing for backup and recovery? What would it look like? Disaster recovery, all that. They're like, big components from a detection perspective, is there like a similar framework or approach that you recommend to people to say when you're building I guess you can obviously use tools to, you know, identify rules and that should protect you, whatever.}
+{\pard  \line \par}
+{But is there like a }
+{\cf2 [00:15:00]}
+{ general rule that you cannot say, protect your data or, I don't know, like, I'm just making up, making up like scenarios here. But in terms of is there like a framework that you think of that people cannot use to apply detective controls on the services that they be working in?}
+{\pard  \line \par}
+{Especially if there's a new service. }
+{\pard  \line \par}
+{\b\cf1 Nick Frichette:\b0}
+{ Yeah, so I think in general, specific to aws following things like the well architected framework will really in general set you up for success. You want to be sure that you have proper monitoring in your environment, particularly on things such as cloud trail, which is sort of the source of truth as to what took place in an account.}
+{\pard  \line \par}
+{Beyond that having say some sort of CSPM in place some sort of posture management to be mindful of the state that your resources are in. And hopefully you don't have a situation where, you know, that developer who created an S3 bucket to store, who knows what. Hopefully it's not public to the world, and if it was, hopefully you have tools in place to quickly report that to you or even per perhaps automatically take care of that for you. that type of response would be incredibly }
+{\cf2 [00:16:00]}
+{ helpful in a cloud environment. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ that's pretty fascinating for me as well. Say for example, we kind of go down the. and we stumble upon I don't know, like two or what you said, cross tenant or cross account vulnerability or potential vulnerability challenges.}
+{\pard  \line \par}
+{I shouldn't say vulnerability. What's the guideline here? Like I think if any of us normal people who are not doing research on a regular basis stumble upon something which feels suspicious. , is there like a guideline of some sort available from like Amazon to kind of work around these things? Or how do you just go about even disclosing something to Amazon?}
+{\pard  \line \par}
+{\b\cf1 Nick Frichette:\b0}
+{ Yeah, so disclosure is pretty easy. I admit the first time you do it, it's probably scary and you're not really too sure what the best way to do it is. With more recent times, it's. We're at least folks at Datadog we're comfortable enough with the cloud security providers that we can just send a text to some people we know to let them know that, hey, things are coming and send an email.}
+{\pard  \line \par}
+{In general, every cloud service provider has what they call a vulnerability disclosure program. And it takes a couple different forms. Some of them have like a, web form that you can. Others have an email address that you can send to. And in those }
+{\cf2 [00:17:00]}
+{ situations you want to try to provide as much details as possible as to what you found, where you found it, why you think it might be a security issue and have the cloud service providers themselves evaluate it.}
+{\pard  \line \par}
+{They tend to be very responsive, trying to react quickly to customer concerns. And they'd probably be the best people to talk to in terms of making sure that they get resolved. And, }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ To your point then, how. Long should one wait before I guess getting a response and putting a blog out, I guess.}
+{\pard  \line \par}
+{Cause there's always like this gray area of, I've disclosed it, I haven't heard that for one month. What do I do? Like should I just post it on a blog? }
+{\pard  \line \par}
+{\b\cf1 Nick Frichette:\b0}
+{ Well, you know, it depends. I, I suppose it depends on the nature of the vulnerability and what the impact might be. So for example, in general, the, the cloud service providers are very good about responding.}
+{\pard  \line \par}
+{Even if they disagree, if they don't think it's an issue, they'll be pretty upfront and tell you. And in those situations, you did your due diligence, you spoke with the cloud service provider. May not hurt to put out a blog post and sort of share your findings. At the same time though, in general, they're pretty responsive.}
+{\pard  \line \par}
+{So if you did }
+{\cf2 [00:18:00]}
+{ find something, it'll almost assuredly get fixed. It's just a matter of how long will it take. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ All right, fair enough. And I think also worthwhile calling out. Right? You kind of mentioned the beginning of this interview as well, shared responsibility and from a pentester's point of view what's the point where you feel sometimes in, like for people who have kind of done some kind of pen testing or research, when you find web app application and you get to a point where you have an open S3 bucket and for whatever reason you find that you have credit card information there, I mean, you were just looking for your credit card, but you realized that, oh wait, I can change the number from one to two on the url, and now I can see ashish's credit card information in his statement aswell.}
+{\pard  \line \par}
+{Where do you like, I think obviously at that point in time you can disclose to the company, whoever the customer or whoever the actual bank is, but if you are the bank employee yourself and it sounds like you have done the right thing in terms of application and it just happens to be a, something on the Amazon end.}
+{\pard  \line \par}
+{ where should people draw the line for? Okay, at this point in time, }
+{\cf2 [00:19:00]}
+{ I should stop here before it becomes illegal. Is there like a line that is drawn some for some something? }
+{\pard  \line \par}
+{\b\cf1 Nick Frichette:\b0}
+{ Well, it depends I think the best rule of thumb to follow is it depends on who would be responsible for fixing the situation.}
+{\pard  \line \par}
+{If it is the responsibility of the company the people who deployed the infrastructure, then it's on them. But if it, it would be the responsibility of the cloud service provider due to some vulnerability on their end, then it would be their responsibility and that's who you would contact. Particularly if you are say external assessor.}
+{\pard  \line \par}
+{Maybe you're a consultant with a company you've only known for a couple days. It might be a little bit difficult to discern which is which. But in general, it's, it's much, much, much, much more likely that you'll find a vulnerability in a customer deployed thing than you would something on the cloud service provider side, just due to the nature of how many people are attacking these resources and assessing their security .}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Wow. So can be much more harder for people to find vulnerabilities , or vulnerabilities is the wrong word, but maybe even misconfiguration on the on the cloud end. }
+{\pard  \line \par}
+{\b\cf1 Nick Frichette:\b0}
+{ I shouldn't say unlikely. It's less }
+{\cf2 [00:20:00]}
+{ likely than the customers just due to the nature of the how seriously the cloud service providers take security.}
+{\pard  \line \par}
+{They're certainly not perfect. You know, we're all human mistakes happen, things slip through. But in general, it's more likely that, the customer has a security issue than the service provider. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Awesome. And I think that makes me kind of think about, well, another angle as well. Now since you kind of know the boundaries, we also know, but there are options to raise it with the cloud provider, AWS. What are some of the attack techniques people can actually think about? Like where do, because you know how people, when people think of pentesters and just think of, or it maybe even hackers for the matter, like bad hackers. I mean, because someone's wearing a hoodie in a dark basement, has really sharp skills on command online terminal.}
+{\pard  \line \par}
+{Is there a similar criteria to even get into the cloud security research space? So I think I was supposed to be, , I don't know, super geniuses in command prompt and everything else that goes kind of goes with it. Or is there a attack technique that you normally use and people can be easily pick it up as well and do their own research?}
+{\pard  \line \par}
+{\b\cf1 Nick Frichette:\b0}
+{ Yeah. I mean, in order to get }
+{\cf2 [00:21:00]}
+{ into the cloud security space, honestly, , it's a pretty low bar. For whatever reason , I've always been a little surprised that there seems to be so few people like actively involved in trying to find cloud security issues. Although more recently that has changed, there's definitely more of us kicking around now.}
+{\pard  \line \par}
+{In terms of skills or things to know, I think, you know, having a good foundation in sort of common pen testing techniques web application. Especially for the cloud would be very helpful. As silly as it sounds, sometimes you find sort of generic OWASP top 10 type, you know, process scripting, SQL injection type stuff.}
+{\pard  \line \par}
+{the other advice I would give to somebody who's interested in cloud research or cloud security research would be to try and Look, think more holistically about the attack surface as it relates to the cloud service provider. Like yes, you'll find those OWASP top 10 vulnerabilities, but there's much more interesting ones that are related to how the cloud services work.}
+{\pard  \line \par}
+{You know, if you can invoke an API call without that getting logged to cloud trail when it normally would. That would be pretty significant for an adversary to abuse because now they're suddenly invisible to a customer. }
+{\cf2 [00:22:00]}
+{ Or if you can, like we mentioned with AppSync, if you can trick a service to access another customer's resources, that's also pretty scary.}
+{\pard  \line \par}
+{So in general, trying to think more about how the cloud services work and using your advantage would be a lot of help. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Right. Okay. There is an angle of yes, we need to understand AWS services in the first place as well. And I normally believe that, that usually people who are building solutions are probably more exposed to all these or maybe have a higher probability of finding those misconfigurations at the AWS end. So I guess keep an eye out, I guess, for people who are listening to this and going, okay, I should definitely. , try and do something. So if you, for whatever reason, think that this is a vulnerability or a misconfiguration, you should definitely disclose it, especially if an os vulnerability as well.}
+{\pard  \line \par}
+{Because do you find what's the more common vulnerability misconfiguration that you hear of from an AWS perspective? Because, you know, when I was starting, like six, seven years ago in this whole cloud space, people didn't believe cloud. People were just like, oh, it's, I can't trust cloud }
+{\cf2 [00:23:00]}
+{ Now. The trust is aautomatic but I love this research field. That's what I've dedicated a whole month on the cloud Security podcast for this as well, is because that notion is now changing to I trust cloud, but have we configured it correctly? Mm-hmm. , and I think that's like the new messaging that people are using these days, and I kind of love that.}
+{\pard  \line \par}
+{So to your point then , with this new notion coming in, do you find that there is a common vulnerability that used to. Found quite easily earlier, but not anymore. Like, so, you know, it would've been something that obvious you would search for like an open S3 bucket, but they don't exist anymore as much.}
+{\pard  \line \par}
+{Is there a sense of pattern that you found so far that Oh yeah. That's very rare now.}
+{\pard  \line \par}
+{\b\cf1 Nick Frichette:\b0}
+{ None come to mind. I think, I think it is safe to say that the, the example you gave with the, the public S3 bucket, those are starting to become less and less common. Unfortunately it does still happen. I think as recently as like a week ago there was another big name bucket exposure.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ I dunno how they did it, but somehow they managed to it. Cuz it's not even possible in the console anymore. }
+{\pard  \line \par}
+{\b\cf1 Nick Frichette:\b0}
+{ So I, I tried recently to create a }
+{\cf2 [00:24:00]}
+{ public bucket and like, there's so many, like, do you understand what you're doing? Click here. You know? Yeah. I, I have to imagine it's probably like infrastructure as code or, or something, or copy pasting something in there.}
+{\pard  \line \par}
+{But yeah, I think that is starting to get a little better. And of course in April, I believe they'll be enforcing the preventing public assets by default. So making it even more difficult for people to have public S3 buckets. I think another really common vulnerability slash misconfiguration more, more realistically is IMDSv one versus version two.}
+{\pard  \line \par}
+{So the instance metadata service. , as a former pen tester, I can't tell you how many attacks would've been stopped if they had just used IMDSv2 that has additional protections to prevent things like service side request forgery. It prevents certain types of attacks based on networking.}
+{\pard  \line \par}
+{So preventing the number of hops between networking . That my, one of my best advice I can give for anyone doing AWS security is enforce IMDSv2 across all your EC2 instances and you'll resolve a lot of potential issues. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Wait, }
+{\cf2 [00:25:00]}
+{ actually should explain that a bit more as well.}
+{\pard  \line \par}
+{So what is IMDSv2 and, cause we report not even know, like v1, v2, like, I don't know what is, IMDSv2 what is it? You can even put the IP address as well in there. }
+{\pard  \line \par}
+{\b\cf1 Nick Frichette:\b0}
+{ Yeah, yeah, for sure. So the instance metadata service is this handy little service that hangs off of an EC2 instance. And it's at that 1 69, 2 54, 1 69, 2 54 IP address.}
+{\pard  \line \par}
+{The instance metadata service has a lot of useful metadata as you can assume about that EC2 instance. So what's its public IP address? What security groups is it in? It has information as to what account it's in and things like that. What size of EC2 instances is, whether it's like a T2 micro or something else.}
+{\pard  \line \par}
+{Most important for security is if there's a role associated with that EC2 instance, then there are IAM credentials for that role at that metadata service. And so version one had sort of an unfortunate design. Setup or a design implementation where all it took to get those credentials was a simple get request to a very particular endpoint and you could just have them.}
+{\pard  \line \par}
+{And of course }
+{\cf2 [00:26:00]}
+{ that leaves it vulnerable to things like service side request forgery or XML external entity attacks, where an attacker is able to make a request to that service and steal those IAM credentials and use them for. Whatever they wanna do. Version two, which came out I believe in early 2020, although I might be mistaken about that has some additional protections in place.}
+{\pard  \line \par}
+{So instead of just a simple Git request, there is now a a sort of a handshake that occurs where you have to get a token and then you use that token in subsequent requests. While that doesn't. Fully, like a hundred percent mitigate the risk of service side request forgery. It's pretty unlikely that an attacker would be able to, to do that.}
+{\pard  \line \par}
+{Setting headers is pretty non-standard and it does have additional benefits as well. So it prevents certain networking configurations from accessing it. You know, for example, say in like a C I C D scenario, if an attacker gets their way into a Docker container, the default networking configuration of. docker cant talk to the metadata service so they can't even reach out and connect with it. So it's definitely better to have version two than version one with all the additional }
+{\cf2 [00:27:00]}
+{ protections it affords. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah, and I think I haven't, I, it's funny, I think you mentioned server side request forgery as well. It has been a while since I've heard a server side request forgery.}
+{\pard  \line \par}
+{But to what you said, it's kind of like, I always compare it to the unpatched Windows 98 that is still running somewhere at the moment. It's almost very similar where. , A lot of people raise vulnerabilities around S S R F and being a common thing. And I guess for context, for people who have probably heard of this for the first time, the 1 6 9 2 5 4 1 6 9 2 5 4, that works across everyone.}
+{\pard  \line \par}
+{It's not like, oh, Nick has a, a special one. I have a special one. No, I can access everything that Nick's I guess AWS account would have if I have access to, like, if I have an IAM role, that gives me access. Which is an IAM role in Nick's account. I can use 169254 to basically discover everything inside his account as well.}
+{\pard  \line \par}
+{Is that, is that a fair summary of how bad this could be, Nick? }
+{\pard  \line \par}
+{\b\cf1 Nick Frichette:\b0}
+{ Well, it depends. It's totally }
+{\cf2 [00:28:00]}
+{ possible that those credentials might have no privileges at all. Oh, yeah. Yeah. The unfortunate thing though is that typically they have, they have something you would want, right? your app has to do something or, or else you wouldn't be making it.}
+{\pard  \line \par}
+{So typically we can just abuse that functionality and, and access those resources. Yeah, }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ and I think the specific scenario that I call out is when I was talking to a few people during consulting, a lot of people would also talk about the fact. They would just put an empty IAM role onto an EC2 instance this is back in the day when you could not later on add the IAM role onto an EC2 instance. Now, at least now I believe you can edit and add an IAM role later on for each. People should do earlier would just, just add an empty IM role to an EC2 instance and I'm like, oh, that's like brewing ground if the, for whatever reason EC2 is compromised all I have to do is just update my, IAM role to have permissions, but I can still explore and discover. But anyway, I think you're right. You're, you're on the money there. }
+{\pard  \line \par}
+{I've got a comment from Tom as well who's he's mentioned there's some great cloud pen platforms like SAT cloud from NCC group and Cloud Goat from }
+{\cf2 [00:29:00]}
+{ Rhino Labs that set up vulnerable by design so you can practice cloud pentest without getting in trouble.}
+{\pard  \line \par}
+{Do you know if any thanks for sharing that as well. So I dunno if you've used any Nick, or have you heard of them as. Yeah, }
+{\pard  \line \par}
+{\b\cf1 Nick Frichette:\b0}
+{ I've actually used both. There are definitely a lot of really good resources out there if you're trying to learn more about cloud security without getting you know, without actually attacking a cloud environment.}
+{\pard  \line \par}
+{I've also heard of Hack the Box has some labs that are super, super helpful. And then I, full disclosure, I made this but I, I've also created a cloud-based CTF called CIC Don't. So trying to teach sort of common cloud, C I C D misconfigurations and security issues and actually abusing.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Cool. So what was the service called again? }
+{\pard  \line \par}
+{\b\cf1 Nick Frichette:\b0}
+{ CIC don't. So ci slash c don't. It's part of Hacking the Cloud, which is an open source encyclopedia of offensive security techniques that I developed. Just trying to share more information with the community and sort of provide an avenue for teaching different security techniques.}
+{\pard  \line \par}
+{And it's available at hacking the dot. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ All right, I'll make sure I'll put the link for that as well. Awesome. And thanks for that link as well, Tom. And I think the one thing that I }
+{\cf2 [00:30:00]}
+{ kind of keep coming back to again, since you've kind of gone through a few parts of the whole experience of doing some research is also I guess hack the cloud as well, that you're gonna have been working on what's hack the cloud about.}
+{\pard  \line \par}
+{And I guess why did you start that and what was the story. }
+{\pard  \line \par}
+{\b\cf1 Nick Frichette:\b0}
+{ Yeah, so I created Hacking the Cloud back in the day. Working as a penetration tester. I was pretty surprised early on that there really wasn't a lot of good offensive security training for penetration testers in aws. There's stuff like the, the aforementioned service side request forgery to the EC2 metadata service.}
+{\pard  \line \par}
+{But I was kind of expecting there to be more and more information. And so as a result of sort of wanting to find out more, I developed Hacking the Cloud to try and more easily share that information. Because before it's scattered between blog posts and conference talks and, you know, all kinds of little things.}
+{\pard  \line \par}
+{So hacking the cloud is sort of a centralized location where these techniques can be shared and. Give it a little bit more light. One stop shop, essentially for offensive security }
+{\cf2 [00:31:00]}
+{ techniques that both offensive security professionals and defensive security professionals can use to improve their security posture.}
+{\pard  \line \par}
+{Yeah, and }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ you've been maintaining the blog for a long time now. Right? }
+{\pard  \line \par}
+{\b\cf1 Nick Frichette:\b0}
+{ Yeah, I think I think it was in 2020 that it launched. So it's been going for a while. I'm sure. We'll get to three years here soon. Last year we had over 73,000 visitors and some some crazy number of page views.}
+{\pard  \line \par}
+{So it's slowly been chuckling along in the background}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ . Yeah, I mean it's a great resource as well for people who are trying to at least go down the path of identifying what could go wrong. Cause you've got cause I think the, the harder piece and maybe you can share some that on this can only a pentester think about vulnerabilities or misconfigurations in AWS.}
+{\pard  \line \par}
+{Cause I, I . Personally believe that it's just about thinking about how to breaking it. Like how would you break it? But I dunno, what's your personal opinion on the whole. , everyone who's probably listening to this and going, oh, Nick is just special. Nick is just awesome. He's got a cool t-shirt on, enjoys cybercrime, and I need a cool t-shirt and and probably as much as experience as Nick does to even go around the }
+{\cf2 [00:32:00]}
+{ path of even doing this for fun.}
+{\pard  \line \par}
+{If I wanted to do on the side what's your thought for people who are probably thinking about approaching this? I would you say it's, it's fairly, it should be straightforward or it is just basically a complicated. }
+{\pard  \line \par}
+{No, }
+{\pard  \line \par}
+{\b\cf1 Nick Frichette:\b0}
+{ honestly, it's, , pretty simple. You know, I, I did say that all I had to do to find a cross tenant vulnerability was change a single letter.}
+{\pard  \line \par}
+{So as silly as it sounds, sometimes there are vulnerabilities that have, you know, really significant impact that are relatively simple. I think, you know, pretty much anybody, if you wanted to be a cloud security researcher or even, you know, as a hobby, that's personally what I did. Just trying to develop research techniques and findings and tech technique.}
+{\pard  \line \par}
+{Did it as a hobby and somehow it turned into a full-time job. You know, I think in general, as long as, you know, you can reproduce the work and you can, you can demonstrate you know, that hey, is, this is just a weird, super strange scenario. Like, it, it actually does function the way that we think it does.}
+{\pard  \line \par}
+{Yeah, I think anybody could be a, a researcher. For sure. Yeah.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ And I think we definitely need a lot more cuz Nick, you kind of touched on this earlier, it's one of the reasons why we have the whole breaking the cloud month }
+{\cf2 [00:33:00]}
+{ as well. Cause there's not enough researchers in this space as well, the researchers for web app, the researchers for all these other things.}
+{\pard  \line \par}
+{But for somehow Cloud doesn't have as many researchers, I think maybe less than 10 or maybe 20, I guess. And to think that how big the space. Only having 10 to 20 people. I, I think 20 is stretching it right. 10 is probably the right number. They're very handful in this space, so we definitely need a lot more of them as well.}
+{\pard  \line \par}
+{Question from Vineet, do you have other cloud providers in your hack into the cloud I guess the blog that you have. }
+{\pard  \line \par}
+{\b\cf1 Nick Frichette:\b0}
+{ Yeah. So most of the content, something like 90, like 95% is all aws and I've, I've written the vast majority of it. We do have some submissions for GCP and Azure.}
+{\pard  \line \par}
+{Other folks have submitted that content and, and added it. So there might be some Definitely though AWS has been , the predominant, just cuz that's what I mostly focus. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah, so, and if you find something, if for anyone who's listening to find something in Azure GCP as well, they can submit the request.}
+{\pard  \line \par}
+{Is that right? }
+{\pard  \line \par}
+{\b\cf1 Nick Frichette:\b0}
+{ Yep, for sure. Yeah, we're totally a hundred percent open to anyone who wants to submit a pull request. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Awesome. Cool. }
+{\cf2 [00:34:00]}
+{ So that, thanks for that question. aswell Vineet alright. I've got one question jimmy, sorry. Hey, Jimmy. Thanks for a question as well. So, Jimmy's asked a question do you have any tools you enjoy using Nick commercial or open source when conducting research? }
+{\pard  \line \par}
+{\b\cf1 Nick Frichette:\b0}
+{ Ooh, that's a really good question.}
+{\pard  \line \par}
+{That's a really good question. So, in general, one of the, one of the hard things about the cloud security community being so, so small and there's not many people, is that you kind of have to create your own tools. So over the years, I developed a little bit of a toolbox for using different things.}
+{\pard  \line \par}
+{So for example, for signing API requests, I don't typically use something like the AWS CLI or any of the, like the SDKs. I actually manually sign them. And so I built a tool that allows me to do that as quickly as possible and efficiently as possible, because otherwise it takes way too long. And some other tools that I've built, I, I built it a fuzzer for the AWS API}
+{\pard  \line \par}
+{as you can imagine, sometimes you want to send a lot of requests. And so building a fuzzer was definitely one of the better tools that I've made, although I. Unfortunately get like a $3,000 AWS bill by fuzzing. }
+{\cf2 [00:35:00]}
+{ So , in big, bold letters I have on the GitHub page, you know, I'm not responsible for what you do, don't use this blindly.}
+{\pard  \line \par}
+{Thankfully that got, that got resolved. But I'd say yeah, the, the signer and then the buzzer have been some of the best tools that I've personally had to make. Having a good sim is also very useful for a research perspective, just so that you can quickly look through cloud trail logs and see like, you know, what was detected, what wasn't detected and as well as looking for opportunities within logs for trying to avoid detection.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ All right. Actually, that's a interesting thing, just a extension from what Jimmy's asked as well, if you were to kind of do research. and what, and you know how you mentioned you can use siem if you have a good siem for Cloud Trail. Mm-hmm. . What's your data point in the AWS side to see what's happening?}
+{\pard  \line \par}
+{I guess for each service there seems to be CloudWatch Cloud Trail bump, everything into that direction. Are those probably the sources? What's the thinking there is, is the thinking that. Aim to try and have everything in CloudWatch or Cloud Trail or rely on on logging from the service }
+{\cf2 [00:36:00]}
+{ itself.}
+{\pard  \line \par}
+{\b\cf1 Nick Frichette:\b0}
+{ Yeah, so I, I rely almost entirely on Cloud Trail. CloudWatch tends to be a little bit more like service specific, and it doesn't, it's more about like performance type stuff or like number of occurrences as opposed to like API actions. So in general it's all cloud trail. Personally, Full disclosure, I work at Datadog.}
+{\pard  \line \par}
+{Mm-hmm. . But I use Datadog in order to review those cloud trail logs, see what's coming in and trying to identify hopefully if I haven't been detected within those logs and things like that. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Right. Yeah. Cause I, I would imagine one of the hardest things to do in researching is also.}
+{\pard  \line \par}
+{Identifying what's really happening. So you can basically I guess peel off the layers and see what you can find or dos with it as well. I've got a similar question. I guess extension of that Kfir asked can you provide some tips or research at least on how we should get into a cloud service internals.}
+{\pard  \line \par}
+{I'm assuming by that , he's referring to, I guess, services or commands from cloud. But I'll, I'll let you answer based on the interpretation that you've had. }
+{\pard  \line \par}
+{\b\cf1 Nick Frichette:\b0}
+{ So that's a really good question. And honestly, that's, that's one of the major things that I sit around thinking about all day is like, how do I }
+{\cf2 [00:37:00]}
+{ figure out how this service works or what, what I can do to it?}
+{\pard  \line \par}
+{I think there's a number of great places to start. So the AWS console is actually like a really fantastic place to figure out how something's working internally. You can, as silly as this sounds, if you hit F 12 and you go to the network tab, just watch all of the requests that your browsers are making to the service.}
+{\pard  \line \par}
+{Because in your browser, the client is forming API requests to backend services. And that's a great place to find out about things like undocumented APIs or for APIs that may have additional functionality. You can all see that occurring. And then from there you can take those API requests and you can sign your own and you can start doing things like trying to.}
+{\pard  \line \par}
+{Puts in malicious inputs or you can try and reformat requests and you can look at things like trying to abuse those services. That's probably the best place to start. Some other minor tips and I can only speak to AWS cuz that's the cloud I'm most familiar with. But different cloud service providers have different ways of }
+{\cf2 [00:38:00]}
+{ sort of formatting.}
+{\pard  \line \par}
+{Their API requests. In AWS there are multiple different protocols that you can use to form a request. So getting familiar with those reading through things like the SDKs, so how those API requests are made can also be incredibly helpful to figure out how the services work and identify opportunities for you to abuse them.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Awesome. Yeah, that was great. Great advice there as well. Do you find that. Documentation in general, or especially API documentation? You mentioned SDK documentation, API documentation. Have you ever had the thing that it has services probably not disclosed? I guess in terms of a commands, you can, you know, I don't know, delete command in like a HTTP web, which is not there, but you can use it.}
+{\pard  \line \par}
+{\b\cf1 Nick Frichette:\b0}
+{ yeah, all the time. There, there are so many aws API calls that actually aren't documented anywhere. Or at the very least, if you, if you Google the their name, they don't, nothing shows up. There are a ton of 'em that are undocumented in a sense, and so it can be difficult trying to figure out like what services are and how they interact.}
+{\pard  \line \par}
+{And so that's, }
+{\cf2 [00:39:00]}
+{ that's part of the fun is though trying to fit. Puzzle pieces together and actually do that research. Sometimes you find APIs that they didn't intend to expose, and sometimes you can abuse those APIs. Awesome.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ And I've got another question here quickly, do you have any cloud security lab resources that you }
+{\pard  \line \par}
+{\b\cf1 Nick Frichette:\b0}
+{ re. Good question. So in general, I know folks who have spoken very highly about the Hack the Box, AWS Cloud Security Lab . I forget the name, I think it's hailstorm or something. I know they have a number of cloud security labs and each cloud service provider, they give it another storm unique storm name.}
+{\pard  \line \par}
+{So I think it's hailstorm. Outside of that, there are things like cloud goat . Which I believe is from Rhino Security or SAD Cloud, which I think is ncc. So those can also be really excellent. But it is sometimes you can just spin up stuff in your own AWS account, being, being mindful of the costs, of course.}
+{\pard  \line \par}
+{And you can just sort of interact with those resources and sort of evaluate them and sort of get an understanding for the security implications }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ awesome. And that question }
+{\cf2 [00:40:00]}
+{ was from Oyegun Augustine. Thanks for that question. Hopefully I pronouncing incorrectly aswell man}
+{\pard  \line \par}
+{I've kind of covered most of the questions that I had in mind and unless there's any more questions coming in, this kinda like the tail end of the interview where I also ask three fun questions, cause non-technical so people get to know you a bit more as well.}
+{\pard  \line \par}
+{The first one being, what do you spend most time on when you're not working on researching Cloud vulnerabilities ? }
+{\pard  \line \par}
+{\b\cf1 Nick Frichette:\b0}
+{ Ooh, okay. What do I do most? I'm honestly, I'm a big home laber if you're familiar with that. A lot of like self-hosting type stuff. Over, over to my left, I have a 22 U rack with some, some server components.}
+{\pard  \line \par}
+{I'm big fan as, as crazy as it sounds. I'm big on self-hosting your own data, not having it shared out there in the cloud. Just for the sake of like, Hey, I, I know where my stuff is and there's no risk of somebody else seeing it or, or stealing it or who knows what. And I spent a lot of time, probably, probably too much time just sort of maintaining that infrastructure, upgrading it, and assessing new projects that I could deploy at home.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ That's pretty awesome. And I was gonna say, you probably should blog this somewhere if you haven't blogged already, how to keep your data stored locally and. }
+{\pard  \line \par}
+{\b\cf1 Nick Frichette:\b0}
+{ }
+{\cf2 [00:41:00]}
+{ Yeah, it's stuff definitely something I've considered. It's just a matter of trying to find time for it. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah, of course. Like everything else, man, I think , everyone's trying to find time for things as well.}
+{\pard  \line \par}
+{I've got the next question. What is something that you're proud of but is not on your social media? Ooh, something that I'm proud }
+{\pard  \line \par}
+{\b\cf1 Nick Frichette:\b0}
+{ of. That's interesting. what am I proud of? }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Sounds like a server. Cause your server is not there on the internet. . Yeah. Yeah. No, that's, that's, that's a fair example. }
+{\pard  \line \par}
+{\b\cf1 Nick Frichette:\b0}
+{ I'm pretty proud of that.}
+{\pard  \line \par}
+{I don't know what, what am my products, to be honest, all, most of what I do is something related to sec. You know, I'll say in school I, I definitely was not the best candidate for like a computer science degree. Was not much of a math guy, but I just sort of powered through and managed to do really well.}
+{\pard  \line \par}
+{So I'd say, you know, focusing through that was definitely. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Awesome. And last question that I have for you is, what's your favorite cuisine or restaurant that you can share?}
+{\pard  \line \par}
+{\b\cf1 Nick Frichette:\b0}
+{ Ooh, cuisine or restaurant. There is a restaurant in my town called Medici's and they have this fig pizza thing, which is incredibly good. It's like it's got like fig on it and it has, I think it's prosciutto is the meat. It's, it's pretty }
+{\cf2 [00:42:00]}
+{ fantastic. Definitely one of my favorites. Wow. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Cool. Awesome. That was all the questions we had. Dude really thank you so much for your time and I really appreciate this. And for people who are listening in and have more questions, feel free, reach out Nick directly as well. If don't reach out you, where can they find you on the. Yeah, }
+{\pard  \line \par}
+{\b\cf1 Nick Frichette:\b0}
+{ so you can find me on Twitter.}
+{\pard  \line \par}
+{I tweet pretty regularly about, you know, security techniques that I'm exploring or sometimes critiquing real world intrusions and why some adversaries don't do so well. And then you can also probably find me on Mastodon. I'm on I'm at, at @frichetten@fosstodon.org }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ is that I didn't realize Mastodon is still a thing.}
+{\pard  \line \par}
+{I just saw it, it just basically blended into the background as well. So p i, well, if people are on MasterONE, definitely check out Nick there as well and I'll leave the link to all of his I guess socials as well as I kind of put them on the blog. But dude, thank you so much for this. I really appreciate you kind of hanging out with us.}
+{\pard  \line \par}
+{Quickly, someone just recommended AWS Goat as well. That's a good service as well. Yep. So definitely check, check that out. Thank you so much. Oh, there you go. I've got another question with this. What are some of your focus areas }
+{\cf2 [00:43:00]}
+{ of research in 2023? Okay. }
+{\pard  \line \par}
+{\b\cf1 Nick Frichette:\b0}
+{ That's a really good question. For 2023, some of the research focus that I have is really trying to dive deep into those undocumented APIs that I mentioned.}
+{\pard  \line \par}
+{There has been a lot of success lately and even historically with abusing those. Most recently there was the Lightspin ECR vulnerability that came to light where. Turns out you could just replace any container that was in the, the public gallery, which is terrifying. So focusing in on those undocumented APIs to perform unintended functionality or to evade detection is a major focus for me.}
+{\pard  \line \par}
+{Additionally, as an aside, I am pretty interested in learning more about Kubernetes. I have. Like I, I'm, I know enough to be dangerous, but there's always so much more you can learn when it comes to a complex topic like Kubernetes. So exploring that and then it's specific impacts on the cloud service providers.}
+{\pard  \line \par}
+{You know, distribution of Kubernetes is a major focus for me as well. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Awesome. Thank you for the question and thank you for the answer as well, Nick. Awesome. All right, that was all the questions. Thank you so much everyone for your time and questions as well. Feel free to reach out, }
+{\cf2 [00:44:00]}
+{ Nick, or to myself.}
+{\pard  \line \par}
+{You have more cloud security questions, but I will see you next week with another episode and I think. It's, it's funny most of the names that came up over here are also coming in this month as well, so it's gonna be really interesting when, cause we've got Gafnit coming in as well later this month as well, so she can talk about the, cause that's where the whole undocumented API thing, I'm like, what is an undocumented api?}
+{\pard  \line \par}
+{I'm like, yeah, it's like, like, and it just like happened to stumble onto it. So I'm, I'm sure that story would be quite interesting. But dude, thanks so much for this man, and thank you everyone who's tuned in. We'll see you next week for the next episode of Breaking the AWS Cloud month in January, and we'll see you soon.}
+{\pard  \line \par}
+{ Thanks everyone else. Bye everyone. Bye }
+{\pard  \line \par}
+{\b\cf1 Nick Frichette:\b0}
+{ For 2023, some of the research focus that I have is really trying to dive deep into those undocumented APIs that I mentioned.}
+{\pard  \line \par}
+{There has been a lot of success lately and even historically with abusing those. Most recently there was the Lightspin ECR vulnerability that came to light where. Turns out you could just replace any container that was in the, the public gallery, which is terrifying. So }
+{\cf2 [00:45:00]}
+{ focusing in on those undocumented APIs to perform unintended functionality or to evade detection is a major focus for me. }
+{\pard  \line \par}
+{For 2023, some of the research focus that I have is really trying to dive deep into those undocumented APIs that I mentioned.}
+{\pard  \line \par}
+{There has been a lot of success lately and even historically with abusing those. Most recently there was the Lightspin ECR vulnerability that came to light where. Turns out you could just replace any container that was in the, the public gallery, which is terrifying. So focusing in on those undocumented APIs to perform unintended functionality or to evade detection is a major focus for me..}
+}

@@ -1,0 +1,652 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red114\green179\blue114;
+\red128\green128\blue128;
+\red102\green0\blue204;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\b\fs48 Nishant Sharma\b0}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ With the talk about AI ChatGPT, do you feel it'll add or enhance cloud penetration testing? }
+{\pard  \line \par}
+{\b\cf3 Nishant Sharma:\b0}
+{ I'll say it will enhance }
+{\pard  \line \par}
+{a lot of people spend their time debugging their automation script.}
+{\pard  \line \par}
+{I think that part ChatGPT can take away very easily. And again, there is another aspect. If you know that there is some library that exists in Python, certain things, then you know it, if you dont know it there's a steep learning curve ChatGPT if you just ask it what is the library? Can you gimme a sample code? Just like that. You can run it and you can see if it works.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Happy Chinese New Year to everyone celebrating. This is the year of the rabbit, which is supposed to be the luckiest animal. So I hope it brings everyone luck as well. Not just because you may have you been born in the years of the rabbit, but even if you're not born in a year of the rabbit. I hope this brings a lot of joy and a lot of luck in your life as well. Let's get to the episode. }
+{\pard  \line \par}
+{Have you tried teaching someone }
+{\cf2 [00:01:00]}
+{ cloud security, leave it all, AWS cloud security? In this month we are talking about how you can train others to be at least thinking like hackers. You don't have to be a hacker having that mindset always helps, and as someone who's always believed in learning offensive side, be better at the defense side.}
+{\pard  \line \par}
+{And this sounds like the announcement of a course coming in. No, the course is not coming now. But this is something I'll share in this episode of Cloud Security Podcast. For this, we had Nishant Sharma, who is the director of lab platform and education platform called i INE and they have released an open source tool called AWS Code, which it comes with MIT license.}
+{\pard  \line \par}
+{You can use it yourself and you can use that to train yourself in cloud security. And these are common scenarios of what are some of the common use cases you see this obviously is a great conversation for people who are trying to learn . This is also valuable for people who are trying to do defense in AWS as well.}
+{\pard  \line \par}
+{ A lot of us, whether you're a cloud security architect, you're a cloud security engineer, or you are a security engineer, what you would realize }
+{\cf2 [00:02:00]}
+{ is that a lot of defenses that you're trying to build, whether it's using AWS SCP guard, duty threat detection, throw every security word out there.}
+{\pard  \line \par}
+{All of that comes down to thinking like how a bad hacker would. And what we spoke about during this conversation is just about AWS code, how you can use that to train yourself. Yes, we spoke about ChatGPT as well.}
+{\pard  \line \par}
+{We also spoke about what are some of the common tools, how do you start with scenarios which involve things like serverless, Lambda, . How do you protect against them so that you , don't at least don't allow the bad hacker to break out of the container.}
+{\pard  \line \par}
+{That and a lot more in this episode. And if you are someone who's interested in starting to defend AWS Cloud and want to start at least knowing the foundational pieces, and this is the episode for you, and again, this is not the announcement of the upcoming AWS security course that I have.}
+{\pard  \line \par}
+{We are definitely running a capture the flag before that. So keep an eye out for that. And as always, if you find value from this episode, I would definitely appreciate. You sharing with some of your friends who may be on the same journey if you're listening to }
+{\cf2 [00:03:00]}
+{ our cloud security podcast for a second or third time.}
+{\pard  \line \par}
+{But if you can leave us a review or rating on your popular video platform like YouTube or LinkedIn or your audio platform if you leave us a review or rating there, it definitely helps us find more interesting people. So when they see the podcast episode or when they hear on any podcast platform, they get to see how much value you can provide to the existing audience as well.}
+{\pard  \line \par}
+{And I wanna say thank you to everyone who's been shared their feedback on LinkedIn or messaging me saying how much they enjoyed the episode. Thank you so much. I really appreciate this. It means a lot. And I just wanted to say thank you. I hope in enjoy episode. I will see you in at the episode later this weekend where we talk about actual pen testing.}
+{\pard  \line \par}
+{So today we spoke about the training involved in becoming a pentester in the cloud. Next week we're gonna talk about how do you even pentesting cloud, and I'll keep it a secret for now. And until then, I hope, enjoy this episode. I will see you soon }
+{\pard  \line \par}
+{by bringing developers and security together. You don't have to choose between speed and }
+{\cf2 [00:04:00]}
+{ security, develop fast, stay secure.}
+{\pard  \line \par}
+{Could you tell the audience a bit about yourself? }
+{\pard  \line \par}
+{\b\cf3 Nishant Sharma:\b0}
+{ Sure. Ashish first thank you for calling me onto the show I have been a watcher, a subscriber whatever you call it for some time.}
+{\pard  \line \par}
+{ it is a good opportunity for us as well to, you know, to showcase something so my team is the one who actually builds new capabilities, running different, different kind of labs. We make this you know, system more scalable, available in different, different regions.}
+{\pard  \line \par}
+{We keep it secure and all of that. So that's what I'm currently doing with them.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So because you're talking about AWS cloud and AWS goat as well how would you describe penetration testing in aws? Like, what does that mean for you when people say I'm pentesting cloud or pentesting AWS? Okay. }
+{\pard  \line \par}
+{\b\cf3 Nishant Sharma:\b0}
+{ So I think the, the word pentesting has been around for quite some time now.}
+{\pard  \line \par}
+{know before this, before the cloud, you know, mainstream people were talking about application pentesting , talking }
+{\cf2 [00:05:00]}
+{ about network pentesting . . So similarly, you know, when people say cloud application pentesting or cloud account pentesting , right?}
+{\pard  \line \par}
+{What they're trying to do here is they're trying to assess the security or security posture of the account or whatever you have deployed on aws you know, in the cloud. So a cloud pentester on, you know, if internal, external, you know, how much information or how much are provided to him, trying to assess that.}
+{\pard  \line \par}
+{And main thing that you worry about are configurations. Because vulnerabilities, as soon as they'll know it, they'll hack it }
+{\pard  \line \par}
+{In cloud. If guys find something, it's already passed for everyone. Right? So I think the main focus for people there is to find the entry point. So, you know, cause nobody is actually give access to theirs AWS account. So you have to find a way to get in.}
+{\pard  \line \par}
+{And I think the most common way of doing that is to target the web applications or the APIs. And }
+{\cf2 [00:06:00]}
+{ once you have that, after that begins, this domino train will fall and then second will fall. And this thing is way bigger, when it comes to aws, cause infrastructure is so big, right? The scope is so big. It is multi-region, multi-service, all of that is }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ , to level the pain field.}
+{\pard  \line \par}
+{As you were saying earlier how would you describe web app, pentesting and network pentesting and how different is that to Cloud pentesting? . }
+{\pard  \line \par}
+{\b\cf3 Nishant Sharma:\b0}
+{ Sure. So web pentesting and network pentesting as I was mentioning, right? We're around for quite some time now. When you see web application pentesting, , scope is very important whenever you're talking about pentesting.}
+{\pard  \line \par}
+{So when you're talking about web application pentesting, for example, suppose I now put up a very simple php website on our web server which I am hosting now you can divide it into infrastrucuture security and web application security }
+{\pard  \line \par}
+{but just when people say this, they target both points. So they'll see if they can find some vulnerability, OWASP Top 10 or something else . And similarly, they also }
+{\cf2 [00:07:00]}
+{ try to see they can reach out to the server the server and see if there are something open, for example of cases when people run WordPress.}
+{\pard  \line \par}
+{They're actually using one server. Just my sql database is also running the same. In that case, the scope is covering both. Yeah. When we talk about network pen testing, it's more about, you know, what you can find when are connected to a network and obviously finding the first step , to find, you know, which, hosts are there, trying to find what all they're exposing, what kinda services are there, which services are not protected.}
+{\pard  \line \par}
+{And then you try to attack that. And then there are other attacks and responsibility for the infra used to fall on people who are deploying application and maintain now with cloud, I think the main shift that is there is it's a shared responsibility model.}
+{\pard  \line \par}
+{You don't have to worry about the infra, AWS or whoever provider is actually taking care of. So you don't see a }
+{\cf2 [00:08:00]}
+{ real physical that you have to manage. You want to put up a VM and you wanna make secure. There is a security code that you have to configure and it's very easy to do. But here, new things that are coming in are the misconfigurations .}
+{\pard  \line \par}
+{So you have to make sure that , the IAM roles that you're making, the other roles , the policies, all of that are good. They're not giving excessive privileges, they're using the good practices and all of that again, means through cloud is another aspect that is there, when you had a fixed infra, you know, that people cannot abuse more than that in cloud, you dont have that.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Interesting. And I think , you dropped in the OWASP Top 10 as well and I think a lot of the AWS cloud elements Goat Elements link over there as well. So maybe if you could probably introduce what AWS Goat is and what was the reason starting it. And we can probably talk about OWASP Top 10 after that as well.}
+{\pard  \line \par}
+{So what is AWS Goat? }
+{\pard  \line \par}
+{\b\cf3 Nishant Sharma:\b0}
+{ So AWS Goat is actually you know, a little effort from our side to give back to }
+{\cf2 [00:09:00]}
+{ community. So, you know, as I was discussing before with you you know, in our last call that so we were hiring a lot of engineers who were gonna, you know, work on AWS and GCP and Azure and we wanted to teach them as well as on keeping the system secure.}
+{\pard  \line \par}
+{So, you know, , we asked them to what some conference videos go through the blogs. We did the same. And then after that, we came up with a list that, ok, let's build all of these things which are affected by vulnerabilities. And then we will test them., so when we did this and took, you know, couple of weeks after that when we put it together , like something which you, a new user can use to learn AWS, security hands on, especially for the novices, actually begin with it, there are multiple factors that are there, to ensure that.}
+{\pard  \line \par}
+{We're deploying it correctly taking it down correctly, otherwise you be charged and all of that. And then most important thing I think is the exploitation part If you have never done it }
+{\cf2 [00:10:00]}
+{ before. You're going not feel the confidence that you can do it. Yeah. So that we've packaged it into you easily deployable which you can extend and continue to use it and put it on GitHub. And then, you know, we told our company and then they were very supportive.}
+{\pard  \line \par}
+{Like, okay, looks good for the community , so, you know, why don't you guys actively develop, so that is what AWS Goat was as a product. And right now it is on the Github. You can just go there, you can spoke the repository and use the Github actions, just set the parameters and it will automatically deploy on your account and as easy to take it down after you have done this }
+{\pard  \line \par}
+{it's. Nobody is advised to use it in production environment. Yeah. It is supposed to be a new account that is there for just for trial }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ yeah. So people can use that for training themselves in pen testing. }
+{\pard  \line \par}
+{\b\cf3 Nishant Sharma:\b0}
+{ I think it is way bigger than that. When you tool there are 100 ways to use to tool depending on what the tool is In case of AWS Goat ,you have }
+{\cf2 [00:11:00]}
+{ the application, you have the infrastructure as as code in Terraform okay. And then once you deploy, the first thing that you have already covered is you have code for goat things. You can learn IAC using it, you can tweak it, you can deploy it. See what happens, right? Then once it is deployed, you'll have a web application . So we have multiple module in the first module is a blog application, and the second module is the HR application.}
+{\pard  \line \par}
+{And the reason for doing this same modular approach is because each application has different components depending on, you know, what it is going. And those components,, if you want to make a scenario, it'll not look realistic. For example, if there is a block application, why, you know, application will use something like q or something doesn't make sense, right?}
+{\pard  \line \par}
+{That's why we have made sure that we have backend infra which is required to deploy that application. Very realistic as realistic as we can get in this space. So once you deploy, you can try to make }
+{\cf2 [00:12:00]}
+{ into using different vulnerabilities that are there. So we have put in OWASP Top 10 web application vulnerabilities on the web application site that people can see similarly, once you have deployed it, you have exploited it. And again, for exploitation, we actually give you manual, actually give you video, so can see and do exactly that if you are not able to do it on your own. And once you have done that after that comes the defense angle, because you have full visibility and it is your account, so you have full control.}
+{\pard  \line \par}
+{So now you can try to see which AWS native things like guardduty macie other things, what all you can use to detect these and to contain these because you know, again, There is a saying that I never hacked so it's better to get prepared for the second one. So if you can detect it, contain it, I think that should be the objective.}
+{\pard  \line \par}
+{You can do that can do the security engineering by modifying the IAC to make sure that the vulnerability }
+{\cf2 [00:13:00]}
+{ doesnt work now so yeah, all the things you know, you can do with it depending on what your objective }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ is. It's pretty awesome. I think as you were saying, everything was a question that came in from Roderick. And I think it's pretty timely as well.}
+{\pard  \line \par}
+{Do you need permission from AWS to do penetration testing against your AWS account resources. }
+{\pard  \line \par}
+{\b\cf3 Nishant Sharma:\b0}
+{ So for your own account that you own, you don't really need that cause you're checking your system. Right. And when we say you know, by testing, we're not doing something different. Right. We're doing same operations that a normal user will do .}
+{\pard  \line \par}
+{But we are just doing it in the way to find things. So for example, initially cases when you are doing innovation on AWS account access to it and now you're doing innovation , we're actually doing the same commands in the back end, they use something like Pacu or something, they use the same API requests in the back end}
+{\pard  \line \par}
+{aws, apart from the volume, they don't, they can not actually differentiate in, apart from the volume part. So up to level they don't really care cause it is your account and you know, if }
+{\cf2 [00:14:00]}
+{ you're trying to make it secure, it's all fine from their side. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That's awesome. And I think I'm gonna add a few bit, hopefully they'll answer your question, but feel free to ask your , follow up question.}
+{\pard  \line \par}
+{I'm gonna attach on to another question where, so what would be the difference between say pen testing the application versus say pen testing, AWS S3 bucket? Because I would've thought the pen testing for both of them. To your point about shared responsibility, if you're don't pen test aws s3, you're technically in AWS Erritory point in time, right?}
+{\pard  \line \par}
+{Or is that okay to kind of do some, I don't know, end map at it and see what comes out }
+{\pard  \line \par}
+{\b\cf3 Nishant Sharma:\b0}
+{ means you can try that, but I think that part, they're already handling, so you're not going to see much there. So when you have brought it, when you mentioned it, so whenever you're spinning your EC2 instance in AWS and a public IP on it, AWS actually have these registered block of IPs which are actually public. We dunno which one we know it's from that one. So there are mass scanners, they are }
+{\cf2 [00:15:00]}
+{ scanning for it. As soon as they find SSL or something automatically they try all the password and , once you SSH login success they will actually install the cryptominer or a DDOS bot on it }
+{\pard  \line \par}
+{so, so they not stopping them so I dont see them stopping anyone else }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ actually it's a good point because if you the whole crypto miner thing , is interesting because you would get notification that hey, crypto miner potentially on your EC2 instance, but they could technically to your point, block it.}
+{\pard  \line \par}
+{They don't have to like make it a notification and you take an action accordingly, I guess, which simply a block it if they want you to, so that's pretty interesting, man. Then how different is, say I, I guess to your point then AWS Goat is deploying application into AWS and when we try and say work through scenarios, in each of the modules of AWS Goat we are technically just testing the application.}
+{\pard  \line \par}
+{And I guess , the thing underneath is that, right? }
+{\cf2 [00:16:00]}
+{ So }
+{\pard  \line \par}
+{\b\cf3 Nishant Sharma:\b0}
+{ that's the thing, right? When you're talking about that we are managing or third party, you have something, it actually stops there. The scope actually stops there. For example suppose you have it in WordPress or something. So from WordPress, if you hack everything in, you're gonna get access to the modifications and the databases that what you care about however when you deploy a complicated application on AWS . So I take example of module for AWS Goat. So we have deployed this application using is Amazon Lambda? Yeah. So in Lambda whenever you put code, And if you want to define somethings change right? So for example, I wanna put how to access the S3 bucket, which is secure. In that case, you define things in environment variables, in configuration files and all of that.}
+{\pard  \line \par}
+{Now, AWS is taking care of its security. However, if the application that you have }
+{\cf2 [00:17:00]}
+{ deployed, if it has problems like the module one of AWS it has whatever problems. So once you get your foot forward into the lambda, Now you have crossed the boundary from the application through the AWS infra side. Yeah, so once you're in the server, you can try to drop these environmental variables, you can try to see what are the connections skills there.}
+{\pard  \line \par}
+{You can try to, what are the keys there? And from there you can also check if there is some role attach to it. From there, you can try to get the temporary explanations, you can try to see what all is allowed on that, and then from there you can jump right. And after that it's all trying and failing and jumping to another service }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ yeah.}
+{\pard  \line \par}
+{So }
+{\pard  \line \par}
+{\b\cf3 Nishant Sharma:\b0}
+{ that's the boundary right just cross from one side to the other side and now it is limitless. And once you, if you load or something, you can do anything and everything. You can destroy their infra, you can spin up multiple machines. And the thing with admin rule is if it is not }
+{\cf2 [00:18:00]}
+{ properly configured and they're not using the organisation roles and SCPs, other things control, you can pretty much disable their detection mechanisms as well.}
+{\pard  \line \par}
+{Right. Also can do if it just an account, modern }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ organization. Actually, that's another question from Rodrick here. What are cloud penetration testing tools used for pentesting? }
+{\pard  \line \par}
+{\b\cf3 Nishant Sharma:\b0}
+{ There are Multiple ones. It depend what exactly you want to do, but generally when people ask this question and they're starting up their, they're talking about enumeration and basic exploitation I think Pacu is one of the tools that is very popular}
+{\pard  \line \par}
+{we have used it, it was fantastic. If you wanna do enumeration and everything, it will bring down the effort on your side by a very big deal, that is the first one. And then,}
+{\pard  \line \par}
+{open source community is a very engaged community. So when you put something out, people will try to, you know, create software, try to work, and so multiple other tools there, you can start from there. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Awesome. Thank you for answering that and again, feel }
+{\cf2 [00:19:00]}
+{ free to ask for follow up question ro if you like.}
+{\pard  \line \par}
+{So you mentioned the, I guess crossing the boundary into the AWS lambda land, and we spoke about the fact that I, I think what you said is absolutely right as well because you're technically doing exactly the things that you would expect to do in an AWS Lambda EC2 or whichever service you talk about.}
+{\pard  \line \par}
+{But I think what you're looking for is at that point in time misconfiguration, because I guess the first two episodes of this month break the AWS was around cloud security research. They said the same thing as well. They're not really trying to do, I don't know, like hardcore deep zero day somewhere, basically.}
+{\pard  \line \par}
+{But they're trying to come from a perspective of. This is how a normal person, or at least this is how AWS expects you to use it, but what's the way if I change, I don't know, parameter one to two, does it make a difference? Or if I try different kind of fuzzing, does it make a difference? So I think it's very well said.}
+{\pard  \line \par}
+{I think one of the things that you called out over here serverless misconfiguration as well. I think actually Tom's , question is kind of like where I was going with, so I'm gonna put bring up Tom's . Question . How useful is the }
+{\cf2 [00:20:00]}
+{ metadata, URL of a cloud instance }
+{\pard  \line \par}
+{\b\cf3 Nishant Sharma:\b0}
+{ very actually the metadata service that we can access in EC2, right? So AWS actually had to make changes to it just to prevent it from the SSR F attack. So what people were doing, they were deploying web application on EC2, and if your application is vulnerable to SSRF, You can make the server make the request on your behalf.}
+{\pard  \line \par}
+{You can actually make a request through the web application to the metadata service, and then you can get some information. From that information. You were able to obtain a temporary access credential or token from there you able access everything that the rule or the EC2 machine actually had access to. So for that AWS actually had made some change. I, I'm not recalling it, just to make it more difficult, but it's still possible if you have hold }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ on machine.}
+{\pard  \line \par}
+{Now, the, the change you're referring to is version one, version two of the Yes, exactly. }
+{\pard  \line \par}
+{\b\cf3 Nishant Sharma:\b0}
+{ Yeah, I think it's probably, I covered it in my class but I don't remember }
+{\cf2 [00:21:00]}
+{ right now what exactly was }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ hundred percent man. But I think to Tom's question, I guess it's still useful because many people have not upgraded themselves to V2, they still use V1 of iMDF}
+{\pard  \line \par}
+{so I think Matt I think to what Tom called out, this is definitely something you would still find quite everywhere as well. Oh yeah. So someone else called out that played a quite a big role in Capital One data breach as well, which is also true. I think the Amazon hacker used it as well. Sorry did you have some thought on that as well?}
+{\pard  \line \par}
+{Capital One and any, everyone else that you know of that basically exploited this? }
+{\pard  \line \par}
+{\b\cf3 Nishant Sharma:\b0}
+{ So, I, I'm not sure about the Capital One. I have not checked it in detail, but when we were taking these vulnerabilities for AWS Goat, at that time, we made sure we are checking those things that have actually happened in the real world so this thing so much countless examples, if you just search for it, SSRF hack, you'll get multiple examples of this.}
+{\pard  \line \par}
+{ And the same thing can also happen in the containerized environment by the way. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah, yeah, a hundred percent. Like it's }
+{\cf2 [00:22:00]}
+{ like a who is this service as well? Probably best way to explain it. So who is this service or what is this service? And I think the person who called out that was Tanner yeah.}
+{\pard  \line \par}
+{But I think at least having read the report for the Capital one, that was basically exploiting metadata url. So not really exploiting url, but using the URL for your advantage to find out about it. So thanks for pointing that out as well. , feel free to question follow up questions as well, folks as we kind of go deeper into this as well.}
+{\pard  \line \par}
+{So you mentioned the scenario where you were talking about AWS Lambda as a serverless misconfiguration. And lot of times when people go for pentest , they kind of talk about the whole OWASP Top 10 which you kind of mentioned earlier as well, like, I think, is there a lot of overlap between the two or is there just no overlap and OWASP Top 10 is a web app thing }
+{\pard  \line \par}
+{and then there is like the whole to your point that's like a whole different , universe on it. Is there an overlap or are they mutually inclusive? }
+{\pard  \line \par}
+{\b\cf3 Nishant Sharma:\b0}
+{ So OWASP actually have lists for everything, they have lists for cloud, they have lists for web and everything.}
+{\pard  \line \par}
+{So in cloud, they actually mention all of }
+{\cf2 [00:23:00]}
+{ these , they mention serverless exactly what, you know, they talk about, okay they can be problem with , the access control . They can be problem with, you know, whatever roles you have provided and all of that. So yes, there's, there's a huge overlap. In terms of concept I can say and in AWS Goat all the applications we have used OWASP Top 10 Web as well. And the way OWASP, does this ranking right? Very, very this useful to actually use for us. Cause this is something that they are seeing in the offsec world, right? So most people, again, as a security researcher, I very fascinated about the vulnerabilities and zero days and other things. But I think most of the times, just like you mentioned, right, the Capital One data breach, and even if you check , the APTs, right, the advanced persistant threat groups you know, it's on my. }
+{\cf2 [00:24:00]}
+{ Website if you go, they have this full blown section. People are actually not aware of it, but there's so much knowledge there. So if you go there, click on APTs, you'll actually see}
+{\pard  \line \par}
+{actually what they have been using. And some things are so, so simple you'll not even believe that this is leading to the APT threats and all of that. Similarly, most of time that we for, you know, these hacks, the, it actually comes from mistakes and all of that. Yeah. Percent is, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ yeah. I think what that reminds me, so on the attack mitre website, one of the things they call out for the kill chain, or I guess the attack path for a hacker for cloud was phishing .}
+{\pard  \line \par}
+{and it was almost, you, almost like what phishing leads to, but I think exactly. Who, who was it? I think oh Yeah. So the Uber }
+{\cf2 [00:25:00]}
+{ breach that happened, you know, recently, whether they spoke about, oh, our so and so many records were kind of lost, and they also called out over there that, oh, our AWS credential and Azure credential were lost as well.}
+{\pard  \line \par}
+{I think people focus on the data rather than the fact that, oh, wait, their actual production data could also be compromised because they have lost access to their AWS accounts. But I mean, it, it kind of tells you two things. One, it also, it makes you aware that a lot of people don't see cloud as a you know, also production enviornment.}
+{\pard  \line \par}
+{When you started talking about AWS code, you said don't use a in your production environment, but how many , people even consider that, oh, cloud could have dev, test like people actually run stuff on production over there. So it's sensitive from that perspective and , bringing it back to OWASP Top 10 as well.}
+{\pard  \line \par}
+{ If was being given out of consideration for kind of working towards I guess this internally as well. Cause I think one of the, I guess, takeaway that I would love to have for people this conversation that you and I are having , is }
+{\cf2 [00:26:00]}
+{ obviously is to teach themselves if they want that they can choose, is to use the open source.}
+{\pard  \line \par}
+{AWS kind of worked on and you guys have created, the other thing is also teaching other people , as well. I mean, especially imagine, I think when I had a team, one of the biggest challenge to what you face when you were trying to do AWS Goat, how do you teach someone AWS Goat or kind of scenario, how do you teach someone pen testing cloud when the only thing you can find on the internet is, hey, get an AWS Certification }
+{\pard  \line \par}
+{but that doesn't teach you , the security side. How do you normally recommend people who try and want to build an internal training for cloud security? And not necessarily for pen testing, but maybe just for cloud security. What do you normally recommend to them? }
+{\pard  \line \par}
+{\b\cf3 Nishant Sharma:\b0}
+{ Yeah, so You know, I'm in this training space for 8 years now.}
+{\pard  \line \par}
+{Yeah. We, connecting trainings, workshops, you know, building courses, labs, everything. I think the best way, and you know, I think I have also seen this position in, especially in the infosec training industry over the past few years, is that hands on training right }
+{\cf2 [00:27:00]}
+{ there is not better than if you can do it hands on, the kind of results in terms of skills, in terms of confidence, in terms of your readiness.}
+{\pard  \line \par}
+{It is unparalleled. So I'm not saying that theory is not important , yes, you should do, but I think now it is like 20% of the theory and 80% of the hands on is what is you making you win. So whenever someone is starting, I'll say, don't really jump into too much, just get the basics. For example, beginning with AWS pentesting , right?}
+{\pard  \line \par}
+{There is no direct way in , which is recommended directly jump into this. First you need to the basics. AWS basics is have, make sure that what is IAM, what is role, what is SCP, that is the first step. Once you have spent some time here, create your own account and then create some resources. Try to put these policies, just don't spin the EC2 instances most people do that. Most people create }
+{\cf2 [00:28:00]}
+{ the S3 buckets and ok done, try to set some policies. After that, take a tool like AWS Goat set it up and then you go from, you know, end to end in this process, the kinda confidence it will you it is just the first test that you're taking and it hardest one, I think once you have done, that'll give you immense confidence to go ahead try out so many tools out using, you know, the AWS CloudShell or your own machine.}
+{\pard  \line \par}
+{ Try hands then repeat this thing. You dont need to cover 100 or 200 services of AWS, most organisations use the Top 10 or 20 . So this is all doable step by step , but theory I think the first basics of AWS is something that is very important.}
+{\pard  \line \par}
+{And which people actually overlook that. And then when they directly jump into schools and everything, they just, they'll just follow the video and after, ok, so what now . So you won't be having this problem }
+{\cf2 [00:29:00]}
+{ if it takes some time. And I know it's not the best thing, but again, it's important, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ right? So, so just to summarize, basically get the AWS fundamentals first.}
+{\pard  \line \par}
+{Once you've done that build an account, EC2 instance, whatever, but put some SCP policies and then deploy something like , AWS Goat or similar. Yeah. And use that as a way to at least, cause I think there's a module so you can actually go walk through in modules of AWS Goat . So towards the end, cause I was gonna come to that as well, a lot of people are like, okay, I guess I've done the modules now what?}
+{\pard  \line \par}
+{So you can just basically saying you can add more based on the company you work in, or maybe scenario you may have seen is, is that right? Like, so you can keep growing and not just like, oh, all modules are done and that's the end of it. }
+{\pard  \line \par}
+{\b\cf3 Nishant Sharma:\b0}
+{ Obviously not. It is not. And the good thing is, cause it is open source and everything is there, right?}
+{\pard  \line \par}
+{try to make tweaks to it once you do some tweaking in the IAC, now I think the opportunities and the things that you can do it is limitless. You can just the IAC documentation }
+{\cf2 [00:30:00]}
+{ for Terraform, right? The best documentation that I have. So you can just go there, try to find what kinda resource you wanna deploy. And this is that you have copy, you have to change, but using that you can actually create your own scenarios}
+{\pard  \line \par}
+{ for you in own company , right? Your own, whatever you are managing can try to replicate all of that using ISU or maybe even manually and that is where you can pentest it. And, you know, once you have some you know, insights into the security postures, you know how to improve it, then maybe deploy the changes onto production.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I was gonna say, the one thing that I love in the entire conversation is that you did for you did not mention what was it? Kali . Oh yeah, sorry. So they'll change their name now? Yeah. So cause I remember when I did the offensive security training for OSCP it was kinda like drilled in, like everyone who would bring their laptop to a ctf, they would have Kali installed on it.}
+{\pard  \line \par}
+{That was like step one,. I'm totally hacker right now. I'm glad you didn't mention it, cause a lot of people just assumed that, , I need to BackTrack or Kali installed but I'm glad you mentioned the fact }
+{\cf2 [00:31:00]}
+{ that build something and then try because you don't have to be like super sophisticated to, I cannot go down this path. Is that right? }
+{\pard  \line \par}
+{\b\cf3 Nishant Sharma:\b0}
+{ Yep. And I also use Kali . I love it. I have been using it for so many years now nothing against them.}
+{\pard  \line \par}
+{But the way we do things we ask them to bring Kali as well to use otherwise, the other way to use for AWS is create your own account. In the account. You actually get this thing called CloudShell right? You can get a shell inside the account and it's free. Yeah. And it's so easy to actually install things in it. You wanna install Pacu or some other pentesting tool, it's very easy to install it there and you can take it away with you right?.}
+{\pard  \line \par}
+{Even if you go somewhere, you open your own account and from there it will work we install tools and from there, you know, then you can do things but nothing against Kali}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ because installing pacu on your own EC2 instance, }
+{\pard  \line \par}
+{\b\cf3 Nishant Sharma:\b0}
+{ Cloud share. Cause if you do Ec2, then you know, you are paying for EC2, cloud share }
+{\cf2 [00:32:00]}
+{ is free}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ ah, right, okay. So you, oh, actually, yeah. Cause cloud share just an instance over there, right? }
+{\pard  \line \par}
+{\b\cf3 Nishant Sharma:\b0}
+{ I mean they are running it in an ec2 in the backend, but they don't charge you }
+{\pard  \line \par}
+{for it. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah, yeah. So it's a point in time. }
+{\pard  \line \par}
+{\b\cf3 Nishant Sharma:\b0}
+{ Yeah. Oh, but it's persistent. So whenever you need it, you just click that console button on the top of AWS's screen.}
+{\pard  \line \par}
+{And it'll just give you a CLI and that you can do everything that you want. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I have never tried that. That's, that's so if I log into AWS account and I go to AWS CloudShell and I install Pacu and for whatever reason life got in the way, I switch up the browser, come back in the browser again, open CloudShell again .}
+{\pard  \line \par}
+{It should remember that Pacu was installed on my account. }
+{\pard  \line \par}
+{\b\cf3 Nishant Sharma:\b0}
+{ Yeah, it should. Unless you, you delete it or on your own, then it'll go. Otherwise its there. The same thing is is there in Azure as well as GCP as well. They have also their own shells , you can do things in it and }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Interesting. That, that's very fascinating for me, man.}
+{\pard  \line \par}
+{\b\cf3 Nishant Sharma:\b0}
+{ And }
+{\pard  \line \par}
+{it's very, very helpful when }
+{\cf2 [00:33:00]}
+{ you're dealing with AWS's own you know, account. So you know, if you wanna do something in the same account using the CloudShell , actually save you so many hassle you don't have to install AWS login or utilities on your machine and it'll, it's not gonna configure something. You're not keeping those credentials, they on your local machine, right?}
+{\pard  \line \par}
+{Cause sometimes if it's not your personal account, dont do that. Right? If it's not your own personal machine, you dont want to keep those credentials there. So, }
+{\pard  \line \par}
+{interesting. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Wait,, so training primarily can be done by Cloud. Shell like instructions for people who are thinking about internal , training instead of trying to talk about EC2 and all of that, database, primarily people are CLI users, to just go straight to, Hey, don't worry about EC2 i students that use a, these API commands, and cloud shell use API commands.}
+{\pard  \line \par}
+{\b\cf3 Nishant Sharma:\b0}
+{ Most of the tools that we have seen, which we use for most of them actually work apart from one or two, which are little fuzzy that used otherwise, most of the tools and its getting better and better, if you remember right. Five, seven }
+{\cf2 [00:34:00]}
+{ years,}
+{\pard  \line \par}
+{it was a nightmare to install some of the tools. Yes. Now all of that is not, most of the things are Python based you just update and it works . }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah, actually that's a good point, man. I'm gonna give that a short, I, I got a question from Roderick. With the talk about AI ChatGPT, do you feel it'll add or enhance cloud penetration testing? }
+{\pard  \line \par}
+{\b\cf3 Nishant Sharma:\b0}
+{ I'll say it will enhance cause ChatGPT is giving you answers very quickly because most of the times, even for the snippets, right, the basic python and snippets, I'll say 90% time, it has given me good offence.}
+{\pard  \line \par}
+{I'm using it, Im regularly using it. It save me a lot of time when you want to do small automations in batch, Python or something. In terms of even the cloud pentesting, right? The subject matter is also there. I think if we did that effect into consideration ChatGPT and advancement from AI from a pentesters point of view, yes, it's going help us a lot. Oh. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Cause then you can automate a lot of your testing as well. So if you don't know Yeah, }
+{\pard  \line \par}
+{\b\cf3 Nishant Sharma:\b0}
+{ a lot of people spend their time debugging their automation script.}
+{\pard  \line \par}
+{\cf2 [00:35:00]}
+{ I think that part ChatGPT can take away very easily. And again, there is another aspect. If you know that there is some library that exists in Python, certain things, then you know it, if you dont know it there's a steep learning curve ChatGPT if you just ask it what is the library? Can you gimme a sample code? Just like that. You can run it and you can see if it works. }
+{\pard  \line \par}
+{Interesting. So it is taking data for now , }
+{\pard  \line \par}
+{yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Wow. Cause I think I've been using the ChatGPT for building AWS resources and it does really good job in doing the IAC of that as well.}
+{\pard  \line \par}
+{Yeah, I, I haven't done the flip yet, so I'm gonna try some flip, but thanks for that question, Roderick. I appreciate that as well. Feel free to follow, ask a follow up as well. }
+{\pard  \line \par}
+{\b\cf3 Nishant Sharma:\b0}
+{ But if you ask like complicated programs, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Like a multiple, kill chain kind. Or }
+{\pard  \line \par}
+{\b\cf3 Nishant Sharma:\b0}
+{ even if you talk about the, the programs, right? I have seen to do something for programmers, but a little complicated. I, so for }
+{\cf2 [00:36:00]}
+{ example, suppose create permutations and combinations from a word to generate a word list.}
+{\pard  \line \par}
+{Yeah. So for the simple cases, whatever code you can just. You know, but as soon as it adds some conditions, it starts giving you buggy code, and that is where it'll actually drive down the productivity a little as debugging other codes is always more difficult that writing your own. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That's pretty fascinating, man. I, I did have a, a question on the whole serverless thing as well. Cause if you were trying to implement it, and to your point, the cloud shell was a great example, which we kind of were talking about just before. How does it, like, you know, so when people talk about vulnerable serverless application, I'm gonna to talk about two services that are really popular in the area space.}
+{\pard  \line \par}
+{Which one is the ECS container space and one is the serverless space. And I guess cause one of the modules is on serverless. What's the thinking behind that? Is that a vulnerable application running on, which }
+{\cf2 [00:37:00]}
+{ is web facing, vulnerable application running on lambda and that's how you get, like, once you, I mean, what to Tom mentioned earlier, Then after from that, we basically exploit the web app first, and then we use the metadata to kind of, you know, explore further.}
+{\pard  \line \par}
+{Is that the thinking and how easy or difficult is that? Because I imagine a lot of people don't even think about servers from that perspective. Right. }
+{\pard  \line \par}
+{\b\cf3 Nishant Sharma:\b0}
+{ So module one of AWS code is actually based on on lambda, serverless part . And the reason for doing that, cause even as a company we actually use, so a lot of output actually goes into this.}
+{\pard  \line \par}
+{So again, we were like what is the best way to actually teach people that even when this is serverless there is something that runs for sometime whenever you read about server less, people say, okay, you have some code and you have selected environment for it this is pulled in runtime into a container }
+{\cf2 [00:38:00]}
+{ and then code runs and then it goes away }
+{\pard  \line \par}
+{just to make sure that they optimize things. This thing actually stays there for some time. Yeah. And you know, you can actually make sure that it stays there for some time where you can go into it, check the code if you have, you know, a foot into this by using a vulnerability or something and from there you can do things. Right.}
+{\pard  \line \par}
+{So, so that was the reason why we went with serverless at that time. Cause we were using it, we were like, ok. I think, this is a good thing to, to start with. What we're doing in that case is you have web application which has multiple data endpoints as well as the frontend part. So all of that is beefed out by multiple lambdas.}
+{\pard  \line \par}
+{And then in the backend for the storage, we're using AWS DynamoDB. And then there are S3 Buckets some files and then are other things like IAM so, because most of the time, as I was mentioning right there, entry that you're get is }
+{\cf2 [00:39:00]}
+{ going to be a web application or api, so in this case, cause this application has multiple vulnerabilities, you can actually use SSRF to get a foot into the container and from there can dump the environment variables can see okay, this this or this credential that is there.}
+{\pard  \line \par}
+{It can be used to access dynamoCB, you go to Dynamodb you find some information there and from there it other service and so and so, so , that is what the scenario is and the thing you can actually do in we deploy, right? And it is not a problem on lambda side. If your code is vulnerable, there is going to be some problem }
+{\pard  \line \par}
+{yep, yep. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And is the same for ECS as well.}
+{\pard  \line \par}
+{\b\cf3 Nishant Sharma:\b0}
+{ Yeah. Yeah. ECS is also same as again, , the way you approach it first. Cause in case of ECS it totally depends how its deployed. So when deploy ECS there are two ways of doing it , one is have your own PC machine running in the backend and in other case }
+{\cf2 [00:40:00]}
+{ AWS will automatically make sure that your image and everything is running containers form you don't have to worry about.}
+{\pard  \line \par}
+{So in the first case we have not seen much because it pretty managed by AWS , in the other case,}
+{\pard  \line \par}
+{ there are EC2 instances running in the backend, your containers are running there it is possible actually to run a privileged container there. But if you do that you can actually attacker, if he gets into that container, he can actually break out and then he can access the metadata service of EC2, and from there he can take then to}
+{\pard  \line \par}
+{module, right? Hey, we have done all of this. In that ECS is there which actually running EC2 in the backend }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Wait, when you say breakout of container, what do you, so does that mean that the person is able to break out the container to be on the EC2 instance }
+{\cf2 [00:41:00]}
+{ itself? }
+{\pard  \line \par}
+{\b\cf3 Nishant Sharma:\b0}
+{ That's correct. If you are container misconfigured or it has more privileges, you can actually break out of that space and you can actually access that is on EC2}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ would that be because it's a volume attached or Cause I would've thought that's, isn't that segregated to begin with and I'm just pretend to be a fool. }
+{\pard  \line \par}
+{\b\cf3 Nishant Sharma:\b0}
+{ It totally depends on how you have done things. So, you know, suppose in some cases there are multiple tools which you use for monitoring your container host.}
+{\pard  \line \par}
+{Yeah. One of the tools you must have heard about, Sysdig Yep. They do container monitoring. Right. Similarly, there is one more tool which is for therefore most of the post management it's called, there are plenty tools, which, which actually volume or docker sockets should be posted on those containers cause otherwise they won't be able to function cause they need to exactly the post using the dock socket, get all the data and }
+{\cf2 [00:42:00]}
+{ then monitor actions that are doing right. In this case, if you can somehow break into such a container, now you have the docker socket planted on it.}
+{\pard  \line \par}
+{So you can actually issue command for the docker, and if the docker is running as root which most cases it is, then you can actually break out of the container. So this is one scenario. Another scenario is something which actually needs more privileges. You have given it more capabilities, or you have made privileged container , which is a bad thing you should not not dot it. And in kubernetes if you are using maintained one like in the case of ECS you wont be able to do it in the other case, if you have a need, then if you go to the EC2 based route, you can actually do all of that. then the attacker can actually exploit us So again, it is a misconfiguration, you should not do it, but it's not something that we have made up scenarios where you have things like, }
+{\cf2 [00:43:00]}
+{ }
+{\pard  \line \par}
+{And how,}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ how do you protect against this as well?}
+{\pard  \line \par}
+{to you point then , and, cause a lot of people talk about some people talk about the whole runtime, security of ECS containers as well, but how do you even protect, I mean, I guess we kind of spoke about how do people can break out and which could be a bad thing. How do people protect against this not have miscommunication?}
+{\pard  \line \par}
+{I guess }
+{\pard  \line \par}
+{\b\cf3 Nishant Sharma:\b0}
+{ Again, }
+{\pard  \line \par}
+{miss the security in these things is also layered, right? So first thing is you don't need them to, so that is where you want, make sure the application itself is updated, the code and everything is good right now, assuming that updated. And then you have to put in things in places. So, for example, sysdig itself actually allows you to that as soon as a shell is spawned into any of the containers.}
+{\pard  \line \par}
+{So as soon as if you bash or something in a container sysdig can actually tell you that. On your, it can send you an alert on your dashboard, and from there you'll know that okay, something is happening. And after that, if you configure it , it can actually see }
+{\cf2 [00:44:00]}
+{ all the things that is doing. So there are things, right so you can detect it and contain it if you have made sure that there is nothing valuable on your EC2 there is no over privilege attached to the EC2 then I think even if the EC2 falls into his hand, there is not much to worry about. So all these things are very specific to what have actually deployed. If you have deployed something that does need to access the database, then don't have to worry about the database, right? Just contain the thing.}
+{\pard  \line \par}
+{But if you need access to database, you have to make sure that the data that is there, is not something which the attacker can do damage with, e.g. PII , keep your customer record seperate keep only those data those things in the database, which is required for the working }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ This kind answered the question that Roderick has as well, which was a security risk if someone breaks out the container.}
+{\pard  \line \par}
+{I think you've kind of answered it, but did you wanna just clear }
+{\pard  \line \par}
+{sure. }
+{\pard  \line \par}
+{\b\cf3 Nishant Sharma:\b0}
+{ Depends. For example, you container host }
+{\cf2 [00:45:00]}
+{ site, right? They vary from size to size which can be EC2 . Which is small inside. It can be a brick EC2 , it can be dedicated machine which you have rented out }
+{\pard  \line \par}
+{, let's have broken out and you have access to EC2, you have some data on it, which is important, right? or if it has a role or something attached to it ?}
+{\pard  \line \par}
+{That is not there. threat model again, falls back to having control over machine. Whatever you can do there, can do the same thing here. Cause it's again, a machine, right? If you don't have anything, there can be misused apart from the machine itself. I think that is where the threat is controlled But if you have something else, then you have to worry about that as }
+{\pard  \line \par}
+{well.}
+{\pard  \line \par}
+{Awesome. Thank you for answering that as well. I think one thing that I highlight right in Azure, when you run the VMs, most of the time people just like, ok, the VM is running }
+{\cf2 [00:46:00]}
+{ the VM is that, is to run the vm, which is not true. If it has internet connectivity, the user or the attacker can actually send a lot of data out and that will actually cost you more money that you have ever anticipated and he can do it malicious just to cause some thrill or it can be a DDOS bot which is sending a lot of traffic So I have these instances where }
+{\pard  \line \par}
+{it was a very small machine, I'll say hundred dollars a month machine and it got hacked by the scanners that I was talking about. Right. Automated scanners. So once the machine was hack DDOS agent was installed on it and it participated in one of the DDOS attacks and in three days it actually send over 300 TBs of data. Oh my God. }
+{\pard  \line \par}
+{People don't actually think about this. That's thing is very specific cloud. Cause when you have your }
+{\cf2 [00:47:00]}
+{ machine right, you're not charged for vendor but in case for Azure. I'm not sure about AWS right now, but in Azure actually charge data it will run into tens of thousands.}
+{\pard  \line \par}
+{so that is also very interesting ,}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That's interesting. I think it does apply to AWS as well. Cause the data out charge. But because generally the , data out is not much. So people don't think about it. And to Azure as well, people would not think about the data , out. That's a good point man. And I I didn't even think of industry.}
+{\pard  \line \par}
+{It could be used as an agent, as well, the, so lack of better word the messaging. That's pretty awesome man. I think, and we kind of towards tail end, I wanted to understand from you as well, what's the future plan for AWS Goat as well? Cause I think that's just obviously, that's one of the tools that people can use to learn and maybe extend that to make their internal training module or make their own if you, if they want you.}
+{\pard  \line \par}
+{So that's pretty awesome that you kind of created that for the community. What's a future plan from your part for AWS Goat? }
+{\pard  \line \par}
+{\b\cf3 Nishant Sharma:\b0}
+{ Yeah, so as I mentioned, right it's going to be modular, so we are going to roll }
+{\cf2 [00:48:00]}
+{ out more modules, but more than that, you know, so I did a survey on my LinkedIn and other places.}
+{\pard  \line \par}
+{And I ask people what exactly they want to see in AWS Goat?. So most people actually voted to have defender centric manuals. So what all things are there, which can be exploited, how I can use native things from AWS to detect or contain , we're currently working on that and we are gonna add those defender modules as well so people can use them and try to see if they can grow these things.}
+{\pard  \line \par}
+{So that is the next step. And as I was mentioning before, just like AWS Goat we have also created Azure Goat and GCP Goat, all of those are available on GitHub, you can download them , you can deploy them in a similar manner on your own account, again whenever you ask people to deploy things in their own account, one thing they worry about is the cost}
+{\pard  \line \par}
+{so }
+{\cf2 [00:49:00]}
+{ we have actually, given the estimates on the GitHub page itself it'll not costly more than a dollar to actually run it for one to two hours if you run it. And it actually comes under free quota. So if run out of free quota then only be charged won't. So those are plans, adding the defender and eventually the security engineering part.}
+{\pard  \line \par}
+{These are the things that you can fix in IAC to make sure that this thing doesn't }
+{\pard  \line \par}
+{happen. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That's pretty awesome, man. And yeah, I think be having it as an open source project, which anyone can use and cause it. So I think when we were talking about, well you mentioned licensing requirement for that.}
+{\pard  \line \par}
+{Project is pretty open source as well. So people can use it for their internal training purpose if they want to. Yeah. Yep, }
+{\pard  \line \par}
+{they can. So our AWS code and GCP code are under MIT , MIT is the most licensable open source out there. You can do pretty much everything. This, and the reason for this, we to give community from, from the, and, and our company has supported us.}
+{\pard  \line \par}
+{They have dedicated time so that we can work on it. }
+{\cf2 [00:50:00]}
+{ So, yeah. Even if, you know, someone is facing the difficulty when they're their own module for aws, we actually help out those people. And we try to see if, you know, , we can add whatever they're for that. }
+{\pard  \line \par}
+{Awesome. I think this, this would be a pretty , good addon for the follow up conversation that we have later this week.}
+{\pard  \line \par}
+{, so I mentioned this to you earlier, but I think we've got someone coming in, , who's gonna talk, what's it like to do penetration testing cloud world as well with scoping and everything. So on a conversation later this week as well. So I think people, I'm sure you'll find both that conversation , quite valuable.}
+{\pard  \line \par}
+{But that was kind of the technical question that I had. I've got some fun questions for you as well. Three fun questions, which I would love to get to have you share your other side as well, which is the first one being, what do you spend most time on when not working on cloud training or technology?}
+{\pard  \line \par}
+{Okay. I love gaming, so most of the times I'm playing age of empires . Nice. Was it four? So, yeah, that's the top thing. Second, I love cooking, so whenever I have some time, I do cooking. And then the thing is to go around and see }
+{\cf2 [00:51:00]}
+{ happening nearby. Yeah, }
+{\pard  \line \par}
+{that's all.}
+{\pard  \line \par}
+{Awesome. I think cooking is kind of what the my third question, but the second, the second question.}
+{\pard  \line \par}
+{What is something that you're proud of that is not on your social media? }
+{\pard  \line \par}
+{\b\cf3 Nishant Sharma:\b0}
+{ Okay. Okay. , and that's a tough one actually. . So yeah, it work related actually. So that kind of interest we have at INE make sure that their customers can run labs 24 x 7 in six different geographic region.}
+{\pard  \line \par}
+{Right? We are running thousand, 10,000 actually labs every, every couple of days. And keeping that infra up and making sure that it's secure and everything. I think that is the, the next thing that I take pride about. Cause I don't actually say it, this is the first time I'm mentioning it in }
+{\pard  \line \par}
+{No, but as engineering, I love that part.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. Yeah. As an engineering, }
+{\pard  \line \par}
+{I'm, I can imagine the, the scale of engineering that is also quite challenging as well. So I'm glad you're doing and something to be definitely be proud of. Last question, and this is kind of related to your cooking, I guess. What's your favorite cuisine or restaurant that you can share?}
+{\pard  \line \par}
+{\b\cf3 Nishant Sharma:\b0}
+{ So , }
+{\cf2 [00:52:00]}
+{ I don't have a favorite favorite right now. But favorite cuisine I prefer, yeah, mostly the butter chicken or somewhere. Yeah, . }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ There you go. Butter chicken as well. It's always good to, I think someone in Sydney over here started something called the Indian Kebab. And the Indian kebab is basically a Naan breaded with butter chicken inside.}
+{\pard  \line \par}
+{Are they, as I found, or. For people out there who, if you wanna try an Indian kebab, that's word. It's like basically butter chicken inside a Naan, a rolled up Naan but that was most of the questions we had, man. Where can people find you on social media to kind of have follow up questions about the whole AWS goat and cloud penetration testing and all that as well? }
+{\pard  \line \par}
+{\b\cf3 Nishant Sharma:\b0}
+{ Yeah, }
+{\pard  \line \par}
+{I'm on }
+{\pard  \line \par}
+{LinkedIn, I'm on Twitter, so yeah. All the questions are welcome, get questions even for people that, you know, I have interacted like five years back, they're,like this is the thing and how do I tackle that}
+{\pard  \line \par}
+{and you know, I also, sometimes you don't think things even }
+{\cf2 [00:53:00]}
+{ when you are working on it full time sometimes the perspective, the outsiders angle is very valuable. So yeah, forward }
+{\pard  \line \par}
+{to all the questions. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Awesome. Well thank you so much . For coming in. Everyone else who's joined us for the session pen testing session happening. This Thursday. You'll see the livestream, , notification page. So definitely make sure you follow the cloud security podcast page. But otherwise, I'll look forward to seeing you all and thank you again, Nishant , for coming in. Well I'll see everyone on the next episode and hopefully Nishant can come back in again.}
+{\pard  \line \par}
+{But thanks so much for this Nishant and thank you everyone for tuning in thanks everyone. Thank You Ashish. All right, thanks. Bye.}
+}

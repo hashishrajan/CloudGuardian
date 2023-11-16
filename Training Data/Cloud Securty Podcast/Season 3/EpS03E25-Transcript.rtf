@@ -1,0 +1,506 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red250\green138\blue59;
+\red128\green128\blue128;
+\red216\green34\blue146;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ Hey Sai welcome man. How are you?. }
+{\pard  \line \par}
+{\b\cf3 Sai Gunaranjan:\b0}
+{ Hi. Good. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ How are you? Good. Thanks for coming in, man. I'm really looking for this conversation last week we spoke about leveling up at least the Azure security fundamentals for people who may be just starting.}
+{\pard  \line \par}
+{So I'm really excited about. What we can talk about from a cloud security architecture perspective as well, but before we kind of get into that, for people who may not know who Sai is can you just tell us about yourself and a bit of body professional }
+{\pard  \line \par}
+{\b\cf3 Sai Gunaranjan:\b0}
+{ background? Sure. So, hi, I'm Sai, I'm a principal architect currently with Allscripts health care and part of the cloud platform team but responsible for overall availability and the security of the platform and all applications that actually are hosted on the platform.}
+{\pard  \line \par}
+{I started off way back. I think it's about 15, 16 years plus experience in all of this stuff is a building. And we started off as a desktop engineer, worked on servers, worked on data centers and then eventually got into cloud. And it's, it's been an absolute fund in the cloud better than the data center.}
+{\pard  \line \par}
+{This, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I can watch for that as well. So let's start with the obvious cause a lot of people may not even know what an Architect does. Let's just start with that first, }
+{\cf2 [00:01:00]}
+{ what does an architect can do in a day-to-day. }
+{\pard  \line \par}
+{\b\cf3 Sai Gunaranjan:\b0}
+{ Oh for us as a platform architect day-to-day basis for me working with various application teams across various business units and then enabling them to be successful using the cloud services, you know, using Azure primarily because my focus area is Azure.}
+{\pard  \line \par}
+{Enabling them to be kind of think of it as. Cloud focused application development, you know, from an, from the whole resource point of view, to the code deployments, CI CD pipelines, all that kind of stuff. We kind of plan out implemented and, and, and you know, get it kind of operational on the cloud.}
+{\pard  \line \par}
+{? So as an architect, it's all about planning, design, how to, how it should look like or not how it should be deployed. And in all the stuff that actually goes into security. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So , how do you design the architecture of an application? }
+{\pard  \line \par}
+{\b\cf3 Sai Gunaranjan:\b0}
+{ Kind of, yeah. How does the application on the services that, you know, eventually someone is going to consume either it could be a, you know, end user, a client partner or maybe on internal systems could be using it.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That could be a next segue then starting with Day 0. Imagine we haven't done }
+{\cf2 [00:02:00]}
+{ anything in Azure and I want to try and cater for people who are starting in Azure first and then kind of go into the advanced mode. So for people who are today is day zero. And I have been told, I need to put an application into Azure.}
+{\pard  \line \par}
+{What are some of the basic foundational design consideration people would have to make when building applications in Azure? }
+{\pard  \line \par}
+{\b\cf3 Sai Gunaranjan:\b0}
+{ So the top, so the top few that I would actually, I can talk about away would be to start off with is authentically. How has application going to work in authentication point of view, whose conduct integrate with the application and how is application would not indicate with other services?}
+{\pard  \line \par}
+{Like if you have web services and function apps and, you know, Kubernetes, clusters and pods and so on, how are they going to be accessing. You know, backend databases, cosmos DBS, and, you know, sequel and, and all of them, and also how the user can authenticate against these services to get access to them.}
+{\pard  \line \par}
+{That will be a big thing. And natively Azure ID has been really a great service putting all of this stuff. So, so basically when the entire application authentication, even for end user }
+{\cf2 [00:03:00]}
+{ authentication for so starting off with that, the next thing would be network controls. Everything on public cloud is.}
+{\pard  \line \par}
+{In in, in, in, in, in some terminology. So you have to actually always ensure that you have firewalls enabled. You have to actually ensure that, you know, your services aren't exposed to the internet are not exposed to, you know, unnecessarily will not be not necessary. So like storage accounts and key vaults and container registries and stuff, which eventually, you know, contained to center to a certain degree sensitive data.}
+{\pard  \line \par}
+{It shouldn't be on the internet. They should be always privatized. They should be having some amount of network controls. Even if you don't take pass services, even if you consider a web service or a, or an a front end, there should be some kind of or something that actually, you know, governance of traffic that actually gets into an application that's network controls.}
+{\pard  \line \par}
+{From there on the next few things would be accessing logging access controls from an administration point of view, who, which administrators should have access to the resources who do, who can modify or change them and so on. And then we went to logging as well. Everything must be }
+{\cf2 [00:04:00]}
+{ logged, everything, you know, data is very important for us.}
+{\pard  \line \par}
+{You know, it kind of leads into a lot of compliance requirements that you have, you know, be HIPAA SOC or whatever. You've got to have data to evidence out what happened in the platform. So logging is absolutely. These are the few things that we get let's get started off with. And then there will be so many more.}
+{\pard  \line \par}
+{Once we start to go deep dive into the application, its functionality it's exposure and so on, you can actually in deep dive and, you know kind of tweak it more to the application needs. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Thank you for laying out the groundwork for where do you start with, because what I noticed was you kind of mentioned authentication, networking, and access control.}
+{\pard  \line \par}
+{ I would have thought in my mind, you would have spoken about security services as well. So where does the Azure security services play a role in this. What's the thinking behind using those when designing an architecture. }
+{\pard  \line \par}
+{\b\cf3 Sai Gunaranjan:\b0}
+{ This is from an application point of view, ?}
+{\pard  \line \par}
+{As a platform, when you onboard a platform that's where you have to actually enable, you know, Sonia when you onboard on a subscription or list the Azure service on within the enterprise, ? The first thing is to actually enable defender and a and defender for cloud these }
+{\cf2 [00:05:00]}
+{ services get baked into the.}
+{\pard  \line \par}
+{To a subscription itself to the tenant itself. And then every S every resource that's actually coming up on top of it actually will be monitored based on how you do, how we configure the policies on, on security center and so on. That's how I, so that's why I'm not going to detail our security services on the application kit.}
+{\pard  \line \par}
+{It's more of a platform thing. The application teams, in my opinion, should be abstracted out of that. It should be something that they integrate as the kind of onboarding. The, the, the tooling that we provide. So when they deploy like a web service or they deploy Kubernetes or something like that, if you have defender for cloud enabled, and if you have all the required policies and stuff enabled on defender, Kubernetes, clusters, container registry is all of them start getting scanned automatically based on the policies that to deploy.}
+{\pard  \line \par}
+{Then, you know, if you have honorable images or if you have wonderful processes and stuff, you know, you do get alerts a new group to get notifications that, you know, You know, th this is, this is going wrong or, you know, kind of a malicious file and so on. So that's how I see that, that, that actually simplifies the }
+{\cf2 [00:06:00]}
+{ application side of it.}
+{\pard  \line \par}
+{They don't have to worry about what I need to do to secure my application. They already start building into a secure environment. This goes in very much into the RSA talk that we're giving in the next week as well, like in, in, in June. So we kind of covered. The platform readiness. And then we talk about application design and then from there on, we kind of go into, you know, operations as well.}
+{\pard  \line \par}
+{So yeah, so that that's, that's really, I didn't cover security services and application design. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ It's a good point as well. That was a trick question. You answered it really well. The reason I was asking was to kind of highlight the fact that for people who may be listening in from an architecture perspective , they kind of have to think about from two tracks as well.}
+{\pard  \line \par}
+{Like one would be an architect from, Hey, I want to design the Azure platform for scale and how do I secure it? But then the other parallel track that is running is, or applications that are going to be deployed, whether the application itself needs anything special, because then you can. Reuse something from your platform for the application as well.}
+{\pard  \line \par}
+{Now, to your point, that could be authentication, not networking as you pointed out when you're building the platform. Now }
+{\cf2 [00:07:00]}
+{ the next layer of question for this is then , if I have my platform sorted, I've got one application running as. Now, at this point in time, does it make a difference if my application is using containers or is it using my regular VM?}
+{\pard  \line \par}
+{Would you approach this any differently if it was containers versus like, especially windows containers? Cause I don't hear much about them and you seem to have some knowledge of it. So, because I was like, why would you use windows containers? But anyways, I'll keep the conversation aside for now, but between like a virtual machine and a windows container, would your approach be any different for design considerations as an architect? }
+{\pard  \line \par}
+{\b\cf3 Sai Gunaranjan:\b0}
+{ VMs as a whole compared to a past service, like even if it, it's not continuous, even if it's a web service or a function app or Lambda or whatever you have, . This. Footprint defense. So, so there's a footprint difference, ? VMs are the whole stack of to actually maintain it, manage it, upgraded, updated, you know, secure have a lot of firewall policies and all that kind of stuff that actually go with it.}
+{\pard  \line \par}
+{It's a lot of administration that goes along with maintaining a VM as it's, it's much more easier, you know, you have, }
+{\cf2 [00:08:00]}
+{ you just have the service layer and you only have to maintain the service. And then if it's product or service and safe kind of service from, you know, having controls and so on and, you know also different footprint.}
+{\pard  \line \par}
+{It's not exactly as BMS. I would say it's, it's what smaller footprint. So your your update cycles, and those could be much, much more streamlined, but then you do have inherent problems as in you're running in a virtualized environment. So you have. Plan out on how you scan them. The challenge of containers mainly is, you know, the real-time scanning that actually happens.}
+{\pard  \line \par}
+{There's a lot of third-party tools available in the market. You know, like now even I think Azure defendant has some scanning available where it actually kind of catches a wonderful POTUS of stuff like that. But that's one of the biggest concerns that you have actually not out if you're having a traditional VM, that's not a problem.}
+{\pard  \line \par}
+{You install, you know, call us or, or other agents on those machines. And, you know, Kind of sending out data as to what's wonderful, you know, what's going wrong and so on, but if it's contained, it's more challenging. Your footprint is so small that you actually can't do it. So that's where it's, it's, it's a different mindset.}
+{\pard  \line \par}
+{When you go to containers, it's not, you can't compare them with like a traditional VM based }
+{\cf2 [00:09:00]}
+{ deployment. And the security challenges that come with it are, are, are its own. Like even how you secure a container image, you know, And show that you were pulling images from a secure location. How can you confirm that the image is not actually compromised or there is no, you know, somebody didn't ingest something malicious into the image and then you're consuming some kind of malicious image as well.}
+{\pard  \line \par}
+{So all of those things comes and a concern comes into concentration when you build container based images beat windows or Linux, it's the same challenge. Windows images are windows emails that are more painful process to go through, but the challenges are the same Oh, yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I'm glad you said it, man.}
+{\pard  \line \par}
+{I'm glad I didn't not to say that the windows container that a challenge. I don't even know why people go for that, }
+{\pard  \line \par}
+{\b\cf3 Sai Gunaranjan:\b0}
+{ There are some use cases of using windows containers. We had some success using windows containers in a one time use build agents. . So they, they kind of have to pick up a task and then they do a build. Bill for you on Azure DevOps or GitHub, and then just terminate themselves so }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ we do that. }
+{\pard  \line \par}
+{So we started with the basics of architecture. We kind of then did the }
+{\cf2 [00:10:00]}
+{ compute difference, the security different platform, as well as the comparison between security architecture for a platform versus an application.}
+{\pard  \line \par}
+{I want to talk about scaling as well and sounds like. What we have been talking about is basically the foundational pieces. If you don't have a great platform, you can't build application, but if you have application, you can only build one. You can't really multiply that by 100 times. So IaC or infrastructure as code is kind of like a very foundational piece to automating and doing a lot of things at scale.}
+{\pard  \line \par}
+{First of all, what is IAC for people who may not know what it is and why not ClickOps? }
+{\pard  \line \par}
+{\b\cf3 Sai Gunaranjan:\b0}
+{ I actually had to read about what is click go so IaC is a code version of the infrastructure that you deploy. So you in, in, in simple terminology, you know, the VMs are to deploy the SQL servers, the pass services, whatever you deploy on, on any cloud provider, you know, beat AWS or Azure they actually can be defined as code.}
+{\pard  \line \par}
+{They can be defined as a Jason template, or there could }
+{\cf2 [00:11:00]}
+{ be, you know, like a Terraform had C a language it's, it's highly declarative, but it's actually. It's a, it's a text file you can read through and you can see the properties of the resource. You can actually define what you wanted there, you can define what size of the or what services you want exposed to the internet and so on.}
+{\pard  \line \par}
+{That that actually helps in keeping consistency a lot. We always see scenarios where. I think I did that on the portal, but then something else happened or, you know Azure messed up because I was expecting to click on this and, but you know, something else actually happened. I did not know what happened on all of the stuff actually gets eliminated.}
+{\pard  \line \par}
+{When you do ISE, you know, you will know exactly what you wrote, you know, that's what is actually sent to Azure. And then, you know, what is sent is what actually gets deployed. On, on, on Azure, you know, you could use a combination of arm templates. They also have bicep, which is a newer language. It's fairly new.}
+{\pard  \line \par}
+{I think it's, it's still kind of picking up and also be finished out from primarily and I found to do more of open source cross cloud deployments. }
+{\pard  \line \par}
+{ Click ops it's more kind of laborious, ? suppose I want to build up like say 40 }
+{\cf2 [00:12:00]}
+{ machines and, you know, in multiple virtual networks and configure, you know, all the firewall rules and NSG rules and all the stuff that actually goes along with configuring the environment that's going to take forever.}
+{\pard  \line \par}
+{And if I want to do it like multiple teams across multiple regions across various Azure, Like in the U S and Europe and all that kind of stuff, it's just, it's just going to take forever. And inevitably we arguments, we're going to make some mistake. I, as you might click something, I'll assume that I did something else there, but that's not what I clicked.}
+{\pard  \line \par}
+{And that's not what actually caught you know, inputting into the system as well. Sometimes IAC or, you know, using code is better because there are features and there are some options that you will look in, in apply using code. You can do it in the. So, for example, some firewall, I think container registry or something on Azure, one of them you can't really apply firewall rules on the portal anymore.}
+{\pard  \line \par}
+{Maybe, maybe no, you can. But in the past you could only have to actually use CLI or if you start a former arm templates to actually apply those things some options may not just be available, so it's better to, you know, quantify it, }
+{\cf2 [00:13:00]}
+{ validated, test it out, someone can review it and then it gets to. The bigger aspect also is review.}
+{\pard  \line \par}
+{You know, you suppose you have a human being going and doing it, you know, you don't know what they're doing. There's no one looking over what they're configuring, but if you have something in court it's reviewed by the peers, they actually actually have a peer review to ensure that everything is correct.}
+{\pard  \line \par}
+{There is no The internet exposure has minimized all the kind of stuff is correctly designed. And then, you know, it's implemented }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ yeah. It's the age old problem. Well, if it works on my machine, but doesn't work on yours clearly like data center world would know about }
+{\pard  \line \par}
+{\b\cf3 Sai Gunaranjan:\b0}
+{ it. But also I think from, from my point of view, as an architect, , the closure you get when you finish an application is to see successfully deployed the way you intended it to be designed, like, you know, where you designed it.}
+{\pard  \line \par}
+{And if it is not, and if there's no way to. Check it, you know, so, so, so you can go down tools and you can go verify the implementation, but if you don't have a code to verify what you did and see, okay, this is what we put in paper as a design, or this is what is it kind of represents in code, and this would exist on the platform.}
+{\pard  \line \par}
+{It becomes extremely challenging on to audit and verify if everything's }
+{\cf2 [00:14:00]}
+{ correctly done, especially from a security point of view, it becomes a big. So ISE is preferred then, you know, click ops, give cops what led to scale is it's going to, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ It's funny, I heard this once and for people who still may not have understood what kickoffs is basically, it's like, you're doing next, next, next to the screen using your mouse.}
+{\pard  \line \par}
+{We spoke about the importance of not using ClickOps and going down the path of automating. You kind of touched on arm and bicep. What are they }
+{\pard  \line \par}
+{\b\cf3 Sai Gunaranjan:\b0}
+{ from measure? So there they are, the native languages for So, so Terraform is more open source, ? It's, it's managed by HashiCorp and it's open source.}
+{\pard  \line \par}
+{So native services on Azure, if you, if you want to deploy something into, into our shore as an arm template or the bicep bicep is more of an abstraction of arm templates, it it's easier to understand the non templates. But it is it's, it's, it's, it's more native to the solution layer. It's more native to Azure itself.}
+{\pard  \line \par}
+{You can't use it for other services outside of Azure. Other than that, you also could use PowerShell and CLI, but that's more to do with like operational tweaks if you want to do }
+{\cf2 [00:15:00]}
+{ it. But I don't really recommend that as a full fledged implementation. That's not, that's not going to scale again, but then there are some places where ISE might not really work out and that's where you, you want to stress on you.}
+{\pard  \line \par}
+{Some code again, which is like CLA a PowerShell to, you know, set up the last bit of the resource, something like that. And if you have some configuration to tweak or stuff like that, that's what do, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I'm glad you kind of pointed out that templates and bicep may not always be the thing . Is IaC something I can use for the application as well? Or is it just for. }
+{\pard  \line \par}
+{\b\cf3 Sai Gunaranjan:\b0}
+{ It's only for infrastructure. You could do some amount of application deployment in that in a, you could, you could configure a web service or a function app.}
+{\pard  \line \par}
+{You could, you could package it in such a way, but it's not really recommended IAC. So, so Terraform or our arm templates and stuff are best only for deploying. If I do a post deployment, like, you know, application level deployment, they should use a different pipeline for that. That's also, it actually goes back into the design aspect of the application, answering availability of the platform, considerably a bit of the, of this, of the application itself.}
+{\pard  \line \par}
+{It's it's best to }
+{\cf2 [00:16:00]}
+{ actually have them both kind of segmented out the infrastructure deployment should happen in, on its own. And then the application should happen as a post deployment task that they're both two different separate specialized tasks by themselves. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I've got a question here from Mayank as well over here.}
+{\pard  \line \par}
+{I'm going to, rephrase this. How much can we have to depend on Terraform for any cloud security plan? }
+{\pard  \line \par}
+{\b\cf3 Sai Gunaranjan:\b0}
+{ So if I, if I can understand the question, so I think it's like how much, so, so none of them are actually very, very dependent. You know, you can depend on it for a lot of resources there. The, you know, it's, it's the, the maintenance of the modules and the resources are really. Unlike you know, some, some few years ago most of the latest features that are available on the platform are available in Terraform as well, both from a security point of view, as a lesson resource configuration point of view.}
+{\pard  \line \par}
+{So you can depend on it a lot. So there are scenarios where something that just came out late last week might not be available because this is open source now. It's going to take, it's going to take some time to catch up. That's when you know, you have to actually maybe pair it with. Bicep, maybe a bit of bicep, like rap, bicep, INR, maybe into Terraform, and then use that to deploy most case }
+{\cf2 [00:17:00]}
+{ scenario.}
+{\pard  \line \par}
+{There are scenarios where, you know, you'll have to maybe run like a PowerShell or an easy CLI command around, wrapped around with, with Terraform and then deploy, you know, use that to kind of configure the resource, like for example, like some resources and some services like front door, they have limitations on how.}
+{\pard  \line \par}
+{So th those are, those are kind of changing very, very rapidly on Azure platform. And Terraform has some catch up to do at times. That's where, you know, bedding Terraform with CLI a publisher will, be the best kind of results as well. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ We spoke about Terraform and we spoke about Azure bicep arm as well. Now probably the second most important component of a building at scale is CI/CD pipeline.}
+{\pard  \line \par}
+{How would you describe CI/CD pipeline and what are some of the design considerations there? . }
+{\pard  \line \par}
+{\b\cf3 Sai Gunaranjan:\b0}
+{ So so now we have code, ? We can run the code from a local machine and then, you know, run the, the required partial commands and deploy data, or even , you know, bicep as well. But that's, again, that's not going to scale because we are dependent on }
+{\cf2 [00:18:00]}
+{ one human being to run.}
+{\pard  \line \par}
+{You know, commands and then execute them and they might be having issues, you know, they might lose internet. They might. So maybe, maybe even machine crash, also, everything will just go for a toss after that, you know, your time has, will be impacted. That's why CSED pipelines come into picture. So whatever your.}
+{\pard  \line \par}
+{But whatever is written in code is in a source controlled. You have a strict review process so that, you know, someone always checks what you actually wrote. What does w what you kind of configuring your, what plan to deploy after that? It get most into the main branch and from the main branch, you have pipelines that actually executes the pipelines and nothing but a collection of tasks or actions that are set to do that are set in a sequence to perform.}
+{\pard  \line \par}
+{Well from a deployment of perform a configuration of performance, that kind of action on, on Azure or AWS or any other platform of your choice. ? So the way I would, so in, in the way I design applications are more to do with blast radius, we consider the impact of an application, a pipeline going wrong and how much it can take down.}
+{\pard  \line \par}
+{So rather than having }
+{\cf2 [00:19:00]}
+{ everything in one package, Or other than having like hundreds of pipelines and one pipeline for every resource. Group group number of services into a collection. Like, you know, maybe if it is a multi-tiered application or if you have a front service, if you have a network tier and stuff, and so on, we'll pull resources that actually are alike and deploy them in one pipeline.}
+{\pard  \line \par}
+{So that's how we kind of designed pipelines as well. And then we kind of segment that out between resource deployment. And, and and the, the application configuration, they're two different pipelines we don't want, because application configuration and application pipelines, you want the application team to have more control and they should be able to iterate fast.}
+{\pard  \line \par}
+{They shouldn't be tied into a resource deployment pipeline. They shouldn't be waiting for the infra pipeline to run, to do the application stuff. So we want to enable them to be faster and, you know, deploy sooner on Azure or AWS. . So. Bye pipeline, design attributes, three major things, blast radius, and segmentation of resource versus application deployment.}
+{\pard  \line \par}
+{And then last year, it is also to a point where you can based on that, based on size of the application, you know, maybe }
+{\cf2 [00:20:00]}
+{ network is one pipeline. Maybe the front-ending is one pipeline and maybe the data tier is a pipeline and stuff like that. That's how you have to plan it out, but also governs with the state file.}
+{\pard  \line \par}
+{It also governs with access restrictions. So you only have network team who can run the network pipelines. You only have, you know, the, the, the infrastructure teams to be able to do server deployments and so on using these pipelines and in case something goes wrong, or it only takes down that pier doesn't take down every, the entire application is.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That's an interesting point you touched on about the whole CI/CD, where one per app versus infrastructure separated by application and grouping as well. I'm going to a question that came in from Sunil Prasad Muralidhar Sunil's question is Hi Sai!, where do you believe cloud security products do they fall short in term of meeting the needs of practitioners, such as yourself? Missing IOC context alert, volume, runtime. This is actually a great question because I've got a question on monitoring as well. So where do you see the cloud security products fall }
+{\pard  \line \par}
+{\b\cf3 Sai Gunaranjan:\b0}
+{ short and the two products actually there is, }
+{\cf2 [00:21:00]}
+{ I think native products.}
+{\pard  \line \par}
+{There, there is amount of integration that sometimes is missing on native products. There are other third party tools that actually fill in this, this. But natively on platform itself, you know you may be late, they may be false alerts and, you know, it might be even kinda miss the presented because of stale data, the different cycles and stuff might be pretty late that actually might give you long kind of, kind of misrepresent your environment from a security point of view.}
+{\pard  \line \par}
+{But you know, I think other than that, there are some third party tools that can be paid with data services that will fill in these gaps. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Okay. And do you feel like you have to kind of switch over to something else at that point or? No. }
+{\pard  \line \par}
+{\b\cf3 Sai Gunaranjan:\b0}
+{ It's a combination of them, ? You, you, you, you always, you know, it's, it's always about a combination of tools that you end up using eventually to kind of get all the results that you're looking for from a security point of view.}
+{\pard  \line \par}
+{So it's not, you know, you can't rely only on one tool for everything. There are, there are tools which are specialized, only mobility management. There are tools that only specialize in say scanning of resources. So you use those tools to fill in any gaps that the native tools don't provide.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ One of the questions that people }
+{\cf2 [00:22:00]}
+{ always have that is not taught in may certification as well is if you're building an application. So you use everything that has to be offered by Azure.}
+{\pard  \line \par}
+{Would you say you would have gaps in security capability if you were to just only do Azure now? Separate argument about whether you're using parts of your your Azure is basically a mix of on-prem or whatever. But if I were to just go I'm cloud-first, I'm building my application in cloud and I'm building everything using cloud native Azure things only.}
+{\pard  \line \par}
+{Would they be still gaps left at that point in time from an architecture perspective that you will probably }
+{\pard  \line \par}
+{\b\cf3 Sai Gunaranjan:\b0}
+{ see it'll give you enough to So I think it depends on what you want to get out of the platform as well. So if you're looking at, say, let's take an example of say this like a SQL database kind of misconfiguration of SQL database a password was being misconfigured.}
+{\pard  \line \par}
+{I was just acute a center or defendant. We'll alert. If there's something going wrong, they will just tell you that, Hey, we recommend don't doing it. But if you use a third party tool, }
+{\cf2 [00:23:00]}
+{ you'll get an alert saying, you know, there is a misconfiguration of SQL database. There's this misconfiguration of storage account or stuff like that.}
+{\pard  \line \par}
+{So, Secretary center defendant for cloud. We'll give you a sufficient to get started with, but if you're looking at more enterprise scale, multi cloud, multi application correlation, all that kind of stuff, you're you. I, I it's best to get, actually get some third party tools also involved in, in, in this in.}
+{\pard  \line \par}
+{So yeah, so yeah, exactly. Yeah. And also if you have multi multi-region, like multi-cloud deployments in our sacred center, doesn't always solve all of those problems we left in, you know, using other tools that actually fill in those gaps for you. Yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ The E5 license in Microsoft definitely helps fill a lot of the gaps and makes a whole big hole in your pocket as well.}
+{\pard  \line \par}
+{But you can afford that. But that's, those are good conservation men. So we do the }
+{\pard  \line \par}
+{\b\cf3 Sai Gunaranjan:\b0}
+{ bare minimum a lot. Say that's the best way. It's definitely the bare minimum you can get started with. And then, yeah, it's awful. Don't get me wrong. I'm not trying to downplay Azure or something as powerful. Like, you know, it's a combination of different of a cloud and }
+{\cf2 [00:24:00]}
+{ Azure policies and stuff.}
+{\pard  \line \par}
+{You can actually do a. You actually can alert and do a lot of good stuff, but that's not always what security teams also look for. They want alerts. They want to see what's going on. That may not be fully baked into defender, or it may not be that, that efficient as what a third party to kind of offer. So that's where the tools come into picture.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ We were talking about CI/CD pipelines and what are some of the design considerations?}
+{\pard  \line \par}
+{Because we are talking about building application in Azure in a secure. In a way that it can be scaled as well. We spoke about the platform is what called application and we kind of touched on the IaC part. CI/CD. and you touched on whether you would go with an individual's CI/CD pipeline per application, or would you group them as services?}
+{\pard  \line \par}
+{Based on what just here, what are you normally recommending people to monitor in an Azure platform? I mean, obviously if we're, depending on the application, what's the kind of application is, but in general as an architect, what are some of the basic monitoring things you're asking people to at least monitor for, or have some kind of an }
+{\cf2 [00:25:00]}
+{ operation capabilities?}
+{\pard  \line \par}
+{\b\cf3 Sai Gunaranjan:\b0}
+{ So it depends. Yeah. I think it depends mainly on which, what application is you're deciding on a show. So if you're going for past services, then, you know, you're using native monitoring capabilities of paths using app insights or insights itself. Yeah. I would say log everything that's possible.}
+{\pard  \line \par}
+{Get get all the logs that are, that you can, and then once you have the data, you can then alert based on what you feel is more relevant for the application. Some applications are very spiky that, you know, they have, you know, where they, you know, have like bursts of data that the process and stuff and so on.}
+{\pard  \line \par}
+{And those kind of applications having like a CPU or memory monitor doesn't make really a lot of sense sometimes also on the firewalls and stuff. If you see a lot of connections being dropped or, you know, connections being made on random ports and stuff, you might want to get alerts on that so that, you know, if, if there's.}
+{\pard  \line \par}
+{Trying to get into the system. You can actually alert and track it. Same thing for friends or kind of services for IaaS and PaaS for IaaS. It's this totally different. Again, for IaaS, you want to do security monitoring. You want to do one durability }
+{\cf2 [00:26:00]}
+{ management and on the BMS, you want to want to see, you know, if, if your VMs wonderful, any, any known issues, if there's any patches missing.}
+{\pard  \line \par}
+{And, and, and so on. So it's a combination of availability as well as security monitoring for, for IIS as well. So if in case the mission is going to get restarted or it's going to, or it's called offline, you want alerts for that as well. Those are some considerations that you want to take into for ISA.}
+{\pard  \line \par}
+{But for past, I would say native services do a really good job of monitoring it. Especially app insights. If you have app insights deployed for, for web application and functions and stuff, it gives you an overall overview of the service as well. It tells you at which, at which layer and at which hop of the service that the application went offline or what, what happened.}
+{\pard  \line \par}
+{We'll actually get to see the whole history and the whole trail of events that actually what happened in on log and let exome it's very useful. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yep. And probably another one to call out over here then. Is that okay if you have app insights and it seems like a lot of other things that you can go forward with how do you even measure maturity .}
+{\pard  \line \par}
+{There might be a lot of people who want to start today. And we started this whole interview }
+{\cf2 [00:27:00]}
+{ with the conversation that today is day zero. We're starting from scratch. So for people who are listening into you're going to going, okay, like, it seems like I have a lot of work to do. Where does one start?}
+{\pard  \line \par}
+{What are some of my basic foundational things that I can maybe offer a finished, respond to this episode on the audio podcast or watch the live stream? What can I go ahead and at least do as a basic benchmark, if you like, you know, at least I've done the basic.}
+{\pard  \line \par}
+{Very very basic level one. If you were to use that word from a maturity perspective and how are you going to scale that out? , what's your thought process for where does the level of zero was, is level 10. If that's how high you can go. }
+{\pard  \line \par}
+{\b\cf3 Sai Gunaranjan:\b0}
+{ I would say level zero level one was to at least enable logging men yet.}
+{\pard  \line \par}
+{So there, so if you deploy a pass service natively on Azure, ? If you deploy key water storage accounts and stuff, and all . Diagnostic logging, which actually monitors the self. For, you know, number of hits, number of failures, you know, who, why they failing all the kind of stuff is not enabled by default to actually enable diagnostic logging for it.}
+{\pard  \line \par}
+{So step one would be to first create a log. It takes work. How has centralized one don't have having multiple of them }
+{\cf2 [00:28:00]}
+{ is not going to work out because you know, it gets too, you know, you have too many, you don't know which one has, what kind of logging and security center and defender for cloud and Sentinel also get into trouble with scanning, all of them, you know, you just start to have more costs and more operational burden.}
+{\pard  \line \par}
+{So have a centralized one. If you want to do it per region, how it is send all the logs to that. That's definitely like. Once you have the data, unless the data, see what application is more relevant to, and then accordingly scan or, you know, alert for vulnerabilities are, you know the events that actually happened on that.}
+{\pard  \line \par}
+{For example, if you have a storage account, that's expecting data uploads only, only, only data uploads. When you start to see someone trying to read data from it to download data from it, that that's an alert you want. So if you don't have the data, you want to know what's going on and you can alert on top of it.}
+{\pard  \line \par}
+{And then from there on you have log analytics, workspace, you have the logs, you have the Cousteau language, you customize a query based on environment, based on, you know over the various parameters that you want. And then you can create a lot, some there, you can also create like, you know, dashboards and graphs and so on and, and take it from there }
+{\cf2 [00:29:00]}
+{ that, that, that will be, you know, to start with and then dashboards and having real-time monitoring would be like, like a good seven, eight.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Someone has a real-time dashboard on their Azure. That's like level seven or eight. }
+{\pard  \line \par}
+{\b\cf3 Sai Gunaranjan:\b0}
+{ Yeah. And then from there on you can do real-time alerting as well, and you can get text messages. So alerting is always there. I think I would say a solid thing is always like a constant thing. You have to keep on checking it and see if it is still relevant for the environment and then tweak the alert.}
+{\pard  \line \par}
+{So it's, it's a, it's a continuous operation. It's not like you set it up and then you're done with it. You have to always tweak it to meet your requirements and meet the changes in the platform. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ What about auditing and compliance kind of thing? How does that fit into all of this?}
+{\pard  \line \par}
+{\b\cf3 Sai Gunaranjan:\b0}
+{ The way I see it, as, you know, you have to actually build in those requirements into the design, so that, so again, logging is one of the key aspects of, you know, compliance in the. No what's happening in the platform. If you don't know what's happening from that, that's a big issue. You've got to kind of, you've got to manage your deployments.}
+{\pard  \line \par}
+{You've got to know who has access to the environments. All of that stuff is baked }
+{\cf2 [00:30:00]}
+{ into the design. So we started off with authentication access controls you know, then go into CSED pipelines. And one of the reasons why we do segmentation. I plain says we absolutely know which team has access to which pipeline and who only can, who's authorized to run those pipelines.}
+{\pard  \line \par}
+{So you don't have any unauthorized usage of those pipelines, which will go maybe cause a negative impact to the environment, come into the portal level, access itself. You actually have to control all of that. All of that feeds into the compliance and various controls that to actually apply. And then pipelines are the ultimate, you know diploma strategy.}
+{\pard  \line \par}
+{So if you want to do change management and stuff by plans actually helped with that. So you actually have proper approvals. You have a track of who approved it, who initiated the pipeline, who requested for the change, all that stuff is actually attracting that. So all of these things eventually feed in no unknowingly, you know, you's gonna set it up, you know, it's painful, you set it up, but then eventually when you sit into the auditor and you send a look at this.}
+{\pard  \line \par}
+{We have this. Yeah. We have pipelines that can evidence who ran it, you know, do we have the gab? We have the, do you know who much this quarter? I have PR for it, who approved it? I know who approved. So all of that stuff is baked into the platform. It's it's, it makes it a lot more easier }
+{\cf2 [00:31:00]}
+{ to kind of sit through audits and have all the answers ready rather than scrambling at that point of time.}
+{\pard  \line \par}
+{basically I was just going to summarize that, you know, all the stuff that we spoke on all this while will directly feed into the compliance and audit. And enable the application to be, you know built securely rather than being an afterthought, like making these centers afterwards is going to be pain.}
+{\pard  \line \par}
+{Like if you want to enable some stuff later and you want to do then do CICD pipelines and then do do Terraform, and you already have resources, you have conflicting interests. You know, you have deployments that you have to actually go through now. It's a different challenge to meet once the application is live and you're already having deployments completed.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ You are a principal, Architect as well so maybe we can switch and do some of this conversation as well. What are the skill sets required for people who are trying to be a principal security architect in the Azure space ? }
+{\pard  \line \par}
+{\b\cf3 Sai Gunaranjan:\b0}
+{ The certifications and trainings definitely help.}
+{\pard  \line \par}
+{They give you a foundational understanding of it's services used for what? But after that, it's just getting your hands dirty and going through. You know via titrations and, you know, deployments and stuff and so on. And, and just understanding. So VA, we are taught a lot of stuff. You know, we answered a lot of }
+{\cf2 [00:32:00]}
+{ questions in the exams as well, but not all of them will actually suit an environment.}
+{\pard  \line \par}
+{When you look at it from a compliance point of view, like So some services, we just alternate can't use a tall, like they're not secure enough for us to use. They don't have the logging capabilities that we know and an organization can actually use in their environment. So those only you get to see one, so start to get your hands dirty in the platform.}
+{\pard  \line \par}
+{And you kind of go through the pain of seeing and understanding the application and also understanding the environment that you're working in that eventually gets to you know, gets experienced. And then you can become a principal, even senior architects. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Are there any frameworks you follow as a architect or have you got a general mindset in terms of what you normally look out }
+{\pard  \line \par}
+{\b\cf3 Sai Gunaranjan:\b0}
+{ for?}
+{\pard  \line \par}
+{So I I'm TOGAF certificates. I used to get a lot I use the reuse a lot, you know if it is all the available so the courts metrology. So if you already have it on the platforms, just take it. Don't have to rebuild everything from scratch. Yeah. Yeah, so, and more input, output based mindset. So the requirements, and then you use services available a platform, or you build them and then you give you get outputs, like the, the whole the TOGAF methodology of }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ For people who may }
+{\cf2 [00:33:00]}
+{ not know what TOGAF is, they might think it's a black belt man.}
+{\pard  \line \par}
+{What is TOGAF }
+{\pard  \line \par}
+{\b\cf3 Sai Gunaranjan:\b0}
+{ open group? It's the open group architecture framework. They've there are multiple phases of the application the, the framework and, you know, they take you through various solution architecture patterns and, and an enterprise architecture patterns as well. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And then there are cloud specific ones as well.}
+{\pard  \line \par}
+{\b\cf3 Sai Gunaranjan:\b0}
+{ I don't know if TOGAF is cloud specific it's more platform or, you know, technology agnostic. It's almost like there are security add-ons and cloud add-ons if I'm not wrong, but then it's, it's not, it's not, it's just a framework, like architecture. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Framework I'll put a link for that as well on the show notes so people can see that.}
+{\pard  \line \par}
+{So last question then, where can people learn about Azure cloud security kind of information? Like sounds like there's a lot to learn there for people who may be starting today, or at least for people who are trying to go to that level seven maturity, where can people learn about Azure cloud security? }
+{\pard  \line \par}
+{\b\cf3 Sai Gunaranjan:\b0}
+{ I would say Microsoft docs is really a good resource.}
+{\pard  \line \par}
+{That doc was that updated a lot. They kept up to date. They, they kept you know kind of th th th the, the, the }
+{\cf2 [00:34:00]}
+{ kind of constant releases also made on the platform. So my cousin docs, Microsoft documentation is the best place to get started with. And then maybe how, you know, look at blogs and other tech tech, community articles, maybe kind of filling in the gaps at the Microsoft article may be missing.}
+{\pard  \line \par}
+{It screenshots and stuff and so on. So I always rely on Microsoft articles their roadmap their blogs also is really good. They have a lot of details in the blogs as well in the roadmap documentation. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Sweet. It's funny. People with AWS normally recommend the opposite. Like don't compete with, rely on AWS Azure.}
+{\pard  \line \par}
+{So on the Azure side, it sounds like you can definitely rely on the Microsoft documentation. }
+{\pard  \line \par}
+{\b\cf3 Sai Gunaranjan:\b0}
+{ Start with that. Always. I will. So, so, so, so same with the tooling as well. So start with what Microsoft has to offer for default available. And then from there on, if it is it doesn't meet your requirements, if it's too narrow or if it's too broad and then go to other tools or other documentation as well.}
+{\pard  \line \par}
+{So I would always start there and understand the latest functionality and features available, and then maybe look at any other blogs that actually can help a bit understand the concept that they are detailing out in the release articles. That's }
+{\cf2 [00:35:00]}
+{ how }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I always do it. . Awesome. Thanks so much for this man.}
+{\pard  \line \par}
+{The entire episode has been awesome. Like we're talking about designing and building applications in the Azure side from a cloud security architecture, as well as support of I'd definitely recommend people to go back and listen to the episode on our social media platform.}
+{\pard  \line \par}
+{Towards the end, I have fun section, which is basically three questions, not too many just to get so that people who have been listening into all the amazing genius of Azure security that you've been teaching us so that we can get to know the other side of side as well.}
+{\pard  \line \par}
+{So the first question is what do you spend most time on when you're not working on Azure or, or technology? }
+{\pard  \line \par}
+{\b\cf3 Sai Gunaranjan:\b0}
+{ Oh, I like to take walks. I go for long walks. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I still do, especially off the court. I guess I want to step out of my house and do a lot more than just sitting in my house. So that's a good activity, man.}
+{\pard  \line \par}
+{Second question. What is something that you're proud of, but it's not only a social media. }
+{\pard  \line \par}
+{\b\cf3 Sai Gunaranjan:\b0}
+{ I don't know. I played chess. I'm proud of it, but I don't think it's out. I don't. Yeah. So I }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ only test }
+{\cf2 [00:36:00]}
+{ and what's the last question? What is your favorite cuisine or restaurant that you can share?}
+{\pard  \line \par}
+{I don't think he good, man. Cool. Well, I'm looking forward to your Indian food recommendation as overnight, but I'll, I'll definitely ask people to check out your talk at RSA, which shows in a, in a couple of weeks. I think so as well. And part of saying San Francisco now with this on mine, my where can people find you?}
+{\pard  \line \par}
+{If they have more followup questions that aren't Azure, Azure security, we can. }
+{\pard  \line \par}
+{\b\cf3 Sai Gunaranjan:\b0}
+{ I'm active on LinkedIn and Twitter, not very active on Twitter, but you know, I'm active on LinkedIn so I can reach out. I'm also on Twitter. Follow me in I don't, I don't tweet a lot. Yeah }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ like me. You're trying to find your way on Twitter.}
+{\pard  \line \par}
+{Cause I like compared to Twitter as well. Like what is this platform that people keep talking about? Especially after not Elon Musk is bored and I think I'm bored my attention. He's trying to buy it, but thanks so much for this minute. Thank you everyone for tunes in at the Twitter space as well. Mr. Iris, and the photo or for you }
+{\cf2 [00:37:00]}
+{ guys have found it valuable and for people who are on the live stream do check us out on the website, www.cloud security, podcasts, or TV for more clarity podcast, episodes, and a different Ricardo, LinkedIn and YouTube channel for all the other episodes that we do on card security.}
+{\pard  \line \par}
+{But for now, thank you so much for that. Thanks before text Mr. RS, we'll see you on the next one. We do this every weekend. So we'll see you on the next week in episode. Thanks guys. And texts everyone on the live stream as well. See ya, and thank you everyone on the live stream.}
+}

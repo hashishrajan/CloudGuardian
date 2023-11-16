@@ -1,0 +1,456 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red102\green0\blue204;
+\red128\green128\blue128;
+\red114\green179\blue114;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\b\fs48 Eve - NewYork Times- with-AD-RAW\b0}
+{\pard  \line \par}
+{\b\cf1 Eve Ben Ezra:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ I think earlier when we were talking about it, we kind of called it like not being dictators. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah. I think we, we said that, yeah, we don't wanna be dictators, but yet we come across like dictators. If we just say we do a tool. If }
+{\pard  \line \par}
+{\b\cf1 Eve Ben Ezra:\b0}
+{ we say, you need to do it exactly this way and exactly this method with exactly these things.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah. With no reasoning for why, but just do it. }
+{\pard  \line \par}
+{\b\cf1 Eve Ben Ezra:\b0}
+{ Developers should not be only getting feedback on whether or not something is compliant when they go to deploy}
+{\pard  \line \par}
+{So you need to provide developers' feedback much earlier in the cycle. Mm-hmm. So that they. Can have more productivity in knowing whether or not what they're developing is compliant and whether or not their configuration is compliant. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ I just wanna say thank you for all the love you showed Shilpi and I at Kubecon EU in Amsterdam, as well as RSA in San Francisco over the past couple of weeks. I cannot be grateful enough that you are showing so much love to us. You've supported us to grow on social media and on Spotify and all these podcast platforms, so thank you so much for all the love and support he showed us.}
+{\pard  \line \par}
+{Thank you so much for the sake coming and saying hello and }
+{\cf2 [00:01:00]}
+{ taking selfies with us, and some of you are grateful enough to come on my daily vlog, which I post on LinkedIn and Twitter. Thank you so much for being part of our life and making it what it is today. Alright, let's get to the episode before I get emotional.}
+{\pard  \line \par}
+{Hello and welcome to another episode of Cloud Security Podcast. In today's episode we have another recording from Kubecon EU where we spoke to Eve from the New York Times. Eve Was talking about OPA Argo CD. Yes, those are real people. I'm just kidding. They're not real people. They're just softwares that you can use to improve your CICD pipeline and integrate security into it.}
+{\pard  \line \par}
+{\\ talk was primarily focused on how you can have a developer first security while including security in the C I C D pipeline, like Argo CD, OPA. How can you do it before it comes into the pipeline? A pre-commit stage? There's a lot more nuance to just doing integration of security, and Eve was kind enough to share.}
+{\pard  \line \par}
+{What Eve was gonna talk about so if you are listening to conversation later on, definitely feel free to share your experience with us. Or if you have any gaps that you've identified that we should talk about, definitely }
+{\cf2 [00:02:00]}
+{ share that with us as well on our YouTube Linkedin as a comment or just feel free to reach out through us, our website.}
+{\pard  \line \par}
+{It's always a pleasure to hear from you on how we can keep improving this. If you know someone who's trying to learn about OPA or Argo CD and how CICD can be improved by using security, definitely share this episode with them. If you're listening to this for the second or third time, you know what you do, hit the subscribe or the follow button on our audio platforms like iTunes, Spotify, Google Podcast, or our video platforms like YouTube, LinkedIn.}
+{\pard  \line \par}
+{By the way, on YouTube we're about to hit 10K. I would really appreciate it can subscribe over there cuz we want to hit the 10K and maybe even 20K because. That just lets people know that hey, what we are creating over here is valuable and would be helpful for you as well, and maybe a future you who listens to the cloud.}
+{\pard  \line \par}
+{security podcast that's all what I wanted to say for the episode, I hope you enjoy this episode, we'll come back with another Kubecon special in the next few days and I will talk to you then in Enjoy this episode. Peace. }
+{\pard  \line \par}
+{ Hello and welcome to Kubecon EU edition edition of Cloud Security Podcast and today we are talking about something interesting OPA}
+{\pard  \line \par}
+{which is }
+{\cf2 [00:03:00]}
+{ not my best friend, but more than my best friend at this point in time. Should be best friend for cybersecurity people. But for this we have Eve. Hi Eve. How are you? Hello. I'm good. How are you? Good. Thank you for coming on the show. Of course. For people who don't know who Eve is, if you could just tell us a bit about yourself.}
+{\pard  \line \par}
+{What got you into this whole cloud native kubernetes of space? }
+{\pard  \line \par}
+{\b\cf1 Eve Ben Ezra:\b0}
+{ I accidented my way into the cloud space. I have a background in mathematics. So I have my degree in mathematics and I wanted to do something related to that. I originally went into data analysis and data engineering. From there, got into database configuration.}
+{\pard  \line \par}
+{I was at a very small company. Someone left and my boss figured that I was close enough to DevOps, so I became the DevOps person. I kind of taught myself Kubernetes to a point, and then moved to the New York Times where I am now. Much smaller fish, much bigger pond. I've learned from some really excellent people.}
+{\pard  \line \par}
+{And from there I've really moved into C I C D }
+{\cf2 [00:04:00]}
+{ Oh yeah. In the cloud Argo cd, which is a cloud native technology. Yeah. And that's how I'm }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ here. Awesome. And is this your first kubecon curiosity? This }
+{\pard  \line \par}
+{\b\cf1 Eve Ben Ezra:\b0}
+{ is my second coupon. I went to North America in Detroit this year or last year. Oh, }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ and how was that compared to this, I guess, what's your analysis so far?}
+{\pard  \line \par}
+{\b\cf1 Eve Ben Ezra:\b0}
+{ I like this one because being in Amsterdam is really cool. I think there might be more people here than we're in Detroit. Oh, I think Detroit. Sold out of all of the hotels. There were no hotels in Detroit. There were here I think, because Amsterdam is a big city, but I think in terms of the people, much the same booths mm-hmm.}
+{\pard  \line \par}
+{Offering talks, all very interesting. All kind of cutting edge cloud native technologies. Yep. Yep. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Awesome. And talking about technologies, your talk what is it called and what can people expect from the talk when they listen to it ?}
+{\pard  \line \par}
+{\b\cf1 Eve Ben Ezra:\b0}
+{ Ooh. So the talk is called Automating Configuration and Permissions Testing for GitOps. Mm-hmm. With OPA conf test. Yeah. And it's kind of half tutorial, }
+{\cf2 [00:05:00]}
+{ half how we implemented. OPA, the open policy agent, they have a utility called conf test, which allows you to write policy checks on structured configuration data.}
+{\pard  \line \par}
+{Mm-hmm. To be used locally or in the CI process without connecting to a Kubernetes cluster so they can be used offline. Which can also be a security concern. You don't have to connect to the cluster to run them, but helps people ensure that their code and their configuration is compliant before they merge it into a repository and it's deployed to the }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ cloud.}
+{\pard  \line \par}
+{Oh, right. And. I think maybe we should define a few of these terms. Cause I think , some people may just, were like, oh, I guess I know what GitOps is. I know what OPA is, so what is GitOps? So people who maybe have never heard of it. Sure. }
+{\pard  \line \par}
+{\b\cf1 Eve Ben Ezra:\b0}
+{ GitOps is an operational framework that works on the idea that you have a single source of truth.}
+{\pard  \line \par}
+{Mm-hmm. So I think a lot of people have run into manually configuring infrastructure. Manually changing something. Maybe it's documented somewhere, but then you go to deploy something and everything breaks because, well, prod doesn't look like you thought it looked, }
+{\cf2 [00:06:00]}
+{ and GitOps aims to reduce this. It aims to reduce what's called configuration drift.}
+{\pard  \line \par}
+{Mm-hmm. Which is when the live version of your application or infrastructure drifts. From whatever written down descriptive version that you have. So instead of someone manually going and creating an EC2 instance, you have Terraform doing that. You have that declaratively in your quote unquote single source of truth repository.}
+{\pard  \line \par}
+{And the live state reflects what your declarative state is. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Ah, interesting. And you also mentioned Argo CD. Yes. As you're talking to CICD, what is that? Argo }
+{\pard  \line \par}
+{\b\cf1 Eve Ben Ezra:\b0}
+{ CD is a continuous delivery tool for Kubernetes that operates on GitOps principles. So most people think of C I C D as you push from your local machine to get to, and then CI pushes to wherever you're deploying.}
+{\pard  \line \par}
+{Yep. Instead of this Argo. Pulls from your repository, so you give Argo your repository. Argo }
+{\cf2 [00:07:00]}
+{ watches that repository for changes and syncs those changes to the live cluster. Deploying your app. Which }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ that links back to the GitOps you were talking about as well, which is basically the framework that kind of design. }
+{\pard  \line \par}
+{\b\cf1 Eve Ben Ezra:\b0}
+{ Yes. Ah-huh.}
+{\pard  \line \par}
+{So Argo works on GitOps principles. If you have your configuration declaratively defined, Argo takes that configuration and applies it just as you've written it. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Oh, and you mentioned OPA as well. Yes. What? What is OPA? }
+{\pard  \line \par}
+{\b\cf1 Eve Ben Ezra:\b0}
+{ OPA is the open policy agent. Yep. Which is a policy engine that aims to kind of unite policy across the cloud native stack.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Right. And I think to put all this together, you also spoke about the development platform that you guys have at the moment. Yes. Why do you need a development platform? }
+{\pard  \line \par}
+{\b\cf1 Eve Ben Ezra:\b0}
+{ So the internal developer platform at the New York Times is fairly new. It's been in progress for a couple of years. I've been very lucky that I've been there, kind of from implementation.}
+{\pard  \line \par}
+{Oh, nice. To, we just went GA. Nice. So I've gotten to be part of a lot of discussions, a lot of actual development, which has been very }
+{\cf2 [00:08:00]}
+{ cool. But. So we have a lot of feature teams mm-hmm. At the New York Times who are making things. Yep. Like cooking games. You might be familiar with Wordle. Oh yeah. All of these teams deploy in different ways.}
+{\pard  \line \par}
+{We have all these kinds of different infrastructures and architectures. Some teams have multiple Kubernetes clusters. Were on multiple cloud providers, and this just became. Too much overhead. There were too many teams doing it in too many different ways for us to really keep a handle on how teams were doing it and secure how they were doing it.}
+{\pard  \line \par}
+{Mm-hmm. And so the internal developer platform kind of arose out of this infrastructure sprawl issue? Mm-hmm. Okay. And we consolidated into, Three shared Kubernetes clusters, a dev, a stage, and a prod. And teams now deploy to isolated spaces on those clusters that are called tenants. They get their iso they get isolated resources.}
+{\pard  \line \par}
+{They get an isolated space. They can't access any }
+{\cf2 [00:09:00]}
+{ other spaces, but. That was kind of the drive behind it, that consolidation of how people deployed, where they deployed. And it gives us a lot more opportunity to manage what they're doing. To secure what they're doing. Yeah. And keep our systems secure. I just an }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ interesting one cause a lot of people and I always feel with development.}
+{\pard  \line \par}
+{Because I think you kind of talk about when you talk as well, , the concern that people have is a whole shared infrastructure. It's automatically thought of as a killer for developer productivity. Yeah. And it's almost like, wait, so I can't deploy myself? I have to go through this, whatever the random thing that you created, blah, blah, blah.}
+{\pard  \line \par}
+{And we were talking offline earlier about the whole analogy that we as security people or us as a technology business, we can. Make a platform, we can make an option available, but then at the end of the day, it's still up to the developers to adopt it.. Now the security concern they already called out for I guess you having a platform, which is well shared infrastructure, is there any other concern or maybe a challenge that you had to come across }
+{\cf2 [00:10:00]}
+{ outside the whole, Hey, shared infrastructure, people are getting frustrated.}
+{\pard  \line \par}
+{What other challenges were things that you had to overcome? There }
+{\pard  \line \par}
+{\b\cf1 Eve Ben Ezra:\b0}
+{ was quite a challenge, and I didn't work on this directly, so I'll do my best, but there was a challenge with the kind of Argo that we're using. So we're using what's called the hub and spoke architecture, right?}
+{\pard  \line \par}
+{So you have one Argo control plane that's deploying to multiple clusters, that's deploying to multiple places. If that gets compromised, the whole thing goes down. Like you can deploy it anywhere, right? Yeah. So there was a lot that went into, and two of my colleagues. Did a talk on , how we secured Argo against that.}
+{\pard  \line \par}
+{Oh, nice. It involves I think we tied it to IAM roles in AWS instead of using the traditional service account. Right, right. To kind of pair down the permissions and scope. Yeah. Yeah. And access. But that was, that's one major consideration is you have a smaller attack surface. It's easier to attack. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Interesting and to what you called out over there just for, which is fairly, a lot of people, }
+{\cf2 [00:11:00]}
+{ that's what scares them about having a single CI CD pipeline that to your point, you access Once now you can deploy to anywhere you want.}
+{\pard  \line \par}
+{You can update anything you want cuz technically that is a single source of truth or at least supposed to be. And then the whole conversation about software supply chain, the supply chain being the C I C D pipeline, that makes it kind of even more interesting. What were some of the feedback concerns that you had as well with.}
+{\pard  \line \par}
+{I think when I was reading a talk, you had security developer autonomy and feedback as a, as three kind of considerations that were challenges. What was the feedback part over there and why was it important? So }
+{\pard  \line \par}
+{\b\cf1 Eve Ben Ezra:\b0}
+{ when you're using a shared infrastructure and teams are no longer kind of deciding to, deploy however they'd like.}
+{\pard  \line \par}
+{Yep. That. Can really decrease their productivity because they have to figure out how to deploy. But it can also, impact their autonomy. Mm-hmm. Because they no longer get to deploy however they like. They have a lot less freedom. And so I think it's a balancing act in being very careful about your security, but not being overly prescriptive.}
+{\pard  \line \par}
+{\cf2 [00:12:00]}
+{ Mm-hmm. Not. I think earlier when we were talking about it, we kind of called it like not being dictators. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah. I think we, we said that, yeah, we don't wanna be dictators, but yet we come across like dictators. If we just say we do a tool. If }
+{\pard  \line \par}
+{\b\cf1 Eve Ben Ezra:\b0}
+{ we say, you need to do it exactly this way and exactly this method with exactly these things.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah. With no reasoning for why, but just do it. }
+{\pard  \line \par}
+{\b\cf1 Eve Ben Ezra:\b0}
+{ But so another tool that we're using, That is from the Open policy agent from OPA. It's called Gatekeeper, right? And Gatekeeper is a Kubernetes admissions controller that intercepts API requests and persists those requests only if they comply with policy.}
+{\pard  \line \par}
+{Ah, right. Again, and you can also mutate them. But generally it does what it says on the box. It's a gatekeeper, right? It gate keeps. And so, Developers should not be only getting feedback on whether or not something is compliant when they go to deploy. Mm-hmm. Because if you think earlier I mentioned configuration drift being.}
+{\pard  \line \par}
+{Something that GitOps aims to limit. Yeah. If you merge something into your main branch, into that single source of truth repository and it can't be }
+{\cf2 [00:13:00]}
+{ deployed. Yeah. Then your app, your live application state has drifted from your declarative configuration state and that also is configuration drift.}
+{\pard  \line \par}
+{So you need to provide developers' feedback much earlier in the cycle. Mm-hmm. So that they. Can have more productivity in knowing whether or not what they're developing is compliant and whether or not their configuration is compliant. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yep. And. Because you've mentioned another OPA component, because I guess I love this, and I would love for people who are watching in audience and who listening to kind of answer this question in their mind.}
+{\pard  \line \par}
+{When is the ideal time for developers to begin getting feedback in GitOps operational framework? The options were six during the PR or pull request process before merge to a main branch during automated testing in a CI process. After merge during sync process while developing locally, after any user or stakeholder testing as frequently as possible throughout the development life cycle.}
+{\pard  \line \par}
+{Now, I'll let people who are listening and watching maybe take a couple of seconds, maybe answer it in a comment or maybe in a Spotify question as }
+{\cf2 [00:14:00]}
+{ well. But what were the two options? Which are the right ones in this? }
+{\pard  \line \par}
+{\b\cf1 Eve Ben Ezra:\b0}
+{ It's a trick question. Yeah. So I apologize to the audience because the last option is of course kind of an all of the above answer, which is true.}
+{\pard  \line \par}
+{You should be getting feedback continuously, but when you think about when to begin getting feedback, it really needs to be locally. Mm-hmm. Which is option. Four. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Wow. Yeah. Remember? Yeah. Four, option four. And so DNF is what you went }
+{\pard  \line \par}
+{\b\cf1 Eve Ben Ezra:\b0}
+{ for. Yeah. Yes. You should be offering developers, feature developers, local feedback.}
+{\pard  \line \par}
+{ As soon as they start developing, before they've even pushed any code, they should have access to those tools. Whether or not they use them is the tool. You can lead a developer to the tools. You can't necessarily force a developer to use the tools until you can. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yep, yep. Until you can one day we'll get there at, at }
+{\pard  \line \par}
+{\b\cf1 Eve Ben Ezra:\b0}
+{ some point in the process you can.}
+{\pard  \line \par}
+{Yeah. But developing locally, you largely can't. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yep. Yep. And to your point then, where would OPA fit into , all of this, because to what you called out? When I hear }
+{\cf2 [00:15:00]}
+{ local feedback, I'm thinking, oh, there's something on my laptop, which would tell me, or is it at commit? Like at what point is it, it's local.}
+{\pard  \line \par}
+{On your for like an agent on my laptop kind of }
+{\pard  \line \par}
+{\b\cf1 Eve Ben Ezra:\b0}
+{ thing? No, like a command line interface. I think we have a CLI for our idp. Okay. That we can kind of wrap it into, but you can also pull. Conf test policies from a url, you can pull it from a protocol like Git. Mm-hmm. I have that in my talk, that people can just, if they have the conf test CLI installed, you can also sign them. You can package policies into bundles. You can sign those bundles and you can put them on a registry where they can be pulled down. So there are a lot of different options to get developers access. Mm-hmm. And depending on how you do it, OPA supports mechanisms to kind of fetch updates so you don't have to continuously pull down or change policies.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Interesting. And. I'm just trying thinking of the workflow of how would this work? Cause you mentioned conf test }
+{\cf2 [00:16:00]}
+{ as well. What is that? }
+{\pard  \line \par}
+{\b\cf1 Eve Ben Ezra:\b0}
+{ Conf test is the offering from the open policy agent that allows for testing, like locally or in the CI process. It's what the talk is mainly about. So the open policy agent is a general purpose policy enforcement across the cloud native stack.}
+{\pard  \line \par}
+{And then they have. Utilities such as conf test, which is for testing your structured configuration data or gatekeeper, which is the admissions controller for }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Kubernetes. Yeah. Oh, right. Okay. So to your point I, I guess the way I see this and where I come from is if we have a set of policies define, cause I'm thinking people who are listening to this, watching this, they're going, okay sounds like OPA gatekeeper OPA Conf test sounds fairly simple.}
+{\pard  \line \par}
+{Now I should get go and download or try using it. Would I be correct in saying that they should have a base policy in mind already before they kind of walk down that path of OPA or conftest and gatekeeper and all that? Or does it come with a preexisting set? }
+{\pard  \line \par}
+{\b\cf1 Eve Ben Ezra:\b0}
+{ They have a pretty wide array of examples.}
+{\pard  \line \par}
+{The examples are}
+{\cf2 [00:17:00]}
+{ fairly bare bones ish. Okay. I think for comp, they have examples. For a bunch of different frameworks, including Kubernetes, but their Kubernetes examples are like only allowed deployments and services. So those can give you a good idea of where to get started. I think it is a good idea to have in mind what kind of policies you wanna put into place, right?}
+{\pard  \line \par}
+{And depending. You can use it for a lot more than just configuration testing. You can use it for authorization checks. I think Miro uses it. Mm-hmm. The Whiteboarding app uses it fairly frequently as. Checks to see if people are allowed to access boards, and they do that in the moment. So every time you do anything, create a sticky note, they're checking OPA to see if something has changed.}
+{\pard  \line \par}
+{Oh, wow. And if you're still allowed to access that board. I can't really tell you more details about that Of course, but I of course think it's really cool. It's very, very versatile. How we're using it is really checks on configuration. So for }
+{\cf2 [00:18:00]}
+{ example, we might check that the name of your application. If it's Suffixed with, you know, staging, we're gonna check that you're deploying to the staging cluster.}
+{\pard  \line \par}
+{Yeah. And you're not deploying to the prod cluster. And that's more of a like administrative thing. That's right. Yeah. Than security or policy. We also use it for security. Mm-hmm. With policies that are kind of passed down from principal engineers or security groups. But it's a good idea to have. Some basic idea of how you would like to implement it in mind.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah, yeah. And to your point, it sounds like basic hygiene, it doesn't really sound security as well, cuz to your point also the fact that if I'm deploying and development, it should go into development. It's, there's nothing security about it. Just literally, yeah. Just like silly mistakes. Yeah. Yeah, yeah. I mean, making sure that's important is an easy, and where I'm coming from is the fact that.}
+{\pard  \line \par}
+{What we use, the example that word which I called out our dictator way of doing security, is , the fact that if we are able to at least put forward things that }
+{\cf2 [00:19:00]}
+{ are obvious, It doesn't have to be security, it's just basically calling out, Hey, maybe we're just doing this check. Especially when you're introducing something new for the first time to developers.}
+{\pard  \line \par}
+{Cause I think that's kind of where a lot of , people question sounds great, but it doesn't work for me. Yeah. And I think I would love to hear in terms of as you kind of are going through the process, a couple of years of working on this, what's the thinking behind making this more accessible for developers?}
+{\pard  \line \par}
+{Cause you mentioned there's already, the step one is, hey, get quicker feedback loop. There's already a CLI tool that you have for people to just use in their command line when they do a commit. Are there other things along the way in their ci cd pipeline that they can do? Or is that the first, cause I imagine you can just have multiple entry reports to CICD pipeline, right?}
+{\pard  \line \par}
+{\b\cf1 Eve Ben Ezra:\b0}
+{ Yeah. Well, we started with just having. conf test as a CI check for the repositories that were related to our Argo CD app. Mm-hmm. So on the repository that we used to install Argo CD, we had it for kind of silly mistakes for my team, for the CICD team to make sure we weren't checking in things }
+{\cf2 [00:20:00]}
+{ that we shouldn't have been checking in, or to make sure that we had the names correct.}
+{\pard  \line \par}
+{What's list? We didn't have typos in that way. And then from there we kind of moved on to governance of the repositories that manage Argo projects, which projects are kind of spaces that host applications. Mm-hmm. And then applications. Those are in two separate repositories where they're grouped.}
+{\pard  \line \par}
+{And we wanted to take a hands off approach because we didn't wanna seem like dictators. Of course. Our IDP it automatically creates configuration files. Yeah. And those configuration files, we didn't necessarily want someone on our team to have to go over them with a fine tooth comb, of course, every single time that one came in because that would be a pretty fast bottleneck.}
+{\pard  \line \par}
+{Yeah. Yeah. There are only so many of us on the C I C D team compared to so many engineers at the New York Times. So we set up this policy code for whether or not people are onboarding more manually and creating these CRDs by themselves, in }
+{\cf2 [00:21:00]}
+{ which case, The policy is code acts as kind of guardrails.}
+{\pard  \line \par}
+{Yep, yep. To be like, Nope, keep, keep almost there. You need this, you need to include this part. Ah, interesting. And also the checks that I've already mentioned, like is it being deployed to the correct cluster? Is it being deployed from a source that we trust and allow, or are you trying to deploy some random GitHub repository?}
+{\pard  \line \par}
+{Are you trying to, you know, set up a Minecraft server and. I think from there we've moved toward creating and writing policy to a point where that automatically created or generated configuration can be automatically merged in because we are sure that if it passes these tests Yep. It's a minimal amount of compliant.}
+{\pard  \line \par}
+{ We use a different tool for schema validation, which is called Kube conform. Mm-hmm. But from a policy standpoint, we can kind of take a hands off approach and allow developers to deploy and take this kind of trust, but verify stance to their }
+{\cf2 [00:22:00]}
+{ deployment by being like, well, we know that it complies with these basic minimal Yeah.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Things. Yeah. And which anything. Other than that it would be just complex and probably application related anyway, so someone does need to look at it. Yeah. Whether it be the final call, we }
+{\pard  \line \par}
+{\b\cf1 Eve Ben Ezra:\b0}
+{ can if there are going to be new policies, we can communicate those policies with this by setting up warnings instead of failures.}
+{\pard  \line \par}
+{Oh, yeah. So if we're going to change something in the future, we can have it flagged. Yeah. In the CI pipeline or wherever they're getting their output locally that just says like, Hey, just so you know, This policy is gonna go into place and this won't be allowed anymore. Yeah. Change it. Yeah. Which is much easier and more easily accessible than putting it in some internal documentation or a Slack message or an email.}
+{\pard  \line \par}
+{Yeah. Then no one will check. Yeah. And then for weeks after, you'll be like, why did this stop working? Oh }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ , I love the fact . That the focus is more on being where the developers are and taking that as an approach rather than, Hey, we're just gonna come up with a bunch of }
+{\cf2 [00:23:00]}
+{ alerts and just throw it at the developer and hope for the best.}
+{\pard  \line \par}
+{After that, I guess I'm curious, was the Argo CD and OPA clearly sounds like Cloud Native enabled a lot of this. Just made it easy. Is the Kubernetes deployment that you guys have, is that more managed or like a self hosted one? The reason I ask that question is were there challenges from the public cloud space that where you had to fill the gaps yourself?}
+{\pard  \line \par}
+{Cause Argo CD I'm sure they have their own ci cd pipeline, but you guys chose Argo CD for a specific reason, I imagine. }
+{\pard  \line \par}
+{\b\cf1 Eve Ben Ezra:\b0}
+{ Yeah. We are not using any enterprise version of these cloud native apps. Yep. We, the C I C D team, Owns and configured Argo. Oh, nice. We have a specific team that owns and manages our shared Kubernetes clusters.}
+{\pard  \line \par}
+{Yeah. One of them also gave a talk at cilium Con Oh, nice. Yesterday. Oh, yeah. Yesterday. Yeah. Yeah. co located event about how we've used cilium for a more security, network security. Yeah. Yeah. But we do host on AWS E Ks. Mm-hmm. }
+{\cf2 [00:24:00]}
+{ So these are EKS clusters. But they are all, we have enough engineers in our operations that we are lucky enough to get to do it all ourselves.}
+{\pard  \line \par}
+{Wow. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Because I always feel there's limitation with , the public cloud provider in terms of how much flexibility that you have. And it's pretty awesome to know that you guys have developers who can probably build their own kubernetes and manage it as well. What would be one thing you would recommend for people who are listening to this and thinking about, Hey, what.}
+{\pard  \line \par}
+{What, what she said makes sense. , I'm going to do this today. What would you say would be the baby steps to kind of walk in that direction? }
+{\pard  \line \par}
+{\b\cf1 Eve Ben Ezra:\b0}
+{ Don't do it in one day. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah, definitely. Don't do it one day. Rome's not built in one day. So you probably don't wanna }
+{\pard  \line \par}
+{\b\cf1 Eve Ben Ezra:\b0}
+{ build this one day as well. No, I really think the answer to everything is piece by piece implementation.}
+{\pard  \line \par}
+{Mm-hmm. If maybe you set up a Kubernetes cluster today and then you work towards setting up. Gatekeeper or cilium or some other kind of security tool on that cluster. And then moving toward like, well, how are we gonna get apps onto this cluster? Yeah. And then moving toward }
+{\cf2 [00:25:00]}
+{ what can we do to give policy at that onboarding phase and just kind of shifting it back until you have a whole pipeline of A to B.}
+{\pard  \line \par}
+{Yeah. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ And to your point then, what would you say once you've made the kubernetes cluster, OPA is a good place to start first, or should people start with the ci cd pipeline, as in, should they start with a cluster or should they start with a CICD?? Like is there always, or is it a chicken and egg }
+{\pard  \line \par}
+{\b\cf1 Eve Ben Ezra:\b0}
+{ situation?}
+{\pard  \line \par}
+{I think it should start with CICD. Okay, cool. I think everything you deploy should be checked for compliance first. Yeah. And policy just because it's easier to change something before it's live. Mm-hmm. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yep. Yep. And to your point then, Because I imagine a lot of people are still trying to learn this as well.}
+{\pard  \line \par}
+{How would you describe as a good resource, or what would you describe as good resource for learning kubernetes? Cause there's a lot of kubernetes resources, but not much for kubernetes security per se., how would you describe could be good links or good ways people start learning about the space?}
+{\pard  \line \par}
+{\b\cf1 Eve Ben Ezra:\b0}
+{ I think there are a lot of really wonderful free resources on YouTube. Mm-hmm. }
+{\cf2 [00:26:00]}
+{ Every. kubecon, maybe CNCF hosted event. All of their talks are on YouTube. They go up free several weeks after the event. Yep. And I think }
+{\pard  \line \par}
+{ I also think a great place to start is just reading the documentation. Mm-hmm. Kubernetes has really great documentation. Right, okay. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Like fairly consistent and accurate.}
+{\pard  \line \par}
+{\b\cf1 Eve Ben Ezra:\b0}
+{ Fairly consistent. Fairly accurate. They have . Guidelines in place where like people aren't supposed to be like, and easily this can be contrived . You're supposed to assume that it's not easy. Right. Okay. And I think everything Kubernetes rego, which is the declarative policy language that OPA uses, all of these things have a learning curve.}
+{\pard  \line \par}
+{Okay. Right. Once you get over the learning curve, it's. Easier. Yeah, fair enough. I mean it, a lot of these made sense or at least made sense for me and this is what I've heard from other people. Yeah. And I think one of the best ways to learn Kubernetes is to use Kubernetes. Mm-hmm. You can do that locally, you can do that.}
+{\pard  \line \par}
+{Rancher desktop has a great Kubernetes Docker desktop supports Kubernetes, }
+{\cf2 [00:27:00]}
+{ so it's easy to spin up a local Kubernetes cluster, start applying things, start looking at how. You might secure them. There's always Kubernetes the hard way. Oh yeah. If you, thanks Kelsey. If wanna bootstrap your own Kubernetes cluster for some reason I did.}
+{\pard  \line \par}
+{And then I got yelled at by my security team that has alerting. Yeah. I was like, who created these? And I was like, it was me. I really like kube by example. And they have a lot of well, Codefresh offers several GitOps kind of online certification courses, like Okay.}
+{\pard  \line \par}
+{That are very useful to learn GitOps, which is helpful to learn Argo. Mm-hmm. But I think for all of these, Kubernetes is really the gold standard of cloud native, }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah. But I guess to your point then, if you're trying to learn this space, even from a security perspective, you probably wanna consider ArgoCD, OPA and Kubernetes.}
+{\pard  \line \par}
+{Cause you're kind of like the application is built and deployed into a Kubernetes cluster. Argo series is a CICD pipeline that's deploying everything. OPA becomes that your gatekeeper and policy }
+{\cf2 [00:28:00]}
+{ checker. Cilium becomes that network security component between the clusters, I guess.}
+{\pard  \line \par}
+{Yes. So there's still a lot of moving parts that people can actually learn, but great to see so many open source players coming in as well. And just }
+{\pard  \line \par}
+{\b\cf1 Eve Ben Ezra:\b0}
+{ to be clear, Argo is a CD tool. Okay. Not a ci, not a CI tool. Good. Yeah. As a CI person. Yeah. I think it's, it's very important that those are two different things and testing is still very, very important.}
+{\pard  \line \par}
+{Yeah. I would not recommend anyone just jump straight to using cd. Yeah. Have, have CI in place. Yes. But cd, true cd is very, very cool. Yeah. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Well, I'm glad you kind of brought that up as well. How would you describe the difference between the two CI vs CD?}
+{\pard  \line \par}
+{Cause a lot of people, just to what you said, and I kind of made the mistake myself as well, by call calling, oh, CICD, ArgoCD, CD what the difference between CI and CD? }
+{\pard  \line \par}
+{\b\cf1 Eve Ben Ezra:\b0}
+{ Other than. Kind of their names. I think CI is the process in which you test and integrate your code so you make sure it's working.}
+{\pard  \line \par}
+{A lot of people use CI s CD, so they'll have their testing suite, and }
+{\cf2 [00:29:00]}
+{ then at the end they'll build an image in that and they'll say, Hey CI if all of these tests pass, deploy this image. Mm-hmm. Run this like Kube CTL apply F command. Yeah. I think where the break is is after testing. After building your artifact, after putting it somewhere in a registry in ECR, then you have a CD tool that actually deploys it.}
+{\pard  \line \par}
+{So those two things can be separate, and I think CI is more of a push feature. Mm. You push code, it triggers CI CD, true CD in the way of Argo and GitOps, and this kind of operational framework is a pulling feature. Interesting. It syncs your repository. It looks at it, but you're not ever really telling Argo.}
+{\pard  \line \par}
+{All right. Go. Go deploy this. It's saying like, oh, you've given me things to deploy. I'm going to deploy them now. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Oh, which is kind of what Cloud native should be. You know, it event based rather. I think that's what they call it, rather than just. The traditional old school of me running a bash script to just have everything just, is it there?}
+{\pard  \line \par}
+{Is it there? Is it there? Or I mean, which is not }
+{\pard  \line \par}
+{\b\cf1 Eve Ben Ezra:\b0}
+{ }
+{\cf2 [00:30:00]}
+{ to knock bash }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ scripts. No, definitely not. Yeah, they're definitely great. I've done, I've written plenty of them, but to your point, it sounds a bit like, Hey, wait, why am I waiting for this? Like not that it's a real person on the other end of the Bash, but he can kind of feel bad.}
+{\pard  \line \par}
+{Oh yeah. A bash script can just run when the change happens instead of just consistently driving the processor to just keep running this. Yes. So from a memory utilization, all of that perspective, performance perspective, it definitely goes a long way. That was kinda like also the end of the questions that I had as well.}
+{\pard  \line \par}
+{Where can people find you to have more information about this world of Argo CD and OPA, and how can maybe they take this further in their organization, where can they get in touch with you? }
+{\pard  \line \par}
+{\b\cf1 Eve Ben Ezra:\b0}
+{ Get in touch with me on LinkedIn Uhhuh, I'm Eve Ben Ezra there. You can also get in touch with me on TikTok.}
+{\pard  \line \par}
+{Oh, nice. A TikTok account, which is Help me Exit vi. And I make really terrible Kubernetes jokes there. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ We should follow you, follow her on TikTok. Cool. Awesome. Now thank you for sharing that and yeah, I'm looking forward to having more conversations about this in the future as well. }
+{\cf2 [00:31:00]}
+{ Thank you so much for coming to the show.}
+{\pard  \line \par}
+{Yeah, thank you. Thank you. Thanks everyone }
+{\pard  \line \par}
+{\b\cf1 Eve Ben Ezra:\b0}
+{ when you're developing an app, security might be treated as an afterthought with functionality, requirements and tight deadlines. It's easy to accidentally write vulnerable code or use a vulnerable dependency, but sneak can help you secure your code in real time so you don't need to slow down to build securely.}
+{\pard  \line \par}
+{Develop fast, stay secure. Good developer sneak.}
+}

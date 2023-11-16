@@ -1,0 +1,664 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red216\green34\blue146;
+\red128\green128\blue128;
+\red250\green138\blue59;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\b\fs48 Jeevan Singh\b0}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ Hello, welcome to another episode of cloud security podcast. Today, we are talking about threat modeling at scale. So people like you and I, and other security people can go on a holiday. Yes, we had G sing who is working for Twilio as a product security director. And we were talking about what is threat modeling so we can level the plane field for everyone.}
+{\pard  \line \par}
+{What does threat modeling look like in a cloud security multi-cloud hybrid cloud kind of world. And how can you enable your developers to do threat modeling the right way? Yes, that was the topic today. And I am so excited because what this means is people like you and I who have been talking about threat modeling for a long time, or for people who may not even know what threat modeling is.}
+{\pard  \line \par}
+{This is a great, I intro episode for that. And if you do know someone who is probably understanding or trying to figure. What threat modeling can look like. I would definitely recommend the conversation. That actually is the talk that Jivan gave at B side San Francisco. I would link them the show notes as well.}
+{\pard  \line \par}
+{So you can check out that talk definitely worth your time. And it talks about the four phases of the threat modeling approach that failure took. And oh my God, I'm so excited. So pumped, by the way, }
+{\cf2 [00:01:00]}
+{ if you didn't know, Jivan had definitely has like a very, I'll just say a very meditative soft voice. So it was very interesting to just hear him talk.}
+{\pard  \line \par}
+{So, I mean, just an added flavor to that conversation. I hope you enjoy this episode. And as always, if you know someone who probably is wanting to learn about threat modeling or is gonna find benefit from this episode, please do share this with them. And while you're on your Spotify or your apple podcast or your Google podcast, or your favorite podcast platform, And you find this free episode valuable.}
+{\pard  \line \par}
+{It would really help us when you drop us a reviewer rating. So we get discovered by more people, which means we can help out a lot more people. So that makes me really exciting. And thank you so much for everyone who came and said hello to us, black hat, as well as Jeff Cohen. It was really amazing. And it was really awesome to hang out with a lot of you at Boston, Vegas and London.}
+{\pard  \line \par}
+{And we have, yeah, I think we have a lot more of these coming in while we take cloud view podcast on the road. But because you can hear my radio voice again, it's also because I'm back in the studio and back in Melbourne for. We'll be announcing more }
+{\cf2 [00:02:00]}
+{ cities that we are going to next month. So definitely to keep an eye out for, or in this case, keep an ear out to listening when this conversation happens as well.}
+{\pard  \line \par}
+{We'll keep you posted for that again. Thank you so much for all support. I look forward to talking to you on the next episode next weekend. Talk to you soon. Peace.}
+{\pard  \line \par}
+{\b\cf3 Jeevan Singh:\b0}
+{ By bringing developers and security together, you don't have to choose between speed and security. Develop fast, stay secure}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ one, start with this. I think a lot of people know you already, but for people for the little two or three people who don't know who G even is, how would you, I guess, share your background bit, bit about yourself as well. }
+{\pard  \line \par}
+{\b\cf3 Jeevan Singh:\b0}
+{ Yeah. Uh, I'm Juvan Singh. Um, I've been, I was one of those individuals that was on the development side for a really, really, really long time.}
+{\pard  \line \par}
+{They spent about 12 years on the software development side and eventually made the decision to. It was a hard decision for me. I was being groomed for a lot of great things on the development side, }
+{\cf2 [00:03:00]}
+{ but I had a fantastic VP of security that joined the organization and convinced me to start security. Um, it took me about a month to make that decision.}
+{\pard  \line \par}
+{Should I stay in software? Should I move over to security? But literally after the first day of joining security, um, at the end of the day, I talked to him. I don't know why it took me so long to make the decision. I'm never going back to development. I love development, but security is everything. So, uh, to help build up, uh, the security practice, uh, from scratch at that organization moved over to another one, helped build it up from there.}
+{\pard  \line \par}
+{Um, recently I hadn't moved over to a segment, um, and the security practice was really pretty strong there. Um, Um, work that segment to start thinking about next generation type of security programs. What can we do to really prepare us for what the future holds in store? And then while we're start slowly starting to build out that next generation security, uh, program we got acquired by Twilio.}
+{\pard  \line \par}
+{\cf2 [00:04:00]}
+{ And so now, now I'm looking at doing it at a massive scale in general. So looking forward to. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Awesome. And I've got a few people who came online. So people are clearly excited about threat modeling, but unfortunately not everyone knows what threat modeling is. So just to level a plain field, what's your version of start modeling for people who may have heard of it, but don't really know what that is.}
+{\pard  \line \par}
+{So consider you spent some time on it. How do you describe it? Yeah, I, }
+{\pard  \line \par}
+{\b\cf3 Jeevan Singh:\b0}
+{ I'm glad that you asked about what flavor of threat modeling. Not every company, not every person does it. Uh, similarly. And to tell you the truth. I learned that I was doing it incorrectly, uh, really early on in my career. So I had learned it very differently.}
+{\pard  \line \par}
+{Um, and then chatting with other folks, uh, better understanding what it is. Um, threat modeling is simply you're looking at a system and you're looking for the assets within the system and trying to figure out what the risks to those assets. And that's all threat modeling is. You really want to focus on being risk }
+{\cf2 [00:05:00]}
+{ centric?}
+{\pard  \line \par}
+{So one of the challenges I had was when I looked at a particular system, this is earlier on in my career. I was looking for solutions when I really need to look at problems. Um, and that that's what really threat modeling is. We wanna make sure that we're looking at a, looking at any sort of system, any sort of feature, and just looking for what you think someone might be.}
+{\pard  \line \par}
+{And then you wanna make sure that you think about how they can attack it, or what are some of the problems. But with that particular asset, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ was that switch to just think what problems so in our case would be its threats. I, I imagine. }
+{\pard  \line \par}
+{\b\cf3 Jeevan Singh:\b0}
+{ Yeah. So the, the funny thing is it took me after I discovered that I was doing it incorrectly.}
+{\pard  \line \par}
+{It took me about a year to properly shift that in my mind, cuz I kept on looking for solutions. Solutions come, but you have to find the universe of risks, the universe of threats, and then you can properly do the solutions. If you are thinking about solutions first, you might not think about all of the different type of }
+{\cf2 [00:06:00]}
+{ risks associated with the tax.}
+{\pard  \line \par}
+{Um, and then you won't be able to write the right controls, uh, as a part of it. So it it's a small little change in your mind, but, uh, when you start only focusing on the risks, it really helps you figure out, have a comprehensive. Um, controls in place to really protect your assets. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Interesting. And I think as you mentioned, I just remind myself of one of the scenarios where I, I think I can't remember who I was talking to, but the way they approached application security was they went, uh, and thought of what's a SAS tool that I get, or what says SCA tool that I can get.}
+{\pard  \line \par}
+{And so to, to your point, it wasn't like, Hey, let's take a step back and think about what the threats that actually affect. Yeah. Instead, let's start with what task tool can I get or what SGH, who can I get? Or what does, is that what you mean? That, that }
+{\pard  \line \par}
+{\b\cf3 Jeevan Singh:\b0}
+{ really like when you are threat modeling your entire program, that's definitely that like you, you would want to start with a risk centered approach.}
+{\pard  \line \par}
+{Um, so. You would look at it and say, okay, what are the }
+{\cf2 [00:07:00]}
+{ common, uh, attacks that are happening to my system? And maybe it is, maybe it is they're going after your third party component. So you want to have, uh, SCA that will help you identify that. Um, maybe it is, you're worried about the, um, people insiders.}
+{\pard  \line \par}
+{Injecting really poor code so that they can add backdoor. So you maybe wanna add, assess to it, but more importantly, what most of the application security engineers or product security engineers, they do, we will have an actual system that the developers want to build. And you wanna make sure that you do threat modeling early.}
+{\pard  \line \par}
+{So threat modeling is very the earlier you do it. Everyone talks about shifting left threat modeling is actually shifting left. So you would have during the requirements. Product managers will come up with requirements for the feature. And you wanna make sure that you still embed security there, and they're not doing poor things, uh, with requirements, but right after they get the requirements, uh, the developers will get the requirements and build a design.}
+{\pard  \line \par}
+{\cf2 [00:08:00]}
+{ So, um, once they've mostly flushed out the design, once it's 80, 90% done, you wanna involve security and security will have a look, you'll do threat modeling together, and you will say, okay, these are some of the potential problems that you might have a part of this system. And you can actually fix vulnerabilities before a single line of code is written.}
+{\pard  \line \par}
+{It's really, really cheap to fix it. At that point, I come up from an immigrant family. Uh, so, uh, I know all about being frugal. Um, I wanna make sure I fix things before they cost any money. So doing threat modeling in the design phase is great. Sometimes that doesn't happen and you have to do it after it gets deployed.}
+{\pard  \line \par}
+{And that could be expensive. Cuz when you go through, you might dis discover you have to do architectural change. If you have to do, yeah. If you have to do architectural changes, it's gonna cost, like you've already spent this much time doing it. You're gonna have to spend a lot more time to actually fix it, uh, and remediate some of these problems.}
+{\pard  \line \par}
+{So the sooner you do it, the cheaper it is for, for an }
+{\cf2 [00:09:00]}
+{ organization. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah, a hundred percent men. And I think many also agreeing to what he said, mindset shift, mindset shift is a great advice. Cause we've got a lot of people listening in who are, who have been doing threat balling for some time. I think they specifically talks about threat balling quite a bit.}
+{\pard  \line \par}
+{So I'm sure he he'll him and other people would have a lot of questions about this as well, but cause I'm kind of think trying to balance the level. Plain field for everyone. Cause a lot of people, just to your point, tread modeling. Yep. I understand. I need to save money. I understand. I need to not have a lot more cost in building the product.}
+{\pard  \line \par}
+{When I say I save money later on, because then it just architectural change and it's massive cost to come later on. Why is it important for a code company that we scored? Cause everyone, these days, everyone is writing a code, right? Like I can't imagine a company just not writing code, even if your mail system, whatever the mail system would be.}
+{\pard  \line \par}
+{They have a software and a background for everything to function. So why is threat modeling important? Like I think, why can't we just do SAS test and like, you know, quality day and move on? }
+{\pard  \line \par}
+{\b\cf3 Jeevan Singh:\b0}
+{ Yeah. Uh, one of the }
+{\cf2 [00:10:00]}
+{ things that these tools do really well is they catch like the commodity based sort of, of vulnerabilities.}
+{\pard  \line \par}
+{So maybe like, In your JavaScript, you are doing certain type of poor behaviors react for example, and dangerously that inner HTML is a great example of it. Maybe you have a bunch of that. SAS will catch that very easily, but what threat modeling does is really find those business logic vulnerabilities, where it's really hard.}
+{\pard  \line \par}
+{For tooling at this point to discover that maybe we'll have some advanced AI tooling, actual, real AI ML tooling in the future. where it will help us find those type of vulnerabilities. But until we get to that futuristic world, it's really hard to, with tooling to find some of these business logical ones.}
+{\pard  \line \par}
+{So stuff like authorization, vulnerabilities, broken access controls. Those are really hard to discover with, uh, tooling, cuz they don't have the context. that they need as part of the code. So sitting down with engineers, discovering }
+{\cf2 [00:11:00]}
+{ what the system does, what it's supposed to do, who should be using it.}
+{\pard  \line \par}
+{Mm-hmm , you can walk through all of those sort of situations and you can have run other things that tooling don't do really well as denial of service attacks. It won't really find good places where you might have an APPO or you haven't set up things correctly. So there are a lot of these vulnerabilities that, uh, static analysis SCA is da tools that do really well, but threat modeling looks at the entire picture and it really helps you discover things that are really hard to discover through.}
+{\pard  \line \par}
+{There's }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ a comment from odes well flow analysis of our app service from architecture design or diagram is what I do, what I do to identify stride. Is that a good way to describe it? }
+{\pard  \line \par}
+{\b\cf3 Jeevan Singh:\b0}
+{ Tentative flow analysis. Yeah, I think that like, uh, sometimes I also describe threat modeling as making sure that you look at the abuse cases, that sort of stuff, but yeah.}
+{\pard  \line \par}
+{Uh, one of the things that is really }
+{\cf2 [00:12:00]}
+{ important to do. Every company also does software development differently. So the more traditional, the more academic threat modeling, you have data flow diagrams, and you look at data flow diagrams and discover the vulnerabilities through those diagrams. But you don't want like engineering they're building sort of like, uh, I think was it Uday Uday was mentioning architectural diagrams.}
+{\pard  \line \par}
+{Yeah. Those are just as relevant. Like I don't want engineering. I want to fit into the engineering workflow rather than have them fit into the security workflow. Yeah. So if they had to write architectural diagrams, then they had to write data flow diagrams. It's gonna add friction to the whole process.}
+{\pard  \line \par}
+{Yeah. I wanna make sure I come to them. If they're doing architectural diagrams, like who they is doing, then I want to come to them and say, okay, let's look at these architectural diagrams. Let's understand what the feature that we're building out and see where we can discover some of these vulnerabilities as a part of that.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Thank you for the answer. And so KA has a question, where does it fit in a C }
+{\cf2 [00:13:00]}
+{ I }
+{\pard  \line \par}
+{\b\cf3 Jeevan Singh:\b0}
+{ C D? Yeah. That's a great question. It doesn't fit like a tool into the C I C D a bit. I have heard of some companies that if you haven't built out a threat model or I haven't done things in the process, it can actually block you from pushing to production.}
+{\pard  \line \par}
+{There are very few companies that are that mature process wise, but it's more of a process, uh, workflow type of item where, what we've done at segment and Twilio. Initially, we have a requirements document, a PRD product requirements document. It gets built out security looks at it. It gives the thumbs up.}
+{\pard  \line \par}
+{Then it goes into a blueprint, a architectural blueprint. And from there you will have a table where it has a lot of folks that will comment on it. You want to have architects involved, making sure that. Architecturally, it aligns with the long term company vision. You may have SREs involved to make sure that there's resiliency built into the actual feature that's mainly being built out and you will want to have security.}
+{\pard  \line \par}
+{Or if you are integrating with a third }
+{\cf2 [00:14:00]}
+{ party, you might want to have a GRC or legal or other folks involved as part of the process. So it's more of a process type of workflow rather than actual. uh, like a tool where you actually fit it into the C I C D pipeline. Um, having said that if you are able to be mature enough where, um, you have enough security engineers or, um, in other ways, uh, we talked a little bit about, uh, going on vacation.}
+{\pard  \line \par}
+{Uh, one of the things that we were building out at segment and we're looking at building out at Twilio is we're really diving deep at teaching engineers, how to threat. So I joined segment, uh, late 20, 19. I, I joined the team. Um, I, I flew down to SF and, uh, when, when I went down there, talked to Colleen, the CISO and I'm like, okay, it looks like you already have a program.}
+{\pard  \line \par}
+{I'm really good at building programs. Why did you hire me? Uh, I, I don't know what's going on. Like you already have so many great, talented, uh, folks. }
+{\cf2 [00:15:00]}
+{ Uh, we sat down, we talked about some Colleen's vision and one of the things that she envisioned. Reducing the operational workload on security engineers. And how do we do that?}
+{\pard  \line \par}
+{And we actually put some of pushed some of the security work onto the engineers themself, and one of which was actually doing threat modeling. So I sat down, we mapped out self-service threat modeling program where we actually taught developers how to actually do threat modeling themselves. I wasn't a hundred percent sure.}
+{\pard  \line \par}
+{Like we, at the beginning of the project, I'm like, okay, this type of impact, it may or may not. I spent two quarters teaching about a hundred, hundred 20 engineers, how to threat model. And after it was done, it actually blew my mind how well engineers, like the literally the first self-service threat model that was done and how we did it was that first we trained them.}
+{\pard  \line \par}
+{And then we go into a phase. We call observation. Um, I'm gonna give a little bit more context, um, at when }
+{\cf2 [00:16:00]}
+{ I alert threat modeling, um, I, I was watching my boss do it, and so I was shadowing my boss and then I was reverse shadowing. So I would do the threat modeling and he would be watching me and giving me pointers on things that I'm doing well and not well.}
+{\pard  \line \par}
+{So after a lot of practice, I got better at it, and this is what I was trying to do for the developers. So first the, they, I, in those observation phase settings, um, reverse shadowing them, they're running the threat modeling themselves, and then I'm watching, seeing if they're doing it well or not well, and giving 'em pointers on how to do it better.}
+{\pard  \line \par}
+{So literally that first one, it was me and it was a principal security. We went into it. Uh, there were very, very senior staff level engineers that were building out this feature and me and the other security engineer provided zero value in that meeting. And it blew my mind how strong these engineers and how quickly they, um, adapted to security, um, that wasn't the case for everything}
+{\pard  \line \par}
+{But, uh, all of }
+{\cf2 [00:17:00]}
+{ these more senior staff principal level engineer, They're actually really good. And once you teach, 'em how to understand what security is. They're they're able to digest it fast. Um, one last thing I wanna talk about this is that developers are way better at threat modeling their systems than security folks.}
+{\pard  \line \par}
+{Um, a hundred percent of the time. So this came up several times when I did threat models, I have about an hour to understand their system and then try coming up with. They work day in, day out for months, quarters, years on their system, they know exactly how their system works. So there are many times where I'd come up with vulnerabilities.}
+{\pard  \line \par}
+{Great. But they would come up with stuff that I there's no way I would be able, I'd have to spend weeks on the threat model to dive deep enough into their system. So if you can teach developers how to threat model, you're gonna get way, way better vulnerabilities. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Awesome. That's a great answer as well, man, I think, and thank you for sharing that by, by the way.}
+{\pard  \line \par}
+{So that kind of is a good segue into the }
+{\cf2 [00:18:00]}
+{ next segment that I've had in mind as well. Hopefully they'll answer your question card. Thanks so much for this man. I've got a few comments quickly. I wanna quickly go through them. So they mention. SaaS is late. Sometimes when you have your database exposure over the number D four credential, this is where threat morning helps.}
+{\pard  \line \par}
+{Awesome. Thank you for that. They Ryan, uh, diamond advice so far, man, there you go. He's got a fan here. I think it's your radio voice by the way. I think the way you're talking, I'm like, yes. Tell me more, Jim. Uh, if you like, }
+{\pard  \line \par}
+{\b\cf3 Jeevan Singh:\b0}
+{ usually back in the day saying that you have a, a talent for the radio. Insult say so your, your face isn't good enough, uh, to be presented.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So I'm glad it's different, your voice we need. It's your face. It's your voice. all right. Uh, car said, oh, great. Thanks for explaining Rama. I think it has. Yes. So, which is kind what you were saying. It's the broader spectrum. Uh, thanks for Ramma as well. The question. Okay. How much level expertise }
+{\cf2 [00:19:00]}
+{ required in programming to understand and be an expert in threat audience?}
+{\pard  \line \par}
+{It's a very broad question about how hopefully you have. Simple enough answer for Kar to at least get some guidance. }
+{\pard  \line \par}
+{\b\cf3 Jeevan Singh:\b0}
+{ Yeah. So this is a, it depends sort of situation. Um, and like I, one of the things that I really preach as part of my threat modeling workshops that are run for developers and actually other security folks is threat modeling is a team sport.}
+{\pard  \line \par}
+{You can't do threat modeling on your own. Um, first you obviously need the developers that are develop. but you also need the right security professionals to help. So we are living in a cloud world and you need a lot of different security engineers. So I'm really good at application security, but if there's a infrastructure heavy type of, uh, feature that we're building out, I'm gonna pull in my, uh, cloud security, uh, counterparts.}
+{\pard  \line \par}
+{Um, they're really good and knowledgeable in that area. If, if this particular area is super, super sensitive, I'm gonna probably put in, pull in my incident }
+{\cf2 [00:20:00]}
+{ response, the cert or our threat hunting team as well. Cuz I want, they think very offensively and I wanna make sure that, uh, these offensive folks come in and these certain sensitive areas.}
+{\pard  \line \par}
+{So how much level of expertise is required? It really depends on the type of threat model you're doing. Um, it helps I'm not gonna lie. Um, I've had over a decade of experience on the software development side, really understand, and it really helps. It makes it easier to communicate with engineers. When you're coming up with solutions, you can iterate a lot faster.}
+{\pard  \line \par}
+{But, uh, some of the cloud security folks don't have that software development experience. They have a lot more on the DevOps side. So, and some of the incident response are threat hunting, um, individuals, red team of individuals. They don't have much at all experience in programming. Um, but they have ridiculous amount of knowledge on breaking things.}
+{\pard  \line \par}
+{So it really depends on the type of individual that you are, that is helping with threat modeling. But if you're coming }
+{\cf2 [00:21:00]}
+{ from application security side, yeah, it helps. It definitely helps you don't have to be an expert, but being able to understand how to finding vulnerabilities, isn't hard, but, uh, you won't be able to find controls that work.}
+{\pard  \line \par}
+{And if you have a software development background, it really helps that way. Oh, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ actually's a good way to put in because you're, you're essentially trying to see, or may, you're trying to recommend. Controls which may help solve a vulnerability rather than, you know, I mean, it's not really, it's not fixing per se.}
+{\pard  \line \par}
+{It could be fixing based on the situation, but primarily it's trying to find }
+{\pard  \line \par}
+{\b\cf3 Jeevan Singh:\b0}
+{ a control. That's right. And a lot of the times it isn't like it, it is the recommendation. How do we, and sometimes like maybe you discover something that has a ridiculous amount of risk and you can implement, it's gonna take a month to implement this control, to reduce it to.}
+{\pard  \line \par}
+{Or maybe it's gonna take a week to reduce it 75%. Um, and being able to talk through those with the developers and understand the amount of effort that's required will really help you decide what type of controls that you wanna put in }
+{\cf2 [00:22:00]}
+{ place. The goal of threat modeling is not to eliminate all risk that's bad for the business.}
+{\pard  \line \par}
+{The goal of threat modeling is to reduce risk and understand how. Um, appetite we have for reducing }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ risk, actually, that's a good point. And, uh, by the way, thanks to the question, Carly. Hopefully that was interesting. Cause you know, to, to you what you said there. Bang on the money. It's not, you're not trying to convince and find out, or maybe you are maybe trying to find all risk so you can manage them.}
+{\pard  \line \par}
+{Is that well, that should be right. You're trying to control }
+{\pard  \line \par}
+{\b\cf3 Jeevan Singh:\b0}
+{ all of them, right. That's right. You want to find the universe of vulnerabilities as part of the threat modeling, uh, practice. You're not gonna find everything. We're not we're humans. We're not. Uh, perfect. Um, so as long as you can find the vast majority and especially for our program, we want to find the critical high, medium ones for.}
+{\pard  \line \par}
+{And low informational it's if you don't find them all, it's not end of the world. You'll, you'll find some, but you may not find all of it. Um, but the goal isn't and once you discovered all }
+{\cf2 [00:23:00]}
+{ of these vulnerabilities, the goal isn't actually to eliminate at all, you want to eliminate the amount that actually makes sense for the business.}
+{\pard  \line \par}
+{So if you're at a. Maybe you're okay with having a few more vulnerabilities open, cuz the goal is to survive. You wanna make sure that you are putting out a solid product and you're finding product market fit. Yeah. But if you're at enterprise or a crypto company, you wanna make sure that you're eliminating vast majority of vulnerabilities in general.}
+{\pard  \line \par}
+{Right. And }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I think to your point in that case, you know how people dev test and then pro as well, should this be when the solution is being }
+{\pard  \line \par}
+{\b\cf3 Jeevan Singh:\b0}
+{ made? I. Uh, I love this question. Okay. Um, so we have a philosophy for that. So there are, there are some stuff that we find that are critical vulnerabilities. Um, so ideally it's done in the design phase and we fixed it up in the design phase, but we will have safe.}
+{\pard  \line \par}
+{Uh, there's a particular thumb model. We might have 12, 14, um, vulnerabilities that were discovered as a }
+{\cf2 [00:24:00]}
+{ part part of it. We will actually let work with the developers and say, when does it actually have to be fixed? Um, some have to be fixed by alpha. Some have to be fixed by beta when we're actually using external clients, that real clients that are using it.}
+{\pard  \line \par}
+{Um, and then some we say that has to be fixed by GA and some, um, can be post GA. So we work really, really closely to identify and really understand the vulnerability itself and the severity of vulnerability. Um, and once we have that, then we can work with the engineering team and say, when do, when do.}
+{\pard  \line \par}
+{Expect you to actually fix it. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Interesting. And I think you touched on cloud security a bit earlier as well. You might work on cloud security team. So just for the, because cloud security podcast as well. What, what would be an example workflow for that kind of threat model where you have to work with a cloud security?}
+{\pard  \line \par}
+{Uh, I guess theme, I guess, for lack of a better word. }
+{\pard  \line \par}
+{\b\cf3 Jeevan Singh:\b0}
+{ Yeah. Uh, whenever, so there's a bunch of different scenarios, um, uh, integration }
+{\cf2 [00:25:00]}
+{ between, uh, an outside third party. Um, I'd wanna make sure I'm pulling in my cloud security. And we're doing the, um, whatever type of, uh, type of, uh, advance communications with them.}
+{\pard  \line \par}
+{So if we have to lock, how do we make sure that no one's listening in, on these sort of conversations. Anytime we spin up a we're AWS heavy type of organization. We also use GCP and Azure, but we're doing heavily in AWS. Anytime there's new type of services in AWS, I wanna make sure I'm bringing in our cloud security folks with that type.}
+{\pard  \line \par}
+{And, um, a lot of our tools are now cloud native. So it's like half half of the application development's already cloud based. We wanna make sure that. Right permissions. We have least privilege enabled everywhere. Yeah. So we'd work closely with our cloud security folks to make sure that that is enabled as well.}
+{\pard  \line \par}
+{Um, it, it, the vast majority of our threat models. Are either cloud cloud sec heavy or pro }
+{\cf2 [00:26:00]}
+{ sec heavy. Um, and, uh, so it'll be one or the other team, but there's a good one that requires both of us, uh, to be in attendance for. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And that's kind of where I was going with because most applications these days, I mean all the CSPs out there, and this is kind of good link to the question that Jillian has asked over here.}
+{\pard  \line \par}
+{Thoughts on including the CSP administrators as threat agents, uh, as part of the threat model. And just kind of like where, cause to what you said, most applications, these days are either product heavy. They don't like no code or whatever they want, like whatever AI machinery they're doing or on the other spectrum where they are very cloud native using primarily cloud services and traditionally threat modeling.}
+{\pard  \line \par}
+{A lot of people talk about they're like, well, you know, it's, it's a. For lack of better. It's been between the four walls. It's not outside the four walls. Now we are talking about . This is outside our control as well, sometimes. So CSP administrator, your cloud service product, like an Amazon or Microsoft or Google cloud or whatever, how does this }
+{\cf2 [00:27:00]}
+{ fit in into that kind of space?}
+{\pard  \line \par}
+{And maybe if, uh, to your point, you gave an example earlier, just say, um, someone has, I don't know, I've called a regular website, which is I'm hosting on AWS and well, hopefully that answers Julian's question as. We have just a regular thing. How would you kind of recommend, cause I know I'm just trying to put place the, the skeletons of where you can see where this would fit in.}
+{\pard  \line \par}
+{Yeah, I dunno. We don't have to go into the detail of it, but just }
+{\pard  \line \par}
+{\b\cf3 Jeevan Singh:\b0}
+{ into that's a great question. So one of the things that you really have to understand is who are the threat actors trying to attack you? Yeah. If it's a script kitty, um, okay. You wanna build the controls that will protect against it, and then you sort of build up a script, kitty hack.}
+{\pard  \line \par}
+{um, insider threats. Uh, are you worried about nation states? So you wanna make sure that you build their system towards it? So a as part of the threat modeling process, um, especially at mature companies, they know, um, the type of threat actors that they're, um, dealing with. }
+{\cf2 [00:28:00]}
+{ So they want to build in the controls based on that, um, sort of, uh, threat actor.}
+{\pard  \line \par}
+{So, um, am I afraid that AWS admins will be attack? Our infrastructure potentially in certain areas maybe have really, really sensitive customers, uh, high value targets as we like to call them. Um, maybe they're part of our system and we need to go that extra step and maybe they're paying us a lot more to go through those extra hoops in order to protect them even against, uh, wherever we're hosting it.}
+{\pard  \line \par}
+{So, uh, definitely if they're the great thing about threat modeling, , you can decide how the level of sophistication you want to do for every system or feature that you want to build out. And then if you are really worried about nation states, or you're worried about insiders at Amazon, or if you're insiders at your own company, you can build that as part of when you're scoping your exercise.}
+{\pard  \line \par}
+{You wanna make sure that as during the scoping, uh, phase of the threat model, you figure out, get everyone on the same page. These }
+{\cf2 [00:29:00]}
+{ are the type of risks that we're concerned. . And when you actually look at your system, you account for those risks and try diving deep into discovering vulnerabilities. Yeah.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And, uh, thanks for sharing that as well. Cause I think I you've hit it on the nail as well, because it also is based on the company as well. Not everyone's worried about mission state, hopefully not. Everyone's worried about nation state , but of course some the main comments as well. Uh, thanks to you. So you got the answer and got Ryan.}
+{\pard  \line \par}
+{Haha. Absolutely. Oh sort kind. The radio voice, man. I think you, you could totally do the calm app. You know, the meditation app. You could totally do that by the way. And I'm like, I just realizing as I'm listening to you, like, oh, that's a good watch to listen. I'm like, that's why, like you could be like a total, like breathe in, breathe out, breathe in, breathe out.}
+{\pard  \line \par}
+{You can do that the entire time. It seems like there's }
+{\pard  \line \par}
+{\b\cf3 Jeevan Singh:\b0}
+{ good money in that place.}
+{\pard  \line \par}
+{my side gig. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Okay. People we're turning into meditation show now for the rest. Next 30 minutes over here. Uh, }
+{\cf2 [00:30:00]}
+{ sweet. Awesome. Uh, so Jillian got the answer as well. Thanks for Jillian. And, uh, good question for Rama as well. How does the complexity increase considering multi-cloud hybrid environments? You've come up with a multi-stage approach.}
+{\pard  \line \par}
+{\b\cf3 Jeevan Singh:\b0}
+{ Oh, I love this question. Uh, I haven't run into this too much. There, there have been certain systems that, uh, while I was working at segment that we did have a multi-cloud, um, situ. And it was, uh, Ramma you're right. It is very complex. Um, uh, so, um, fortunately I had a real strong cloud security team that helped us, uh, through that complexity.}
+{\pard  \line \par}
+{And we got to a place where it was risk acceptable. Um, it wasn't perfect. We got to a place that was risk acceptable and over the quarters afterwards, we slowly kept on bringing down the risk, cuz we weren't fully happy with the solution. So, um, sometimes. A lot of times in security, you get the choice of a lot of bad options and then you have to choose the least }
+{\cf2 [00:31:00]}
+{ bad option.}
+{\pard  \line \par}
+{Um, but the good thing is security is also a marathon and not a sprint. So that means that we have a lot of time to, uh, continue iterating and getting better. So, and that particular situation I haven't done too much multi-cloud but in that particular situation, um, we put out a solution that worked in the short.}
+{\pard  \line \par}
+{But we kept on iterating to a place where I was very satisfied with the result at the end of it. Um, I do expect, uh, us, uh, at Twilio to do a lot more multi-cloud stuff in the future. Um, and yeah, uh, we'll definitely have to connect when, whenever we dive down that and we can share, uh, different type of styles and design patterns that we can use, uh, Awesome.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Thanks for that question as well, Rama. So I think we kind of dive, uh, took a nose dive into a very quickly going away, but like, almost like I was thinking this would come towards like a bit more later, but now since we kind of have explained a bit more about how threat fits into the cloud security space, we've also current }
+{\cf2 [00:32:00]}
+{ level, the plane field for what threat actually is just talking about rolling it out.}
+{\pard  \line \par}
+{Cuz I mean the topic was, we are allowing security team today. Holiday. Where, how, how can the security team take holiday a in a threat model situation? Like what, what was the idea behind this? And I'll link the talk in the show notes as well for people to kind of hear it as well. What was the idea behind this?}
+{\pard  \line \par}
+{And, um, and maybe we can go from that into what's important enrolling a threat model program into an organization. }
+{\pard  \line \par}
+{\b\cf3 Jeevan Singh:\b0}
+{ Yeah, a great question. So going back to the conversation that I had with Colleen, um, RC, so we really want to reduce, we are security. Engineers are engineer. And we need to engineer solutions.}
+{\pard  \line \par}
+{We're not a operational team where we are analysts and we take things in work on a ticket, spit it out. Um, and that doesn't really scale well with, uh, organization. We don't hire as many security engineers as we do engineers. So, um, in, in order to really, }
+{\cf2 [00:33:00]}
+{ really be proactive, we want to make sure that we had a solution for our operational workload and working with engineers to tackle.}
+{\pard  \line \par}
+{So we came out with a program where first we'd train the engineers on, uh, threat modeling then sort of talked about being observation, like reverse shadowing, making sure that the engineers are doing it right. And then they get to a point where they don't need us to be there. So we, they would actually do the threat models on their own.}
+{\pard  \line \par}
+{And then we review the artifacts after the fact just to make sure everything's good. And then when we're actually satisfied that they're doing a good job, Um, we don't have to, it was a security optional phase after that. Um, we don't have to be there. We don't even have to review the artifacts. So, um, a as we were doing it through segment, um, we're really strong with, uh, training and, uh, we're doing really well with the observational phase and some of the teams were strong enough to do, um, the.}
+{\cf2 [00:34:00]}
+{ }
+{\pard  \line \par}
+{Actual threat modeling on their own and we'd review the artifacts, uh, from that spot. And so it was slow migration to that particular space. And I'm actually confident with, uh, at least a handful of engineers that there are some really strong engineers and some of our SRE are just as capable. Security engineers that we're fully confident that whatever they put out, we don't have to double check triple check their work.}
+{\pard  \line \par}
+{Um, but our goal was to take a sample. So if they did 10 threat models, we'll take a look at one just to make sure everything they're doing is correct. Um, so, um, our assumption is, as we are able to really push the threat modeling over to the engineering. then we can look at other type of engineering, security engineering related work that we can work on and really reduce the operational workload.}
+{\pard  \line \par}
+{Um, we're just joked about, uh, taking a vacation, um, because, uh, security work is like a Hydra where you cut one head off, often two of 'em pop }
+{\cf2 [00:35:00]}
+{ up. Um, but, uh, but it really would, it really would have a relaxedness quite a bit knowing that the engineering team is doing threat models. Well, themselves. Going through the exercise with them.}
+{\pard  \line \par}
+{I know that they can actually do it really well. So, um, if we are able to really remove ourselves away from, um, one thing I should add is, um, even in this particular program, the security engineers will still be involved with certain type of threat models. Um, I, we do trust the engineers, but anytime there's Phi going through our system, PI P.}
+{\pard  \line \par}
+{I wanna make sure I'm involved, or if we're working, we're redoing our authentication or authorization, uh, controls. I wanna make sure that I'm a part of that sort of stuff. So, um, it will hopefully eliminate 80% of the threat models that we need to be a part of. But those 20%, I wanna make sure that we're sort of part of, so it will really, the goal of the program was to really reduce our operation workload, um, and put it to the engineering }
+{\cf2 [00:36:00]}
+{ team.}
+{\pard  \line \par}
+{What we learned. They're way better at it. They find way more vulnerabilities. Uh, and this is the type of program that we, um, really need to release to most companies, uh, in the industry. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Awesome. And I think to, to your point then, uh, cause that was a, a good segue into another question that came from P as well, who is the minimum ation?}
+{\pard  \line \par}
+{So what's minimum representation you require in a thread modeling. }
+{\pard  \line \par}
+{\b\cf3 Jeevan Singh:\b0}
+{ Yeah. Um, so there's two sides of it. Um, one is the engineering side. Um, that is actually, so, uh, a lot of things that I've talked about is engineering here because I'm a product security engineer. Mm-hmm I work really closely with, uh, engineers themselves.}
+{\pard  \line \par}
+{You can threat model anything. Um, so, um, so a lot of the things that I'm gonna talk about is on the engineering side. So first you need the engineering representatives. Uh, you need the individual that actually came up with the. The people that are actually, um, doing the, um, software development work themselves.}
+{\pard  \line \par}
+{\cf2 [00:37:00]}
+{ Um, so those are the minimum on the engineering. On the security side, it really depends on the type of feature that's being built out. Um, if you are having, um, you want to likely have your product security engineer and you might want a cloud security engineer there as well. Um, those are the minimal on the security side, but if you want be a little bit more advanced, I talked about adding cert and, uh, or your red team as a part of that as well.}
+{\pard  \line \par}
+{I've also pulled in GRC or privacy at times as well. Cuz um, sometimes if, uh, if I'm passing, um, Phi through our system, I know a lot about, uh, security, but my privacy and my compliance and knowledge of all of the different, uh, legislative regimes in the world. Isn't that great. I do want to bring in the experts for that.}
+{\pard  \line \par}
+{So I definitely have brought in GRC and privacy. Some of these threat models and they can answer things right away for us as well. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Awesome. }
+{\cf2 [00:38:00]}
+{ And thanks for sharing that as well. Cause I think to, to your point then if the minimum representation, I guess depends on the application that you're trying to build as well.}
+{\pard  \line \par}
+{And that's where you mentioned the cloud security people earlier, depending on what you're trying to troubleshoot. Cause as you're trying to talk about this one, one thing that comes to mind is a whole cultural change as well. Yeah. Cause a lot of organizations will listen to this go even great idea, man.}
+{\pard  \line \par}
+{My company has been done doing this without threat boarding for a long time. How do I like there's a backlog that is obviously being created ongoingly. Is there any advice for that? }
+{\pard  \line \par}
+{\b\cf3 Jeevan Singh:\b0}
+{ Yeah, that's a great question. Um, hard, hard advice, uh, to give, um, the culture work comes two ways. Uh, one is top down and one is bottom up.}
+{\pard  \line \par}
+{So you definitely want to work bottom up and make sure that the engineers understand why security is. but ultimately the, it has to come top down. Um, the engineering leadership, the executives have to say that security is important. We're gonna change how we do security. }
+{\cf2 [00:39:00]}
+{ And this is how we're gonna work going forward.}
+{\pard  \line \par}
+{Um, it's gonna be rough. Um, and I remember a couple of companies that were built out the security team from scratch. Um, it literally took about a year, um, to culturally build security in, um, just first was a lot of people don't know what security does. Um, so letting them know when you can pull us into conversations and communicate with that, with them on that.}
+{\pard  \line \par}
+{Um, and then other situations it was, um, Yeah, I've been here for 10 years. I know how I'm doing things. Uh, get outta my way in those situations. You work with that individual and if you can't work with it, that's okay. Um, sometimes you can use the carrot. Sometimes you have to use the stick, um, and bring folks in line.}
+{\pard  \line \par}
+{Um, I'm much more about carrot type of person. much }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ all the meditation that you've been doing. }
+{\pard  \line \par}
+{\b\cf3 Jeevan Singh:\b0}
+{ much more of a care type person, but yeah. Um, it, it, it, it can be D. . But, um, when we were }
+{\cf2 [00:40:00]}
+{ moving to the self-service model, one of the things that, um, I was selling the engineering team was it's with us doing this, we're gonna move faster.}
+{\pard  \line \par}
+{As we scale, it's gonna be much faster for engineering to do the threat modeling than it would be for security. Security team is small. We're gonna model NCU. You're gonna be slow with that. Uh, engineering team is much, much bigger, so you can, it's easier to scale that way. Um, uh, and in addition, there's like there's a very little, um, additional work on the engineering team.}
+{\pard  \line \par}
+{You have to do the threat modeling anyways. Yeah. It's gonna take an extra 15 minutes or half an hour per threat model. If engineering is. So it's really easy to sell on the, the segment side when we rolled it there, because ultimately it was gonna be much, much more beneficial for the segment team. For the engineers.}
+{\pard  \line \par}
+{The velocity is gonna get higher. We're gonna see much fewer vulnerabilities if everything is }
+{\cf2 [00:41:00]}
+{ being threat model. And if everyth, if we see a lot less vulnerabilities means you're gonna do a lot less security work, you're gonna be doing focusing much more on the engineering work and you're gonna be shipping more.}
+{\pard  \line \par}
+{It seems kind of weird. Like the more we threat model, the less security we're gonna do, but that's how it works. The more we threat model, the better we get at threat modeling the much less you're gonna have to do security work, which is way better for everyone. It's a win, win, win. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Why can't people start with that first?}
+{\pard  \line \par}
+{Is it just start with that first? It's like, Hey, you, you wouldn't have to bother you later on if you just do this in the beginning. Cause a lot of you talk about the fact that, oh, we need to know all its. We need to know what are we protecting against? What control should we need? But to your point, if you, if you just start with, Hey, we won't bother you later on.}
+{\pard  \line \par}
+{If we just do these things and then, you know, you do whatever you want, I guess until obviously it's accomplished situation or whatever. I, I think maybe that could have been a better way to approach this and. To your point about the cultural thing as well. And I, I don't imagine it's a small feat. It takes a while.}
+{\pard  \line \par}
+{So yeah, being patient with that would obviously }
+{\pard  \line \par}
+{\b\cf3 Jeevan Singh:\b0}
+{ help a }
+{\cf2 [00:42:00]}
+{ absolutely. You have to be patient. You have to actually sell the vision. You have to sell the vision and do it. And you also have to approach threat modeling in a way that engineering can digest it. So there are situations where you need to do a multi month long threat model or a security architecture.}
+{\pard  \line \par}
+{Um, if you do that for every single thing, engineering's not gonna engage with you. You have to make sure it's lightweight enough. It's digestible enough for them to do it. So I ran into this problem much, much earlier in my career where our quality assurance team was doing really heavy QA type of, uh, risk analysis.}
+{\pard  \line \par}
+{Really early on, every time we built out a feature, it was gonna cost three hours for us to. um, that thing lasted maybe two or four weeks before. Everyone's like, we're not doing it anymore. So you have to make sure something is light enough. That is digestible and compatable, uh, for the engineering team.}
+{\pard  \line \par}
+{Um, and you just start slowly, like, uh, start with, }
+{\cf2 [00:43:00]}
+{ um, really strong engineering teams that are okay to do security show how well they are doing it, and then compare them to other teams in the organization that aren't doing it. And show why it's important to do security and doing threat modeling. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ What's an example of carrot outta curiosity, towards the needle }
+{\pard  \line \par}
+{\b\cf3 Jeevan Singh:\b0}
+{ example of carrot would be just the showing the organization, how little security work folks are doing.}
+{\pard  \line \par}
+{So, um, we have a lot of different, uh, reports. It shows the organization, which parts of the organization have a lot of vulnerabilities that they have to work on and which parts don't have that much of vulnerabilities to work on. So that's definitely a carrot and I, I love recognition like, uh, um, my boss, he built out, uh, Security leadership, uh, or security points leader.}
+{\pard  \line \par}
+{Board salary is security leader board. Yeah. Where anytime someone did something well, security wise we'd give 'em points. And there was a competition. There was }
+{\cf2 [00:44:00]}
+{ an inherent, we gamified security that way, and there's an inherent competition. And there are people that after they've discover vulnerability or fix vulnerability, they reach out to the security team say, Hey, I wanna make sure I got my security points for it.}
+{\pard  \line \par}
+{So, um, that worked out really well, uh, at, at an organization. Fantastic }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ few different carrots there yeah. Few funeral carrot. Cause I think the coming back to the whole, I obviously, by the way, you've been quite quite favorite. So ode is, uh, has kind of declared you. You're his favorite guest so far as well.}
+{\pard  \line \par}
+{So you, you should definitely practice that meditation voice a lot more uh, and Rama is looking forward to a deep dive session on this topic as well. So quite a few ideas for it, but so, uh, this has been really awesome going on, man, I think, and I'm just curious. Spoke about threat modeling. We level the playing field.}
+{\pard  \line \par}
+{We also spoke about how can people start deploying it. We also spoke about how they can scale it. And, um, I would refer to the show notes for, uh, the, the talk that you did based explain that }
+{\cf2 [00:45:00]}
+{ whole, the four step four stages of the threat modeling process as well. Um, Because a few things that are kind of coming to mind, because we spoke about the cloud security and multi-cloud and hybrid cloud angle as well in a, in a thread modeling context, you've put the right people in the room and you've kind of gone through the process.}
+{\pard  \line \par}
+{How long do you typically say people should spend on? Cause I mean, you know how people love planning? I mean, I can just keep making up. For lack of better word threats all day long. Do you guys timebox it and go, Hey, this is your time we sort allocate }
+{\pard  \line \par}
+{\b\cf3 Jeevan Singh:\b0}
+{ we timebox it, but it also depends on the size of the initiative that we're doing.}
+{\pard  \line \par}
+{So, um, I, I remember at segment, we're looking at completely changing how we implemented segment, uh, making it much more customer centric and it made sense rather than actually doing a threat model and coming up with vulnera. We just embedded a security engineer into the project. Um, they were part of the standups.}
+{\pard  \line \par}
+{They would answer the security team immediately. Sorry, the engineering team immediately, and }
+{\cf2 [00:46:00]}
+{ it literally reduced months, maybe quarters off the project itself. So yeah, it really depends on the situation. Um, we typically wanna have smaller, uh, working in an agile organization. We wanna have smaller threat models.}
+{\pard  \line \par}
+{And, um, usually I, I spend about, uh, Half an hour initially, to talk to the initial engineer to better understand what they're building out. Um, I'll probably spend another half an hour, um, just to let it sink in. Uh, try to come up with vulnerabilities on my own. And then I'll go to the threat modeling session where it's usually a, typically an hour and a half, and we work together to sort of come up with the vulnerabilities together.}
+{\pard  \line \par}
+{But you can't do that for the multi-cloud situation where you actually have to have, um, a bunch of different ones. So another great example of it is, um, someone on my team Alejandro, um, he was working on this particularly large, uh, And he ended up having to do nine or 10 threat models as a part of that functionality.}
+{\pard  \line \par}
+{Wow. }
+{\cf2 [00:47:00]}
+{ It was very large. Um, and a lot of 'em, um, he did, uh, with a few security folks, but one of which was a particularly sensitive area where we pulled in a lot of different security folks, cuz we wanted make sure that, uh, we had a lot of eyes on it and we captured all of the vulnerabilities as a part of it.}
+{\pard  \line \par}
+{So it it's a hard question to answer. But you want to make sure that again, the process is small and natural and it fits in. Um, so that, uh, you don't, you don't wanna add friction. You wanna make sure that the process is smooth. Um, so typically an hour, hour and a half is what we do for our fat models. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And where I was going with.}
+{\pard  \line \par}
+{That was also the fact that once you've discovered a few threats that you're working with and say to what you were saying for security people, to be able to go on holiday, we train developers and engineers to, uh, I guess be able to do this themselves as well. How do you judge the quality and maybe judge a strong word, but how do, how do you maintain quality of threats being identified or, }
+{\cf2 [00:48:00]}
+{ you know, cause sometimes.}
+{\pard  \line \par}
+{Some people may look at a particular wonderful or threat and go. This is probably the most important, but in your mind, actually, I don't think that's really the most important thing. There's this other one they should be looking at. Like, you know, there, there, there is that call. Sometimes we, as security people would make with engineers, but how does that kind of play a role in a whole self-service based, uh, threat model?}
+{\pard  \line \par}
+{\b\cf3 Jeevan Singh:\b0}
+{ Yeah. Um, that's something that we're still working on. And one of the things that I want to do. As security, we always are continuously learning and growing and, um, getting better. I cringe at all the software that I wrote earlier in my career. , I'm hoping that I've gotten way better at doing software development, uh, now.}
+{\pard  \line \par}
+{Um, but, uh, we grow and we learn. And so one of the things that I was really looking forward to. We had these 100 level courses that just really the basics about threat modeling and getting people off the ground there. But I had goals }
+{\cf2 [00:49:00]}
+{ with 200, 300, 400 level courses and going ridiculously deep and making sure that we have that continuous training for those folks that, um, are working on these projects.}
+{\pard  \line \par}
+{So, um, after a year or after six months, we would go through that next level of training, so that get them even more. Deeper into threat modeling itself. So that was the goal from that to sort of make sure that we are, um, still maintaining the high quality, but is also as part of the security, optional phase where we're not involved with the threat modeling.}
+{\pard  \line \par}
+{The goal of it was actually, we wanna make sure that we're sampling. Um, so, um, once every 10, once every 15 threat models let's have a quick look let's peak, are they finding all of the critical high, medium vulnerabilities? If they're. Let's go back and talk to them and find out why they missed some of these really, really important ones.}
+{\pard  \line \par}
+{So it's sort of like that, uh, motto trust, but verify we, we trust that they're doing the right thing, but let's verify and make sure that the }
+{\cf2 [00:50:00]}
+{ quality still remains high there. Yeah. And I }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ think maybe another, um, one at the tail end of this is also, how do you keep them informed of the new vulnerabilities?}
+{\pard  \line \par}
+{Like if lock four J comes up, I dunno, lock four J part two. And as I said, that is a volcano erupting somewhere as well. It's like, oh my God, this is lock four J part two. Uh, how do you folks recommend, uh, keeping them up to }
+{\pard  \line \par}
+{\b\cf3 Jeevan Singh:\b0}
+{ date? I love that question. Um, this is one of the things that I learned as part of this, uh, journey.}
+{\pard  \line \par}
+{If you can really Evangel the security, like, let me take a step back. So pre COVID security would be sitting in the middle of development and you hear things and you walk and you talk and talk to people and really implement security there. Um, once COVID hit, we're all stuck in our homes. We're not really going into the office.}
+{\pard  \line \par}
+{So you're not part of those conversations where you can really help engineer. So our initial goal was like, uh, }
+{\cf2 [00:51:00]}
+{ let's have a monthly check in with engineers. Let's do a monthly workshop where they can learn a little bit more about security. We started off with that. Then we rolled out the threat modeling training.}
+{\pard  \line \par}
+{Once we rolled out the threat modeling, training it, uh, this is anecdotal. There's no hard, no way for, there's no way for me to measure it. Security culture went through the roof. Um, it was, it was absolutely. My favorite story around this was, um, I had an engineering manager, um, east coast, most of the, at the time, most of the security engineers were on the west coast.}
+{\pard  \line \par}
+{So, um, segment is a heavy node and go Lang uh, uh, shop. And, uh, this particular, there was a high vulnerability that node had release of explore. So this engineering manager. He found out when that they released it. He patched his team. He scanned all of, uh, segment code base discovered two other areas where it's impacted.}
+{\pard  \line \par}
+{He identified those, uh, folks had to be, they're also on the, }
+{\cf2 [00:52:00]}
+{ uh, east coast. So they're aware they create tickets for it. Um, and they were gonna plan on releasing a fix in a couple of days. This was all done before a single person on the west coast even woke up. So yeah, like, so what I noticed that has happened.}
+{\pard  \line \par}
+{Once the engineers were, they understood, um, what security is, what threat modeling is. They naturally, they have a sense of pride. They want to be really good at it. And they themselves, um, were like fantastic at it. Uh, really, really shocked me at how well and how. um, how passionate they became about security.}
+{\pard  \line \par}
+{And we have many of those sort of engineers, uh, still at segment and definitely a ton of them at Twilio. So, um, you just have to find the right message to communicate with your engineers and they themselves will be interested in it. Um, one other like another anecdotal anecdotal. I've started seeing a lot }
+{\cf2 [00:53:00]}
+{ more, at least the there's a segment has the office in Vancouver.}
+{\pard  \line \par}
+{I've seen a lot more of the Vancouver engineers join O O Vancouver and learning more about security from that standpoint. So, wow. It's security is interesting and engineers find it interesting as well. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ interesting. And it's funny cause you know, you, you say that and I truly believe that's possible also because.}
+{\pard  \line \par}
+{A lot of us do security day to day. A lot of us lock our doors. When you walk outta the house, that is security. We, no, one's really telling you, but in your mind, I mean, you do it by default because you know what, the importance of it as well, but a lot of people are already doing it in their nonwork context suddenly.}
+{\pard  \line \par}
+{I think we just have to reshape the education in why it's important in an organization context as well. This is super awesome, man. I think I wish I had a lot more time. So, uh, the, the, one of the questions that I also have for you is just around learning about threat modeling. Obviously the way you've deployed.}
+{\pard  \line \par}
+{I think a }
+{\cf2 [00:54:00]}
+{ couple of the different threat modeling thread modeling, there are different types of thread models, stride, and others. You, you, I'm assuming you favorite one is tried. }
+{\pard  \line \par}
+{\b\cf3 Jeevan Singh:\b0}
+{ Yeah, well, we've used it. I guess it's one of the more popular, um, ways of threat modeling and, um, all of us, uh, segment. And now that Twilio are a lot more familiar.}
+{\pard  \line \par}
+{So, yeah, we, we like, uh, using stride to discover vulnerabilities. When I tell, um, when I tell our developers is stride is great. It doesn't really matter the type. Like, I don't want you to get fixated if you found a tampering vulnerability and just labeling it, tampering stride is just a tool. It's a tool that we use to discover vulnerabilities.}
+{\pard  \line \par}
+{And if you find things that are outside of stride, it's okay as well. Like, uh, the goal of threat modeling is just to find vulnerabilities. Um, but stride is a lot easier for us. Just to implement it's. Yeah. It's, there's so much content on stride out there. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. And, uh, where can people learn about threat modeling in general?}
+{\pard  \line \par}
+{Cause obviously they can hear from, hear, talk as well and talk and }
+{\cf2 [00:55:00]}
+{ learn about. The self-service threat modeling works and they can also take holidays. But in general, where, where do you set resource? Where do you send people when they wanna learn threat }
+{\pard  \line \par}
+{\b\cf3 Jeevan Singh:\b0}
+{ modeling? Yeah. Um, I think we're really bad as a community on threat modeling, just in general.}
+{\pard  \line \par}
+{Like when I started out there wasn't many resources, we're slowly getting there. Um, one great place, uh, and it's free. The OWA slack. Um, so OWAS has a slack that you can join. There's a threat modeling channel with literally world class threat models, uh, threat modelers in there. So a lot of the folks that are academic, um, know a ton of things that run actual full day, full week long, uh, threat modeling classes.}
+{\pard  \line \par}
+{They're just in that channel answering. So . Yeah. Yeah. So there, there's a bunch of, 'em a as a part of it, uh, highly recommend it's free. You can ask questions, people respond back all the time, highly recommend joining that. Um, the best }
+{\cf2 [00:56:00]}
+{ way to learn threat modeling is to actually do threat modeling. You'll do it poorly at the beginning, but as you slowly start exercising that muscle, you can get better and better and better.}
+{\pard  \line \par}
+{Um, that's the best way to actually. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ awesome. Uh, well that was the, uh, final question. I've got three more questions for you, man. I think, which are fun questions for people to like they haven't had the enough, they haven't had enough of the meditation wise. So we're gonna have three more questions just to, uh, help them learn a bit more about you.}
+{\pard  \line \par}
+{And these are very, just fun questions, Ben, uh, first one being, what do you spend most time on when you're not working on threat modeling or te. }
+{\pard  \line \par}
+{\b\cf3 Jeevan Singh:\b0}
+{ Um, usually taking the children to and from of activities, the states. So, uh, I got two young boys, uh, eight and five, uh, yeah, me and my wife. Uh, we spend a lot of time, so it's, uh, they're the joys of our life.}
+{\pard  \line \par}
+{So, um, mostly spending time with the kids. Yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Awesome. And, uh, what is something that you're proud of, but is not on your social media? Oh man. }
+{\cf2 [00:57:00]}
+{ }
+{\pard  \line \par}
+{\b\cf3 Jeevan Singh:\b0}
+{ Oh, that's a great question. I, um, I, I think the one things that I take a lot of pride in is, um, uh, try to uplift and help others. Uh, so, um, I had a lot of help getting to where I am in my career.}
+{\pard  \line \par}
+{Um, it takes a community to raise a child sort of situation. So a lot of folks really help me out and I try to pay it back by helping others as well. Cuz I couldn't get where I was without other folks involvement and I wanna make sure I pay it back and help other people get to the. We have a lot of smart people like at the junior intermediate stage of their career in security.}
+{\pard  \line \par}
+{And I know like even on my team, um, I, I have a ton of really, really smart people that I know given the opportunity. At some point, they're gonna go way past where, what I'm capable of. And I look forward to actually reporting into them at some point in the future as well. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That's so cool, man. I think I, I, and I, I also look forward to her Dave and I }
+{\cf2 [00:58:00]}
+{ think people would, would've helped in the, in, I guess sometime now and in the future they do awesome things.}
+{\pard  \line \par}
+{They're like, oh yeah, I remember this person. Um, the, uh, last question. What's your favorite cuisine or restaurant that you can }
+{\pard  \line \par}
+{\b\cf3 Jeevan Singh:\b0}
+{ check? Uh, FA I Punjabi Punjabi food is Northern Indian. I it's like, so I I'll }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ take that as an answer. Cause I think I love it as well. I think in fact, I had last night as well, Lego}
+{\pard  \line \par}
+{Um, so, so of, of course, uh, this was a great episode, man. I thought I, I really enjoyed it. I think I, I definitely need to bring, bring you back on as well. In fact, we need to also ask for it already. Great. Please bring even back in the. You need to bring your meditation voice as well. You should do some meditation session while we like breathe in, breathe }
+{\pard  \line \par}
+{\b\cf3 Jeevan Singh:\b0}
+{ out.}
+{\pard  \line \par}
+{We'll start the next one with that. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ yeah. yeah. Uh, where, where can people find you by the way? Uh, if people have any follow up questions, they connect with you }
+{\pard  \line \par}
+{\b\cf3 Jeevan Singh:\b0}
+{ and find you hit me, hit me up on LinkedIn. Um, Jimon on LinkedIn. Um, I actually created an email alias }
+{\cf2 [00:59:00]}
+{ for when we open source the threat modeling training at segment.}
+{\pard  \line \par}
+{The whole point was like, it is fairly generic training and it could be applied to any organization. So I also created email alias, S S TM. Self service, threat modeling, segment.com. So send an email there. Um, we can talk more about, uh, threat modeling as a part of that, but, uh, I think I'm oh, and ask ging on Twitter.}
+{\pard  \line \par}
+{Uh, I'm much more on LinkedIn than Twitter, but just, uh, that's another way to get a hold of me. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I I'll put the links in the, uh, in the show notes for the episode as well, but dude, thanks so much for coming in, man. I really appreciate this. And looking forward }
+{\pard  \line \par}
+{\b\cf3 Jeevan Singh:\b0}
+{ to having you again. Yeah. It was such a pleasure.}
+{\pard  \line \par}
+{Thanks for having. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Not a problem. All right, everyone else. Uh, we'll see you next weekend. Episode, talk soon. Share safe. Peace.}
+}

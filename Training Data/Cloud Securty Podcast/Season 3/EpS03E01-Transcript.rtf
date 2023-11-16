@@ -1,0 +1,529 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red250\green138\blue59;
+\red128\green128\blue128;
+\red216\green34\blue146;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\pard  \line \par}
+{ }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ I think for people who may not know who or is first of all, if you could tell us a bit about yourself and also how'd you get to where you are right now, man,whats your story.}
+{\pard  \line \par}
+{\b\cf3 Or Weis:\b0}
+{ Sure. So essentially I'm sort of a cliche and Israeli entrepreneur.}
+{\pard  \line \par}
+{My background starts in the intelligence Corps and the idea for us. I was a developer officer, a team leader, project manager. Yeah, they are, they under a lot of hardcore software and reverse engineering. I then proceeded to work in a couple of startups, startup. Cool. In T4, we did containers before containers were thing, but for really bad go to market.}
+{\pard  \line \par}
+{And afterwards I worked in Another few startups. I worked as a consultant back in the ministry of defense and I was a VP of R and D in a cybersecurity company that catered to governments like minded agencies wide only worked on defensive projects, not offensive, really proud of that, especially with the current climate nowadays and afterwards, between I think too late 2016, up to two years ago, I co-founded and ran a COA developer }
+{\cf2 [00:01:00]}
+{ tools company called rookout which enables production debugging, still a board director there still major stakeholder.}
+{\pard  \line \par}
+{Currently I'm working on a permit IO. My new company, which as you kind of mentioned, focuses on identity access management, and more specifically on authorization and access control. And then you can see throughout my career and background, cyber security and software development were always a key element.}
+{\pard  \line \par}
+{And with this company, I really enjoy combining them both both software development, working and providing solutions for developers and putting the focus on security, but from the depth side. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh, wow man, really interesting story. By the way, permit IO is an interesting name as well. You guys had a different name before, right?}
+{\pard  \line \par}
+{So why that name? And I think the story behind that as well. }
+{\pard  \line \par}
+{\b\cf3 Or Weis:\b0}
+{ Yeah. So, first of all, technically we're still in stealth mode. We haven't did any announcements yet? This kind of this podcast is kind of an exception. We'll be doing more announcements later in this new year. We were previously called authorizon, which was this kind of a pun, not saying good pun, but upon on }
+{\cf2 [00:02:00]}
+{ authority horizon, because authorisation is an unhinging horizon to things that you need to do.}
+{\pard  \line \par}
+{ But we had a problem where people would read authorizon . And if of your company, that's a bit of an issue. So you were lucky enough to be able to get the domain permit IO from a, another great entrepreneur. And now that's what we're called permit IO. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That's awesome, man. A great name as well. I've got a few more people who just came in as well.}
+{\pard  \line \par}
+{All right. Let's get into this man. So I think you and I have been talking about identity access management for some time and offline as well, but a lot of people may not be aware of what identity and access management is so, so that we can level the playing field for everyone.}
+{\pard  \line \par}
+{How do you describe I'm gonna throw a few words and pick anyone to start off with. How do you describe authentication authorization, access control? }
+{\pard  \line \par}
+{\b\cf3 Or Weis:\b0}
+{ Right. They, and also they're shortened in a very similar way. So you have authentication, which people would call often off N and you have a forestation with people who would shorten this off the Z, so they both have offend them.}
+{\pard  \line \par}
+{So it's super confusing, but they're very different. }
+{\cf2 [00:03:00]}
+{ And they're all part of this bigger space called IAM or identity access management. I like to think of identity access management as a waterfall composed of three parts. The first part is identity management. So identity management is all about managing your identities as the name indicates it's about being able to define who's part of your organization.}
+{\pard  \line \par}
+{ What attributes they have, which departments that do belong to, and just have the ability to create identities and aggregate them, catered them, manage them in a unified kind of interface. Most leading solutions for identity management are Okta and Azure active directory of people. So you Google Googles.}
+{\pard  \line \par}
+{I am for for identity management and that's really the baseline for identity access management. And so, and while identity management takes part on the organization side, the other two parts happen on the product side, they connect to identity management. So the second, the next stage is authentication .}
+{\pard  \line \par}
+{So authentication is all about verifying the }
+{\cf2 [00:04:00]}
+{ identity of who's connecting into a product. There you'll find products like off zero Kognito on AWS. One login, et cetera, et cetera. And then you proceed from that verifying your identity, essentially logging in, you proceed into the product, and then you need to decide who can do what within the product.}
+{\pard  \line \par}
+{ And that's called . So who can do what, in which context is that's the forestation and you have common questions like which users can use, which features. Who can you do? What? So identity management is managing their identities. Authentication is who's at the door. And lastly authorization is once people are in your house and your product what are they allowed to do?}
+{\pard  \line \par}
+{Are they allowed to sleep in your bed? Eat your kitchen, set things on fire. It's really, it really changes, but it's important to make decision }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ decisions. Hopefully not to set them on fire. I guess }
+{\pard  \line \par}
+{\b\cf3 Or Weis:\b0}
+{ I'm not a judge. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. Fair enough. I don't, I won't judge people when they come into the house. Yeah. Feel free to send your files.}
+{\pard  \line \par}
+{It's not like my, my house is your house kind of like, but if you want to. So I think by the way that that was written in almost like a }
+{\cf2 [00:05:00]}
+{ chain that we kind of went through, }
+{\pard  \line \par}
+{\b\cf3 Or Weis:\b0}
+{ yeah, it's more than a chain. It's actually a waterfall. So they feed one another. So you have to have first layers, you can have the following there.}
+{\pard  \line \par}
+{So if you don't have identity match, if you don't have source, when you can query identities, you can't really verify them. And if you don't have identities, it's really hard to build authorisation cause if you don't know who that person is or who that entity is, you can't really decide what they're allowed to do as opposed to other }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ entities.}
+{\pard  \line \par}
+{Yep. And I think it's pretty, it's funny as in how nuanced , this thing as well, right? It's almost like you have a product and I think I want to summarize it really quickly as well. I think it'd be great. You have a product and every product you can either have it open the internet. Anyone can just go in and do whatever they want on it, which is kind of like what, what, what we all do with Google.}
+{\pard  \line \par}
+{And then, then I'm just like, I'm going to use a Facebook as an example. I would get a special ID , for me to log in, into my profile, but I don't get access to everything in Facebook. And that's that separation of authentication, authorization and access control is how much, like you may decide to block me as a friend and }
+{\cf2 [00:06:00]}
+{ because , Ashish's always do live streaming every weekend.}
+{\pard  \line \par}
+{So I hate him for this. So you may decide to just go, you know what, I'm just going to block. And so my access is basically limited at that point to you. So like, there's that another example of access control as well, }
+{\pard  \line \par}
+{\b\cf3 Or Weis:\b0}
+{ a terrific example. And it also works in multiple levels. So you have, who can access the solution itself, who can work with it in the infrastructure level, who can manage it as in the developer and who can work with it as a user.}
+{\pard  \line \par}
+{And the thing is the more products we have and more things, we connect. One another, there's more and more need for authorization. It used to be a lot simpler. And it was a lot easier for developers to everyone would start with just, I just need two types of users in my app, admin and not, and now it's kind of exploding and there are multiple levels of authorization, for example what am I allowed to do in the application?}
+{\pard  \line \par}
+{What do I allow the application to do on my behalf? What day would allow the opportunity to use, but also trickles down into privacy.}
+{\pard  \line \par}
+{ }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. And I think that maybe a good place to start also is clearly we have been, you know, we've done this for }
+{\cf2 [00:07:00]}
+{ a while. Initially on efficient, it was just, Hey, I just want to admin non admin now coming from the other people may wondering, so what are some of the common authorization methods that people see in the industry?}
+{\pard  \line \par}
+{\b\cf3 Or Weis:\b0}
+{ So up until recently, like the last two years, people have been mostly building authorisationn on their own completely. So you just build it from scratch. I was also one of those people in my previous company rookout. I ended up rebuilding authorisation five times that kind of turned on the light bulb for me that something is wrong here.}
+{\pard  \line \par}
+{And new solutions started to evolve open-source swans and S services, et cetera. And I think the most dramatic change that caused us to be different than it used to be before is microservices. So when you were building a model with application, you have the ability to kind of bake in, in just one place, how you control, who connects to what within the application.}
+{\pard  \line \par}
+{Usually also new sub specific frameworks like spring framework or Django in Python. You also get some of those controls baked in, but as you start to break that }
+{\cf2 [00:08:00]}
+{ application out into multiple services, now you end up replicating the code across these different microservices. And that then makes it very hard to do.}
+{\pard  \line \par}
+{And the way to approach that is a recognize that now. Kind of spread and then also recognize that you have more needs on top of that. So the logic now, it's not just I need admins or not. We, as I mentioned before, there are more requirements. Like we need different need different roles. We need to control the different attributes.}
+{\pard  \line \par}
+{And I can maybe kind of take this for, but I don't want to rush the }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ yep. Fair enough. And I think it's a good thing to mention to the point that it's so easy to kind of feel like you would have the best solution for authorization, because it should be straightforward. I just need to paint. And especially when the part is starting, I don't imagine it to be like, oh, it doesn't need to be complex.}
+{\pard  \line \par}
+{Let's just get this out of the door. One admin, one on admin. I just thought don't worry about it. }
+{\pard  \line \par}
+{\b\cf3 Or Weis:\b0}
+{ I called that applying the salami method to yourself. Just think it's a little slice, just a small slice. And then I, oh, they actually need an editor role. And then the user comes in and oh, we actually need audit logs and we need }
+{\cf2 [00:09:00]}
+{ to be able to monitor them on their own side.}
+{\pard  \line \par}
+{And then sales comes in and we need the impersonation. We need to be able to see the system from our own eyes or at a rural county. Like it's also things that you don't really think about. Like at lookout one of our partners, Cisco, they serve, sell directly to market. And then they came in one day and said, we want our own backup.}
+{\pard  \line \par}
+{We want to be able to manage the users that we onboard into the system and your, and I was like, there's no way in hell I can take the solution, stretch it to be that way. I have to build, rebuild it from scratch. So, and now that, because it's also spread across multiple microservices, I need to rebuild multiple microservices over and over.}
+{\pard  \line \par}
+{So it's really because of the complexity and because of the new technologies that we're working with, it's really requires a new mindset, new best practices and new technologies to kind of address this challenge. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I think that's probably a good segway into like, you know, there obviously having existing solutions in the past and some people are still using those solutions as well.}
+{\pard  \line \par}
+{Either they've gone down the product part or they've gone on the part of like, to your point made customers and national television for their products, which }
+{\cf2 [00:10:00]}
+{ seems to be the easiest to, because you already have developers now, why are. The world we live in night now with microservices, cloud cloud native, it just so complex in terms of the kind of computer you can go for as well.}
+{\pard  \line \par}
+{Why is there a need to kind of challenge authorization at this point in time? And I think you kind of talk about permit.io your new company, that you've kind of focused primarily on authorization. So why challenge authorization now and why it's not working or is that why we're challenging this?}
+{\pard  \line \par}
+{\b\cf3 Or Weis:\b0}
+{ So there are two reasons why this is the point of the challenges. Firstly, it wasn't really applicable before we had to solve the previous layers. We have to have identity management work. Well, we have to have authentication work well and we have to have those interconnecting. So until we had SAML and SSO connect between identity management and authentication that basically that entire area wasn't stable enough to build upon.}
+{\pard  \line \par}
+{And before we had standard. Standards. It's like Jason web tokens in the authentication layer. It was basically impossible to connect with in a standardized way. Jason web tokens are a really great way to communicate from the }
+{\cf2 [00:11:00]}
+{ authentication layer into the application and specifically into the authorisation layer.}
+{\pard  \line \par}
+{And they became mature just in the last, like two years, three if we were kind of kind to it. So first of all, the technology and space wasn't there yet. And second thing the mindset wasn't there yet, we were still evolving and how we were thinking about. If you go five years back, people were still thinking like, oh, billing is something that I'll implement on my own in authentication that's to core and critical.}
+{\pard  \line \par}
+{I have to implement it on my own. But thanks to these companies like Stripe and like off the xero now people realize that these are really hard problems and there's no reason that you should be building them from spec over and over again. And the mindset that you can adopt critical services as part of an application you building became legitimate.}
+{\pard  \line \par}
+{And more than that, now the consensus is. It's kind of solutions cause trying to build it on your own, you'll probably make a lot more mistakes and you'll be a lot more pain for you. So state of mind is ready for them and we parallel the complexity. Like I mentioned before, the complexity of both the demand }
+{\cf2 [00:12:00]}
+{ for a more advanced authorization and the spreadsheets and the complexity of the applications themselves moving to microservices and cloud native structures.}
+{\pard  \line \par}
+{ We made the pain of building it into application by itself more I'll have more, a bigger, a lot more painful. So having the two work together both the space ready and the pain kind of reaching kind of a threshold. That's really what was a signal for us that. New tools will be built here.}
+{\pard  \line \par}
+{And thankfully we both us and other players in the market started with open source. So there are now solutions that even if you don't buy, you can already kind of adopt them as building blocks and more importantly, as a best practices that you can kind of bake in to make sure you don't repeat the mistakes of the past and be ready.}
+{\pard  \line \par}
+{ How you building authority station. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That's an interesting point as well, because you almost wonder that, you know, you mentioned cloud native and cloud platforms as well, because obviously if you talk to someone from AWS Azure or google cloud or any of the cloud service providers, they will just say, Hey, you should use our authentication }
+{\pard  \line \par}
+{\cf2 [00:13:00]}
+{ and you kind of mentioned cognito in your example earlier. So when we started this company, So at what point would someone choose to go down say an open source part for authorization or versus just using a cloud platform solution for.}
+{\pard  \line \par}
+{\b\cf3 Or Weis:\b0}
+{ So I think it doesn't really matter what, how you choose to address this. You need to understand the complexities of it and how essentially the best practices that you need to adopt. So you won't find yourself concept, we building this and you can approach this also by building on your own. That's still an option, but you should build it on your own way.}
+{\pard  \line \par}
+{Then you can instead of reinventing the wheel and you can take ready-made solutions as open-source or services, and you can build on top of them also kind of to avoid the common mistakes in terms of like choosing the solution or choosing something of your cloud.}
+{\pard  \line \par}
+{It's really, really important to understand also the difference here in adopting the authentication and authorisation . So authentication is really at the gate. Of your application. It's just some, just a door. And once people pass through it, then you get a JSON web token. You kind of free of it. It's not deeply ingrained.}
+{\pard  \line \par}
+{Authorization is a lot more critical. }
+{\cf2 [00:14:00]}
+{ Essentially most applications would do multiple authorization queries, pair requests, pair microservice in the application you're building. So it's a lot more performance critical. Has a lot more impact on the application. And also there are a lot more interaction points.}
+{\pard  \line \par}
+{So if you don't get those interaction points, right, you're going to have a bad time and getting those right is adopting those best practices. The first one, by the way, is decoupling policy and code. So having essentially a separate microservice. For authorization and then building the microservice, right?}
+{\pard  \line \par}
+{Having it based in a way that you can load policies and data into it in an easy fashion making it event driven so you can update it quickly as things change. And there are a few more best practices that we'll touch on in a minute, but you can build a microservice. Again, as I said, you can build it on your own.}
+{\pard  \line \par}
+{You can adopt open source like Uber open policy agent, which is part of the CNCF, which is essentially a fancy metacache did you can build policies and data into, and then run queries on it. But in fancy memcache, there's actually fencing. It comes with good }
+{\cf2 [00:15:00]}
+{ reformers. It comes with the API APIs and best practices and how you manage that component.}
+{\pard  \line \par}
+{And then when you want to take it to the scale of replication, you can take open like Opal, but for our disclaimer and one of the maintainers and developer of and opal enables you to take open and make it event driven, and then it can sync with your application in real time. So you can build all of those on your own.}
+{\pard  \line \par}
+{You can reimplement them in a different way, but it would be a most important for you to recognize that these are complex problems that require good design and B that there are already good solutions out there that you can build upon and not find yourself constantly rebuilding from scratch. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And I just want to point out for people who are trying to be future security architects and probably already architects will really relate to the problems that you just mentioned as well, because I tend to get used to just the gateway to your product.}
+{\pard  \line \par}
+{It follow really step one beyond before you opened the Pandora's box for, oh, is it Ashish from a security or is it Ashish from marketing or is it Ashish who has admin privileges versus admin who }
+{\cf2 [00:16:00]}
+{ was non admin? Like you can let, the number of questions you're going to have to kind of think about in authorization is just so complex and that's why.}
+{\pard  \line \par}
+{Sure. There's so many companies have departments that are just dedicated for identity, and access management, nothing else. They just work on that. }
+{\pard  \line \par}
+{\b\cf3 Or Weis:\b0}
+{ Yeah. And also it's getting more complex by the minute. Just maybe I'll try to paint a quick picture so people can maybe wrap their heads around why this is complex because on the surface of it, it sounds simple, but thinking of where do we manage the identities?}
+{\pard  \line \par}
+{Is it coming only from the identity management of the customer? Are we adding more information on that on top? Are we adding information from external services? How do we make them consistent? So is information coming from identity management? If it's finding the job to Jason web token is it's found in our database, is it found in a third-party service?}
+{\pard  \line \par}
+{So I'll maybe I'll give one example here. Let's say we want the simple policy, like only users that pay for a feature. Can you. It's again, it sounds very split on the surface of it, but it's very complex. First of all, we need to know who this user is and }
+{\cf2 [00:17:00]}
+{ maybe other attributes on how are they supposed to pay and how they are going to use different features in the system.}
+{\pard  \line \par}
+{This can already touch on both the authentication layer, the Jason web token, and some elements in our database, but then it also touches on a third-party system billing today, or pricing or paying is not implemented in your system and your database. It's implemented in a third party service like Stripe or PayPal.}
+{\pard  \line \par}
+{And we want that to be quick. So when someone swipes a credit card or types in their credit card and Stripe, we want that information to pro propagate immediately into our application so that user can start using. Yep. We essentially need to be event driven when the event happens and Stripe, we need to be able to listen to it and update our authorization layer accordingly.}
+{\pard  \line \par}
+{And then when the user comes in and that's a different request coming in, running into different application, we need everything to chime in and the right moment, so will work smoothly and we just described the most basic policy you can basically think of. Yeah. And still can be super complex.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ It is a great example as well, by }
+{\cf2 [00:18:00]}
+{ the way, because on the surface, such a simple thing. Yeah. I just, pay and move on but it's quite a complex one to follow it. I'm going to take a switch gear cause I've got a few more questions coming in as well. Hey Tom. Happy new year, man. Good to see as well.}
+{\pard  \line \par}
+{Tom has a question as well. What problem or opportunity are you trying to address in the IAM world with. }
+{\pard  \line \par}
+{\b\cf3 Or Weis:\b0}
+{ Yeah, that's a very simple question. We're working on a full-stack permissions as a service spoke one I'm describing here essentially with authority's agent or permissions or access control are all the challenges that you have to go through just to get to the basic step.}
+{\pard  \line \par}
+{And then it never ends. It continues. You constantly have more demands and you constantly up more requests from customers, from partners, from your sales, your marketing, or product. It never ends. And as a developer at the end of the day, you don't want to deal with all of that. You just want to be able to build your actual product.}
+{\pard  \line \par}
+{So just like you don't want to implement the building from scratch and you don't want to implement authentication from scratch. There is no reason to build access control from scratch. So what we're trying to do is kind of cover it end to end, unless you want to build something. In which case. You }
+{\cf2 [00:19:00]}
+{ can, but unless you want to, you don't have to build anything, can just plug and play access control, both on the infrastructure, back office and customer facing interfaces.}
+{\pard  \line \par}
+{You can just plug them in and have your product, have all it needs to have for access control for you having to build. And also have it in a way that the different stakeholders can come in and work on this. So it starts with developers. Developers are always the ones that in the end of the day are requested to build this features into the products and applications, but it obviously is required by other players like product security compliance.}
+{\pard  \line \par}
+{So for security, for example, the ability to have audit logs for the entire system pair of tenants. And if those be fed into your SIM SOC and other monitoring systems is a critical thing. You'll need to do that. And you need to enable those security people to control that, configure that and have the old information they need to be part of managing the system.}
+{\pard  \line \par}
+{So that's when we're trying to do, we want to enable the developers to empower every everyone else in the organization. We've found having to build this from scratch over. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Awesome. }
+{\cf2 [00:20:00]}
+{ Thanks for that. Or, and hopefully that answered your question as well, Tom. Good to see you, man. All right. I wonder another question from, Vineet , what is your approach when you design authorisation at large scale, especially when they want more granular access for different use?}
+{\pard  \line \par}
+{That's a great question as well. }
+{\pard  \line \par}
+{\b\cf3 Or Weis:\b0}
+{ Amazing question. So, first of all, I'll start with saying that we, as a society or as humanity, we don't really have a concrete answer for that yet. So with authentication, how we should manage the idea that, you know, you should press with a long, for example, we have a very good answer.}
+{\pard  \line \par}
+{Jason Webb tokens are based on both groups have gruffy and the, and Battle tested protocols. And we know that's the default go-to with authorisation . The space is still evolving, which is kind of cool. But also kind of intriguing. So there are two camps today, the powered by code camp and the powered by graph camp.}
+{\pard  \line \par}
+{And they both have pros on the powered by code camp, you have solutions like OPA, which I mentioned before and also offer great solutions like Oso , and Caspin, these are essentially engines , that you load data and policies into based on code. And they }
+{\cf2 [00:21:00]}
+{ execute them to follow inquiries, to answer who can do what if people are familiar with prologue or data log those engines are basically based on that kind of mindset, that expert system mindset the advantages of those agents and engines is that they are very organized.}
+{\pard  \line \par}
+{You have a specific language in Opa, for example, this language called Rigo, and also you have a language called polar both enable you to write code that is efficient and focused on building. And you can distribute those agents across your system and that with the microservice approach, having them, for example, as a sidecar or cluster, we really solves your scaling out channels.}
+{\pard  \line \par}
+{And they are preferred. They will give you the performance. You need to be able to use in scale in your application. But they are also the downsides. You now need a way to keep them always in sync and you need to make sure that they're consistent. So if you have multiple microservices, you need each of them to be in sync with you.}
+{\pard  \line \par}
+{So you don't get permission to mark requests. And then I'm never on the cover. That's one camp. I try to give kind of }
+{\cf2 [00:22:00]}
+{ pros and cons quickly. The other camp is really led by a white paper from Google called Google Zanzibar and sends apart as essentially a graph based concept on how you manage the world picture.}
+{\pard  \line \par}
+{Of your authorisation so think about your different entities as nodes on the graph and the connections with between them. The relationships are one, what will define access control? So let's say for example, in Google drive, which is based on Google Zanzibar, you'll have a folder which would contain a folder, which would contain a folder, which will contain a file.}
+{\pard  \line \par}
+{And to the top folder, we say Ashish has access, read access. So you will have a node coming in from the top file. And from there called read. And from that, we'll have a connection to the user that is connected to Ashish' s identity. So when we want to answer, who has access to that file, we navigate on that graph up to Ashish , and then we can say Ashish has access to that file for all those folders.}
+{\pard  \line \par}
+{The main advantage of the graph based approaches that we can navigate the other way around. So we can ask that's, what's called the. Who has access. So not }
+{\cf2 [00:23:00]}
+{ only does Ashish that have access, who has access to this file so we can run the graph the other way around, which we can do with code write code.}
+{\pard  \line \par}
+{It only runs one way. But the challenges with it is that we're managing basically a huge graph in our cloud. It doesn't really fragment. Well, we can't really put a sidecar far surfaces. And then if we were using it to an external service, we'll usually pay a large of cost in late in network latency.}
+{\pard  \line \par}
+{So that's problematic the kind of approach that I think the market would kind of stabilize on. That's my kind of prediction is a hybrid approach, so we'll be managing the greater picture in a graph. So we'll be running queries locally. In kind of a deduced image that would be saved , in specific agents that are local to each microservice.}
+{\pard  \line \par}
+{And that's kind of, you can get the best of both worlds. By the way, one of the challenge, I never challenged that the graph base protests is aside from managing the S just the complexity of that graph, which is really hard to do as also how complex you can make the permissions. So with code it's really easy to make loops and }
+{\cf2 [00:24:00]}
+{ iterate, or even be recruited.}
+{\pard  \line \par}
+{If you make that graph. None directly a cyclical. You'll be running into a really bad time cause you'll end up moving a lot on the RAF and not being able to actually answer questions. So you you're limited in what you can to describe with the graph as opposed to code again. That's another word they're kind of complimentary and why I feel that the hybrid approach is really the way to go, but we'll see the market's still evolving.}
+{\pard  \line \par}
+{What's cool about using the best practices and using solutions like permit IO is that we're just kind of abstracting this for you. We'll combine whatever approach to Marianna has hybrid non hybrid. You can just consume it with, through our APIs and no matter what changes, what ends up being the ultimate solution, you'll just get it.}
+{\pard  \line \par}
+{You don't have to kind of rebuild it from scratch, which is also something that I think that can be very helpful if you want to focus on building. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I think it had a good talk on this as well. Was like a few couple of months ago, something on, come meet up talk. I found her on a YouTube channel, which was really interesting.}
+{\pard  \line \par}
+{And has the diagram of the waterfall that we spoke about earlier as well. And it speaks about the two kinds of }
+{\cf2 [00:25:00]}
+{ approaches, the policy agent approach as permission graph approach. I'll add that to the show notes. So people can actually go up to that talk and listen to that talk as well}
+{\pard  \line \par}
+{\b\cf3 Or Weis:\b0}
+{ and maybe it's the talk that I gave in cloud native London. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So }
+{\pard  \line \par}
+{\b\cf3 Or Weis:\b0}
+{ both covered the the different approaches and the best practices. So there are five best practices, again, even if you just choose to build on your own, which is fine, or build open source, just to make sure you covered the best practices.}
+{\pard  \line \par}
+{So you won't end up rebuilding. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Do you recommend people start on their own first, so they know how hard the challenge is. }
+{\pard  \line \par}
+{\b\cf3 Or Weis:\b0}
+{ Yeah. It's all a matter of like you're building a product, you have different requirements at different points in time. You need to have priorities and decide what's important for you.}
+{\pard  \line \par}
+{Now, as long as you stick with the best practices you can end up upgrading can then shift if, but if you choose the wrong design, you'll have to rebuild from scratch. So you can build that micro service on your own and then switch it with open-source and switch it with a third party service or switch it with something else you will build later.}
+{\pard  \line \par}
+{But if you end up embedding it in your code, you're going to have a bad time. Don't do that. If there's one take take, from what I'm saying now, don't embed the }
+{\cf2 [00:26:00]}
+{ formalization with your code decoupling. That's the, maybe the most important best practice. Yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Hopefully the answer to your question Vineet , but that was a great question as well, man.}
+{\pard  \line \par}
+{So it's worthwhile calling out the two kinda approaches. Cause a lot of people have. Having been a security architect in the past. A lot of times the conversation just would end at the part of, Hey, why aren't we using single sign on? And when people were asking for authorization and that way we have one central point to control,who Ashish is and what Ashish can do whatever the accessing is. But to your point about complexity with now different kinds of cloud, native cloud workload, and all these other things, right? So what's the now clearly we moved beyond from, Hey, just your single sign on and we'll be all good. And we have a lot more complexity around it.}
+{\pard  \line \par}
+{So what are some of the best practices people can look forward to? And it could be to your point, a hybrid approach to the policy method or policy graph or permission graph method, but what are some of the best practices. }
+{\pard  \line \par}
+{\b\cf3 Or Weis:\b0}
+{ So maybe before it's having to do more and more of the best practices, maybe to touch on that point with like with single sign-on.}
+{\pard  \line \par}
+{So single sign on is very important. It's a good sort of NAB and a lot of customers would require }
+{\cf2 [00:27:00]}
+{ it in anyway. So it's a good approach, but it covers a very small part of the picture because the different attributes that the user has that are not necessarily part of the identity management, for example, which country are they connecting from?}
+{\pard  \line \par}
+{Maybe you want to live that according to geolocation are they connected through a VPN or not? That can also be another attribute. How much of their quota have they used? And it's really easy to see how this complexity moves on. And it also really changes between different products and also it might be one way in a product today and next release or next feature requirement, the next audit or compliance, and you have to go through it would change.}
+{\pard  \line \par}
+{So it's really important to understand. Single sign on is okay, but it gets more complex and it increases in complexity per the overall market and fair product for all time consistently. That's something that you can really bet on easily. So going into the best practices. So the first one we already kind of mentioned decoupling policy and code have a separate micro service.}
+{\pard  \line \par}
+{So people often ask me, is }
+{\cf2 [00:28:00]}
+{ it okay? Do you have a separate library? It's okay. But it's usually not enough. If you have a library and it compiles in a different fashion or is integrated in a different fashion, into different microservices, you often find yourself having a bad time because you end up having different microservices with different versions of the authorization.}
+{\pard  \line \par}
+{And then keeping it consistent is really painful. So ideally ideal, you should aim from day one to have a separate, separate microservice for authorization as soon as possible. Even if that microservices, just the Lambda function that always returns true, or just text checks, the username is your name and majority through it would be better just but separated from day one.}
+{\pard  \line \par}
+{So that's the first best practice. The second best practice is have things event driven. So consistency is very important and very hard. And the space is by definition is going to be distributed because you have a different billing service that is external to you. We have a different authentication service. You have a different third-party database. You have a different third party quota match, marketing solution. You're going to have a lot of different }
+{\cf2 [00:29:00]}
+{ solutions that are part of the overall thing you building. And they're going to be in an async fashion and remotely from you. So if you're not able to work in an event driven.}
+{\pard  \line \par}
+{The complexity of the data, the distributed data plane is essentially going to end up making you have a bad time. So try to build or think of a design it's going to be event driven. It doesn't have to be fully event driven from day one, but you should take that into account. So if you take those two, by the way, if you take the first two best practices, you can easily achieve them by with opensource, for example, by taking OPA and then taking Opal.}
+{\pard  \line \par}
+{So Olga will give you a separate microservice and Opal will enable you to keep it in sync with a pump solution in an event driven fashion in a real-time fashion. Again, you can build those on your own, but there are solutions that are already made open source that you can just. The third best practice.}
+{\pard  \line \par}
+{And fourth backs practice are really about how you work around the microservice and distributed they layer. So the third best practice is building it back office. That's something that you should recognize that they want. }
+{\cf2 [00:30:00]}
+{ You are building it as a developer now. But other people are going to use this dev ops would need to be able to control this and take effect security, compliance, product sales professional services, et cetera, et cetera, essentially, everyone that's building the product and will need to be able to manage the product.}
+{\pard  \line \par}
+{So you need to build your interfaces on top of that authorisation micro-service from day one to enable other interfaces for other people. So enable. So for example, security, to see the audit logs enable sales and professional services to create the tenants enable product managers and compliance do audits or change the policies.}
+{\pard  \line \par}
+{So you want to build interfaces, both API APIs and UIs on top of that authorization layer. And you need to manage, you need to design that authorization there to support that from day one second part is very similar, so your people need the interfaces, but your customers also are going to require. So they want to manage some of their policies on their own.}
+{\pard  \line \par}
+{They want to be able to add users on their own and assign roles on their own and assign attributes }
+{\cf2 [00:31:00]}
+{ on their own and be able to see their own audit logs. They'll ask how can I see what my users did within your system? It's going to happen if you're building a B2B product it's going to happen sooner or later.}
+{\pard  \line \par}
+{So take that into account, build the API APIs and designed to support that from day one, think about how you are going to scale that data. So it will become available as part of the audit log, for example. And lastly that's really about my thing. My main preference is Git ops. So we need to kind of take all these layers that we mentioned that decoupled, microservice, the event, driven layer, synchronizes the different agents, the interface that we have and need to find a way to constantly upgrade this and keep it with the times and the way that.}
+{\pard  \line \par}
+{ Most battle proven this is Git Hubs ops. So you should manage your policy as code. You should manage the configuration of how you load the events in that event. Driven pipeline through a configuration in your report. And then you are able to check push changes. We're able to control this in a }
+{\cf2 [00:32:00]}
+{ unified debate that is focused around code, and you can make it in a way that is both audit-able and controlled.}
+{\pard  \line \par}
+{So, you know, who changes your authorization layer? There's an entire whole space of authorisation for authorisation, which is super recursive and super confusing. I want to dive into it right now, but starting with get-ups is a really good way to kind of have a baseline to work with that and not get lost on day one.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So it's a good way to talk about the best practice as well, I was also going to add, it's also worthwhile calling out a lot of people who may be listening. }
+{\pard  \line \par}
+{They might be using a monolithapp instead of sort of like a microservice cloud native app. And some of these solutions may or may not work there. Right? Like, I don't imagine a monolith app would have the, well, it can have flexibility, but is that something that can work for monolith apps as well, or it's approach for this on like a modern cloud hosted cloud native kind of app only.}
+{\pard  \line \par}
+{\b\cf3 Or Weis:\b0}
+{ It's easy to integrate into a monolith app. The challenge you usually see is , that if you've built a monolith app, you already have authorisation kind of A }
+{\cf2 [00:33:00]}
+{ authorisation can of baked into it. So the most of the pain would be to go around cutting the areas that you already kind of glue}
+{\pard  \line \par}
+{But if it's decoupled enough or if you need decouple it then it's really easy to just plug in an STK call orauthorisation layer and that authorisation layer can be baked in kind of compiled into the monolith and it can still be a separate service even monolith applications need . Separate services like databases and cues.}
+{\pard  \line \par}
+{So having a, essentially a authorisation agent is essentially a fancy database, but think of it with memcache. So you've configured it like redness. So it's not that different to query it. You just need to write interfaces between your monolith or main service and that authorization layer. And what we're seeing today anyways, is unless with applications that are being deprecated, they're being added more services in kind of SOA architecture.}
+{\pard  \line \par}
+{ So adding that additional service would usually make sense. And I find myself talking to a lot of company. Large ones like banks that approach us and a smaller ones like startups that are saying, oh, we've built this monolith, but we know that we'll have to move to }
+{\cf2 [00:34:00]}
+{ microservices in like a month or two.}
+{\pard  \line \par}
+{ What should we do? So that transition would be not as painful. And first of all, in general, we're happy to help with that. We're always learning from people coming with those challenges. But also the the basic answer usually is start with the best practices, understand how complex your data is or going to be.}
+{\pard  \line \par}
+{And then we can kind of go step by step and think how we can kind of break it down and make it easier. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And for people who may not know what monolith applications are, this is how we've been developing applications for years. Now, this is the example that, or you started off with by saying, Hey, I'm going to build my own authorization.}
+{\pard  \line \par}
+{ There was no standard, there was no single sign-on. There was none of that stuff. So all of those applications, that's still pretty elephant, like, I guess. }
+{\pard  \line \par}
+{\b\cf3 Or Weis:\b0}
+{ Yeah. I think like if he glimpse quickly in the past, like if you were in like early, late two thousands, most applications were still mostly proprietary code and then they move in date and then you just say, oh, it's all my code, compile it altogether, create one binary, run it.}
+{\pard  \line \par}
+{And the end of the day, we'll also, in most cases you delivered, I still a }
+{\cf2 [00:35:00]}
+{ physical server I've on your network or a to the customer's network. So it was like, yeah, anyways, Build it all together. We're doing it anyway. And then we moved to, oh, we are going to be put containers through the cloud. So we probably should break this down and use our services.}
+{\pard  \line \par}
+{And then we started and we moved from being almost like like many percent proprietary. We moved to like 50% proprietary, 50% opensource. Nowadays applications are already 90% open source and they're starting to be more and more third party services. So it's no longer just not your proprietary code.}
+{\pard  \line \par}
+{It's your proprietary service. It's running on someone else's cloud and this trajectory is just going to expand dramatically. The way we are building applications and the federal half forces us to break it down to more components because we have to connect with more.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yep. I think it's a good exercise for anyone. Who's probably listening in just to see how they do authorisation even today. And that's an easy way to identify if you are currently working with a monolith application or microservices, and because there's a }
+{\cf2 [00:36:00]}
+{ lot more complexity, I think, or am I just touching on like scratching the surface over here to really a lot more deeper level that he can go into this as well.}
+{\pard  \line \par}
+{ I'm just conscious of also the fact that we kind of talk about a lot of best practices we've spoken about some of the modern approaches as well, but in terms of maturity, I guess when people look at this and go like, they've heard what you and I have said, they've gone ahead and had a look at what they have under the bonet , I guess, of the applications.}
+{\pard  \line \par}
+{Oh, I have a monolith or I have like a micro service I'm using a sidecar approach or whatever. What do you see as maturity for authorization? That's if people were to kind of benchmark themselves for, Hey, this is level one and this is like level 10 what are some of the maturity scale graphs that people can look at tomatch themselves against?}
+{\pard  \line \par}
+{\b\cf3 Or Weis:\b0}
+{ So if you'd kind of aligned up with the best practices, I think the kind of the negative level would be a jumbled spaghetti code for authorization. So you have a lot of copy paste code between different services between different applications. And a lot of it is duplicated, and also it started to drift from one another.}
+{\pard  \line \par}
+{That's also one of the big challenges when you're not the }
+{\cf2 [00:37:00]}
+{ coupling. So you have that code and then a number developer creates a new service or a new function. He just copies it over, but changes it slightly. So that's like the worst. Then when you want to add a new feature, change a new layer, that's very painful because you need to refactor across multiple services.}
+{\pard  \line \par}
+{And there's not even a consistent way that the code refactor would go because you need to kind of snowflake each and every function calls. So that's, that's horrible. If you're at that state, you should really consider setting time to face that technical debt and manage it before you will actually have to find it.}
+{\pard  \line \par}
+{Otherwise you'll be spending up or companies spending on average, like eight months on doing that in factor, like for a whole team, super painful, really it's better to avoid doing that under stress from a, like a feature request or demand from a auditor. So try to avoid that. The step above that is having a.}
+{\pard  \line \par}
+{Code that is you kind of merged into the application code itself, but it's the least organized. There's some API APIs that are said there's separate functions. That's kind of a }
+{\cf2 [00:38:00]}
+{ step, a better step above that is a separate library, have a separate library that you can kind of compile or building into your product that manages the formalization.}
+{\pard  \line \par}
+{And lastly is taking that library and moving it into a separate microservice. And then ideally having them microservice be based on a battle tested, mature. It's also a way to kind of gradually migrate into some better, you can identify different areas where your different pain points and gradually migrate them into that better, best practice.}
+{\pard  \line \par}
+{And if we're already talking about maturity, maybe it's worth to mention what's the maturity of the solutions available out there today. So we mentioned OPA OPA is a very mature solution. It's a CNCF project that is on that is graduated. It means it's on the same level as Kubernetes in terms of kind of peer review and.}
+{\pard  \line \par}
+{And Opal, which I mentioned a while, not a CNCF project is a project that complies with the CNCF and is already being used in various mature companies in production like Tesla and Accenture, Zapier, for example.}
+{\cf2 [00:39:00]}
+{ So it's also very mature and can kind of count on it. And there are other solutions out there and I won't obviously mention everything, but the , are also good solutions around the Zanzibar Ori and specifically , are, I think good mentioned there, there is still a bit more kind of nascent.}
+{\pard  \line \par}
+{But it's getting there when you're trying different solutions, when you're picking them, it's really important that you match the level of maturity of your application and the scale that it has with the maturity of the product and kind of go step in step with them to make sure that you get what.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yep. All great advice there as well, and definitely started by looking at what you already have and sometimes what you might find as you kind of change things really quickly in a monolith. But I'll, we'll let you discover that. Now we're obviously talking about Opa Opal and I think I definitely want to leave some references for people to like, where can people find out more about this, man?}
+{\pard  \line \par}
+{I think I always find that it's such a complex topic and we only have a limited hour long episode to talk about the evolving for 20 plus years, I guess. So what are some of the resources that you recommend for people to }
+{\cf2 [00:40:00]}
+{ learn about Opal and other things on authorisation.}
+{\pard  \line \par}
+{\b\cf3 Or Weis:\b0}
+{ Terrific question. So what I'd really like, and one of the things that's always gets me gravitating back to developer tools is working with other developers and the community. So both OBA and Opal is very good at communities that he can come in, ask questions, see examples of whatever people have built, learn from their experience, learn from their mistakes join in discussions.}
+{\pard  \line \par}
+{That's really, I think the best way to kind of jump into this see what others are building, share what you're building and get feedback on. That's a great part. Both OPA Opal have slack communities. You can just join them directly. And and ask questions show and tell , et cetera. Both we're also very active on GitHub both in the sense of catchy contributing code, but also seeing other project examples or discussions.}
+{\pard  \line \par}
+{ People are very welcomed there and both use the kind of CNCF conventions of welcoming people. So it's a very inclusive environment. So that's our really great place to start. And obviously there's the reading materials for both like the documentation }
+{\cf2 [00:41:00]}
+{ before OPA you can find it on open policy, agent dot Oregon for Opal.}
+{\pard  \line \par}
+{You can find it in opal.ac. It's easy to dive in and maybe we've been mapping. I don't want to be too, fear-mongering you think authorisation is a big challenge, but I don't think people should be too wary of it. A lot of times people come in and, oh, I have a lot of data and I don't know how to manage everything.}
+{\pard  \line \par}
+{It's going to get messy and maybe I should just stick with just shoving it in there. And I don't know. And often when you take the first step and you actually look at what you have in place and where you need to be in. The next step that you need to take is usually very simple. Usually you have less data than you actually think you have, that you need to manage.}
+{\pard  \line \par}
+{Usually you have a lighter scale that you can just manage naively at first, and then you can go there. Step-by-step and they're already kind of battle-tested architectures that you can copy off are people see from the community, adopt them and just start that from that and kind of gradually build on.}
+{\pard  \line \par}
+{And I encourage people to do that because a it will }
+{\cf2 [00:42:00]}
+{ save them in later and B it's, it's fun and that's a bunch of cool bunch of people. And I think you'll enjoy connecting. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That's a great advice as well. I just had a quick question come in from Ms. Schwartz on the YouTube thing. What is your view on Yammel?}
+{\pard  \line \par}
+{That is vulnerable today, how we are going to change the approach when we are considering the security today with policy and governance and Yammel was wonderful. }
+{\pard  \line \par}
+{\b\cf3 Or Weis:\b0}
+{ So it depends on what I mean with Yammel being vulnerable. I don't think that the necessarily mean vulnerability in the kind of parsing or execution of Yammer is part of a system, because then it really depends on what your Yammer parser is.}
+{\pard  \line \par}
+{Maybe there's one specific one that is vulnerable. I dunno, in like node or Java, but one would probably be okay. I think they're probably meaning just having that critical information being concentrated in one place kind of becomes a crown jewel that if beget asked us to have a wide effect on your system and the basic access control and and general controls that you have.}
+{\pard  \line \par}
+{So forth, and I think it's really important to go }
+{\cf2 [00:43:00]}
+{ back to those best practices. So one, you shouldn't have everything in one Yammel you want to decouple,your authorisation there, and you want to understand if you have different layers of a authorisation . So you have a authorisation or you have physical access, right?}
+{\pard  \line \par}
+{You put locks on keys, on your doors to the whole. Where the computers that have access to the Clouder position. And then you have network level access control, like firewalls and a zero trust networks and VPNs. And then you have infrastructure level access control, like which service can talk to which service in Kubernetes.}
+{\pard  \line \par}
+{And lastly you have application level access control. So first of all, you don't want all the access control to be in one place. That's essentially stupid. Just think about putting the physical keys in the yammel file or something like that. It's just so separate into those layers. And within those layers also separated to the different services that you have.}
+{\pard  \line \par}
+{You don't have to have your finger in one place, but also aside from not , having everything concentrated and vulnerable, it will be easier for you to manage just in your head and with your }
+{\cf2 [00:44:00]}
+{ team in a repository. So it can have multiple repositories there, multiple microservices that you manage separately.}
+{\pard  \line \par}
+{And then you still want to have organized controls into that. You don't want to just have a chaos. You need to have authority visitation for your authorization and the best place to start there, I think is get ops. So you manage who can commit what and what tests, checks, and balances they need to go through before debt changes, applied into production and also offer environment.}
+{\pard  \line \par}
+{So you should always stay for more access control, just like you have for every critical service that you're maintaining. So if you separated into. Separate into services and silos and have a clear way focused in code or figuration to access it and have controls and checks and balances on top. You should be in a good place.}
+{\pard  \line \par}
+{And the other way around, obviously there's a lot more to talk about access control for access control, but we should probably keep that for a }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ different our episode that's another day as well. But that's a great answer though, man. }
+{\pard  \line \par}
+{\b\cf3 Or Weis:\b0}
+{ Thank you. I tried }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:45:00]}
+{ that and hopefully that answered your question as well, which was, but let me know in the comment as well, if you, if we have another question after this, }
+{\pard  \line \par}
+{I think that brings us to the end of the show as well. I think everyone enjoyed the session so far as well as board comments from Tom Pyke as well.}
+{\pard  \line \par}
+{Great insight. It's like an alteration on so many layers of complexity of thinking about it. It's so true, my friend and Vineet also enjoyed the great session. I think where can people find you clearly, they want to, a lot of people who want to HRP as well and get some more information about like finding a station, where can they find you?}
+{\pard  \line \par}
+{\b\cf3 Or Weis:\b0}
+{ Yeah. Feel free to reach out to me, both on Twitter and LinkedIn. I'm on both of them. I'm just Or Weis or w E I S should be easy to find. And in those communities I mentioned before both an OPA and Opal you'll find me refer quickly under the same thing, my name and I'm always happy to engage with fellow developers, follow with designers, people that are working on.}
+{\pard  \line \par}
+{ Problem or similar problems really feel free to read. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Awesome. And that brings us to the end of the show. So for people who may be coming in and watching too, at the end of it, this is kind of some of the topics we talk about every week cloud security. And if you might find, if you're watching some YouTube or LinkedIn, I'm going to leave a few links over here, }
+{\cf2 [00:46:00]}
+{ so you can follow us on LinkedIn or subscribe to the YouTube channel, but I will see you on the next time.}
+{\pard  \line \par}
+{And thank you all for coming in. I really appreciate you hanging out with us and having us in the middle of the night as well. So thank you so much for doing that. I will, you hopefully soon again, on the episode, maybe on another authorization layer topic, but before we do that for now, thank you.}
+{\pard  \line \par}
+{And thanks to everyone else who are watching goodbye and I'll see you soon. Bye. }
+}

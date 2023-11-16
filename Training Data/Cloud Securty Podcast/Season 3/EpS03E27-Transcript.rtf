@@ -1,0 +1,633 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red250\green138\blue59;
+\red128\green128\blue128;
+\red216\green34\blue146;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ I doubt people would not know you, but for the people listening to this livestream right now, who do not know who Tanya is, could tell us a bit about yourself and your professional background. }
+{\pard  \line \par}
+{\b\cf3 Tanya Janca:\b0}
+{ Awesome. So I'm Tanya Janca, I'm also known as she hacks purple and I am a person obsessed with the security of software.}
+{\pard  \line \par}
+{And I realized this is the cloud security podcast, but guess what is hosted a lot in the cloud, tons and tons and millions, if not hundreds of millions of pieces of software. And so the security of the software is very important to me. I wrote a book about it, Alice and Bob learn application security.}
+{\pard  \line \par}
+{I speak at conferences. I teach courses, and, I am the founder of we hack purple, which is a community and cademy although AppSec secure coding, et cetera. And. We were just bought by bright security last month. And so as so big, thank you to bright because now, all the courses and the we have purple academy are free.}
+{\pard  \line \par}
+{So if you go to the community, basically you join. And we have put all the courses in there now, and they're free. So they used to }
+{\cf2 [00:01:00]}
+{ cost a lot of money in the academy, but now you can get them for free. And guess what? We have one on.}
+{\pard  \line \par}
+{And so, , so when she, she was , Hey, do you want to come on my podcast? I was , you had me at hello. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I didn't even think of Azure security courses. And as far as Tanya did not think of that as well. So for people who may be I guess now since people have been introduced to Tanya as well, and now they know about the awesome courses that we hack purple is doing.}
+{\pard  \line \par}
+{What are some of the, maybe a good place to start? Because when we were talking about the security fundamentals, last time we touched on a few of the important components, but I guess we didn't really go into the high level of, we spoke about tenants. We spoke about subscriptions. We didn't go into the scaling part.}
+{\pard  \line \par}
+{We spoke about certification and everything else. So in this episode, I'm hoping we can talk more about, say the next level up from. What are some of the common Azure security services that people should be aware of? }
+{\pard  \line \par}
+{\b\cf3 Tanya Janca:\b0}
+{ Okay. So one of the things that, so I used to work at Microsoft and I worked on Azure security stuff with the developer advocates.}
+{\pard  \line \par}
+{And one of the things that was really exciting for me joining Microsoft is that there are people there who are just as obsessed about }
+{\cf2 [00:02:00]}
+{ security as I was. And so they're literally trying to make one of every type of security tool, not what they're saying, but what I am seeing.}
+{\pard  \line \par}
+{. So first of all, there's security center, and I know that we're going to talk about security as center a lot and a bit, but do you want me to , kind of describe it now? Or do you want me to Spencer? }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Okay. Let's set the stage for it. I guess that way we can. }
+{\pard  \line \par}
+{\b\cf3 Tanya Janca:\b0}
+{ Okay.}
+{\pard  \line \par}
+{So security center is kind of an overview of a dashboard of all your security in your entire Azure subscription. And so you could have it be a top level subscription with everything down to show you everything. And what by that is, it'll show you, for instance, it gives you a grade, so there's a score that you get.}
+{\pard  \line \par}
+{But basically I tries to show you at a glance, how you're doing, and then you can drill down into different parts and it actually makes you a to-do list. So they call it recommendations. And basically they put all their super smart people together and we're , okay, , what could go wrong?}
+{\pard  \line \par}
+{What should, what are best practices? Let's make a list and everywhere where it's not applying, we'll just put it on their to-do list. So number one is always turn on multifactor }
+{\cf2 [00:03:00]}
+{ authentication for all your owner account. If the account can buy stuff, I'm sorry, a password is not enough. And so Basically that's always the F and I was , , everyone using MFA.}
+{\pard  \line \par}
+{And so that's, what's Curtis center does, it's a beautiful dashboard that shows you all the things. And so then the next thing that people talk about a lot is Azure defender. And so when I worked at Microsoft after defender and Microsoft security center were one thing, then defender got yanked out.}
+{\pard  \line \par}
+{Then it got put back together and the whole thing was called the fender. Then it got separated. And now there's this security center and defender. And basically the Azure defender is the paid part of security center. So security centers free with your subscription by free. , it's part of the cost that you're paying and then defender is on top of that.}
+{\pard  \line \par}
+{You pay more for even more stuff. And so I'm going to go on a limb here and say, so it's a club, it's a CSPM , a cloud security posture management tool. And so it looks across all your stuff and says , listen, , DVA scans on this, we checked your firewall stats. We checked all these things.}
+{\pard  \line \par}
+{Here's a picture and here's what's wrong. }
+{\cf2 [00:04:00]}
+{ And I think it was the first one, because I was trying to describe to people what it was. I'm , it's magical, gives you this whole view of everything and it tells you how to fix stuff. It's not cheap costs a lot, but it's a thing that didn't exist.}
+{\pard  \line \par}
+{And so then slowly other products are getting rolled out and they call it CSPM , which means cloud security, posture management, and to the posture, the ideas is it's an overall arching view of everything and your cloud system and stuff that you need to do. To fix it. And so what defender is, is it has just extra cool features.}
+{\pard  \line \par}
+{So there's PIM. So or just a second, let me just go through them one by time. So there's just in time access. So closing all your ports when you're not using them, there is application control tooling, which is used to be called application weightless thing, but that's not super politically correct.}
+{\pard  \line \par}
+{So they changed it and then, , but a lot of people are , oh, you mean whitelisting? And I'm , that's what it used to be called. But what we're really doing is making an approved list, and then file integrity monitoring. So that's fin integrity monitoring and }
+{\cf2 [00:05:00]}
+{ there's just threat protection specifically for databases or threat protection specifically for I think they have not infrastructure as a service IOT.}
+{\pard  \line \par}
+{And so the idea is, is basically you can buy extra security services. And that is Azure defender. You get it as one big package with Azure }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ defender. Interesting. Wow. So there's a lot more stuff in different than what . It used to be, and I can understand why they are making you pay as well. And maybe, actually, now that I think about it, I just try to question from a thought here and I feel it's probably good to just level the playing field.}
+{\pard  \line \par}
+{Cause there might be, we'll still be , Hey, great. But what's the Azure security thing. . Is central part of S C P M. }
+{\pard  \line \par}
+{\b\cf3 Tanya Janca:\b0}
+{ Okay. So }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ what is that }
+{\pard  \line \par}
+{\b\cf3 Tanya Janca:\b0}
+{ CPU? , exactly. that's what I was thinking.}
+{\pard  \line \par}
+{CSPM cloud security, posture management. So Sentinel is a separate product and it's a SIEM. So. S I E M security information and event management system. So it's , I'm probably not supposed to say this, but it's exactly Splunk, except for, it's just made fracture. And unlike Splunk, it's part of it, if that makes sense, it's how do I word this?}
+{\pard  \line \par}
+{\cf2 [00:06:00]}
+{ So Sentinel's already built into Azure because it's made by Microsoft. So you just pay and turn it on. Well with Splunk, because it's a third party, you have to roll it out and set it up. But Splunk works on any network and Sentinel, as far as I know, only works in Azure. And so basically what a SIEM does is it tells you what's going on in your network.}
+{\pard  \line \par}
+{It's , Hey, this happened and we think that's weird. You should probably take a look. This is happening and we are pretty certain it's this type of attack and you definitely need to do stuff. And the basically a lot of large organizations have something called a SOC, a security operation center, and it's a whole bunch of people who are really good at network security.}
+{\pard  \line \par}
+{And they sit there and they watch the SIEM and as various alerts come up, they go and they track them down and see if it's something real or not. And depending upon how big your organization is, you may or may not have that situation. A lot of places don't have a SIEM and that is okay. But , for instance, when I worked in the Cain government, they had a gigantic, SOC was 50 }
+{\cf2 [00:07:00]}
+{ experts in this giant room and they'll get a million monitors.}
+{\pard  \line \par}
+{Why do you get six monitors? And I only get one they're , cause you're just a little pen tester go away. That was my friend, not the bus. But , so Muktar , hopefully that answers your question, but basically Sentinel's a separate product and it is outside. It does not come with the Azure defender bundle as far as I know.}
+{\pard  \line \par}
+{And from what I'm told, it costs approximately the same as. So,}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ so there was another question from , right? So, and this is basically leveling the playing field for anyone else who's listening in as well, from maybe more from a career perspective as well. That's kind of where it's coming from from an Azure security perspective. That's one of the common questions being asked by a lot of folks for how do I get into the Azure security space?}
+{\pard  \line \par}
+{And I was, I was kind of gratefully to her towards the end. But maybe while we're on the topic anyways, might as well just touch that as well. What's your recommendation usually for folks who want to get into the Azure security space as a profession? }
+{\pard  \line \par}
+{\b\cf3 Tanya Janca:\b0}
+{ . So Microsoft, when I was working there created Microsoft learn and Microsoft learn is free and it's a whole bunch of, so the developer advocate }
+{\cf2 [00:08:00]}
+{ team made a lot of modules in there and then they have all these amazing technical writers.}
+{\pard  \line \par}
+{ They have a huge technical writing staff that made many of the modules. And then some of the engineers that build the security. Contributed and added to the modules and basically so each Azure learn kind of programmer or course or whatever. It's kind of a tutorial where they walk you through things.}
+{\pard  \line \par}
+{Some of them have a sandbox where you can actually go and do stuff. And some of them you go through when you read and you watch videos and then you answer some little quizzes. It depends on the one. So it's not a thorough in depth, really, really long thing. It's a lot of shorter courses. I of them are , , 20 hours or something that.}
+{\pard  \line \par}
+{ Which is good though, because then you could kind of take bite-sized learning if that makes sense. So you could do when meaning when Microsoft learn program per week or something and not to up too much of your personal time. And then they also have some, which I believe you can take. It's , if you cover all of these things, then you can go for a certain certification.}
+{\pard  \line \par}
+{The Microsoft certifications. Basically you have to know this stuff or you }
+{\cf2 [00:09:00]}
+{ won't pass, which is ideal with a certification. But from what I understand, some organizations will ask for them and some of them don't, it kind of depends on where you work and how they decide to test you. So if you have no job experience, having certification can show, I'm very serious about learning this.}
+{\pard  \line \par}
+{But I got asked this this morning and I don't have any certifications at all. Learning at Microsoft learn for free is super smart, learn for free. And then also we have purple courses are free as well. And we have one about basically so we have one and it's free, but you need an Azure trial, which is also free.}
+{\pard  \line \par}
+{If you haven't already used your trial. I had a lot of people sign up and they're , well, it said I already use my trial and I'm , I don't work for Microsoft anymore. I can't give you free Azure. I could give you free. I don't mean to sound a jerk. I would keep the Azure. Who'd be}
+{\pard  \line \par}
+{, . But so if you haven't already used your trial, basically we load a whole bunch of intentionally vulnerable stuff into your trial, and then we secure it. So we go through it and we do a VA and we look at the right stuff and we're , let's turn on HTTPS. , let's force that, let's }
+{\cf2 [00:10:00]}
+{ do this, let's do that.}
+{\pard  \line \par}
+{And you just slowly walk down all of the stuff. And we talk about how to turn on different features and when you might want them. And I don't say exact prices, cause I know those things will change, but I try to give you kind of estimates as to cost. . And so it's a less biased view. I hope because I don't work for Microsoft anymore.}
+{\pard  \line \par}
+{Meaning I could say whatever I want, as long as I'm not breaking a nondisclosure agreement. And since I haven't worked there in years, I don't actually know anything. Good. Anything. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Well, you still know a lot as well, so that's really helpful. And I hope that answers your question. As I moved on, I think it was a great advice on started learning free material, get into Azure trial and see, try and secure an application in there.}
+{\pard  \line \par}
+{But hopefully that answered your question, but feel free to follow up. And I think I've got a few more people who probably have been in the Azure space for a while. And from what you mentioned as well, when you kind of start a trial and put something wonderful's done on different things, that was going to be my next question, as well as to, for people who are listening in and going, all right.}
+{\pard  \line \par}
+{I've heard Tanya, I'm going to start down on for trial. Now. I've turned on my Azure trial for the first time. Not because I've used it before. What are }
+{\cf2 [00:11:00]}
+{ some of the basics, I guess, cybersecurity hygiene thing that we should be doing as part of building that up, because should I start the tenant subscription?}
+{\pard  \line \par}
+{Where am I going over here? }
+{\pard  \line \par}
+{\b\cf3 Tanya Janca:\b0}
+{ Well, okay. So let's say you're a person learning on your own. If you don't have anything inside your subscription, the only thing you can really do is turn on multifactor authentication for your account. So that's the main thing. So you make a strong password and it's unique for this account.}
+{\pard  \line \par}
+{You don't have it in 25 other accounts, the same password. And then you turn on multifactor authentication because you are the owner or account. And then, and if I were you, I would add your phone number so that Azure can call you if it thinks there's an emergency. And it sounds weird. But when I used to work at Microsoft Azure called my boss to tell on me, , I was making an intentionally vulnerable demo cause that was part of my job.}
+{\pard  \line \par}
+{And then it said, , you've checked a secret into your code. And I was , I know, shut up. It's not real. It's not real secret. How can it tell? Right. And it's , we don't that don't do that. And I was , just, just do it. Okay. Azure. And so then }
+{\cf2 [00:12:00]}
+{ it filmed my. And said, there's a security incident with one of your employees, a secret has been putting it.}
+{\pard  \line \par}
+{So I get this phone call , oh my gosh, Tanya has your called me. So first of all, that's weird to have a robot call you second about apparently you put secrets in the code and then put in production, where are you doing? And I'm , I'm making that vulnerable demo we talked about. And he's , oh, it's , well, I, she was pretty ticked off at you, Missy.}
+{\pard  \line \par}
+{. And then we laughed about it. And then the real incident response team called and niacin and do-do. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh, for sure. What else? }
+{\pard  \line \par}
+{\b\cf3 Tanya Janca:\b0}
+{ . So put your phone number in your contact information in so then after that you would want to load stuff in there and by that, , infrastructure or applications or services.}
+{\pard  \line \par}
+{So if you don't have anything in there, then there's nothing to secure besides your account. So let's say you put, let's say you're going to do a platform as a service, and then you want to put a web app. So you would deploy a platform as a service, which is literally a couple of clicks and a credit card swipe.}
+{\pard  \line \par}
+{And then within maybe five, 10 minutes, they've built it for you, which to be quite clear, super exciting. And then deploying your app. If you have a Docker container, you can literally just , be , this is my Docker }
+{\cf2 [00:13:00]}
+{ container. Please make this a reality for me. And it just loads up your app.}
+{\pard  \line \par}
+{Or you can say, actually, I've got some code. I want to show you whatever the thing is. And so then if you have an app on there and you have a platform as a service, you can start to secure those things. So you could look. So what I to do is immediately open whatever the service is. So in this case, the platform as a service or paths, so they call it an app service.}
+{\pard  \line \par}
+{So just , so you go to your app service and you look at it. And I to look at the configuration settings in the security area. So. On the left. So when you're in your app service on the left, there's just this ton of menu things go to the one that says security and check out the things there.}
+{\pard  \line \par}
+{And so I personally believe that on the internet, things have changed for years, and I think we should only have HTTPS everywhere. I'm biased because I'm obsessed with security, but I don't think HTTP is the way anymore. Encryption is cheap and or free now. Thanks to let's encrypt. And so one of the first things I do is I force HTTPS.}
+{\pard  \line \par}
+{ There will be no }
+{\cf2 [00:14:00]}
+{ HTTP connections to this only HTTPS. And then it'll say, , what version of TLS do you want? I'm , obviously the super new one. But , it'll give you some suggestions of things to do. And so go through the settings and see what you want. So you might want to put this app service behind a firewall.}
+{\pard  \line \par}
+{ If you just have one app service, maybe. Don't feel you beat that, but generally people put firewalls around things. So then you could go and make an Azure firewall and then make a network security group and be , okay. So my app service goes in my network security group. The firewall goes around the network security group.}
+{\pard  \line \par}
+{Life is pretty sweet. Now people are not attacking my stuff. And then I would go look, insecurity security center and see if it has recommendations for me, because it might say, oh, you have a network security group. But I saw this when I first started at Microsoft, one of our advocates had a test box and it was , but it's outside of the firewall and all the groups.}
+{\pard  \line \par}
+{And that guy is just on his lonesome. And also it keeps getting attacked. Every day it was one of my greatest joys when I started at Microsoft was this one box that we found and I }
+{\cf2 [00:15:00]}
+{ immediately alert the owner and he's , oh, it's just a deaf box from zillion years ago with old demos on it.}
+{\pard  \line \par}
+{ It's garbage Tanya it's I'll just delete. I was , no, don't do it. There's someone who's manually trying to hack it every day and failing. And it's awesome. And so I started using it in my demo. So I'm , he's back our attacker, him or her is back to do a bad job again, of hacking. And it's , I have this person's IP address.}
+{\pard  \line \par}
+{ They're really bad at it, but it was so fun to see them just fail over and over. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ When I guess I I'm coming from a AWS background, so its always fascinating for me as well. So it would show you in real time as an, this is not central. This is security center. . }
+{\pard  \line \par}
+{\b\cf3 Tanya Janca:\b0}
+{ Security center would say basically someone has tried to log in to your box, 10 times and failed.}
+{\pard  \line \par}
+{So they're locked out again. And then I'm , what IP address? And it's this IP address. I'm , oh, it's our friend. Our friend is back and was manually trying to brute force this box with nothing of value audit whatsoever. And so it took months and months for the person to finally give up. I was , our friend is gone.}
+{\pard  \line \par}
+{And it's great demos. It's , he's just such a failure }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ at hacking. }
+{\cf2 [00:16:00]}
+{ Oh my gosh. , all the YouTube script kiddies are going to be laughing at the poor thing. So I imagine you could have at least tried some kind of a script and all this while you were there, but, , kudos for points for trying at least}
+{\pard  \line \par}
+{logging as well. Cause I had a couple of questions come in. And the whole concept of are people who come from a windows background who have had windows environment for a long time. There is this, I don't know if it's a misunderstanding where you can correct me if I'm wrong that you need active directory or Azure active directory set up to be able to use Azure.}
+{\pard  \line \par}
+{Is that right? }
+{\pard  \line \par}
+{\b\cf3 Tanya Janca:\b0}
+{ Sort of, so if basically, if you you need to have an identity service. But you have to have one and theoretically you could buy Okta and then install it into Azure. If that was the thing you really wanted. But basically if you, if you have users on a network, the network needs to figure out who you are and that's just how do I word this?}
+{\pard  \line \par}
+{So in the olden days we used, we just use firewalls to protect the network, but now I've heard people say , the perimeter is dead and I don't want to make extreme statements that. But basically once you're inside the }
+{\cf2 [00:17:00]}
+{ perimeter, , I don't think we should stop using firewalls. Unfortunate.}
+{\pard  \line \par}
+{. I }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ don't think that's so the firewalls, but they call it something else now, but sure. If you don't want to call it firewalls, but, so to your point then where I had acquired that for the trial though, or is that only when I'm trying to make it into an enterprise? As in the identity, the I'm sorry.}
+{\pard  \line \par}
+{. We're }
+{\pard  \line \par}
+{\b\cf3 Tanya Janca:\b0}
+{ the Azure ID. So I think it kind of gets installed by default. I think that , it's just there by default whether you want it or not. I remember though, once I wanted to make my own instance of Azure active directory. , so my original trials, when I was at Microsoft, they didn't have a trial at a real account.}
+{\pard  \line \par}
+{And then I was inside their a D and then I wanted to make my own Azure active directory so that obviously I can make crappy demos of me smashing things. Cause that is my good time. But I, I'm not sure, actually, that's an interesting question because I haven't when I teach the class, I don't really go into identity.}
+{\pard  \line \par}
+{I go specifically }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ into the. I guess what I'm coming from is the fact that I'm vocal for, we will make it find confusing as well. And so when I'm signing it from Azure I just going to use an impasse for it. And that's about it. The username }
+{\cf2 [00:18:00]}
+{ password and credit card, mobile lumber, don't have to think about Azure AD }
+{\pard  \line \par}
+{it happens in the background possibly. And you get done later on. }
+{\pard  \line \par}
+{\b\cf3 Tanya Janca:\b0}
+{ , it does. Because, so basically so when we think of identity and access management or IAM, basically it thinks that or the way that it works is you can go and get permission or not get permission to everything in your trial, but unless you're letting anyone else in there, you don't usually think of it.}
+{\pard  \line \par}
+{So let's say for example, let's say I wanted to build a trial and I wanted you to come and teach with me. So I would make you a user in there. I would have to get either put you in a group. . If we're just two teachers, we'd probably make each other super admins. But if we're actually trying to do a good, realistic job and not do a, I am Rooter, I am God example.}
+{\pard  \line \par}
+{Cause I find when you do a lab, you're , okay, everyone log in as root PS, never do this. Right. And so ideally if you are going to teach, you, teach the way you should do it, but let's say I give you the software developer role or the database administrator role or the network administrator role.}
+{\pard  \line \par}
+{\cf2 [00:19:00]}
+{ But you can also just create your own role. So I could be super cool teacher dude role, and I can name it that, and then I could just give you, , God asked privileges within our environment because we're teaching a course together. But then we could give students only the ability let's say to, let's say we're going to teach them some dev ops and some dev sec ops.}
+{\pard  \line \par}
+{So it's , okay, so you guys can each make your own. CICD pipelines and Azure DevOps. And you're allowed to make platforms as a service and you're allowed to roll it, infrastructure code and infrastructure as a service, but that's it. I don't really trust you to do more stuff. That's all you're allowed.}
+{\pard  \line \par}
+{And so then you make a role that's dev ops student role and you just give them that. And then that's all they can do. Someone was asking me the other day, I was teaching a course and they're , I'm really concerned about the software developers, disabling, all my security tests and the CICD.}
+{\pard  \line \par}
+{ How can I stop them from doing that? And I was , talk to them, show them the value. He's , no, but how can I force them to not do that? And take away their ability to edit the }
+{\cf2 [00:20:00]}
+{ pipelines. , to be clear, that's a big middle finger you're giving all the dev ops teams. I don't know if I was on a dev ops team and I didn't have control over my own pipeline.}
+{\pard  \line \par}
+{I'd be pretty. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Giving them a heads up and getting that green. So I guess that definitely has made , well, I don't know. I don't want to call it court Trump, but it sounds a Trump fair being it. . But it, but it's }
+{\pard  \line \par}
+{\b\cf3 Tanya Janca:\b0}
+{ no, but if you're on the dev ops team, you should, you're the one that makes the pipeline, the pipeline is yours and the security team take your own access away to your own thing.}
+{\pard  \line \par}
+{It's , well, if I want to write a new secure, , test of any kind against my own app way, I have to ask permission to the security team. this is the test environment. This is my play area go away. And so I kept trying to give other answers that were where the DevOps team hate. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ , well, hopefully that's a good segway into the next thing as well.}
+{\pard  \line \par}
+{Cause I, I think we we're, I love where we're going as well. We started off with setting it up as a trial and building that up with MFA mobile lumber credit card and everything. Now you've mentioned the devops side, as well as your has this whole Azure DevOps. So let's talk about the level of 200 as well.}
+{\pard  \line \par}
+{If the person listening to this is a }
+{\cf2 [00:21:00]}
+{ Azure DevOps person and they want to secure the CSED pipeline, have automation. And as they kind of go through this, what are some of the I guess basic security principles that you would recommend him or her to have as they're building the CICD pipeline for deploying application?}
+{\pard  \line \par}
+{ Let's start with , what are some of the foundational security things you would do then? Because that's the, we spoke about Sentinel already. We spoke, but Azure defender already as your security stack, But I'm sure we have Azure policy somewhere in there as well, but let's start with where do I start with building applications?}
+{\pard  \line \par}
+{Okay. }
+{\pard  \line \par}
+{\b\cf3 Tanya Janca:\b0}
+{ So a thing that I start off, every consultant call with , is that Azure dev ops is being sunset in the next few years because availability is the most important thing for most security folks. And I put it on Twitter and a zillion, Microsoft people came out and told me to shut my damn mouth very politely, but it was very , and they all denied it.}
+{\pard  \line \par}
+{And then I had one of my clients confirm with their person the next day. And they're , oh , definitely. It's being sensitive. So , people are going to get pissy with me, but anyway, no, but it's true. Availability is really important. And also I'd just to }
+{\cf2 [00:22:00]}
+{ make clear, I think that's the dumbest business decision ever because Azure dev ops is beautiful.}
+{\pard  \line \par}
+{I it so much. And I know that everyone wants everyone to move, to GitHub actions and GitHub actions as super duper fun. Badger dev ops works perfectly and it's so mature and it's good. And I really it and I don't want it to go away. Okay. So now that I've got that off my chest, so I think Azure dev ops is awesome.}
+{\pard  \line \par}
+{And basically with a few clicks, you can actually lay out a simple pipeline. And so what, so if you're a big organization, I would suggest making a template of a pipeline and making every single new pipeline have that template. So for instance, I want to have at least one dev box. I want to have at least one QA box.}
+{\pard  \line \par}
+{When UAT box and then onto prod. Okay. So let's say you always want to have those three levels because let's say you have a user acceptance team. You have a QA team, obviously you have a dev team, or I don't know why you're doing dev ops. And so then let's say, so things that I to check are, I want to run a dynamic scan, which is called dynamic }
+{\cf2 [00:23:00]}
+{ application security testing.}
+{\pard  \line \par}
+{I want to run unit tests. So usually devs, they code, they code, they code, they run their little unit tests sometimes themselves from within the IDE. Sometimes they do. With a terminal or command prompt or wherever you want to call it. And sometimes they do it in the CIC D but basically unit tests are a little tiny regression testing.}
+{\pard  \line \par}
+{And I believe that we should have security unit tests, but that is one of my cause that's really, really far left for security. Do what ? The first possible security test you could do, but I digress. Okay. So then, I want to do software composition analysis. So check all of my third party dependencies.}
+{\pard  \line \par}
+{So a new get package or Ruby gem, a really cool library that does ball. I want to make sure all those are not scary. Then I have static application security testing. So just look at the code. My team wrote, tell me if there's something, obviously garbagy in there and dynamic application security testing.}
+{\pard  \line \par}
+{So punch my app in the face of it. So to do the DAS, the dynamic testing, you have to put it on to the dev server. However, for the other two, you don't even have }
+{\cf2 [00:24:00]}
+{ to put it. You don't even have to have a server or anything. You can just run it directly on the code. And Azure dev ops has a bunch of really super beautiful plugins.}
+{\pard  \line \par}
+{So for instance, if you are doing an open source project and you're only going to run it five times a day or less, you can use waste source, it's called waste source bolt, and it's free to run up to five times. So let's say, I don't know you happen to have your own open source project, which I used to have.}
+{\pard  \line \par}
+{I would run it and it would tell me this library you're using, we're a little concerned. And also, are you sure you're not violating this license? And I'm , yikes. And then I would run dynamic scans. And , it would tell me, okay, it looks maybe this, , your input validation, isn't so good here because we were able to do this bad thing to your app.}
+{\pard  \line \par}
+{And it went along with our plan. So you should make it not do that anymore. And then I also checked for secrets in the code, we said before, where I got posted doing that at Microsoft, but I was doing it on purpose just to be clear. I did not actually check a real Microsoft secret in, but I still look them.}
+{\pard  \line \par}
+{But , so , I guess I try to kind of check those three. I call it the three pillars or }
+{\cf2 [00:25:00]}
+{ there we go. So how my app is running and how it acts. So dynamic testing the code I wrote, so that sassed and then, SCA the code. I did not write, but I'm accepting the risk because I put it inside my app.}
+{\pard  \line \par}
+{And so I feel if you check those things, you're pretty good. If, if you wanted to be more advanced, you could do more stuff. So you could do. Serious attack simulation sorts of things. Or you could do performance testing, stress testing. You could have a penetration test or come in, or run a red team exercise.}
+{\pard  \line \par}
+{So you can really, really stress your systems and see how far they can go. But if you could just test the three pillars, then you're going to have a pretty decent test them and then fix the things you find. Just to be clear. I don't mean just run tests. And I say that because I seriously, when I was a pen tester, you give the report and you're , so you're going to fix it now.}
+{\pard  \line \par}
+{They're , no, we're not. We had to change this box. And I'm , my job is helpless. I liked AppSec. I switched out of pen testing really fast because there's not enough social time and I've just got lonely. I just, anyway, AppSec is }
+{\cf2 [00:26:00]}
+{ where you spend time and you help them fix the thing. And I just leave the pen test.}
+{\pard  \line \par}
+{Consulting contracts and feel my work's not done. It really irritated me, but anyway, I digress. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Fair enough. So, so to your point, then we have what the , basic hygiene goer for all the automation pieces. What about the virtual machines that would be built as part of say the CICD pipeline it's built the infrastructure, virtual machine, and at that level, what are some of the basic hygiene at that level?}
+{\pard  \line \par}
+{From a Virtual machine perspective that is running the application? . }
+{\pard  \line \par}
+{\b\cf3 Tanya Janca:\b0}
+{ Okay. So if you were hosting your app on a virtual machine, there's way more to do than if it's a platform as a service or a container. And the reason for this is the shared responsibility model. So if you do infrastructure as a service, so that means you're , Hey, Microsoft, I'd to have, I don't know, a machine running windows with this many cores, et cetera.}
+{\pard  \line \par}
+{And they're , here you go. You have to patch it from then on. So you need to do. Participate in patch Tuesday, and you can call it patch Wednesday or patch Thursday. If that's, when you actually apply your patches, but you need to patch regularly. You also need }
+{\cf2 [00:27:00]}
+{ to, in my opinion, run a VA scan regularly.}
+{\pard  \line \par}
+{And so Microsoft has their own VA scanner, but there's a zillion out there that are quite good that you could use. I used to use Nessus a lot when I was a pen tester, because it's just so easy, just so easy. You press you're , what do you want me to scan? I'm this range. And they're , want me to do a big scan?}
+{\pard  \line \par}
+{I'm scan everything now. So it's just tell me what's wrong. I'll fix it. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ But not use the one from Microsoft or not because it doesn't have enough capability or, }
+{\pard  \line \par}
+{\b\cf3 Tanya Janca:\b0}
+{ oh, that was because it was before I worked at Microsoft. Right. And because I was going from data center to data center to data center and it wasn't cloud, it was all data centers.}
+{\pard  \line \par}
+{So I wear a hat and mitts and a coat. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Fair enough. Fair enough. Make a hat as well. So it does have a VA. }
+{\pard  \line \par}
+{\b\cf3 Tanya Janca:\b0}
+{ . So part of Azure defender is it does VA for you. So it will basically every 24 hours, Azure defender will VA every single thing in your subscription, it can take. And if you update something, it will go and VA it usually within an hour, but it'll tell you, this will refresh.}
+{\pard  \line \par}
+{So when you }
+{\cf2 [00:28:00]}
+{ go and fix something, so , let's say security center says, Hey, I have a recommendation that you go and do X. So you go and do X. And what used to happen is then it would not show that it was remediated and I'd be giving demos. And I'm , is this thing on? But it turns out what it was waiting for was for the VA scanner to come back and check that it actually happened because sometimes you send the.}
+{\pard  \line \par}
+{, it doesn't actually, and this is why when I was a pen tester and I would use Nessus all the time, I would make so much money. Because, and I don't mean necessarily specifically, , any VA scanner that is good, there are whole bunch that are good. But that is the brand that that company used.}
+{\pard  \line \par}
+{And so I would basically run the scan and just see patches that just didn't take for whatever reason. Or maybe someone was running around doing the hardening guide on all the machines and then they missed one. And that might sound odd, but it happens. And the patch just doesn't take, or they send out the range and this machine was disconnected or they got the range wrong, et cetera, et cetera.}
+{\pard  \line \par}
+{And so they with SCCM, system center from Microsoft, they said no to all these patches. And then it just }
+{\cf2 [00:29:00]}
+{ doesn't hit everywhere. And also sometimes weird things happen. I was working somewhere and I was , you have Microsoft office 2003 on your low balancer. And they're , oh, should we upgrade that?}
+{\pard  \line \par}
+{And , do you write short stories on your load balancer? I feel maybe you could just take it off. , why do you have anything other than load balancer stuff on your load balancer? The only other thing I might find there usually would be a laugh, a web app firewall. Right. So I'm , then I would see that I'd be , okay, that makes sense.}
+{\pard  \line \par}
+{But I'm Microsoft office. No, don't get me wrong. I office. I'm not trying to say I don't, but it just doesn't work when you're low bouncer. I'm just , oh, what's going on here guys. So it helps you spot weirdo. Things things that don't , one of these things are not the other. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yep.}
+{\pard  \line \par}
+{Fair enough. So then when salvinia thinking about securing a VM, then . So this almost what about access to the VM itself? Because there is that connotation as well. , is there a bastion? Is that the concept exists? . So }
+{\pard  \line \par}
+{\b\cf3 Tanya Janca:\b0}
+{ there's two ways that you can do that in Azure. So when you can use a bastion host, or I used to call it a jump box, so basically you remote desktop into a specific }
+{\cf2 [00:30:00]}
+{ box, and then you open up a remote desktop from that box to the VM that you actually want to work on.}
+{\pard  \line \par}
+{You could also use SSH keys, which you connect directly. Sometimes it depends on what you want to do. But, what I used to do the most often was I would use just in time access control. So I closed all of the ports. So this is part of Azure defender. So it close all the ports on the whole thing.}
+{\pard  \line \par}
+{And then I would log into the portal of Azure. And then I flick open. Let's say, I want to RDP in cyclic, open the RDP port. I think it's 25 or 27 or whatever. But anyway, it just says RDP. And I'm , yes, please. So it would open it and it'd be , how long do you want to open for? And you could choose one hour or three hours, eight hours.}
+{\pard  \line \par}
+{But after eight hours. So , no, you have to tell us again, cause we don't think you're doing this for more than eight hours. We're going to close it on you. And so then I flip it open, then I am able to RDP to it and then I have to do use your name, password, and then MFA. And then I'm on there. And then after a certain amount of time, so I remember I'd be , oh one hour, I'm so fast.}
+{\pard  \line \par}
+{And then it would kick me out and make the hub, even though it's been }
+{\cf2 [00:31:00]}
+{ an hour. So I learned that I needed to click the three hour one. I also was , I don't need this. This is fine. , I'm not going to forget to take away people's access. And then my friend, April and I were working together and I'd given him access and then two weeks later we're going to go work again.}
+{\pard  \line \par}
+{He's , oh, do you have to turn my access on? I'm , no, I totally forgot that they're going away. And so, so I was having it automatically close things for me is actually really helpful because it turns out I forgot. . }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ They using Qualice for VNO. }
+{\pard  \line \par}
+{\b\cf3 Tanya Janca:\b0}
+{ . So I , I Qualitas I honestly, I haven't really seen any VA software that I thought sucked. I used an open source one and I found it really clunky to get it going. I didn't that one, but of all the paid ones. I haven't seen one where I'm , this is garbage.}
+{\pard  \line \par}
+{ They all just look at the patches and this one's missing or , oh, here's your settings, that's disconcerting. But with the VA there, there's way more that you can do to secure it. So definitely patching the follow, the hardening guide. Right? There's another thing you can do is that when you're going to do the infrastructure as a service, you can go.}
+{\pard  \line \par}
+{So I don't know if you've heard of the CIS benchmarks. . so the center for information }
+{\cf2 [00:32:00]}
+{ secure internet security. So basically this big group of really smart, awesome humans got together and came up with what they feel are acceptable settings and hardening settings for everything. And so Microsoft partnered with them and made infrastructure as a service where you can say, just give me this one.}
+{\pard  \line \par}
+{That's already got all the Azure all of the suspension mark setting set up. And so , that's a huge win you're , don't give me the default one and give me the in it. I think it, it costs slightly more, but only because it has more features built into it. So those settings cost more or something.}
+{\pard  \line \par}
+{But I remember thinking , wait, I can get pre hardened infrastructure. Yes, please. Yes, please. I would that. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So maybe a good way to talk. So a VA for people who may not know, we've been talking about VAs, vulnerability assessments, softwares let's. Ah, because someone might, for some reason, thing is much less distant, but it's what vulnerability assessment it gives.}
+{\pard  \line \par}
+{There is any confusion. So maybe a good segway. And I think there's a question from Mukhtar as well on threat intelligence and threat protection, but I'm assuming that kind of goes into the whole }
+{\cf2 [00:33:00]}
+{ SIEM category, but any thoughts on the whole threat intelligence and threat protection in Azure? }
+{\pard  \line \par}
+{\b\cf3 Tanya Janca:\b0}
+{ Okay. So Microsoft offers an additional service on top of Azure defender, copra protection.}
+{\pard  \line \par}
+{And so you can get it for your databases and for your search containers, I believe. And basically it's extra monitoring that is specific for that. And I ended up getting it for my databases because. Even though it's demo data. I'm , I don't want anyone breaking it. And also what it would do is so then I would attack my own web apps because I'm a jerk that.}
+{\pard  \line \par}
+{And they'd be giving demos of me, trying to smash things. And then the threat protection service would say, it would alert me and sometimes it would block it. And I was , and so then I could go do an investigation. So, Azure defender it's security center will tell you if they see an obvious attack.}
+{\pard  \line \par}
+{So even if you don't have the threat protection, there are certain ones that are extremely obvious that out of the box, they will just detect for you. So if I am doing, an SQL injection attack, and it's a really obvious one, we're one equals one, which is the most common one. It'll }
+{\cf2 [00:34:00]}
+{ just notice and tell you this app is being attacked and we're concerned, and we're pretty sure it's SQL injection and what you need to do protect against this is this and this and this.}
+{\pard  \line \par}
+{And so. That's just out of the box. You don't need the extra threat protection. so basically, threat protection. Oh, you can also add it for your data as well, but it's basically protecting your database essentially, but it's an extra cost and I believe it's $15 per month per server.}
+{\pard  \line \par}
+{Not per database. . Well, as of two months ago, the last time I taught at, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ , we kind of have to be careful of the pricing just because it's changes so quickly and you're , , someone watches this and someone greets you at UNB. , Hey, you guys have $15 look at this. And I'm , whoa, all right.}
+{\pard  \line \par}
+{Hopefully that answered your question. But maybe }
+{\pard  \line \par}
+{\b\cf3 Tanya Janca:\b0}
+{ For threat intelligence, that's a separate topic. And I don't know if Microsoft offers a threat intelligence service. I know they certainly have a lot of threat intelligence cause they have entire teams that are looking into that because they have a really, really high risk profile because they're very attractive target being a company that }
+{\cf2 [00:35:00]}
+{ measures their profits and trillions, and also being the makers of, , the world's most used consumer operating system.}
+{\pard  \line \par}
+{ The second most used cloud, they're very big, very extremely attractive target. So I know that they do threat intelligence, but I don't know if they sell that as a service. I unaware of that if they do that. But if they did, it would be so cool. Anyway, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ if they know the answer, feel free to drop that as well.}
+{\pard  \line \par}
+{But thank you for that question. We've spoken about basic foundation security for when we're doing securing VMs, when you're securing a tenants subscriptions as well, in terms of scaling, how does it scale in terms of I, in my mind, I'm going, do I get multiple subscriptions or multiple tenants? What's the recommended way here to kind of scale out when you're trying to be a global application from anywhere, I guess.}
+{\pard  \line \par}
+{\b\cf3 Tanya Janca:\b0}
+{ Okay. So this is super hard question because every organization seems to do it differently. When I worked at Microsoft, our team had , we would call it the parent subscription and then we were the children's subscription }
+{\cf2 [00:36:00]}
+{ underneath because we're supposed to only try to spend $200 worth of atrip per month, but they would , we work for them.}
+{\pard  \line \par}
+{We're making stuff for them. So it's not we would personally get a bill, but they're , could you try to budget for that? Because we don't know. The advocacy team to spend a zillion Edgar dollars per week, which is very reasonable having budget's important. So then they could monitor and if one of us was a bit out of hand, then they could be , Hey, so what if you didn't run 10,000 different machine learning models per day?}
+{\pard  \line \par}
+{Right. So ,, not in an angry way, but in a, we don't want to blow the budget weight. And so that worked really well for them, but I've also seen it where basically companies do not trust their employees to purchase anything. And, and that were , I don't know, I've worked at places where.}
+{\pard  \line \par}
+{Would I want the employee to be able to just press a button and be able to buy stuff. Maybe I don't, maybe I'm not that comfortable with it. At, we have purple eyes there, , the maximum we got to with seven people, but I never gave financial signing authority to anyone else. They would send things to me and I'd be , I approved 98% of the time, but sometimes I'm , no, we don't have 12 cameras.}
+{\pard  \line \par}
+{We do not need another camera or whatever the thing was. And }
+{\cf2 [00:37:00]}
+{ then I was , glad that my employees did not have the keys to the kingdom. And so when I worked in it in the government, I remember , I'd have to go and ask to have a van made, but I was a debt and they were ops and there'd have to be this approval process, et cetera.}
+{\pard  \line \par}
+{And so then when those groups move to the cloud, it's , you're not going to give ownership privileges to every single person. And so some organizations they'll be one parent kind of subscription, or they'll have different departments that have their own subscription so they can manage their budget, et cetera.}
+{\pard  \line \par}
+{But you have one tenant. And there's one Papa subscription or parents, or grandma's subscription this top of the entire family, and then it would go down. And I really depends how granular you get depending upon the organization. And I don't want to say level of trust of their employees, but maybe level of responsibility they plan on making them have, right?}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So subscription allows for such a structure where you can have to what you said a parents' subscription. And underneath that we can have one business unit have their own subscription, which could be a dev account. And then another subscription, which }
+{\cf2 [00:38:00]}
+{ is a product owner. I imagined what would be the boundary that you would set up for?}
+{\pard  \line \par}
+{Hey, this is a business unit. This is their dev, this is their test. This is their part kind of thing. How would you say that? }
+{\pard  \line \par}
+{\b\cf3 Tanya Janca:\b0}
+{ So I feel how you pay. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ . . So, but I give them individual subscriptions that, a good practice. Or would I go }
+{\pard  \line \par}
+{\b\cf3 Tanya Janca:\b0}
+{ it's up to you? Every single company has a snowflake.}
+{\pard  \line \par}
+{That is what I've learned. The more companies I talked to about the Azure, the more I'm , you all do it differently. And so I've decided there isn't a best practice way. There's a, what way is best for your org way? And so if you're doing it one way and it's not working, you should try another way. Not try that way harder.}
+{\pard  \line \par}
+{I see a lot of organizations where they're , well, we've been doing it this for this long, and we're really not getting traction. And I'm , well, don't try to enforce it more. Cause it's already not working. So let's try to walk this back and find a different way that might work better. }
+{\pard  \line \par}
+{.}
+{\pard  \line \par}
+{\b\cf3 Tanya Janca:\b0}
+{ The for dev boxes versus two 80 boxes versus prod and stuff. I would organize that more from a network level rather than a business unit level. If that makes sense. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ . Sorry. I guess, but I was thinking it was more from a perspective that what's the }
+{\cf2 [00:39:00]}
+{ boundary for information, because, , we were talking about perimeter earlier and depending what is, I guess, dead, but still exists, I guess, for some extent.}
+{\pard  \line \par}
+{. So what's the highest level of abstraction one can get between. So would that be, if I have two tenants, so 10 is the highest level of obstruction, as I know, there's , unless you have attended accident, you don't have anything, but within the tenant, if I subscription the next layer of abstraction , that's subscription that right as intended then.}
+{\pard  \line \par}
+{And then I can imagine the subscription, but once subscription cannot copy the other subscription, }
+{\pard  \line \par}
+{\b\cf3 Tanya Janca:\b0}
+{ It }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ reports up under the same gun and }
+{\pard  \line \par}
+{\b\cf3 Tanya Janca:\b0}
+{ under the same tenant. . So , let's say tenant and then two subscriptions that go out this. Yep. Yep. If you're on the same network, you can talk to each other, but you can't force them to do to buy stuff in the other situation.}
+{\pard  \line \par}
+{But I was in a, several layer below child subscription. It makes me sound I'm a great, great, great grandchild. But when I was at Microsoft, I was not the big boss or whatever. And so I could only force changes within my subscription. And so I was telling my boss, I'm , you should put me in the }
+{\cf2 [00:40:00]}
+{ higher ups, move my user to the higher ups subscription, because then I could go and secure all of the systems of all my developer advocate colleagues.}
+{\pard  \line \par}
+{And he's , you are not going to go and mess with their demos. I'm going to mess with their demos. I'm just going to make their demos say. I know what you're on to Tanya, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Azure policies comes in as well? }
+{\pard  \line \par}
+{\b\cf3 Tanya Janca:\b0}
+{ Yes. Okay. Yes, exactly. So I, before we came on, I asked if she should, if we could talk about policies.}
+{\pard  \line \par}
+{Okay. Okay. So I used to think policy suck. I really didn't them when I was at dev, they'd be , oh, we're going to help you. We're going to give you a tool. It's a policy. And I'm , what do you mean? And it would be a web page on our intranet of words on a screen. I'm , this is not tool.}
+{\pard  \line \par}
+{This is boringness that will put me to sleep. What is this? And they're , no, but the policy is , it's a law within an organization, thou shall drink this. And I was , , but none of those apps are doing it. So it doesn't help me. And they're , well, you could kind of hit them with it.}
+{\pard  \line \par}
+{, with it's a stick. And I was , okay, I don't, I don't this. I thought that I did not enjoy that. So then when I went to }
+{\cf2 [00:41:00]}
+{ Azure, Oh, we have policies. It's , Hm. , you have policy paper. And they're , no, no, it's a tool. And it was, I was skeptical. Let's be clear. And so I got to hang out in Israel with the team that made all the recommendations for Azure security center.}
+{\pard  \line \par}
+{And they're , no, no, let me show you. They're , so let's say your policy is that all your apps services or anything that delivers a web app must be HTTPS only. I'm , , I want that. And they're , okay. So we're going to set that as part of the default policy, I'm , okay. And then what? And they're , well, in the next 24 hours, it's going to be a everything.}
+{\pard  \line \par}
+{And you're all of the dev advocates subscriptions and tell you everyone that's out of line. Is it that I could go click down and see who owned it? I'd be , actually we need to talk. Do you have four web apps? And they're not fortune HTTPS. Can we talk, I'll explain to you why you want it.}
+{\pard  \line \par}
+{Maybe , so I just need to press this button. So then I started meeting with different dev advocates, trying to secure their demos. And so the policy is just , you set the rules within Azure, and then it tells you every single person that's not compliant. And if you have the power, which my boss would not give me because I am a control freak.}
+{\pard  \line \par}
+{I'm not }
+{\cf2 [00:42:00]}
+{ saying he was wrong or anything. It's just , I want to secure all the things that Mike's, you're blocking me from that. And so basically you can actually, if you have the power, which I did not, so I did over eventually over my little team, but I never did over all of the dev advocates and I get that.}
+{\pard  \line \par}
+{They don't want me to break stuff. Anyway, what you can do is you can actually say , just press the button and say auto remediation. And a bunch of it. It'll just actually change all the settings for you or apply the patch for you or do whatever the thing is. And not all of them are push a button, but the goal was when I left to make 100% of them, just a button you press and it magically remediates it for you.}
+{\pard  \line \par}
+{. And so then you can make your own custom policy of any rules that you want, or you could say, so we are , let's say healthcare provider and we have to follow HIPAA. So you can actually choose and say apply HIPAA to my subscription. And then it will auto check all the ones that are possible to check in an automatic way.}
+{\pard  \line \par}
+{ Some of them you have to , look with your eyes. And so it'll say this one, you have to manually verify, this is how you would manually }
+{\cf2 [00:43:00]}
+{ verify it because some things you need a human being for, but every single part that it can, it would automate it. And so they made one for the Canadian government called PBM M, which means nothing.}
+{\pard  \line \par}
+{Unless you work in the Canadian government for. It's government speak, but the point is is that then they could just apply it and I would tell them every single person that's not complaining, it was just such a beautiful thing to be able to automate. So to me, that's a real tool, to me, a real technical safeguard versus a bunch of stuff on a screen that no one }
+{\pard  \line \par}
+{reads.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So Azure policies definitely check them out as well then. So maybe that's also a good segway into my final question for the episode, which was on the maturity scales as well. I feel we've kind of a different focus, a different maturity over here. We spoke about, Hey, starting with trial, MFA credit card, email, phone number, everything, and I'll go on.}
+{\pard  \line \par}
+{Okay. I'm I guess I'm level one. So what's different levels as you kind of go up. What's the mature, Azure bill that you would know of that people can strive for. }
+{\pard  \line \par}
+{\b\cf3 Tanya Janca:\b0}
+{ So that's a really hard conversation, but basically if you go through the recommendations and security }
+{\cf2 [00:44:00]}
+{ center and you do them, you're going to be in an awesome place because basically they put all their super brains together and came up with this list and how to prioritize it.}
+{\pard  \line \par}
+{Another thing that you could do is apply the policies. I said, so pick the policies of your country. So for instance, for New Zealand and Australia, I believe they have the government policy. So if you worked in the government of Australia or government of New Zealand, whatever, whatever, basically you would apply that.}
+{\pard  \line \par}
+{And you're , ha ha. I just did all of the things I said, well, I can go home now. No, but it's really nice. Right? And basically it will set this list of what it thinks best practices are for you. And so you can mature by continuing to do that. So they have this thing called secure score. And I know that I keep seeing conference talks about hooking modification makes everything works.}
+{\pard  \line \par}
+{Everyone loves video games. I'm not everyone loves video games. Some of us think they're super boring, FYI. And so I know I sound such a grouch. I sometimes I play Dr. Mario. I'm sort of okay at it, but I'm just , I'm not gamer and that's okay. But basically it shows you a score. So it's , , let's say there's }
+{\cf2 [00:45:00]}
+{ 1200 suggestions that we would have for you, and you've done 850 of them.}
+{\pard  \line \par}
+{So we're going to give you a score of 62% and then you can strive towards increasing and increasing that score. And it might sound really silly, but Ashish I find that my bosses, when I would do security, they would only notice me when there was a really crappy security incident or I was pushing for a security thing I wanted.}
+{\pard  \line \par}
+{And they're , no, it's going to take people off Tanya . We don't want to take people off. And I'm , but we need to do this because, and the rest of the time, it's , I wasn't alive. And I've been working really hard to try to do things, but no one notices that you worked with a team and they, , remediated 10 vulnerabilities instead of two, they originally wanted to, they're just , there wasn't an incident today, whatever.}
+{\pard  \line \par}
+{But with secure score, I could show my boss , Hey. I used to have a score of 42 and now I'm at 82. I'm awesome. Can I get a hell? . And I'm , they could , see how hard you've worked. Does that make sense? . Cause I don't want them to only notice me when something blows up in our }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ faces at school, a scoring is a good idea.}
+{\pard  \line \par}
+{So is this part of the, the }
+{\pard  \line \par}
+{\b\cf3 Tanya Janca:\b0}
+{ free security }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ center? }
+{\cf2 [00:46:00]}
+{ Oh, perfect. Also sort of , you don't have to pay extra }
+{\pard  \line \par}
+{\b\cf3 Tanya Janca:\b0}
+{ for it. Same with the policies too. It's all part of the free thing. That's why I think. Okay. So , again, this is in my imagination, but I think that all the cloud security posture management tools came from security center.}
+{\pard  \line \par}
+{ When I saw the Azure security center and AWS at the time didn't even have guard duty yet. I believe I was just , this is so cool. Can I have this for my own data center back when I used to work in the government, this is the best. And so it makes sense that industry was , well, , SecurityCenter school, but have you seen this?}
+{\pard  \line \par}
+{So . I think that they probably in my own head, they invented that entire }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ cool. We've got a comment from Vinita as well over here, just because I think you can integrate intangible Sentinel as well. There you go. So sent extra level up in there as well. }
+{\pard  \line \par}
+{So talking about other places that people can find you as well, I believe you're at RSA as well, coming up as well. So it can people find you on social media and where can people find you speaking, talking for the next month? So, }
+{\pard  \line \par}
+{\b\cf3 Tanya Janca:\b0}
+{ okay. So on social media, I am at she hacks purple. So I have a YouTube channel.}
+{\pard  \line \par}
+{I have a Twitter that I use a }
+{\cf2 [00:47:00]}
+{ lot, LinkedIn, a lot. I have a Facebook account, but honestly my intern answers that I'm not really a fan. Actually. She just graduated. So I shouldn't call her an intern anymore. She graduated this month, go Amanda. Anyway. And at RSA, so I have a newsletter. So if you go to new school, That she hacks purple.ca.}
+{\pard  \line \par}
+{I'm going to send out a schedule shortly. So I am doing 12 events at RSA. Hey, so I'm speaking at the conference three times. So I'm giving a talk a panel and a birds of a feather, but I'm also speaking at the purple cloud summit with Ashish well, not together with this show, I speak and then he speaks.}
+{\pard  \line \par}
+{But I'm also doing six or seven book signings. So I'm doing one with with VMware, with Juniper networks, with, PIRO. Cloud defense with the RSA bookstore. And there's one more. And now I feel I don't remember. . And then, so right before RSA is beside San Francisco and all day Sunday, I'm going to be at the bright booths.}
+{\pard  \line \par}
+{And so if you are going to be at, Bsides San Francisco, please come to the booth and hang out with }
+{\cf2 [00:48:00]}
+{ me because being at a booth for a really long time is boring without awesome humans. And so if all of you could come visit me at the booth, that would be amazing. I'm going to have tons of stickers, bright stickers, she X purple, we have purple, et cetera.}
+{\pard  \line \par}
+{And there's going to be, I believe quite a few surprises occurring. So please come hang out at the booth and give me hugs. I know I'm probably not supposed to say that, but I really do hugs and Ashish to be around as well. And you should all come see him, come see him speak at the purple cloud summit, but please tell me all the other places you're going to be so I can stalk you back.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I think it's funny. I think you and I both had something, , garbage to talk about wherever, where are we for the next month as well? So people should definitely follow the social media pages as well, but that was what I had time for. And this was really amazing. Thank you so much for spending the time with us and sharing level 200 Azure security fundamentals, and hopefully everyone else gets to go back and see all the livestream sessions.}
+{\pard  \line \par}
+{And thank you for everyone. Who's on the Twitter space as well. That was the, also the end of an Azure security month.}
+{\pard  \line \par}
+{Next one, we're doing RSA and talking about RSA a month. So , we'll talk to you guys then, but for }
+{\cf2 [00:49:00]}
+{ now, thank you and enjoy the rest of your weekend long weekend for people in the U S so you peace. }
+}

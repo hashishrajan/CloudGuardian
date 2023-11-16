@@ -1,0 +1,562 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red250\green138\blue59;
+\red128\green128\blue128;
+\red216\green34\blue146;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ hey, welcome Dylan. How are you, man? }
+{\pard  \line \par}
+{\b\cf3 Dylan Ayrey:\b0}
+{ Good morning. How are you? }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So people would already know who you are based on. I guess people have been following us from season one, but for people who were not in season one and did not watch our bug bounty episode that we did with you on Google cloud. Can you give us a bit of intro about yourself and how'd you got into cyber security?}
+{\pard  \line \par}
+{\b\cf3 Dylan Ayrey:\b0}
+{ Yeah, sure. So my name is Dylan for those that are watching I've been in cybersecurity for awhile, started in a kind of consulting space, doing a little bit of bug bounty work on this side. Did a little bit of work in politics a while ago eventually came out to the bay area and worked for some big tech companies.}
+{\pard  \line \par}
+{Most recently I was at Netflix for a bit. I was at Salesforce before that, on their in-house security team. And then about a year ago I decided to quit my Netflix job and start an open source cybersecurity company. That's kind of centered around secrets detection and secrets management, . }
+{\pard  \line \par}
+{Truffle security is the name of the company. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I'll probably say this because we've been doing identity and access management month and a lot of people somehow always feel , kind of identity and access management.}
+{\pard  \line \par}
+{You're , oh, identity }
+{\cf2 [00:01:00]}
+{ its easy right username and password. I feel it's the same with secrets as well. And secrets and passwords were, I mean, yeah, we're sort of picking the bird sorting password it's I find secrets management and identity access management. Probably the most unspoken subjects.}
+{\pard  \line \par}
+{And in a while, and now you have a whole company dedicated for this. So I'm curious. How do you define secret management and any examples of secrets for people who may be listening in and going, why this secret management? What's the big fuss? }
+{\pard  \line \par}
+{\b\cf3 Dylan Ayrey:\b0}
+{ Yeah. So when we talk about IAM in cloud and things that, let's first define what a secret is.}
+{\pard  \line \par}
+{So the secret is basically an API key, a token, a private key, those types of things that are sensitive. So as we're going multi-cloud, and we're integrating with more and more SAAS providers, those credentials are kind of the glue that holds all that together. And when you to answer your first question, define what secrets management is in my mind, it's split into two main parts.}
+{\pard  \line \par}
+{The first part is. Where do we want these secrets to live? They are the most sensitive, , their, their direct access to }
+{\cf2 [00:02:00]}
+{ production data. And because our clouds are sitting on a public internet if you have access to one of these keys, that's it. You don't have to be in a private network. You don't have to do any sophisticated hacking.}
+{\pard  \line \par}
+{You just talked to a public API with public documentation and you pull all the sensitive data. And so the first part is secrets management as well. These things are super sensitive, where do you want them to live? So you have to answer that question. You have to define that policy for your organization.}
+{\pard  \line \par}
+{And then the second part is how do you enforce that? Especially as the organization gets bigger and bigger, how do you make sure that it's all the places , that you want them to be? And none of the places that you don't want them to be. And so that's when I think secrets management, those are the two parts and the two pieces that organizations have to become mature at so that they can lock down those What I would argue is the most sensitive assets that you have is just the keys that give you direct access to your production data.}
+{\pard  \line \par}
+{Yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ It's funny, as you mentioned that, I'm just thinking the number of passwords I deal with and both people who are watching the live stream right now and probably are going to watch the replay of it. I'd be curious if you, }
+{\cf2 [00:03:00]}
+{ if they want to put in the chat, how many secrets on an average an individual has?}
+{\pard  \line \par}
+{I think we have so many passwords that we manage on our own as well, right? }
+{\pard  \line \par}
+{\b\cf3 Dylan Ayrey:\b0}
+{ Yeah. That's, that's a good question. So there's, there's personal credentials, so there's things that log you into different websites and stuff that. And then there's corporate credentials. There's , how do two web servers talk to each other?}
+{\pard  \line \par}
+{How does a web server talk to, , a cloudy. And usually the way we manage those is different. So at a large organization, when you define policy for where secrets should live, usually you have one piece of software for storing personal credentials, something one password or something that.}
+{\pard  \line \par}
+{And you might have, , 50 or a hundred, right? For all the different things that you log into in a given day. And some of those might not have anything to do with your job might be your Facebook and your, , your Google and things that. Things you can't have single sign on for. And then on the corporate side, , an organization could have.}
+{\pard  \line \par}
+{Tens of thousands, if not more different credentials for how old their servers talk to each other and how they talk to cloud API is how they talk to SAAS providers. So , it in aggregate an organization put out }
+{\cf2 [00:04:00]}
+{ easily, hundreds of thousands, if not millions of different various forms of credentials.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. I'm curious as the people who are listening in or watching later on, if they aren't dropping the comment on live chat, how many secrets did do they think that they have? I was just trying to think, as you were giving the answer, my one password account is definitely filled with over a hundred passwords at this point in time.}
+{\pard  \line \par}
+{And , these are accounts which I've forgotten about, but you almost , yeah, you want to have random password everywhere, but it's, it's insane, man. The number of secrets we deal with is this day and age of modern applications. But maybe that most makes me think, if you had that many kinds of secrets what are some of the biggest challenges and under space and for managing secrets?}
+{\pard  \line \par}
+{Yes. }
+{\pard  \line \par}
+{\b\cf3 Dylan Ayrey:\b0}
+{ I think what's interesting is at face value, you kind of hinted at this earlier. It doesn't seem the flashiest most sexiest security problem to tackle. , especially when you hear all these reports about NSO group using this zero day to hack into the iPhone with zero clicks and things that.}
+{\pard  \line \par}
+{That's kind of what ends up in the headlines and where everyone's mind goes. And they think about security. But when we actually look at the trends, where are the }
+{\cf2 [00:05:00]}
+{ most common data breaches coming from a hackers are more than happy to follow the path of least recent. So most breaches involve one of these credentials in some form, , a stolen or a guest credential.}
+{\pard  \line \par}
+{And usually it's just because it's in someplace, it shouldn't be, or someone's reusing a password in a way they shouldn't be. So the challenge is really just the sprawl and it comes down to those two things is where we want them to live and where do we not want them to live? And when you have them scattered all over the place or you're reusing them between services and then that other provider, their credentials get leaked out and can be used for you because you've chosen the same password for two different services or, , an attacker gets access to a laptop.}
+{\pard  \line \par}
+{And then that laptop gets access to. And then in that slack, the chat history has a password or something that. I mean, that's literally how the celebrity account takeover happened at Twitter last year. , when Elon Musk was , I forgot what it was, you sent me a big point. I'll send you two back or whatever.}
+{\pard  \line \par}
+{That was, , that was because somebody posted their credential to their internal slack. It's a hard problem. The bigger your organization gets as you get thousands of }
+{\cf2 [00:06:00]}
+{ developers and they're coming and going, you've got interns coming in and out, and everybody has to know where they should live and know where they shouldn't live.}
+{\pard  \line \par}
+{And one person making one mistake could be the whole farm. It becomes a bigger and bigger challenge for organizations. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. I did not know where the slack thing, cause I mean, I guess it was that because slack is not encrypted, is that I mean, it was a lot of conversation going on for some time where slack caught all conflicts, flags and non-encrypted encrypted or something.}
+{\pard  \line \par}
+{\b\cf3 Dylan Ayrey:\b0}
+{ No. So, I mean you, you might be referring to end to end encryption, but that wouldn't have actually helped in this case. What you're describing is , should I be worried about slack, the company being breached, and then someone steals all the chat messages that slack the company, and then it has my chat messages, and some of my employees have sent passwords and credentials.}
+{\pard  \line \par}
+{Yes. That is a thing you need to worry about, , well, in the universe of supply chain, but this was actually a lot simpler than that. This was just, I think if I remember the story correctly, someone who worked at a Twitter had malware running on them. That malware had access to that user's slack session.}
+{\pard  \line \par}
+{And then that session was sold on the black market. So then }
+{\cf2 [00:07:00]}
+{ someone purchased that slack session, right? They said, let me see what organizations you have slack sessions for. Oh, Twitter. I want to buy that. So we bought that slack session and that gave them access to the same messages that the employee had access to.}
+{\pard  \line \par}
+{So regardless of whether or not those messages are encrypted at rest or not, if the employee had access to the messages, the attacker got access to the messages. So then because there was a sensitive credential in a public channel that that employee could otherwise normally access that gave you attacker access to the same data that data had a credential.}
+{\pard  \line \par}
+{And then that credential was used to log into some administratives portal that gave them the ability to take over celebrities. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That's insane, man. Everyone that I know he's a slack already has a policy that you should not post anything sensitive and the slack, but I guess it's a great example to share when people are questioning.}
+{\pard  \line \par}
+{ Why does it matter? It's slack, right? }
+{\pard  \line \par}
+{Ive got a question here from Rama as well.? Where do we categorize maintenance of secrets? I can see people start with one and two heavily, but don't think much about this part. Maintainence the secrets, }
+{\pard  \line \par}
+{\b\cf3 Dylan Ayrey:\b0}
+{ That's a good question. You }
+{\cf2 [00:08:00]}
+{ have , where should they live?}
+{\pard  \line \par}
+{Right. And you have a bunch of vendors that do that, that sort of you're a Doppler or your Hashi, or you're a AWS secrets manager. They provide a solution for that. And then you have how do you enforce that? How are you scanning all of your, your wikis and your slacks and your CIA log outputs and things that, to make sure those secrets don't live there.}
+{\pard  \line \par}
+{And that's where something , truffle hog, the product that we make comes in, and then you have maybe a different other question, which is okay, well, we've defined where they should live. How do we make sure that , the access is as minimal as it needs to be? How do we make sure that , the secrets get rotated on, some basis that makes sense for five keys for that might be easier to do And honestly, a lot of that is still immature, as an industry, , we don't necessarily have good practices around making sure credentials fall, at least privilege, and that they're being rotated.}
+{\pard  \line \par}
+{A lot of vendors don't even give us the ability to create these privileged credentials. They just have a binary, you create a credential and has access to everything or you don't. So I think as an industry some of the nitty gritties of the management side of things, we're }
+{\cf2 [00:09:00]}
+{ still maturing as a whole,}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ thanks for answering that because I think he was talking about more rotation versioning as well. Cause I think there's a up question from Chris. Hi, what problem does Truffle Sec solving?}
+{\pard  \line \par}
+{Are you able to answer , who your competitors? I think big open source one. I don't know who competitor is, but I don't know if you wanted to answer that question for Chris. }
+{\pard  \line \par}
+{\b\cf3 Dylan Ayrey:\b0}
+{ Yeah, so, I mean, we are an open source products that's been around for a little while now. Basically what truffle hog does is that identifies API keys do credentials in places that it shouldn't be.}
+{\pard  \line \par}
+{So it scans things slack it scans things lock CII outputs and things that. And it has coverage for. More credentialed types than any other vendor that we know of. And I think what really sets us apart, , I don't know any competitor that's doing this is we're more or less giving the technology away for free.}
+{\pard  \line \par}
+{I'm a huge believer in open source. And I think that transparency and security is a really important thing. And so , I think that blend of cybersecurity and open source and transparency around secrets detection is really unique to us. And so }
+{\cf2 [00:10:00]}
+{ one other thing I'll call out is , if you're following along with us on Twitter, you'll see we're constantly open sourcing new things and constantly making it easier for people to, , to use , these free open source tools.}
+{\pard  \line \par}
+{We have a bunch of really big things that we're going to be dropping in the next few weeks. So stay tuned. And you're going to see some really awesome free open source tools around the secrets detection space that are gonna land. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Cool. Hopefully that answered your question as well, Kris, and thanks for talking about why the opensource perspective as well for transparency.}
+{\pard  \line \par}
+{That's pretty awesome, man. And that makes me question the fact that, cause last time I had you on the show, we were talking about bug bounty club in Google cloud. And is there a parallel or is there a similarity between secret management and bug bounty? }
+{\pard  \line \par}
+{\b\cf3 Dylan Ayrey:\b0}
+{ Secrets are a subset of bug bounties, right? If you go out and do bug bounty is if you find a secret, a company is going to pay you a big chunk of loop for that, and they'll pay you for other stuff too. But an example is recently someone found a credential that was packaged into an electronic app.}
+{\pard  \line \par}
+{I believe that if maybe I'm conflating two different bug }
+{\cf2 [00:11:00]}
+{ bounties, but if I remember the story, right this company I think was. And I think they paid $15,000 for that credential that this, this researcher found. And so, , one of the things that you would have had to do is unpack this thing and manually go through and look for the key.}
+{\pard  \line \par}
+{That's the kind of thing that we're helping out with. And so, , one of the tools that we're going to be open-sourcing soon is something that can auto detect certain types of encoding. , is it as in a zip, is it basically for, and without having to do any of that work yourself, it'll just automatically unpack that and do that scanning.}
+{\pard  \line \par}
+{So bug bounties, I used to use open source truffle hog to find all kinds of keys and made, , a bunch of lewd off of that. Some of these companies are transparent enough to talk about the keys that they've leaked out. , they make these bugs public and you can see how many thousands of dollars.}
+{\pard  \line \par}
+{So they pay every time one of these keys leak out. And I think, , that's another cool thing about open sources. It's yes. This open source tool is used by big enterprises. , prevent these keys from leaking out, but it's also used by just individual hackers to find keys that have already leaked out and help, , make some }
+{\cf2 [00:12:00]}
+{ sites scratch and submit these bugs to larger companies.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And that makes me also wonder if I mean, I guess you touched on this earlier, the lead prep path of least friction that you mentioned, if you're able to find a parcel and GitHub, it's so much more easier to kind of just use that as a bug bounty thing, instead of trying to find the most complex zero day or I know it's a complex across a scripting that you can find on the website instead of that you just basically work with AI, find a secret.}
+{\pard  \line \par}
+{I imagine it's a lot more valuable to find someone's secret official officials, an admin user that you find a secret for. This also makes me wonder though if you're talking, there are so many parallels and we have a lot of application that we use in clouds. Github that he just mentioned as examples, slack, we spoke as well.}
+{\pard  \line \par}
+{Now we're also seeing multi-cloud and SAAS services. I guess I'm going to pick almost a pool that we have one pool SAAS services that support our day to day. And then there is a whole multi cloud angle as well. How is the whole shift of multi cloud, which is getting more common?}
+{\pard  \line \par}
+{How's that affecting this whole managing secret space. }
+{\pard  \line \par}
+{\b\cf3 Dylan Ayrey:\b0}
+{ I think what's really interesting, to build on your previous }
+{\cf2 [00:13:00]}
+{ comment, when you said you have admin password or something that and a repo it, , that's, , you can get paid out more for that potentially.}
+{\pard  \line \par}
+{I think what's interesting is , It used to be, if you found a password or credential in a repo, you might've have to be on an internal network to be able to use it. A company that's running its own data center, that all our servers are talking to each other and they're not using clouds and things that.}
+{\pard  \line \par}
+{If you found a credential that, that was accidentally leaked out, maybe somebody put it in a pay, spend, somebody put in a repo, somebody put it wherever it put an electron app you could submit it, but then there was no way to demonstrate impact you couldn't directly use it because you had to be on their internal network.}
+{\pard  \line \par}
+{And maybe an attacker could clip themselves on an internal network by, , phishing an employee or something that. But as a bug bounty, or you can't do that, but as we're shifting everything to cloud and not just cloud, but multi-cloud right, the ability for these clouds to talk to each other and you can't give an instance, as far as I know, in one cloud or role binding, to be able to talk to an instance in another cloud, short of exporting a key and giving that key to the instance.}
+{\pard  \line \par}
+{And so if that key leaks out. The bug bounty or }
+{\cf2 [00:14:00]}
+{ can just directly talk to the public cloud API. There's no need to be on an internal network. There's no need , to have any other hacking pieces as part of that story. And so you end up with these huge breaches, the Uber breach, where every single user in Uber had all of their pie leaked out, as well as every driver had all of their driver's license numbers and all of their social security numbers leaked out.}
+{\pard  \line \par}
+{And then the hacker ransomed, Uber, the company, a hundred thousand dollars, they paid the ransom. The whole, thing's a crazy story we made, , we made a short video about it on YouTube, but that all, that whole hack was one AWS key committed. There is just direct access to the production data, straight right into the point without lateral movement that moving from one box to another, without getting access to internal networks or anything that, it's one key to a cloud API.}
+{\pard  \line \par}
+{And so our move to public cloud is good in a lot of ways, and it helps us centralize policy and it helps us, , standardize on security, best practices. But I think one of the }
+{\cf2 [00:15:00]}
+{ biggest challenges that's coming with that is all the API is, are public. And that means that these keys are becoming more and more sensitive.}
+{\pard  \line \par}
+{And when one of them leaks out , the more we're going cloud and the more we're going SAAS and the more data we're putting in those places. But the bigger, the impact of that, that type of event becomes, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ yeah, I almost wonder how many people are not noticing that the landscape is also getting quite complex as well, to your point, the ongoing demand for every product should have an}
+{\pard  \line \par}
+{public facing API, what can you be transferring to what API? But that also means that if secrets that are for those API, anyone can use it on the internet. You don't have to be inside the network. And so does this mean . There's this whole concept of source of truth for passwords usually. And a lot of people would say, especially in the enterprise context for the census on single sign on, on you SAML have source of truth, but are there, I imagine it's quite important, but other than the examples of complexity around this for secret management.}
+{\pard  \line \par}
+{\b\cf3 Dylan Ayrey:\b0}
+{ Yeah, absolutely. The first and foremost thing that I would say is if you can remove the need for an API key, absolutely }
+{\cf2 [00:16:00]}
+{ do so. Right. If you've been introduced to singles or passwords as well, if you'd introduce single sign on and you can make it so that , there's one fewer password or one fever key that needs to exist.}
+{\pard  \line \par}
+{If you can give an instance and IAM role binding instead of giving it a. Do , it, it absolutely helps with this problem. The sprawl, right? The randomness that key's going this way and that way, and no consistency. That's what leads to breaches. And when somebody breaks into a, , an employee's laptop or something that, the first thing that hackers going to do is they're going to go to your Wiki and they're just going to start reading.}
+{\pard  \line \par}
+{They're going to figure out how your internal environment works. And if you don't have a unified strategy, that's centralized and really. Then they're going to go to the Wiki page that, that outlines the worst setup of all of the 1500 setups you might have. And they're going to use that as their path in.}
+{\pard  \line \par}
+{And it goes back to my previous comment, , of the two pieces, the most important thing that you can do if you're starting to think about secrets is coming up with a policy where you want them to live and centralizing on that and making }
+{\cf2 [00:17:00]}
+{ that the source of truth. And then after you do that, that's when you can start locking that down and making that , enforcing that and making that least privilege and adding all of the extra security bits on top, but having that centralized source of truth and that standardized policy is super, super simple.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ To your point I imagine with the identity, well, we spoke with identity sprawl, a thing a couple of episodes ago for how many people are normally, you're not even thinking where the secrets sprawl. And it reminds me of one of the companies that I've worked for ages ago. They had the central shared network folder where all the access keys were stored because they didn't have a password manager of some sort.}
+{\pard  \line \par}
+{And, but it's an internal network drive, but I wonder what they're doing in this work from home. What happened to that network drive now, but it's really fascinating that people are actually just completely ignoring some obvious things about ticket management. I've got a few more questions over here coming in.}
+{\pard  \line \par}
+{So I'm going to switch gears just for a second to get to them. Belay has I heard about a lot of companies that migrated Microsoft teams and slack. Some of them use slack with a }
+{\cf2 [00:18:00]}
+{ warning, said don't post sensitive information. How do you see this thing from a security perspective?}
+{\pard  \line \par}
+{Migration is not a good decision. How Bart a discord, maybe you touched on the slack before me. That's where the question came in. Well, I think }
+{\pard  \line \par}
+{\b\cf3 Dylan Ayrey:\b0}
+{ that's, what kind of our bread and butter is making sure you have coverage in all of the different platforms you're using. And so whether that's Microsoft teams or discord or slack , we want to make sure that.}
+{\pard  \line \par}
+{That in all of those places, you have some sort of detection, mechanism and prevention mechanism in place to find credentials that are posting there. What becomes actually dangerous is have you heard this shirt? The term shadow it before? . Yeah. So basically you work at a larger organization and that organization puts out a controversial policy.}
+{\pard  \line \par}
+{You can't use that software or something that. And then your employees use it anyway, but you don't have any visibility because you're pretending it doesn't exist or it's not allowed to be there. And then you create this adversarial relationship between you and your developers who are doing the thing that you've told them not to do.}
+{\pard  \line \par}
+{And then, because they're using those things, then you. All of the keys are ended up going there, but then you don't have any coverage to }
+{\cf2 [00:19:00]}
+{ be able to detect anything there. So I think what's important is as a business unit, you recognize the technologies , that the company needs to be productive and do their jobs, and then you work within those needs.}
+{\pard  \line \par}
+{And so if your developers are using Microsoft teams or maybe your developers are split, half of them are using teams and half of them are using slack. You need to sort of embrace that. I would not recommend, , necessarily coming out with a policy that would be confrontational. It's demanding that people use a particular piece of software, but instead work with.}
+{\pard  \line \par}
+{To recognize that they are using those technologies and then figure out what you need to do to secure those relative platforms. So, , we might handle the secrets detection piece, but then beyond that, to your point, you got to make sure these things are both using single sign-on and then you gotta make sure, , maybe your message retention is locked down.}
+{\pard  \line \par}
+{Maybe your app install stuff is locked down so that nobody can install arbitrary auth apps and things that. So I think, , I wouldn't be prescriptive about, you have to use that chat form or this chat platform instead, I would just operate within }
+{\cf2 [00:20:00]}
+{ the universe of what does the company need to do its job.}
+{\pard  \line \par}
+{And then what can we do to make sure that those pieces of software are centrally managed and. Yeah, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I think it's a , good point because it's easy for us to imagine that. Yeah, because everyone in the company using slack, they would just switch to slack and everyone's on slack. But I know for sure that a lot of companies in the name of communication there are whatspp groups there are signal groups, they all kinds of stuff.}
+{\pard  \line \par}
+{And I mean, it's only , I think for one of the companies that I've worked for, we had our incidents were coming out on 66. I, I'm pretty sure they have a password shared over that as well, because signal everything is encrypted or whatever, but it's yeah. I, to belay your point it doesn't matter if it's discord or slack or Microsoft teams.}
+{\pard  \line \par}
+{I think the question that would just come down to you more, probably want to encourage a good practice everywhere in respect, to just recognize to what Dylan was saying, that, Hey accepting the fact that might be multiple messaging boards on in the company. Just going to }
+{\cf2 [00:21:00]}
+{ find the integration and hopefully manage the secret effectively.}
+{\pard  \line \par}
+{\b\cf3 Dylan Ayrey:\b0}
+{ , I've worked for a company that's tried to ban slack and what that resulted in that resulted in about a hundred shadow slacks popping up all without single sign on all without any centralized policy or anything that. In my view, banning software, that never leads to a good result. And then to your point about signal. , if the attacker has access to your laptop, they have access to your signal. Right. And so what could be important? There is maybe message retention. It's the setting within signal, but that doesn't mean everybody turns it on.}
+{\pard  \line \par}
+{And so if you don't have the history blowing itself out, all of a sudden, you've got five years of keys that you've shared back and forth with the people you're talking to, you get malware on your laptop. Attacker gets access to your signal chat and then five years of history, right? }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That's a good point.}
+{\pard  \line \par}
+{A good reminder for everyone using signal to make sure that messages are disappearing after a certain time. I've got a few more comments. Oh, I think that the individual might've mentioned identity Federation businesses when we were talking about single sign-on cross-cloud authentication without keys still impact, but no.}
+{\pard  \line \par}
+{\b\cf3 Dylan Ayrey:\b0}
+{ Yeah. OIDC is }
+{\cf2 [00:22:00]}
+{ a part of ooff. And if your cloud provider supports that, absolutely. I mentioned before, if you can move off keys, move off keys. The problem is just not every SAAS provider and cloud provider has that option available to you. And some of the SAAS providers are actually really immature when it comes to granting third-party access to things I mentioned, it's , you can only make a team and then you can't scope the key at all.}
+{\pard  \line \par}
+{Right. So the nice thing about OIDC is it's got this idea of scopes and you can choose for your integration, how much access do you want it to have? But you might be working with certain SAAS providers that have no concept of scope. no concept of identity or access controls. And it's just, literally your only option is to make this API key that has full access to everything.}
+{\pard  \line \par}
+{And we just have, , that's just the universe that we operate in. So if you have the ability to move off of keys, move off of keys, but , you can't do that across the board because some providers just don't give you that often. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah, that's an interesting one because I have worked with a few organizations.}
+{\pard  \line \par}
+{I don't know if you guys had this with some of the customers or the companies that you've worked in the past, but there's always, usually a third-party }
+{\cf2 [00:23:00]}
+{ policy where, Hey, if you don't support single sign on, or if you don't support open ID, which is that a YDC thing you are they, they, they don't work with you because there's a security question is sometimes asked that question as well.}
+{\pard  \line \par}
+{Where, Hey, do you support SAML? Do you support or OIDC the industry standards? I mean, it could be one of the things that you can forward as a company requirement for every SAAS , but I kind of what you mentioned. I don't know how many SAAS applications out there do it for free as well, because I imagine there's an extra layer of cost as well.}
+{\pard  \line \par}
+{The moment he's a single sign-on Yeah, }
+{\pard  \line \par}
+{\b\cf3 Dylan Ayrey:\b0}
+{ I think that people would put up for vendors that charge extra for security features., some vendors might not support them at all, but I think when you mentioned there, the security questionnaires, right?}
+{\pard  \line \par}
+{ your internal GRC team that has this minimum list of requirements or whatever , they can set those policies and then use them for meeting certain requirements. But I think the unspoken truth that we all kinda know is if an individual engineer needs Trello to do their job, they're going to find a way to use Trello to do their job.}
+{\pard  \line \par}
+{I know they're not going to necessarily send it through, , the GRC }
+{\cf2 [00:24:00]}
+{ approval process or whatever writer they need to use , heap analytics or, , whatever it is. And they can get away with just throwing it on a core part. Not necessarily following every GRC. In a large enough organization, people find a way.}
+{\pard  \line \par}
+{And so we just have to kind of operate within that universe and just instead of pretending it doesn't happen and then it just gets out of control, right. And then you've got secrets in your Trello boards. We need to just create some exception process for that recognize that it does happen and figure out the universe that, , allows us to secure that as much as we can.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That's a great answer as well. Next I've got a comment from Vineet HashiCorp Vault could be a solution for multicloud secret management security. What are your thoughts? }
+{\pard  \line \par}
+{\b\cf3 Dylan Ayrey:\b0}
+{ Yeah, I think Hashi corp Vault has a a product that answers the first part of the question.}
+{\pard  \line \par}
+{Right? Which is where should you put your secrets? It's a little bit kludgy to set up, but if your organization is large enough it's got a lot of nice features and allows you to operate. Multi-cloud on-prem lots of different options available to you. That answers that first question.}
+{\pard  \line \par}
+{Where should your secrets live? Doesn't answer the second part of the question, which is how do we make sure it's in all of the }
+{\cf2 [00:25:00]}
+{ places that it shouldn't. Right. And then it also it might be moving more in the space of , how do we make sure that these things are locked down least privilege and making sure that our grants aren't as big as they need to be and things that.}
+{\pard  \line \par}
+{But honestly, a lot of the times a security team still has to come in and supplement a lot of that and it needs to manually inspect what our oldest keys, , why does he have admin privileges wherever for the small microservices, just doing the small thing. And so, , you could definitely set vault as your standardized best practice.}
+{\pard  \line \par}
+{Everyone should put your teams here. There's usually some additional policy and help from security teams that comes along with that. But then you also have to answer some additional questions. How do we make sure our keys aren't in other places and how do we make sure the keys we're creating our lease privilege in lockdown.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yup. And I think it's probably to your point what we're referring to as a subtle differences, the fact of. There's a secret hidden somewhere which is not HashiCorp vault, but just has you go war would not help you find it. I guess that's kind of where you're coming from. Is that right? }
+{\pard  \line \par}
+{\b\cf3 Dylan Ayrey:\b0}
+{ Yeah.}
+{\pard  \line \par}
+{HashiCorp vault. Won't do secrets detection. So it won't scan your discord or your slack or your Microsoft }
+{\cf2 [00:26:00]}
+{ teams and tell you what credentials are laying around there in real time, prevent them from being posted there or anything that. All HashiCorp vault is it's kind of in the name, I guess, is it's just a vault for you to store your secrets.}
+{\pard  \line \par}
+{So you write your policy that says everybody should put their credentials in your vault and you scream that into the wind in year, 2000 person organization. And then, , you have some tool in place to actually make sure that people are doing that.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah, hopefully that answered the question Vineet and yeah. Feel free to ask any more if you have any more Jothi as well. What would be the best start for an organization to concentrate on secret management mainly for recently migrated apps?}
+{\pard  \line \par}
+{\b\cf3 Dylan Ayrey:\b0}
+{ It's a great question. It depends, I think a lot on the size of your organization and how multicloud you are. I think if you're in a single cloud, you don't have anything on prem or anything that. You may not necessarily need to use something . Well you might be able to just get away with using the native secrets manager in your cloud provider.}
+{\pard  \line \par}
+{So AWS secrets manager or the Google cloud secrets manager or something that. There's also some really simple off the shelf secrets products for running things in Heroku. If }
+{\cf2 [00:27:00]}
+{ you just want a really simple canned secrets manager, that's, , a company Doppler might come in but the more sophisticated and advanced your architecture becomes, the more you have things in multiple files.}
+{\pard  \line \par}
+{Non-primary things that. That's where something vault would come in. So the first step, I guess, would just be survey your environment, figure out what your needs are and then pick where you want your secrets to live and create a Wiki page that defines that policy to make sure that everybody knows where you want those keys to live.}
+{\pard  \line \par}
+{And then the second part would be go find a solution that enforces that those keys are only there and aren't anywhere. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Good answer. And hopefully the answer, your question Jyoti since we went through some of the questions that came in we were talking about source of truth before we kind of switched gears. Now, switching them back, the next question that I had in mind, which was the best practice for secret management.}
+{\pard  \line \par}
+{ So I'm curious for people who are starting today and you wanted the questions partly with Jothi, but it's, for some reason, I find that scaling could be a challenge with secret management. And it's not just about, I mean, you and I have been talking }
+{\cf2 [00:28:00]}
+{ about slack, we've been talking about all these other applications, GitHub, JIRA, or Trello, it doesn't the list doesn't end.}
+{\pard  \line \par}
+{And even if people are listening to this and thinking we are at a startup, I'm sure we don't have that many secrets, but I can tell you right now, I imagine they will be a lot of people who would just be I guess, to signing up for different SAAS applications and maybe even using the same email as your company, email and password in those tasks accounts as well, because Hey, I'm using it for my official purpose.}
+{\pard  \line \par}
+{I'll find in is there a scale challenge to this. }
+{\pard  \line \par}
+{\b\cf3 Dylan Ayrey:\b0}
+{ I think what's interesting is a lot of people think of large organizations as, oh, they've got this problem solved, right? They figured their secret stuff out. They must've figured it out years ago, but I think to your point, this is absolutely a problem that just gets worse and worse.}
+{\pard  \line \par}
+{The bigger your organization gets unfortunately. And so while a small organization might have the problem and attractable space, right, let's say a really small startup, it's got 10 people or something that. You could get them all in a room together and you can communicate. Here's what we're doing with our secrets.}
+{\pard  \line \par}
+{Let's }
+{\cf2 [00:29:00]}
+{ all get on the same page when you're a 2000 person organization. And your average turnover is 1.5 years for your engineers or something that. You've got new insurance coming in every summer, all of a sudden, any one of those. That makes this mistake and posts in a slack channel or something that could just directly give access to production data.}
+{\pard  \line \par}
+{And , , that's the end, right? This is a problem that just gets worse and worse and harder and harder. The more SAAS providers you integrate with the more multi-cloud you get, the more keys you end up with, the more developers you have doing weird things with keys, the more debt of the last five years of people doing that stuff.}
+{\pard  \line \par}
+{And maybe something was posted to a Wiki page two and a half years ago, and then the Wiki page was updated. And you just don't realize that three versions old vert, , that people can still access it. That page still has that light key in it. It's just, it becomes really, really hard to do. And so I think the answer to your question of scale is a security team.}
+{\pard  \line \par}
+{10, not they can't manually go out and find all these keys and put them in the right places. , they can't do that on a small scale. And the especially can't do that on a large scale. If }
+{\cf2 [00:30:00]}
+{ you have 2000 engineers and they all over a year's time make this mistake once, and you've got, , maybe in a best case, four or five AppSec engineers or something that, they all can't find thousands of keys and move thousands of keys over.}
+{\pard  \line \par}
+{Right. And so that's where this term shift left comes in. You've probably heard that term before, but it's basically for certain security problems. Not for all security problems, but for certain security problems, we can empower individual developers to do the right thing and to take that security burden on themselves because otherwise it just doesn't scale.}
+{\pard  \line \par}
+{We can't have a security team. That's 2000 people big. It just wouldn't make any sense. You'd be spending billions every year on your security team. And some companies by the way, do spend billions of year every year, every year on their security team and still don't have this, this problem under control.}
+{\pard  \line \par}
+{And so that's kind of the, the philosophy that I have around it is , when we go out and detect keys , it has to be the person leaking out, that's driving the effort to remediate. And so we've kind of built some tooling around that where we try to figure out who did the leaking and then get that }
+{\cf2 [00:31:00]}
+{ person on a slack thread automated so that they can automatically do the cleaning up.}
+{\pard  \line \par}
+{And you don't have to necessarily pull in an engineer every time it happens, because if it happens, , a few hundred times a year, a few thousand times a year, however often that happens, you're not gonna have an AppSec team. That's going to be able to scale. Oh, she }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ has a good point.}
+{\pard  \line \par}
+{Cause I mean, there's a cute lip in world as well. It's not just about identifying you have lead keys, but how do you do cleanup for, I guess, applications that may not be owned by you as well, GitHub and all these other pieces as well. So, I mean, how do people see people address those? To your point, GitHub, I just use that as an example, , do I just contact or }
+{\pard  \line \par}
+{\b\cf3 Dylan Ayrey:\b0}
+{ It can be , I have some fun stories I can share.}
+{\pard  \line \par}
+{I mean, it could be a challenge, right? Let's say somebody's personal GitHub access token leaks out. And then, , again, this is why the person who leaks the key is the one who is most qualified needs to do with rotation. If the security team finds that key, there's no, there's nothing they can do, right.}
+{\pard  \line \par}
+{That person will get out of the account. Is it centrally managed? It's not they have any visibility into that key. All they can do is use the key. There's no end point that looks at them rotated or deleted or anything that. Right. And so you }
+{\cf2 [00:32:00]}
+{ got to go find who leaked it out and get them tapped.}
+{\pard  \line \par}
+{, that's why we have some tooling that helps, that helps with thesis of that. , to more to your, your question is , when you have this sprawl of different SAAS providers and you have the sprawl of different cloud providers. If the security team is playing that game of , we're going to pretend all those things don't exist and we've got this GRC team and this list of approved apps, this problem becomes harder and harder because if you do find a key laying around to somebody's personal Trello board or something that, that they've shared with their team, and you don't have that in single sign on, you don't have any auditability there, and you don't know who stood up originally.}
+{\pard  \line \par}
+{It just becomes a really big challenge. And then on the rotation side, , let's say, you've tracked this key down, , who it belongs to. You also need context around that key. How's it being used? When's the last time it was used. If I rotate this now, what's it going to break? And of all the different customers we're working with, I've only met one customer that was.}
+{\pard  \line \par}
+{I really wish we could hard rotate this immediately after it was identified. And I was , , that's going to take production down if we do that. And they were the only person I know I ever talked to is , we are so }
+{\cf2 [00:33:00]}
+{ worried about this problem. We're okay with the production website going down, if a keenly sat in our slack or something that.}
+{\pard  \line \par}
+{But usually, , companies just don't have appetite for that. They want some lead time to rotate, , to make sure , that you don't have problems that. So rotation is a challenge. I think the person who leaked the key out is usually the most qualified to be able to handle that they have the most context around that key, how's it being used and whether or not it's safe to rotate, we do our best to help provide some of that extra context.}
+{\pard  \line \par}
+{, but yeah, it's, it's a difficult problem. And I think it's something that the industry is still maturing and figuring out. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. Cause I think it's easy for Amazon to come and tell, say that, Hey, use the Amazon keys and rotated automatically or whatever, but Amazon is just one of the components.}
+{\pard  \line \par}
+{There's just so many in any organisation . }
+{\pard  \line \par}
+{\b\cf3 Dylan Ayrey:\b0}
+{ Let's talk about Amazon keys, right? , let's say, Amazon, can you leaked out? And you've, , leaked out on the public internet or something that. , your next step is saying, well, what's this key used for right. You log into the Amazon UI or whatever.}
+{\pard  \line \par}
+{And you say, oh, this thing was used, looks once a day for the last month. So is it safe to rotate? Was that the attacker uses it? Right? It's got }
+{\cf2 [00:34:00]}
+{ all these open-ended questions even within Amazon. It's still not always just straightforward, just immediately rotate it. Okay. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And also the password was hard-coded somewhere that'd even screwed even more.}
+{\pard  \line \par}
+{\b\cf3 Dylan Ayrey:\b0}
+{ Right? Yeah. So I think. If, if a credential is hard-coded somewhere the first step there is moving that credential over to a more secure place and updating your code to pull from the more secure place. And then the second step that's rotation, because if you do it in the reverse order, then you're gonna end up hard coding the new key.}
+{\pard  \line \par}
+{Right. So it's, it's a little bit of a complex job. Yup, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ yup. A hundred percent. Cool. I've got, I've got to ask you another question coming from Rama. It's funny that Rama I was actually thinking of that questionnow. Do you think it's defining the best practice for secret management first base, but implement any automated security policy kind of stuff to keep consciously monitoring, to align to those practices?}
+{\pard  \line \par}
+{I guess very similar to what I was going to ask. So I think it's worthwhile bringing that over because how do people monitor and react? I mean, I guess we got the reaction part covered. How does one monitor for this? }
+{\pard  \line \par}
+{\b\cf3 Dylan Ayrey:\b0}
+{ So that's where , our company has an open source solution that we also, have a }
+{\cf2 [00:35:00]}
+{ managed SAAS product for basically we integrate in a whole bunch of different SAS providers.}
+{\pard  \line \par}
+{So things , your slack or your S3 buckets or , your log outputs or your containers, your artifacts, all these different places where your keys are leaking out, we monitor them. And we can tell you instantly when a key lands there, even if it's several versions old, you're seven versions ago, Wiki page, as a key, we go through all those old versions.}
+{\pard  \line \par}
+{We find those keys. We figure out who created that page. We get them on a remediation thread. , that's kind of what we're building open source tooling for. And what's great about, , this journey of creating this company and stuff that is we get to give it all out for free.}
+{\pard  \line \par}
+{ we're building this all in an open way where people can. Access this technology, regardless of how much resources they have and they can, they can run it. And the same exact tooling can be used for bug bounty, right? Because the same thing that's monitoring an enterprise you can use after hours to go scour the internet and look through open S3 buckets and things that.}
+{\pard  \line \par}
+{Find keys, reporting the companies and make Westside scratch on it. , that's free to do all that's open source and auditable and }
+{\cf2 [00:36:00]}
+{ transparent, and we're going to be pushing out so many new features. We're going to be releasing a new scanning engine. Soon. That's going to come with hundreds of new credential types that we support just in the next couple of weeks.}
+{\pard  \line \par}
+{So follow along on a truffle sec, Twitter link down the bottom, and you should be able to to see when those things land and play around with them when they come out. Oh, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ well, I'm going to definitely keep an eye on her for that. I think there's another question to that part as well, where automating the security policy to keep continually monitoring for align for practice.}
+{\pard  \line \par}
+{It's almost you're defining the practice, but how do you monitor that people are aligning to it? Cause it's just kind of slightly different as a whole, I guess, detector a key has been leaked into the GitHub repo. How do people do that? Kind of monitoring for policies are being sort of followed. I'm not saving my password in a shared network drive or something.}
+{\pard  \line \par}
+{I just. }
+{\pard  \line \par}
+{\b\cf3 Dylan Ayrey:\b0}
+{ That's basically what we offer as we offer the ability to monitor and enforce all that stuff, to make sure that people aren't sharing those passwords in Microsoft teams or Microsoft SharePoint or any of those places where those credentials shouldn't live. So I think, , step one is figure out where you want your secrets to live.}
+{\pard  \line \par}
+{Right? And we're not }
+{\cf2 [00:37:00]}
+{ in that business, but I have a ton of things to say about it, whether that's actually corporate native AWC cause manager adopt or any of those things. So , you can't go out and enforce something that you don't have a policy for. So step one is figure out where you want these things to live.}
+{\pard  \line \par}
+{And then step two is how do you make sure that they're not in all the other places and how do you keep that enforcement in place and make sure that they're not. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. Awesome. And having an ability to rotate them, I'm working with the person who must he lead the key to be able to rotate the key in the first place.}
+{\pard  \line \par}
+{Sweet. Yeah, that's a great question. It's got to keep them coming guys. We spoke word monitoring. We spoke about Scale as well is I imagine there's a maturity curve to this as well, to your point about with one secret or one application, I guess, instead of just, , boiling it down ocean, what are some of the recommendations or at least the things that you've seen in terms maturity scale for secret management across a different level of size of organizations.}
+{\pard  \line \par}
+{\b\cf3 Dylan Ayrey:\b0}
+{ Yeah. Great question. I think to your point of , starting with an application, if you are a security engineer, you just came in, you found there is no centralized security policy. You found people are posting them all over the place. }
+{\cf2 [00:38:00]}
+{ People are putting them on Wiki pages, describing steps and how to log into systems and things that.}
+{\pard  \line \par}
+{You write your policy, but I think with that, to your point it's probably really important that you kind of eat your own dog food, right? Deploy an application and use the steps you've just laid out because you may find that it's a lot harder to do than you think. So , start simple, start with just a dummy app that you put together and then start with maybe your team.}
+{\pard  \line \par}
+{So any applications that your security team or dev ops team or whatever operates themselves, get all those things moved over and then just, and, , grow in consensual tricks circles, move over more and more applications. And so you, you shift over from that initial burden to just needing to.}
+{\pard  \line \par}
+{Have continuous monitoring. And so you're no longer actively moving things over. You've already communicated, messaged out to your whole org. This is what we want to do. Now you're kind of running in more of a passive mode where this thing is just continuously monitoring and, , automatically messaging people for you saying, Hey, , this, we don't, we don't do secrets that way.}
+{\pard  \line \par}
+{We do it this way instead. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That's great. Good advice as well. I think I can't imagine it being an easy problem to solve in any organization, especially if you have }
+{\cf2 [00:39:00]}
+{ thousands of people in the organization thousands of probabilities of what else could be using. Maybe sounds I should do an episode on how do you discover what applications are being used in your organization as well, to your point about the shadow it and the shadow SAS services.}
+{\pard  \line \par}
+{I }
+{\pard  \line \par}
+{\b\cf3 Dylan Ayrey:\b0}
+{ think for AppSec teams, I've heard certain AppSec teams say that it's literally the most important application security. Because if you think about an AppSec team that's going out and looking for problems, right? They're looking for things SQL injection. They're looking the things passwords and things that.}
+{\pard  \line \par}
+{If they're only looking at the applications that they know about, they might go super, super deep on those applications and find out there's application is not being secured at all. And so for a lot of organizations, including, , Netflix that built an application catalog and invested a tremendous amount of resources into inventorying all of their apps for certain organizations, the most important app sec problem to solve is just the question.}
+{\pard  \line \par}
+{What apps do we have and where do they live? And so at, , asset inventory or this, , asset cataloging is a super, super important problem. It's a different problem that , folks can go really, really deep on. }
+{\cf2 [00:40:00]}
+{ But, but you're absolutely right. That is a super important security challenge, separate from, , secrets that that organizations need to solve.}
+{\pard  \line \par}
+{And also, I think what's interesting about credentials is , I am constantly surprised with all of the different, unique ways that apps are deployed and things that. Where were those credentials could potentially leak out and. As , recently we're working with an IOT provider and that IOT providers making devices and actually sending them to people.}
+{\pard  \line \par}
+{And we had never even considered that use case before chatting with them. That the biggest thing this company was worried about was it leaking out a secret through their Git hub or anything that? It was actually, they were worried about one of their developers accidentally hard coding, a secret in an IOT device and shipping it to half a million people.}
+{\pard  \line \par}
+{And so when we started scanning their firmware, we started doing these regular scans on their firmware. We were able to stop AWS keys from going half a million people because, , it's just a different type of application deployment, but. That's I guess that just speaks to threat modeling and asset inventory and things }
+{\cf2 [00:41:00]}
+{ that.}
+{\pard  \line \par}
+{ You've got to grok the problems base and understand where , your code and your assets are. And then always, if there's a big source of data then there's potential for secrets to be in that source of data. I guess it's the long story short, whether that's a mobile application whether that's an IOT device, whether that's an S3 bucket.}
+{\pard  \line \par}
+{We found credentials laying around in all these places. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Wow. Wow. Wait. So cause I think I just realized we've been talking about secret management from an advanced level for some time on how complex it could be as well. But on the podcast we also have some people who may be new to the industry as well.}
+{\pard  \line \par}
+{And that's what we kind of started for them. But where can people find out about the secret management space begin to learn about this kind of conversation? I guess? . }
+{\pard  \line \par}
+{\b\cf3 Dylan Ayrey:\b0}
+{ I've started a YouTube channel where I'm starting to share some stories around secrets management. I'm talking about some of the open source tools.}
+{\pard  \line \par}
+{We're putting out things that. The company name is truffle security. You can find us on Twitter at truffle stack. You can find us on YouTube. , we love to talk about those types of things. That's a great place to start are open source tools as well. I mentioned can be used on an individual basis.}
+{\pard  \line \par}
+{You don't have to go work at a corporate }
+{\cf2 [00:42:00]}
+{ enterprise to use these things. You can use them personally to go out and find bug bounties . You can scan repositories, you can scan as three buckets. You can scan pace bins. It's very flexible and powerful. And a lot of those capabilities are actually going to be open sourcing and just the next week or two or three or so which we're super excited about.}
+{\pard  \line \par}
+{And so I think , that's what I would recommend. Get your hands on the tool. Go find the keys that companies are leaking out. , the, the number of keys you can find just from Google dorking, it's still staggering, right? It's just , type , password equals or whatever the right Google's working, you can find tons and tons of keys licked out that way.}
+{\pard  \line \par}
+{I think that is kind of how I got into it, right. Was just this bug bounty thing of just going out and finding all the keys that were leaking out responsibly disclosing to the companies. Some of them paying me a little bit of side scratch for doing that. So that was, that was a great way for me to get into it.}
+{\pard  \line \par}
+{And I definitely, , follow us on all those places and you can see all the new open source tools as we put them out. We recently put out this new tool called driftwood and what this tool does is it inventories every single SSL }
+{\cf2 [00:43:00]}
+{ public key that's used for TLS. So all of those are locked in a public ledger.}
+{\pard  \line \par}
+{We went downloaded billions of public keys for all those different SSL keys. And then we went to GitHub and we downloaded everyone's public SSH key for all 34 million users. So if you use get hub and you upload an SSH key there they allow you to actually download those T's. And so we downloaded all of those public keys and we created this massive database of billions and billions of different public keys.}
+{\pard  \line \par}
+{So then when you go out and look for a private key and RSA private key, w whether you find it laying around in a Pastebin or an S3 bucket, or, , yet, or wherever you can instantly hit this, , free API using this open source tool and see whether or not a parish is something sensitive or not.}
+{\pard  \line \par}
+{As, , individual employees, we've all played around with the technology. And we found a as one example, a key that belonged to Oracle that could be used for. Access and individual's account that could push directly to sensitive Oracle repositories. And we disclosed that to them. They paid out a bounty for it, I believe.}
+{\pard  \line \par}
+{And they're about to, , }
+{\cf2 [00:44:00]}
+{ credit the employee who, who found the key. So these tools that we're giving out I highly recommend if you're getting into secret stuff, play around with them because there's a ton of bug bounty money and a ton of potential for you to be able to find sensitive keys.}
+{\pard  \line \par}
+{And we're just making it easier and easier with the more tools we put out. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ A great answer as well. And I think probably a bug bounty is always a great pace to I guess, learn of a few new tools as well. So I would definitely encourage you both to check that out as well. }
+{\pard  \line \par}
+{ I enjoy this really conversation. I think I've, I feel everyone else who does well, where can people find you to connect with you and maybe talk more secret management ?}
+{\pard  \line \par}
+{\b\cf3 Dylan Ayrey:\b0}
+{ So, , obviously the company is truffle sec, that's linked, but you can also find me individually at insecure nature is my Twitter handle. And , recently, , you mentioned, I've been making some YouTube videos that talk about , I try to keep it relatively novel. , the content we've put out is talking about new tooling that nobody had access to before, or it's talking about a new security subject that the people haven't talked about before. It might change that up in the future. It might make some more , fundamental here's how to do these kinds of things }
+{\cf2 [00:45:00]}
+{ basic.}
+{\pard  \line \par}
+{But for right now feel free to check out that YouTube channel and see some of the novel security stuff that we talked. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Sweet. Thanks for sharing that. I'll put the link to your YouTube channel on the show notes as well, but thanks so much for coming in, man. And that's pretty much what we had time for everyone.}
+{\pard  \line \par}
+{I'll see you all for another episode of identity access management next weekend. It is going to be close to Australia day for people who fall falling in Australia, but just letting we're continuing our identity access management month and definitely check out truffle sec with Dylan.}
+{\pard  \line \par}
+{The next time you're around thinking about secrets and secret management. Awesome. All right. Have a great evening, have a great day to anyone who's listening, but we will see you all next time. Peace. }
+}

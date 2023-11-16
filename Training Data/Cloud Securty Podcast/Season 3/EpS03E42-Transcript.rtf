@@ -1,0 +1,454 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red216\green34\blue146;
+\red128\green128\blue128;
+\red250\green138\blue59;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\b\fs48 Jack Naglieri\b0}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ Hello, welcome to another episode of cloud Security podcast. We are continuing our theme for the month of September, 2022, which is building a modern security stack. Last week, you spoke about API security. And this week we are talking about cloud native security monitoring. We had Jack Ary, he's the CEO of panther.com.}
+{\pard  \line \par}
+{We spoke about what should cloud native security monitoring be like? What is security monitoring compared to a traditional one where it used to be like Jack has spent some time in companies like Yahoo and Airbnb as a practitioner. Where he was dealing with petabytes of data as this problem to solve.}
+{\pard  \line \par}
+{Now at Airbnb, he was part of an open source tool that was released to do monitoring. And I'll leave the link for that in the show notes as well. Now, as he kind of went down the path, he concept realized that, well, it is actually a data problem. So. A lot of the conversation that we have today focuses on how different is cloud data security monitoring from your traditional monitoring.}
+{\pard  \line \par}
+{How can you start today and talking about this, whether you should build, or you should buy one of those open source tools for monitoring. We also spoke about some of the }
+{\cf2 [00:01:00]}
+{ requirements that you might have in your team later on, especially when you start dealing with our data and a lot of logs where some of them might not even make sense to your incident response team or SOC team.}
+{\pard  \line \par}
+{They might not have the cloud context, or sometimes you may have tools that don't even understand a cloud native service on how does it affect in terms of on premise, whether you can actually port over something from your on-premise environment, all that, and a lot more on this episode with Jack, definitely check it out.}
+{\pard  \line \par}
+{If you know someone who's trying to build a cloud native security monitoring, or probably someone who deals with petabytes of data for cloud native logging, or just building a detection program in cloud, I think they should definitely hear this conversation. If you're listening to security podcast for the second, third or fifth time, I really appreciate if you can drop us the reviewer rating on iTunes or Spotify, it really helps more people discover us.}
+{\pard  \line \par}
+{That means we get to help out a lot more people. Thank you, everyone who has been sharing all the podcast episodes on LinkedIn and other social media as well. We really appreciate it. Thank you. Forting us as well. It really means Lord, when you find value }
+{\cf2 [00:02:00]}
+{ in the episodes that we create and we strive to continue to have valuable content for you.}
+{\pard  \line \par}
+{So you can have a great cloud security career and hopefully remember us along the way when you become popular. So. Or before you go, I just wanna let you know that we are starting a new series called this is my security architecture, where we would have professionals talk about how would they build security architecture for cloud services in Azure, AWS and Google cloud.}
+{\pard  \line \par}
+{We are starting with Azure tomorrow with Sai one of our previous guests. So definitely check out the YouTube video for it. Unfortunately, that would not be converted into a audio because as you can imagine, when you're trying to show something on the screen, doesn't really translate into a podcast episode.}
+{\pard  \line \par}
+{Unless we figure out some magic of doing it, but I would definitely encourage you. If you are someone who's trying to build secure services within Azure, definitely head to the YouTube channel while you there free subscribe. So you get to find out when the next one comes out. I hope you enjoy that episode as well.}
+{\pard  \line \par}
+{It's a new series we're starting and we are really excited about it. A lot more people have been requesting for it. So we finally have a series that we are starting for this }
+{\cf2 [00:03:00]}
+{ where we go a bit more deeper into implementing some of these controls that we talk about on the. I'll see you on the YouTube video tomorrow.}
+{\pard  \line \par}
+{Otherwise I'll see you in the podcast episode when he comes out next weekend. Talk to you soon. }
+{\pard  \line \par}
+{\b\cf3 Jack Naglieri:\b0}
+{ By bringing developers and security together, you don't have to choose between speed and security. Develop fast, stay secure.}
+{\pard  \line \par}
+{Welcome Jack, love you going. I'm good. How are you? Good. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Thanks for coming in. And really looking forward to this conversation I would love to, there'll be very few people who would not know who you are.}
+{\pard  \line \par}
+{So for the one or two people who don't know who Jack is, how would you introduce yourself? And your journey into the current role that }
+{\pard  \line \par}
+{\b\cf3 Jack Naglieri:\b0}
+{ you are at? Yeah, my my name's Jack, I'm the founder and CEO of a company called Panther. And we are a cyber security company based out of San F. And our whole mission is to make secops painless effectively.}
+{\pard  \line \par}
+{And our whole mission really comes from , my own background, my own journey, which I think we'll talk a little bit about today and yeah, really excited. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Sounds good. Cause you were, I mean, I guess you had history with }
+{\cf2 [00:04:00]}
+{ Airbnb, with Yahoo as a practitioner. Mm-hmm I'm, I'm just curious as well.}
+{\pard  \line \par}
+{What's how, what's it like to transition from becoming like. Engineer, like all of us and suddenly become like a CEO tomorrow. I mean, if you have a short version of that, }
+{\pard  \line \par}
+{\b\cf3 Jack Naglieri:\b0}
+{ well, it wasn't a overnight transition. It took a lot of time. So yeah. I mean, my background is in incident response, I started out actually at a company called bear sign.}
+{\pard  \line \par}
+{And I remember I walked in, in like the first week my manager sets down with me and he is like, all right, this is a SIM, this is when an alert is. And I was just like, what is an MD five? Like, I don't know what any of this means. and. You know, I was just fresh outta school. I was actually still in school.}
+{\pard  \line \par}
+{So those internships like really were the gateway for me to get out to Silicon valley and kind of continue onto that like next step of my journey, which led me to Yahoo and operating at such a massive scale. I mean, Yahoo was a giant company. Yeah. And, you know, they had over a billion users, so that was quite a big difference.}
+{\pard  \line \par}
+{And then going from Yahoo, the bigger monolith tech }
+{\cf2 [00:05:00]}
+{ company into Airbnb, which was the more. Cloud native fast growing startup at the time. And they were kind of like an, an upstart you would say, right? Like they weren't super small then. Yeah, but they were getting ready to go public and a lot of these other things.}
+{\pard  \line \par}
+{So the experience I had there was really interesting and I sort of used these unique experiences as a practitioner to start the company. And I wanted to start the company because we saw this shift happening, where there was a lot of people struggling to deploy SIM. And myself included, like we used, you know, big SIM at Yahoo and it was really difficult.}
+{\pard  \line \par}
+{And then when we joined Airbnb, we had sort of been struggling with using them in the past. And, you know, my teammates were from Facebook and from a Dropbox and things like that. And we just wanted to build something that was cloud native, because we were struggling with like high ops, like cost, like rigidity.}
+{\pard  \line \par}
+{We wanted to automate a lot of things. We wanted to really. In the cloud, we wanted to operate with a lean and, and mean team. We were only two people. So it's like, how do you }
+{\cf2 [00:06:00]}
+{ secure an entire growing business with two people? It's pretty hard. Yeah. So we rely on technology to make that easier for us. Wait.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So cloud native is an interesting one as well, and yeah, you, since you've kind of been on that practitioner side, how do you define cloud native? }
+{\pard  \line \par}
+{\b\cf3 Jack Naglieri:\b0}
+{ That's a good question. I I'd say. it's like an abstraction layer. Right. Cause everything at the end of the day, the cloud is just servers, right? Yeah. Yeah. But as time has gone on, it's become more and more and more abstracted from you.}
+{\pard  \line \par}
+{Mm-hmm so cloud native to me are services that accomplish a specific use case. So for example, storage storage is a thing that we used to like rack service for and install NFS mats. Right? Like that was the thing we. Now I click a button in, in Amazon and I in AWS and now I have a storage bucket. I have storage like, yeah, that's cloud native.}
+{\pard  \line \par}
+{To me, it's taking a particular use case or a part of the stack and just productizing it and making it super simple to deploy. And then you sort of rinse and repeat that across everything that supports a technology. }
+{\cf2 [00:07:00]}
+{ Interesting. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And, and so definitely well align with the conversation we are having today as well, because so this month we're basically helping people understand what a modern security stack is looking like these days.}
+{\pard  \line \par}
+{Last week, we had a conversation with Corey ball about API security as how API plays a biggest, significant role in the modern security stack and security monitoring is obviously a massive part of it. But you have this tweet, which is pined on your Twitter profile. So definitely check that. Around what you felt is a security stack for a modern, I mean, I, I guess cloud native stack for use that word, I guess.}
+{\pard  \line \par}
+{What was the thinking around it? Like why do you feel well go into the whole detail as well, but what was the thinking when about with that tweet now we're making you think quite hard, harder to tweet now? }
+{\pard  \line \par}
+{\b\cf3 Jack Naglieri:\b0}
+{ Yeah, the tweet , was fun. I think the intentional part of it was really. How can I sort of bring forward , these practitioner founders who have like solved these problems inside of companies and are now like solving a problem generically for a wider audience.}
+{\pard  \line \par}
+{So it's practitioner, }
+{\cf2 [00:08:00]}
+{ practitioner, founders effectively. And then the second part is built in the cloud for the cloud, right? It's this massive shift is happening in the last 10 years to where, like when I started as a practitioner and when a lot of those other founders started as practitioner. they were sort of in the early days of that shift, cuz Yahoo, N AWS wasn't really that popular.}
+{\pard  \line \par}
+{Then it was kind of gaining traction, but people were still using like open stack and they were like building it themselves. Yeah. So now we all transitioned and then we learned a bunch of stuff and then we started companies. So it's just like fix it for everyone instead of just doing it inside. Awesome.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And I think the one thing that took away from that tweet to what you said. , I love the fact that you kind of mentioned it from the transition of practitioners who, I guess founders kinda like what you did, but I love the fact that in your tweet, you also had, oh, things like everything that we can think of right now, like vulnerability management, secret scanning, automation, email, everything has like a cloud native equal now.}
+{\pard  \line \par}
+{So do you feel like as an industry, we have matured since the time when we }
+{\pard  \line \par}
+{\b\cf3 Jack Naglieri:\b0}
+{ started? }
+{\cf2 [00:09:00]}
+{ Absolutely. It's completely different. And I think the biggest benefit with that maturity is the fact that we don't have to deploy tools ourself anymore because that's what we have to do. We used to have to do that all the time.}
+{\pard  \line \par}
+{Oh, you want case management? Like here's an ISO, like have fun. and I'm just like, I don't wanna do that. And if I could click a button and pay a SAAS vendor and just be like, okay, cool. I have case management in five minutes. That's awesome. And that's really the whole thesis. Of the company. Like I started the company because I thought security people should focus on security and not all those like surrounding distracting, operational things that exist.}
+{\pard  \line \par}
+{Yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ To your point then maybe worthwhile calling out how different, cuz you know, a lot of people might just look at this go. Well, Jack, we've only, you know, spoken about security monitor for years now and you've been doing it yourself. Why such a likeness towards cloud native security monitoring.}
+{\pard  \line \par}
+{\b\cf3 Jack Naglieri:\b0}
+{ Well, I think cloud native , is sort of twofold. It's what are you protecting? And how are you protecting it? So, yeah, the, how you are protecting it is operating on }
+{\cf2 [00:10:00]}
+{ the technology basis, right? So we use cloud native tech in order to account for the scale and cost elements being better because we used to do this ourselves.}
+{\pard  \line \par}
+{It was really operationally heavy. It was very expensive. It was very difficult to sort. Keep things up to date all the time. Like we're not offs people we're studying how attacks happen and we're doing instant response. We're not, we're not DevOps engineers. Like I kind of was because I had to learn it, but most security people don't have that experience and they shouldn't have to have that experience.}
+{\pard  \line \par}
+{So there's that element. Right? So cloud native as the basis reduces ops significantly and it takes away a lot of those scale and cost issues that happened before. And then the second piece is as you build your application, using the cloud is the focal point of that. So where is your data coming from?}
+{\pard  \line \par}
+{ It's really coming from the thousand SAAS apps that your company probably has, but you narrow it to like 20 that are the most important. And that's how, really how we start. I usually think about maturity of a detection program as like starting really }
+{\cf2 [00:11:00]}
+{ broad in saying like, what sources can we go get that? Give us the widest coverage across our tax surface. The fastest. And that's typically your cloud audit logs or your like orchestrative like Kubernetes or similar logs. And then you sort of just go like narrower and narrower and deeper. So we see really big deployments of Panther.}
+{\pard  \line \par}
+{They've taken like specific use case, like endpoint or something or network, and they've just gone like huge scale. But you only do that after you have a good broad set of visibility. So again, Cloud native becomes the focus on, the basis in which we operate our technology, but also how you as a practitioner need to really secure your }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ systems for, so for context, for a lot of people like me and probably yourself in the past as well, who probably have been doing traditional security monitoring for a long time.}
+{\pard  \line \par}
+{ How do you explain that difference to them? Cause I think one of the things that I wanted to kind of highlight as well as we talk about as building the modern security stack and doing the entire month of September, mm-hmm }
+{\cf2 [00:12:00]}
+{ one of the thing I'm I'm highlighting is also the fact that the traditional way of I'm just gonna, I don't know all well, a, I remember it used to be a thing that security just wanted.}
+{\pard  \line \par}
+{All the. That's being questioned these JS as well. the other thing was everything just needs to be ingested into a SIEM, but nowadays like AWS and all these other providers have their own capability as well. Mm-hmm and there's so many choices to be made. So, and a lot of people can nominate, would hear then go, well, I've already got the tools that I need. This is already a solved problem. Why? So, especially for cloud native. So in terms of like, how are you seeing the market currently be for security monitoring. I'm curious as a practitioner . oh, from what you've }
+{\pard  \line \par}
+{\b\cf3 Jack Naglieri:\b0}
+{ seen before? Well, yeah, I mean, when I started, when I really started 10 years ago, it was just , the SIM in a box.}
+{\pard  \line \par}
+{So it was like the arc sites and you know, those types of things and you just, you get it, , you like the alien vaults as well. You deploy it, you feed a data and it's like, this is bad. Go fix it. Yeah. You're like, okay. But , these 50 things are actually not bad. I checked all of them. so what we did is we.}
+{\pard  \line \par}
+{\cf2 [00:13:00]}
+{ And with that evolution came like higher scale. So those didn't work for us anymore. So we went to logging tools cuz that was the closest thing to yeah. Us like accommodating scale. And then that's when I was a practitioner, we, Yahoo and Airbnb, we were just using , the logging tools. So, you know, broadly, this is elastic, Splunk, Sumo logic, and like a few others, but they're just very generic.}
+{\pard  \line \par}
+{And they didn't start as security tools. They sort of evolved into that after us, the practitioners were like, we need to put our data somewhere and we need a way to search it. So that was really , the only option. And then what ended up happening is, and then those one are, are going outta style currently because they're really hard to scale.}
+{\pard  \line \par}
+{Yeah. And they're very expensive because they were built 10 years ago. And as cloud native businesses, we're growing so fast now. The access to creating infrastructure is so democratized that like any engineer can just like click a button and launch like a thousand instances. Yeah. Whereas before you have like this big like, process, and you know, it was a little bit more contained and you couldn't }
+{\cf2 [00:14:00]}
+{ grow out of control, but we seen these like crazy hypergrowth companies just like come out of nowhere.}
+{\pard  \line \par}
+{And I'm speaking obviously to like modern companies, right? Like not every company has this problem. And if you're not facing these problems, I'm talking about. Don't fix it if it's not a problem, right? No one typically can do that because we're so strapped for time.}
+{\pard  \line \par}
+{But on the honest reality is like most security teams don't have the data that they need and they do struggle with all these things. And regardless of scale, it's still a problem. Cause people wanna automate things. We're super understaffed. Like we really wanna work smarter and not harder.}
+{\pard  \line \par}
+{Yeah. So it's like, that's why we look. Newer like modern security stack companies, like that's kind of, or products I should say. So. Yeah, as a practitioner, it was just logging tools and scripts that saved my life, you know? And now I see like product productization of these verticals, which it's a good call out that you mentioned that I did call out like all of these different parts of security cause is that it's super.}
+{\pard  \line \par}
+{You know, most people probably don't even realize that like, those are all the different types of }
+{\cf2 [00:15:00]}
+{ security. So when you say like, oh, I'm a founder of a security company that could mean like 30 different things. That's right. Security is this big nebulous thing that just exists that like we have to navigate.}
+{\pard  \line \par}
+{And it's kind of like witch hunting a little bit. Sometimes you don't have like, especially instant response. Whereas other things like vulnerability, management's like more, more cut and dry, but IR is just. Very very difficult and very nebulous cuz , there's not always a definition of like good and bad.}
+{\pard  \line \par}
+{It's really like you're investigating a crime scene and you have to prove that it's bad or good. Yeah. Right. It's very, very gray area. So I hope that answers your question. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ it does. And I think talking about not so modern environments as well. I've got a question here from vineet as well on this does security monitoring for cloud native also expand, I think he's mentioning on premise and monitoring }
+{\pard  \line \par}
+{\b\cf3 Jack Naglieri:\b0}
+{ OnPrem.}
+{\pard  \line \par}
+{Yeah. It totally does. I think , it's the basis of your monitoring lives in the cloud now. Yeah. And as long as you can bridge from on premise into the cloud in some way, then yeah, it totally applies. That's that's always been my experience. You can do that easily with, or, you know, }
+{\cf2 [00:16:00]}
+{ I say easily, cause I've done it too much, but you can that gap fairly simply with like log stash or fluid D or whatever, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ the on premise challenge. , the way I always thought about this and the way cloud native security monitoring. It only, it's almost like if you were to think of cloud as a house, like a fully automated house, because it's enabled by APIs.}
+{\pard  \line \par}
+{You have all these levers that you can pull to. Oh, I need information from my AWS S3 logs or my VPC logs or some other logs. Although I think there's like a Chris Ferris from can't remember the name of the company he works for, but he did a talk . And it's talking about all these logs that we get from AWS.}
+{\pard  \line \par}
+{Like the biggest one being the S3 data log is just like a massive wave. And it's like forwarded by like a little a VPC. And then there's another one little, one cloud trail after that. I mean, we're still talking a lot of data, but my understanding was that it it's only possible in cloud because it's cloud native to what you say, it's API enabled, but from an on premise world, do you find that there's capability and on premise as well?}
+{\pard  \line \par}
+{as in, do you know how you were saying you can bring that bridge that over, or }
+{\cf2 [00:17:00]}
+{ do you feel the vendors in that space are also building tools to integrate into cloud? Cause they realize people are moving into cloud. }
+{\pard  \line \par}
+{\b\cf3 Jack Naglieri:\b0}
+{ I actually don't have the opinion that on premise vendors have, have made it easy for us.}
+{\pard  \line \par}
+{I don't think they have. I think even, I think even SAAS vendors struggle to make it easy. the ones that I have tons of respect for are the ones where they just give it an option to put it into S3 or SS or, or Googles like blob storage or whatever. Yeah, so that's the best. And they use JSON like, can we just use JSON for everything please?}
+{\pard  \line \par}
+{Like, why are we }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ wait, not YAML. Is that even }
+{\pard  \line \par}
+{\b\cf3 Jack Naglieri:\b0}
+{ a no people don't use the YAML for logs but oh my God, that'd be terrible. yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Say so you know how you mentioned the detection program as well? I, I feel. Threat detection itself has gotten a lot of limelight in the cloud native space and where it used to before on premise.}
+{\pard  \line \par}
+{I don't even remember. They used to be titles for detection engineers before now. There's like threat detection engineer earlier. It used to be threat intelligence. So. With the program that you mentioned for threat detection programs. Do you have some insight }
+{\cf2 [00:18:00]}
+{ for people who may be looking at this going okay. Jack sold me on the idea of doing cloud native security monitoring. Yeah. , what am I looking at? What am I really building in my company to do, to even start }
+{\pard  \line \par}
+{\b\cf3 Jack Naglieri:\b0}
+{ this today? It starts with visibility, a line that I said recently in a blog post is you can't protect what you can't see. Mm. So you have to really start there and.}
+{\pard  \line \par}
+{I wrote a few blogs on this, , on my sub stack. It's about what detection engineering like really is and how you start with it. So it talks about logging. It talks about testing detection, code, things like that. And then I'll probably write some, some more. It just got home from travel. So a lot of time yet.}
+{\pard  \line \par}
+{Ah, but it's really just , starting there and, and making sure that you start with a platform that will grow with you. And I think that's a big mistake that people make is they use short term solutions or. They build something themselves that probably works for the scale they're at currently, or maybe for the next three months, but not after that.}
+{\pard  \line \par}
+{And , in security monitoring or detection response, which we also need to just standardize in calling it one thing, like 50 different things. But incident response }
+{\cf2 [00:19:00]}
+{ detection, whatever it is. We need to think in the very long terms, because if we get breach. At one point, we may not hear about it for six months later, and that's a very common thing.}
+{\pard  \line \par}
+{So if you don't have the ability to go back, or if you don't even have the ability to retain that data, then you're kind of outta luck. And then you can't, you, you really can't answer questions about what happened. So you don't know what the extent of the breach was. And then a lot of other bad things happen cuz you can't really prevent it again, cuz you don't know what happened.}
+{\pard  \line \par}
+{So you never want to be caught in that position. So you should always. Visibility into the assets that you care the most about, like, what are your like, quote unquote, crown jewels? Like, what are the, what are the things you need to, to monitor? You know, if you use the house example, which I, I use all the time, I think the house examples.}
+{\pard  \line \par}
+{Perfect. You have a house you're trying to protect, and you have like strong windows and you have doors and you have ways of getting in and out and you have cameras and you have valuables in your house and you wanna make sure that, you know, who's accessing. So you start there, right? And then you }
+{\cf2 [00:20:00]}
+{ go, you sort of fan out and then you get more and more and more context.}
+{\pard  \line \par}
+{So instead of just knowing who unlocked the door to you're safe you see who, who came in the house or who was driving near the house or whatever it may be. And it's very synonymous. Like what real attacks look like? You're doing what reconnaissance people are mapping out like, okay. Like how do I break into this place?}
+{\pard  \line \par}
+{So it just requires a lot of context over a large span of time and attacks can be really fast or they can be really slow. It really depends. Cuz they try to like the whole goal is to evade us, you know, like how do we get around the monitoring and how do we not make it look obvious? And that's also a really big challenge is.}
+{\pard  \line \par}
+{Good attacks. Just look like normal behaviors sometimes, you know? Yeah. I, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I, we hide behind the normal behavior. Another, and even a anomally behavior detection itself is such a big field . I mean, if you're go down that path as well, I was also gonna ask in terms of like the detection response in cloud, cuz we've been.}
+{\pard  \line \par}
+{Trying to give a comparison to folks who may not be in a modern environment at the moment, how different is detection response in }
+{\cf2 [00:21:00]}
+{ cloud was the traditional security monitoring kind of thing. }
+{\pard  \line \par}
+{\b\cf3 Jack Naglieri:\b0}
+{ It's way more automated. So in the traditional world, or, you know, if I just think through when I was an analyst, it was just a lot of like, adhoc querying.}
+{\pard  \line \par}
+{It was me typing some generic string and then like hoping I find something, whereas., in the, you know, quote unquote modern cloud native world, we adopted these technologies like detection code and in order for detection code to be a thing, which is, you know, I'll just quickly explain detection code is you use like really small pieces of software to analyze data as it streams mm-hmm}
+{\pard  \line \par}
+{So in order for that to work, you need to have structured data. You have structured data, you have to ETL extract transform and loaded. So you have to have this transformation, which is also a really hard problem to. Yeah, and then you need to analyze it. And then when you're analyzing it, you're looking for certain attacker patterns.}
+{\pard  \line \par}
+{And then once you get an alert, you have to go back and correlate across all of your other data to be like, okay, what's the context around this alert that allows me as a practitioner to determine if this is good or bad. And then if you're really }
+{\cf2 [00:22:00]}
+{ sophisticated, you can automate that process because everything's structured in a data lake, you can be like, okay, when this alert happens, run a query.}
+{\pard  \line \par}
+{And then if this is a result, Do something else. Right. And like that's kind of the world we are like still trending towards is like that fully automated structured data using code to do, , to cover like the 80%. And then the human steps in when it's not in that 80%. And we have high confidence that this could be really bad.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Also from a capability perspective, people should like the detection score capability within teams to point sounds like unit data lake. you need detection engineer, who can do detection as code. But obviously we're talking about modern cloud bill, large scale companies as well.}
+{\pard  \line \par}
+{So it's worthwhile putting that context on top of that as well. Outta curiosity, what are some of the mistakes you, or at least maybe, maybe before we kind of go into the whole mistakes as well. What are some of the challenges in doing this? I find the right talent or, oh man, what are you talking about?}
+{\pard  \line \par}
+{\b\cf3 Jack Naglieri:\b0}
+{ the challenge is the technical complexity . because to do this really at scale, you have to be nuanced in data engineering. You have to be nuanced in }
+{\cf2 [00:23:00]}
+{ running applications at scale, you have to be nuanced in security, obviously. And it's super hard to find that skillset. And the mistake that I've seen is just people build it themselves too much.}
+{\pard  \line \par}
+{Hmm. They're like, oh, I have cloud trail data. How do I analyze it? It's like, oh, I'm gonna build a lambda function. Then I'm gonna do this. And. and then like 12 months later, you have this thing that breaks. Cuz you're not an engineer that builds stream processing systems. You're a security person your job is to protect your organization.}
+{\pard  \line \par}
+{But because there's been such bad tooling in the past, that's kind of been, the last resort is like, okay, we have to build it because I don't want to use X, Y, Z you know, big logging tool. So that's, a mistake I see a lot is people are just building things unnecessarily. It's kind of funny, cause I'm, I'm somewhat guilty of that.}
+{\pard  \line \par}
+{Like at Airbnb, however, we built it and open sourced it and we were like, okay, here you go. And then, you know, my motivation was like, I wanna keep working on this idea. So I started the company. So that's like the first, like my residing advice is like, please don't build this yourself. Unless it is like 100% unique }
+{\cf2 [00:24:00]}
+{ to your organization, then definitely build it.}
+{\pard  \line \par}
+{If it's like a conduit of getting into something more structured. So. Just like you wouldn't go build like your own version of Kubernetes. It just doesn't make sense. Like yeah. People who've done that. Yeah. Don't do it. I've }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ been part of the whole project as well. They definitely don't succeed much.}
+{\pard  \line \par}
+{\b\cf3 Jack Naglieri:\b0}
+{ Yeah. It's just for, it's just not part of , the charter of the team. Right. And because the cloud is so accessible to most people and because also we have this culture of like wanting to own projects, like it's easy just to be like, oh, I'm gonna build my own version of this. But it, it just ends up falling by the wayside , over time.}
+{\pard  \line \par}
+{And we get distracted as engineers or analysts because we have real security issues we have to work on. And then that project of like building the infra that protects us is like a back burner thing. And that's kind of what I saw. And , that's again, like why I wanted to work on it full time. I was like, okay, this is such a big }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ problem because funny thing is, my next question was gonna be, Hey, well, if I'm if I'm starting today, what services in AWS can I use to build one?}
+{\pard  \line \par}
+{Clearly. I mean, I don't imagine a lot of smaller companies, like }
+{\cf2 [00:25:00]}
+{ the SMBs out there would have the capacity to have a data lake. , they don't even have a capacity to have a SIEM sometimes as well. Yeah I imagine cause you know, the open source tool that you were part of writing in Airbnb. Yeah. I know if we kind of said, Hey, you should not build, you should buy . But the, for, for those folks who. Can't buy at the moment. What's , are there, is there like a thinking process you have for maybe if you use the AWS example any thinking process there for how they should approach }
+{\pard  \line \par}
+{\b\cf3 Jack Naglieri:\b0}
+{ it?}
+{\pard  \line \par}
+{Oh, it's so hard for me to answer this question as a founder who literally built a SAAS product. But I guess the thing I would say is, you can use open source. There's at least like structure around this project. So you're not starting from scratch, but open source is not. So it's like, it may, you know, if you can't pay for something, you're that that's just gonna go somewhere else.}
+{\pard  \line \par}
+{That cost is just gonna go into another thing. And I'm just being completely like CEO hat off. I'm just being completely real. Like open source is not free. That's a big misconception because sure. The code is free, but all the maintenance and the time learning and the time upgrading and if, when things break and like }
+{\cf2 [00:26:00]}
+{ all the surrounding effort that comes with open source.}
+{\pard  \line \par}
+{honestly, doesn't end up being worth it, in my opinion, especially when you're monitoring at scale, it's just such a non-trivial problem. And if you're not nuanced in it, it's just gonna be pretty difficult. And that was my experience. So, you know, I think you, you can absolutely do that if you're nuanced enough, but just know that like eventually you're gonna run into something.}
+{\pard  \line \par}
+{Yeah. And I think it's, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ it's been a pattern that's been noted in the industry quite often as well. the conversation normally starts with, Hey I'm gonna try and build myself something and then you made the mistake and then come back. But I mean, I guess in general, as a concept, it's been something that's been wildly adopted, especially if you can find some with the capability as well, but , to your point, I've got a few questions here as well, so I don't quickly answer them.}
+{\pard  \line \par}
+{So vineet has asked for comparison cloud native tools at scale. Would it be more , cost effective compared to a traditional. Absolutely }
+{\pard  \line \par}
+{\b\cf3 Jack Naglieri:\b0}
+{ the cost basis of cloud native is completely different because cloud native is typically usage based on the back end. So an }
+{\cf2 [00:27:00]}
+{ example of that is like S3 Lambda , or anything else, SQLs SIS, like all these underlying services that have been attracted for us , are cost basis is so much lower.}
+{\pard  \line \par}
+{So we can operate at a much higher scale with a much , lower overhead cost. So it's really nice. And it's sweet. It's a whole lot better than trying to rack your own servers and manage that it's cheaper. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ There is a notion that people talk about the initial cost of moving in to the whole cloud native space is a bit more costlier.}
+{\pard  \line \par}
+{Then it kind of slows down. Is that still the case with the cloud data monitoring as well? In terms of you, if people are doing it themselves I would imagine there would be a huge spike in the beginning as well, even if it's, unless it goes serverless path that you did with your }
+{\pard  \line \par}
+{\b\cf3 Jack Naglieri:\b0}
+{ open source tool it's, it's so hard to generally answer that question, cuz if you have like no volume yeah.}
+{\pard  \line \par}
+{Then it may not be worth the cost if you're like really small, but I mean, I would always say it's worth it, right? If you can outsource something that you are not uniquely positioned to do, which is like running servers and scale. On hundred percent, }
+{\cf2 [00:28:00]}
+{ you should do it there's zero reasons why you shouldn't do it in my opinion.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ , I think your point, the nuance or the asterisks over there is if you have the capability. Sure. Definitely should go on the path. If you don't have the capability, then they should reaching }
+{\pard  \line \par}
+{\b\cf3 Jack Naglieri:\b0}
+{ the decision at appointment hundred percent. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I've I've got another question from Rajeev here.}
+{\pard  \line \par}
+{Can you talk about the automation of heterogeneous log correlation? Mm-hmm for the house example, the logs of someone open the front door, tie it to someone stealing valuables, also enhancing the ity by pulling the video from the camera. Ooh, like a spy movie that were great. Question meant }
+{\pard  \line \par}
+{\b\cf3 Jack Naglieri:\b0}
+{ it's hard. I mean, I can talk about my, own experience and things that we've done there, but it goes back to the.}
+{\pard  \line \par}
+{The premise of like data engineering is really hard. And what you need to do is create a data model and the data model has to have unified fields that you can use for correlation. So for example, like a file name, a file name could be called like a hundred different things in your logs. It could be like file underscore name.}
+{\pard  \line \par}
+{It could be file. It could be named, it could be all these things, right? So the system that isn't taking, all this data }
+{\cf2 [00:29:00]}
+{ needs to have a way , of normalizing it in some. So there's just a huge amount of work that goes into transforming data from its original source into a like columnar based storage.}
+{\pard  \line \par}
+{And , then there's a second transformation layer of figuring out like, okay, there's a file name in my CrowdStrike logs, the same as a file name in my syslogs. Right. And then you can start to do correlations and detections that are a lot more efficient instead of having to write these like really difficult queries, which is kind of what has happened in the.}
+{\pard  \line \par}
+{But there's I think it's called like the really old version of this is Seth, like C F. Okay. Yeah, but that that's really how you get there. And again, these are data problems. And the thing I said like five years ago was like, security is a data problem at the end of the day. If you can solve that data problem, then you've gotten a lot better at both like being able to understand your data and being able to retain it for the long.}
+{\pard  \line \par}
+{Yeah. Yeah. And I think, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Thanks for sharing that as well. Cause I think you kind of touched on the whole security data lake before as well. Yeah. And I kinda like yourself there, a lot of folks in the industry at the moment, or at }
+{\cf2 [00:30:00]}
+{ least for some time have been talking about the security data lake and what does that really mean?}
+{\pard  \line \par}
+{And actually maybe good place we start? What does that really mean for you? What does secure data lake and }
+{\pard  \line \par}
+{\b\cf3 Jack Naglieri:\b0}
+{ well, a data lake is a cloud native infinitely, scalable database. And a security data lake. Is that for security? So it's, instead of putting these logs into you know, name, a log analytics vendor, right.}
+{\pard  \line \par}
+{Instead of putting it as like a flat string, you store it as database and then that way you can do column based searches, you can you can size up. I mean, I'm speaking about snowflake specifically, cuz they're the ones that like I have the most experience with, but you can. Separate storage of compute to where you can ingest data non, nearly, and then you don't have to add more compute.}
+{\pard  \line \par}
+{So it's really, really helpful for operating at scale. And there's a number of vendors, snowflake data bricks, and click house, and there's fireball and like a huge amount now that have really popped up. And their whole thing is like, we wanna operate at a massive scale with }
+{\cf2 [00:31:00]}
+{ very structured data. Cause before there were services.}
+{\pard  \line \par}
+{Like RDS. Right. Which was Postgres my SQL, but those have their scale limits. Like they're really good for applications, but they're really bad for terabytes or petabytes of data. So then you have like the data warehouse evolution and like the red shifts, and then you have the, now the snowflakes and the data bricks.}
+{\pard  \line \par}
+{Right. And, and they're taking these like really big data solutions in productizing them. And like for example, data bricks is based on an open source project snowflake isnt, But, yeah. Yeah. So it's really solving, the data problem and data lakes are, the way that we solve the storage and search problem.}
+{\pard  \line \par}
+{And then serverless is the way that we typically solve the analysis problem. And that's kind of the other element to it. They're sort of both, it's like detection and response, you know? }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right. So your ETL will be done by serverless components, }
+{\pard  \line \par}
+{\b\cf3 Jack Naglieri:\b0}
+{ I guess. Is that ours? Ours is. Yeah. Right. So we ETL it on the way.}
+{\pard  \line \par}
+{and we have a, we try to just support as many log sources as possible. So people don't have to think about it. Yeah. But what's happening in the background is, you know, }
+{\cf2 [00:32:00]}
+{ Sy log data can be like very unstructured. So we have pars and we have transformers and we have all these things to where just take care of it.}
+{\pard  \line \par}
+{And then on the other side, you get this like my SQL database, that, which is what it looks like under the hood. It's like this data lake and it's a collection of these databases and tables. And you can query like gigabytes terabytes, petabytes of data. And you can pick, you know, a point in time be like, okay, I want to know everyone who logged into this machine for this week, six months ago, and you do it and you get it back and it's done.}
+{\pard  \line \par}
+{Whereas before you'd have to wait like six months or you'd have six. Yeah. You'd have to wait like an hour, six hours or a day or whatever for that data, which just, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I remember when I was used to work as a cloud security architect, one of the things that we had in our remit was to basically to , make ensure logging was sent you the theme or whatever, but there was always this gap for who's writing the detection on it.}
+{\pard  \line \par}
+{And then there was a whole gap for what are we really sending them? Am I sending them debug logs? Or am I sending them like everything security or what am I really sending them? But to your. It's an interesting thing }
+{\cf2 [00:33:00]}
+{ to talk about from a data problem as well. Cause, and I'm curious if, what your opinion on why it's being driven what's driving the data analytics part as well, because earlier it was as simple as I'm just gonna give it to the SIEM team and they'll take care of it, but no, one's actually going to the SIEM team and asking, Hey, what kind of detections are you running on your cloud environments or the logs sending across?}
+{\pard  \line \par}
+{So , is that also something that I guess changing in like almost like a paradigm shift there. That it's not just about, Hey, I'm just gonna throw it across the fence. But to your point, modern companies are even thinking about, Hey, let's make a security data lake out of this. And so we, we can actually analyze.}
+{\pard  \line \par}
+{And so if Jack found something or Ashish found something or Vineet, or someone else have found something as well, we are able to kind of pick that up query or would it still be that team is working on building a data lake, building detections for. Or if they're out the out of the box, how use the out the box ones, but that 20 percent that you were already talking about, we create them.}
+{\pard  \line \par}
+{So that's kind of what a modern stack would look like from a security monitoring perspective. }
+{\pard  \line \par}
+{\b\cf3 Jack Naglieri:\b0}
+{ Yeah. }
+{\cf2 [00:34:00]}
+{ I mean, I don't expect anyone to build the data lake. I expect a provider to build it for me and manage it for me because there's so much that goes into it. It's feeding the data in, it's making sure it's extracted and normalized and it's it's searchable and those things are not free.}
+{\pard  \line \par}
+{You have to work at. In order to get that like healthy operational state, especially at scale. And you have to monitor it cuz things break. Yeah. , you know, the service could go down like an API can crash. Like you, you never know it's gonna happen. Right. So the provider should take care of all that the user should just be responsible for crafting , the detection logic and making sure that their assets are, are covered and that they have the right data and the right detections , to find those.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ yeah. Sounds like the modern security team should also have data skills in there as well, as in to your point, even if it's not being built, it's being bought, you still need to understand what's really happening and how you can translate, say, cause to your point everyone's putting in lift and shift, like, you know, monolith application into cloud as well.}
+{\pard  \line \par}
+{So they're calling it quote, cloud }
+{\cf2 [00:35:00]}
+{ native when you're like, no, it's not really cloud native, but I still want it to be into like some kind of a log aggregate. So some, and I mean, we have been doing it for a long time, so there are a lot of potentially a lot of those floating around as well. And from that perspective, to your point, you see that moving forward the same way you had their tweet about modern security stack, the modern security team would also start having data folks in the team as well.}
+{\pard  \line \par}
+{\b\cf3 Jack Naglieri:\b0}
+{ I think only if you're doing like very advanced analytics. So if you're hooking up a notebook or something to the data, If you want to extend it further than yes, I would say that could be a world that exists. Is it gonna be very common? No, it's not gonna be very common cuz it's hard enough to hire security.}
+{\pard  \line \par}
+{People, let alone a data person who's nuanced in security. It's just a very hard thing to do. And unless you're Netflix or apple, it's like, you're probably not gonna do that. That's like the that's like the top like 0.0, zero 1%. You. Other than that most people are gonna rely on the services }
+{\cf2 [00:36:00]}
+{ or the applications to do it for them, which is fully the world that, that I plan to build.}
+{\pard  \line \par}
+{So yeah, no, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ that's pretty awesome as well. I think I'm looking forward to it as well. That was pretty much most of the questions that I had. . Now, where can people find you? If they have any more questions, where can they reach out to you? Where do you hang out on social? }
+{\pard  \line \par}
+{\b\cf3 Jack Naglieri:\b0}
+{ Twitter is the biggest thing I have LinkedIn, but I'm very much a Twitter person. So you can, you can see what's going on in my head.}
+{\pard  \line \par}
+{by like an Twitter I can hear about new things that we're working on at Panther. You can go to panther.com if you wanna learn a little bit about the company and the product that we've created for you all to use and yeah, really excited. We have some things.}
+{\pard  \line \par}
+{Launching in the next few months that I'm really excited about. So you'll hear about it on my Twitter and yeah, really appreciate the time it was great. See you. Yeah. Yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Great to see you as well. Thanks everyone for coming in as well. And I'll leave the social media links on the, on the show notes as well for people to follow up, but thanks everyone else.}
+{\pard  \line \par}
+{And thank you for joining in. Thanks so much . Thank you. }
+}

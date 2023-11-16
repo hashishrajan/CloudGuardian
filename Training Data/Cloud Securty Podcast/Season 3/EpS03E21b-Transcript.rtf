@@ -1,0 +1,418 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red250\green138\blue59;
+\red128\green128\blue128;
+\red216\green34\blue146;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ For people who may not know you yet w what was your journey into your current role? }
+{\pard  \line \par}
+{\b\cf3 Ian Lewis:\b0}
+{ Yeah, sure. So I'm not currently a developer advocate Google cloud.}
+{\pard  \line \par}
+{And I'm actually based here in Tokyo. So both of us are kind of. At the moment. But I started Ellis I'm from the us originally when I started. By going to college and for computer science and then did some work at some enterprise companies for early on. And then this is like in the Washington DC area.}
+{\pard  \line \par}
+{And so I kind of decided to do something else kind of didn't want to go through the whole kind of, you know, security get a security clearance and do like government contracting kind of thing in DC. So You know, and I had like kind of hobby of like learning Japanese and I thought that going to Japan would be kind of fun to do.}
+{\pard  \line \par}
+{And so I decided to do that. And then from there I kind of started branching out, doing a little bit more like kind of community type of stuff. So I got involved with the local kind of Python developers. Started to help build that }
+{\cf2 [00:01:00]}
+{ community there. So we started like the Python JP conference and started kind of really jelling that community.}
+{\pard  \line \par}
+{And as I was doing that, like I kind of then, you know, got involved early in, like what happened and got released. So like that was early on like kind of a serverless products that are supporting Python. And so being a Python person, I was kind of involved early in like, Working with people who are wanting to learn app engine and we're learning Python for the first time and, you know, things like that because like they want to use app engine, app engine.}
+{\pard  \line \par}
+{We supported Python at that point. So like did a lot of that sort of thing. That's sort of how I got started in cloud. And then I kind of became more involved with. Google related tech and then as Google cloud became a big thing became involved in that. And so I got tapped on the shoulder at one point to be to join the GDA team at Google cloud.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That's awesome. And maybe that's a good segue to. Technology that was kind }
+{\cf2 [00:02:00]}
+{ of given by Google to the world as well. Keeping it ease, I guess. So from a people who may not know what you introduce is, and may have just recently gotten introduced your cloud native, how do you describe Kubernetes to someone?}
+{\pard  \line \par}
+{\b\cf3 Ian Lewis:\b0}
+{ Right. So like, there's, there's a couple of things that you probably have to talk about when you talk about communities, like first is containers, right? Like I think that sometimes people are when they're encountering Kubernetes that are accounting containers themselves, like for the first time. And so.}
+{\pard  \line \par}
+{You know, it's, it's helpful to describe containers and what they are first, right. And like, you know, containers are a way to a package and run applications. And you kind of make use of your operating system features to give the application a kind of virtual environment. And this isn't using like virtualization, like you would say like a VM, like virtual is a little bit overloaded.}
+{\pard  \line \par}
+{But this is a way of running the application so that it doesn't really see the other applications. It thinks it's the only thing that's running in that environment. And so. It doesn't have }
+{\cf2 [00:03:00]}
+{ like affect other applications. And so that's kind of the main thing you can set up a very specific environment for that application to run in that runs similarly, no matter which app, which machine you're going to run it on.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah, sorry. }
+{\pard  \line \par}
+{\b\cf3 Ian Lewis:\b0}
+{ And then I was going to move on to talking about Kubernetes, but yeah, Kubernetes is a way of like essentially orchestrating those containers across a bunch of different machines. Right? So like, as you start wanting to build like web servers and services, that scale, you want to be able to run that application on multiple machines.}
+{\pard  \line \par}
+{And communities gives you a lot of ways of making sure that the application is running. How many incidents, like making sure that the number of instances you want to run are running across the cluster, setting up the networking so that they can talk to each other and you know, doing other types of automation, like auto-scaling those applications you know, making sure that they restart when they crash and }
+{\cf2 [00:04:00]}
+{ things like.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So, so w would it be I don't want to use the word container orchestration management, but that'd be kind of like a high, very, very high level of saying what it does. }
+{\pard  \line \par}
+{\b\cf3 Ian Lewis:\b0}
+{ Right? Exactly. So like, that's the word that focus smokes. She used to talk about the things that I, or to describe the things that I did.}
+{\pard  \line \par}
+{I mentioned, right? Like is orchestration. You orchestrate all of what the containers are doing. Like the word orchestration doesn't really describe exactly what happens, but it kind of gives you a good idea of like, you know, Kubernetes is this orchestrator. Or that's controlling all of the containers in your cluster, right.}
+{\pard  \line \par}
+{Hurting tax is another way that people describe it, right? Yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And, oh, actually herding cats for good examples as well. And I think the reason I kind of use that container orchestration thing is also because a lot of times, and maybe some of the listeners who maybe listening. It's easy to kind of think that Kubernetes security is probably similar to container security and kind of you've mentioned that container is just one component of it as well, but are they quite similar in }
+{\cf2 [00:05:00]}
+{ terms of how you would apply security for the two, }
+{\pard  \line \par}
+{\b\cf3 Ian Lewis:\b0}
+{ right?}
+{\pard  \line \par}
+{Yeah. Like there's, they're similar, but there are different kind of levels right. Of how you approach security for something like Kubernetes, because Kubernetes is like multiple levels, right? Like you can definitely think about the container itself and the security of the container itself. And then start like going up the stack from there, like, you know, thinking about the networking, thinking about like the Kubernetes API server and all of the communities, components that go in.}
+{\pard  \line \par}
+{So, you know, for container security, you can think of like, there's a lot of different types of attacks services, like what people would call a tech services. So like, you know, the container boundary itself. So like trying to make sure. If an application gets compromised or there's some malware in there like that, the malware is unable to escape the container and go and deal like hit other or affect other applications running on the same host.}
+{\pard  \line \par}
+{And then ideally it can't }
+{\cf2 [00:06:00]}
+{ jump from one host to another using some sort of other vulnerability. That's another boundary, right? There's obviously the attack surface of the container of communities itself. So like using the API server to, you know, move to another host or to you know, do something there that it shouldn't be doing normally.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right. And okay. And cause it's, there's a lot more moving parts as well to Kubernetes and }
+{\pard  \line \par}
+{\b\cf3 Ian Lewis:\b0}
+{ containers. Right? Exactly. There's a lot of different pieces, right? Like you can attack the Kubernetes API server. You can try to break out of the container and then use. For example, like use the Cubelets the, the agent that's running on that particular machine to manage containers on that particular machine.}
+{\pard  \line \par}
+{It also talks to the API server and has some credentials. And so you can think about like an attacker would try to take those credentials and. Use it it's access to it. It gets to the API server to try to get the API through, to do something that you don't really want it to do }
+{\cf2 [00:07:00]}
+{ normally. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right. So I guess some of our listeners listeners may be interested also in this one other aspect, because some of them worked for consulting companies.}
+{\pard  \line \par}
+{They obviously are always ask the question, how do you start doing security for Kubernetes? So maybe what are some of the components of security that they should look at from a Cuban Andy's perspective? And they talk to people who may have been doing it for the first time. How do you even describe registrar security?}
+{\pard  \line \par}
+{Cause I, I think there's a, there's almost like two personas that you have to explain it to. One is the platform people. Who would be helping create that or deployed that humanities, but then the other side is the security people themselves. And how does one, like maybe a good place to start is where does the security component of Kubernetes that people should consider?}
+{\pard  \line \par}
+{And then you can go into a bit more in detail of it, but }
+{\pard  \line \par}
+{\b\cf3 Ian Lewis:\b0}
+{ sure. I mean, I can talk about a couple of things. Like, I mean, first I think you would want to kind of understand like what containers are, right? Like if you're kind of getting started in a space. }
+{\cf2 [00:08:00]}
+{ Trying to understand the Kubernetes security and kind of wrap your hand around it.}
+{\pard  \line \par}
+{Like you kind of first need to understand what containers are and like what the kind of issues are with regard to just the keeners or that technology. Right. Can we mention a couple of them? You know, that's kind of where you would start. And then you can kind of go to understanding Kubernetes itself.}
+{\pard  \line \par}
+{Like what are the different components of it, right? Like there's a few major components, right? Like you have the API server, which is the normal thing that you normally, what you interact with when you're talking to a cluster. And then there's other components like the CD server, which is where the data is.}
+{\pard  \line \par}
+{The state data is stored. There is the controller manager and the scheduler, which are also components that use the API server and are not normally used. They're kind of background components. They're there at least and can be potential attack vectors. So you kind of need to be aware of them if you think about security.}
+{\pard  \line \par}
+{And then another major one is the, the Kool-Aid that runs on each host, right? And that's, that's, }
+{\cf2 [00:09:00]}
+{ what's controlling the, each host and is talking to the API server to understand like which things it needs to run on each on that, on it's a particular host that it's running. And so once you understand those kinds of components, then you can start thinking about.}
+{\pard  \line \par}
+{You know, what type of what type of attacks can happen. But you know, there's, there's kind of a number of things that could produce itself gives you a as features that you can think of as maybe components that will help you. Things like the security context, which is what it's used. What is, is part of the API that he used to.}
+{\pard  \line \par}
+{Six different security settings for a particular running application. So things like making the, you can make the route file system of your container, like read only so that an attacker can't like overwrite something in the container. You can do things like sex you know, psychotic or these You know, like have armor or I Linux type of }
+{\cf2 [00:10:00]}
+{ policies on your container to like help harden it.}
+{\pard  \line \par}
+{So there's a number of different settings for the container itself there. And then there's other things like network policy, which is kind of a little bit of an add on to Kubernetes, but that's another kind of core API that's part of communities that allows you to help kind of, you know, manage the attack surface at the network.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh, okay. I liked, I liked the, how I like it. How you approach it with the layers as well. Like the nitro component, the host component, the run-time component, as well as where you're at CD kind of coming, comes in. I think are the interesting part over here for me is. Because it seems to be multiple kinds of deployment of Kubernetes as well, that people who are like, say it could be using Google cloud version, but I may be a purist and I decide I'm just going to}
+{\pard  \line \par}
+{Right. So would this change between them or does it become easier if you're going to Incorta to GK you kind of space? }
+{\pard  \line \par}
+{\b\cf3 Ian Lewis:\b0}
+{ I think it }
+{\cf2 [00:11:00]}
+{ probably is a little bit easier if you're using managed service. Like, I think that most people who are security professionals, like recommend that people use a managed service because like the people who are developing the managed service know Kubernetes, like pretty well.}
+{\pard  \line \par}
+{Right? Like they like Google, like we invented it essentially. So it's like, we know it very well. Like we have lots and lots of developers are actually working on it. Like the core Kubernetes, like actually developing it. We have lots of people who are very well versed in it. And so we build a product that is like, you know, has a lot of the security stuff built in.}
+{\pard  \line \par}
+{Like, you don't really have to think about it as much. Right. For example, the API server is completely segmented from you. So like you don't have access to any of the. Components that you might have to think about insecure things like exit easy things like the scheduler or things like that, that those are things that like you wouldn't normal, you don't have access to.}
+{\pard  \line \par}
+{And so they're not things that you have to }
+{\cf2 [00:12:00]}
+{ manage or secure at all yourself. But if you're running your own server, you definitely need to think about that. Right? Like many folks when they run their own server, they run. And API, like they run a kubelet on their API server, for example, and then use that to run the Kubernetes components.}
+{\pard  \line \par}
+{So it's a little bit of a meta type of thing, but that means that you can kind of see the components in the Kubernetes API server. And if you somehow get control of the API server, you can then take control of, or affects the things that are actually running Kubernetes itself. So XEV, or You know or that the scheduler or things like that, and do things like if you were somehow able to affect the scheduler or, you know, change the schedule in some way, you could get it to, for example, schedule a pod, a specific type of pod onto another host that you don't have access to.}
+{\pard  \line \par}
+{And then allow it to run your malicious code there and then }
+{\cf2 [00:13:00]}
+{ essentially escape or escalate onto another host, for example. So like, those are types of things you definitely need to start thinking about if you're like, especially if you're running Kubernetes yourself, like you want to. You have to think much more about the actual communities components.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right. And I think it's a really good one for people who may be thinking declining it, or maybe just curious about how someone deploys capabilities as well, to your point, the whole it is documented a gourd on the managed bot rather than the unmanaged and Salesforce report, because then you kind of have a lot more moving parts for security as well.}
+{\pard  \line \par}
+{\b\cf3 Ian Lewis:\b0}
+{ Right, but that's exactly right. Right. Like, and you have a lot more tools as part of the platform usually, right? Like if you're on AWS or you're on GCP or you're on whatever platform you happen to be on. Right. There's a lot of tools like BIM, right? Like the the, the VPC networking features, right? Like all of those features like will help you to kind of secure your cluster that you may not have.}
+{\pard  \line \par}
+{Right. If you're running it on }
+{\cf2 [00:14:00]}
+{ prem or on your own machine, Yeah, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ but then you're starting from scratch. If you're doing self phone steady, you kind of have to build the next, how do you do identity? How do you do even to a point national security, host security, kind of just like the Pandora's box is all, but at that point I just kind of shut it down.}
+{\pard  \line \par}
+{\b\cf3 Ian Lewis:\b0}
+{ Yeah. Like how do you, like, if you're going to use like another, like if you're on prem and you want to use a cloud service, for example, right? Like you've got to give it some sort of like A let's say like a service account key or something like that, or an API hook in, or something that you can put in your container in order to give it access to that server.}
+{\pard  \line \par}
+{And a lot of times those are long lift tokens or tokens. They don't refresh or anything like that. And so if they get stolen your, your access, like the folks who stole it have access to that API for. And so, you know, there's some features like as part of GTE, like for example, like workload identity, which allows you to get like, kind of much more short-lived tokens that you can }
+{\cf2 [00:15:00]}
+{ use for accessing GCP APIs, for example.}
+{\pard  \line \par}
+{Right? And so those types of features don't really exist or are very hard to replicate outside of. You know, a Cod platform or a hosted environment. Yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Unless you have like a hundred plus team just waiting just to deploy all these. }
+{\pard  \line \par}
+{\b\cf3 Ian Lewis:\b0}
+{ Yeah. You can definitely set it up and there are there components, like if you're, if you're going to set up spiffy and all of those kinds of identity components and you can get it working in the right way, you can do that sort of thing.}
+{\pard  \line \par}
+{But it's, it's very involved to get that. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah, and I, that's why I pay me. It's interesting also to point out, because I think in the CNCF realm, Kubernetes is still the, at least based on the, based on the reports that I've read, it's still the most active project as well. One of the most active projects, but it's also one of the most confusing projects as well, because there is a whole managed component and then there's a whole self component as well.}
+{\pard  \line \par}
+{And I think if you start adding layers like service mesh and all }
+{\cf2 [00:16:00]}
+{ the other things, Istio and all that other thing that kind of comes in. Oh maybe another part of the security thing is when someone is deploying a Kubernetes cluster or do they need all these other components like Istio and all the other stuff that people talk about?}
+{\pard  \line \par}
+{Do they need OPA? Do they need SEO? Maybe I'll be better at answering the security thing first and then gonna go into some of this. }
+{\pard  \line \par}
+{\b\cf3 Ian Lewis:\b0}
+{ Yeah, I think that that's like Istio and Obama are definitely things to look at and consider, right. Like there, but I think that they're not necessarily the first thing that you would consider.}
+{\pard  \line \par}
+{So definitely like when you are operating a community like Kubernetes at scale and a larger much larger scale, you definitely want to be thinking about these particular features or these particular things like, but there's a, there's a fairly large trade off between like the overhead of running these and operating them.}
+{\pard  \line \par}
+{On top }
+{\cf2 [00:17:00]}
+{ of, you know, for the cost when you're doing a cost benefit analysis, for example. So like, you know, there's a lot of overhead that you have to do to manage them. But you know, you get these benefits, but you'd have this kind of large cost, right. So if you're operating at scale, that benefit is much bigger for.}
+{\pard  \line \par}
+{And so it kind of balances out the cost, but if you're operating in a much smaller scale, the benefit is much less and, but you still have a fairly high management costs. And so it doesn't really balance out quite as well in that case. But that said like from a security standpoint, you do get a lot, right?}
+{\pard  \line \par}
+{Like it's, you know, gives you identity. It gives you. Management over your services and observability of services or things that are at a service level, right? Like you can say, like this service talks to this service and this service talks to this service and you can kind of see that like kind of graph of the services and how they talk to each other.}
+{\pard  \line \par}
+{You can see, like you can set a policy for like which services can talk to which services }
+{\cf2 [00:18:00]}
+{ and. They get strong identity, like essentially, you know, kind of cryptographic identity so that they can't impersonate each other. For example, And, you know, kind of get around that policy that you set up. So that's a, that's one of the kind of major things that is you, it gives you but like if you're running like one or two services, it's not going to give you like a huge advantage.}
+{\pard  \line \par}
+{Whereas if you're running hundreds of services or something like that, you're going to get a huge advantage by using it. And the same thing kind of goes for. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ No, that's sorry. I'll let you finish. Cause I was just going to ask, }
+{\pard  \line \par}
+{\b\cf3 Ian Lewis:\b0}
+{ I know I was kind of mostly finished there about OPA or what I was going to go talk about opine, I guess, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ but yeah.}
+{\pard  \line \par}
+{Yeah. I was like calling out because I think where maybe I was going to get into the open space as well, but maybe where, where my question was going to kind of land on was with humanities. To your point about different components? I think one thing to call out for people who may be listening in is that you don't need this here to begin with.}
+{\pard  \line \par}
+{You don't }
+{\cf2 [00:19:00]}
+{ need over to begin with large scale deployments. Like if you have one project. On Kubernetes cluster probably is an overkill to go for OPA Istio and everything else. Would that be right? }
+{\pard  \line \par}
+{\b\cf3 Ian Lewis:\b0}
+{ Yeah. I mean, that's, that's exactly what I'm kind of trying to hint at, I think is that like, you know, if you're operating at a fairly small scale, you're running a couple of services, you know, you're not really going to get huge benefit out of it.}
+{\pard  \line \par}
+{But you will, as you kind of get to manage a large services and if you're kind of And as you're certain, you know, running hundreds of services or like 10, like, you know, upwards of a hundred services or something, you're going to really get a lot more benefit out in that case and }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ probably have a dedicated team for that, managing that as well, because that in itself.}
+{\pard  \line \par}
+{\b\cf3 Ian Lewis:\b0}
+{ Yeah. And that's what I was going to say about like, OPA is that like, It's something that like you set up policy, like the Oprah is essentially a thing that allows you to set a policy like, so that, like when you deploy an application that application to make sure }
+{\cf2 [00:20:00]}
+{ that it's got the security context and the security features set up before it allows it to be deployed.}
+{\pard  \line \par}
+{And so Oprah's another thing that gives you a lot of benefit as you scale up and you have a lot more team members. So like, it makes sure that everybody's on the same page. Everybody's deploying services that have the baseline security features set up. But you're not going to get a lot of advantage out of that.}
+{\pard  \line \par}
+{And if you're just doing it yourself, like by yourself, right. You can kind of essentially police your own yourself when you're doing that. But if you're, if you've got like a team of like 200 people, you can't be like policing everybody or like, you know, checking to making sure, like everybody's got, you know their security features and stuff set up.}
+{\pard  \line \par}
+{You want to feel put like a little bit of a gate gatekeeping aspect to it before you deploy to production. And that's when, what gets you, so that's like once you start getting to a large team where it's hard to manage that, that's when you kind of, hopefully it gives you the value, but it doesn't really give you the value in.}
+{\cf2 [00:21:00]}
+{ }
+{\pard  \line \par}
+{A really small team. If that makes sense. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Maybe that's a good segue into thinking more about when it's an individual starting to kick the tires of Cuban and insecurity. What would be say Cuban insecurity one-on-one that they should be looking at to start off with maybe a two? Cause we kind of spoke about earlier.}
+{\pard  \line \par}
+{We have different components. Container is just one component of it are the API server and everything else at CD and everything else that goes into it. So. A good start to level the playing field for people who may be thinking, listening to you, going, Hey, in the right way, I feel like I want to start cubing it.}
+{\pard  \line \par}
+{These artists give it a shot. What are some of the low hanging fruits that they can go for in the beginning of their Cuban and his first humanities project? }
+{\pard  \line \par}
+{\b\cf3 Ian Lewis:\b0}
+{ Yeah. So like kind of the first thing is you might do I mean, this is let's, let's say like you've kind of. Research containers, you kind of know the, what containers are and things like that.}
+{\pard  \line \par}
+{You kind of know you know, the basics about like }
+{\cf2 [00:22:00]}
+{ the Kubernetes API, like what sort of thing it's or how it works and how the different components in communities work. Then you can start thinking about like, you know, the Mo the biggest, low hanging fruit is really just checking out, like what the container is.}
+{\pard  \line \par}
+{Like the security context teachers, if you look at the security context API, and you can look at the reference API or the API reference like online, right? Like the Kubernetes API reference as like a little section on the security context and all of the fields that you can put in there. And so that's a good place to start, like, just to look there and see what sort of features are there.}
+{\pard  \line \par}
+{And some of the ones that I tell folks to turn on first is to you know, try to run your containers with a root file system. That's read only for example, that's one one of the features that's relatively easy to set up. Most containers aren't like overriding stuff on disk everywhere, like all over the disc.}
+{\pard  \line \par}
+{Right. It usually they }
+{\cf2 [00:23:00]}
+{ have like one directory they need to write data to, or they use like a temporary directory to like write some temporary files too. But like, they don't need access to write to the whole entire like file system. And so you can set up Mt. Points for your the places you need to write to and then make the rest read only.}
+{\pard  \line \par}
+{So it doesn't get overwritten by malware or other things. That's one thing that's relatively easy to set up. Another thing that is good looking too, is to try to make your complaint your containers, or as a best practice is to like, try and make your containers run as non route. So most containers run as root a root user inside the container.}
+{\pard  \line \par}
+{Right? And so what that does is like gives you a lot of flexibility because like it makes your containers run, you know, have access to those things inside the container. And so you can do things like install packages and stuff like that, which is nice. But if somebody takes control of your container or there's malware running unite, it }
+{\cf2 [00:24:00]}
+{ can essentially has access to the entire container itself.}
+{\pard  \line \par}
+{And then if it breaks out of the container, it can much more easily take over the host then if it was running as a, as a normal, you know, Unix user and so. Adding that in gives you like puts in like a pretty large hurdle for an attacker to have to get over before I can start taking over the whole host or escape the container.}
+{\pard  \line \par}
+{It makes it a lot harder for the host or for that, that attachment to to do that. And so that's another thing that's like really a great. Is doing that that said most containers that you're going to get are mostly images that you're going to get from like Docker hub, et cetera, are going to run this route.}
+{\pard  \line \par}
+{And so you can't necessarily do that. Like for most of those images, you will have to do some setting that up yourself or build the images yourself. A lot of times some of the ones like the database ones do a decent, like the, the official ones, like, like the reddest one, for example, or I think the likes equal one maybe does as well, like run as a, my sequel user or read a Caesar.}
+{\pard  \line \par}
+{And }
+{\cf2 [00:25:00]}
+{ so those are, that's getting better over time. Still, most of them are running as roots. I think those are the two kind of like really things that you can do that are fairly easy and will give you the most bang for the buck. Another thing to look at is like network policy. Like if you have a community's cluster that is set up in a way that has a network policy, the feature enabled And if you're running it by yourself, like that's not necessarily something you're going to get right away.}
+{\pard  \line \par}
+{If you're using say like Calico for your, your network your network plugged in, or your network to set up your network that will support network policy. But you need to make sure that your network, your network plugin, or your CNI implementation supports a network policy, but. Number of policies and other good ones that allows you to set up a kind of blocking, like to block network access between containers that don't necessarily need to talk to each other normally.}
+{\pard  \line \par}
+{And that can make it easy for, or harder for attackers to kind of probe your, your cluster and like figure out how to }
+{\cf2 [00:26:00]}
+{ move from place to place. And generally you can set that up without too much of a hassle or without like changing your application itself. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So maybe another way to I guess another component that I want to color.}
+{\pard  \line \par}
+{Cause I think that those are good points and I think people do need to be a bit more technically for this as well. Right. So it's worthwhile calling out that if you are starting off doing humanities and someone would hear a yen going yep. Talk about container host security and. There is a what's the core there's a technical component to it as well, but I think it's that hard to find information about this, is that why it not a big part of people know about it or it's not documented or is there like a source where people can go to for these foundational pieces?}
+{\pard  \line \par}
+{\b\cf3 Ian Lewis:\b0}
+{ Yeah, I think that, like the problem there is that there's not really a single place for all of the Kubernetes because security related stuff. Right. There's like information about the security context, there's information about like }
+{\cf2 [00:27:00]}
+{ network policies, there's information about like these different aspects of security.}
+{\pard  \line \par}
+{But there's not really like a one-stop shop for that online, I would say definitely some of the things you might want to check out, what are some of the books that have been written on it? So like there's a lot of colleagues out there. Liz rice is a very good resource for career security related information.}
+{\pard  \line \par}
+{So like some of the books that she's written one is called container security. I have it written down here actually like fundamentals technology, concepts that predict containerized applications. But there's, you know, if you search for like, like continuous security book, right. Or you're, you'll find it.}
+{\pard  \line \par}
+{And this is by Liz rice. It's, you know, a good resource. There's another book called hacking Kubernetes which is more of a Kubernetes focus and that's by Andrew Martin and Michael hasn't lost. And Andrew's are another really good resource for this type of community security related content.}
+{\pard  \line \par}
+{And then there's the Kubernetes security book. That's also written by Liz rice and my whole house and blessed. So that's you }
+{\cf2 [00:28:00]}
+{ know, you, you see these names like pretty often but Liz rice, Michael hasn't lost Andrew Martin are like really good folks to kind of. Check out fall online, you know, read their books to kind of get a good understanding of the space.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yep. No, thank you for that. And I think one more thing I would like to cover towards the tail and the fun thing is also that yep. Kubernetes deployment. You kind of have the two splits of deployments. You've kind of learned about. How do we protect them or have some other components to think about from a security, best practice as well for people who may be listening in from a, I guess what I've had the the self hosted one, the advice over that is to try and move to the managed one.}
+{\pard  \line \par}
+{At least from what I hear the best practice, because most of these best practices that you called out over here should be already covered in by the managed provider. So if it's a GKE.}
+{\pard  \line \par}
+{\b\cf3 Ian Lewis:\b0}
+{ Yeah. So like many of the things is }
+{\cf2 [00:29:00]}
+{ like actually setting up communities and making sure the cluster itself is secure, are taken care of. Right. Making sure the applications are secure is, is another kind of story. Like that's another layer that doesn't necessarily get. Done automatically by running it on a managed service, but really the value you're going to get from a managed services, making sure that the Kubernetes cluster itself is secure and the components itself are secure.}
+{\pard  \line \par}
+{And you're not going to have issues there. But that said like, you know, the managed services wall through give you a lot more tools and features like in order to help you secure your app is secure at the application. But because you know, the application and, you know, the cloud provider doesn't necessarily know the components of your application.}
+{\pard  \line \par}
+{You're going to need to do a little bit of work there to make sure that that's, that part is. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah, that's sweet. Not that, that, that was pretty interesting when I think, and thanks so much for taking the time out for this as well. Cause I think most of the questions that I had }
+{\cf2 [00:30:00]}
+{ around where, and most of the questions that we get along on these components as well.}
+{\pard  \line \par}
+{Where, how do you kind of where do you video? Because most people leave that have walking into a dental, walking into an environment where there's already a self hosted capabilities and then making a choice of being self hosted versus managed. They're also making choices between which component should I go for?}
+{\pard  \line \par}
+{Should I go for Cuban or D then I feel it straight away. Go for Istio. Should I go for Envoy or what am I really going for? Like this, that confusing. Is there anything else that's normally you find when you talk to people about the security where people. Kind of get odd misinformed, I guess that you would call out }
+{\pard  \line \par}
+{\b\cf3 Ian Lewis:\b0}
+{ misinformed.}
+{\pard  \line \par}
+{I think that like, most people, like in general, like from my experience, most people like have a fairly good understanding of a particular area of particular areas. Right. The problem is really kind of like what you don't know, right? Like }
+{\cf2 [00:31:00]}
+{ there's, there's quite a lot of difficulty in front of, to like, understand the entire space.}
+{\pard  \line \par}
+{Right? Like, and that's what makes it really difficult when you're running it yourself, because you need to know everything from. The like security Linux, right? Like you need to know about Linux and the machines themselves and the operating system, making sure that that's patched and all of that stuff. And then before you even get to containers and Kubernetes, right?}
+{\pard  \line \par}
+{Like you need to be like an expert at that. Right. And so like, that's, that's the problem. There is like, you need to know. Essentially everything, right? Like you need to boil the ocean in order to kind of get a really secure communities, cluster. And I think that if there's any misunderstandings, like the main one is like just a lack of understanding about like how much you actually have to know in order to kind of properly secure a container cluster.}
+{\pard  \line \par}
+{Right? Like every time you talk to some. And maybe you mentioned something }
+{\cf2 [00:32:00]}
+{ about security. They're going to be like, oh yeah, I didn't really think about that. We're like, you know, and there's just so many things you have to do. You have to kind of keep in your head. You have to keep it very broad and, and you can't have to focus on the vision.}
+{\pard  \line \par}
+{You have to have a fairly broad, wide vision when you're charting, when you're thinking about it. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ There was a question asked what would my security concern be if I were, what about security concern? If I decided to go beyond managed Kubernetes services and use something like a. Okay. }
+{\pard  \line \par}
+{\b\cf3 Ian Lewis:\b0}
+{ Yeah. So like, that's a good question. Like GK autopilot gives you a little bit more of an inner service on top of communities or like on top of GKE.}
+{\pard  \line \par}
+{So it feels a little bit more of the security, like it provides like essentially a kind of policy layer on top of GKE. So it's a little bit like using OPO or a little bit like using kind of a policy engine on top of using GKE. And. It gives you like, kind of like fault gives you }
+{\cf2 [00:33:00]}
+{ a bunch of really good defaults, right?}
+{\pard  \line \par}
+{That it enforces. So like some of the things that I talked about in the security context, right? Like it set some slightly different defaults there, and that are more secure than the normal GT. And so. You actually have a little bit less security concerns. I would say like, if you're using GK autopilot, like it's a little bit more of a secure environment.}
+{\pard  \line \par}
+{But you still need to think about the networking parts of it, like and the excuse me, like making sure that your cluster itself is secure. So like the API server is secure and like that you have the right permissions set up on your API server. So. You know, you don't have, you don't give your, your applications access to the API server, like more than they actually need to run.}
+{\pard  \line \par}
+{So like, in that case, it really, you need to look at like the And this is true across all of , but it includes all Impala pilot as well, but you need to kind of give your applications least privilege when it comes to the permissions that are allowed them }
+{\cf2 [00:34:00]}
+{ VPI server. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Awesome. And are the context, what is GK autopilot for people who may not know?}
+{\pard  \line \par}
+{Yeah, so that's }
+{\pard  \line \par}
+{\b\cf3 Ian Lewis:\b0}
+{ a good, that's a good thing that I probably should have started with, but GKE autopilot is essentially like. Kind of more opinionated GE. And so it gives you it sets up some like some slightly different defaults. So like, as I've mentioned, like you get your, the, it has a more strict kind of second policies that the application can't do, can't do quite as much as you can with a normal, even normal cluster from a security standpoint.}
+{\pard  \line \par}
+{But like, that's the kind of, some of the major differences. But it also kind of removes the from management's perspective, it removes the, the need to manage the notes, right? So like a normal GKE cluster, you need to like specify a certain number of nodes and you can set up auto scaling on a GKE cluster, but you're essentially paying for the nodes in the GKE cluster.}
+{\pard  \line \par}
+{And with cheeky }
+{\cf2 [00:35:00]}
+{ autopilot, like the nodes are essentially managed for you and. And so the notes exist, but they they're, they're essentially inform you. And you essentially only pay for the, the. The resources that are used by the pods in the cluster. And so it's a much more kind of, it's kind of a hybrid between GE and a serverless kind of approach in terms of billing.}
+{\pard  \line \par}
+{And so from that perspective, it's much more it's much nicer for folks who want to do like kind of scaling that where their applications like scale up and down, like fairly fairly heavily, or they get a lot of applications spikes or things like that. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Awesome. All right now. Thanks for sharing that.}
+{\pard  \line \par}
+{And thanks for that question. I think I'm, I'm hoping that yeah, I just stayed, I think, but I hope I didn't pronounce the name correctly, man, but thanks for that. Great question. Cool. So the yeah, so going back to what, where can people find you? And I think once they have follow up questions about the, can they find you on social media?}
+{\pard  \line \par}
+{\b\cf3 Ian Lewis:\b0}
+{ Yeah. So I'm on Twitter. Mining, my Twitter handle is }
+{\cf2 [00:36:00]}
+{ in. Just at an end in the middle, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Of my knee.}
+{\pard  \line \par}
+{\b\cf3 Ian Lewis:\b0}
+{ And so that's, that's my Twitter handle. I'm also, I also have a blog on Ian lewis.org which is where my, my blog is. Haven't updated it too much recently, but I hope to do that more this year. And those are the kinds of like the major places to find the }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That's good. }
+{\pard  \line \par}
+{\b\cf3 Ian Lewis:\b0}
+{ You can also, you can also email me at at gmail.com, which is my kind of personal email.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Sounds good. I'll I'll put the links for your website as well there. So people can just to get, to get to that and to your connect with you. But thank you so much for doing this. I appreciate you kind of waking up early for us and kind of spreading the word for community security, best practice as well.}
+{\pard  \line \par}
+{Thank you so much for doing that and for everyone else who's listening, I'll see you tomorrow. We have another episode tomorrow, so I'll see you all tomorrow, but thanks so much for doing this and I will talk to you soon and maybe hopefully have you on the show again. }
+{\pard  \line \par}
+{\b\cf3 Ian Lewis:\b0}
+{ Yeah, absolutely. And thanks for, thanks for doing this podcast.}
+{\pard  \line \par}
+{It's really a great }
+{\cf2 [00:37:00]}
+{ podcast and you've had a lot of great past guests as well. So I've really enjoyed kind of looking at your back catalog. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. Thank you. Thanks so much. All right. All right, I'll talk to you soon and talk everyone talk. I'll talk to you, everyone else in lay front as all peace.}
+}

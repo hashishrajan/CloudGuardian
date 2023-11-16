@@ -1,0 +1,685 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red88\green62\blue49;
+\red128\green128\blue128;
+\red102\green0\blue204;
+\red222\green74\blue29;
+\red114\green179\blue114;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\b\fs48 KubeCon EU 2023 Panel-with-AD-RAW\b0}
+{\pard  \line \par}
+{\b\cf1 Andrew Martin:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ Kubernetes is a robot that you pray to with your hopes and dreams, and you hope that they materialize.}
+{\pard  \line \par}
+{\b\cf3 Kerim Satirli:\b0}
+{ for a developer. Easy way to get your stuff online for a security professional, possibly job security.}
+{\pard  \line \par}
+{\b\cf1 Andrew Martin:\b0}
+{ first iterations of Kubecon there was defining what are we actually selling?}
+{\pard  \line \par}
+{What is this thing? How do you talk to your CISO about this? Who is the economic buyer that is gonna put their money where the cloud native mouthpiece is? You also had a huge number of companies that didn't exist anymore. Mm-hmm. That all got acquired, all the platforms ended up in someone else's cloud.}
+{\pard  \line \par}
+{\b\cf4 Matt Jarvis:\b0}
+{ I think it was something like two thirds of the sponsors, there were security vendors. Now it's like, wow, what this has changed, you know? And, You know, that says something about what the concerns of operators are.}
+{\pard  \line \par}
+{\b\cf3 Kerim Satirli:\b0}
+{ Take, you know, GCP and IAM policies, a lot of asterisk in there should not be in there, only at the tail end of your S3 bucket. That's the only place where you can have an asterisk. Everything else starts with the word deny and ends with literally that policies are hard because }
+{\cf2 [00:01:00]}
+{ they encumber you.}
+{\pard  \line \par}
+{They make sure you can ship to production unless you hit certain gates and nobody likes gatekeeping. }
+{\pard  \line \par}
+{\b\cf5 Ashish Rajan:\b0}
+{ I just wanted say thank you for all the love you showed, Shilpi and I at Kubecon in Amsterdam, as well as RSA in San Francisco over the past couple of weeks. I cannot be grateful enough that you're showing so much love to us. You've supported us to grow on social media and on Spotify and all these podcast platforms, so thank you so much for all the love and support you showed us.}
+{\pard  \line \par}
+{Thank you so much for coming and taking selfies with us. And some of you are grateful enough to come on my daily vlog, which I post on LinkedIn and Twitter. Thank you so much for being a part of our life and making it what it is today. Alright, let's get to the episode before I get emotional, Hi there, have you ever wondered what the future of Kubernetes security is in 2023 or how it has evolved from back when it started in this conversation, it's a panel discussion we had for Cloud Security Meetup Amsterdam.}
+{\pard  \line \par}
+{We had Kerim Satirli from HashiCorp, Matt Jarvis from Snyk. Andrew Martin from ControlPlane, and yours truly. Yes, that's me. I was moderating and sharing my opinion }
+{\cf2 [00:02:00]}
+{ about how we have seen the Kubernetes security landscape change. Now I want to give you a warning before my personal audio in the video was a bit hazy, but everyone else could be heard really well, which is probably the most important people in the conversation. Anyways, I just wanted to say that this was a really interesting conversation, which questions from the audience as well, which we've tried repeating. It's a panel discussion that was recorded as part of the Cloud Security Meetup , Amsterdam.}
+{\pard  \line \par}
+{So thank you everyone who came to support us at the Cloud Security Meetup, Amsterdam. It has been running for a few months now and it's growing quite steadily. So if you're listening to this and based out of Amsterdam, definitely checked that out. We are always looking for speakers talking about cloud security meetup.}
+{\pard  \line \par}
+{We also run cloud Security meetup in Melbourne, London, New York, Boston, San Francisco, Seattle, and Austin, Texas. So if you are in one of those regions, definitely feel free to reach out. If you wanna speak at one of those events or you would just like us to be participating in one of the events at your end, definitely join those cars getting meet up.}
+{\pard  \line \par}
+{If you don't have one close to your house, definitely reach out to us because you would love to have more hosted all over the }
+{\cf2 [00:03:00]}
+{ world. It's a space where other cloud security advocates or cloud security folks can come and say hello and meet other people who work in cloud security, maybe find a job, maybe find a solution to a problem that they've been facing cloud security.}
+{\pard  \line \par}
+{In this panel discussion, we speak about AI. Yes, we spoke about AI in kubernetes. We also spoke about how it has evolved. We also spoke about the cloud service provider landscape, which is kind of taking over the kubernetes one. Where a lot more people prefer managed kubernetes over a unmanaged one. However, there are still many scenarios where people still prefer to use unmanaged kubernetes and how the. Project space for the open source has grown quite a bit. It's a really robust conversation. I hope you really enjoy this. And if you know someone who's trying to understand the Kubernetes landscape, this is a conversation they would really find valuable from a leadership perspective. These three people are guns in the space of Kubernetes security, keeping an eye on it.}
+{\pard  \line \par}
+{So it was really interesting for us to have them over here, the part of some of the boards as well for CNCF so they had a very unique perspective. And if you }
+{\cf2 [00:04:00]}
+{ know someone who's looking to up their Kubernetes security mindset for 2023, definitely share this with them. And if you're here for the second or third time, definitely give us a follow subscribe on our audio platforms like iTunes, Spotify, Google Podcast, or a video platform like LinkedIn, YouTube, and anywhere else you find us on the internet.}
+{\pard  \line \par}
+{Thank you so much for supporting us. We're really close to hitting 10K on YouTube and for 20 K, you never know. But I appreciate all the support and the love that he showed us. Thank you again and I will see you in the next episode. Peace }
+{\pard  \line \par}
+{So Kerim you wanna start with a little intro about yourself where you are? Absolutely. }
+{\pard  \line \par}
+{\b\cf3 Kerim Satirli:\b0}
+{ Yeah. So hi, my name's Kerim. , I'm a developer advocate at HashiCorp We're focused on infrastructure and orchestration. }
+{\pard  \line \par}
+{\b\cf1 Andrew Martin:\b0}
+{ Hi, I'm Andy Martin, founder and CEO of Control Plane CISO Open uk, where we try and advise the UK government on avoiding foot guns.}
+{\pard  \line \par}
+{From a legislative perspective and co-chair at Tag Security where we try and bring graduating projects through the CNCF to a reasonable security baseline before sending them on their merry way. Foot }
+{\pard  \line \par}
+{\b\cf4 Matt Jarvis:\b0}
+{ guns. I like that }
+{\cf2 [00:05:00]}
+{ word. I'm gonna steal that. I'm Matt Jarvis. I am director of developer relations at a company called Snyk.}
+{\pard  \line \par}
+{I'm also a CNCF ambassador and I am the vice chair of Open uk. Awesome. }
+{\pard  \line \par}
+{\b\cf5 Ashish Rajan:\b0}
+{ I'm looking forward to having this conversation with all of these people. I think it'll be a great one maybe to level the plane field.}
+{\pard  \line \par}
+{For people who don't know much about kubernetes, , how do you guys describe kubernetes to security folks and non security folks? }
+{\pard  \line \par}
+{\b\cf1 Andrew Martin:\b0}
+{ So to non-security folks, Kubernetes is a robot that you pray to with your hopes and dreams, and you hope that they materialize. I have Tabitha Sable from SIG Security to thank for that definition.}
+{\pard  \line \par}
+{To security folks, it is a reimagination of the bin packing and microcosm of Linux. So containers give us homogeneity, the similarity of runtime across different environments and bundling and isolation. So we have all our, of our dependencies, we have our name spaces and cgroups. And Kubernetes extends that with useful things like service discovery, network management, persistent data }
+{\cf2 [00:06:00]}
+{ management, and some resilience generally for security folks, it's mediumly terrifying though.}
+{\pard  \line \par}
+{\b\cf4 Matt Jarvis:\b0}
+{ I like that. }
+{\pard  \line \par}
+{\b\cf3 Kerim Satirli:\b0}
+{ That is a perfect description for a developer. Easy way to get your stuff online for a security professional, possibly job security. The defaults are geared towards developers getting your stuff in front of people. That's great. Security is hard. Security is a team sport. You can't just pin it on the security team. If you're in security, thank you for your hard work. If you're not, thank your security team.}
+{\pard  \line \par}
+{\b\cf4 Matt Jarvis:\b0}
+{ Yeah, I'll take a slightly different tack cuz I think Andy's done all the humorous bit there. You know, Kubernetes and. You know, other orchestration systems do exist, but you know, this is all about abstracting away the underlying platform that you're running your applications on and providing you an easy way to run applications in an automated way with things like scaling and redundancy and all that kind of stuff built in.}
+{\pard  \line \par}
+{\b\cf5 Ashish Rajan:\b0}
+{ I think that's probably good segway into they were saying they had 10,000 people at attend this year. Yep. Probably 1200 waiting or something. Yeah. It's like really interesting but Cloud }
+{\cf2 [00:07:00]}
+{ Native Security is another one that is always debated on, cause all people feel considering there is a version from aws Azure, Google Cloud, which is quote unquote managed kubernetes, and there's an unmanaged one. How do you describe cloud native security? It's a definition that I've heard, like multiple versions from multiple people.}
+{\pard  \line \par}
+{Curious to know how you all }
+{\pard  \line \par}
+{\b\cf1 Andrew Martin:\b0}
+{ describe }
+{\pard  \line \par}
+{\b\cf4 Matt Jarvis:\b0}
+{ it. That's a good question. I mean, I think cloud native security, you know plays a lot in that same kind of space as DevSecOps and all the kind of shift left stuff that we talk about In terms of when you are effectively running these platforms, what you're aiming for is empowering velocity, empowering change , from developers. And so any security kind of constraints that work within that have to be able to cope with , that kind of rate of change, because that's the whole point of running Kubernetes, right? If you just wanna run an application, never change it, and you know, Kubernetes is not for you, you know, , it's not required.}
+{\pard  \line \par}
+{So, so I think security tools that prioritize automation, that prioritize, you know, giving }
+{\cf2 [00:08:00]}
+{ insights to developers , all fall into that category. }
+{\pard  \line \par}
+{\b\cf1 Andrew Martin:\b0}
+{ Yeah. To extend that, what we had with the first round of cloud provisioning was a lot of procedural codes. Looking at chef versus puppet, the whole declarative versus imperative configuration, and.}
+{\pard  \line \par}
+{People kind of realize that actually all declarative models probably need an escape hatch somewhere, cuz you can't necessarily, and that becomes a sort of higher order templating language in the case of helm or looking at stuff that Q does. What cloud then brought us was things like cloud formation and terraform, which then you had that fully declarative and Kubernetes and cloud native then grew on the back of that.}
+{\pard  \line \par}
+{Really doubled down on what we now have as git ops, which is everything defined as code. Again, helm and sort of post-deployment mutation with CRDs do mess with that to some extent. But then what is cloud security? When everything is defined declaratively, it becomes a lot of static analysis.}
+{\pard  \line \par}
+{It becomes infrastructure shift left. So developers can then know whether they'll hit their admission control entry because OPA gatekeeper}
+{\cf2 [00:09:00]}
+{ will also run in conftest and you can run that locally. So yeah, I think the declarative configuration space is a big one. It's also a nightmarish hydra of complexity and I feel very sorry for people who are entering the industry at this point because I was lucky enough to start with bare metal, get through virtualization, and then you look at something like Google Cloud where you have bare metal running container name spaces around a virtual machine manager that's running a virtual machine that runs Kubernetes inside it with more containers.}
+{\pard  \line \par}
+{So it's a strange turtles all the way down. The expression you're looking painful. Inception and yeah. A disk world in nightmarish complexity perhaps. }
+{\pard  \line \par}
+{Kerim, what do you think? . }
+{\pard  \line \par}
+{\b\cf3 Kerim Satirli:\b0}
+{ Things were easier when we had Pearl Scripts back then, you know, That's not true, comparatively, }
+{\pard  \line \par}
+{\b\cf4 Matt Jarvis:\b0}
+{ I'm old enough to remember that }
+{\pard  \line \par}
+{\b\cf3 Kerim Satirli:\b0}
+{ I mean, I'm getting there. , I'm like, I had early PHP as well. It's I think what happened back then is that I learned that your security can't start, and even now you see it a lot. Cloud native security is great. Protect your cluster by all means. But if that's the }
+{\cf2 [00:10:00]}
+{ only protection you have, you are way too late in the process.}
+{\pard  \line \par}
+{ Y'all make a great product, protect your code before it even hits your release candidate, before it even hits your deployment pipeline. Because if your code is vulnerable or shitty, then you know, the best protected cluster doesn't mean anything. You just have a bolt garden where the fire is contained within, doesn't work.}
+{\pard  \line \par}
+{\b\cf5 Ashish Rajan:\b0}
+{ I'm curious. Because I think someone was saying that last stat that came from Kubecon Valencia was they had 5,000 attendees. This time we had twice a number, 10,000 attendees. And I think next year is in Paris, most likely, I imagine 20,000 attendees maybe even matching us. I'm assuming this not the first Kubecon for either one of you.}
+{\pard  \line \par}
+{Oh, is it? Is it, oh, I've only the one you remember maybe? }
+{\pard  \line \par}
+{\b\cf1 Andrew Martin:\b0}
+{ Well, yeah, , I only missed the first one. And then the second one was in London, and then I've followed them around the world since then. Oh. }
+{\pard  \line \par}
+{\b\cf5 Ashish Rajan:\b0}
+{ And what do you think has changed?}
+{\pard  \line \par}
+{I'm curious, cause obviously you guys have, this is my second one, right? Already feel there's so much maturity in conversation, but. }
+{\cf2 [00:11:00]}
+{ Curious as to what have you found different as we wanna progress with each }
+{\pard  \line \par}
+{\b\cf1 Andrew Martin:\b0}
+{ kubecon}
+{\pard  \line \par}
+{ there was I hesitate to be too sort of valley centric, but there was market annealment going on for the first iterations of Kubecon there was defining what are we actually selling?}
+{\pard  \line \par}
+{What is this thing? How do you talk to your CISO about this? Who is the economic buyer that is gonna put their money where the cloud native mouthpiece is? You also had a huge number of companies that didn't exist anymore. Mm-hmm. That all got acquired, all the platforms ended up in someone else's cloud.}
+{\pard  \line \par}
+{And , we're back to a state where there's not very many Kubernetes platforms. , there's a few here. And at this point we see a huge number of traditional vendors who've just, I hesitate to say jumped on the bandwagon, but they're not cloud native, native. Which seems very gatekeeper of me to say, you }
+{\pard  \line \par}
+{\b\cf5 Ashish Rajan:\b0}
+{ cloud Native, native.}
+{\pard  \line \par}
+{You might have to explain that later. Matt, go on }
+{\pard  \line \par}
+{\b\cf4 Matt Jarvis:\b0}
+{ Yeah. Well, I mean, I think, you know, for when you look at how Kubecon changed, you really have to look at, at how the world of Kubernetes has changed, right. And the things that we are concerned with now with a relatively }
+{\cf2 [00:12:00]}
+{ mature, you know, platform and if you go back , to not that long ago, you know, there were many, many things missing in Kubernetes, you know, not least of which that it didn't scale.}
+{\pard  \line \par}
+{ Back in the early days of kubecon, most of the. Internet scale platforms didn't even run Kubernetes. You know, they were all still running mesos because mesos could scale to, you know, tens of thousands of nodes. And I think Kubernetes at the time could do some really small number.}
+{\pard  \line \par}
+{And a lot of , the niceties of, you know, how , the internals of it work now took a while to mature. You know, , if you look at the kind of companies who are around the ecosystem, now they are. Mostly focused on add-ons rather than, you know, the kind of the base stuff around the platform because, you know, Kubernetes is matured as a delivery mechanism, you know, to the point where it's clearly running lots and lots of enterprise workloads all over the world.}
+{\pard  \line \par}
+{So I think you have to tie those two things together. Yeah. you see }
+{\cf2 [00:13:00]}
+{ this in, you know, this is not the first time we've been around , this loop either, right? You know, for those , with long memories. It's a very similar, you know, kind of story to the OpenStack world a decade ago, or, you know, , in terms of uptake , and companies getting involved in it and the change from, , as an ecosystem matures, how that affects you know, the kinds of companies that people start around that ecosystem , and who the players are.}
+{\pard  \line \par}
+{Kerim. what do you think? }
+{\pard  \line \par}
+{\b\cf3 Kerim Satirli:\b0}
+{ I think the biggest change I've seen is maturity. Definitely. Yesterday I asked people, how many of you are first timers here? During the keynote, I think we called out 58%, which is insane, right? Yeah. Two thirds almost of the audience. First time at kubecon doesn't mean they're first time to this industry or new in this industry.}
+{\pard  \line \par}
+{It just means that they have never been to kubecon. If you come back, you'll notice two thirds of the sponsors , and companies in the area will stay the same. One third constantly rotates. Companies push out a product because it's a lot easier now nowadays than it was, and then we find ourselves in a situation half a year later, no }
+{\cf2 [00:14:00]}
+{ runway, that product didn't , find the market fit.}
+{\pard  \line \par}
+{I think the maturity is definitely there. We're switching more from gimmicks and nice to have to products that we actually need, but there's still add-ons. There's very few that. Actually solved the really hard problems. }
+{\pard  \line \par}
+{\b\cf1 Andrew Martin:\b0}
+{ I just wanted to jump in there briefly to say like, a perfect example of course is vaults because back in the day, there was no encryptions, basically foreign encoded secrets.}
+{\pard  \line \par}
+{And that was the big kind of dirty secret , of security. And so you had to strap something on. I mean, obviously vault was kind of de facto at that point, but things like that getting brought into core, especially scaling, to your point about, I }
+{\pard  \line \par}
+{\b\cf4 Matt Jarvis:\b0}
+{ mean, the start of vault wasn't even focused , as a Kubernetes product, right? vault, was a you know, platform independent thing. }
+{\pard  \line \par}
+{\b\cf1 Andrew Martin:\b0}
+{ And it's a strange example cause it is one of the few products that's really kind of transferred from , and it's interesting to say cloud native by hashicorp when Terraform kind of defines everything that sort of intersects very strongly with that.}
+{\pard  \line \par}
+{ But yeah, very strong point about the scale. And actually so many of a, a fascinating thing. If anyone's got a sort of machine learning of }
+{\cf2 [00:15:00]}
+{ sentiment, analysis background, it'd be super interesting to see what, oh, it's interesting topic. Tagging what the topics of the talks have been over the years.}
+{\pard  \line \par}
+{Yeah. Mm-hmm. Because my inclination is there was a lot of pushing the scalability. Yeah. I've just got my 6G or 7G Telco riding on 10,000 nodes, like halt the press, 10,000 nodes. And like you say, like Twitter was running insane scale for many, many moons. Yeah, yeah. Before this even }
+{\pard  \line \par}
+{\b\cf4 Matt Jarvis:\b0}
+{ turned up.}
+{\pard  \line \par}
+{Well, I mean, I remember , one of the last really big OpenStack summit, seeing a talk about someone running Kubernetes on top of mesos, on top of OpenStack. Oh my God. Which was at the time, you know, the, but you have to remember this was actually even inside Google. That, was that one of the use cases that they thought Kubernetes would have?}
+{\pard  \line \par}
+{Was that as a scheduler for mesos? Not as a kind of standalone thing. I think it was one of the first announcements of it was actually a mesos con as a scheduler for mesos. So it's funny , how things end up, but I was gonna just bring the conversation background to security }
+{\cf2 [00:16:00]}
+{ again, because I think that's , an interesting thing as well. I know you've been banging the security drum for a very long time , at kubecon, but you know, for a lot of the time you've been fairly out in the wilderness somewhat. You know, in terms of, I mean, last kubecon in North America.}
+{\pard  \line \par}
+{ I went round and looked at how many security vendors there were in that hole. And I mean, there was just, I think it was something like two thirds of the sponsors, there were security vendors. Now it's like, wow, what this has changed, you know? And, You know, that says something about what the concerns of operators are.}
+{\pard  \line \par}
+{You know, when you look at you know at how that pans out and clearly securities moved up from being something that there wasn't a very major concern to something that's now a, an extremely large concern. And }
+{\pard  \line \par}
+{\b\cf1 Andrew Martin:\b0}
+{ that's been }
+{\pard  \line \par}
+{\b\cf5 Ashish Rajan:\b0}
+{ the case today. Like do you feel the kubecon space at the moment is primarily filled with, or two third filled with security.}
+{\pard  \line \par}
+{\b\cf4 Matt Jarvis:\b0}
+{ I didn't notice it that this as much in at this kubecon, but definitely in North America, I thought it was very heavily skewed towards security members. }
+{\pard  \line \par}
+{\b\cf1 Andrew Martin:\b0}
+{ Yeah, I strongly agree.}
+{\cf2 [00:17:00]}
+{ We yet to do the beer crawl or booth crawl as it's officially known the shift that we've seen has been first generation cloud native security was, was Docker, right? It, it was container security. It was people trying to intercept a route own demon. If you're in the docker group, you can start a privileged container and mount the host file system and breaking full the name spaces or whatever you are, route on the box.}
+{\pard  \line \par}
+{As an unprivileged user, it's a direct route through. So people were looking at intercepting the socket calls and trying to mess with how the OCI spec has a becket, it's pre oci. Then the second generation tooling. Integrated Kubernetes with that, but it was sort of added on. And you see that in the Prisma Cloud offering.}
+{\pard  \line \par}
+{The way the AquaSec were the two like real big players at the time, Sysdig kind of came on as an interesting mutation of the two cuz they had such a deep introspection of observability , and runtime metrics and behaviors. Now we're into a point where we've got stuff that I would say arguably , is Kubernetes native and all the appliance vendors have suddenly realized that people aren't shipping boxes, the data centers anymore.}
+{\pard  \line \par}
+{And I think that }
+{\cf2 [00:18:00]}
+{ was a preponderance of security vendorism in North America. A lot of organizations you wouldn't necessarily associate or think of as cloud native. Now see, the addressable market is of a certain size and they're probably being told by VCs somewhere, maybe you should start spending money for the Linux Foundation, which is.}
+{\pard  \line \par}
+{Good for us all in, in some ways we get nicer and nicer venues remains. Remains to be seen what Paris is like. }
+{\pard  \line \par}
+{\b\cf3 Kerim Satirli:\b0}
+{ Turns out the, H in hardware security modules is actually up to interpretation. I mean, that's not a bad thing. More security applied in a right way gets us better applications. I don't wanna be woken up at 3:00 AM because we have a security incident.}
+{\pard  \line \par}
+{I generally don't wanna be woken up at 3:00 AM. But definitely not for a security incident because that usually means you have to get more people involved. Operations incident, that's your team usually, hopefully not marketing because then you're really screwed up. But we're definitely there. The maturity of the event certainly helps.}
+{\pard  \line \par}
+{Yep. The thing that I see is a pattern. When Terraform first came out, we had no good way of dealing with }
+{\cf2 [00:19:00]}
+{ security. So vault came, when Ansible first came out, Ansible vault was not a thing right from the get-go. Puppet data bags was that puppet. Also not, you know, a 1.0 feature. We always went for, let's ship, ship right now and then figure out security later.}
+{\pard  \line \par}
+{You need to hit the ground a few times before you can figure out where to apply to security and what patterns work and what security you need. In my experience, }
+{\pard  \line \par}
+{\b\cf1 Andrew Martin:\b0}
+{ that's a really interesting point because as I was just slating everything that Kubernetes did for the initial suite of launches, abac instead of rbac, no network policy, no admission control, no pod security policy what's the other egregious one, and then no encryption on etcd and etcd mounted and publicly addressable over the same network, all that good stuff.}
+{\pard  \line \par}
+{The point is actually we've seen all this MAD adoption and it's the second biggest project on GitHub behind the Linnux kernel, which is even property on GitHub and it's got all these contributors from all around the world. So actually. }
+{\cf2 [00:20:00]}
+{ It has succeeded and I've got into all sorts of trouble over the years for saying Kubernetes is not secured by default, which I maintain because operationally it should have come with some sort of networking.}
+{\pard  \line \par}
+{ Obviously everything is all IP tables, but some sort of enforcement, some sort of default policies for admission as well. So it's not secured by default from an administration and a usage perspective. But the code base is excellent and it generally always has been very, very few CVEs }
+{\pard  \line \par}
+{\b\cf5 Ashish Rajan:\b0}
+{ and do you feel we're that place now where default. }
+{\pard  \line \par}
+{\b\cf1 Andrew Martin:\b0}
+{ Just to repeat the question Madhu Akula. Yeah. Thank you. Has an open source project based on OWASP goats called k ube goats, which is basically lots of vulnerable scenarios for default configuration. What happened, I think, is that the space of everything was built to maximize adoption and to ensure that the project was developer focused security teams.}
+{\pard  \line \par}
+{They can figure that their own stuff out afterwards. Then we had all these platforms that came with some level of security by default, actually OpenShift kind of excels as the extreme version of that, but they run in a slightly different way as well by building a }
+{\cf2 [00:21:00]}
+{ project abstraction over the top. So the question of, first of all, what is vanilla Kubernetes?}
+{\pard  \line \par}
+{Compare that to. Yeah. kubeADM by yourself with a low set of flags. No one, no one. Some people do that for very specific use cases, but the rest of the time you're running a managed service. Yep. And you're using a platform that's already bought a platform, }
+{\pard  \line \par}
+{so most things have a reasonable security posture, but still, in terms of what you get out of the box, GK autopilot's pretty locked down. I'd say , that's by far the best experience, but you still have to do a reasonable amount of work with most things. }
+{\pard  \line \par}
+{\b\cf4 Matt Jarvis:\b0}
+{ I think , there's an argument to be made, and I'm not saying that I'm slightly playing devil's advocate here, but you know, there is an argument to be made that complex open source projects which by their nature are designed to be highly configurable, don't necessarily have a requirement to have an opinionated set of defaults, you know, to kind of be fully clear about that. I mean, you know, I agree with }
+{\cf2 [00:22:00]}
+{ some of the sentiment around that, but, you know, there are lots of people within the open source development world who would say, well, , that's the responsibility of the packager, or the distributor too.}
+{\pard  \line \par}
+{But anyway. I'm not gonna dig anymore }
+{\pard  \line \par}
+{\b\cf5 Ashish Rajan:\b0}
+{ on that. I was saying the same. I can kind of sometimes draw a parallel between cloud security and cloud native security }
+{\pard  \line \par}
+{\b\cf1 Andrew Martin:\b0}
+{ the same way. }
+{\pard  \line \par}
+{\b\cf4 Matt Jarvis:\b0}
+{ , I'm gonna disagree with you on that point, Ashish, because you know, when you are the cloud security , the only parallel there would be , if you decided you were gonna run a pure vanilla upstream OpenStack cluster, because that's the comparison, right. You know, if you are buying from aws, the responsibility line for that basic level of security lies with aws. Right? I mean, this is , the real big important point that I know you talk about a lot as well is people understanding , where that line of responsibility lies. So if you make that consideration in terms of vanilla upstream, Kubernetes, You know, that's not necessarily the responsibility of upstream Kubernetes maintainers to, }
+{\pard  \line \par}
+{\b\cf1 Andrew Martin:\b0}
+{ I feel }
+{\pard  \line \par}
+{\b\cf5 Ashish Rajan:\b0}
+{ like Andrew's just gonna , jump from the seat or }
+{\cf2 [00:23:00]}
+{ something. Like, I'm curious to hear to what you guys said as well that, there's a submarine that runs Kubernetes, like a is running in the space. It's like lot of these high stake projects are running on kubenetes. Where do you kind of like what happened with Red Hat in the beginning where it was free and everyone used it and like suddenly it's like, oh wait, who supports this? I don't know. is there a moment coming for that for kubernetes as well where, hey, it's open source, CNCF }
+{\pard  \line \par}
+{\b\cf4 Matt Jarvis:\b0}
+{ and, well, I mean, I think that that moment's already here, right?}
+{\pard  \line \par}
+{I mean, that moment's gone you know I suspect the vast majority of people who are consuming Kubernetes are consuming Kubernetes through a service provider of some kind. Right. And to be honest, as I made the argument many, many times, you know, unless you are a provider of hosted Kubernetes, there is very little business value to you running Kubernetes yourself, right?}
+{\pard  \line \par}
+{Because where's the business value to your organization? In almost every case, 99% of the business value is the application on the end. It's got nothing to do with, you know, running shiny DevOps }
+{\cf2 [00:24:00]}
+{ platforms and all that stuff. As much as engineers would love that to be the case, you know, when you look at it purely from a business perspective.}
+{\pard  \line \par}
+{Yeah, yeah. application, that's the application is really where, and there's something to be said for always maintaining that question of, you know, should I be running this stuff? }
+{\pard  \line \par}
+{\b\cf3 Kerim Satirli:\b0}
+{ So I wanna briefly come back to the shared responsibility model because I think , that's a really interesting one.}
+{\pard  \line \par}
+{When you set up for your AWS account GCP account, you sign an agreement that obviously nobody reads, but if you do their certification, they quiz you on it. I just renewed mine and it was like, oh yeah, wait, there's a percentage of how much I'm responsible for stuff. AWS's job is to sell more EKS}
+{\pard  \line \par}
+{yep. Their job is not to sell secure EKS. In fact, and I'm not saying that's what they're doing. I love the platform, but I also love all the other clouds because we're cloud agnostic at Harshi Corp. Their idea is sell it slightly insecure, cuz then you can sell other services on top of it. Mm-hmm. AWS WAF is gonna be way better than what's building in a standard Kubernetes distribution because it's tailor made for }
+{\cf2 [00:25:00]}
+{ it and it applies to your whole network.}
+{\pard  \line \par}
+{So as you are running your own cluster, I think it's always important to take the step back and think like, is their goal of running this the same as mine? Are we protecting it the same way? Or is their goal to make sure I spent more with them at the end of the month? And I'm not saying WAF is a bad product.}
+{\pard  \line \par}
+{In fact, I'd rather have a WAF accessible in Kube directly. Yeah, because I mean, the power , is amazing. This is }
+{\pard  \line \par}
+{\b\cf5 Ashish Rajan:\b0}
+{ my moment of having an Andy AWS WAF . I think I have some challenges with it, but I'll let you finish. }
+{\pard  \line \par}
+{\b\cf3 Kerim Satirli:\b0}
+{ I mean, which security product does not give us challenge. That's right. As a developer, I'd prefer my code to be unencumbered.}
+{\pard  \line \par}
+{I prefer my GitHub actions to always tell me my code is great. My linters disagree with that, that's a great learning opportunity, but I'd rather have that be told upfront before it becomes a security incident. Yeah. }
+{\pard  \line \par}
+{\b\cf5 Ashish Rajan:\b0}
+{ Hundred percent. Andrew, you want to finish your thoughts on responsibility for Cloud native and a paid subscription for support for kubernetes.}
+{\pard  \line \par}
+{\b\cf1 Andrew Martin:\b0}
+{ Yeah, I, I agree. Red Hat is a perfect }
+{\cf2 [00:26:00]}
+{ example because ultimately Open source provides enterprise value in that you get everything for free. It provides retention for the bleeding edge of next generation developers because the really invested people are going out and fixing things that are broken on their systems.}
+{\pard  \line \par}
+{But then the eternal dichotomy for a government or a regulated organization is 3:00 AM , who am I gonna call? Yeah. Well, ideally the person you call a support contract with, not your, you know, tech lead for that project. I do agree. We've reached the sort of general unification , of everything is supported in some way or another.}
+{\pard  \line \par}
+{The number of people that run kube ADM natively I mean, I can name customers we work with on one hand , that do, that they have very specific, very high throughput on-prem use cases and yeah, so, so, so, fair enough. And they're not running OpenShift , for whatever reason, because that's almost, it's kind of a rancher or OpenShift question.}
+{\pard  \line \par}
+{I think in my mind at that point that there isn't too much else that one of the three, although of course ranchers now off the table as well, more or less so. }
+{\cf2 [00:27:00]}
+{ Yeah, I, I think people rely on managed service providers. The ultimate question is whether those fundamental requirements for cloud use cases of elasticity and burstability are applicable to most people who use them. And then you're into a question of, well, how big are you? And at what point do you actually want to start paying for your own data center and systems engineers who will rack and stack stuff? Yeah. Because you're spending 3, 4, 5 x I mean, it's your point. Like they want you to spend more money and it's very expensive for what it is.}
+{\pard  \line \par}
+{Renting compute is not really very efficient. No. And at some price point it just, it blows itself out of the water. }
+{\pard  \line \par}
+{\b\cf5 Ashish Rajan:\b0}
+{ And thats when you come to the multi cluster, single cluster, everyone's running a single cluster most of the time. I}
+{\pard  \line \par}
+{\b\cf1 Andrew Martin:\b0}
+{ mean, , that question should be based upon workload sensitivity and the size of your operations team.}
+{\pard  \line \par}
+{Because if you can multi-tenant everything and you have a sophisticated team, boom, get your bin packing, save your money that way if you don't have a sophisticated team, you're gonna stress them out. You're gonna churn your team and your business, is gonna }
+{\cf2 [00:28:00]}
+{ do a lot worse. Everything's business value.}
+{\pard  \line \par}
+{\b\cf4 Matt Jarvis:\b0}
+{ I mean, that's one of the interesting things I think , about. Kubernetes as , the original, you know, kind of holy grail of all of these orchestration things was about. Resource utilization, right? That's where all these things come from is, you know, back , to the sort of internal platforms inside companies like Google and like Facebook about achieving very, very high resource utilization.}
+{\pard  \line \par}
+{But in actual fact, you know, through the history of Kubernetes, that isn't what has happened with Kubernetes at all because you know, you had this and partly because of the security boundary idea, right? That people decided that, because Kubernetes was lacking some of these hard multi-tenancy things that perhaps you had more in older cloud platforms like OpenStack, that people start to consider the cluster level as being the, trust boundary, right?}
+{\pard  \line \par}
+{And then you start getting proliferation of cluster. I think it's interesting you were saying people running a single cluster, because that is actually the opposite of what certainly, you know, going back over the last four or five years of what I've seen is, }
+{\cf2 [00:29:00]}
+{ you know, the one point, we did some, some research when I was at Mesosphere and , the average was something like 25 clusters, you know, when you counted because, well, }
+{\pard  \line \par}
+{\b\cf5 Ashish Rajan:\b0}
+{ I think the single cluster thing was coming from AWS and Azure so those folks, yeah, they generally push you down the path regarding a single cluster. Cause by design to Kerim what you said is customized, but they had limitation that, oh, well all these things work. If you work in one cluster, can you work in one cluster? Mm-hmm. So that's kind of where they pushed a lot of people in that path and.}
+{\pard  \line \par}
+{That's when now they're all starting, Hey, what about multiple clusters? Why, why isn't that not my boundary? But I think we can keep going off, but I do have one question cause we are kind of at the tail end of this as well. People who are listening to this and watching this. What is that one security topic that you wish people are talking more about?}
+{\pard  \line \par}
+{Cuz obviously we've come a long way. We spoke about the maturity }
+{\pard  \line \par}
+{\b\cf3 Kerim Satirli:\b0}
+{ the one everyone hates, most policies. Invi. OPA. Yeah. Definitely .Start there. }
+{\pard  \line \par}
+{Policy is code. Make sure you have strong policies.}
+{\pard  \line \par}
+{I'd like to compare it. If you're in front of development, you run }
+{\cf2 [00:30:00]}
+{ something like CSS land or JS land, it's gonna break your heart the first a hundred times that you run it because your code is full of crap. That's okay. If your policy engine doesn't break your heart. The first a hundred times you were too generous.}
+{\pard  \line \par}
+{And a lot of us are like that. Take, you know, GCP and IAM policies, a lot of asterisk in there should not be in there, only at the tail end of your S3 bucket. That's the only place where you can have an asterisk. Everything else starts with the word deny and ends with literally that policies are hard because they encumber you.}
+{\pard  \line \par}
+{They make sure you can ship to production unless you hit certain gates and nobody likes gatekeeping. }
+{\pard  \line \par}
+{\b\cf4 Matt Jarvis:\b0}
+{ I think for me, not necessarily frustrating, but you know, the whole SBOM thing at the minute, it's a great set of words, but, you know, other than that, it's like, yes, every tool under the sun can now generate some JSON, but what does that mean?}
+{\pard  \line \par}
+{You know, do, why should I trust that bit of JSON? What am I supposed to do with this bit of JSON now I've got it. So where do I store it? How do I interchange that with other people? I don't think we've answered }
+{\cf2 [00:31:00]}
+{ any of the important questions, which are really about , what's the work flow of how we work with these things?}
+{\pard  \line \par}
+{You know, we've gone, yes, everyone should have an SBOM and now every tool under the sun will make you an SBOM. But, you know, why should you trust an SBOM that Snyk makes, or hashicorp makes, ultimately that brings you back to this whole idea about trust, right? We're all into signing everything at the minute, but, you know, somewhere along the line where's the thing that you've gotta lay your stake in the ground? And I think that that plays into the SBOM thing }
+{\pard  \line \par}
+{\b\cf1 Andrew Martin:\b0}
+{ as well. Very strongly agree. You remind me of another quote from , a sig security lead Ian Coldwater, which is, we're all made of stars, but your RBAC shouldn't be.}
+{\pard  \line \par}
+{I like it. It's very beautiful. I love it. Yeah. And yeah, I, I mean, to your point, absolutely. Software composition is something that we already get by interrogating a package manager. Okay, fine. We also have this whole software composition analysis scanning flow. Why do we suddenly invert our trust model so that we trust not only the software, but also metadata that comes }
+{\cf2 [00:32:00]}
+{ with it instead of providing a verification step?}
+{\pard  \line \par}
+{I mean, I, I couldn't agree more. I guess from my perspective, the thing that I thought would've blown up five years ago, and it's still sort of , sub conversational, is is workload identity. We are living in a place where zero trust is enabled by identity. And you look at the beyond core model and you go back and you say, okay, so first of all, we established the identity of the calling party.}
+{\pard  \line \par}
+{Then we look at metadata about the call. Maybe it's just the time of day, maybe it's other metadata we know about the IP space it's coming from. Maybe there's layer seven embellishments to the metadata to do with the identity of the person who's making the call from the workload or the machine. And this gives us very, very precise input metadata to our policy basically.}
+{\pard  \line \par}
+{So this seems no-brainer for me. Years ago I also thought service mesh was a no-brainer. So you can tell where I've just got a technical deep dive and I forget that actual usage is important. Yeah. So the Spiffe Spire Project, I'm the biggest fan. It's federated cross cloud transportable machine }
+{\cf2 [00:33:00]}
+{ identity.}
+{\pard  \line \par}
+{We see now that all the clouds have implemented some form of service identity, whereby metadata about the workload. So if you're on linux, maybe it's your process ID and your process name. Maybe it's that simple. If you're an aws, maybe the attestation relates to your Amazon resource number, but it's some form of unique metadata that can be encoded as selectors into an X 5 0 9 certificate, generates a TLS certificate, and then perform mutual tls.}
+{\pard  \line \par}
+{And then you've got layer seven identity for any call that you make. And that's where istio kind of based itself and sort of eventually got to. These principles enable zero trust not only within a set of machines, but also federating trust between domains , and it is all about trust really, and how one thinks about it.}
+{\pard  \line \par}
+{And then finally, for humans coming in, human comes in, switch your identity or token for a jots or for an X 5 0 9, or whatever it is. So yes, workload identity is where we need to get to, to really enable zero }
+{\cf2 [00:34:00]}
+{ trust. SBOMs come from the US Biden ordinances. And the other thing you really made me think, sorry, just one final thought.}
+{\pard  \line \par}
+{SBOMs went from zero to nothing in about a year workload identity has gone from everything. It's probably down towards nothing in, I mean, BeyondCorp paper was, I don't know, 2011, maybe 2013. So it's amazing what a hype cycle does for something, whereas something that's actually really difficult. gets I guess descoped. }
+{\pard  \line \par}
+{So }
+{\pard  \line \par}
+{\b\cf5 Ashish Rajan:\b0}
+{ probably the same thing people can say with ChatGPT as well. No one cared about AI for so long that everything has an answer with ChatGPT now though I wanted to take a moment and are there any questions? }
+{\pard  \line \par}
+{\b\cf1 Andrew Martin:\b0}
+{ So just to repeat the question the failure of workload identity is anchoring the identity to a physical machine and , not to something else. Funny you say this, , so this is literally the a AWS simple Token Service, v1, V2 migration. So yeah, sts version one was linked to the outbound MAC on the AWS fabric. So you make a call and you magically get authentication because , your Mac, I call it Mac, the SDN Mac is your identity. }
+{\cf2 [00:35:00]}
+{ This enabled server side request forgery. All I've gotta do is embed a curl call into a mis escaped piece of user input from my web application.}
+{\pard  \line \par}
+{And boom, I can then hit the metadata API and, and pull back keys , or I can behave on behalf of that service count. The version two API requires a specific call with a specific string, so that means that you're no longer reliant. And it also means that a non root user, for example, , can't make that call.}
+{\pard  \line \par}
+{The way that Spiffe differentiates itself is that the attestation can relate to an entire node on a VM. It can relate to a container. So it can use, cuz it's just about what selectors you use. It can relate to a single process. So it's the workload identity enabled by Spiffe is above and beyond what every everybody else offers.}
+{\pard  \line \par}
+{And the question that I got asked the other day was why have AWS not adopted Spiffe? Because it allows you to federate via trust domains. And coming back to your point, there are misaligned incentives for the vendor to give you transportability of identity. There's a super cool thing you can do with Kubernetes, O I D C and Spiffe auth where you }
+{\cf2 [00:36:00]}
+{ can basically authenticate cross cloud by transferring it back }
+{\pard  \line \par}
+{so yes, I agree it's a failure for the STS V1 and that level. But I should have a small Spiffe flag to just wave at this point. }
+{\pard  \line \par}
+{\b\cf5 Ashish Rajan:\b0}
+{ So what do you recommend for learning? }
+{\pard  \line \par}
+{\b\cf3 Kerim Satirli:\b0}
+{ So let me flip this around for a quick second. If I ask you how do you deploy a kubernetes securely, what's gonna be your first answer? The first thing that comes to mind. I find with a lot of these questions, people go like, well, it depends.}
+{\pard  \line \par}
+{And that's a hard thing with security. If I teach you security, I'm taking responsibility for what I'm teaching you. And a lot of companies don't want to be the ones that get called out if things go wrong. We're talking about incentives. I mean, anyone, right? Terraform has the same problem. We give you guidelines, but if you don't use Terraform the way we tell you to, That's on you. And that's important for us. You should be free to use the tools the way you want. Security education is incredibly hard and it has to be specialized towards your use case for it to be useful. A workshop that will teach you how to build a secure image that you can }
+{\cf2 [00:37:00]}
+{ then run securely is great.}
+{\pard  \line \par}
+{And it might get you there for 40%. It's not gonna get you there for a hundred percent. And that's what's really frustrating, because if we embedded more of our security training I mean, if you've done compsci, I, I haven't, I studied media design which yeah. Says everything that you should know about security.}
+{\pard  \line \par}
+{We had no security training and our compsci colleagues also didn't because universities were afraid of thinking about that. We're not teaching our engineers. When you join a company, eh, people are like, eh, security, you know, it's fine. We'll, we'll figure it out as we go along. Usually two to three incidents in security training.}
+{\pard  \line \par}
+{If you can figure out how to do that at scale you are not gonna work a day for the rest of your life five years after you've started because you've printed money. But it's }
+{\pard  \line \par}
+{\b\cf1 Andrew Martin:\b0}
+{ hard. I, so sorry to jump in. I feel deeply reprehensible and self-loathing in this moment because I'm just gonna The provider of security Yeah, exactly.}
+{\pard  \line \par}
+{\b\cf3 Kerim Satirli:\b0}
+{ Available. }
+{\pard  \line \par}
+{\b\cf1 Andrew Martin:\b0}
+{ So see Andy afterwards. Yes, precisely. I'm very, }
+{\cf2 [00:38:00]}
+{ very deeply invested in the space. I think your point there about scalability , is so key to this. It's the crux of the matter because a good security training is actually just consulting. You need somebody with the breadth and the depth of expertise to answer a range of questions for a range of different use cases.}
+{\pard  \line \par}
+{And yes, you need good labs, you need strong champions programs. Yeah. You know, }
+{\pard  \line \par}
+{\b\cf4 Matt Jarvis:\b0}
+{ I mean, there's a, oh, then }
+{\pard  \line \par}
+{\b\cf1 Andrew Martin:\b0}
+{ there's a question here of how it actually lands. }
+{\pard  \line \par}
+{\b\cf4 Matt Jarvis:\b0}
+{ How about organizational transformation, right? This is what's really, you know, when companies have built security practice into their software development life cycle, you know, it's not just about sending developers on a security course or DevOps folks on a security course in fact, teaching developers and other folks to be security professionals doesn't solve your problem either, because, you know, that takes away , their real skill, which is developing applications, you know, and most of the tooling really is about not requiring folks to be security experts, right?}
+{\pard  \line \par}
+{ But giving you actionable }
+{\cf2 [00:39:00]}
+{ insights into just enough and telling you how to fix it without actually requiring you to deeply understand every cve. But I would say that , the training thing is a recognized issue, which is why the CNCF has already, you know, the associate security trainings out beta today.}
+{\pard  \line \par}
+{And there's some of us from Tag Security working on the more advanced exam. So it's definitely recognized within the CNCF ecosystem that more training courses need to be available to folks. So, and I think you'll see that happen over the next few months. }
+{\pard  \line \par}
+{\b\cf3 Kerim Satirli:\b0}
+{ I think no matter in which part of the operational chain you are, no matter if you're building the image, if you're running it, if you're just building the HML for it, you're security adjacent. It's a team sport. You have to play in your position and understand what your team is doing to be at the right spot at the right time.}
+{\pard  \line \par}
+{I can't hide behind. Oh, wow. I didn't know that that token was not supposed to go on my GitHub. I could, and then I can wait for the email that at least GitHub will send me. AWS will send me one, and then I can have a chat with a CISO }
+{\cf2 [00:40:00]}
+{ and update my LinkedIn. Ultimately, I mean, we've all been there like.}
+{\pard  \line \par}
+{Sorry, I've been there. I don't wanna make assumptions here. I do security by learning how to not be secure. And part of that is the shared responsibility model. AWS will quarantine the key that you just leak. That's great. Until you look at the policy and you realize that that quarantine is not the same quarantine that we had for the pandemic.}
+{\pard  \line \par}
+{So it was not isolated. Fun fact. A lot of people don't know that key prevents you from starting EC2 instances. It's great, right? It's my primary concern is saving money on compute. No way. But the policy allows me to delete RDS snapshots. I can create way more havoc for your organization by deleting your RDS snapshots than I can by starting up maybe five more easy two instances.}
+{\pard  \line \par}
+{\b\cf5 Ashish Rajan:\b0}
+{ I love it. I think maybe one summary, maybe from what it's coming through as well. All the training we are talking about there, will always being asterisk to it . I think what you find is as you cloud security, you would find it always a snowflake }
+{\cf2 [00:41:00]}
+{ situation, which is just specific to your organization and no one would have an answer for it.}
+{\pard  \line \par}
+{You just have to like work with other teams to figure out, what's our comfortable level with this risk? Like we don't wanna leave the door wide open for the internet, but what's that like, just a little bit that what we can do that would prevent something bad from happening. It's a very normal conversation }
+{\pard  \line \par}
+{\b\cf4 Matt Jarvis:\b0}
+{ We were talking about this yesterday that some of the expectation that's emerging, particularly as part of the supply chain thing, you know, of zero vulnerabilities are pretty unrealistic, you know if you set that as a goal in your organization, then you are almost certainly gonna fail.}
+{\pard  \line \par}
+{Yeah. Because the only piece of code that is fully secure is something that hasn't been written and isn't actually running on a computer. Right. I mean, it is just never gonna happen. And, you know, as anybody who's actually been responsible for security in production environments know it's always a trade off.}
+{\pard  \line \par}
+{Yep. It's a trade off between risk and, and ultimately cost to address risk. Yep. , and that's always gonna be the case. Yep. }
+{\pard  \line \par}
+{\b\cf5 Ashish Rajan:\b0}
+{ Awesome. Thank you. Any questions }
+{\cf2 [00:42:00]}
+{ before we close off, bit away from security maybe, but it's still related. How do you approach, }
+{\pard  \line \par}
+{disaster recovery and Kubernetes backing it up, especially if the whole infrastructure is deployed with Terraform, and you have to keep your Terraform state secure and you need to }
+{\pard  \line \par}
+{\b\cf4 Matt Jarvis:\b0}
+{ recovery.}
+{\pard  \line \par}
+{But in theory, in modern microservices environments, there is no state. Right? So why would you ever want to do disaster recovery? Surely we don't have stateful applications anymore, right? Is that a }
+{\pard  \line \par}
+{\b\cf1 Andrew Martin:\b0}
+{ thing? So there's a pattern called Software Factory, which is, it, it's probably 30 years old, but it was revitalized by the US Department of Defense, and the idea is your C I C D can create itself.}
+{\pard  \line \par}
+{So you have this templating mechanism where you can stamp out new environments. And so if you use that, then not only can you recreate C I C D, but you can also recreate any of your environments so you can recreate production. The way we used to talk about this , in government or public sector work was what do you do if your data center becomes }
+{\cf2 [00:43:00]}
+{ a smoking hole in the ground?}
+{\pard  \line \par}
+{So nothing's left at all. And the secondary question is, are you talking disaster recovery for a public cloud or a private public? Okay. So, so for public then we expect there's some sharding of data and it's replication between regions. So we're state becomes somebody else's problem. Let's assume a purely market surfaces architecture.}
+{\pard  \line \par}
+{Then the software factory pattern is basically you have a USB key with load of signed container images and a laptop. They both go into a safe and a faraday cage In a salt mine, two salt mines you have two factor authentication, like two phones, two sim cards. They're over like 40 kilometers is the UK government guidance. The realistic example is just have some redundancy.}
+{\pard  \line \par}
+{And then the point is you take your USB key, you stick into the laptop, you've got a yubikey or gpg authentication of subscription. One way of doing this is to then start mini kube on your laptop. Deploy tacton. It's quite a heavy duty question, but, or deploy your containers. They then run terraform.}
+{\pard  \line \par}
+{Your }
+{\cf2 [00:44:00]}
+{ secrets are encrypted on those devices, so you build 'em locally, authenticated cloud, and you start to slowly rebuild your first trusted compute based environment. This is so much work. So you can take whatever portions of that , are sensible, probably at a minimum. Terraform swaps for some like yaml encrypted secrets.}
+{\pard  \line \par}
+{A yubikey definitely to have your second factor cryptographic identification and then whatever form redundancy is needed, and then you can start to piece it together. Probably still manual steps involved, but that's the way that we've done it for regulated places. Maybe, the vendor would like to challenge some of those.}
+{\pard  \line \par}
+{\b\cf3 Kerim Satirli:\b0}
+{ Think they're beautiful points and very true. The biggest thing with that, Any process like that, you have to dry run a hundred times before it hits the fan. If you test the first iteration of your playbook , for disaster recovery, when you have a disaster, it's too late. At that point, my only professional advice would be figure out what your PagerDuty API key is.}
+{\pard  \line \par}
+{Head on over to a Terraform registry, }
+{\cf2 [00:45:00]}
+{ get the PagerDuty provider an update to schedule and remove your name. That's literally the only path forward at that point. And }
+{\pard  \line \par}
+{\b\cf4 Matt Jarvis:\b0}
+{ we should point out that , this testing of disaster recovery advice has been, you know, we've been talking about this. I've been in this industry for 25 plus years, and you know, people are, are still probably the majority of people not following that advice.}
+{\pard  \line \par}
+{So }
+{\pard  \line \par}
+{\b\cf3 Kerim Satirli:\b0}
+{ DR is a great buzzword. It's hard to implement. People used to struggle with that a lot more. Infrastructure's code made that easier. Didn't make it frictionless. If you think about, you know, what are the biggest disasters, the biggest disasters in software, you know, smashing a satellite into a meteoroid because somebody worked in kilometers and the others worked in miles, that provides context.}
+{\pard  \line \par}
+{Everyone screws up. It's okay. You know, screw up in new ways next time and get your disaster plan planned to be better. }
+{\pard  \line \par}
+{\b\cf5 Ashish Rajan:\b0}
+{ So something, I don't know right down here, but in Australia there is something called firedrill I'm sure you have it as well there. But for an actual fire, you need to know where you should be going.}
+{\pard  \line \par}
+{In this }
+{\cf2 [00:46:00]}
+{ scenario, the same concept of disaster recovery as well. That the intent is you should have, if you know what your crown jewels are or what the important applications you need to have all the time ready. At least as a CISO, this is my previous role. What we did was we had a fire drill once a year for all the important applications that we were running, and it was Terraform, it was cloud.}
+{\pard  \line \par}
+{There were all those elements in there. There were few accepted risks. Like for example, our code was in GitHub. So for the possibility or the probability that GitHub goes down, AWS goes down, Terraform goes down, it's like, like the world's ending, you might as well what he said, like just right away there's nothing that can stop me at that point in time.}
+{\pard  \line \par}
+{So that's why we walk down that path. So we were just testing our part and okay, assuming I have a scenario where terraform cloud goes down, can I recover? Oh, assuming scenario AWS goes down, can I recover? Assuming scenario my github goes down, do I have another way, to your point a yubikey }
+{\cf2 [00:47:00]}
+{ with usb and all of that}
+{\pard  \line \par}
+{totally do that as well. Probably extreme, I don't know, but maybe you can totally go down the 40km path as well, find a salt mine . But definitely depends on the organization. And what you would find is nowadays it's a shared risk with everyone. It's like everyone's using some kind of SaaS provider, like I think we , called out already. Even if you're on premise, you're still using something which is like a SAS service. Most likely it would. I think there was a stat. I read somewhere, as I said about most organizations have about over 200 SaaS applications. You just don't realize it. You look at around and start saying, oh yeah, this is SaaS.}
+{\pard  \line \par}
+{Is my salesforce.com is SaaS, my HR is also SaaS. My all these, oh, my new wellness being whatever software is also SaaS. Like, so you start seeing them around, like you passed on your risk quite a bit.}
+{\pard  \line \par}
+{\b\cf1 Andrew Martin:\b0}
+{ So the question is, is chat G P T A problem, a solution or a fad?}
+{\pard  \line \par}
+{Large language models are very good at reproducing stylistic versions , of language linguistic styl and firstly, there's a question about whether for generalized }
+{\cf2 [00:48:00]}
+{ AI you can actually represent intelligence truly alphabetically or in alpha numeric terms. Like, is that actually a thing or do we require all the sensory inputs that we have as humans?}
+{\pard  \line \par}
+{Maybe one day if we model The neuronal and hormonal interactions of the body is two separate things in their interplay. Maybe we get a bit closer. So from that perspective, we're at the beginning of a massive, massive exponential curve. And certainly right now it's got a lot of promise to go in terms of, on Kubernetes, there is Kubernetes, G p t from a Datadog guy, I can't remember.}
+{\pard  \line \par}
+{He's, he's quit his job. He's now running that. So you feed in Kubernetes aero logs and it just tells you what's wrong, which is nice because it's that stylistic reproduction again. In terms of where it's really useful, it's amplifying and embellishing a human at this point, but it's the confident incorrectness that's the problem.}
+{\pard  \line \par}
+{And from that perspective, as a security guy, I would say , it's zero tolerance. You can't have somebody over confidently telling you what to secure. But it is super useful for people with a }
+{\cf2 [00:49:00]}
+{ sufficient expertise to identify the missteps. }
+{\pard  \line \par}
+{\b\cf3 Kerim Satirli:\b0}
+{ So here's the thought. We struggle training up humans in good security patterns.}
+{\pard  \line \par}
+{Problem there is we don't have enough educational material. Just looking at the code and determining this is good, this is bad, is almost impossible. You need a ton of context. Without that context somewhere written down, our machines are not gonna overtake us in that. So everyone who's in security still will have a job.}
+{\pard  \line \par}
+{But like you said, if, if you know your tooling, AI can help you get faster results, especially for the tasks that nobody wants us to focus on, definitely use it. But understand that like, you know, a teenager who just learned like a few concepts, that AI is very confident in thinking that this is the one true solution and it's not.}
+{\pard  \line \par}
+{I tricked myself in that I had chat G P T generate some vault policies for me cuz I was like, I have a talk. I'm too lazy to do that myself. How bad could it be? It took me 15 minutes to look at them and I was like, }
+{\cf2 [00:50:00]}
+{ something here is not right. And I couldn't figure out what, because it looked so correct.}
+{\pard  \line \par}
+{I use Vault daily, so I should have been able to determine it. If our trained people are not able to find this, then the input material is faulty, which means the output cannot be good, in my opinion. Security prompt engineers, }
+{\pard  \line \par}
+{\b\cf5 Ashish Rajan:\b0}
+{ that's a new job. }
+{\pard  \line \par}
+{\b\cf1 Andrew Martin:\b0}
+{ New job. }
+{\pard  \line \par}
+{\b\cf4 Matt Jarvis:\b0}
+{ I think it's a really big question and I think far too big a question for us to arrive.}
+{\pard  \line \par}
+{I was amazed at Andy's attempt to to summarize the search for generalized intelligence in three sentences. Mapping neuronal, what was it? Mapping neuronal pathways. Yeah. Yeah. Great. No, but I mean, I think it is gonna be a transformational tool. Absolutely. No doubt. We've done a lot of experimentation with it internally , in my team at Snyk and, you know, not just from a security perspective, but from an everything perspective.}
+{\pard  \line \par}
+{ I think anybody who doesn't take the transformational thing of that technology seriously, is profoundly wrong. You know, it's gonna change every aspect of how we do most things, including writing }
+{\cf2 [00:51:00]}
+{ code you know, certainly writing content about most things, documentation, all that kind of stuff.}
+{\pard  \line \par}
+{So, and , we are only just at the tip of the iceberg, right? Yep. As things existed for three months. , it's certainly within my lifetime and, you know, I've seen some big transformational technology changes, the internet, you know, Linux, et cetera. It, yeah, I think this will be far more.}
+{\pard  \line \par}
+{Profound. Whether that is profound good, profound bad, who knows? }
+{\pard  \line \par}
+{\b\cf5 Ashish Rajan:\b0}
+{ Just another food to thought we were talked about training earlier and on cloud security podcast, we did a video on how you can use chatgpt to learn cloud and cloud security as a concept sounded great. And as we were kind of going through it, kind of same challenges where, and then you spend 15 minutes, I kind of had the same thing trying to do an AWS Cloud formation template.}
+{\pard  \line \par}
+{Am I going, what is wrong with this thing? And you kind of keep asking it the same thing. Cause they just, they teach you that, oh well it can help solve the code as well. So you keep giving it back, it keeps coming out with a different code. And you're like, okay. At one point Im just gonna write it myself.}
+{\pard  \line \par}
+{I just don't really care. }
+{\cf2 [00:52:00]}
+{ But the point being, a lot of people who are going behind the hype of it at the moment are gonna use that as Bible and go, oh, this is how I should be writing. And they literally, what we used to do with stack overflow, copy paste is gonna be literally going to be chatgpt copy paste.}
+{\pard  \line \par}
+{Or whatever the Kubernetes version is or another version. But what security people are also realizing that I spoke to another CISO so they have started using chatgpt internally. Mm-hmm. Cause they found that a lot of people are finding useful but the way they were doing it was they had a proxy in between themselves and the actual chatgpt cause now you can have APIs.}
+{\pard  \line \par}
+{And they said, well their number one concern was the data. Where is this data going for them? It's like, oh, well it's only for training that fact that, oh, we have not created something which is malicious as a response. So they store that for a month and after that it's removed. But clearly that's not good enough for Italy, which recently banned it and it's not good enough for Germany as well, just banned soon as well.}
+{\pard  \line \par}
+{So you almost have to kind of, we are at that juncture where I guess cryptocurrency was }
+{\cf2 [00:53:00]}
+{ where everyone feels very strongly, Hey, this is where we should be going, but we haven't figured out what's the right way forward. And the challenge on one side is you can train an entire generation with wrong information and they could just move forward with that. Cuz we would not be able to support everyone. I think if you can go on it, you see it. Oh yeah. Seems alright works as well. Maybe security is thought into this, maybe not, but depends on what was fed into at the }
+{\pard  \line \par}
+{\b\cf4 Matt Jarvis:\b0}
+{ moment. Well, I mean that's another good point though, isn't it? This is an entirely new set of jobs in terms of prompt engineering, you know, understanding how to get the right things out of these things if simplistic, prompt two large language models. Really where you end up getting very bad output from them. And, you know, even in the very short period that people have been using them so far, I think there is emerging practices on how to get very high quality outputs out of these models. to be honest, I think most people who work in that field }
+{\cf2 [00:54:00]}
+{ don't actually understand they've gotta the point where they don't understand how these models work internally either. Right. And, you know, which is a pretty terrifying moment. Although I heard from, one of the VC funds that the average.}
+{\pard  \line \par}
+{A salary in neural network engineering now is between five and 20 million a year, which is 20 million }
+{\pard  \line \par}
+{\b\cf1 Andrew Martin:\b0}
+{ a year. }
+{\pard  \line \par}
+{\b\cf4 Matt Jarvis:\b0}
+{ It's an incredibly niche. Incredibly niche and, you know, incredibly competitive field, so, wow. You know, you're gonna have all of the, biggest players in the world wanting to hire you if you are a top engineer in that.}
+{\pard  \line \par}
+{Find my high school notebook, I don't think they're gonna be hiring you Ashish yeah. }
+{\pard  \line \par}
+{\b\cf5 Ashish Rajan:\b0}
+{ Find my high school notebook and as a neuroscientist, but I wonder if, }
+{\pard  \line \par}
+{\b\cf4 Matt Jarvis:\b0}
+{ I mean, I don't know how true that is. Right. But I mean, you know, }
+{\pard  \line \par}
+{\b\cf1 Andrew Martin:\b0}
+{ definitely. }
+{\pard  \line \par}
+{\b\cf5 Ashish Rajan:\b0}
+{ That was kind of like most of the time, I won't take too much of time for everyone, thank you everyone for coming in. Thank you, Andrew. Thank you, Kerim. Thank you Matt. It's a really good conversation. Thank you. All of you as well. }
+{\pard  \line \par}
+{\b\cf1 Andrew Martin:\b0}
+{ When you're developing an app, security might be treated as an afterthought with }
+{\cf2 [00:55:00]}
+{ functionality, requirements and tight deadlines. It's easy to accidentally write vulnerable code or use a vulnerable dependency, but Snyk can help you secure your code in real time so you don't need to slow down to build securely.}
+{\pard  \line \par}
+{Develop fast, stay secure. Good developer Snyk.}
+}

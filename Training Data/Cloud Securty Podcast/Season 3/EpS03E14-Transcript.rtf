@@ -1,0 +1,516 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red250\green138\blue59;
+\red128\green128\blue128;
+\red216\green34\blue146;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ Hey, hello. Welcome to the show }
+{\pard  \line \par}
+{\b\cf3 Eliav Livneh:\b0}
+{ thanks having me. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah, no, not a problem. Thanks for coming in. So Eliav, I know you have done a few interesting things with AWS and you continue to do some interesting things with AWS, but before we kind of get into this, I wanted to get some background from yourself in terms of people who may not know, who you are.}
+{\pard  \line \par}
+{So. How was your professional journey, your current role, I guess, as let's start there. }
+{\pard  \line \par}
+{\b\cf3 Eliav Livneh:\b0}
+{ So, originally I started out in network security. I was in the military, Israeli defense force intelligence core, for five years, as mainly a network security analyst, two years as a team leader there.}
+{\pard  \line \par}
+{And when I finished my military service, I started after a few months working in this small startup company. I was the first employee called hunters. It was about three and a half years ago. And at the time we were building an automated threat hunting platform since then we've moved to what we saw at the, in this sponsorship advertisement at the beginning.}
+{\pard  \line \par}
+{But At the beginning, we just wanted to automate the whole process of threat hunting, and take it and, and automate it so that people that want to do it in their own organization, have a much easier time of doing it themselves. And the first place we said, we should start in was cloud.}
+{\pard  \line \par}
+{Cause we said, all the }
+{\cf2 [00:01:00]}
+{ organizations are now moving to cloud. Everything is now becoming cloud centric. And which cloud should we start in? We looked at the distribution of organizations using which cloud which CSPs say, okay, Amazon have more than 50%. Let's start there. So all right. Let's start researching AWS.}
+{\pard  \line \par}
+{So I, at that point had no clue what is cloud that was just like only the gag of like, yeah, it's in the cloud, it's in the cloud. And I just imagined, I dunno, a cloud with servers in it. And, and I had many months of. Learning what is cloud and what is AWS and how organizations use it. And that's kind of what jumpstarted me into this whole cloud security era in the last two, three years, which is what I've mainly been focusing on in hunters.}
+{\pard  \line \par}
+{And it was really fun. That's }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ pretty awesome, Eliav. I think I also also wonder, cause it's not a common part. Like the whole threat hunting thing is almost feel like, it is a covered path where it's pretty awesome to be a threat hunter, but one, doesn't get you to know that that many threat hunters in the cloud space.}
+{\pard  \line \par}
+{So, I'm also curious , if you don't mind sharing, you did discover, the AWS temporary access ID. I'm not gonna spoil by saying the entire thing, but I would love it. If you kinda share what you had discovered and what was the thought process behind it. }
+{\pard  \line \par}
+{\b\cf3 Eliav Livneh:\b0}
+{ So basically two }
+{\cf2 [00:02:00]}
+{ interesting findings.}
+{\pard  \line \par}
+{I had in last a year or so, it was both, that API keys, temporary API keys, are being recycled, in cloud trail. And also, some technique for spoofing source, IP addresses in cloud trail. Both of them basically, I discovered, from just digging deep into cloud trail, understanding how the logging works, because basically my goal was to find text.}
+{\pard  \line \par}
+{And my only tool, mainly only tool was cloud trail logs. So I had to really get deep into cloud trail logs and learn exactly how, how they look, how they work, what are the fields, how are they populated, how each different service populates every different field. And when I had a relatively extensive understanding of how this logging were works, then suddenly I realized , and found, , these two different interesting findings.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Interesting. So that kind of begs the question that I'm sure of got a few curious people here as well. You are trying to do threat hunting in AWS, I guess what are some of the common ways to start off with and, what people should be thinking about at this point in time about this?}
+{\pard  \line \par}
+{\b\cf3 Eliav Livneh:\b0}
+{ So, first of all, you need to understand, well, if you wanna start threat hunting, that's after, from a high level security standpoint, that's you need to make sure that you're doing it after you already have right. Fostering place, }
+{\cf2 [00:03:00]}
+{ because threat hunting is, is, a more mature part of the security workflow.}
+{\pard  \line \par}
+{Yeah. And part of the difficulties that we've also been seeing is that many organizations. Don't even have an enough, a mature enough or a security organization to even get to that. And they focus more on the basic not basic, but more critical aspects of having like everything, the right security posture in place.}
+{\pard  \line \par}
+{But after that, in terms of how to start, threat hunting so well there, the basic of it is, first of all, you need data. You can't hunt. I read this sentence somewhere and it's completely true. You can't hunt without. Having data to hunt on you build, you can't find something if you don't have anything to find it in.}
+{\pard  \line \par}
+{And this is, a critical part of knowing how to configure ins for example, cloud trail correctly, because there can be lots of misconfigurations you want logging from all your regions, from all your accounts. Not only read only events while also write events. And then you also have object of the logging, which is also important.}
+{\pard  \line \par}
+{So first of all, understanding that you have all the logs in place, then the next critical aspect is having some way of working over those logs, querying them. So there are lots of different ways. Athena gives an }
+{\cf2 [00:04:00]}
+{ kind of out of the box way that I haven't really worked with too much. Any data warehouse where you can load the data into and just query escal queries or whatever query language , you want a theme, for example, that's like what you need to start.}
+{\pard  \line \par}
+{And then once you have the data and you can query it, you can start playing around and start asking questions. And that's like the beginning from there continue. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ , so what are some of the juicy data points, I guess, cause clearly you mentioned AWS, our trail earlier.}
+{\pard  \line \par}
+{Are there any other ones that you think are juicy enough that maybe, you have your eyes on? And maybe other people can, I mean, have, I guess skim over it as well, if they like to, just to discover a few things, what are some of the other juicy points in AWS? }
+{\pard  \line \par}
+{\b\cf3 Eliav Livneh:\b0}
+{ So I would really say at least 70% 80% is cloud trail because almost everything is there.}
+{\pard  \line \par}
+{Mm-hmm but putting aside cloud trail, the other interesting things. Main things. I I've worked with and found, were config ALIST config, which is usually used not in the way I use it personally. It's usually used for like, I dunno, conformance packs and rules , and, and stuff like that. But it also has a feature that isn't really even exposed well in the, in the UI, logging all the snapshots of all the configurations of all the }
+{\cf2 [00:05:00]}
+{ resources once every hour or so, for example, or once a day, to, to like S3.}
+{\pard  \line \par}
+{And then this is wonderful for hunting because you can look for resources that may have might not exist even now, but exist at a certain point in time. And you have a snapshot of their exact configuration. So it really helps you compliment investigations of looking into things that happen. Not necessarily right now, but maybe a day ago, maybe a week ago, maybe four months ago, and understanding , what they were and how to continue investigating into that.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh, actually that's true because anything oh, cause E to your point, even if the resource doesn't exist anymore, because the configuration is probably still the same. If you find something from that data in the past, that probably most likely still does exist in the current data. }
+{\pard  \line \par}
+{Exactly. }
+{\pard  \line \par}
+{Okay, cool. So this is definitely exciting.}
+{\pard  \line \par}
+{So we've got the primer sorted. So I'm I curious from a perspective of, common juicy points , in a AWS point is primarily cloud trail, but with the whole threat hunting and threat detection as well, there's another term that often gets, I was gonna say muddy together.}
+{\pard  \line \par}
+{A lot of people think it's the same thing, or are they the same thing, or what's the difference between threat hunting and threat detection, maybe in specifically in the }
+{\cf2 [00:06:00]}
+{ AWS context? }
+{\pard  \line \par}
+{\b\cf3 Eliav Livneh:\b0}
+{ So I think, there is a, a slight difference as in threat detection would come first. Philosophically, or maybe not philosophically, maybe practically threat detection I think is mainly focused around, getting alerts from, existing tools or even setting up high fidelity alerts of your own, over data and then mainly responding to those alerts, charging them, investigating them, et cetera, for that, for example, could have guard duty as a threat detection tool.}
+{\pard  \line \par}
+{Yeah. And also your custom alerts would work here as well while threat hunting is in its core, searching for things that weren't surfaced by any other product that creates alerts. So the difference between them ideally successful threat hunting should end with something in a threat detection, , a framework or product.}
+{\pard  \line \par}
+{But it's not always vice versa. I mean, If I have some thesis about how an attacker would operate, then I would have to research it. And that would be the threat hunting part. I would just formulate a thesis and think about how to find it in the data, build a query that I think finds what I imagine, in the thesis and then, okay.}
+{\pard  \line \par}
+{I get some results and okay. They might look interesting. Now I have to investigate them to see, see what they are. If they're interesting, if they're }
+{\cf2 [00:07:00]}
+{ malicious, if they're benign, if they're benign, but, but still touch onto the thesis that I originally imagined. And then there's some, improvement cycle of maybe the thesis.}
+{\pard  \line \par}
+{Wasn't right. Maybe, I, for example, I imagine the thesis that I say only an attacker would do this and then I search and I see, oh no, there are 14 different saw software paradigms in the cloud that also use that. So maybe the thesis isn't well, isn't good. Or maybe I see. Okay. The thesis is good, but I still need to refine it more or ask some follow up questions.}
+{\pard  \line \par}
+{Cetera, in an I process that eventually. If it's successful and it's not always successful because it is a very research type of process, it would end in, a detection rule or analytic. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh, sweet. And I think that kind of as is in line with the question that we need was asking over here, choose how do you narrow down to, what do you hunt when we have too much data logs?}
+{\pard  \line \par}
+{And I think a couple of months have came in as well. Boss mentioned the fact that greater hypothesis Fu as well. But yeah, any thoughts that you wanna add to the question from Vineet ? }
+{\pard  \line \par}
+{\b\cf3 Eliav Livneh:\b0}
+{ So that's a great question and I really agree with the response. It really is thesis based. I mean, if I have.}
+{\pard  \line \par}
+{Regardless. It doesn't matter how many logs I have. I need to look for something. I need to know something I'm looking for. Even if }
+{\cf2 [00:08:00]}
+{ that something is, to the extreme, just finding abnormalities in a certain type of how many times a specific event has been called, even that is a specific thesis and of course, and get much, much more specific that, and an interesting question is where we get our thesis from, but that's a different question.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ oh, I, I am curious now. So where do we get the thesis from? }
+{\pard  \line \par}
+{\b\cf3 Eliav Livneh:\b0}
+{ so, there are multiple ways , of doing it. The easiest ones, first of all, are going. Okay. 80, 90% of what one should do is gather what is already online, accessible, and known, which is for example, what we see in MI attack.}
+{\pard  \line \par}
+{So MI attack has, since like last year there's cloud matrix, there are known to there. So we can build hypotheses based on the techniques that are there. That's wonderful. And there are blog posts online blog posts of many great cloud security companies. That's also a wonderful source for hypotheses.}
+{\pard  \line \par}
+{And when you either run out of hypotheses or want to do even more advanced stuff, and that's kind of like a lot of the, the, the work did the beginning of very research list, threat addiction. I kind of like tried to play the CAD and mouse game of the attacker and the defender. I set up my own account and I was like, okay, I set up a basic }
+{\cf2 [00:09:00]}
+{ environment.}
+{\pard  \line \par}
+{I am now an attacker. How would I attack this environment? What would I want to achieve and how would I go on to achieve it? So, at the time I knew very little about AWS. So obviously I, I wasn't very successful, but , that was kind of like, my approach that over time, as, as I learned more, it allowed me to develop, more or, I don't know, sophisticated, but, More interesting thesis about, okay, maybe there's this feature that I can U utilize as an attacker, et C etcetera.}
+{\pard  \line \par}
+{And because not all of this is publicly documented, especially in cloud, which is relatively new. So lots of these things are still pretty much UN unknown, or at least not well documented. Maybe it's in some Twitter thread that if you find it's one wonderful, it's, it's better than finding it out on your own.}
+{\pard  \line \par}
+{But there's still lots of areas to, it's like to discover. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So, I mean, I, we can talk about the space as well as too cause I think you and I were having a conversation offline about, how yeah. Theres about the threat handing space by itself, but does one thing just like, think about from a threat trending perspective, it sounds like threat detection is something that people would be more used to, or at least more wary of.}
+{\pard  \line \par}
+{They probably what I've heard about that more often. How does }
+{\cf2 [00:10:00]}
+{ one even start with threat hunting an organization? Cause I don't imagine every company out there needs a threat hunting service user that, }
+{\pard  \line \par}
+{\b\cf3 Eliav Livneh:\b0}
+{ , you don't need to, you must have some way of making sure.}
+{\pard  \line \par}
+{For example, again, posture is critical that, you're doing things generally correctly but threat hunting really is for bigger organizations that a might be prone to more attacks or be interesting victims for attackers or just being a big enough organization to statistically, be victim of even random, cyber crime, four person organization, or it's not really an organization that doesn't do a lot.}
+{\pard  \line \par}
+{Probably. There's no reason for them to threat hunt because they probably won't be real victims. So. Organizations that get big enough and big enough can be anything, , it can be 2000 thousand people, but if you have the resources starting to put resources into threat hunting, a little bit and, and bigger as you get as the organization gets bigger, becomes important because, especially because the cloud, security space is still not very well developed, like in endpoints, it's different, threat hunting and endpoints and classical Enterprise networks is also very important.}
+{\pard  \line \par}
+{\cf2 [00:11:00]}
+{ Don't get me wrong, but still the security products are much more mature. You have antivirus companies working for 20 plus years and their products are very, very mature. Cloud trail was just released in 2013. So there is no security product that has has more than 10 years of maturity over cloud trail logs because I hasn't existed, that long.}
+{\pard  \line \par}
+{So, the entire maturity area of both attackers, but also defenders and products there, is less. So it's more important to, to do that. But I think I got caught up too much in that. And I might not answer there question. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That's fine. But I think to your point then my line of thinking over there was if I'm an organization, probably maybe a startup, and do I need to care about Threat hunting?}
+{\pard  \line \par}
+{Maybe I need to care about Threat detection. Or should I just rely on someone like yourself and other community members to hopefully, create and some awareness around any vulnerable you may have found? I guess that's kind of where the question is coming from. Cause I imagine people at different scale have different requirements for threat at certain levels, compliance would force them to have some kind of detection, at least be point the guard duty earlier.}
+{\pard  \line \par}
+{A lot of that's a good practice. You have guard duty returned on. I don't believe there's a charge for it as well. Maybe there's a minimal }
+{\cf2 [00:12:00]}
+{ charge. But in respective, all cloud cloud service provider would have a thread detection tool, which people should leverage, but threat hunting is I feel like it's a next layer up after that, that you're actively searching for.}
+{\pard  \line \par}
+{So think that, oh, and should a small company think of it, I guess as a probably may. And at what level do you feel to what he was saying? Or if you will get a, that quite often and if you're, I don't know, maybe have government secrets and like, , Like the complexity of the kind of organization you may be in there might be a threat hunting required, but would you say smaller companies require threat hunters as well?}
+{\pard  \line \par}
+{\b\cf3 Eliav Livneh:\b0}
+{ That's a great question. So I think, generally not necessarily you should start thinking of, doing threat hunting or forming a threat hunting activities in your security organization. If you, see that the current threat detection tools that you have already been using, do not suffice in terms of the use cases you would like to search for because detection tools usually are, , not even vertical specific, but definitely not business use case specific they're more generic.}
+{\pard  \line \par}
+{So when those stop, Doing what you want in terms of co the coverage of specific threat scenarios you were worried }
+{\cf2 [00:13:00]}
+{ from, then maybe then you should start thinking about threat hunting. For example, if you do not have a threat detection product, then you should not think about threat hunting yet.}
+{\pard  \line \par}
+{You, maybe you can get it as an external services and a complimentary to threat detection or together with threat detection and threat hunting. There are companies that do that. We do that as well, but if you're building it yourself, then the first step is building a strong threat detection, capabilities which at first you should actually even start with outsourced tools, and then slowly build, build }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ it up.}
+{\pard  \line \par}
+{Oh yeah. Cause your point, you don't have 10, 20 years of research to find out, Hey, what should I be thinking about? Cause I imagine the first detection tool that you get, because it would not have business specific use cases you almost are looking for, Hey, wait, where's the ground zero for where do I start?}
+{\pard  \line \par}
+{What kind of detection should I be looking for? Exactly. Yeah. Sweet. I got a question here from Kennedy Tokoura do you use AWS S3 log complement cloud trail? It seems it has some information not available in cloud trail. }
+{\pard  \line \par}
+{\b\cf3 Eliav Livneh:\b0}
+{ So I, to admit, , I think the, question refers to S3 access server access logs or something of sir.}
+{\pard  \line \par}
+{I }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ have, I was gonna say Kennedy, feel free to correct us if we are wrong, but maybe it is the Aw S3 access log }
+{\pard  \line \par}
+{\b\cf3 Eliav Livneh:\b0}
+{ }
+{\cf2 [00:14:00]}
+{ because I'm saying it's because there is. Logging for S3, access logs in cloud trail it's called object level logging. And you can get logging from that too, if you, but it's opt, you have to turn it on, which is also a problematic , in terms of posture.}
+{\pard  \line \par}
+{, it's reasonable for cost perspective, but nevermind. So I've worked with those. I've worked with, I've worked with cloud trail object level logging, which is S3 activity. I haven't, I mean, I haven't worked yet with S3 server access logs or I think that's what it's called. So, so I don't know, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ but cool right now.}
+{\pard  \line \par}
+{Thanks for, well, I'll let Kennedy clarify if it was the S3 access logs or just the object logged, but that's an interesting one. So, because. A couple of other ways to look at S3, threat hunting as well, because sometimes the whole breach that people talk about, whether, how the S3 bucket open in public.}
+{\pard  \line \par}
+{A lot of times the, the main culprit for the threat when you are looking and so technic would not be a threat. I think there's a word for it. There's a , dangling DNS, threat that happens for may at S3 bucket, where you used to have a domain linked to an S3 bucket, but you delete the S3 bucket, not the domain.}
+{\pard  \line \par}
+{So someone else and create the S3 bucket. There was another one, with S3 bucket was basically, I mean, I guess someone estimate left it open on the internet. There's obvious }
+{\cf2 [00:15:00]}
+{ one, which people have heard about so many things in your point, even though these things are less than 10 years old at this point in time.}
+{\pard  \line \par}
+{And we haven't had the, number of years to kind of call out whether we have found everything to make it a mature product. So it's, I doesn't sound like it's a. To what he was saying earlier. It's a research thing where you kind of have to spend a lot of time, just basically identifying, going through, a lot of data to identify the hypothesis.}
+{\pard  \line \par}
+{It sounds like a really interesting at the same time, quite a challenging role as well, man. Cause I'm assuming people are thinking about going, oh, I wanna be like a amazing, I would have I'll discover a wonder. It'd be super cool. But I wonder, if people have the capability to start a threat hunting program, and they've listened to you and go like, oh yes, a cloud trail.}
+{\pard  \line \par}
+{ If you were to start again , what would be recommendation maybe for people who may be listening in, and I kind of was thinking, have it in the two words later on half of the, of the episode, but I'm kind of, I feel like this is a good segway to it because we spoke about.}
+{\pard  \line \par}
+{Threat hunting as it stands at the moment. And, and not every organization may need it, but you need threat detection for sure. But if it is a company that is capable of having maybe has sophisticated thing or attach }
+{\cf2 [00:16:00]}
+{ attacks that they think of that they feel affected by, is there like a qualification for this or is this basically hypothe research reevaluate the hypothesis?}
+{\pard  \line \par}
+{\b\cf3 Eliav Livneh:\b0}
+{ So, I, I don't know if there's any formal qualification for it. I took the, UN informal approach of, of what you mentioned the latter of just trying to understand exactly how would attack even beforehand. Well, how organizations use AWS and that anyone venturing into AWS threat hunting has to start off with, because I couldn't threat hunt for attackers before I understood how even the legitimate organization sees it.}
+{\pard  \line \par}
+{And then the next step is okay. I understand how organizations use it. How would attackers try to approach, how would they try to attack it and then, and then build hypothesis and, and revise and resubmit on the hypothesis. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Okay. And so maybe another question, this thing is then maybe at scale as well, how would this work at scale?}
+{\pard  \line \par}
+{Cause I imagine. Yeah, it's the scaling challenge. So how does that work at scale? }
+{\pard  \line \par}
+{\b\cf3 Eliav Livneh:\b0}
+{ So scale does is something very interesting to threat hunting, and this is a bit different than in threat detection, because you can imagine if you have a five person organization to one extreme side, }
+{\cf2 [00:17:00]}
+{ and for example, you have a, I dunno, anti viruses on all the computers, then you would imagine to get maybe alert once a week, once a month.}
+{\pard  \line \par}
+{And if you have a 50,000 person organization, it would expect the number of alerts pretty much be. 10,000 times that much, yeah. In threat hunting, it's different. The scale does it makes it both harder and easier. I'll explain why harder is because, there is so much more data. So first of all, from, in terms of the infrastructure perspective, you have to load and, and gather much more data from processing perspective and all the computation behind it.}
+{\pard  \line \par}
+{That's, it just makes it much harder, but that's the less cyber interesting part to talk about. It also, it's also harder because, there is much more abnormal behavior because if you have more people, then they do more abnormal stuff and more normal stuff looks like more bad stuff. So that, that makes it much harder.}
+{\pard  \line \par}
+{These environments are much more chaotic and larger. On the other hand, threat hunting in a huge environment is also easier because. Often, not always, but often truly malicious behavior stands out more when you have a huge data set of comparison of lots of different legitimate }
+{\cf2 [00:18:00]}
+{ behaviors to compare to.}
+{\pard  \line \par}
+{So even if users behave in strange ways and do lots of other stuff, the attacker would still stand out. And when you're comparing to, for example, a thousand other users, instead of to five other users, then that difference stands out much more because in five users, if someone's off by 20%, say, okay, let's, there are four users, another one a bit off, but if you have thousand users all around the same baseline, then one off by 20%, that makes it stand out much more.}
+{\pard  \line \par}
+{So there are many more benign examples to kind of like feed off and build the baseline. And that helps. And another interesting aspect, which is. Pretty crucial for threat hunters, is it's much more rewarding. And it's interesting because hu threat, I'm thinking a small environment and I've done on it on both on small organizations or customer environments, like, I don't know, hundred, 200, 300 people or company and tens of thousands people, company and it's different.}
+{\pard  \line \par}
+{ The larger the organization, the more fun it is. The more interesting it is, the more challenging it is because a there's much more bad to be found, right. Even if it's not }
+{\cf2 [00:19:00]}
+{ always APTs every day after day, even finding like, , a new DevOps employee that's copying, using his personal endpoint with an admin access key, and then using it from a VPN from an on a monitor device and then doing lots of.}
+{\pard  \line \par}
+{Shady stuff with it, even though it's legitimate finding that is interesting because the security organization often doesn't know that and you improve the security just by that. So by a larger organization has much more chaos. So finding more chaos means finding more things and something that's very hard for, for hunters.}
+{\pard  \line \par}
+{I think in my perspective is not finding anything, just hunt for three weeks and find nothing it's very discouraging. So that's also an interesting aspect. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh, wow. Yeah, that would be, because I think I was gonna add another scale question there because not everyone would just have one AWS account.}
+{\pard  \line \par}
+{They probably would have hundreds of AWS account depending on , where you see it as well. So, how does that scale from a, I guess a cloud infrastructure perspective? Cause it sounds like the problem just gets even larger. }
+{\pard  \line \par}
+{\b\cf3 Eliav Livneh:\b0}
+{ So it really depends on how you gather the data. And this is very much , a data engineering question ETL question.}
+{\pard  \line \par}
+{Yeah. And it, it, it basically depends on the tool you }
+{\cf2 [00:20:00]}
+{ use because cloud actually is much simpler in, in the sense than the non-cloud stuff, because you could just have all your hundreds of counts logging to the same single cloud trail bucket. And if you have a tool that feeds off of that bucket, if you're alerting it into a seam or XD or whatever, or using Athena over that single bucket, }
+{\pard  \line \par}
+{If you have hundreds of accounts or a single account, it doesn't make much of a difference. It makes a difference in terms of the sheer quantity of data. And if you have hundred X data, then queries will take a hundred X time or cost a hundred X more. But there's no real way of getting around back. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right.}
+{\pard  \line \par}
+{Okay. Fair enough. So automation is your help, I guess, as much as an automation. Can you do fair enough? Well, I'm, I'm actually curious. Do AWS have any threat hunting tools? I know we spoke about the threat detection tools like guard duty and I'm sure the other ones as well, are there threat hunting tools as well in AWS?}
+{\pard  \line \par}
+{\b\cf3 Eliav Livneh:\b0}
+{ So , I haven't really encountered a service for threat hunting. But there are two services or two, two ways of, of still doing something close to it. First of all, if we look at threat hunting as okay, getting the data in, in some place and then start running on it queries, then at a }
+{\cf2 [00:21:00]}
+{ basic level, Athena gives that you just can write queries and see data.}
+{\pard  \line \par}
+{So, it isn't a service focused on threat hunting in terms of the company infrastructure and additional, features that would give you easy follow up investigation and stuff like that. But it works for asking questions, which is the core base of threat hunting. That's on one hand and on the other hand, I mean, that's one thing.}
+{\pard  \line \par}
+{And the second thing is a OS detective, which is also very, very useful. It's not for threat hunting, but it's for threat investigation, which is, it very important component of threat hunting. Because if you're in threat hunting, I formulate a thesis and then I search into the data and then I find some results and I need to investigate the results to understand if those, if they were malicious, if they were benign, how I can improve my query logic to eventually turn into infection.}
+{\pard  \line \par}
+{A core part of that is investigating those events. And when I want to investigate, a specific event or specific session, That's something that's relatively hard to do. And , we can talk about that a lot. , I focused a lot about this area of how to investigate a control plane security incident, but it always detective helps with that }
+{\cf2 [00:22:00]}
+{ a lot.}
+{\pard  \line \par}
+{If you start with some ARN or some IP or something in a session, a bucket, then it lets you relative easily investigate and ask lots of questions with a very fun to consume and easy to consume UI, instead of just looking at raw logs, which is pretty hard. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I've got a question about detective, you just mentioned it. Can you explain what you find useful in a AWS detective, such as specific features? }
+{\pard  \line \par}
+{\b\cf3 Eliav Livneh:\b0}
+{ So I have to admit, I, I haven't used it a lot and I will say something here in general that I.}
+{\pard  \line \par}
+{Attempted and, and pretty much succeeded in building a, a variant of AOS detective features into our product. And that's a lot of what I research and that's a lot of why I research cloud trail to be able to answer those questions and supply that functionality. But from what I remember I looked at, and these are the I in questions that need to be asked in investigating, security incidents is understanding.}
+{\pard  \line \par}
+{So for every control plane security incident, that someone wants to start investigating, I always try to answer three questions. Who did it, what did they do and where they did it, and detective specifically, and in general, any investigation tool, should help answering those when answering who }
+{\cf2 [00:23:00]}
+{ did it is complicated and.}
+{\pard  \line \par}
+{And that's a whole topic of understanding what is who and, and how we can know that because we can have complex identity chains of assume role identities and, federated identities and users, and, and that's a whole myth, and it's pretty hard, but it's important to be able to do that, there's answering what they did, which is also non-trivial, but that's basically being able to understand from the log, from the culture logs, that happened in a specific session, by a specific user IPA and access key, et cetera, what they actually did, which these answer is to, all these, all these 6,000 events.}
+{\pard  \line \par}
+{This is what happened, but that's very hard to consume. So there's lots of stuff that can be done regarding that and where they did it from, which is. The much more trivial part than the first two questions, which is mainly their IP address and user agents, which has nothing eight less specific about it.}
+{\pard  \line \par}
+{Mainly, but it's just like, okay, where the IP is from and what, which user agent they use. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Awesome. And I think it's funny because Chester is also working on building his, his own for it in Splunk. Like I suggest, basically said funny, I asked because I'm building }
+{\cf2 [00:24:00]}
+{ a more useful version myself, why I Splunk.}
+{\pard  \line \par}
+{So good luck with that Chester. Maybe you can connect with the layout as well, and you guys can come with something interesting. So cause I think we just, before we kind of switched to the database detective topic, we were talking about investigating and I think that's to probably an unexplored well, Hasn't been spoken about that much.}
+{\pard  \line \par}
+{So I'm curious when you do find a threat , or a security bug however you call it, classify it, I guess you, how do you start investigating it? Because I imagine it's the same case with someone who's works in security operations as well. They identify something. , what are some of the things you recommend at that point in time?}
+{\pard  \line \par}
+{And I'm happy for you to kind of call out certain examples if , of any as well. }
+{\pard  \line \par}
+{\b\cf3 Eliav Livneh:\b0}
+{ So, really the first thing, as in, from the three questions I mentioned earlier as into who did it, identity in cloud , is, , very robust and extensive, but it also makes it complicated from that's a flip side of the coin.}
+{\pard  \line \par}
+{So you could have an ARN, an alert for example, , on some ARN doing something and the ARN would be something, something assumed role admin slash admin. Okay. Or it could be, it slash timestamp. And that doesn't tell me anything about who actually did it. And it's either }
+{\cf2 [00:25:00]}
+{ right. There are two possible answers.}
+{\pard  \line \par}
+{There's either an automated something, a service, a script or something doing it, or it's literally a person now doing something with sitting behind a keyboard and doing something, and figuring out the answer to that is, is critical because it helps understanding, okay, what caused this behavior and even splitting it just between an automated service and a person makes all the difference in understanding how to continue investigating it and understanding if it was legitimate or not.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I thought it was really interesting point. I didn't wanna just brush it off that there are two kinds of identities there as well. One could be automated. Someone has basically left a script and just keeps happening in the background, cuz I could technically drop something in there and it which doesn't happen between nine to five.}
+{\pard  \line \par}
+{So, Hey, Ashish was not in the office, but something's going on in the background. I'll let you continue. }
+{\pard  \line \par}
+{\b\cf3 Eliav Livneh:\b0}
+{ Yeah, definitely. So, , that's a really important distinction to make, and it's not easy to do. You need to take the original ARN and try to kind of like follow it back.}
+{\pard  \line \par}
+{Sometimes it's a specific user belong to a specific service. And then if you say, okay, it's the, I am user of this service and it's called from the IP of the }
+{\cf2 [00:26:00]}
+{ pods of that specific service in EKS. And I know, okay, I know it's disservice. It's an easy end, but sometimes it's not easy because it's an assumed role done from an IPU.}
+{\pard  \line \par}
+{You don't know. And then you have to go and find back who assumed that role. So you have to go and find back the assumed role call that created, generated those credentials. And you see who called that assumed role. And that could happen in, in definit. A number of times, I haven't really seen it more happening more than four or five times, but there's a chain.}
+{\pard  \line \par}
+{It can be a chain of. Identities. And you have to follow those events back until you circle back to the original identity that called that event. And then you can see, is it a person using a script? Is it a person using a console? Is it an automated service running from here? And that's just to answer like who was their actual original identity that called it }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ interesting.}
+{\pard  \line \par}
+{As you said, that that made me remember something about AWS in general. When a lot of, I guess one of the recommended practice in AWS is to have cross account access. So, and to your point about building up that chain, imagine if you have 80 or hundred AWS accounts, you started the first one, but keep doing cross account, cross account, cross account all the way to the one that you really want to, actually have some bad impact on because, and you can correct me if I'm wrong.}
+{\pard  \line \par}
+{What my understanding }
+{\cf2 [00:27:00]}
+{ is, if I assume a role in an account, it would know what account it came in from. You can follow the chain if you like, but the chain can be as long as the number of accounts in the organization as well. And if you have hundreds of accounts, basically, you're going through hundreds of cross account of potential kill chain that you have to go through to find out, Hey, , where does this bread come lead to?}
+{\pard  \line \par}
+{Yeah, }
+{\pard  \line \par}
+{\b\cf3 Eliav Livneh:\b0}
+{ technically is possible. I don't think any organization would actually have policies like so complex that you can assume roles from each one to each other on, but it definitely, and I've seen long chains, like up to five that I've had to work hard in following back and back and back and back.}
+{\pard  \line \par}
+{And you don't even notice }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ you's worded five. Like you've gone all the way to five if cross account before you actually got to the real person or potentially, or real account where it would've started. }
+{\pard  \line \par}
+{\b\cf3 Eliav Livneh:\b0}
+{ Yeah, it was, I think it was maybe two or three accounts, but five different identities, like back, back, back.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ What are some of the common things you see in terms of are there any, cause I'm just thinking from a perspective that people who are listening to this would be curious and going, oh, okay. I just need data source. Okay. So, Eliav mentioned I can go cloud trail. I can look at S3.}
+{\pard  \line \par}
+{I can probably even look at }
+{\cf2 [00:28:00]}
+{ EKS. So now, since I've looked at that, , I've made, built up a hypothesis. What, I mean, I guess the real question that becomes over here, I've detected something which I, to your point have identified is not a actual user is an automated user to what he was saying earlier.}
+{\pard  \line \par}
+{And it's gone through five different kind of, IM roles or whatever to identify. Oh, okay. So this is this particular action. Cause sometimes that could be outside of AWS as well. I imagine like it could be a GitHub action that would've created it. Then you kinda are in a different rabbit hole at that point in time. What are some of the common things or, evasion techniques people can use to, not be discovered? Cause I mean, there's one side to threat hunting is us looking for people. So us looking for threat, the other side is they might also be trying to delete their breadcrumbs as well as they're walking out of the door.}
+{\pard  \line \par}
+{So are, are common evasion techniques people should look out for as they're building up for their, I guess, potentially a career in threat hunting, I guess. }
+{\pard  \line \par}
+{\b\cf3 Eliav Livneh:\b0}
+{ , So basically besides like the identity you use and like the name of the session , you can, in an assumed role, when you assume a role, you can give a name and academic can be misleading, which is by the way, great.}
+{\pard  \line \par}
+{You can give a misleading name that, , that throws }
+{\cf2 [00:29:00]}
+{ defenders off. Besides that there are two things that are, almost completely under control as an attacker. When you do when you make API calls, they do list API calls with like stolen credentials, which is the source IP address. And the user agent.}
+{\pard  \line \par}
+{Now the user agent is, shouldn't be surprising by definition. It is what is supplied by the user, by the client. And I haven't seen many attackers actually making use of this, but why not? I mean, you can just write there whatever you want. And many logics, I wrote myself even, Rely on the user agent to try and understand and say what type of client and what services is, because if I see it's console.aws dot com that I know it's a web session.}
+{\pard  \line \par}
+{And if I know that it's AWS dash internal slash something, something, something I know it's some internal pod probably for inks and the master, the master, note or whatever. And I know it's probably okay, it's AWS running and, and everything else. I can say, ah, this is a Python because it's, there's Bodo in the user agent.}
+{\pard  \line \par}
+{So , it's just fully controllable. And that's very misleading, and it can be very misleading and there's not much to do. I mean, there, you can detect that, but it's hard. You need to compare. The user agent }
+{\cf2 [00:30:00]}
+{ and everything else being done to see, does this make sense? For example, if, if someone's spoofing a, a console, a web console user agent, but they didn't have a console login event at the beginning of the session.}
+{\pard  \line \par}
+{Okay. Then that's something doesn't make sense. So that's like the user agent, and there's a source which you wouldn expect an attacker would be able to control. But that was one of the findings I had. Generally the source I be address in cloud trail is the source I be addressed from which the person making the person or system or whatever, making the API ABLs API call, that the source I be address from which that, that entity is making that a call.}
+{\pard  \line \par}
+{And you can't really control your IP address. You can use in a VPN, it'll be a different IP address, but it can't be whatever you want it to be. It is where , your request is originating from. Even if you hide it, to be something else. However, There is, and this is the technique I found.}
+{\pard  \line \par}
+{There is a way to spoof, in a very elegant way, the IP that your actions are being logged to in cloud trail. And it basically uses two core features of VPCs. One is, the IPSS that you can give to subnets in a VPC. And the second is a feature called }
+{\cf2 [00:31:00]}
+{ VPC peering. So the first one is simple. You create a VPC when you create a sub VPC, you can give it IP, IP addresses and IP range.}
+{\pard  \line \par}
+{Not only internal IP ranges, not only 10 0 0 and 1 92, 1 68. You can give it anything. You can give it 1, 1 11, et cetera, any public address you can give as the internal IP address, sub range of the VPC. And that's one. Okay. Feature important for some reasons, I guess. And the second feature is VPC peering that is also a performance and optimization feature that lets you make API calls directly, within , your VPC within your subnet, without going through the internet to making an API call.}
+{\pard  \line \par}
+{If you have, for example, instances in a VPC making AWS API calls and the, if we join these two features together, if I, as an attacker have, stolen credentials of some victim, I in my attacker controlled AWS account that I use with the credit card, I just bought off the internet. I spin up a VPC with the subnet, with subnet, with the IP, which I want to spoof, that'll be written into logs eventually.}
+{\pard  \line \par}
+{Let's say I dunno the IP of the white house sub for example, I spin it up and then I create an instance in that VPC and I create a VPC endpoint for the service }
+{\cf2 [00:32:00]}
+{ I wanna call. And I just make the call with spoofed credential with the stolen credentials and because the call was made directly through the VPC endpoint, it never went out to the internet cloud trail, have no other choice, but to log the internal IP address of the machine that I created, because there is no public IP addresses, it never went out to the internet.}
+{\pard  \line \par}
+{And that private IP address is the IP that I picked, which was basically the IP I decided to spoof. And it would simply appear into the cloud logs with that source IP address. I have to admit, I have to say, that. When this is used, then there's also another field that's populated with the VPC endpoint ID, which says, hints, look, this was done through a VPC endpoint.}
+{\pard  \line \par}
+{This might not make sense, but I doubt anyone who doesn't know this would, would notice this. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That's interesting. So, but I guess that's assuming you, I mean, it could be your own AWS account as well, where you create that VPC endpoint because you have con so let's assuming we have the hypothesis over there to your earlier point is you have access keys to your victim's AWS account, but instead of just working in a directly, you've created another }
+{\cf2 [00:33:00]}
+{ AWS account, which is really just to be a stolen credit credit card, created a VPC endpoint, between that and the VPC on, onto your victim account.}
+{\pard  \line \par}
+{And basically using that as a way to kind of do whatever you're doing. Is that right? }
+{\pard  \line \par}
+{\b\cf3 Eliav Livneh:\b0}
+{ Yeah, it's, it's creating a VBC endpoint directly to AWS services. You don't even need to do anything with with the other ABC, for example, I can even use credentials that were accidentally leaked to GitHub as an attacker.}
+{\pard  \line \par}
+{I can use those credentials, just spin up my own AWS account and do it. I don't need to know anything about my victim's a AWS actual and environments. All I need are stolen credentials. That's it. Sorry, what do you need? Sorry, only stolen credentials. Really? Nothing else, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ but so how they account one account two related like, so, I mean, is there a link?}
+{\pard  \line \par}
+{\b\cf3 Eliav Livneh:\b0}
+{ Not at all the VPC peering, what did sorry. I, I might have said VPC peering at some points. I meant, I, I apologize. I confused with GPC end points. Oh, this has nothing to do. This has nothing to do with GPC peering. I apologize. Oh, right, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ right. Peering. Fair enough. So, so VPC endpoint, because you can have a VPC endpoint linked to any VPC and or any AWS account.}
+{\pard  \line \par}
+{\b\cf3 Eliav Livneh:\b0}
+{ Yeah. You can create it in anys account and }
+{\cf2 [00:34:00]}
+{ you create it for a specific service. And there are over 130 or something services supported. Most of the major ones are supported there and it just lets you make calls to that service, directly through the endpoint and not through the internet. And I can do that from the attackers, account.}
+{\pard  \line \par}
+{So I don't need to do anything with the victim VPC actually. It's just, is this an end point? }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh, so you're piggybacking on the endpoint to get information about another because I, I, well, another Aw account, I guess. So you technically, you don't need to have any control on the other one. Basically you're making calls from your own stolen credit card, AWS account.}
+{\pard  \line \par}
+{But because it's VPC endpoint trying to make calls to this, whatever victim AWS account, I guess to your point, that's when. The victim's AWS account cloud trail would log it as internal IP. }
+{\pard  \line \par}
+{\b\cf3 Eliav Livneh:\b0}
+{ It would log it as the IP that I decided. Yeah. Oh, and I created the BPC with, so it's like using those loan credentials from anywhere else, just with this whole process.}
+{\pard  \line \par}
+{, the only thing that changes is the source IP, or is logged in the victim's title logs, which can definitely throw defenders off because if I'm investigating, in a security incident and I say, okay, this looks weird. It looks bad. Ah, but }
+{\cf2 [00:35:00]}
+{ it's from the office IP, then I say, okay, or maybe it's from their administrator IP and say, oh, okay.}
+{\pard  \line \par}
+{Or it's an AWS internal IP. And I say, okay, it's fine. So }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ yeah. Yeah. That's a great Eva technique, man. I think so. Cause no one more thing that I hear quite often is the fact that there are a couple of other scenarios where. We obviously spoke about evasion from that perspective. I mean, one extreme way could be just delete your cloud trail log as you walk out and probably delete the S3 buckets as well, where the cloud trail is being stored.}
+{\pard  \line \par}
+{But you come across, challenges from a hunting perspective where say the resource doesn't exist. Cause I think in the beginning of the conversation, we kind of had that as, as well. Where there being, non-persistent resources, I guess you can have AWS account, a machine potentially being compromised, like an EC two instance being compromised.}
+{\pard  \line \par}
+{But by the time you get to it's already been deleted. Right? So, for those ones, like what, is there any hope for? Those are basically, oh, I guess if we didn't have an S3 bucket with cloud trade logs left behind, we don't have anything. }
+{\pard  \line \par}
+{\b\cf3 Eliav Livneh:\b0}
+{ So, so yeah, it's pretty much down to what, to, to the logs you have for cloud trail, unless you have snapshots of all the instances in your environment, which is probably not something you have.}
+{\pard  \line \par}
+{Then it's down to the logs you have in cloud trail and }
+{\cf2 [00:36:00]}
+{ the retention you store, which is also an important part of it. And, and also, like I mentioned earlier, the config logs, if you happen to log them, which is definitely non-standard by any means, but it helps you recover configurations of past resources.}
+{\pard  \line \par}
+{So, and also you can see some configurations in cloud trail logs, if where to look for them. So for example, when you create an instance, then the event logged on that called run instances of, information with with these on these resources. But it's hard. You need to look, you don't need to know where to look for.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That's pretty awesome. We kind towards the tail end of this question as well. So, obviously what the question of, where does when you start learning for this? Cause I've got a question here from Munaam Tariq as well. So , what are certifications? You go for blue teaming and cloud. So if you can probably, if you have some suggestions there, but also from a side as well.}
+{\pard  \line \par}
+{\b\cf3 Eliav Livneh:\b0}
+{ So, I actually don't have any recommendations for certifications because I didn't get any, and I didn't look for any myself. I, I did a very relatively solo path in just trying to learn it on my own, which was non ideal because it made my learning process much it longer. However, what I would recommend for anyone who wants to get into this, To not }
+{\cf2 [00:37:00]}
+{ do the path that I did in terms of just trying to read AWS documentation and go from there.}
+{\pard  \line \par}
+{But the just there is, and I've only joined this workspace recently, but there's a wonderful cloud security forum, slack workspace, that has, so many really smart people that know lots of stuff so much more than anything I would ever learn by myself, about datas security and in general cloud security.}
+{\pard  \line \par}
+{And just a few months have been that slack workspace, I've learned so much more and have wonderful references to lots of other places to learn, stuff from and ask people stuff. So I definitely recommend anyone in the cloud security workspace to join that slack workspace, and. And the second general, recommendation is also trying to read up on as much as possible, publications and also Twitter and stuff like that, of people that are in the field and post post stuff.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yep. No, thank that's pretty awesome as well. And I'll I'll good. Shout out to fwdcloudsec as well. Just gonna come up soon as well. So definitely check that out con that conference is definitely gonna be, really interesting and where I'm gonna be definitely supporting hopefully in person, but hopefully that answered your question.}
+{\pard  \line \par}
+{but other certification, you could probably look for the }
+{\cf2 [00:38:00]}
+{ AWS certification as well, but I think the big caveat there, and it's probably hard to answer those questions when. I mean, I guess both Eliav and I can't make out as to what you've done in the past, but sometimes having that basic foundational knowledge of networking and some, having some kind of experience for working with network identity, like we spoke about doing the episode about there's an automated identity and there's a permanent identity.}
+{\pard  \line \par}
+{Like the, just having that understanding or even networking like I'll probably just start over there before blue teaming before you straight jump onto a cloud certificate. But yeah, I mean, feel free to kind of reach out if you have more questions there, but good. Thanks for the question. Cool. All right.}
+{\pard  \line \par}
+{So that's pretty much what we had time for in the episode where for people, obviously, who would've been curious and have learned a lot from this, maybe wanna know more about, how else they can do 20 way or threat hunting in the cloud space, because it is a small community.}
+{\pard  \line \par}
+{So I think it's all about hanging out together, as you were saying, not doing it on your own. Where can people reach out to you and where can they connect with you? }
+{\pard  \line \par}
+{\b\cf3 Eliav Livneh:\b0}
+{ So, either email, my email address El hunters, I, or my personal one, the gmail.com, or LinkedIn }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ sweet and, and I'll lead those links for at least I'll leave a LinkedIn link as well on the, on }
+{\cf2 [00:39:00]}
+{ the show notes.}
+{\pard  \line \par}
+{But thank you so much for doing this, man. I appreciate this. And I think everyone else would've had a great time as well. So thank you so much for your time. And I will see, I guess, hopefully I can get to bring you back again and maybe, , it will be really interesting next time. We'll probably do have a live demo of threat hunting exercise, but we'll see, we we'll we'll try and see if you can go on that part, but thank you so much for your time.}
+{\pard  \line \par}
+{And thank you everyone else who will listening in, I will see you in the next step before next weekend, but until then see you peace. }
+{\pard  \line \par}
+{\b\cf3 Eliav Livneh:\b0}
+{ Thank you. }
+}

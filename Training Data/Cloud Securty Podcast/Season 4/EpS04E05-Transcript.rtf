@@ -1,0 +1,546 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red114\green179\blue114;
+\red128\green128\blue128;
+\red102\green0\blue204;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\b\fs48 Mrunal Shah\b0}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ why would you start with containers in the first place?}
+{\pard  \line \par}
+{Why not just start with, I don't know, EC2 or something else ? }
+{\pard  \line \par}
+{\b\cf3 Mrunal Shah:\b0}
+{ When the cloud started, becoming more mainstream. Most of the engineering teams were running their software on EC2s and auto-scaling them and the world has graduated a little bit since then.}
+{\pard  \line \par}
+{Whether you are in prod or you are in development, you don't have those issues of, Hey, it works in my development but doesn't work in my prod. So we're seeing more and more teams moving towards containerized workflow and more and more companies moving towards containerized workflows, and that's becoming the modern application stack.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Building a container security program is quite complex, especially when you have to deal with containers Kubernetes, and the complexity of whether you are on premise or hybrid or maybe have a really large cloud footprint. In this episode, we're talking about building a security program, which is running on containers, or if you're gonna call it building a cloud security program with containers.}
+{\pard  \line \par}
+{And for this we have Mrunal Shah. He is the head of container security for Warner Brothers Discovery, }
+{\cf2 [00:01:00]}
+{ and he spoke about what do you need to think about from a skillset perspective, a team perspective, a technology perspective, what are some of the challenges in the container space that you need to consider?}
+{\pard  \line \par}
+{What are some of the things you need to unlearn from a traditional world that you probably don't need to think about? So if you are someone who's trying to build a program in 2023 for cloud security, but using containers primarily, and when I say containers, I mean containers and Kubernetes.}
+{\pard  \line \par}
+{Definitely check this episode out and if someone else who's trying to do this as well, definitely share the episode with them. As always, if you're watching us all listening to us for a second or third time, I would really appreciate if you give us a follow and subscribe to the podcast on your favorite audio platform or on your favorite video platform, like YouTube or LinkedIn as well.}
+{\pard  \line \par}
+{And if you are up for more cloud security, definitely check us out. And if you're feeling generous enough, definitely drop us the rating or review on iTunes and Spotify. It helps us find guests and let's future guests know that they are coming to a show which has provided them value. I hope you enjoy this episode of Container Security Program.}
+{\pard  \line \par}
+{I will }
+{\cf2 [00:02:00]}
+{ see you in the next episode. Peace!, }
+{\pard  \line \par}
+{\b\cf3 Mrunal Shah:\b0}
+{ by bringing developers and security together, you don't have to choose between speed and security, develop fast, stay secure.}
+{\pard  \line \par}
+{Hey, Mrunal!, how are you? Hey, Ashish! Thanks for having me. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Not a problem. Thanks for coming, man. By the way, congratulations on your talk at reinvent as well. it was really good. I'm glad we got glimpses of it and replay of it as well. So for people who may not know who Mrunal is, could you share a bit about yourself and how you got into the space?}
+{\pard  \line \par}
+{\b\cf3 Mrunal Shah:\b0}
+{ I'm Mrunal Shah!. I'm responsible for all of container and cluster security for Warner Brothers Discovery. My team is working on all sorts of container and security challenges for a very massive scale that we have at Warner Brothers Discovery, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Your talk was around container threat detection, but before we get to that threat detection part, I just wanted to talk about from a program perspective as well considering you have build a program and where many people would just be confused as to why would you }
+{\cf2 [00:03:00]}
+{ start with containers in the first place?}
+{\pard  \line \par}
+{Why not just start with, I don't know, EC2 or something else ? }
+{\pard  \line \par}
+{\b\cf3 Mrunal Shah:\b0}
+{ Most of the engineering teams , when the cloud started, kind of becoming more mainstream. Most of the engineering teams were running their software on EC2s and auto-scaling them and the world has graduated a little bit since then.}
+{\pard  \line \par}
+{We're seeing more and more folks using clusters and containers to package their environment and for running it, on their stack. It's a more modern workflow. It gives you scalability. It allows you to be consistent across your different working environment.}
+{\pard  \line \par}
+{Whether you are in prod or you are in development, you don't have those issues of, Hey, it works in my development but doesn't work in my prod. So we're seeing more and more teams moving towards containerized workflow and more and more companies moving towards containerized workflows, and that's becoming the modern application stack. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ From a leadership perspective, what's the advantage? I mean, technically you are able to rinse and repeat quite often. As a, leader or maybe even as other leaders listening to this }
+{\cf2 [00:04:00]}
+{ conversation, in your opinion, why should they consider containers over like a regular EC2 compute?}
+{\pard  \line \par}
+{\b\cf3 Mrunal Shah:\b0}
+{ So with containers you can pack and get more out of your host. And if you're running in a more optimized way, you can obviously have more performing applications. , traditionally EC2's pack a lot of os . So there's a lot of OS components, which also from security perspective bring in a lot of vulnerability!}
+{\pard  \line \par}
+{Whereas if you look on the container side, the footprint is minimal on the OS side. So a lot of very popular base images that you see in the open source at the moment, Alpine, they're five megabytes compared to a gigabyte that you'd probably see in a regular os. So you get to run your application on a minimal footprint.}
+{\pard  \line \par}
+{And you can pack a lot more of your application within a server compared to if you were to do it on a bare metal or on an EC2 }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ two. Reminds me of containers that I saw in one of my previous workplaces where it was 5GB for a container. You're like, that is }
+{\cf2 [00:05:00]}
+{ not a container, that is just an EC2 instance at that point in time.}
+{\pard  \line \par}
+{Might as well making an EC2 instance. That's which you find, because I think the reason I wanted to have this episode is also because we've been talking about containers and ties for such a long time, or it feels like a long time now. Yep. A lot of people find it hard to understand the challenges that come with running a program as well.}
+{\pard  \line \par}
+{Yep. Both from a technical aspect as well as from a team and leadership perspective as well. Starting off with the, the leadership perspective. What are some of the challenges, as a person building the program on container security, what are some of the non-technical challenges that you came across as you were trying to build the program?}
+{\pard  \line \par}
+{\b\cf3 Mrunal Shah:\b0}
+{ I'll do both technical and non-technical! I think from leadership perspective, there's three big components that I see. And, I think they may be applicable in other areas as well. It's mostly people. tools and skills so you want the right number of people running the program.}
+{\pard  \line \par}
+{You want them to be appropriately skilled. . To be able to understand clusters, containers,}
+{\cf2 [00:06:00]}
+{ and then you need to give them enough tools so that they can efficiently do their job. Right. So those are the three big components that , kind of apply very broadly and obviously they also apply in container security.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Of course. And to your point then, from a team perspective I imagine for a lot of leaders, they already have an existing team that is already probably really good at aws, but may not be container expert. Is there a difference in that skillset? Like for example, if I know AWS services, how different would it be for me to pick up containers or is that a challenge as well?}
+{\pard  \line \par}
+{\b\cf3 Mrunal Shah:\b0}
+{ Yeah, there's some basic skills you'd need beyond cloud. And certainly cloud is. Foundation yes. , especially if you're running your workload , in cloud, you obviously need to understand the core cloud concepts, so that's the foundational piece}
+{\pard  \line \par}
+{ Yeah. Especially if you're running containerized environment , but containerized environments also run outside of cloud. So they're not necessarily married to the cloud. People are running }
+{\cf2 [00:07:00]}
+{ that on their, on-premise data centers and so on and so forth. I, I would highly recommend , some certifications that , at least, if anything, it'll bring your team to a common language . On how you communicate within your organization. So , I I would recommend , certified Kubernetes admin CKS and CKA. Those are the two ones. I think you have to do CCK before CKS. And the benefit is not necessarily that's gonna, , have your team learn everything that you're gonna do at Job, but it's gonna bring them to a place where you're all speaking the common language.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Mm-hmm. . And , even if the people who are involved in that conversation are not, say, working containers directly, but it's worthwhile them going through, especially if the organization is working in a container space or the team's gonna work in container. . }
+{\pard  \line \par}
+{\b\cf3 Mrunal Shah:\b0}
+{ Right, exactly. But I wouldn't say that people who haven't done CKA or CKS can't break in.}
+{\pard  \line \par}
+{Oh, of course. }
+{\pard  \line \par}
+{especially like, there's quite a few folks who have }
+{\cf2 [00:08:00]}
+{ extensively worked on Kubernetes , and they have a lot of working knowledge. So the goal is if you have a team and you want to upskill them and you wanna make sure you're all speaking the same common language, just like cloud has its own certifications where it doesn't necessarily teach you everything about the cloud and how to design and run, , things on the cloud, but doing some sort of certification just brings that common language within your team.}
+{\pard  \line \par}
+{Right, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ of course. And let's, let's move on to the technical aspect as well then. From a technical perspective, as you were saying that, , you need to learn Kubernetes as well. And a lot of people still kind of feel like, wait, wait, we were talking about containers. Why are we talking about Kubernetes now? I'm thinking of services like ECS in aws, and separate to the EKS thing, a lot of people are confused by Hey, which one should I go for? Why would it make sense for me to go one over the other? Do I need, or do I always need Kubernetes? I know I've thrown three questions at you, but start with, what's the difference here between the ECS and the EKS kind of the world? }
+{\pard  \line \par}
+{\b\cf3 Mrunal Shah:\b0}
+{ I almost see it as a two different thing, so if }
+{\cf2 [00:09:00]}
+{ you are a developer, you probably don't need to know everything about running and managing a cluster. So you can get away with just knowing your application and being able to containerize the application. Docker is a very popular tool that folks use, but there's also other tools open source tools that , I've seen teams use for building containers nowadays and. There's a whole standard now open container standard where they specify how you can build containers and so on and so forth.}
+{\pard  \line \par}
+{But dockers obviously the most popular tool that I've seen , yeah. Across the board most people use. Developers for the most part can get away with knowing how to sort of containerize their application. And usually the handoff at that point happens to some sort of platform engineering team that is managing the cluster, managing the scalability, reliability of the clusters designing the clusters, designing the network components of the cluster service.}
+{\pard  \line \par}
+{So that's sort of where Kubernetes comes into the picture. Kubernetes is sort of the open source project from Google. And it has a lot of history. It used to be called something else, and I forget the name, but yeah, }
+{\cf2 [00:10:00]}
+{ it was . It was an in-house project from Google that kind of, they made open source.}
+{\pard  \line \par}
+{There's, , many cluster management tools and EKS is the managed service from AWS that runs Kubernetes. But you can pretty much take Kubernetes and also run it by yourself, just taking the open source piece. And then there's ecs, which is not Kubernetes. it's got its own terminology and its own names and so on and so forth.}
+{\pard  \line \par}
+{So just a very different version of AWS EKS. But I think Kubernetes gives you a lot of knobs and dials to play around and change things. And ecs, in my opinion, has been a little more simplistic on that front where. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ If I come to you and, Hey, I've got a hello of world Yep. Versus I've got, I don't know, like I'm maybe building a bank over here, . Yep. It's gonna be a full fledged, scalable, blah, blah, blah, , the full cloud first kind of app. Yep. What would your choice be and why between the two.}
+{\pard  \line \par}
+{\b\cf3 Mrunal Shah:\b0}
+{ So there's a lot of monolithic applications that sort of have all the components sort }
+{\cf2 [00:11:00]}
+{ of bundled up together that sort of used to be the software development philosophy many years back. And moving forward, we are seeing monoliths being broken down into more service oriented architectures.}
+{\pard  \line \par}
+{So you have distributed services very tiny services that coordinate with each other and. are able to take in requests and process it and communicate with each other. But they're not, sort of monolith. They're not all like, kind of jumbled up together.}
+{\pard  \line \par}
+{They're their own components. And those services make , perfect applicants for dockers docker containers and running on, on clusters. Yeah. But if you have a monolith that you would obviously want to slice and dice it and make it more service-oriented architecture and sort of break it down into a smaller components and dockerize just those components and then kind of container and, put 'em on the clusters.}
+{\pard  \line \par}
+{Once you have broken down your monolith into microservices you need to manage the scalability and reliability and }
+{\cf2 [00:12:00]}
+{ upkeep of those microservices. Yeah. And that's when you would look at a cluster management tool such as Kubernetes, where you would deploy these services into that cluster and define and again, Kubernetes gives you a lot of knobs and dials where you can define, okay, well I want three of these services running at any point, either as replicas or in some other ways.}
+{\pard  \line \par}
+{And so you can define those in Kubernetes artifacts or in helm charts, which is a newer way of telling Kubernetes how you want your stuff to run. Kubernetes takes those files and knows the state that you're desiring for your application, and then it tries to manage it.}
+{\pard  \line \par}
+{So in case one of your microservices goes down, then Kubernetes will see it and automatically pop in a new service and bring it up. So it's great from just reliability perspective where, you always have something up and running, even if, because of a memory leak, something broke down and, , the services doesn't go down, it'll }
+{\cf2 [00:13:00]}
+{ come back up.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ But what about from a security perspective? Reliability definitely is like a thing. I definitely agree. From a security perspective, would your choice be any different if it was just purely driven by security? }
+{\pard  \line \par}
+{\b\cf3 Mrunal Shah:\b0}
+{ So containers have minimal os footprints, and a lot of vulnerabilities that come out of applications, you'll see 80 to 90% of them are coming from the unpatched OS's and, they are the prime targets of zero day vulnerabilities and things of that nature. When you are running on EC2, you cannot get rid of the underlying os. you have to run your application on top and you have to have a process where you're constantly patching your underlying host to keep up with it.}
+{\pard  \line \par}
+{The containerized world is a little bit different there's no patching involved. What it involves is updating the base images that are used for running your application. And then if you're picking some really minimal Linux OS }
+{\cf2 [00:14:00]}
+{ such as Alpine, or if you even want to go further, you can use something called Distros, which is a really, really new type of base image that's really cool.}
+{\pard  \line \par}
+{And I would highly recommend people to play with. You can really minimize the footprint of your application. So your container just has just enough packages for your application to work and what that means is you don't have packages that are not supporting your application running and offering vulnerabilities for the attackers to attack your application.}
+{\pard  \line \par}
+{ So from security perspective, it's a lot more secure if you're containerizing your application and running it on clusters. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I think I understand that. So what you're trying to say is basically containers would have minimum footprint of the application probably like a five MB os, which is like a really minimal correct skeleton version of a OS as well.}
+{\pard  \line \par}
+{So the likelihood of being used as a target for, Hey, I'm gonna take over the OS right, is probably harder. But to your point, than in the case of ECS and E Ks, which is a managed }
+{\cf2 [00:15:00]}
+{ service, we wouldn't even see that. That's something that Amazon would manage it. Is that right?}
+{\pard  \line \par}
+{Or }
+{\pard  \line \par}
+{\b\cf3 Mrunal Shah:\b0}
+{ It's a shared responsibility. They won't manage what's inside your containers. So you of course still have vulnerable, and this is true, even if you're running serverless, if you're running an application that's vulnerable , Amazon's responsible for underlying OS and the stack below that networking stack and all of that if you're running on serverless.}
+{\pard  \line \par}
+{ The responsibility of securing your application, especially for serverless, is on you. The same with containers what's running inside containers is your responsibility. Amazon will not , it's not their responsibility. They'll just make sure that they'll , keep up with the underlying networking and underlying Kubernetes manage control plane and so on and so forth.}
+{\pard  \line \par}
+{So they'll give you some reliability around that, but and security around that. But they, they won't necessarily do it for the the containers that are running in your clusters, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Since we're in the grey area of where our responsibility starts and where Amazon responsibility end as well.}
+{\pard  \line \par}
+{Yep. What are some of the negative things about }
+{\cf2 [00:16:00]}
+{ working in a container space as well? Just to get a holistic idea. And I don't mean negative in terms of Amazon is bad or whatever, but more in terms of like, oh, this particular thing.}
+{\pard  \line \par}
+{If you're thinking of doing that, it would not make sense in a container. }
+{\pard  \line \par}
+{\b\cf3 Mrunal Shah:\b0}
+{ The traditional vulnerability management makes a little less sense on containers. }
+{\pard  \line \par}
+{Mm-hmm. }
+{\pard  \line \par}
+{Because there is no patching. And I'll give you an example, right after I gave my presentation at AWS re:invent this year I had people reach out right after , the speaking engagement that they were like, okay, well hey, , we're looking at these vulnerabilities within our application and we're giving out these tickets, but we're not really seeing a lot of progress and do you have any tips for us to sort of help people fix their issues.}
+{\pard  \line \par}
+{So if you go deep down and you think about it. So the core issues are. The developers, they don't necessarily know, or it's not even required for their job to know how the underlying }
+{\cf2 [00:17:00]}
+{ OS's work. And so say you even picked up Alpine, which is a minimal base image, it will probably have some CVE like two months, three months down the road and that's just the name of the game.}
+{\pard  \line \par}
+{Yeah. }
+{\pard  \line \par}
+{And they don't necessarily know how to patch those. They don't know how to build those alpine base images. }
+{\pard  \line \par}
+{Of course. }
+{\pard  \line \par}
+{That's not part of the job. They just know their application and they run it on top of these alpine images.}
+{\pard  \line \par}
+{So there's few ways you can get around fixing it. One way is obviously you swap out the base images, which is a simple fix, but a lot of vulnerabilities also come into the picture when you are taking your build time packages and running it during runtime and that's where something like visuals is really cool and really cutting edge.}
+{\pard  \line \par}
+{ The way you would use it is you would have something called a multi-stage docker-build. What it does is you use whatever image you want to use to build your artifacts. So say in case of Java, you're building a JAR file, which has pretty much everything that you need to run your Java program, and then you're pretty much }
+{\cf2 [00:18:00]}
+{ in the first stage of your build, you use whatever image you want to use to build your JAR file. Mm-hmm. . And then once the jar file is billed, you take that jar file and you stick it in another, in the second stage of the, in, in the build, you stick it in the distro-less image, which pretty much has really no packages running.}
+{\pard  \line \par}
+{So you are almost skipping all the build packages that you had used in the first step of your docker build}
+{\pard  \line \par}
+{yep.}
+{\pard  \line \par}
+{And you're only taking the runtime packages that you need and sticking it in distro-less. The benefit is distro-less doesn't come with any package managers. It doesn't come with any shell and , you're only running your runtime package.}
+{\pard  \line \par}
+{So the benefit is even if an attacker breaks into your containers, they can't install anything. They can't shell into anything, so they're not gonna be able to jump into other containers within your infrastructure and so it gives you more hardened security if you're running stuff on containers.}
+{\pard  \line \par}
+{But there's also }
+{\cf2 [00:19:00]}
+{ other cluster level management and security pieces that have to be in place. And again, security is always in depth. So we've just been talking about containers, but there's other pieces of clusters, especially Kubernetes, if you're speaking of one, that you would have to configure because some of the defaults that come out of the box are not secure.}
+{\pard  \line \par}
+{And you want make sure that those knobs and dials are set up correctly. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Also to your point then, vulnerability management is definitely something that is, we need to rethink about vulnerability management in the container space, if you kind of build a program around it. Yep. Are there other components which made sense in like, I imagine antivirus is out as well, then there is no need for antivirus.}
+{\pard  \line \par}
+{Yeah. }
+{\pard  \line \par}
+{\b\cf3 Mrunal Shah:\b0}
+{ There is none in container space. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Damn it. I was so excited about it. I was like, I'm gonna stop . }
+{\pard  \line \par}
+{\b\cf3 Mrunal Shah:\b0}
+{ Yeah. It's one of the things you don't have to deal with if you're running on containers. And that's, I am happy I don't have to run any . }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I think maybe is a fine balance as well. And, and correct me if I'm wrong, I feel like}
+{\cf2 [00:20:00]}
+{ yes, it makes sense because there's no application, literally the operating system, which is just refreshed every often. , if you're doing it the right way,}
+{\pard  \line \par}
+{Uhhuh . }
+{\pard  \line \par}
+{There should not be a need for a vulnerability management or a anti-virus software, but the fact that compliance and governance requires it, do you find that are they changing or are they like slowly moving towards a place where, oh, if you're using containers, I understand you don't need to have antivirus as long as the base image is being refreshed.}
+{\pard  \line \par}
+{Like, are there conversations like that going on as well? }
+{\pard  \line \par}
+{\b\cf3 Mrunal Shah:\b0}
+{ In containerized world, it's a different world. These things just don't come up at all. We don't have to worry about antiviruses, and that's the best thing, the base images and the images are so tiny, they don't even have enough resources to run anything beyond the application.}
+{\pard  \line \par}
+{So that's the best part, right? And then as part of the best practices, we also recommend. To set up memory limits and CPU limits. CPU is a, is a place where there's a lot of }
+{\cf2 [00:21:00]}
+{ contention. So you can probably get away without having CPU limits, but especially memory limits. We, we certainly recommend you put memory limits on your containers, and they're very minimal.}
+{\pard  \line \par}
+{They just don't have enough memory to run anything beyond your application, and that's the best part. in some weird way it's least privileged kind of access. You're just giving just enough access to your containers to run your application, which is really cool .}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Hundred percent. I think we've covered breadth of topic in the container security space in terms of embed the program spoke about where it starts with the team, the skillset, and why, containers over Kubernetes as well. We took the next step of understanding what are some of the challenges in terms of things that don't work, like antivirus, vulnerability management all that.}
+{\pard  \line \par}
+{Now talking run time, like, , we've built applications, we have built a microservice and this is kind of crux of what your talk was all about as well. Threat detection cuz we've got everything in production now. It is up and going or about to go into production. }
+{\pard  \line \par}
+{Yep. }
+{\pard  \line \par}
+{How does one approach threat }
+{\cf2 [00:22:00]}
+{ detection and prevention, if you wanna go down that path as in a container threat detection capability in a container security program. What does that look like? What was the thinking there? }
+{\pard  \line \par}
+{\b\cf3 Mrunal Shah:\b0}
+{ Yeah, so threat detection especially on your clusters, you'll have all sorts of services running. And there's gonna be sorts of knobs and dials that can be set by specific teams to run their application.}
+{\pard  \line \par}
+{So it's extremely important that there's visibility within your clusters. There's quite a few open source projects that are out there that can really help you bootstrap and jumpstart your threat detection. Falco is one of the most popular open source tooling that's integrated to sort of check as system calls that are made between the kernel and containers.}
+{\pard  \line \par}
+{They can sort of check and see if there's any priviledge escalation happening by a specific container or is a container behaving maliciously. So that's sort of on the open source space, but there's also, like if you're on the cloud AWS has AWS guard }
+{\cf2 [00:23:00]}
+{ duty, which is really cool.}
+{\pard  \line \par}
+{It only works with EKS and ECS aka works with only AWS services. So if you're bringing in your Kubernetes bare metal, like something that you picked up from open source and you're putting it on your EC2, , it's probably not gonna work. But what guard duty does is it ingests the Kubernetes audit logs without really integrating inside your cluster.}
+{\pard  \line \par}
+{It just ingests your logs and it compares it with Cloud Trail VPC Flow logs, DNS logs, and, and Kubernetes audit logs, and kind of combines all of them together and runs machine learning programs on top to see if there's any malicious or any anomalies happening within your cluster. And it gives you alerts that you can leverage.}
+{\pard  \line \par}
+{Especially if you're running on aws. That was part of the speaking that I'd done at Reinvent. , we use guard duty, and guard duty is an out of the box integration. It's very scalable. You can quickly integrate it }
+{\cf2 [00:24:00]}
+{ across hundreds of thousands of clusters, however many clusters you have.}
+{\pard  \line \par}
+{But again, there's also other projects that , folks should look at such as Falco or if you're running a program and you have a vendor that you work with, a lot of them come with some runtime agents who are usually deployed as daemon sets on your host. And , you pick a tool, but you sort of need some sort of anomaly detection within your environment.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Okay. Wait, that makes me come back to one more thing that I always felt was an anti pattern as well, the whole agent based approach. And I know. , , we kind of mentioned containers doesn't really have like a five MB image or something. There's technically no agent , I can't imagine that having an agent in there.}
+{\pard  \line \par}
+{ We just talk about having agents as well on boxes for runtime production. , guard duty kind of makes it in line. They're able to ingest logs. }
+{\pard  \line \par}
+{Yep}
+{\pard  \line \par}
+{. But traditionally vulnerability management or the IDS/IPS of the world, think about, this space as I need to have an agent so I can know right now I'm under attack, or right now my ECS is under attack versus , }
+{\cf2 [00:25:00]}
+{ some people may just go, well, okay I don't have agents, but I have like a side scanner or whatever.}
+{\pard  \line \par}
+{Uhhuh}
+{\pard  \line \par}
+{Was there a thinking that you had to go through from that perspective to go, okay , what's the risk that I'm managing here for you from a container runtime protection perspective?}
+{\pard  \line \par}
+{Yeah, }
+{\pard  \line \par}
+{\b\cf3 Mrunal Shah:\b0}
+{ If you take a snapshot of the market right now, of the tooling that's available, there's agentless and then there's agent based, both types of threat detection and threat prevention tools available in the market at the moment. So guard duty is obviously agentless.}
+{\pard  \line \par}
+{ It has its pros and cons, the pros is, you can quickly integrate it, it works seamlessly. You can scale it really quickly across. , how are many clusters you have specifically if you're running like a native cluster, And it's pretty good with being able to detect , I think all sorts of anomalies .}
+{\pard  \line \par}
+{What it lacks is the ability to prevent something on the cluster so it's more of a detection. }
+{\pard  \line \par}
+{So we pivot into the agent based sort of threat detection and prevention so the pros and cons of those are , the pro }
+{\cf2 [00:26:00]}
+{ is they will be a little more comprehensive in being able to prevent and allowing you to be able to build rules within your cluster to prevent a threat from propagating within your environment.}
+{\pard  \line \par}
+{Mm-hmm.}
+{\pard  \line \par}
+{But the con is, it is an agent that you have to deploy as traditionally, either as a sidecar container or as a Daemon set within your environment. And when you have a lot of clusters they are not easy to manage. So once you're deployed in the cluster, you have to kind of keep up with making sure they're running and they're working properly and being able to build rules on top and just just the upkeep of the agents within the cluster.}
+{\pard  \line \par}
+{Then it becomes like a service that you're drawing on the cluster. You may get little more bells and whistles, but that's at a cost of managing these additional agents, and the scalability is there, but it takes a while, especially if you're a smaller team, to be able to kind of go in and integrate it across the board with, , however many clusters you have.}
+{\cf2 [00:27:00]}
+{ }
+{\pard  \line \par}
+{So they kind of interject the system calls and that they're running something on the cluster. But again, there's other drawbacks some of the runtime agents don't work within the clusters.}
+{\pard  \line \par}
+{You may have different type of networking. , a lot of teams like service meshes nowadays. That's like the new thing. }
+{\pard  \line \par}
+{Yeah. }
+{\pard  \line \par}
+{And the runtime protection agents, so to speak, they don't always work with all the service meshes, and they also don't always work with all versions of the Kubernetes clusters.}
+{\pard  \line \par}
+{So there's all these integration issues that come once you sort of have something you deploy on the cluster. Yeah. And that's why you'll see a lot and lot more and more of agent less approach kind of coming into the picture because they're, , easy to integrate. You don't need a lot of people.}
+{\pard  \line \par}
+{You can quickly do it. But obviously then you have to do steps before things get deployed on the cluster to make sure , you're deploying clean stuff on your cluster so you're not, sort of introducing additional risk because these agentless tools are just gonna give }
+{\cf2 [00:28:00]}
+{ you monitoring and not necessarily like prevention.}
+{\pard  \line \par}
+{Yeah, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ that's just a good point. So anyone who's probably listening in and thinking about going down this path, they definitely need to work on the left. On the, the shift left side, as people kind of say they need to work on the left side to make sure your images are small, they're being rolled over, application patching is being done or whatever, I take care of as much of it as possible on the left hand side, so that the right hand side, you're able to do more cloud friendly agentless threat detection.}
+{\pard  \line \par}
+{Thinking about container security in end to end anything, the threat detection, probably the important component over there is the one on the left where do as much of your prevention side, your guardrails, have a small image to be used to container, have your application security being done in terms of whatever, SDLC protection .}
+{\pard  \line \par}
+{By the time you come to the stage of production. You're really just okay to have a threat detection capability, which may be every 30 minutes or every hour, every }
+{\cf2 [00:29:00]}
+{ two hour instead of real time, because you've done all the hard work for doing prevention in the on the left instead of trying to do things on the right.}
+{\pard  \line \par}
+{Did I summarize that }
+{\pard  \line \par}
+{\b\cf3 Mrunal Shah:\b0}
+{ right?}
+{\pard  \line \par}
+{ I think you did. If you're looking at an agent less approach, it's never gonna really stop anything on the cluster. I mean, there's nothing running on the cluster to stop it anyway, so that's what you've signed up for basically .}
+{\pard  \line \par}
+{ We sort of chatted about misconfigurations, on the containers, but there's also cluster misconfigurations that can happen. So you want to make sure when you're building your docker files, you wanna make sure you're not building your containers as root.}
+{\pard  \line \par}
+{ They shouldn't be running as root on the clusters. There's also additional misconfigurations that can happen on the clusters. , there's specific flags within Kubernetes artifacts. So if you look in under security context then you'll see there, there's specific flags around like privileged escalation and, making sure things , not running as root.}
+{\pard  \line \par}
+{You just make sure you set those flags as false before you get them deployed. That in addition, you want to prevent certain }
+{\cf2 [00:30:00]}
+{ things from happening on your cluster, such as , you don't want containers to , host volumes, which is basically volumes to attach with the containers that way, like, , it's a big security risk. You're not storing secrets in plain text on the containers. So there's a lot that can happen that's outside of the vulnerabilities that we discussed. So I would break apart, if you're looking at the shift left strategy, I would break apart the container security as hey, vulnerability management, but there's also misconfiguration management, }
+{\pard  \line \par}
+{That's sort of thing if you're building a program, you should probably keep in mind that, , hey, you prevented the vulnerability, that's great, but hey, you also want to prevent misconfigurations on your cluster. }
+{\pard  \line \par}
+{That's a good point. }
+{\pard  \line \par}
+{And, and then I think on the run time that we discussed, say you are going agentless, there's also one of the strategy, and this is more of a, I wouldn't say advance, but a little once you're sort of done the basics of, hey, you are doing shift left and you are securing your containers and you have some sort of agentless, sort of malicious detection within your environment. The next step would be }
+{\cf2 [00:31:00]}
+{ you could deploy something called admissions controller on your clusters. That can prevent a lot of these things from going in . So you can set up, , that, hey, I don't want to allow containers running as root on my clusters.}
+{\pard  \line \par}
+{ So that could be a security policy that you can set on your admissions controller, and then any containers, whether it's pushed from their local laptop or from registry or from error if you have a very chaotic environment, you can still have one choke point where you're blocking all the security bad things from Oh, the, all the bad security things from happening.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ All right. Oh, and admission control is good, so, but that's more of a es correct? }
+{\pard  \line \par}
+{\b\cf3 Mrunal Shah:\b0}
+{ Yeah, that's,}
+{\pard  \line \par}
+{That's correct. Yeah. It's, it's for Kubernetes, right? It, it's doesn't apply to other non Kubernetes }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ environments. Is that where you had mentioned inspector as well as detective, as a service as well? What role would they play in the security program that we are working on?}
+{\pard  \line \par}
+{\b\cf3 Mrunal Shah:\b0}
+{ Inspector is a managed service through AWS that can scan your registries and the containers in the registries to find }
+{\cf2 [00:32:00]}
+{ vulnerabilities. You can use it for scanning your containers and detecting vulnerabilities within your packages and identifying what layer of your docker file is introducing those vulnerabilities.}
+{\pard  \line \par}
+{ It's an amazing tool for that. There's many competitors of inspector, especially like, , if you have your environment that's not dedicatedly running on aws, say you're running on data center. There's other tools available that are also open source such as Claire and Trivi which you can use to probably do similar things.}
+{\pard  \line \par}
+{They're open source projects, you'd have to do a bunch of integration . }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ What about the amazon detective service. , }
+{\pard  \line \par}
+{\b\cf3 Mrunal Shah:\b0}
+{ I talked about this at Reinvent. If you have an incident . Usually the biggest challenge is having enough data to be able to make a meaningful root cause analysis and the challenge with Kubernetes is, there's quite a bit of logs that you'd have to accumulate to be able to have any meaningful root cause analysis.}
+{\pard  \line \par}
+{So you'd need data coming }
+{\cf2 [00:33:00]}
+{ from your applications. You'd need data coming from your Kubernetes control plane. You'd need data coming from your cloud API levels and all of that. You'd have massive data lake, and then you'd have to build complex queries to be able to get to the root of the issue. And that is not always easy or quick.}
+{\pard  \line \par}
+{It takes a while, and when you have an incident, you want something that's quick and that gets to the point really quickly. So detective is a really great service because it auto ingests all of these logs for you. So it ingests your your VPC Flow logs, your cloud trail logs, your Kubernetes audit logs.}
+{\pard  \line \par}
+{And what it does is if there is an incident that guard duty detects, you can pivot into detective, and you have all the data that's graphically connected so you can pivot from one data point to next and quickly do analysis at your cluster and container level and your pod level, }
+{\cf2 [00:34:00]}
+{ and quickly identify where the root cause is and what image is causing an issue.}
+{\pard  \line \par}
+{And you can come, mitigating steps really quickly. So you're not grappling with, Hey, I don't have enough logs to be able to even see what's happening. You sort of move from that to saying, I have all the logs, I have all the data. I've been able to pivot from one data point to another without really taking a lot of time and be able to identify that there's this specific package that's causing an issue.}
+{\pard  \line \par}
+{And then you can come up with the mitigating step, whether you wanna upgrade it, remove it , so on and so forth. So }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Those are great examples. How would this work in like incident response playbooks and stuff as well in most organizations.}
+{\pard  \line \par}
+{ To your point now, if I'm using detective, I'm using the guardduty service. I'm using inspector. Obviously all of these are ideal situations. Yep. I mentioned containers can be super massive as well. What do you find as a capability that you have to build in your team from a threat detection and that right side of the software development life cycle?}
+{\pard  \line \par}
+{Are there anything special from a }
+{\cf2 [00:35:00]}
+{ capability perspective that you have to build in your program. A lot of people were saying, oh, I need a SIEM solution. Cuz , it's not just Kubernetes I've got ECS EKS, I've got all this stuff coming in and I can't really visualize this correctly, or I can't do threat detection.}
+{\pard  \line \par}
+{The quote unquote threat detection for, Hey Ashish logged in. It's an alarm for whatever reason. Like, were you able to find that in your experience, the capability from Amazon does a good job for that as well? For leaders who are listening to this or people who are thinking of building a program in their organization, They would still have to consider non-Amazon aspects for that kind of component as well.}
+{\pard  \line \par}
+{\b\cf3 Mrunal Shah:\b0}
+{ So I think that's a soul search that , you have to do, first you need to know what your infrastructure has. If you're a purely cloud-based environment, then , you can quickly get bootstrapped with guard duty inspector and detective and quickly get up and running with it and be able to make an impact from threat detection perspective. But , if you have a mixed or , no cloud footprint or some other }
+{\cf2 [00:36:00]}
+{ cloud footprint, and you probably have to look at what that cloud has to offer. Or if you're running on, on-prem, then there's different levels of improvements.}
+{\pard  \line \par}
+{Like I wouldn't jump straight on anomaly detection . I would do these shift left things first. You want to reduce the risk upfront instead of tackling the risk when it happens. If I'm on-prem, I would really go heavy on shift left strategies first.}
+{\pard  \line \par}
+{Make sure everything's clean, make sure there's no misconfigurations. So even if an incident happens, it's contained and it's not kind of free for all within your cluster. Additionally, as I said, there's open source tooling that's available, it's not really dependent on the cloud, it's cloud agnostic. There's many available in the market and there's always new ones coming up. Pick one that works for your team. You can pick Falco, you can pick some other tool that's available as open source. You can pick, there's quite a few vendors who also have paid versions of anomaly detection.}
+{\pard  \line \par}
+{Pick one. They all work pretty good and you can get them deployed onto your clusters, and }
+{\cf2 [00:37:00]}
+{ either that vendor will make some sort of SIEM type of capability available. Or if you're running open source tools, then you'd have to build something out of the box and, you'd have to sort out your tech stack to see what works for your company specifically.}
+{\pard  \line \par}
+{ If you're getting more advanced, when you go on SIEM the challenge is you're gonna deal with massive data lakes and you're gonna have to deal with very complex queries to be able to detect anomalies. I would look at some sort of machine learning models.}
+{\pard  \line \par}
+{If there's a team in your company that can help you out to build machine learning models on top of these logs that's probably the best way to approach it If you are on premise. Because it's gonna be really hard to detect anomaly, especially with very massive data sets. But if you're on cloud, you're in luck because AWS gives that out of the box for you so you can quickly integrate and get running. They do all the heavy lifting for you and all you have to do is connect your pieces to say, okay, well one the GuardDuty alert that happens, what's my playbook what's my runbook?}
+{\pard  \line \par}
+{And sort of how do }
+{\cf2 [00:38:00]}
+{ I tackle it from there. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ From a capability perspective in the team, was there anything that you would change about runtime anomaly just using cloud native services, you feel people can achieve a decent detection capability in Amazon.}
+{\pard  \line \par}
+{\b\cf3 Mrunal Shah:\b0}
+{ Yeah, I think so, guard duty is catered more for cloud playing level of anomalies, whereas , say Falco is more catered for a lower level, a system called kind of level anomaly detection. So , pick your poison. I, I think GuardDuty works really well.}
+{\pard  \line \par}
+{ Their alerts are very human readable. When you go to some other tool, they may not be as readable. They may give you some very complicated alerts that you may not be sure how to handle. Especially as you kind of go more towards the kernel level, then , you're gonna have like very weird alerts that you may not know how to tackle them, or you don't even know if you should tackle them right in the first place.}
+{\pard  \line \par}
+{ They can probably get a little bit noisy because there's a lot of those system calls happening. So, I think guard duty is a great tool to pick out of the }
+{\cf2 [00:39:00]}
+{ box. It has very decent coverage. I think they're always improving it. You get a lot out of the box and it's pretty seamless integration wise. We're not deploying anything in your cluster while you're getting all the visibility and , you're able to monitor it across the board. So say you have multiple accounts , you can quickly enable it across the board and consolidate your finding in one account and have your SOC team look at that account or connect it with the SIEM tool if you really love SIEM, then connect your main account with the SIEM and get your alerts that way. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ We would still need some custom alerting . Everyone's basically got different use cases of they're working on, so, Yep. GuardDuty allows you to add custom rules. }
+{\pard  \line \par}
+{\b\cf3 Mrunal Shah:\b0}
+{ It does not, I think as far as I know, you can suppress specific things. So I know I had a colleague who works in a blockchain company and for how to tackle those because his company has open internet and so he does get a lot of troll traffic, but also he was getting a lot of bitcoin mining alerts and he wasn't sure how to tackle them. I mean, it is a Bitcoin company, so, yeah, I mean, they, they are gonna give me }
+{\cf2 [00:40:00]}
+{ Bitcoin alerts, right? So you can't really change them because , they are built for everyone.}
+{\pard  \line \par}
+{They're not built for your company specifically. And that's sort of like, yeah, I wouldn't necessarily say a drawback, but it's just a. Of course, but , you can always connect it with something like your own internal SIEM tool and you can say, okay, well this alert, just ignore it. And this alert don't assign as high severity and, , reduce the severity .}
+{\pard  \line \par}
+{So there's all sorts of things you can do. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Awesome. Thank you for the answer as well. That was kind of most of the technical questions I had for you, so thank you so much for answering those as well. Where do you think people can learn more about this space? I I feel like it's very still very complex space and where do you normally reckon people can go and learn about all of this?}
+{\pard  \line \par}
+{\b\cf3 Mrunal Shah:\b0}
+{ I would always recommend official documentation. They are the golden source. So there's multiple things to be learned . There's not just one and it's a rabbit hole. It's probably as big a space as cloud to be honest. If you look at security, there's four big Cs, cloud, cluster, container, and code. So cloud, it's, people are learning, people are catching up, }
+{\cf2 [00:41:00]}
+{ people understand the terminology . Clusters and containers, not so much specifically for containers. If you're using Docker I would go to Dockers official like documentation and I would build something. The best way to do something is build it. A simple piece of code dock, write it, and build and see how it runs. That's obviously the first step. I would learn how you can take a piece of code and you can containerize it. But then sort of the orchestration, like the container orchestration or the cluster management. So those, if you're in Kubernetes, then obviously go to the Kubernetes documentation.}
+{\pard  \line \par}
+{If you do your certifications, they'll also teach you Kubernetes and so on and so forth. But if you're using ecs, I would recommend . Amazon has a lot of really cool documentation around ecs. The terminology's a little bit different. , they call it pods, they call it tasks on the other side,}
+{\pard  \line \par}
+{So, , you learn all the different terminologies. They eventually, in some way do similar things. But, you have to know, what is called what and , where are the knobs and dials of }
+{\cf2 [00:42:00]}
+{ changing the settings. Kubernetes, has a lot of those more than ecs probably. But ECS is a different way of doing things.}
+{\pard  \line \par}
+{So I would just go to the official documentation. Those are usually the golden sources, and I would build something with it. So reading will only take you so far. Watching a YouTube will only take you so far. Doing a search will only take you so much, so far.}
+{\pard  \line \par}
+{Unless you do or build something from scratch on your local laptop. That deep level knowledge is probably gonna be missing. I would highly recommend just build something take a problem, build it, and deploy it and see how it works. That's probably the best way I would learn.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Awesome. Well, that was the, the final technical question. I've got three fun questions for you, man, so we can get to know you a bit more as well. Sure. First one being, what do you spend most time on when you're not working on containers? Your four Cs?}
+{\pard  \line \par}
+{\b\cf3 Mrunal Shah:\b0}
+{ Besides work and toddler, I don't really think , I have a lot of life outside right now. . So , }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And for obviously for good reasons as well. Next question. What is something that you're proud of but is not on your social media?}
+{\pard  \line \par}
+{\b\cf3 Mrunal Shah:\b0}
+{ So when I was in college, I did a }
+{\cf2 [00:43:00]}
+{ research in sort of being able to take the the thought patterns that you have and convert it into electrical signals.}
+{\pard  \line \par}
+{Oh, wow. }
+{\pard  \line \par}
+{And being able to do actions on it. So there's a paper that I published when I was in school. This is, we're talking 2011 ish, so about more than 10 years ago. But now you are more and more seeing that like, , Elon is coming in kind of triumphing on that battleground. You see a lot of work being kind of done on that front.}
+{\pard  \line \par}
+{So I'm pretty proud of the work we did back in the days. Again, I didn't like pursue it as a career or anything but , at, at that point it was very obscure. Like, people were like, huh, you can turn off light just by thinking, wow, that's amazing. Again, I haven't touted that on my social media at all.}
+{\pard  \line \par}
+{I thought that was very cool. Cause especially for like the people with disability and handicap, they could do things just by thinking without really having to move anything. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I've got the final question for you as well. What's your favorite cuisine or restaurant that you can share?}
+{\pard  \line \par}
+{\b\cf3 Mrunal Shah:\b0}
+{ I like Indian }
+{\cf2 [00:44:00]}
+{ food. I don't know. I mean, I, I eat it at home, but I also eat it outside.}
+{\pard  \line \par}
+{I'm a vegetarian so it's hard to find really good vegetarian options outside. I mean I like all sorts of food, but if I have a preference, I'll go to Indian food. That's . }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That's awesome, man. Thank you for sharing that. Yeah, wait, so that's kind of most of the questions that I had. Thanks so much for this, for doing this, man. I really appreciate this. Thank you so much for spending time with us. Of course, }
+{\pard  \line \par}
+{\b\cf3 Mrunal Shah:\b0}
+{ anytime.}
+{\pard  \line \par}
+{Thanks for having me. No }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ problem. All right. Thanks everyone. I'll see you next episode. Thanks Mon. }
+{\pard  \line \par}
+{\b\cf3 Mrunal Shah:\b0}
+{ See ya. Bye. }
+}

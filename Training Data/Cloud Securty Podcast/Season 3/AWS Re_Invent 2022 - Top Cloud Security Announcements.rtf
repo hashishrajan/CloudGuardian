@@ -1,0 +1,489 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red102\green0\blue204;
+\red128\green128\blue128;
+\red114\green179\blue114;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\b\fs48 AWS Re_Invent 2022 - Top Cloud Security Announcements\b0}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ in a way AWS re:invent was like an Apple event.}
+{\pard  \line \par}
+{There was the iPhone 14 was not really that dramatically different to iPhone13. }
+{\pard  \line \par}
+{\b\cf3 Shilpi Bhattacharjee:\b0}
+{ When you're developing an app, security might be treated as an afterthought with functionality, requirements and tight deadlines. It's easy to accidentally write vulnerable code or use a vulnerable dependency, but Snyk can help you secure your code in real time so you don't need to slow down to build securely.}
+{\pard  \line \par}
+{Develop fast, stay secure. Good developer Snyk.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Hello, welcome to another episode of Cloud Security podcast. This is the final episode for the season 3 of Cloud Security Podcasts. Thank you to everyone who has been supporting us for such a long time. And for this episode, I have the better half of the Cloud Security podcast Shilpi Bhattacharjee}
+{\pard  \line \par}
+{Welcome!. }
+{\pard  \line \par}
+{\b\cf3 Shilpi Bhattacharjee:\b0}
+{ Hello everyone. I was just saying when you were saying the fact that, it's a final episode of 2022, season three, it's always one of those things you kind of feel like, ah, it just, time }
+{\cf2 [00:01:00]}
+{ goes so quickly and I hate , wrapping up it for the season, but it's also exciting cuz what's gonna be there for the next season as well.}
+{\pard  \line \par}
+{So it's, it is always bittersweet. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Bittersweet. It is. Today we are gonna talk about AWS Re: Invent 2022.}
+{\pard  \line \par}
+{We were there met a lot of people on the ground. We met a lot of people at, during the sessions. A lot of interesting conversations. We wanted to cover the keynote in terms of what were some of the highlights from the CEO and the CTO for people who are the security.}
+{\pard  \line \par}
+{You probably realize if you work in tech, the one of the most important things you can do is listen to what your CTO and your CEO are saying, because that gives you a direction for. Where the business is heading. Then we also point out some of our favorite talks. Spoiler alert, I think the talks that we have picked up are the ones which are not aws, AWS talks.}
+{\pard  \line \par}
+{They're talks by people who have actually solved a problem using AWS solutions. So that was our focus there. And then towards the later half, and , the main crux of it is we talk about the announcement now. Announcement, focusing more. , if there was a security }
+{\cf2 [00:02:00]}
+{ product, if it was an existing update to a security product, or is there a product that you should be aware of which is getting an update from a security perspective?}
+{\pard  \line \par}
+{Actually, there's a fourth one as well, which is technically cause there were a lot of announcements that came in just before AWS re:invent started. There were a few which would not technically be classified as cloud security, but we believe would have an impact in the cloud security space as we go into, 2023.}
+{\pard  \line \par}
+{So all that, a lot more I will let Shilpi kick it off with the first one. }
+{\pard  \line \par}
+{\b\cf3 Shilpi Bhattacharjee:\b0}
+{ Thank you. So as Ashish said, AWS Re:invent is just one of those conferences that there's a lot happening. There's lots of talks, lots of keynotes which is different because oh, usually when you attend a conference there'll be, be one at most two keynotes.}
+{\pard  \line \par}
+{But for AWS re:invent there's actually multiple, I think there were about 5 keynotes, if I remember correctly. But from a security perspective, I think the ones that you probably wanna pay attention to is the one from the CEO and also from the CTO. So from the C E O couple of, not cloud security, but interesting things.}
+{\pard  \line \par}
+{ So the first thing that he spoke a lot about was sustainability. And I know a lot of our }
+{\cf2 [00:03:00]}
+{ audience members are quite passionate about sustainability and AWS has been kind of making a lot of comments about sustainability for a few years now. And they revisited some of their goals, which was they wanna be a hundred percent on renewable energy by 2025. And they made a comment that they're almost 85% there. They also said they wanted to be one of the leading water efficiency amongst all the cloud providers and be water positive by 2030.}
+{\pard  \line \par}
+{So those were a couple of call outs and I think we often forget the environmental cost of technology and using cloud and all those things on the environment. So it was good to sort of have that nod and it'll be interesting to see how that's comparing to some of the other cloud providers. So just a bit of a headsup there may be something exciting coming in that sense. }
+{\pard  \line \par}
+{Also there was a lot of talk about cost saving and I think this is really a nod to what's kind of happening in the global environment at the moment. Obviously , we are facing sort of a slight shift in the economic standpoint at the moment.}
+{\pard  \line \par}
+{And I think looking at that AWS obviously made a few comments about }
+{\cf2 [00:04:00]}
+{ that, how leaning into cloud in times of difficulty is actually a good idea. So if you're planning to tighten your belt, for some organizations that might be a priority. At the moment, cloud is probably the best place to do it. Now whether or not everyone agrees with that, I think the jury is still probably out, but that was a comment that they did make and yes, I mean it does, there is a cost of going to cloud, but there is obviously some cost savings down the track as well.}
+{\pard  \line \par}
+{They made an example of Airbnb, so they said that they were able to reduce their spending on cloud by $63 million when, you know they were going through a difficult time. So that was kind of an interesting example. They men mentioned. Those are probably some of the like the thematic things that they spoke about.}
+{\pard  \line \par}
+{One thing that I really connected with on the keynote is something that the CEO said is security is like finding the right balance between control and access. And I thought that was something, that really resonated with me because, that is exactly what it is. It's about making sure everyone has access and is being able to do what they need to do on cloud.}
+{\pard  \line \par}
+{But there is that sense of control as well. So I }
+{\cf2 [00:05:00]}
+{ thought that was something. A really interesting way to think about security. They did mention that, their top priority has always been security from the beginning. And they also gave a nod to the fact that the options clearing cop, which is one of the really important bodies in the financial market, is actually moving to the cloud as well.}
+{\pard  \line \par}
+{And this is like a once in a generation kind of shift for an organization to move in the cloud. So just kind of mentioning that, there are all these like really. Organizations that are moving to cloud and the cloud migration process is still one of those things that is still starting off or in its nascent stage.}
+{\pard  \line \par}
+{There was an interesting comment around the fact that there was no trade off between security and speed. I don't know Ashish if you will agree with that. I think that's the ideal thing that, you often don't wanna have that trade off. I think in real life and execution, and I know a lot of our audience members might chime in as well, that.}
+{\pard  \line \par}
+{Realistically, sometimes there is , a trade off. , I don't know what your thoughts around that would be. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ always, always }
+{\pard  \line \par}
+{\b\cf3 Shilpi Bhattacharjee:\b0}
+{ Always . }
+{\cf2 [00:06:00]}
+{ Yes. I think 2022, everyone's talking about containers and Kubernetes , so I don't think they would've kind of missed out on saying that.}
+{\pard  \line \par}
+{So they did mention containers are becoming increasingly popular. And what you need right now is right tools to secure them. And this is very much in line with, the Kubernetes security episode a month that we did. And a lot of conversations that we had with the experts was around that the adoption of Kubernetes has increased, but a lot of people are struggling with.}
+{\pard  \line \par}
+{The Kubernetes security side of thing, just because it is just such a complex environment and I think that is something that the CEO of AWS , made a mention to. I did wanna sort of mention one thing about AWS supply chain. So they did release a product called AWS Supply Chain.}
+{\pard  \line \par}
+{And if you had just sort of, A few rumblings from the keynote or walking around the AWS ReInvent floors, you may have gotten excited that they've released something to solve digital supply chain and, all these problems that we were talking about. And I, I've been talking a lot about digital supply chain and how it's broken and we }
+{\cf2 [00:07:00]}
+{ need to fix it.}
+{\pard  \line \par}
+{And AWS has come out with AWS supply chain to fix it all. But just T L D R, this is more to do with the physical supply chain. So this product that they've launched is more to do with your logistics and all of those things. So I, I did have a glimmer of hope when I saw it on the the keynote and I thought, oh, this, this could be an interesting take, a cloud provider actually taking a leap to try to solve that.}
+{\pard  \line \par}
+{But, Just wanted to let you guys know that that is not , anything to do with cloud security. It's more sort of their other side of the business, which is the actual supply chain. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Like actually that's right. conveyor belts and packages going from left and right. }
+{\pard  \line \par}
+{\b\cf3 Shilpi Bhattacharjee:\b0}
+{ Yeah, that's exactly right.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Thing, it's not a bad thing, it's just not a popular topic to talk about. Maybe that's why there was almost like there was a peak of excitement and suddenly they just went down.}
+{\pard  \line \par}
+{Cuz like, well, I guess how many people out there using a conveyor belts right now? So it might be many, but it's definitely relevant for them. So yeah, we should definitely call out. }
+{\pard  \line \par}
+{\b\cf3 Shilpi Bhattacharjee:\b0}
+{ Yeah. Oh, definitely. I think like physical supply chain is a challenge for the community. It's just for us, the security folks }
+{\cf2 [00:08:00]}
+{ probably, we, yeah, it's just the context that, we live in.}
+{\pard  \line \par}
+{Because we work in cloud security, we just naturally think about digital supply chain, but the physical supply chain has been there for, for a long time, and that's a bigger problem to solve. So I just thought I'll save everyone a bit of excitement to let down . And the other thing, this is not so much security, but I think it was just interesting that they have actually made all their analytics Services serverless now. So any serverless fans out there, and I know there are a few and everyone's hoping that that's gonna be the next thing after containers. They have made that, so they had this last kind of open source thing that was one of their tools, Amazon open source that allows you to do a lot of things with data.}
+{\pard  \line \par}
+{So they've made that serverless as well, which means all of their analytics have now become server less. So that's just something there for the. Folks out there. Just quickly moving on to the next keynote, and this was by Dr. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Was it open source or open search? Open }
+{\pard  \line \par}
+{\b\cf3 Shilpi Bhattacharjee:\b0}
+{ search, not open source. Open search.}
+{\pard  \line \par}
+{Yeah. Open source. And it's a data sort of, I think an open source. Again, we do a lot of things in data with that }
+{\cf2 [00:09:00]}
+{ product, but not open source. That would be good. , if they do }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Amazon open sourceis a great service. Maybe a good to add for Amazon later, but Amazon digital }
+{\pard  \line \par}
+{\b\cf3 Shilpi Bhattacharjee:\b0}
+{ supply chain and amazon Open source. So the next one, I always like to liken the keynote from Dr. Vogel, like the Steve Jobs of Apple. I know he is the CTO, not the CEO, but I feel people are often more excited now. Maybe just the security folks who are more excited about his keynote. And obviously that one was the one probably that had the most intriguing things. It felt very matrix-like if you watch it.}
+{\pard  \line \par}
+{So maybe, I think for anyone who does wanna watch. Recommend, watch the first five, 10 minutes just because it's entertaining. He goes into this alternative universe where, someone's making one fry at a time. And it's about, he talks about this whole notion of things being synchronous, but how we live in an asynchronous world.}
+{\pard  \line \par}
+{And he gave an example of, how birds, when they're making a flock, one, every bird kind of has these triggers to go into this flock separately and together they become organized. Now take what you will with that. I think he }
+{\cf2 [00:10:00]}
+{ was just trying to come up with something that made sense. But I think the, takeaway from that is what he was trying to say is that the world is event-driven and everything happens because there's an event and that drives it. And then he introduced the theme of event-driven architecture and. an asynchronous principle. So that kind of drove all the different announcements. So we'll talk about the actual announcements and the security ones, when we go into that section because we just thought that'd be good to break that out.}
+{\pard  \line \par}
+{But his overall theme apart from all the weird and wonderful matrix like and bird analogy and you can make from that, what do you like is the whole notion of event-driven architecture. The notion of asynchronous things. So those were like the takeaway from the keynotes, apart from I guess the security highlights, which we'll go into later.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ The themes over here are important, kind of going back to what we were saying in the beginning, why we called these. Well, the fact that listening to what the CEO and the CTO have said have always been a good pattern to see what Amazon would be pushing }
+{\cf2 [00:11:00]}
+{ down through customers for the year after. There've been 11 years of AWS re:invent, and every time something has been announced or shared on the big stage, either by customers who've come on the keynote with all these people, so all of 'em usually have customers who come and talk.}
+{\pard  \line \par}
+{One of the people who came for Vogel talk was Angela she was from Trustpilot. A lot of the other people who came in as well, I think there was a KeyNote from Ferrari as well, but the point being, , it's important to hear the CTO and CEO talk about what their vision of the world is.}
+{\pard  \line \par}
+{No matter how weird and a bird it is }
+{\pard  \line \par}
+{\b\cf3 Shilpi Bhattacharjee:\b0}
+{ well, it makes you pay attention, right? If there's like birds and matrix, like Oh, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ yeah. I'm sure he's trying to be creative or his team is trying to be creative over there. So I nothing against him. I'm just calling out that. The importance of it is basically, if you're looking for ever themes for what Amazon is gonna focus on for the year after or the next year, I normally keep an eye out on both, because that usually gives you a hint for where they are going.}
+{\pard  \line \par}
+{They have always believed in the event driven architecture. A }
+{\cf2 [00:12:00]}
+{ lot of people still believe in the event driven architecture, but until 2022, the serverless architecture space has primarily been used for backend task and not for, well, let's just say not a lot of companies have gone production on a fully serverless application.}
+{\pard  \line \par}
+{I'm sure there are many, but if you were to , make a Venn diagram for it, it's primarily people are still using a traditional compute instead of using serverless. So }
+{\pard  \line \par}
+{\b\cf3 Shilpi Bhattacharjee:\b0}
+{ og Yeah, no, and I agree. And if, I think that's one of the things, if you go to something like a reinvent or reinforce, so any of the conferences, you'll always hear about stories.}
+{\pard  \line \par}
+{Of people who are probably at the cutting edge of all these things or people who are pioneering a lot of things. But as you said, a lot of what happens in the real world can often be quite different. So that's something to bear in mind. And the keynotes I think as we'll go through the security updates as well.}
+{\pard  \line \par}
+{I think people will start to see a trend of how the important things that they kind of mentioned in terms of themes will come through, the product launches, so obviously everything that they say and every theme that they would sort of make illusion to has a meaning. And }
+{\cf2 [00:13:00]}
+{ usually it'll lead to some sort of a product or an update because that's what they're trying to obviously.}
+{\pard  \line \par}
+{Get to as well. Just finishing off I guess the keynote side of things. There are a few other keynotes. So there was one from Peter DeSantis who's the AWS Utility Computing vp. So it was called Monday night. So, it's kind of like Saturday night show. So if utility computing is something you're interested in, you may wanna check it out.}
+{\pard  \line \par}
+{There was also a keynote from Swami Sivasubramanian, who's the VP of Data and Machine Learning. We did hear a lot of really interesting comments for that particular one, just because . Machine learning and data is something that a lot of people are currently interested in and a lot of cloud security.}
+{\pard  \line \par}
+{This is something that I sensed is becoming a lot about protecting data. So that is another theme that came out through these conversations that cloud security or any sort of cybersecurity is becoming a lot about data because there is so much data out there and data is. and has been people's biggest asset as well.}
+{\pard  \line \par}
+{So that was something quite interesting. There was also a keynote from Ruba Bono who was the channels }
+{\cf2 [00:14:00]}
+{ and alliances vp and there was a customer keynote from as Ashish said, from someone from Ferrari as well. So those are all there. Just a quick note, all of these talks are actually, there on YouTube, so if you do wanna watch any of them, and while we know we made note of all these keynotes and we'll talk to some of the talks that really we really enjoyed, you can actually find all.}
+{\pard  \line \par}
+{Fully available on YouTube. So if that's how you wanna spend your Sunday or Sunday you can, but if you just want a TLDR then I guess we should be able to, we've got you covered. I think . }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I think, just an estimate. I would think we have gone through at least 50, 60 hours of content, at least.}
+{\pard  \line \par}
+{For sure , between keynotes and between all of this. But hey, we did this all, you don't have to do it. So at least this way at least you get some value out of it. And yeah, let's get into the announcements. }
+{\pard  \line \par}
+{\b\cf3 Shilpi Bhattacharjee:\b0}
+{ Perfect. I think before the announcements, did you wanna just go through the, the talks and the leadership sessions that you enjoy?}
+{\pard  \line \par}
+{Oh, yes. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. So another thing that I normally talk about usually is the fact. When you go on to reinvent, there are a few sessions that }
+{\cf2 [00:15:00]}
+{ normally take place. Now, they obviously subdivide all of the sessions that are gonna run over 300, plus sessions into different categories. You have your security category, you have also got cloud operations and lot, all the things.}
+{\pard  \line \par}
+{But one category that I also look out for is leadership sessions. The reason I do that is because most of the time, what you'll find is, again, kind of like the ceo, cto, this is now the next layer. , most of them would have customers come and talk about where do they see as a challenge in cloud. Some of the talks that I've actually listed out, only four because there were just so many, but I felt the four were most relevant.}
+{\pard  \line \par}
+{Some of them actually had customers come as panel, whereas some of them were more focused on, Hey, this is kind of where we believe Amazon will head towards, or this is what Amazon is doing to solve problem. The first one was the developer experience. The reason I picked this one, was because for people who are thinking about working with Netflix or how Netflix does their thing, a lot of the themes that talk come out from there, and a few of our guests in the past have said this as well, is the focus on develop experience as to }
+{\cf2 [00:16:00]}
+{ how do we make a tool that is adopted by developers, loved by developers, which makes our job easy.}
+{\pard  \line \par}
+{And this particular leadership session was run by someone named Adam. He's the vice president for developer experience and he also had another person with him, sorry, I can't remember the name of the person.}
+{\pard  \line \par}
+{She's a very popular engagement community person as well. But the idea being, they were talking about why develop experience is important. How do they do it, and how can you also take part in that . The talk was called Delighting Developers Builder Experience at aws.}
+{\pard  \line \par}
+{ That was a topic of the talk, and that was pretty good. So if you wanna know how to make developers happy and make them adopt their tools, that was the best session to go for. Now, the next one was from AWS CISO CJ Moses. }
+{\pard  \line \par}
+{CJ Moses spoke about accelerating innovation at AWS security. Now, for people who have been going to AWS re:invent for a long time, there used to be something called , state of Union for security by Steve Schmidt.}
+{\pard  \line \par}
+{I don't know why it was not done. This time I didn't see that }
+{\cf2 [00:17:00]}
+{ video yet. Maybe it was, maybe I missed a session. If someone finds a session, definitely share that with me. That used to be really good because it would talk about the overall state of AWS themselves , where they see that it would go from a security perspective as well.}
+{\pard  \line \par}
+{So, but this was still good. Lot of themes from CJ Moses around , what does he see as It will be upcoming. And he has also shared his love for car racing with his bright and shiny shoes. I've got two more. One was , in the executive panel where there were people from PagerDuty, Expedia Group and Nubank coming and talking about how can you change culture in the age of cloud, which I think is an important one.}
+{\pard  \line \par}
+{Now, if you're a technical person, you may choose to ignore this particular one, but as someone who's working towards becoming a leader in an organization, a cybersecurity leader or a technical leader, I would definitely recommend checking this out , because at the end of the day, most of the things that you've developed, Would stop at the point when, adoption stops and if there is no culture of having people come and talk to you and share what they can do from security, it just doesn't work.}
+{\pard  \line \par}
+{So there }
+{\cf2 [00:18:00]}
+{ was a good talk from that perspective to hear how PagerDuty, Expedia Group in Nubank do it. Their last and final one this is basically they were customers from Disney streaming and Intuit, and they were talking about data and the talk was called Your data. You need it where you need it when you need it!}
+{\pard  \line \par}
+{And it had people who , had video recordings from employees who are Disney streaming, as was Intuit. Now, as, Shilpi has been saying, you would see a notice a theme here as well, as well as the conversation so far. Data seems to get a lot of limelight. Culture is getting a lot of limelight.}
+{\pard  \line \par}
+{ We should develop good culture and some form of creativity, developers are getting a lot of importance as well, which you've called out earlier. that people who have been trying to DevSecOps for a long time and in 2023, we still haven't achieved DevSecOps.}
+{\pard  \line \par}
+{I probably would say that the only other theme which was left out from the event driven architecture as well is zero trust. , there were a lot of themes around, as you can see already popping from base on what Shilpi and I are sharing. But that was some of the leadership sessions that I }
+{\cf2 [00:19:00]}
+{ really enjoyed. }
+{\pard  \line \par}
+{\b\cf3 Shilpi Bhattacharjee:\b0}
+{ I was just gonna say, the one that you mentioned about culture in the age of cloud. I definitely believe that, security is one of those things that only technology can only take you so far. And I think with everybody that we've spoken to all through all these three, four years, I think there's culture plays such an important piece.}
+{\pard  \line \par}
+{So I would probably flip the notion a little bit more, or I said even if you are technical. . I would still say watch this because I think the conversations around culture are important and whether you are an engineer or a security leader, I think being familiar with, what's happening within the culture and how that can be optimized to in like, drive security, good security in your organization is important.}
+{\pard  \line \par}
+{So I definitely enjoyed that one. But yeah, there were so many sessions to pick from. . So it was really, really hard and I think we probably still have, some that we haven't, probably gotten across to as well. So I think there's lots of really good sessions and there's something for everyone.}
+{\pard  \line \par}
+{But the ones that we have watched and really enjoyed, so there was one from someone called Baker Tilly from LLP, and they had a talk around sort }
+{\cf2 [00:20:00]}
+{ of building and scaling a modernization strategy. So that was really interesting. There was a talk from Robinhood as well, and this was about deploying egress traffic controls in production environment.}
+{\pard  \line \par}
+{So a technical topic, but something that was really interesting in terms of, how they have kind of achieved that in their organization. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ shout Houston Hopkins, who was that talk as well? }
+{\pard  \line \par}
+{\b\cf3 Shilpi Bhattacharjee:\b0}
+{ Yes, he is one of our favorite guests on the podcast, so definitely, shout out to him for a really interesting talk.}
+{\pard  \line \par}
+{We did also really enjoy the one from Netflix. it was talking about reimagining multi account deployment for security and speed. And we actually got a chance to speak to the speakers. You actually might see them on so, Gonna be released very soon. But really interesting about, how they have taken, and I think Netflix is really well known for this, about taking novel approaches to solving things.}
+{\pard  \line \par}
+{They have, a really good team internally as well. So that was something really interesting. Again, technical, but an interesting sort of viewpoint as to how they've achieved that within their organization. The next one that we really enjoyed was how to }
+{\cf2 [00:21:00]}
+{ monitor applications across multiple accounts.}
+{\pard  \line \par}
+{And this was one that was given by JP Morgan Chase. Again, something that was really, really interesting from an organization that obviously is dealing with a lot of data, a lot of sensitive data and how they've done that across multiple accounts was really interesting to see. The next one was aws well architect framework security pillar, cloud security at scale from Molex. So that was something really, really interesting as well. I think it tied in quite well with, the AWS month that we've been running as well, and we've had some conversations around architecture, so I felt like listing to this was quite a good compliment to the month that we run and kind of just like really led on the discussions that we've been having in terms of, what does a well architect framework look like and the security pillar in that. And if you are doing cloud security at scale, what are certain things that you need to be mindful of as well?}
+{\pard  \line \par}
+{So that was really valuable from that perspective, especially if you are someone who works with aws and is building architectures or your }
+{\cf2 [00:22:00]}
+{ security architect, this could be a session that would be quite valuable. The next one was best practices for organizing and operating , on AWS from Warner Bros Discovery - HBO Max.}
+{\pard  \line \par}
+{That was a really, really good session. That had a lot of insights in terms of, how to do things in aws. Obviously, most of these talks are obviously for AWS because it's reinvent. So that provided some really good insights. There was another one called Build Securely on AWS Insights from the C-suite where we had people from Delta Airlines and Asurion.}
+{\pard  \line \par}
+{That was really good because I think from my perspective, I'm always sort of interested in, how leaders are doing certain things. And this was really interesting just to sort of have that insight as well because, sometimes people who are in the C-suite would have that very different lens because they're looking at an organization from a holistic view.}
+{\pard  \line \par}
+{And the things that they pointed out in that talk were quite, quite interesting. I just wanted to quickly go back to the one-on-one Warner Bros Discovery - HBO Max. So I think we met with Bianca as well, who was one of the speakers from there, from Warner Brother Discovery. And it was really interesting because they }
+{\cf2 [00:23:00]}
+{ have sort of done a transition into cloud and into multi-cloud and how they've kind of made that work. And I think there were certain things that she called out that really resonated about just like some basics that we forget about, as we were saying, things like culture, you know paying attention to some of the bare basics.}
+{\pard  \line \par}
+{I think that was sort of a good point as well. Speaking of HBO Max or Warner Brothers Discovery, there was another talk which Mrunal gave, and that was around AWS security services for container threat detection. A little bit more technical, that particular one, but again, Containers are becoming so popular.}
+{\pard  \line \par}
+{ People are, utilizing them so much these days. And this was something that, gave us a lot of information in terms of, how do you do threat detection properly in AWS containers. The next one, and sorry, I'm just sort of going through them these quickly in interest of time, because trying to wrap up everything that you need to pay attention to in aws Reinventing and, 45 minutes is quite the task.}
+{\pard  \line \par}
+{So ideal two production on Amazon SageMaker from Thompson Reuters. So Amazon }
+{\cf2 [00:24:00]}
+{ SageMaker is quite a popular Amazon service or AWS service. So it was really good to hear from, someone who's utilizing it and someone who's using it in production as to what are some of. Things that they're experiencing as.}
+{\pard  \line \par}
+{We did have a couple of nods from Australian banks at reinvent. So that was nice to see. So we had, NAB gave a talk about how NAB transformed the self service experience with Amazon Connect and machine learning. So that was one interesting one. And also Commonwealth Bank spoke about their compliance journey and I know Ashish actually have sort of spoken with them about compliance as well.}
+{\pard  \line \par}
+{So that was, something that I know that they're quite passionate about. So it was really interesting also to. What are the things that are working for them? What are their learnings? Especially if you are a financial organization in Australia, you might want to check that particular one out.}
+{\pard  \line \par}
+{And the last one we did have, so again, this notion of, . This attention on developer, it was really good to see a talk around dev first security, so from code to cloud and back to code. And this was from someone in }
+{\cf2 [00:25:00]}
+{ Neiman Marcus. And they shared their journey about how they've implemented Dev first security and why that is important.}
+{\pard  \line \par}
+{So a few good talks there, I think. And it's like, there are so many good talks, but these are more from like just a cloud security perspective. I think these are ones that, kind of give the good balance of how things are being done in different organizations. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I think another favorite one was, and this is the final one to add into this is the running services without access to data.}
+{\pard  \line \par}
+{This is an Amazon talk. Quite a favorite for a lot of security people out there, so definitely check that out. It's just an understanding of how do you work with applications without giving them credentials so that even if the application was compromised, you're really losing anything at that point in time.}
+{\pard  \line \par}
+{On that note, I think we've spoken enough about the favorite topics and the keynote highlights, and we've at the half an hour mark as. . Now let's get into the announcements as well. Yes. }
+{\pard  \line \par}
+{\b\cf3 Shilpi Bhattacharjee:\b0}
+{ Let's get into the announcement. So we've kind of broken it down into different categories just to sort of give a bit of a theme.}
+{\pard  \line \par}
+{So the first one will, would be, any new products that they've released. The next one we're gonna talk about any }
+{\cf2 [00:26:00]}
+{ updates to their existing security products and services. And the third one is gonna be, we're gonna flip it and it's gonna be any security updates to existing products. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right. In the end, we had the bonus round for any services, which are not cloud security products, but are gonna have an impact as well.}
+{\pard  \line \par}
+{So that was the extra section we added. }
+{\pard  \line \par}
+{\b\cf3 Shilpi Bhattacharjee:\b0}
+{ Love it. Perfect. So firstly, AWS Security Lake, I think everyone would've heard about it. There were so many rumblings and discussions and what this means. So yes AWS has released AWS Security Lake. It's gonna be their managed security data lake, and it you can combine various different security data sets for this, and it's under the open cybersecurity scheme of framework. So there's a framework that a lot of different organizations are aligned to. And it would support things like AWS integration with Security Hub and also collect directly from things like your VPC Flow logs, your CloudTrail or Route53 logs.}
+{\pard  \line \par}
+{So that was one that everyone. Excited about AWS verified access. Now that is something that is a new product or service that they have released, but it's still in preview }
+{\cf2 [00:27:00]}
+{ and it's really just a secure connection service that allows you to sort of look at your local and remote secure access to an application without a V P N.}
+{\pard  \line \par}
+{And the last service, the actual service also that they announced was Amazon verified permission. So it is about managing fine grain permission and authorization with custom application. Now what is fine grain you might ask. So the way I understood it, and I'll be happy for anyone to comment if that's you've got a better explanation, but I think it's kind of combining the best of Rach and aac.}
+{\pard  \line \par}
+{So your role based and attributed based. Some people are saying that this could be really interesting and could be an interesting. To OPA as well. So those were the sort of new services or pro like I would say, services that were announced and from a security perspective. Now in terms of updates to existing security products.}
+{\pard  \line \par}
+{And I think this is something that AWS have been doing since Reforce. So it's been a lot about updates to existing. Products. So there's Amazon inspector now scans for AWS Lambda functions for vulnerabilities. So, Amazon inspector is something that is }
+{\cf2 [00:28:00]}
+{ quite popular for vulnerability management.}
+{\pard  \line \par}
+{So now it scans AWS Lambda functions, and I think people work quite excited by this. , Amazon GuardDuty their threat detection. Service now, it allows for RDS protection. This is something that people think would be valuable.}
+{\pard  \line \par}
+{But it's currently in preview, so it'll be interesting as to how that actually transpires. And they've also released container runtime detection, which is gonna be coming soon. So that is, again, one of those things that people are excited about. So Amazon Guard duty is getting a few upgrades. Which kind of leads on from what happened at reinforce?}
+{\pard  \line \par}
+{Cause we did see that they released malware protection for EBS volumes and integration with Security Hub. So Amazon Guard duty is really becoming, one. I guess superheroes with a lot of belts on, so that got quite a bit of an upgrade or there's things coming soon, so stuff to watch out for that might Amazon Guard duty might end up becoming a powerful tool for you to use.}
+{\pard  \line \par}
+{Amazon, Macie so now has automated data discovery. So, which means that you can actually look into your sensitive data at a lower cost. Again, Amazon Macie was }
+{\cf2 [00:29:00]}
+{ something at reinforce that got s3 object validation capability. So there is that theme of there are certain services and products that AWS is really choosing to uplift.}
+{\pard  \line \par}
+{And you can see that theme sort of coming through the year as well. There was AWS Control Tower, which now in, console, you can have. Manage and enforce your governance rules on there. And it also has a new controls library section, so there's more than 300 controls now available on AWS control towers, so you can just do more in terms of your governance rules on there.}
+{\pard  \line \par}
+{So AWS Config Rules also now supports proactive compliance. So again, in your console for AWS config, you can actually pick a proactive mode which allows you to test for compliance before your, your software is being rolled out. This is again, something compliance or Config rules or something they were paying attention towards.}
+{\pard  \line \par}
+{Even at reinforce Added compliance goals to it. There was AWS Key Management Service Now supports external key stores. So this will be really valuable if you have a }
+{\cf2 [00:30:00]}
+{ regulatory requirement to use and store your encryption keys on-prem or outside aws. So you can do that now. Amazon virtual private Cloud now has VPC Lattice and this is in preview.}
+{\pard  \line \par}
+{So what is the VPC Lattice? It's just gonna be something that's gonna give you a consistent way to connect, secure and monitor communication between your services. I'm just saying AWS and Amazon so many times.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Worthwhile calling out what is the difference between Amazon and AWS as well. Yes.}
+{\pard  \line \par}
+{That was the }
+{\pard  \line \par}
+{\b\cf3 Shilpi Bhattacharjee:\b0}
+{ fun fact. It's called AWS. If it's a service or a product that's been made by aws, but it gets the Amazon name, so it'll be called say Amazon CloudWatch if the origin was back in Amazon. So they actually created the service or product for Amazon, being Amazon, the big shop, and then it kind of translated into a service for the wider audience to use.}
+{\pard  \line \par}
+{So if you've ever wondered why certain things, and I used to wonder this, I'm like, why is something AWS and why is something Amazon? , that's the reason. So that's a bit of a fun fact, for you. But getting back to it Amazon CloudWatch now has cross }
+{\cf2 [00:31:00]}
+{ account observability, so which means that you can observe and monitor resources in the applications on AWS and on-prem and on other clouds.}
+{\pard  \line \par}
+{So you're going to be able to do things like searching, analyzing, and correlating your cross account telemetry data. So that is quite interesting and I know a few security folks are really excited about that one as. . So those were kind of like updates to current security products. And as you will see as a theme, there were a lot of them that had gotten updates in reinforcing your Guardduty, your Macie, your AWS control tower.}
+{\pard  \line \par}
+{Config with compliance . So there are certain things that they're really paying attention to. So if you start to see from, what they do through the year, you can kind of get an understanding of which of the security products they're trying to really uplift. There were some other products as well that got a security lens, which was good to see because sometimes, you have other products.}
+{\pard  \line \par}
+{That don't have a security feature. So that was something that was added. So you can actually now delegate the management of your organization's governing }
+{\cf2 [00:32:00]}
+{ policy. So this was just to achieve a bit more agility and decentralization. AWS backup. So if you use AW s backup now it supports AWS cloudformation.}
+{\pard  \line \par}
+{So it's stateless resources in stack like aws, IAM and AWS VPC. , but it also supports Amazon Redshift. So that's gonna be able to allow you to protect your data from automatic and manual snapshots. Another thing, and this is something that people were really excited about from Dr. Vogel's keynote, was this notion of Amazon Event bridge pipes, which is now generally available. So it's going to, and the intention is that things are just gonna be a little more simple. Consistent and cost effective to create that point to point integration between someone who's producing an event and someone who's consuming it.}
+{\pard  \line \par}
+{So it's gonna go beyond, just your scheduling. So it's like pipes on steroids. That's what I I heard one person say and you'll be able to easily stitch AWS services together and build advanced integrations. The next one, I think Ashish, did you wanna cover that?}
+{\pard  \line \par}
+{Which is just relevant for }
+{\cf2 [00:33:00]}
+{ cloud security, but not security products. , }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ yeah, no, thank you for covering , the cloud security topics. One thing that's just to add on that last section is AWS organization, is also now supporting delegated administrators.}
+{\pard  \line \par}
+{What this means for people is that there has been a notion of, everyone has a lot of AWS accounts and how do you isolate certain parts of your AWS account from people that they become, quote unquote, no touch zone. That is where the delegated admin for your organization perspective and from your backup perspective is really important for people who come from a traditional networking background, you probably realize is that there's always certain parts of your IT network, which are a no-go zone unless you have specifically given access for just in time or for a very short time period. And that's for Delegated administrator is now being done for organizations as well as backup. So that's a really interesting service. Alright. Now talking about services that have been announced, which are in preview, or at least are at the time of this recording, they are in preview.}
+{\pard  \line \par}
+{\cf2 [00:34:00]}
+{ And would be something , you should look out for as a cloud security person. The first one being AWS Application Composer. Now people who have tried building infrastructure in aws, it's really hard to kind of visualize what that would look like.}
+{\pard  \line \par}
+{And sometimes the whole notion of, I have an infrastructure code that's been provided by someone, I have no idea how this is gonna work. So from that perspective, the idea of it is really good. So I don't know because it's in preview, I haven't tried it yet, but the idea being if you have an existing infrastructure as code template or if you have some idea for what you want your architecture to have, then both those options are technically going to be supported by application Composer.}
+{\pard  \line \par}
+{The first option where it's an IAC that you already have, you can use a Cloudformation template or a Sam. To basically recreate an infrastructure architecture that was well left by someone. Or you could just use a drag and drop tool on a browser and you should be able to create what an architecture that you need and you should be able to get a output, which }
+{\cf2 [00:35:00]}
+{ is a IAC again, which is an infrastructure score template.}
+{\pard  \line \par}
+{And you start to deploy into aws. Now, talking about deploying into aws also leads me to the next level, just AWS Code Catalyst, which is again, in preview, if you notice a theme, the application composer talks about, Hey, I want to make this as , take the guess work out of the whole serverless ready Amazon services kind of a thing where I just wanna be able to create an IAC because , I know where the future is and I know that's what I want. this is great from a perspective that they're trying to drive automation and making it easier and easier for people to do automation and Code Catalyst is in line with this as well. They're trying to be a single platform for your software development lifecycle. It would have integration with your GitHub Bitbucket JIRA, and basically everything that you require for you to work with as a software developer.}
+{\pard  \line \par}
+{They're trying to combine all of that in one particular place. , I must call }
+{\cf2 [00:36:00]}
+{ out. They have tried this before and I see as a business why they want to do this. Because if I was them having a control over anyone who's fully Amazon, and if you can make them use a software development lifecycle in Amazon, that is probably the best thing you can do for them because that just means more you get using that service.}
+{\pard  \line \par}
+{The more you would use the existing services of Amazon for a software development lifecycle instead of using. , which you , typically see anywhere is you may have a GitHub or a GitLab or Bitbucket as your repository, or maybe in a private repository for a CI/CD. You may have some people may use Jenkins, some people maybe even one more layer down.}
+{\pard  \line \par}
+{ You could use Jenkins or you could use Azure to deploy into AWS or use AWS themselves. or you could also have IAC templates defined in terraform because you wanted to be cloud agnostic. Like there's a lot options at the moment which makes people go away from Amazon and Amazon has to build integrations for it.}
+{\pard  \line \par}
+{\cf2 [00:37:00]}
+{ So Code Catalyst, I think, is their attempt to be that unified platform where they allow you to use your existing tool. For now, I wanna say for now, because I know in 2023 they would try and push people to just go fully Code Catalyst. And for people who don't work in Amazon or have seen work in Amazon, usually every year there's a theme.}
+{\pard  \line \par}
+{When you start talking to Amazon, you would notice that there's a push for a few services by your solution architect from Amazon. They're really pushing hard for, Hey, why don't you use this service for that? So I believe when this becomes available, Code catalyst would definitely be something that will be pushed hard for a lot of.}
+{\pard  \line \par}
+{And so an application composer would be pushed out for a lot of cloud engineers who are trying to learn about cloud engineering, but don't know how to do IaC and wanna be able to create that as well. So that's the two updates that I wanna share. The other one is probably not as important, but this was announced a day before as it does leading up to AWS re:invent.}
+{\pard  \line \par}
+{There are a few announcements, which Shilpi has covered most of }
+{\cf2 [00:38:00]}
+{ them. One of them that I wanted to add was a company. Wickr which was bought by AWS a long time ago. Now, AWS Wickr was still not GA for a long time, and now it's finally ga. It's basically an end-to-end encrypted messaging platform, primarily used by public sector.}
+{\pard  \line \par}
+{So if you're from the public sector, Wickr is now ga generally available to everyone. }
+{\pard  \line \par}
+{\b\cf3 Shilpi Bhattacharjee:\b0}
+{ I it In preview, in Reinforc. I remember, but we covered that. Yeah. So I think it's good to see that It's GA, but I do agree it is something that is very heavily focused on sort of government organization.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I was gonna take another angle here as well. You know how you mentioned AWS reinvent, I was trying to think of what was covered in AWS Reinforc and now we are looking at AWS reinvent as well. There is this whole thing around , there's certain themes on this side.}
+{\pard  \line \par}
+{We see a lot more security updates to existing products. Mm-hmm. , it was a lot of the same on the reinforce side. Like I think the one service that they announced, which is really interesting, was IAM Roles Anywhere. Yeah. And on this side we basically just saw a lot of features being updated, but there is no }
+{\cf2 [00:39:00]}
+{ strikingly new service, which is like, oh my God, like there's this new service announced that's gonna change my life. Like some people may find that the verified permission, verified access may change their life. But I don't know how many people are gonna use AWS Security Lake , but that's where the excitement of this is.}
+{\pard  \line \par}
+{\b\cf3 Shilpi Bhattacharjee:\b0}
+{ But I think that was very common about, like, even in reinforce there was no new security products, but in saying that, like, do we really need more services? Right. I mean, I'm happy with like just making what we've got if that, those are being made better and maybe that's a better strategy.}
+{\pard  \line \par}
+{From their perspective, rather than just create more of let's just try and make what we have better. So I think that that's what they are doing. They've made updates to Inspector Guard duty. I think last time they had made updates to other security, like in reinforce made updates to these services, but also other services.}
+{\pard  \line \par}
+{So , I think that probably would be the theme for 2023 and don't probably, maybe don't quote me on that, but maybe one of my predictions is that we will continue to see more upgrades because we have probably come to a point where a lot of the cloud providers have released some good services, but they're just not quite there yet, and hopefully they are listening }
+{\cf2 [00:40:00]}
+{ to customers and, people that we're working with and finding ways to improve it. They're probably also looking at, some interesting vendors and seeing how they can , implement some of those things in-house as well, so that we do see a little bit of that happening as well. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh, you and I were talking about this, which would be really interesting, is to cover all the other cloud providers for looking back at what has Amazon, Google Cloud, and Azure done for 2022, and what does that mean for 2023? Yeah. Folks to our listening it was a great idea from Shilpi and if you wanna hear more about it, you should probably Zena just mentioned. Yeah. Seriously, no more services from aws}
+{\pard  \line \par}
+{\b\cf3 Shilpi Bhattacharjee:\b0}
+{ I agree. I totally agree. Zena, like seriously, like whatever's there is enough. I'm happy with, improving. Updates that have happened, though they may not seem revolutionary, I think for a lot of people who are using these services, those little changes, like I know the Event Bridge one, and as you mentioned, like the two that are currently in preview, the composer and Code Catalyst.}
+{\pard  \line \par}
+{Code Catalyst, I think people are excited about it just to see what the potential of that is. I think the updates that were made to the RDS protection. I think }
+{\cf2 [00:41:00]}
+{ that is something that people are excited about }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ because Oh yeah, even that bluegreen thing that you can do. So earlier doing a bluegreen deployment for RDS was another thing, but now you can do BLUEGREEN deployments for rds.}
+{\pard  \line \par}
+{That's a good thing. }
+{\pard  \line \par}
+{\b\cf3 Shilpi Bhattacharjee:\b0}
+{ that's what I wanted to say. So though it was really exciting, I think Apple has trained us for that. Whenever you go to a keynote, you're like, what's new? And is there a new product? But in a way, I think in a cloud context, maybe just updates to current good services that people are using is, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ is in a way AWS re:invent was like an Apple event.}
+{\pard  \line \par}
+{There was the iPhone 14 was not really that dramatically different to iPhone13. }
+{\pard  \line \par}
+{\b\cf3 Shilpi Bhattacharjee:\b0}
+{ Yeah. Yeah, I think, yeah, maybe Apple's going on the same path as well. So there you go. Technology will incrementally improve unless people are using all the AI stuff that's happening. So I think there's lots of interesting things happening in that space.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ You should definitely do the episode on the Amazon, Google and Azure, Azure thing. But folks, if you want that episode, you should definitely drop us a comment and let us know that I think }
+{\pard  \line \par}
+{\b\cf3 Shilpi Bhattacharjee:\b0}
+{ that's something that we're interested in. And we are sort of looking at. For our interests because I do definitely do get interested in like can I see a theme?}
+{\pard  \line \par}
+{Are they all sort of doing }
+{\cf2 [00:42:00]}
+{ the same things or are they tracking in different directions? So if you do wanna hear about that, let us know. Or if there's anything else as always, we'd love to get feedback from you. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Awesome. That was most of the episode. Thank you so much for hanging out with us.}
+{\pard  \line \par}
+{ We have a audio event for this in about half an hour as well, so that should be, and I can actually have some breakfast and can come back to this, but I am looking forward to the audio discussion as to get to hear from all of you as well as to what you feel about Ena.}
+{\pard  \line \par}
+{Yeah. Did we }
+{\pard  \line \par}
+{\b\cf3 Shilpi Bhattacharjee:\b0}
+{ miss anything? Or, was, what was your favorite talk? We will be releasing. A couple of articles as well as a, sort of a follow on from this. So if I spoke too quickly and you weren't able to take notes, obviously you can re-watch this on YouTube as well. There will be some articles coming out later on as well.}
+{\pard  \line \par}
+{But yeah, do join us for the audio event. We always love to hear from you guys and, it's just a forum for us to like openly chat about these things, and share how many services AWS has and we don't want anymore . But yeah, do join us for that. But otherwise, thank you so much.}
+{\pard  \line \par}
+{This is our final episode for 2022, and we are gonna be back }
+{\cf2 [00:43:00]}
+{ in 2023 with a lot of exciting things. We've actually got a lot of really interesting episodes already booked in and, some really incredible people. Your teaser. You may actually hear from some of the people that we've mentioned who did give talks at AWS}
+{\pard  \line \par}
+{so lots of exciting stuff coming through. But thank you so much for everything in 2022. We have loved doing this, and we are looking forward to coming back and sharing so much more in }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ 2023. Thanks everyone. See ya. See ya. }
+}

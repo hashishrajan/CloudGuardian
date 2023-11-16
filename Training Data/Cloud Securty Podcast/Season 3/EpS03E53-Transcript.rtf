@@ -1,0 +1,718 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red216\green34\blue146;
+\red128\green128\blue128;
+\red250\green138\blue59;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\b\fs48 Kat Traxler\b0}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ Hello, welcome to another cloud security podcast. Today we're talking about how to become a cloud security architect in 2023 and beyond. The security architecture role has evolved quite a bit from where it used to be. If you are an experienced security architect, this is the episode for you where we talk about how you transition onto becoming a cloud security architect.}
+{\pard  \line \par}
+{Let me give you a hint on what you can expect as a security architect. With the years of experience in the field, you probably are a chef who's just in a different kitchen. You still have the same tools. The short version is your skill set from the on premise world is still valuable in the cloud world.}
+{\pard  \line \par}
+{For this episode, we had Kat Traxler from Vectra AI she's also building a course on enterprise security architecture in the SANS space as well. So we had to bring it on to talk about how has the security architecture role changed? What are some of the challenges framework people can use to build architecture in cloud?}
+{\pard  \line \par}
+{Whether they need to know coding, what's the difference between a architecture and an engineering space? So if you are someone who's starting off as well, I think this is pretty good because we had a couple of questions from the online stream about. }
+{\cf2 [00:01:00]}
+{ The beginning stages. So you'll definitely find this valuable from that perspective as well.}
+{\pard  \line \par}
+{And if someone else who's trying to get become a cloud security architect or is transitioning onto that, definitely share the episode with them. I think they'll definitely find it valuable. And if you're here for a second, third of fourth time, I'll definitely recommend follow, subscribing and maybe leaving a review on a rating on iTunes and Spotify as well, so others can find out about us as well.}
+{\pard  \line \par}
+{And we get to help out a lot more people like yourself and share the knowledge of cloud and cloud security so they can be better at their job at doing cloud security. This is the continuation of our AWS month as well. Just a reminder, we would be at AWS re:invent so Shilpi and I are attending AWS re:invent and if you're there, definitely give us a shout and we would love to say hello and take pictures and just say hello in person and thank you for all love that you've been sharing.}
+{\pard  \line \par}
+{Thank you for sharing all the LinkedIn posts as well as the Twitter post and other places where you've been sharing the podcast episodes that you've really enjoyed. I really appreciate it. Shilpi really appreciated it. As a producer, this is good feedback for us to know that what we are creating is valuable for you.}
+{\pard  \line \par}
+{If you have any questions about cloud security, feel free to tag us with a }
+{\cf2 [00:02:00]}
+{ question on it, on on our Twitter, which is @cloudsecpod, or feel free to drop them on our LinkedIn page or also on our YouTube channel. We are available everywhere and we are on a mission to help people democratize cloud security.}
+{\pard  \line \par}
+{So any questions you have, feel free to drop them over there as well. But as always, I appreciate your time and I hope you enjoy this episode with Kat Traxler from Vector AI and SANS sharing about how can you become a cloud security architect in 2023 and beyond. I'll see you on the next episode. Enjoy this and I'll talk to you soon.}
+{\pard  \line \par}
+{Peace }
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ by bringing developers and security together. You don't have to choose between speed and security. Develop fast. Stay secure.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Hi, Kat welcome. Hi, }
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ Ashish. Hi friends. How's everybody doing? }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Good. And welcome to the show. I appreciate you spending your Friday evening with us as exciting. It would've been without me, but I appreciate you hanging out with us all all the thousand people over here, but I appreciate that.}
+{\pard  \line \par}
+{For people who may not know a bit about you I doubt there are people who don't know much about you, }
+{\cf2 [00:03:00]}
+{ but could you tell us a bit about yourself and where you are, these days professionally and how you got there kind of a thing. }
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ Yeah. Thanks. Thanks for having me. So my name's Kat Traxler. I'm the principal cloud security researcher over at Vector ai.}
+{\pard  \line \par}
+{So during the day I research cloud data attacks and AWS and GCP, I try to understand what's the attack progressions like on the cloud plane. How do attackers achieve initial compromise? How do they move from initial compromise to recon to executing their actions on objectives and then how can we detect those behaviors on the control plane?}
+{\pard  \line \par}
+{So thats my day job in, in the evenings and weekends, I work for SANS. I'm a SANS author for the cloud security. Architecture course, the SANS SEC 549. So currently it's a two day class focusing on identity architecture in AWS primarily. And we're building it out to be a four day class starting next spring.}
+{\pard  \line \par}
+{I'll be , currently, my bread and butter is in this detection }
+{\cf2 [00:04:00]}
+{ engineering space in the cloud. I do have experience working in web app penetration testing. That was my very first job in security. Right. Just, , working on web apps, and , trying to get xss and, , get that hello world shell to pop.}
+{\pard  \line \par}
+{, I've also worked. Cloud security architecture and big e-com sites. I've worked in, , plain old cloud security engineering and looking at the automation process of infrastructure as as code. So kind of worked the gambit in the cloud space. That tends to happen when, , there's so few of us who are, are cloud fluent.}
+{\pard  \line \par}
+{, oftentimes there's not a whole team of people, , where you can really specialize. Oh, here you have your, your cloud security engineering team, and here you have your cloud security architects, and here you have your cloud pentesters. You just, , if organizations are lucky, they have one or two people who are proficient at the cloud and they end up just doing kind of it all.}
+{\pard  \line \par}
+{So that was my lead up into moving over to the detection engineering }
+{\cf2 [00:05:00]}
+{ space about a year and a half ago. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Wow. And pretty good background as well. Kind of have the pentesting space and the cloud secure engineering, cloud security architecture space as well. Covered. Perfect for this conversation especially cause you're building a course around the as well or you've already built a course around the SANS space.}
+{\pard  \line \par}
+{So think by the way, I think this is probably the first time before SANS DM difference maker award. All three of us are here. Zinet is here. You are here. I'm here as well. So people were listening in word for all three of us as well.}
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ difference }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ maker. This is great. Yeah. There's already difference makers already talking about difference maker. Security architecture is an interesting field as well. Cause we have a lot of people who are to what you called out. Not a lot of people have. Picked up the skills , for a cloud for various reasons, and some people may not even know what a security architect does.}
+{\pard  \line \par}
+{So maybe let's start there. How would you define the job of a cloud security? Well, actually, not even a cloud security architect, just a generic security architect. }
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ The primary function of any person working in insecurity, whether the architect or the engineer and they }
+{\cf2 [00:06:00]}
+{ work in the SOC, is just really, , dumb and simple.}
+{\pard  \line \par}
+{, it's identifying risk within your organization and then working to reduce that risk. It's nothing more fancy than that. , , each of the different roles might approach it a little bit differently. Right. So the architect is looking for those, those larger scale design issues within how the technology is put together that might be put together in an insecure way that}
+{\pard  \line \par}
+{might create undue risk to the organization. And then, , from there they have, , their Swiss army knife, their basket of controls that they can use to mitigate some of those risks or, try to refactor the technology to bring in line with what's }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ acceptable. Yeah. And how different is it to a cloud security architecture role then?}
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ Well, your basket of controls is different, right? So in, in both cases whether you're working on a traditional on-prem architecture or your cloud architecture, you're both looking at patterns. You're }
+{\cf2 [00:07:00]}
+{ both looking at designed architectures and you're saying, , where's the attack surface?}
+{\pard  \line \par}
+{Where are the places that pose risk? But in the cloud you have this whole other attack surface that you really didn't have to consider before. And that's , the cloud control plane. So, this whole other layer opens up that I think the, maybe it's initially hard to grasp for your traditional cloud security architect.}
+{\pard  \line \par}
+{, all of your, your whole data center becomes an API and that is now an attack surface, a risk that needs to be mitigated and controlled. So what are those controls you can layer on to this new attack surface is a whole other ball game and then even in your more traditional architectures, , say , an an application deployed on some pieces of IAAS infrastructure, the identity and network controls you can layer on top of that are gonna be different as well.}
+{\pard  \line \par}
+{ You're still creating architecture that layers on, , identity and network, but }
+{\cf2 [00:08:00]}
+{ how you do it's different. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And actually that's a good point. Some people even yesterday we were on a, we've been running these cloud security ask me anything sessions every I guess every week. And someone asked a similar question and it was one of the things we came up with was, it's kind of like being, a chef in a different kitchen.}
+{\pard  \line \par}
+{Like it, you just, it just not your kitchen. It just basically the same tools exist but you just have to figure out, oh, what kind of knife is available and how do I use it That's not my regular chef knife or whatever. But I thought it was a great analogy cuz would you say you can still use the same principles of doing identity access management and doing backup and all of that, but you just have basically a different landscape to what you called out earlier}
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ absolutely. Yeah. Such a great analogy. Like you're still a chef, but it's somebody else's kitchen. That's }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ pretty much it. Yeah. When I, when we said that, I'm like, that is it. Like we've been talking about this for so long. , why can't you describe that anymore? Absolutely. }
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ You still need to control your, your ingress and your egress.}
+{\pard  \line \par}
+{Like that's still absolutely a thing. }
+{\cf2 [00:09:00]}
+{ Like you still in the cases where previously maybe you wanted to do a network packet capture, you're still gonna have wanna do that in the cloud where you wanted to do it in prem. But which drawers do you pull out to get which tools out and how to make that happen?}
+{\pard  \line \par}
+{Yeah, that's pretty }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ much it. Yeah. And it was, I, I like the more I came out like, can someone write this? Tell this is , one of those ones. But by the who }
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ said that so I can, I can follow them on Maan. Who said that? That's amazing. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ No, I, we, I just made that up yesterday on the call and I like, as I was saying it, cause someone asked a question about, Yeah, it was like what do you call it?}
+{\pard  \line \par}
+{The, the question was around, the fact was someone was, they were a networking person in an on premise world looking to transition to a cloud engineer role. And as we were trying to explain to him, and just like, came to me and I'm like, Someone writing this down, can someone write?}
+{\pard  \line \par}
+{I've been telling this to everyone because that way I remembered myself so I don't forget about it. Maybe it should tweet about it. I'll, that I could forget. I digress. }
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ }
+{\cf2 [00:10:00]}
+{ No, that's, that's fantastic because, , most of, I don't wanna stereotype, but most of the classic architects that I know, they've got a little bit of gray hair, , little older, little wiser, little bit more mature in their career, and they see cloud come along and they think that's for the young kids.}
+{\pard  \line \par}
+{, I can't, I can't do that. It's like every ounce of your expertise skills, knowledge about how to implement controls, is needed in the cloud. ,, we need you, we need your 30 years , of security architecture experience in the cloud. Yeah, what? There might be some upskilling around what this landscape looks like, but there's no substitute for that professional chef.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ No, there is definitely. No, I think and all that learning you had was still valuable no matter how you look at it. Just different. Cause it's not that you can't cook anymore, you can still good the dishes that you want do just for finding out what's available in the kitchen to kinda use. }
+{\pard  \line \par}
+{And continuing with our questioning in terms of architecture, , Oh, }
+{\cf2 [00:11:00]}
+{ there go. Heard that. Perfect. Yeah, I came up with it. Right. ? I think I definitely need a tweet. I'm pretty sure I tweeted somewhere, otherwise I'll forget for sure. I was gonna say in terms of building applications itself to what you said, we are in a different kitchen now and we are talking about the fact that.}
+{\pard  \line \par}
+{You're in different kitchens, the same 20 plus years of architecture experience when you're building a block of application. But what are the building blocks of building an application in AWS specifically, we are running AWS month, I'm sure it can be translated to other clouds as well. From an AWS perspective, what are some of the building blocks for building a, an application?}
+{\pard  \line \par}
+{I guess let's start there. }
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ Well, I think I'm gonna, , just kind of refocus that around. Like where, in what service model, , we've heard about maybe the different service models, infrastructure as a service PAAS platform as a service, SAAS . So, , with the different service models, building an application in there, in the different service models can look very different because you're gonna just have control over different }
+{\cf2 [00:12:00]}
+{ knobs and levers, right?}
+{\pard  \line \par}
+{So, in an IAAS environment, Their architectural components aren't gonna look very different from say maybe like a VM architecture where you're on some hypervisor. They're not gonna look tremendously different. Now you start moving to PAAS and you start losing control over some of those network layers.}
+{\pard  \line \par}
+{And then you have to really focus around your identity perimeter, right? So as you move through that service model, things are changing a little bit as far as what you have control over and what components you can bring to the table to affect controls. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And to your point then would you say, how in a traditional security architecture people would talk about all these things like, Oh, IAM backup recovery, your BCP, or all that?}
+{\pard  \line \par}
+{Cause they still are applicable in the cloud context as well, kind of what we spoke about earlier, right? That that's one that they go away. }
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ No, , they absolutely can't. , I think , , your backup recovery, your disaster recovery, all of that }
+{\cf2 [00:13:00]}
+{ still has to matter. Yeah. , , no large organization , would agree to hopefully to agree to move into the cloud without those mattering you go about them differently.}
+{\pard  \line \par}
+{And it also really necessitates some foundational work to be there that I think that in an on-prem world, you kind of just like take for granted you kind of take for granted that you're gonna have these, , cordoned off spaces in your network. , to shove things where at AWS you might not have, those landing zones set up.}
+{\pard  \line \par}
+{So it really requires some foundational groundwork to set up the appropriate landing zone. So, based off the risk of an application, Where do you put it in your estate? }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Actually, that's a good question. Cause someone asked us on that AMA also would you have a DMZ in a AWS world?}
+{\pard  \line \par}
+{Where do you do you have thoughts on that? }
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ I mean yeah, of course. Like would you have some publicly facing applications? Sure. Like why wouldn't you have a publicly facing application? Like, but the }
+{\cf2 [00:14:00]}
+{ concept of. I'm a large organization and I have a data center and I have, , one or two networks is just not the concept anymore.}
+{\pard  \line \par}
+{But if you want to abstract that away and just say like, is there going to be networks in your cloud that are publicly facing? A hundred percent. , there will be networks that are publicly facing, but it's not gonna look like, , these, mass networks that are spanning accounts.}
+{\pard  \line \par}
+{They can be much more }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ segregated. Yeah. Yeah. Actually once, worthwhile calling out maybe people would not even know where DMZ is, demilitarized zone. Not like, not the one that you talk about North Korea, but this is like a way people have, built networks for ages where your private network is kinda like behind a DMZ and DMZ is kinda like the public facing one or was there another one in front of the DMZ.}
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ Oh no, DMZ would be like your public facing zone and then your, your internal network would be kind of like your safe space. That's pretty much it. Yeah. Yeah. So if you, , depending on }
+{\cf2 [00:15:00]}
+{ the risk level of an application, a classic architecture thing to do would be you would, talk to an application team, understand the risk level, and then say, Okay, can it go public facing or can it, , get shoved in the corner, , internal, external.}
+{\pard  \line \par}
+{Yeah. That's a really classic, like quick risk based decision people have to make. And certainly you are gonna be making similar risk based decisions in the cloud but it, it's not gonna be as simple as, , here or there. It might be like this pattern or that pattern where that pattern might have, , No ingress connectivity and , people are just connecting through , endpoints maybe.}
+{\pard  \line \par}
+{So there's gonna be some slight architecture changes on how you achieve the internal network and yet maintain connectivity }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ a hundred percent. And I think Zinet has an interesting take on as well. So DMZ interfaced with an untrusted external network, aka the internet, that is pretty much sums it up.}
+{\pard  \line \par}
+{Yeah. So I've got a question here from Ketan as well. He's asking I think because you have a threat detection }
+{\cf2 [00:16:00]}
+{ background as well now have, I've seen cybercriminals deploying crypto mining in the cloud, for example, TeamTNT. Have you seen any trends in 2022 for where you see the cyber criminals focusing on for cloud exploitation?}
+{\pard  \line \par}
+{I think the reason I brought that last question up is also because as an architect you definitely need to talk, know about threats. So can if you have seen any insights that you can probably share from your. I love this }
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ question. This is the best question, especially TeamTNT is my favorite threat actor, so thank you for bringing that up.}
+{\pard  \line \par}
+{It is really interesting because it's one of the very few in the wild examples we have of threat actors, going after some really low hanging fruit. We all have as far as cloud credentials , credentials to Kubernetes clusters GCP session tokens, access keys. Basically if people don't know it's a malware, it'll affect your desktop and just like troll local files for these credentials that are just, , stashed on all sorts of endpoints.}
+{\pard  \line \par}
+{So yeah, I mean that's probably the best example we have of, well, , }
+{\cf2 [00:17:00]}
+{ what us Security researchers know is absolutely plausible, but we don't have a ton of concrete examples around. It being used in the wild. And , it's problematic that we don't have a lot of concrete examples in the wild.}
+{\pard  \line \par}
+{But it's expected because, we don't have really robust reporting rules, right? So there's really not a ton of incentive for people to report how they were breached, , to give a really comprehensive retrospective. Those things are just so few and far between. Unless, unless a breach just really gets out control, they have to report it.}
+{\pard  \line \par}
+{And their hand is forced. I would have to say the vast majority of 'them are kept pretty. So all we can do is speculate, right? All we can say is, , there's thousands of endpoints with cloud credentials just sitting on local files. TeamTNT we know goes after them.}
+{\pard  \line \par}
+{Who else is going after them? I can imagine that the threat actors would be financially motivated. Absolutely. Yeah. That's one motivation. Yeah. So from there we're }
+{\cf2 [00:18:00]}
+{ imagining data exfiltration we're thinking ransomware , probably less so risks around defacement. If you're, , maybe from, , the likes of Google, Apple a government organization, you're thinking about state actors.}
+{\pard  \line \par}
+{Also maybe like the medical industry, you're probably thinking of state actors. But that's a little bit less. So. So yeah, Fantastic question. I can talk to you about this all day long. It's a lot of the security researchers talking to other security researchers , we're reasonable people and we can assume what might happen and what could happen and what should happen if an attacker is, is motivated.}
+{\pard  \line \par}
+{We just don't have a ton of examples out there in the wild. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I think, do you find it very similar to the kubernetes space as well? Thanks for that question, Ketan. Where that we know what can go wrong, but how many examples are out there of actual things that, I mean, cause that's where a lot of people are like, well this is just theory, right?}
+{\pard  \line \par}
+{When, when was the real time this has happened. I'm like, well, it kind of can happen. So definitely, hard one. }
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ Yeah. , and without changes to the reporting laws and }
+{\cf2 [00:19:00]}
+{ I don't see how we're going to have any any better data around it. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That's true. I've got another question from John F as well.}
+{\pard  \line \par}
+{As a cloud security architect, how do you keep up with the rapid changes with cloud services? }
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ Yeah, , it's pretty wild, right? Like services are changing constantly. Services are being added. It's a scramble. I mean, it's a full-time job. It's a full-time job. It's a couple fulltime jobs. Twitter is a huge part of my life.}
+{\pard  \line \par}
+{The Cloud Security Forum Slack channel is a huge part of my life. I've also just made just ad hoc contacts with fellow security researchers who just work at different companies doing similar things that I do. And we just have meetings, , every couple months, like, Hey, what are you working on?}
+{\pard  \line \par}
+{Hey, what are you working on? Mm-hmm. Just like foster that cooperation. Yeah. But yeah, , I'm glued to the cloud news. Not only does that impact my day job as far as researching threats, but it also affects my course as I need to make sure that all of the information is accurate and up to date.}
+{\pard  \line \par}
+{It took me a two weeks, }
+{\cf2 [00:20:00]}
+{ I think, to do course updates after reinforce. So we'll see what happens after reinvent. It might be a busy week or two after that. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. Cause I think with pre:invent is already started, there's like a few services that have been announced by AWS. Really interesting. So, Yeah.}
+{\pard  \line \par}
+{And I can already see one of them, at least. The one which is to the ability to query resources all all across AWS accounts across our organizations. Yeah. Yeah. I think that would be great. From a security perspective as well. I wonder that would change the ways people look at SIEMs. A lot of SIEMs were used to do inventory and now you can do inventory inside AWS, but then I don't know if that would expand to an organization level. Anyway, we going too deep in the weed, but hopefully that'll answer your question. John, I'll just, do you have a point about the new service as well? I do wanna let you add your piece on it about that as well.}
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ Oh yeah, the new surface. I don't know if it's gonna change the way people work with SIMs. I think that the SIMs they do allow you }
+{\cf2 [00:21:00]}
+{ to do some of that querying across clouds. Yeah, I think like Steampipe has some, a really good offering around that. But the more like enterprise ready SIMs around, like Splunk and Elastic, those are really more about correlation between the clouds.}
+{\pard  \line \par}
+{ That's where those really shine. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh, actually that's, yeah, that's a good one. Cause I think . The norm of whether you are just AWS or you're multi-cloud and how many people are gonna be single cloud for a long time? I don't know. That'll be only time would tell. Nobody. Yeah. Cause same as the research we were talking about.}
+{\pard  \line \par}
+{Well, we can find out as many I guess possible scenarios, but unless you actually have a real example, it doesn't go away., but talking about examples and how people kind of get to these kind of things leads me to IAM as well, which probably has become the most important thing in a cloud context.}
+{\pard  \line \par}
+{Mm-hmm. , why is IAM so important in the cloud world and Yeah, I know you have, that's your passion project as well. So can you hear your thoughts in the whole IAM space in cloud. Yeah. }
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ We really bonded over }
+{\cf2 [00:22:00]}
+{ identity, didn't we? Yes, we did. It's our, it's both of our loves. And I think yeah, I mean, just referring to, IAM, as , the service from AWS, AWS, IAM, it's that identity and authorization layer.}
+{\pard  \line \par}
+{That gatekeeper between you, like the end user or the attacker and all of the functionality of the cloud and the functionality is , from. Spinning up new resources to destroying all of the resources, to exfiltrating all the data, to, , encrypting all the data. It's full effect of confidentiality, integrity, and availability.}
+{\pard  \line \par}
+{So, that's the gatekeeper between. The end user and all of the functionality. And in most cases, by default, all that functionality is publicly accessible. So there's no network layer controls. , in some more advanced architectures, you can work to put some of that, , behind some network controls.}
+{\pard  \line \par}
+{But, in the vast majority of cases, all of that's going to be, , publicly accessible from any point in the }
+{\cf2 [00:23:00]}
+{ world. And it's that IAM layer that's going , to authorize end user access. So it's the whole ball and axe. It's the everything. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And I think OWASP even has the, what's it called?}
+{\pard  \line \par}
+{Identification, authentication failure as well, The OWASP top 10 funny enough, they've started including things which are sounding very cloud-like as well. And one of them was, I remember identification, authentication failure, which initially used to have more application focus, but nowadays it's creeping into AWS stuff as well.}
+{\pard  \line \par}
+{Right? }
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ Yeah. I love the website. I forget who does it, but it's the website that, , checks to see if AWS IAM has failed open. Oh really? It's just this public website that just says, , AWS IAM has not failed open yet. But , your often in the background, you just start pinging something to see if it's failing open, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ failing open, that it wouldn't be more as in like people can take over.}
+{\pard  \line \par}
+{IAM or, }
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ Yeah. If anybody on the talk is, knowing what I'm talking about, a link would be awesome. Or I can, I can dig it out. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Interesting maybe I can share it later aswell if you can }
+{\cf2 [00:24:00]}
+{ own that service that is just basically, that's game over for entire AWS that's it. That's }
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ it.}
+{\pard  \line \par}
+{Yeah. Yeah. That's a layer that like in theory exists in on-prem world. Like there is a management layer to VMware. So like if your organization is really big into containers and hosts, I'm sorry, virtual machines on VMware. Yeah. There's a management plane layer on top of that. There's a management layer on top of.}
+{\pard  \line \par}
+{ Like HP servers, , they have the, the lights out, the ILO interfaces that are this management plane on top of those machines. So it's not like it doesn't exist OnPrem, that attack service is there. That risk is still present. It's just on steroids in the cloud because it's available everywhere.}
+{\pard  \line \par}
+{There's no network layer controls blocking that. And , instead of kinda a small piece of functionality, it's now like everything everything is }
+{\cf2 [00:25:00]}
+{ programmatically accessible. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yep. A hundred percent. I think now we're in the world. Actually, this kind of leads me to another question where a lot of people ask about the fact that should cloud security architects know coding and automation.}
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ I'm probably , going against popular wisdom here, but I don't think so. I really don't. I think it's, , I know a lot of folks have said that everybody should know how to code at some point, but the security architect's job really is to understand, , to be able to quickly evaluate risk and then understand how to bring it down, not necessarily how to do that implementation piece.}
+{\pard  \line \par}
+{ , is it helpful if they understand a little bit to kind of put, be in somebody else's shoes for a bit? Absolutely. But it's not a requirement by any means and. It's as far as the automation piece, I think automation can be used in a lot of cases to like centralize, kind of like chaotic configurations in the cloud because we have this like configuration sprawl issue.}
+{\pard  \line \par}
+{Yeah. And so automation can really help }
+{\cf2 [00:26:00]}
+{ centralize that. And so it's great if an architect can understand the role automation has in centralizing configurations and then have that like central policy attachment point to be able to say, Okay, that's where I can prevent people from making changes to the infrastructure at only these people to make changes to infrastructure because we're automating and we're piping through CI/CD.}
+{\pard  \line \par}
+{ but do they know how to work terraform. No., that's }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ a good point. Cause the whole point of an architect is not to build a building, but just to build the frameworks around, Hey, what, for lack of a better word, I guess, where would you, would the screw go into the hole or whatever.}
+{\pard  \line \par}
+{Like, it's not about like, oh, what kind a cement should be used and what kind of metal should be that is too down in the weed for them. }
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ Yeah, it's totally not necessary. I mean, you're more talking about a, a security engineer who, , needs to understand , the AWS provider for Terraform, understand the difference between Terraform and CDK and how to }
+{\cf2 [00:27:00]}
+{ integrate that within a C I C D pipeline.}
+{\pard  \line \par}
+{But from there, An engineer can build this fantastic system that works great but has no security controls as far as who can access it. So the architect needs to swoop in in there and say, Okay, I'm gonna use this system now to put limits on who can make changes to my infrastructure.}
+{\pard  \line \par}
+{And it's good for them to know that those possibilities exist. Cause they can try to enforce and inform that end state architecture because otherwise we just have this like configuration, chaos sprawl. And it's possible to enforce at that point. But they don't need to implement it.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Awesome. . There's questions over here as well. So Zinet is asking if it's a control plane. I think she's referring to the IAM piece. Would you say Im is like a control plane for AWS? Yep. }
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ Control plane. Absolutely. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Awesome. Right? Thank you. Zinet Feel for asking a question as well.}
+{\pard  \line \par}
+{I've got a question from Alex as well? How important are cloud certificates? For example, the AWS solution architect professional? }
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ I don't have any }
+{\cf2 [00:28:00]}
+{ AWS certs. , I have lots of SANS Certs and I've always loved doing certs because it gave me this like, goal and focus for my studying. I don't know that it's really, maybe it's helpful when interviewing for a job.}
+{\pard  \line \par}
+{I think that it's more important though, if you're the kind of person who needs this like end goal of studying. , I wanna learn about. , , the availability in AWS, I wanna understand all the resources. It's much easier to motivate yourself if you're studying for something. And that's what I use certs in general for I dunno anything about those solutions architect.}
+{\pard  \line \par}
+{cert. Once I'm done with my course, I might just go and knock off some of those just for fun. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah, maybe I can add some because I've done the AWS solution, architect professional one. I think the, I think what you said is pretty much the answer as well there, depending on what your goal is. Alex, if you're say wondering on the principle of you've been an architect or you are looking into going into the AWS space.}
+{\pard  \line \par}
+{If you want to }
+{\cf2 [00:29:00]}
+{ understand what's an AWS service, like a generic overview of all the services within AWS, which probably are quite common. They wouldn't talk about the 200 plus services, any common services that they know is primarily used by a lot of people across the board.}
+{\pard  \line \par}
+{They will teach you that in the associate, in the professional. The difference you will find is that the question's a lot more longer and they give you a scenario they'll say, Alex, you run a 500 million dollar company and you have a requirement to build cloud and , these are specific requirements.}
+{\pard  \line \par}
+{Which one of these bullet points would you use as an approach? And that's kind of where it comes in from. I think it's good from a perspective of having an understanding of how would you use an AWS architecture? But when you're trying to, to Kat's point, when you're building a real life architecture, that certificate is only as good as knowing, we're gonna go back to the analogy of the, the chef in a new kitchen or in someone else's kitchen where you just don't know where things are.}
+{\pard  \line \par}
+{So you're trying to figure out based on the experience you've had in your on premise world, you're trying to figure out, Okay, }
+{\cf2 [00:30:00]}
+{ what's the service for key management? Oh, it's AWS KMS. Okay, I'm gonna use that. Oh, , what's the service like? The. whole conversation then becomes about ensure drinking the koolaid from AWS because that's what they're trying to make you go around the path of for AWS solution, architect professional.}
+{\pard  \line \par}
+{It's great to get a job or at least get an interview, but when it comes to real life implementation, it's probably still like you would still rely on your original skills of an architect to go make a call for. Does this make sense? Because I already have a key managing system in my on premise. Do I need to pay for another one or whatever , the balance you need to find.}
+{\pard  \line \par}
+{Hopefully that. I'll see your question, Alex, but I think that was my experience with it. It's good. If you have no idea about AWS, I would start with associate profesional a lot more harder. I even failed, my first professional exam was, I feel it's a safe space to talk about. So I would, I failed my first professional.}
+{\pard  \line \par}
+{I had to give it a second time to pass it as well. So happy to kind of share I think the resources I used. But hopefully that answer your question. Alex, thank you for that. }
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ I heard that }
+{\cf2 [00:31:00]}
+{ the professional one was more difficult because they got a little there with the use cases. Yeah. Very, very attuned to how they're wording the use cases.}
+{\pard  \line \par}
+{You have to study the }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ test. Yeah. And I don't think it's a fair thing to a point also because it's not talking about all the latest services. So depending on the version of the exam, they might be like, the versions that I gave. They didn't have a single question of Lambda.}
+{\pard  \line \par}
+{And, but the version after that, even though Lambda was popping at that point, everyone was talking about Lambda, but none of the solutions were pointed to Lambda. Like, well I would not use any of these cause it would not make sense. So I have to switch off my brain for what's current in AWS and switch back to what used to be AWS, what they want to answer.}
+{\pard  \line \par}
+{Yeah. So I mean, there's a whole can we can make a whole entire, on the whole, like my bitch about the certification thing. I've got another question here and I think Malik Bilal Dost is asking, , he's a student who wants to go into cloud security, cloud computing space. And maybe this }
+{\cf2 [00:32:00]}
+{ is first of all, it's awesome that you're trying to get into the space, but this is also a good point to talk about.}
+{\pard  \line \par}
+{I don't think because he's a student, I, I don't imagine he has a lot of experience. What is your 2 cents on people who want to get into the cloud security space but with no experience? }
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ Yeah. I think there's still a lot of roles open around the junior level. I mean, my first job in the security industry was a junior pen tester level, and I moved from development.}
+{\pard  \line \par}
+{So, there's some natural pivot points, like if you have some background in development, well, testing web apps for security issues might be a good pivot. If you wanna go into cloud security. Maybe look around your organization. Is anybody doing cloud security right now? Maybe that could be you.}
+{\pard  \line \par}
+{So try to fill the holes, the gaps in the world where you see them. If you wanna go into cloud security, maybe a good initial step would be to do like DevOps, engineering first, know how to build it first, know how it's glued together, and then you can }
+{\cf2 [00:33:00]}
+{ understand later how to secure it. So.}
+{\pard  \line \par}
+{Hopefully those are some good pivot points. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah, I would probably throw in the fundamentals as well just to the, I mean, not sure how much experience you have, Malik Bilal Dost, but if you can learn about networking in general, backup identity, access management, what these concepts are fundamental concepts.}
+{\pard  \line \par}
+{Cause none of the AWS certifications will teach you that. They just tell you that, Hey, use this. IAM service, use this KMS service. But they don't tell you why do I need a KMS, Why do I need an IAM? Why do I care about any of these? So hopefully that answers your question. }
+{\pard  \line \par}
+{But Malik Bilal and I think John I've had, had a link for you as well. So definitely check that out from AWS. Alright. I've got a question from Roderick Rischer as well. What are the most important skills of an architect ? }
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ This is gonna be a an odd one, but I would say, , shaking hands and kissing babies, , , you find yourself in some really tough rooms sometimes.}
+{\pard  \line \par}
+{You find yourself in, in places where you need to very quickly }
+{\cf2 [00:34:00]}
+{ understand, , what does this application do., what risk does it bring to an organization and how to mitigate that risk? And oftentimes you have no authority to do any of that. , it's just the nature of the game. So we often joked that an architect works on the eighth, ninth, and 10th OSI layers people, politics and religion, where you have to use those people skills to go into a room and say, , Hi, my name's Roderick.}
+{\pard  \line \par}
+{Please tell me about your application. I really wanna know, you need to be ingratiate yourself to these people. You need to be friendly. You need to care what they're doing. You need to understand what value it brings to the business, and then you need to convince them to do the right thing. That isn't gonna be the case in all organizations.}
+{\pard  \line \par}
+{Some organizations, , architects have a hammer they can hammer down, but I don't find that those are too frequent. I often find that the security organization the architectural organization in particular is this this like big cross }
+{\cf2 [00:35:00]}
+{ collaboration organization where their job is to work in partnership with everybody and they don't have a big hammer to bring down.}
+{\pard  \line \par}
+{They have to get everybody to do the right thing because they want to. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah, a hundred percent. I think I love the analogy of kissing babies and it pretty much sums it up even as an auditor as well. It's the same thing as, well. You wanna produce a report, but you wanna come back and do another audit as well.}
+{\pard  \line \par}
+{So you wanna have, find the fine balance between. What should be reported at a high risk versus a medium risk. Mm-hmm. and that conversation never changes. Thank you for that. Question Zinet has a question what SANS certificate do you recommend for transitioning to or geared towards a cloud security architect role?}
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ I have I think five SANS I kind of lose track. I think, , the most recent one was the one based off of the five 10, the cloud security, multi-cloud security assessment course, SANS Sec 510. Great course for all around understanding the secure }
+{\cf2 [00:36:00]}
+{ configurations of GCP, AWS and Azure.}
+{\pard  \line \par}
+{Fantastic course. I contributed part of it, so it was pretty fantastic. Great cert. I keep coming back to my very first one though. The SANS 401 it's just, , a security essentials. It's kind of like their equivalent of the CISSP, very broad, not a ton of depth, but it really is those just fundamentals around CIA confidentiality, integrity, and availability across all technology systems.}
+{\pard  \line \par}
+{Yeah, I studied like mad for that for three, four months. And I really attribute the the solid foundation I built from that first course and that first cert to be able to kind of like build from there. So anybody first starting on it, always recommend the 4 0 1.}
+{\pard  \line \par}
+{It was a hard class and it was a really, really hard cert to study for. So Yeah, I mean it is a 400 level course, so maybe somebody might turn their nose up at it, but it is, it is some solid }
+{\cf2 [00:37:00]}
+{ foundations to get anybody started. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Awesome. Well, thank you sharing that. Thanks for that question as well.}
+{\pard  \line \par}
+{Zinet Talking about CISSP, you dropped in there. I feel like a lot of people would be I guess thinking about, , how it has the broad context for cybersecurity in general, and we spoke about certifications. It's also making me think that it, with regard to clouds as well these days, not many people are, especially if you're in the enterprise space, you don't just have one cloud.}
+{\pard  \line \par}
+{You have multiple clouds and sometimes you have private cloud and public cloud. And I know whatever cloud someone else's may just happen to make in their basement somewhere. And do you feel it is important for a cloud security architect to know all the clouds, at least in some way or form? }
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ I think that is the idea that , a cloud security architect would have this, like, I would say deep understanding of all the clouds is just, is, is just ridiculous.}
+{\pard  \line \par}
+{I can't imagine anybody has enough ram in their brains to contain all of that, ? And, , specialize in one, really go deep in one. If you're an }
+{\cf2 [00:38:00]}
+{ overachiever like me, you can specialize in two. But focus your specialization on like one common or two common languages. For me it's AWS and GCP}
+{\pard  \line \par}
+{And then every time I have to try to understand a concept in Azure, how I understand those concepts is I draw parallels between, and I start saying, Oh, this is like VPC service controls, or, , this resource model is like GCP, but with this variation. So you can start to get some proficiency, at least baseline proficiency pretty quickly.}
+{\pard  \line \par}
+{Yeah. Yeah. If you are just deep in one but don't, don't think that you have to have this deep experience in all three. I, I think it, it's kind of ridiculous to expect that from anybody. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. I'm the same. I've, I started with AWS and I think, I still feel I'm the most in my element in AWS.}
+{\pard  \line \par}
+{Mm-hmm. , but I can definitely transition to Azure or Google Cloud as, as much as I've done. }
+{\cf2 [00:39:00]}
+{ That transition has always just been to what you said. I've drawn a parallel to go, Okay, what was the parallel for this in AWS? Ah, this is the unique way it works. What you can call the service whatever you want. Cause to your point, there might be a fourth Cloud tomorrow.}
+{\pard  \line \par}
+{Suddenly Oracle Cloud becomes popular. And I or IBM clouds become popular. I mean, how many cloud services can you really remember? This is like back in the day, people used to have one certificate, from Cisco and that would be the best for the rest of their life. That's not enough anymore. }
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ And that's why, , get a certificate if you want. Don't get a certificate if you don't want. And it's just a tool to help you learn. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That's all. It's, yeah, I definitely feel like the, the certificates at the moment in the cloud space have become more of a tool to get, to get that next interview.}
+{\pard  \line \par}
+{Cause to what you said, you may have learned cloud security in your organization without a cloud security title, but you're trying to get that role somewhere, then that certification actually helps. Cause then that gets you the entry. Cause whatever filter people have for, Hey, I only want people who are AWS certified, or Azure certified or Google }
+{\cf2 [00:40:00]}
+{ certified.}
+{\pard  \line \par}
+{At least you pass that filter and get to the interview part when you can really shine at that point in time. }
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ I understand that right. A lot of people have, , software that looks at all the resumes that they, are these, these keywords }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ in there? Yeah. Cuz they're looking at thousand. I mean that's most of the people that I've helped out and spoken to, that's what they keep referring to, that you can't even get to the past first filter if you don't have certificate.}
+{\pard  \line \par}
+{I'm like, okay, fair enough that that kinda explains the reason. But if you're in a company where there are already plenty of cloud security roles, you don't need to have a certificate. You just basically work your way through transitioning onto that role within the company. Yeah. }
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ And I bet there's tons of people who are working in the cloud space without that official title because there's so much cloud and so few official practitioners.}
+{\pard  \line \par}
+{So it, it's gonna fall in so many people's laps. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yep. Yep. A hundred percent. This also makes me feel talking about frameworks around what, , how architecture space has always been about I think as ISACA or whatever, there's like a sig there's a few framework people rely on for building architecture.}
+{\pard  \line \par}
+{Are there any frameworks that apply to a cloud security world as well in }
+{\cf2 [00:41:00]}
+{ terms of, Hey, I can go back to this framework and use that as a building foundation, Or should people just use to attack mitre as a way to go, Oh, these are the, my TTPs and I will work on based on that. What do you normally recommend to people for building architectures?}
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ So, I mean, to get really like high level and to get really kind of, , ephemeral around your architecture and to get into like the architect's architecture. I love, I love SABSA. I dunno if you've heard of that. It's out the UK. I based a lot of my former architecture trading around the SABSA methodology, which is very business oriented.}
+{\pard  \line \par}
+{Try attempting to drive outcomes from your architecture rather than just, ratchet up the security, make it super secure. So that's not cloud security architecture, that's just architecture, security architecture in general. And it's a very like, traditional formal methodology. I don't think you should show up to your next job interview with the big formal SABSA book and say, I'm going to, , prescriptively make everything this way.}
+{\pard  \line \par}
+{But }
+{\cf2 [00:42:00]}
+{ it's a really good framework and way to think about things. As far as just like reference architecture and understanding how, what secure patterns look like in the cloud. AWS has their well architected framework which. A guide that we'll talk to you about some really common use cases, like if you wanna connect your VPCs, OnPrem, what are the patterns, if you wanna connect to VPCs together, , what are use cases, , what's the pattern?}
+{\pard  \line \par}
+{And they've also have a a website, the well architected labs that'll you can walk you through all of these different labs of, , building networks and creating identity architectures and roles. And there's different pillars they work on. Not just security, but also like cost and performance and things like that.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh, sweet. , that actually, that's a great idea. I'll put the notes for them in the shownotes as well so people can actually find out about it as well. I've got a question here from . I think this is more around the software development side, and the question is more on the fact that. Thanks for your question.}
+{\pard  \line \par}
+{\cf2 [00:43:00]}
+{ Aside pen testing, do I need to know software development, networking as fundamentals to reach cloud security or cloud computing? }
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ Yeah, I mean, networking fundamentals, absolutely. , understanding, , the difference between public and private IP space and, and, and routing and, and probably even how to do some cider math, some, some basic networking concepts.}
+{\pard  \line \par}
+{Maybe the software development life cycle. It's nice to be exposed to. Well, I guess I'll, I'll make the joke. , how does the bill become a law? How does the soft, how does an application become an application? , I think it's really important to understand, , that process between, , somebody.}
+{\pard  \line \par}
+{Somebody writing some JavaScript on their computer and it being packaged and committed to a get repository and picked up by a CICD system and, , deployed into a container. And then maybe the between dev and prop, just that whole, , life cycle system and then like the places where security plugs into it.}
+{\pard  \line \par}
+{All of those things you're gonna learn. I, I think, , probably in the first day of your }
+{\cf2 [00:44:00]}
+{ job, in the first year or two, that's just, those are things you just soak up by osmosis, by kind of, , living and working within security. And if you find yourself in an organization that'll let you get exposure to a lot of different areas.}
+{\pard  \line \par}
+{Hopefully they'll just kind of pick that up. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Hopefully that'll answer your question as well, but that answer the question really well. I think the last question that I had was, is there more of a. Like a roadmap kind of a thing that you kind of tell folks who are trying to transition over from an experienced architecture role onto a cloud security architecture role.}
+{\pard  \line \par}
+{Is there like usually some kind of a mind map or a roadmap to what we spoke about? Some people love having those milestones that they can take off as they Oh yeah, I can do, do these things and I'll probably get to that cloud security architecture thing. Is there any rough roadmap that you normally recommend to people for how they can approach that?}
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ I mean, not offhand. No. I mean, I hope, I hope that's what I'm building, , Ashish, I hope that's what I'm building as a roadmap. I feel like, in that roadmap, I hope that people take }
+{\cf2 [00:45:00]}
+{ away more about what to retain about , their intuition around. Mitigating risk and designing for confidentiality, integrity, and availability.}
+{\pard  \line \par}
+{I hope within that roadmap that I create that what people, their takeaways is that they already have that intuition in them from the on-prem world. They just need to know how to translate it. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yep. Yeah. And that's a good way to put put it as well, cuz whatever they know, know right now is still very important.}
+{\pard  \line \par}
+{One more question coming from Roderick. What is the most difficult thing about cybersecurity when related to architecture?}
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ Oh, the most difficult thing about security as it relates to architecture. , I think it is probably staying humble, and understanding that, , as security professionals, as security architects, We're there to identify risk, mitigate risk, but we're also there to help the business with whatever that application is there to do.}
+{\pard  \line \par}
+{So you have a team of developers that have developed this }
+{\cf2 [00:46:00]}
+{ architecture and they want to deploy it onto the web because it's going to make your business X amount of dollars. Your job isn't to put all the security on top of it and just security it up. It's to walk alongside of them and to understand, , what is it doing, what purpose does it serve, who its users, what's the business value?}
+{\pard  \line \par}
+{And all of that requires a lot of like, humility. It requires a lot of shaking hands and kissing babies. It, it requires just a lot of like getting to know people and what. What they're trying to accomplish. So I think the, the really easy default thing is to just, , plop security on something and just say it's, call it a day.}
+{\pard  \line \par}
+{Mm-hmm. . But we really just need to, we need to understand what the purpose of this thing is to understand what needs to happen to it. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. The way I put that as well, it's very well said as well. I think the way I put that across is when we are all starting off in cyber security, we wanna to quote you, security, everything, }
+{\cf2 [00:47:00]}
+{ because hackers are out there.}
+{\pard  \line \par}
+{Yeah. But once you start having a bit more experience, you realize actually we are in a role in a company because the company's paying us money to get our advice and guidance on what our risk exposure is. How can you manage it? How can you mitigate. It is not to securitify everything as much as it is like a, byproduct of identifying the risk.}
+{\pard  \line \par}
+{It is not the goal, just that it unfortunately, and it takes you some time to realize. So I, I'm sure, I'm not sure how much experience Roderick has but as you kind of go on the journey of becoming an architect, what you realize slowly is that the whole shaking, hand, kissing babies thing, which is true cause you may decide that, oh, these 10 things are in that list.}
+{\pard  \line \par}
+{If I do all of these, this application be secure and best scale and everything. But out of that, those 10 things, only three or four can actually be. Implemented practically, and people may say yes to everything else would be a no. How do you deal with that? How do you even check your ego while people are }
+{\cf2 [00:48:00]}
+{ like, You've spent so much time and research looking at the 10 things and now suddenly like, I can only do four.}
+{\pard  \line \par}
+{Like, are you serious? So I, I, I normally find that was very humbling for me when I was an architect though, I had to all consistently check my ego for that's okay. They understand what they doing. I've done the right thing. Move. I'll move on from this. What do you think? What do you think about that? }
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ Oh, no, that's perfect.}
+{\pard  \line \par}
+{Yeah. Check. Yeah. Being very conscious of the ego. I mean, it's gonna come up, it's gonna happen. You're gonna feel like, Oh, somebody's not respecting my authority. ? }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So much research. I know all of this. I know. Certificate . }
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ Yeah. What do you mean you can't do that? What do you mean that's gonna take, , six }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ months in?}
+{\pard  \line \par}
+{Yeah, they've a lot of that, a lot of brain power spent on kissing babies and shaking hands. I just say that. Yeah. }
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ So really being very tactical about what you ask for and making sure it has the biggest impact on that. Risk mitigation. Pretty much it, }
+{\pard  \line \par}
+{yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That's, and this is where the alignment of business goal comes in as well to, to your point about tactical }
+{\cf2 [00:49:00]}
+{ part.}
+{\pard  \line \par}
+{As long as your tactical steps are toward, What the business wants. It would be an automatic yes. Yeah. The moment it's like slightly off what business want, Like, oh, let's look on it next time, or let's, , find another way to do this or something. So, but I loved how both you and I were able to kind of like come up with a great answer for Roderick.}
+{\pard  \line \par}
+{If you have any further questions, you able to answer that as well. But thank you for that question. That was a great question. Yeah, that was a great one. Yeah. All right. That was like pretty much the end of my technical question. I've got three fun questions and it won't take that long. And also it's more just to get, for people, know a bit about yourself.}
+{\pard  \line \par}
+{First one being, where do you spend most time on when you're not working on cloud or technology? }
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ My yoga studio. . Yeah. Every, every minute. I mean, that's, that's how I recharge right now. I, right now I'm exceptionally busy and where I recharge is the yoga studio. It was some long covid times when it was closed.}
+{\pard  \line \par}
+{It was real tough. But it's open again. And that's, and that's where I, I find my energy. Wait, is }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ this one of those yoga places they give you, they give you }
+{\cf2 [00:50:00]}
+{ wine and tea as well, or No? No. }
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ Thats lovely. No, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ that I've heard. I've always wanted to try a yoga place where they give you wine. I don't know how you do poses with wine in the belly.}
+{\pard  \line \par}
+{That would be just weird like, Yeah. I think it'll be weird to do that, but I think I, it's a fun activity as well, so I'm glad. Thank you for sharing. }
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ I could see some tea, though. Some tea would be }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ really nice. Tea would be good. But maybe after the yoga, right? Not in the middle of it. Yeah, because cause a lot of people start during covid, they start the whole, Oh, yoga with wine and, and it doesn't seem practical at all.}
+{\pard  \line \par}
+{No, it wasn't. Like, so you do a fews, you stop, you drink alcohol or, or alcohol and you drink wine which is lot alcohol, but, and then you go back into poses again. I'm like, Oh, by the time, by the end of it, are you even able to do your poses? Is just an Australian thing. Maybe an Australian thing.}
+{\pard  \line \par}
+{But we, we definitely came up with interesting ways to drink, I guess. But it definitely flew, , got a lot, got a lot of popularity cause of it. That's why a lot of people helped us get through the }
+{\cf2 [00:51:00]}
+{ covid times when we are in lockdowns. Next question. What is something that you're proud of, but not on your social media?}
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ Something that I'm proud of that's not on my social media. Oh man, that's a hard one. I okay, I'm gonna get real personal here, but this is, this is a safe space. My my sister is 13 years younger than me. So she was , like a daughter, right? And actually as we grew up, I ended up having legal custody of her.}
+{\pard  \line \par}
+{So she is a little bit like my daughter, and she is just like, blossomed into this like, wonderful woman mom. She graduated nursing school. She like has her own house now. She's just like kicking ass at life and, and being wonderful. So I'm most proud of my sister. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That is a great answer, and I'm really proud of your sister as well.}
+{\pard  \line \par}
+{That's pretty cool that you've all gone through all of that and made an amazing person of herself. Awesome. And just on that maybe so so Zinet , they're doing yoga with goats as well. }
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ I've seen that. Yeah. The goats are like walking on }
+{\cf2 [00:52:00]}
+{ your back. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh, really? Is that what they're doing?}
+{\pard  \line \par}
+{Okay. This is well covid has made people weird, I guess. The yoga with wine and yoga with goats, so there you go. Final, I talked about goat and goat cheese. I guess what's your favorite cuisine or restaurant that you can share? }
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ Oh, I think I said this last time, but I think I said Mexican food, right?}
+{\pard  \line \par}
+{Like Yeah, absolutely. My favorite. We have like this little like like Mexican bodega down the street and Right. When neither of us wanna cook, we're just like, let's go over. , grab some, , a plate of Huevos Rancheros or something. Ooh. It's like the places a parking lot mess, right?}
+{\pard  \line \par}
+{Because there's like every contract pickup truck trying to get into this parking lot. , I think the city probably, , sends them letters about the traffic jam. It causes, but , we love it. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh my God. Well I think I definitely great Mexican food in America. For sure, though. That was probably what we had time for.}
+{\pard  \line \par}
+{Thank you so much for coming on the show. Where can people find you to know more about cloud security architecture }
+{\cf2 [00:53:00]}
+{ and the courses you're working on and stuff as well? }
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ Yeah, so I'm on Twitter and Mastodon. Nightmare JS is the handle on both. I'm on the InfoSec Exchange mastodon Twitter now. Like a lot of people, I'm kind of making the migration over to mastodon.}
+{\pard  \line \par}
+{I'm liking it so far, , it's not too bad. I'm also on the, the Cloud Security Forum Slack run by Scott Piper. You can talk to me there. Or , LinkedIn always works. So, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And the SANS scores that you're working on, what's that called again? Yeah, }
+{\pard  \line \par}
+{\b\cf3 Kat Traxler:\b0}
+{ The San Sec 549 Enterprise Cloud Security Architecture two day course.}
+{\pard  \line \par}
+{Now beginning of the year it'll be out to a four day course. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Sweet. Looking forward to that. Awesome. Thank you so much for that. I'll leave a links for all your socials over there, including the course as well. But thank you so much for coming in and thank you for everyone else who tuned in as well.}
+{\pard  \line \par}
+{Ask those questions and we'll see you the next episode. But thank you so much for your time and hopefully you have a great weekend everyone. Thank you. Thanks. Thanks.}
+}

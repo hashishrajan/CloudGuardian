@@ -1,0 +1,281 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2639
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 TimesNewRomanPS-BoldMT;\f1\froman\fcharset0 TimesNewRomanPSMT;}
+{\colortbl;\red255\green255\blue255;\red97\green167\blue95;\red0\green0\blue0;\red109\green109\blue109;
+\red81\green0\blue192;}
+{\*\expandedcolortbl;;\cssrgb\c44706\c70196\c44706;\cssrgb\c0\c0\c0;\cssrgb\c50196\c50196\c50196;
+\cssrgb\c40000\c0\c80000;}
+\paperw11900\paperh16840\margl1440\margr1440
+\pard\sa360\partightenfactor0
+
+\f0\b\fs28 \cf2 \up0 \nosupersub \ulnone Karl Fosaaen:
+\f1\b0 \cf3  \cf4 [00:00:00]\cf3  I think there's a lot of overlap between the two different cloud providers or any different cloud provider. When we built up our methodologies for doing cloud pen testing, we tried to make the methodologies vendor agnostic so that it would apply to any cloud vendor that we're working with. The thing with AWS, Azure and lots of other cloud providers that are out there, they've got different identity platforms that they work with.\
+Whereas in AWS, you might have IAM accounts, policies, roles, groups, all of those things. Within Azure, you've got a completely separate identity system through Azure Active Directory, soon to be Entra ID. Microsoft does a very good job of explaining what their rules of engagement are for pentesting in Azure, either Azure services themselves or pentesting your own resources in Azure.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  When you're looking at Azure pentesting, specifically Azure cloud pentesting, do you realize things like Microsoft Office 365, share drive, and all the other peripherals that are on Microsoft are also where people can take over your Azure account.\
+There are a lot of examples of this that already exists out there. And for this episode, we had Karl Fosaaen \cf4 [00:01:00]\cf3  from NetSPI, who is a VP of research over there, who came and spoke about, including his book, by the way, he wrote an entire book on Azure pentesting. He spoke about what are some of the low hanging fruits you could consider.\
+If you're coming from an AWS background, how would you start doing pentests for Azure? He also spoke about the fact that if you are considering config review as your cloud pentest, you may want to reconsider. And you would probably see this as a messaging throughout this month of Offensive Security in Cloud Security Podcast that we believe that cloud security pentesting is a lot more than just config review.\
+You have to draw a line where this is a CSPM or a cloud security posture manager activity versus a cloud pentest where you're using the information from the misconfiguration that may exist in a cloud as a way to enrich your existing data that you have about the application that you may be working with.\
+We have this and a lot more on this episode with Carl. I hope you enjoyed this episode and this was as part of the offensive security month. So if you're watching this and probably following the entire offensive security month, definitely check us out on the other \cf4 [00:02:00]\cf3  episodes we have on the offensive security site on our website.\
+As always, if you're coming here for the second or third time, I would really appreciate if you give us a follow, subscribe on Apple podcasts, Spotify, or give us a subscribe on YouTube or a follow on LinkedIn, because that's what helps us grow. And that's what makes people like Karl and others find us as well as a way to come in and talk to you so you can share the knowledge for free and get to have a great conversation with us and share the knowledge for you to improve the way you do security in your organization for Cloud. I hope you enjoy this episode. I'll see you in the next one. Peace. Hello, welcome to another episode of Cloud Security Podcast.\
+Today, we're talking about the offensive side of cloud security. And today, specifically, Azure Open Testing. And for that, I've got Karl. For people who don't know who Karl is, if you could share this bit about yourself and how you got to where you are today. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Karl Fosaaen:
+\f1\b0 \cf3  Sure. So I'm Karl Fosaaen. I work for a company called NetSPI.\
+We're headquartered out of Minneapolis, Minnesota, and been with the company for a little over 11 and a half years. It'll be 12 years in October here, and done a little bit of everything over there. I started out my career doing similar kind of pentesting, security auditing \cf4 [00:03:00]\cf3  work with a couple other companies out in Minnesota, but ended up landing at NetSPI where I've been for quite a while.\
+A year or so, I've been primarily involved with the labs team at NetSPI. Right. Where we come up with brand new ideas, new products, new services we can bring to market, research them, see what we can do with them. Prior to that, I was the cloud pentesting lead for about five years, leading up our internal team of cloud pentesters doing security \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  consulting.\
+Awesome. And doing security consulting, a lot of people would look at AWS as probably the first thing they think about cloud because being the largest cloud provider, but today obviously talking about Azure, considering you spend some time in the AWS space as well, how would you say the pentesting in AWS is different from what happens in Azure land?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Karl Fosaaen:
+\f1\b0 \cf3  So I think there's a lot of overlap between the two different cloud providers or any different cloud provider when we built up our methodologies for doing cloud pentesting, we tried to make the methodologies vendor agnostic so that it would apply to any cloud vendor that we're working with the thing with AWS Azure and \cf4 [00:04:00]\cf3  lots of other cloud providers that are out there.\
+They've got different identity platforms that they work with. Whereas in AWS, you might have IAM accounts, policies, roles, groups, all of those things. Within Azure, you've got a completely separate identity system through Azure Active Directory, soon to be Entra ID. But that whole role based access control system there, very, very different from just kind of a fundamental application perspective.\
+There's a little bit of overlap here and there, but... If you start out in AWS and then move over to Azure move over to a different IAM RBAC platform. Those concepts get a little confusing right up front and we've seen some folks kind of trip over that \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  little bit Wait I think it's an interesting one because.\
+As you kind of say that I am reminded of the fact that a lot of people look at cloud pentesting as config review. And I have a bit of an opinion on this and I feel like it's not technically config review, but I would love to hear what you think about when people say, Oh, is it not just config review, cloud security pentesting.\
+Yeah, and \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Karl Fosaaen:
+\f1\b0 \cf3  I think it's an important component from our perspective. We use it to inform our actual pen testing, \cf4 [00:05:00]\cf3  whereas you do the configuration review to see what's exposed out to the Internet, what your internal networking looks like from just virtual networks and what platform is a service services are out there and what kind of configurations are there gives you a good understanding of what that cloud footprint is.\
+But then taking it to the next level with actually pentesting it, trying to find application network vulnerabilities. Abuses of those misconfigurations that you could use to potentially get access or initial access to a resource to a virtual machine. Anything like that? I think that's the key component that might be missing for folks that kind of see cloud pentesting as just configure view.\
+Yeah, it's no to actually pentest it. We actually have to exploit the vulnerabilities and show the potential impact there. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  And what about Comparing that to network pentesting?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Karl Fosaaen:
+\f1\b0 \cf3  I think there's a lot of overlap. There's some similarities. So prior to doing cloud pentesting, my kind of bread and butter was external and internal network pentesting.\
+I've done a little bit of everything over the years, social engineering, mobile app testing, \cf4 [00:06:00]\cf3  primarily network pentesting though, and a lot of those skills have carried over into the cloud pen testing space because a lot of organizations are just bringing their on prem applications, virtual machines, anything like that, up into the cloud.\
+And those same pentesting principles that we had from network pentesting of identifying live services, seeing how we can exploit them, trying to identify vulnerabilities. It's the same kind of ideas, just applied to the cloud context. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Wait, actually, that reminds me of another thing. So if you're saying there's a lot of overlap between network pentest and the cloud pentest, do you say that it's like, this is the next evolution of network pen tests?\
+Would I be right or am I overreaching? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Karl Fosaaen:
+\f1\b0 \cf3  I think that's accurate, especially as infrastructure continues to grow and mature and move slowly into the cloud. We've seen a very slow shift. AWS is what? 12, 13 years old at this point, something like that, really started picking up more adoption about 10 years ago. It's been a very slow roll, especially with kind of the larger companies that we work with where clouds kind of scary \cf4 [00:07:00]\cf3  and we've put a lot of money into a data center.\
+Maybe we should just keep everything on-prem for the time being as that. That thought process has kind of gone away and more people have moved up to the cloud. We're kind of evolving our techniques and how we need to approach pentesting in those spaces. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  And as everything with cloud pentesting, there's obviously a, I mean, even with regular pentests, there's a boundaries that you should not cross.\
+I imagine a lot of the listeners could be pentesters themselves have done traditional web app pentesting or traditional network pentesting and you go into this cloud world and suddenly you're doing Nmap everything, so what would be some of the boundaries they should do as a precautionary measure before they even think about an Nmap or anything else? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Karl Fosaaen:
+\f1\b0 \cf3  Yeah, so that's a great question because I run into that with folks that are trying to use tools that we put out to identify resources that they can potentially attack in a cloud environment.\
+And you got to be really careful with that because if you don't own that resource, you really shouldn't be going after that. Or if that's not in the scope of a bug bounty or anything like that, you got to be careful. Yeah, Microsoft does a very good job of explaining what their rules of engagement are for pentesting in Azure.\
+\pard\sa360\partightenfactor0
+\cf4 [00:08:00]\cf3  Either Azure services themselves or pentesting your own resources in Azure. In our case, we always get approval from our clients to do pentesting against their resources. So we're always good there. But from an external pentest perspective, if we're trying to enumerate, let's say, storage accounts that might have data exposed out to the internet, we don't really know if NetSPI owns NetSPI tools, you know, storage account or something like that.\
+Just because it has NetSPI in the name doesn't mean that we own it. Yeah. So, there's this fine line and a lot of times we have to confirm with clients, like, Hey, do you actually own this storage account? Because... We've stumbled on this. We don't want to start exploiting and downloading a bunch of files, but this looks like it might belong to you.\
+So you've got to be really careful with those kind of things. And even just kind of blanket scanning of the internet or internet facing things. And it's kind of a gray area and you want to be really careful with what you're going out. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Because you know, a lot of the advice on the internet is like, Hey, let's just go to shodan.io, find all the public facing S3 buckets or blob storage or whatever. Yep. And start seeing what's in there. Yeah, but there's a fine line there in between, \cf4 [00:09:00]\cf3  Is the client going to be happy when they hear the fact that you found their bucket? Or is it going to be like a reverse attack on your bucket?\
+Exactly. So, that brings me to the thing then. For AWS initially, they required you to have a prior approval before you can do a pentest, is that the same for Azure as well?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Karl Fosaaen:
+\f1\b0 \cf3  I remember those days. No, most of that's gone away nowadays. I believe there's a couple of cloud providers that may still require that, but for the most part, with both AWS and Azure, we don't need prior approval.\
+We just need prior approval from our clients, which typically is the preferred strategy. You know, that's taken care of in the kickoff for the actual project. Yeah. So we're usually good to go.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  I think another line I normally draw, and I'd love to hear your thoughts on this as well, is that A, you're pentesting the client, how they're using the service, rather than I'm going to pentest the blob storage.\
+Correct. Which is a very subtle difference, but very worthwhile pointing out, right?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Karl Fosaaen:
+\f1\b0 \cf3  Yeah. And there's some weird overlap with that, where, you know, you might. Incidentally stumble on something that is a Microsoft problem and not a client configuration problem. Yeah, we've had several times where we've been doing \cf4 [00:10:00]\cf3  independent research and happen to be in a client environment and say, Hey, we think we found this thing with Microsoft.\
+Can we do a quick check of your environment to see if this is a real deal? Sure enough. Yep. That's live. Okay. Let's put a report together for MSRC, get this submitted. Make sure everybody's good and that gets to kind of a weird point when you start reporting things of like, Hey, so we found a zero day in Azure in your environment.\
+You need to fix this, but it's not really on you to fix it. We'll work with MSRC on your behalf. Don't worry about it like, but just be aware that there are just be aware. Yeah, there's some risk exposure here. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Maybe we can go a bit more deeper into this. What's your thought process when you go down the path of say pentesting in Azure environment?\
+What's your thought process at that point in time? What's your first step, I guess? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Karl Fosaaen:
+\f1\b0 \cf3  Yeah, it depends on the environment because with every environment, you've got different kinds of resources that you're working with. A lot of times we'll run into very IaaS or infrastructure as a service heavy environments where it's all virtual machines and it's all traditional network pentesting for a lot of the vulnerability identification.\cf4 [00:11:00]\cf3  \
+Or the opposite end of it. Platform as a service. It's all PaaS, apps, and it's very configuration driven, but then identifying what exposures are out there and doing more application testing. So really depends at the baseline. It's really just getting a rough idea of what's in the environment, situational awareness, right? Identifying where your attack paths might be, and additionally, where the identities are. So we talked about differences between AWS and Azure concept of passing a role to an AWS service. Same idea with Azure. You've got managed identities that you can pass to a specific service. Take a look at what managed identities are out there, what roles, resources, you know, where are things attached, who has rights to what.\
+And try to start formulating that path of okay, well, if we compromise this, we can then pivot over to this. This has managed identity that has privileges here. Okay, we can start escalating this way and start building out that mental map. It's usually how I've approached things, but again, all depends on the environment that you're in.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  And for some of the low hanging \cf4 [00:12:00]\cf3  fruits that are in these environments, when I go into AWS environment, I'm trying to find is there anything which is already public? And is that kind of similar process? What's the low hanging fruit you would go for as pretty much when you kick off the thing?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Karl Fosaaen:
+\f1\b0 \cf3  So usually public storage accounts. That's an easy win for us. And given there's APIs for every cloud provider, it's very easy to just pull all of that information, scrape it and double check. Okay, is this actually exposed out to the Internet? Because with Azure, you've got a couple of kind of compensating controls\
+hey, you can set this container as public or as container, which allows directory listing, but you can have compensating controls to basically say, never expose this out to the Internet. So there's a couple of different things we have to kind of check on the back end after we've enumerated. Oh, hey, it's a public container.\
+But thanks to the APIs. We just run kind of automation around that to identify that stuff right up front. One of the more difficult ones that I really like is the Azure deployments. So whenever you deploy something to Azure through an ARM template, bicep template, any of the kind of standardized templates used to deploy \cf4 [00:13:00]\cf3  things to Azure, you create what's called a deployment in the resource group.\
+That deployment has all of your templates that were used, any of the parameters that were passed to it. And if somebody forgets to mark something as a secure string, let's say an admin password for a virtual machine that you're spinning up, that can be pulled out by anybody that has read access on that resource group.\
+So we've found countless times of credentials for virtual machines that might be exposed out to the internet that we've got direct admin access immediately as a reader. We're typically starting with reader level permissions. We don't want to change anything in the environment. So with the read only access, we're able to pull back those credentials and then start pivoting from there. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  That's an interesting call out as well. So for people who are thinking about this, a lot of people would go into an AWS or an Azure account, or I guess for any kind of cloud pentesting, they're going with a low privilege read only account. And then how do I persist myself and do the escalation?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Karl Fosaaen:
+\f1\b0 \cf3  It's a little weird because traditional persistence techniques that you might find for an on-prem environment where you've got access to all of the domain hashes or remote \cf4 [00:14:00]\cf3  access to specific systems, you're dropping payloads on different virtual machines, physical machines that are out there that you want to keep having called back.\
+That all kind of applies for the infrastructure as a service, but things like platform as a service, how do you persist there? Yeah. There's a number of different services that are out there. Personal favorite is automation accounts. Okay. To a point where we put a blog post out about it. There's now a Microsoft Defender Detection for using that persistence technique in automation accounts, which is kind of cool.\
+You know, Defender now has detections for stuff that we wrote out. But really just using automation accounts to run scripts on kind of a schedule of like, Hey, I've got a managed identity attached here. Use those permissions of that managed identity to go ahead and get me back into the environment. It's a lot of that same idea of you've got services within Azure or within other cloud providers that run code. Yep. So things like automation accounts, function apps, Azure batch, just things that you can automate running code. Yeah, and you can use that for persistence. Say it run my code at this time to do these things for me and get me back into the environment. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Actually, many people would not \cf4 [00:15:00]\cf3  even know what managed identity is.\
+So do you want to just going to at least play some light on? What's managed identity in the context of Azure?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Karl Fosaaen:
+\f1\b0 \cf3  Certainly. So for Azure resources, you want to have a way to act as a specific identity in Azure Active Directory, and that's managed identities. There's two different kinds. There's system assigned, where you've got a specific resource, we'll say virtual machine.\
+And that system assigned managed identity only belongs to that specific virtual machine. You've got user assigned managed identities, which are a subscription level resource that you can apply to multiple different resources. So if you had, for whatever reason, a managed identity in Azure Active Directory that you wanted to give access to a specific resource, a storage account, key vault, anything like that, you could share that user assigned managed identity to them.\
+Give it to a virtual machine. Give it to a function app. Give it to app services, whatever. Yeah, and then they all have access to the same kind of a bad architectural decision. I get why they use user assigned managed identities generally in Azure architecture, but we've seen some very \cf4 [00:16:00]\cf3  questionable decisions over the years with assigning those.\
+The nice thing, kind of from a persistence perspective, is user assigned managed identities, if you've got contributor level permissions to assign that managed identity anywhere, then you can assign that to a resource that you own, and then you've got full access to that managed identity, you can persist with that, potentially take over the permissions for that without even touching other resources that it's already been assigned to. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Wow. Wait, so as you kind of go through the Azure pentest and try and persist yourself, because I'm thinking about, like AWS or actually Google, probably similar. Azure also has Office 365.\
+It also has things like your share drive and all these other services that are peripherals around Azure. And every time I hear a news about, oh, there's a vulnerability for whatever company and they've given up the Azure keys or they lost access to Microsoft Office 365, but no one talks about the impact of that in Azure.\
+I wonder if it's a similar scenario reverse where is there a possibility where Microsoft Office 365 or share driver any of those additional services that Microsoft would sell? \cf4 [00:17:00]\cf3  Can they be used to kind of go into Azure and maybe potentially abuse that? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Karl Fosaaen:
+\f1\b0 \cf3  So in some cases, yes. Okay. What we typically see with most Azure subscriptions or tenants is that the users that actually have access to do anything in an Azure subscription are usually really limited.\
+It's all developers. It's IT admins. It's usually a small subset. It's not all domain users have access to this Azure subscription. They can do whatever they want. That's Okay. Super rare to run into those things. That being said, you know, we find all sorts of weird things set up all the time. Yeah. But in general, those Azure subscriptions are locked down significantly more.\
+As compared to, say, something like PowerApps, there's the tenable disclosure that just came out this last week here. It was kind of related to that and kind of the connectors are utilized there. That's a great example of kind of the blending of the M365 services and the Azure services, where something like PowerApps.\
+You might have a connector that works through Azure to access a specific Azure resource. And if you can somehow extract keys for \cf4 [00:18:00]\cf3  that or abuse that connection to then pivot into the actual Azure resources, that might be a pivot point. We don't see that as often, but there's all sorts of interesting things that show up, particularly with Power apps that Azure code. It's basically logic apps power automates kind of in that same low code. No code kind of area. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Yeah, because I think that kind of goes back to the whole IaaS and PaaS and all of that as well. Depending on what you've pentesting as an application, you might have been a territory that you may be given a power app, but you don't realize that you can actually piggyback onto that to come to an Azure environment as well.\
+What will be an example of some of the scales of how big deployments can be in Azure that you may have been tested because I think there's a lot of good examples for AWS and Google Cloud, for example, but from an Azure perspective, what does like a big scale environment look like multiple subscriptions or multiple tenancies? What does that look like? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Karl Fosaaen:
+\f1\b0 \cf3  Multiple tenancies, multiple subscriptions, multiple management groups within the Azure infrastructure. You've got your tenant, which is where your Azure Active Directory \cf4 [00:19:00]\cf3  is. And then you have management groups. So the root management groups kind of where you gather everything and you can have sub management groups under that and subscriptions underneath that, and it just kind of tears down underneath all of that really well architected ones look really nice and things are really nicely segmented. It's great. Other ones. It's just kind of a flat one root management group, and they've got 1000 subscriptions. Oh, wow. So we've worked with organizations that are at that 1000 plus subscription range and really trying to hone in on specific vulnerabilities.\
+They might be concerned across the entire environment with or spot check specific things. It's a very different pentesting engagement when you approach a thousand subscriptions versus just one or two ideally would work in just one or two cause those are much easier to work with. It's a lot easier to just kind of segment that, but the complexity gets really kind of all over the place.\
+If you were, say two management groups nested within a subscription that you're in, you've got permissions, two levels up that cascade down to your subscription that you got to keep in mind. Yeah, so if you \cf4 [00:20:00]\cf3  compromise one of those identities, Oh, okay, we can actually hop up two levels, go up to the root management group and then go back down and go back into other subscriptions.\
+From that point, there's organizations in AWS. There's federated identity through AWS and there's the complications of IAM that happen with all of that. I think it's a little bit more concrete in Azure tenancies because you've just got your root management group and everything kind of lives under that.\
+Yeah, it's a little bit easier to parse some of that too. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  And I guess the separation is a lot harder. I mean, I guess when I say hard, I mean there's no cross tenant. There's a cross subscription things that happen. Would that be right? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Karl Fosaaen:
+\f1\b0 \cf3  So technically you can have cross tenant access as well. Okay, so you have guest users as a concept within Azure Active Directory and those guest users are.\
+You know, let's say we've got two different Azure Active Directory environments and we want to allow you access into the NetSPI Azure Active Directory, we can add you as a guest user and then assign your guest user permissions within our tenancy within our subscriptions, right? And then you've got \cf4 [00:21:00]\cf3  external users that have access there too.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Interesting, because where I'm coming from is that for people who, I think at Black Hat, there's been a lot of training exercise for Azure AD hacks and Azure hacks and whatever, I mean, whatever Azure AD is called now, whatever, it's called something else now. Entra. Entra, yeah. So, Entra, as they call it now, it's so weird to call it Entra.\
+But, let's just say, for people who are probably getting access to Entra, and they might find that they only have a read only access. But they can't technically see how many tenancies they have access to in the Azure AD or Entra side. Is that right? Yep. Because that's where it comes from, right? \
+My understanding of the whole identity in the Azure concept is that you do federation doing Entra or Azure AD. Yep. Now, if I have been provided as an employee access to multiple tenancies, just because I have that kind of access, I would be able to see that at the Azure AD end? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Karl Fosaaen:
+\f1\b0 \cf3  Quite possibly, depending on what permissions you're granted for that external tenant.\
+Yeah. So if we gave you access to the NetSPI tenant, there's specific permissions that are granted to you from a tenancy perspective \cf4 [00:22:00]\cf3  for the guest configurations. Yeah. That could allow you to see probably more than, you know, NetSPI might want you to see, right? So that is something that we run into with guest users.\
+We take a look at all of the different configurations that are out there. Yeah, we have seen it where from say more of an external pentest or red team perspective, we get access to an account. that might have access to other tenancies. That gets really complicated, because if all of a sudden I'm pivoting into somebody else's tenant with an account that I've compromised, that starts crossing some boundaries, starts getting a little weird.\
+I'm going to double check where our access is. Yeah, so there is potential that guest users might be able to see more than you want them to see. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  The only reason I bring that up is because I think that to highlight the complexity of, from just being a config review and looking at hundreds of subscription.\
+I feel like there's a lot more nuance to how you would do cloud. And is it possible to even scale your pentest tool against open source tool across the board? How would someone do that, I guess? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Karl Fosaaen:
+\f1\b0 \cf3  Yeah, the scalability is kind of tough when you start getting into the thousands of \cf4 [00:23:00]\cf3  subscriptions because at that point you're bordering on becoming a CSPM and it's kind of like, okay, well, how much of this is like CSPM activity or just doing a pentest?\
+Yeah. So we try to make the right recommendations for our clients at that point of like, maybe you should go in this direction. If this is really what you're looking for, but from a scalability perspective, just breaking it out to individual subscriptions or management groups are just kind of parsing through each one as you go along.\
+You can dump out all of that information and parse through it. Yeah, we have tools on the NetSPI side. We have our resolve platform that we use that ingests all of that data for us. So we have something that handles it and helps us scale it. So that's nice for us. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  And maybe I guess the next question from this point is what are the good TTPs or matrix that you can recommend that you kind of go through at least in the pentests you've done, which others can use as well.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Karl Fosaaen:
+\f1\b0 \cf3  Yeah, so there's a couple of different frameworks that are out there. MITRE's got their cloud attack framework. It's good. It's got wide coverage. That's usually what I tell everybody, you know, because it's trying to handle multi cloud. And, you know, when you've got vulnerabilities, they're kind of similar across \cf4 [00:24:00]\cf3  AWS, Azure, Google Cloud.\
+It's like, okay, open bucket. Yeah. Kind of falls under this TTP. Here's how people enumerate them. That kind of thing. That's all good. But when it comes to more actionable recommendations that we have for Azure, I actually recommend the Azure Threat Research Matrix, the ATRM. There's a Microsoft short link, for those that are familiar, aka.\
+ms, it's just A T R M. Highly recommend that one. The folks that put that together did a really good job on it. It really focuses on attacks that we use day to day. Right. I was lucky enough to help contribute to that a little bit and offer up some of the common techniques that we use. Yeah. To say, okay, this is something we actually use in pentests as an actual attacker.\
+Let's make sure that we have coverage on that. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Yeah, that's pretty awesome because to what you said about attack metrics, I feel like it's very IaaS first kind of approach.. \
+Yeah. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Karl Fosaaen:
+\f1\b0 \cf3  Well, especially pivoting not that I think their intent was to pivot off of the standard MITRE ATT& CK. Yeah. But I think it started from that as people were migrating into the cloud.\
+It's like, okay, well, how did these \cf4 [00:25:00]\cf3  standard, you know, network attack, kind of TTPs pivot into the cloud. Yeah. How do we translate that? That's not really a one to one.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  No. And they need to keep it general as well, because they're trying to do, Oh, I need to cover AWS, Azure, Google Cloud, and any other cloud that's going to come tomorrow.\
+I don't know how that would be. So I'm going to keep it super general, but to your point, I'm glad there's a Microsoft version available. I wonder if the other cloud providers should kind of take lessons from that and make their own version of the ATT& CK metrics. That'd be great. Yeah. I mean, I don't think, yeah, it'd be interesting how open they are about it, but I'm also considering for people who probably are traditional web app pentesters, like you came from a network pentesting background.\
+Same for me as well. So I feel like learning cloud was like, Oh, that's the next obvious thing to kind of mature into. For people coming from a web app pentesting background, like how would they start into the space? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Karl Fosaaen:
+\f1\b0 \cf3  So our normal recommendation for folks that are kind of trying to make that transition is to get that network experience, to get you the full, you know, PaaS, IaaS coverage, and really understand \cf4 [00:26:00]\cf3  how to do pentesting in both realms there.\
+Along with that, really just understanding the cloud platforms themselves. I believe pretty much every cloud platform out there has some kind of free trial period of here's $200 worth of, you know, execution credit, you can run your resources against. And you've got a month to use it. Create that, use, you know, public resources out there to set up vulnerable environments.\
+Go ahead and try pentesting, you know, techniques against those vulnerable tools, or against those vulnerable resources with some tools. Really just understand how things get built and deployed. It's usually the biggest barrier that I run into with folks is... It seems very convoluted and a little bit just difficult to get over the, how do I deploy something?\
+Yeah. That's usually kind of a hurdle for folks is, okay, well, how do I actually create something here? And just getting practice with it in a safe environment where you can mess something up. You're not exposing your own data or client data. You have your own little playground that you can learn in.\
+That's usually where I point people to.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  What about people coming from a network pentesting background like \cf4 [00:27:00]\cf3  yourself? How would you recommend them going on the Azure pentest path? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Karl Fosaaen:
+\f1\b0 \cf3  Definitely same kind of path, building up your own environment. And there's plenty of, you know, ways that you can build up vulnerable environments.\
+I'll take the opportunity to mention the book here. But gosh, almost two years ago now, this is 2021. David Okeyode, who's somebody else you should definitely talk to on the Azure perspective. He and I wrote this Pentesting Azure for Ethical Hackers book for Packt Publishing, and we've got lots of examples in the book as you kind of work through it to build up vulnerable environments and execute those packs.\
+So I'll use that opportunity. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Good point. I think because I was going to ask the same question. What's a good link for people to start learning about this as well? Because not many resources do exist. I think, I also feel this is like still a new field coming up. As much as you said AWS has been there for 12 years.\
+Yep. Azure probably 10 ish, 8 ish years. Yeah, I'm a little hazy. Yeah, I feel like it pretty much came straight after. But there was definitely a period of like AWS was the only provider. Suddenly there was Azure. So there \cf4 [00:28:00]\cf3  was Google Cloud. So there's not many resources. I'm glad you have a book on this and I'll definitely put the link for that in the description and everything as well.\
+The show notes. Any other resources you recommend people can go for is to kickstart learning. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Karl Fosaaen:
+\f1\b0 \cf3  I can't think of anyof the top of my head. I know that there's. There's several other like build your own vulnerable Azure environments, kind of scripts that are out there, right? Right. I can't think of any \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Make your own lab using one of those.\
+And that could be still fair enough. I mean, I guess most pen testers will be used to the whole. I think there's one of the still still one of the most popular videos on YouTube is how to make a home lab security. So I imagine this would definitely be up there as well. And, I mean, that was kind of most of the technical questions I had.\
+Where can people find you on the internet to learn more about, talk more about this? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Karl Fosaaen:
+\f1\b0 \cf3  So, primary place that I'm posting things would be the NetSPI blog. You can find that through the NetSPI website. For the time being, as Twitter is becoming X, or whatever Twitter is going to become, you can still find me at kfoss in there.\
+But I've got social accounts on pretty much every other platform as we determine where we're going to land. \cf4 [00:29:00]\cf3  Yeah, yeah, but yeah, anywhere there on LinkedIn, you can find me as \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  well. Cool. I'll put those links as well, but thank you so much for coming in. This is very valuable and I'll put a link for the book as well.\
+So definitely recommend that as well, but thanks for coming in, man. Thank you. Thanks for having me. Thank you everyone for watching.}

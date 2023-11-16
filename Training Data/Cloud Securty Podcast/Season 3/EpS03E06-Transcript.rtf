@@ -1,0 +1,428 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red128\green128\blue128;
+\red250\green138\blue59;
+\red216\green34\blue146;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\pard  \line \par}
+{\cf1 [00:00:00]}
+{ }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Hi gal. }
+{\pard  \line \par}
+{\b\cf3 Gal Helemski:\b0}
+{ Ah, thank you. Thank you. It's good to see }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ you. Good to see you as well.}
+{\pard  \line \par}
+{I appreciate gal, kind of hanging out with us, so what was your path into cybersecurity? }
+{\pard  \line \par}
+{\b\cf3 Gal Helemski:\b0}
+{ Yeah, well, so I, , like many, I told me Israel, by the way. So like many here in the technology part, so started in the army, , computer science, and right after the army, I joined the medical was one of the first cybersecurity companies here in Israel, , focusing a lot in identity and access management, a single sign on and so on.}
+{\pard  \line \par}
+{It was later. , by integrity and then by computer associates. So I believe that's the company you mentioned, right? Afterwards. I went to work with them. Cyber log again, another cybersecurity company, which I believe many of you are aware of, of I worked there for a couple of years and then I went on to consulting.}
+{\pard  \line \par}
+{I wanted to travel a bit less. , so primarily in Israel, a consulting around identity and access management, I will ping them many logics, like defining, managing }
+{\cf1 [00:01:00]}
+{ and so on. , And at some point of time, I worked with one of the largest banks in Israel and the, I was walking with Owen who was the deputy CSO there.}
+{\pard  \line \par}
+{And today he's my co-founder and he's the CEO of the company I'm walking with. So. , we identified a gap in the market, in the IAM market, which is something we're going to talk about quite a lot in this podcast. And I'm now in plane ID, plane ID is a company we founded like six years ago, something like that in the authorization space, focusing primarily on authorization, controlling, managing, or so we }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ say.}
+{\pard  \line \par}
+{Sweet, thank you for the intro as well. And I would definitely feel, I guess, maybe for some context for the people that think, I guess, so I was starting my career IAM and the company that I was working for was CA computer associates. And I believe some of my colleagues would have worked with the company that you would have been in as well.}
+{\pard  \line \par}
+{So that's the link.IAM , has been like a very important part for me, as well as starting , my cyber security career. And is probably a good segway into my next question. Cause a lot of people }
+{\cf1 [00:02:00]}
+{ think IAM is just username password. Like, oh, as long as I have username password, I don't even, I don't even know what she's talking about.}
+{\pard  \line \par}
+{IAM so maybe a good place to startis what are some of the Building Blocks of IAM. And why. Yes. }
+{\pard  \line \par}
+{\b\cf3 Gal Helemski:\b0}
+{ Yes. Okay. So IAM is certainly not just user ID and password. I know that, , it's common for him in many places just to see what you are facing. But generally speaking,IAM is divided to three main areas. The first is identity identity management, which share takes care of the whole life cycle of the identity, onboarding offboarding goal, changing all of that.}
+{\pard  \line \par}
+{So that's one. Then you would find, , there's so many companies in the IDM IGA space that's covered the identity management pile. The second part is authentication. Authentication is proving the identity identity that , we already defined now needs to be proven as of. Login process, session management.}
+{\pard  \line \par}
+{Again, there's a lot of stuff going on there, but that's authentication against }
+{\cf1 [00:03:00]}
+{ so many companies in that area, as well as. And the last part is authorization and authorization is about connecting identity to digital assets. What identity can do, what identity can see. That's the last part of this, , the full picture.}
+{\pard  \line \par}
+{You have the identity, you have the Authorisation and you have those Authentication. And that's basically what. The identity and access management take cover. There's also accountability, but I'll put that aside eventually, everything that you do needs to be more audited and you need to have controls over that as well.}
+{\pard  \line \par}
+{But we can talk about }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ that. I think that's a good one. Cause I think for context as well, a lot of people in the enterprise space. Actually they have dedicated teams for,IAM like just doing a governance identity. I think it's also really interesting when you see companies having dedicated teams for,IAM , , this like a a big requirement and it's like a lot more than username password as well.}
+{\pard  \line \par}
+{And I think the best example is you can go off and do any. I'm sure all of them have them. IAM department, which is just focused either on }
+{\cf1 [00:04:00]}
+{ authentication authorization, or just application or things like that. So from that perspective, maybe it's a good thing into the topic that I had in mind, which was kind of like the four pillars was Authorisation.}
+{\pard  \line \par}
+{What work is the four pillars of Authorisation. Is it like, is gal allowed to have access?}
+{\pard  \line \par}
+{\b\cf3 Gal Helemski:\b0}
+{ No. No. And it's good to go asking that because we started with what is a IAM , which is we understand it's a very big area. It contains a lot of things within eight and it needs to take care of, , the whole identity stuff and what identity can do.}
+{\pard  \line \par}
+{But authorisation it varies each area and the pillars of authorization are typically divided to four. One is the identity decision, right? So enforcement decision management and governance. So the first one is enforcement to talks about the ability to. To enforce your authorization decision over the, your technology stack, whether that's your micro services, your APIs, your applications, }
+{\cf1 [00:05:00]}
+{ your data, all of that, right.}
+{\pard  \line \par}
+{That's enforcement, second decision. How do you make the decision of who can access what and advanced system would give you , some sort of an engine decisions in today, we're talking about decisions that. In the lutein. Okay. They take in consideration, all kinds of factors like who the identity is, what the identity is trying to access.}
+{\pard  \line \par}
+{Even what time the identity is trying to access. So many factors can make, can affect the decision. So this would be the second piece. The third pillar is management. So you need to manage those decisions. We call them policies. If you heard about the concept of a policy based access control. So that's the core of how you manage the decisions.}
+{\pard  \line \par}
+{Using policies. Policies are basically a combination of wool sets that define. Well, the identities, not by name, but by their attributes by the, whatever, a }
+{\cf1 [00:06:00]}
+{ collectivistic of the identity, what identities can access again, not by a static assignment but by some kind of whole sets definitions and any conditions which you want to include in your policy.}
+{\pard  \line \par}
+{So that's. And the last part governance, you need to govern those decisions in some way. You need to understand what are those organization's decisions that you have there. You need to be able to approve them over and over again, in some cases. So those set of the main pillars, and I can see, you probably know that, but , companies, they spent so much efforts and time just around all of these aspects.}
+{\pard  \line \par}
+{And I believe you need to understand anyone who's looking for an authorization decision need to understand all of those pillars and need also to tell himself, well, the important is what were their importance. Well, do you want to post your efforts }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ so good point and I would say to your point about the implementation of authorisation as well, if you're not covering all those 4.}
+{\pard  \line \par}
+{We have a gap. You just haven't }
+{\cf1 [00:07:00]}
+{ realized it. }
+{\pard  \line \par}
+{\b\cf3 Gal Helemski:\b0}
+{ Absolutely. Absolutely. I can. I can share with you that many of the , people that I'm speaking with, they start with enforcement because that's, I think relatively easy you want, or that's what drives you, you build an application, you need to enforce authorization.}
+{\pard  \line \par}
+{Makes sense. So you start with that and then it grows. How do you manage that? How do you govern that? How do you control all of those decisions? That's well, it becomes more complicated. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Yeah. And to your point, we haven't even gone into the whole user offboarding onboarding. What happens to the change roles as is this always happens in an identity life cycle.}
+{\pard  \line \par}
+{ I think the one thing that I had in mind as you were kind of had the.}
+{\pard  \line \par}
+{Four pillars of authorization, clearly each one of them that it requires its own. I guess space and episode, I guess, but maybe a good place to start. How has authorization for enterprise changed now? Like I think when I was in C, I remember we had. What or whatever the product was, site minder identity, mind that we had this whole conversation of are doing identity life cycle management, where we spent like }
+{\cf1 [00:08:00]}
+{ months trying to get people to even I guess it deploys, softwares and do all these things for the life cycle.}
+{\pard  \line \par}
+{And we still had gaps in off-boarding on onboarding or provisioning, but it gets really complicated. The more you kind of dive into that. So coming from that kind of narrow, I imagine there are a lot of people in the crowd who maybe kind of like yourself, What I've seen the initial stages of identity and maybe always thought that, Hey, that's pretty much where identity access management is.}
+{\pard  \line \par}
+{Right. But it's, I feel it's evolved with the world of cloud. And I'm curious to hear your thoughts on how has it changed from what it used to be on. }
+{\pard  \line \par}
+{\b\cf3 Gal Helemski:\b0}
+{ So the has been significant change and actually it's really exciting to see that I've been in the space for quite some time, as . so I believe the change, you can see that , in several areas, first of all, there's a significant technology change.}
+{\pard  \line \par}
+{And also there is a change in the way which you will receive the formalization area. I'll explain what I mean. So in the past, Well, authorisation was owned by developers. }
+{\cf1 [00:09:00]}
+{ What was owned by the applications. They will developing everything. Everything is Incode. You want it to change something, go to the developer.}
+{\pard  \line \par}
+{They have to change the code deployment process and all that. So. And, and do , there wasn't even, an open there, wasn't always the understanding that that's not the right way to do things you it's okay. If you want to change your authorization decisions to go for a development cycle, which is as , very, very challenging.}
+{\pard  \line \par}
+{So that's , one politics we use to develop those big monoliths and will baked inside. and that's not good enough for the new technologies. That's not good enough for a especially cloud deployment. And that's when things began to change. , I think developers because it understood that whatever they can consume as a service or an open source, that's what they need to do.}
+{\pard  \line \par}
+{If someone has done that already, then why not use it? It makes your life much better, more efficient. Second. You have so much things to }
+{\cf1 [00:10:00]}
+{ do. You need to walk in a better way. Take for example, micro services, right? In micro services, you wouldn't even think to overload your micro service. You want your micro service to be. Efficient to the point, you need your micro service to be focused on the business. It needs to serve that's it,, it doesn't need to know who the identity is or what the identity capabilities are. It doesn't really make sense. So going back to the basis of your question, what changed the way you perceive authorization, which should be a service you.}
+{\pard  \line \par}
+{And the readiness of the technology movement to Michael Salovey's movement to cloud services in general. Has changed a lot of those stuff. And also we station has become not yet a commodity. It's not yet like authentication. I really hope it would be getting there at some point, but it's becoming that path it's becoming into, into that }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ area.}
+{\pard  \line \par}
+{All right. So you would want authorization to become. As an, }
+{\cf1 [00:11:00]}
+{ it becomes so common. What would that look like? Or the curiosity of when it becomes a commodity, would that be like easily replaceable interchangeable? Or what, what would, I guess , what's the future? }
+{\pard  \line \par}
+{\b\cf3 Gal Helemski:\b0}
+{ Yeah. Why not? Why not? I mean, look, look at authentication.}
+{\pard  \line \par}
+{Let's talk about authentication for a second. If you look back 10 years, you had to develop your authentication solution, the want, and it stands out. There was only the beginning of. Salmon open ID connect just the early stages, right? It wasn't yet. But today, if you think about your application where the off the shelf or your Hong Kong application, nobody is thinking about developing authentication.}
+{\pard  \line \par}
+{That is a standard. You just need to connect to that standard and that's it. So is not there yet. It's not there. Step-by-step maybe it would get there. and I think then the challenge would be in management as with authentication today, you need good management, you need good governance. and in order to control all of those decisions and another thing I wanted to }
+{\cf1 [00:12:00]}
+{ mention regarding what change, right?}
+{\pard  \line \par}
+{What change between like 10 years ago to now 10 years ago, you could do. With very high-level decisions. What we call calls grand authorizations, right? You can say this person is a doctor and now application walk with that. Do whatever you want. He can see those patients that call. He can update whatever today.}
+{\pard  \line \par}
+{It's not good enough. Again, you need to be much more granular. Also. needs to be more fine-grained they need to be more dynamic because you want your controls to be more, let's say more smelt or what we advanced. Right. It ties very well to the concept of identity. First security identity is becoming much more a security perimeter.}
+{\pard  \line \par}
+{And the only way to achieve that is by connecting your identity to the digital asset, which is where set, authorization stand. Right. That's the objective of }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ }
+{\cf1 [00:13:00]}
+{ authorization. Yeah. Yeah. And I think that's a, quite a few good points in there. I would love to kind of kind of peel off a few more layers for us.}
+{\pard  \line \par}
+{But I definitely find because there hasn't been a standard per se, I guess all this kind of people, it's still technically not really authorization per se. Like you can go into the scope and access token API. There's a lot more things to do there as well, there's a few methods people talk about with sidecar and all that for authorization as well, seems to be a few other, what are some of the common ones that you see people apply in enterprise?}
+{\pard  \line \par}
+{\b\cf3 Gal Helemski:\b0}
+{ Sure. So, , as you say, Auth is not designed for , but people use that full. So we say they are pushing into the claims as much as possible. I believe it can go to support a Coles client, medium grind authorization, and what, for my perspective, it's fine. It's walking , and they say a standard, which is already out there.}
+{\pard  \line \par}
+{So all even summit you can do. Yeah, but we see, to get more, we seen as of options, if you want to be more granular. So }
+{\cf1 [00:14:00]}
+{ one of them is OPA open policy agent. It's not a standard, it's an open source. Okay. And open source for general purpose policy. And I see a lot of adoption for that open source, I believe.}
+{\pard  \line \par}
+{It's good to see that in the community. , because,, it starts to streamline the way we manage authorizations. And so that's one thing which is out there. There used to be , not used to be, so that's not the right word, but there is another standard. I'll just mention it. It's called sacrament.}
+{\pard  \line \par}
+{I do not see any adoption of Zachariah. I believe Zachariah was very challenging to work with. So I actually see organizations moving away from that standard, but , it is an authorization standard. So I think it's worth mentioning as well. , but , again, not many options out there, but more building and more starting to catch up.}
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Interesting. And I think to your point, I guess it authorisation is so to what you were saying earlier, basically }
+{\cf1 [00:15:00]}
+{ developers, history, the owners of authorisation that, I mean, I don't think in any conversation that I had in identity access management abilities, when I used to be in that space, it was, I would never talk about authorization.}
+{\pard  \line \par}
+{It was almost like, well, they know the application, so they would. What authorization level should be, I guess, available , as an architect or as a person who is working in implementing identity, you're just like, oh yeah, I'll try the shots of negation split across should really matter. I feel like because there's a whole conversation around centralized management and decentralized enforcement in the authorization space as well.}
+{\pard  \line \par}
+{I would love if you can explore that. I mean, I guess explain that a bit more as well. Cause I feel like that kind of ties into this as to why do we care about authorizations for. So centralized management and decentralized enforcement is the word that he called me. And I'm like, I was like, wow, this is like, I mean, before I got excited, }
+{\pard  \line \par}
+{\b\cf3 Gal Helemski:\b0}
+{ Yes. Absolutely. Absolutely. So, why do we care? And then the way which you can, actually control that. So why do we care? We care because security boundaries moving away, they're kind of dissolving, }
+{\cf1 [00:16:00]}
+{ right? If you're in the cloud, what is your security boundary? It's very, very, very close to the digital assets, the effect of your firewalls or whatever controls you use to rely on the past. It's not there. It's not good enough. Even if it's dead, it's not good enough. You need to straighten your security. You need better controls. You need to integrate your risk. And the only way to do that, Is by providing a more fine grind system to control the connection between identity and what identity can access.}
+{\pard  \line \par}
+{So if you're using an advanced authorization solution, you can actually say this user can access their records from Australia, and these users can access records from the UK. You can go that level of granular . You can even say this user can access records one of the UK, but not. So think about your data type of use cases.}
+{\pard  \line \par}
+{That's low and column level control, which is very, very granular. You }
+{\cf1 [00:17:00]}
+{ can do that on the API level. You can do that on the data level, on the application object level. So why do you need that? Because you want better security. You can rely on. , I like to call that,, you open the door. That was your course Glenn access.}
+{\pard  \line \par}
+{You open the door, but once you're in the house, which one can you access? Which so far, can you sit on? That's your fine authorization. You need that today. Any organization needs that in. Just to strengthen the security. Now, how do you achieve that? That's the other question. And the problem here is that you have so many technologies in your technology stack, , and they do not speak the same language.}
+{\pard  \line \par}
+{I mentioned only a few of them. You not like what services, which you probably want to control with the sidecar , you have your API APIs, which you probably want to control with the API gateway. You have your data layer. You want to control with various methods. There's different ways to do that.}
+{\pard  \line \par}
+{You have your applications and so on. So you }
+{\cf1 [00:18:00]}
+{ have many different technology solutions within your stack, and you need to control them in a simple way. And the solution is what you said, central management and control in a distributed enforcement environment. And they'll standing, there are many technologies you need to connect.}
+{\pard  \line \par}
+{Cause for distributed enforcement, but addressing the challenge, which is management , is gained by centralizing management. And that's what I mean by central management of control in a distributed enforcement. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Right. Yeah. And I think you're right, because the Microsoft is word has definitely forced a lot of people to decouple or things as well.}
+{\pard  \line \par}
+{So it definitely makes sense. The enforcement is a bit more decoupled or actually decentralized from that perspective. So. Another thing that keeps coming up in the authorizations piece, a continuation from this only the, in a distributed environment, because we're all living in a world of DevOps, DevSecOps enterprise are going through the whole digital transformation.}
+{\pard  \line \par}
+{Some of them mature, escalated due to the whole COVID world that we're living in }
+{\cf1 [00:19:00]}
+{ now. So what part does CICD play in authorization? When we're asked by being deployed and well, at least from what I understand, most CICD applications are given full access to all the. Le lease privilege kind of goes out of the window, but I'm curious to know what part is that playing in your mind?}
+{\pard  \line \par}
+{\b\cf3 Gal Helemski:\b0}
+{ Yes. So I would say two parts . I will divide that just to explain, as you evolve with the authorization solution, authorization becomes a component which needs to go through CICD cycle. Okay. So that's one file. You would the same way as you would deploy your code, you would also deploy authorization decisions, your policies, right?}
+{\pard  \line \par}
+{You would start in development, push them to staging, push them to action. And you will do that in the same way. You would approve your code and treat that the same way policy as a code, which goes with the same flow as your code, it goes, and I know that's not what you were asking, but I did want to mention that policy's authorization }
+{\cf1 [00:20:00]}
+{ needs to go for the same CICD cycle as you code.}
+{\pard  \line \par}
+{The other part of it is I believe what you asked is how do you control CIC D using fine-grained authorization? So also is I, like I said, they should have. Connected to any process within your organization, within your technology stack. And that includes CIC D , process. There are several ways to do that.}
+{\pard  \line \par}
+{Again, using policies that dictate who can deploy to, well, it can be deployed. You can, for example, say that. , I dunno, your DevOps team. It can always deploy to development and to staging your developers. They can only deploy to the development environment to production. You want much tighter controls.}
+{\pard  \line \par}
+{You can choose even by team. So maybe you have several projects which you are walking on and you want one team to be able to deploy. Part of the code and the other team to deploy other parts of the code. That is exactly what fine grind of }
+{\cf1 [00:21:00]}
+{ civilizations of }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ interesting. And I've got a question here from Belay as well, which is better centralization or decentralization.}
+{\pard  \line \par}
+{Think of in regards to authorization. Of course. What do you think is better? }
+{\pard  \line \par}
+{\b\cf3 Gal Helemski:\b0}
+{ I think the best, the best is central management in decentralized and. Okay. That's where you get your best, , authorization solution. I'll explain why, because you need a central management to see a, your technology stack who can access what, and when that's the basic of authorization who can access, what, and when you need decentralization to be able to connect to all of your technologies.}
+{\pard  \line \par}
+{That's why I'm saying you need centralized management in a decentralized enforcement }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ environment. Yeah. Yeah. And I think that to what you said is absolutely right, because in a enterprise space where you may be dealing with over 200 plus applications, which are basically spread in different parts of network as well, to your point.}
+{\pard  \line \par}
+{It kind of makes sense to have something that can be distributed across, but you're at least as a security team able }
+{\cf1 [00:22:00]}
+{ to manage it in a central location or at least central software kind of a thing as well. }
+{\pard  \line \par}
+{All right. So we were talking about the whole CICD pipeline, and I think the whole conversation on CICD kind of comes from the scaling aspect of authorization as well. Has that kind of evolved to a point actually, maybe a better question is what's a best practice for authorization these days to scale in an enterprise, because I mean, it's unlike a small to medium size or a startup where I can just have like five or six users, or maybe less in front of you.}
+{\pard  \line \par}
+{And enterprise teams to have hundred plus 200 plus users with applications having a total automation, what's the best practice here for an authorization capability. }
+{\pard  \line \par}
+{\b\cf3 Gal Helemski:\b0}
+{ That's a tough one, this best practice , so let me explain the different conceptual parts of an authorization solution.}
+{\pard  \line \par}
+{Okay. And authorisation solution typically has a. Hey an administration point. , it's we call it a P a P okay. Policy installation, one. That's where you would manage your policies. Okay. And you would have also a }
+{\cf1 [00:23:00]}
+{ decision point. That's your PDP. You want your PDP to be scalable? Typically it might be.}
+{\pard  \line \par}
+{You would find that PDP to be all in micro cell base can also be deployed as a sidecar. So we can scale throughout your organization as much as you want. The additional components, like an information point, which would also have the same, , characteristics, , and that would be typically the components, the basic component of your authorization solution.}
+{\pard  \line \par}
+{How do you start to well to sell that's different from a, , formal organization to organization. I would say that start with the first modernization you're doing to infrastructure. You can't eat all the cake at once. Doesn't work that way. And always you in nearly all cases, you're coming to a brown field.}
+{\pard  \line \par}
+{You, you don't get those greenfields. So, so that's very challenging. So I would say. which you are planning to modernize. You may be you're converting to my service. Oh, you're planning }
+{\cf1 [00:24:00]}
+{ to own both some kinds of SAAS and a solution, which you would like to use, whatever. Right. And Delta deploying the overall IBM stack covertly, starting from your identity management authentication and obviously authorization.}
+{\pard  \line \par}
+{put authorisation on the side, you need to take care of from the beginning. And from there, once they develop that practice, whenever you have a new selfies and you application and you platform. It is always tied to your authentication solution and the authorization solution. Have them ready, have them in place.}
+{\pard  \line \par}
+{You need your authentication as a service and also organization as a service ready to use for whatever technology you plan to onboard and. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Okay. All right. So use that to scale authorization. So, but have a, have a starting point. So at least you understand what's required from a dynamics perspective and then, then scale, scale out as you kind of add more applications.}
+{\pard  \line \par}
+{That's it. She, funny enough, it's a very similar approach to what people have for cloud security as well. So }
+{\cf1 [00:25:00]}
+{ maybe are there challenges for scaling in enterprise? Like I imagine with the different business units and 200 applications that two have 200 kinds of owners with their own credit cards.}
+{\pard  \line \par}
+{ What are some of the challenges faced by enterprise? You said that you see. }
+{\pard  \line \par}
+{\b\cf3 Gal Helemski:\b0}
+{ Yeah. So I think , you touched some way, part of the challenge, which is, , scaling across business units, different business units, having a lot of legacy already there, you can. Challenging, , to tackle legacy and, and that's part of the challenge.}
+{\pard  \line \par}
+{So what you would want also to look at is a solution which comes in a, or provides you a module, a report. All at once, but it start with a small part of what may be more easy for you to implement. Maybe the business unit is more cooperative and understands the value. It start small and expand from.}
+{\pard  \line \par}
+{And they'll stand what your limits are. A show value, a value, not only, , it's not the technology failure with authorization. It's also the business value }
+{\cf1 [00:26:00]}
+{ because business would get now visibility into all those policies, into all those who can access what questions much better than they might have today.}
+{\pard  \line \par}
+{So if you show. From day one, even in a small scale that would make it much, much easier to scale and you don't need to go over or business units all at once. That's, , that's very challenging by the way. That also calls for a solution which can, , support delegation. Okay. You, would want to look for that as well.}
+{\pard  \line \par}
+{Not just one place will, everything is managed, but also consider. The requirements are for management within your organization. If you have different business units, maybe you need to be able to delegate or to segregate the management capabilities between them. All of that needs to be considered, , as much as possible in advance.}
+{\pard  \line \par}
+{ That's why I say the management is one of the pillars. Authorization. It's not just enforcement. It's not just decision management actually takes a }
+{\cf1 [00:27:00]}
+{ very large portion of, }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ yeah. And I think there's so many moving parts to a management as well. Like people changing roles, new people coming in, or we were going and I think with the whole nowadays with just-in-time provisioning as well, it's very hard to track where else has increased.}
+{\pard  \line \par}
+{Where, which we may not have record for because it was adjusting time provision. It's I've got another question from Rama here. , what common gaps you, or you have observed in the current authorization implementation across? And are there any common trends you notice? }
+{\pard  \line \par}
+{\b\cf3 Gal Helemski:\b0}
+{ Yes. So the common gap cell, one, many of the decisions are managed within a PKU.}
+{\pard  \line \par}
+{So no visibility within application repositories and so on. That's one second, all explosion, obviously I know many of you are familiar with that. So we started building wars 10 years ago and they just exploded very, very challenging to manage that and the main trend which I see today. And, , we see that with discussion with customers, other speeds, which }
+{\cf1 [00:28:00]}
+{ we'll getting and all that is moving.}
+{\pard  \line \par}
+{To the policy concept, PBAC policy based access control as a way to control those sort of explosion and to provide controls within your application. That's something which you want to look at and to consider it's not every placement. That's also very, very important. You're not replacing. You have already placed a lot of effort in whatever solution you chose to use.}
+{\pard  \line \par}
+{Do you have your IAM in place and you have your whatever controls, but policy, the policy of approach can come on top of that and can help you get better visibility and control. Of course, all of that space. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Awesome. Hopefully that answers your question, but I'm a great question as well, man. Thank you. So we kinda spoke about some of the challenges and I feel like a lot of people who may be listening to this and folks like others who are of similarto Rama and Belay , and other people who are watching this, it, they would have a question about.}
+{\pard  \line \par}
+{Everyone. I feel like the, the starting }
+{\cf1 [00:29:00]}
+{ point is username password, but what's the maturity level as the current, , as a scale flowering becoming a big enterprise, like you've found one application to what you were saying that you really did a good job of authorization. And at that point a question that comes up is what's our benchmark to improve.}
+{\pard  \line \par}
+{Like, so what does, what are some of the different levels of maturity? That people can aim for as they evolve from just username password and letting the developers deal with authorization, I guess. }
+{\pard  \line \par}
+{\b\cf3 Gal Helemski:\b0}
+{ Well, I believe that once you get the full, , concept of authorization as a service for your organization, If you are able to get Authorisation to the same place you have authentication.}
+{\pard  \line \par}
+{That's like the top level of maturity, that all stages along the way, you can get that in one day. But if you understand those stages, then you can control. Well, you want to put your efforts, right? And I strongly believe you need to put your efforts in those developing areas in modernization.}
+{\pard  \line \par}
+{That's where you would }
+{\cf1 [00:30:00]}
+{ see the most value to begin with. And then you can continue to other areas as well, if you want, because you have already the infrastructure in place, you have your methods in place and you can expand. You can expand on that. , }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Yeah. So it's right now, I think it's a good point because the expansion is a, I guess, a step-by-step process, but a lot of questions may also come from the fact that people would not even know much aboutIAM }
+{\pard  \line \par}
+{and I think the conversation that you and I are having, it would be almost like it would be like rockets, the rocket science for a lot of people. It's so complex. So really the only direct people who are trying to get into theIAM space or may enjoy the IAM space, but don't know where to kind of think about these modern ways of authorisation }
+{\pard  \line \par}
+{what do you normally tell them to, I guess this is how you start your,IAM kind of a journey where these bacon. }
+{\pard  \line \par}
+{\b\cf3 Gal Helemski:\b0}
+{ Well, there is so much information out there. So even if you just Google, you would find tons of the information is specifically, I would talk about, , authorization. So in our website, you can }
+{\cf1 [00:31:00]}
+{ also find a lot of material about. Authorisation We have some white papers, some e-books which, which you can download and use if you're interested, , but just Google the topic, which you are interested in. Additionally, if you are, if you have access to consultant companies, , like Gartner forrestor , a coupon and call and so on, they have a very good guide books full for those areas.}
+{\pard  \line \par}
+{So I would start with the basic for identity and access management on the Authorisation , which is part of that. So I would start with that. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Yeah, sorry. I was going to say, I just realized I did ask you a tough question because almost like summarizing all the years that you and I have spent in, I am into like 1, answer.}
+{\pard  \line \par}
+{Like, how do you compress that into one answer? So now, I mean, I appreciate where you're coming from as well, because usually identity and life cycle management itself is such a big topic. You can go deep dive into it. So I definitely recommend people. I, the Gartner resource was really interesting, so I didn't realize they have guides for I and stuff.}
+{\pard  \line \par}
+{\b\cf3 Gal Helemski:\b0}
+{ Yes, }
+{\cf1 [00:32:00]}
+{ absolutely one. Yeah, they do have, and I think they'll really good guy. Oh, }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ and are there any conferences that people should be aware of that they can go and when we connect with other people in the identity space and maybe learn from as well? }
+{\pard  \line \par}
+{\b\cf3 Gal Helemski:\b0}
+{ Yeah, absolutely. So first of all, , one of the top, , consequences in this area is the Gardner identity and access management in a, the us, unfortunately, this one that you pushed a bit to, it was supposed to be in a month from now and they pushed it to August I believe , something like that.}
+{\pard  \line \par}
+{But it's a very good conference for my experience. , there is also the identity girls, which is a good conference, the Oakton, which is a good conference. There are several conferences. Those cells like metal us conferences that you would also find some very good consequences in UAP. Like the white Y told Maddie I believe, and the crippling call a conference at fault for identity and access management.}
+{\pard  \line \par}
+{ We had the blog that standardized all identity and access management conferences. So you you can look for that as well. You have a list there and choose }
+{\cf1 [00:33:00]}
+{ whatever suits you best }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ put that link in. Yeah. }
+{\pard  \line \par}
+{\b\cf3 Gal Helemski:\b0}
+{ Yeah. And, and fortunately, really, but we all know we are in this COVID situation.}
+{\pard  \line \par}
+{So many of those conferences are currently only virtual. I really looking forward to the time where we can start meeting people face to face, not just in zoom. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ No, I agree. I agree. I see that. We've got another question from Rama as well. The way we have, we have best practice for major practice, best practice of major practice.}
+{\pard  \line \par}
+{Is there any background strategy happening in similar lines as authorization as a service refugee? It doesn't mean cover the ramen. So it's a great question, man. Do you see Authorisation as a service coming in, in your as you're kind of working in this. }
+{\pard  \line \par}
+{\b\cf3 Gal Helemski:\b0}
+{ So there are some publications, which you can look at a M I, so Gartner published some of them, , there are not yet.}
+{\pard  \line \par}
+{There isn't any walk with which I'm aware of besides just talking about the architectural patterns and what you should do. And even an arts organization solution, like what else is patterns you should have there? , I would point out too to this document. We can probably add the link.}
+{\pard  \line \par}
+{Yeah. , that's, }
+{\cf1 [00:34:00]}
+{ that's what I am aware that is currently, would be relevant to your question. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Maybe I can really I think maybe not my, if you have a I guess your own personal experience as well, feel free to share that to Gail's point. I definitely find authorisation . So. Is not well defined as well.}
+{\pard  \line \par}
+{It's like, it's almost like saying, I mean, I feel like we only get getting to understand Saas now after all these six, seven years. So now it could because of the wholeIaas, Paas and Saas, like people haven't really started giving to, I guess what Gallo was saying earlier there hasn't really been a standard defined for authorization, the standards for authentication, like use SAML use single sign on use dad.}
+{\pard  \line \par}
+{But I feel like for authorization because there hasn't been a step. I wonder if the implementation of authorization is as a service is still, I guess up to an individual's interpretation for it could just be that I have a service does authorisation , which is a Saas at the same time, or it could be as broader as a, I've got an implementation framework that can cover authorization across the board.}
+{\pard  \line \par}
+{So }
+{\cf1 [00:35:00]}
+{ if you have your bus experience, but I would love to get it right. Yeah, but I think I'll put, the link has gala was mentioning, I'll put that link and I'll take the link from you. I'll put that as well. Hopefully that shed some light giggle. }
+{\pard  \line \par}
+{\b\cf3 Gal Helemski:\b0}
+{ I don't think which I would have recommended to look is the publication of.}
+{\pard  \line \par}
+{around zero trust . It's not as authorisation or the service, but they do define guidelines for the usage of authorisation within your architectural framework. It's around zero trust, which is very, very much connected to what we spoke about up until now. And , so you would find some guidelines.}
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Sweet. I think he, so he just came back to me. Exactly. Hence this question as the focus is very less on this area and the attention gets more on the other services and area. Yeah. So same. So it's indication seems to get a lot more focused than authorisation at the point in time, but hopefully we can change this with the conversations like that.}
+{\pard  \line \par}
+{Like this could happen with gal and everyone else. So I'm curious if you could tell us the audience about bit about plane ID and where can they find you as well? What does 90 do with, but that'd be pretty awesome as well, so we can close out.}
+{\pard  \line \par}
+{\b\cf3 Gal Helemski:\b0}
+{ Absolutely. Thank you. So plan IDs }
+{\cf1 [00:36:00]}
+{ company, , we provide a centralized place to manage your access control policies, , to push them, , to deploy them in whatever technology you choose to, to enforce one place to control in a distributed environment, distributed enforcement environment. So the company is the largest company in this area.}
+{\pard  \line \par}
+{Today we have more than 100 employees walking worldwide in the us. And you walk in APAC in Israel. , and Israelis, we started as an Israeli startup. Obviously we just, , by the way, we just closed an amazing round of $75 million and we are growing fast. We're going fast and we are aiming to provide.}
+{\pard  \line \par}
+{It's advanced solution in authorization, management and control for a cost, your technology stack. That's what we do, }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ nothing as well. And where can people find you to connect with you? Talk, talk about more authorization than what you guys do. We're going to be able to connect with you. }
+{\pard  \line \par}
+{\b\cf3 Gal Helemski:\b0}
+{ So our website, plane id.com, LinkedIn, wherever you feel comfortable, just reach out.}
+{\pard  \line \par}
+{\cf1 [00:37:00]}
+{ We'll be happy to talk with you. And we have a lot of knowledgeable people in our company. And I'm behind. I'll be happy to speak with you. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Awesome. I'll put the links for the white paper that you mentioned as well. So I think that will definitely be a great resource for people who are trying to at least get into the IAM space.}
+{\pard  \line \par}
+{But that was what we had time for it. So thank you so much for staying awake from me. And I did promise to finish before midnight, your time. So the other finishing for midnight, but thank you so much for this and for everyone else for joining us, I'll see you next month with our new month, which is Google cloud security, then.}
+{\pard  \line \par}
+{This was the last episdoe for identity access management one, but hopefully all of you enjoyed it. And I will talk to you all next soon, and I'll talk to you to Gal as well soon. Thanks for coming in and thanks to everyone else. }
+}

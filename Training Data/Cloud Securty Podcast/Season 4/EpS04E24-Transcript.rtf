@@ -1,0 +1,546 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red114\green179\blue114;
+\red128\green128\blue128;
+\red102\green0\blue204;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\b\fs48 Ashish and Day Johnson\b0}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ What's a good service that people could start looking at as a good, safe ground to do some threat deduction exercise? I }
+{\pard  \line \par}
+{\b\cf3 Day Johnson:\b0}
+{ might be biased because I actually just weirdly love reading the Google Cloud doc, but honestly, just go read the Google Cloud docs on IAM, they have all this information about how IAM you know roles work service accounts, even how to properly configure service accounts, what to do, what not to do, start with that and then start approaching }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ different things.}
+{\pard  \line \par}
+{I think we've got a couple of answers from Eric as well. He called out something which is. Interesting as well. We can do an exercise called Path to PWN to identify attack path to our crown jewels based on the identity services protocols, et cetera. I think that's a good way to kind explain the identity attack path.}
+{\pard  \line \par}
+{Cuz I guess identity is a new perimeter. Where does one start with these kind of threat detection exercise? Are there any resources that you kind of called out that would be helpful for people to }
+{\pard  \line \par}
+{\b\cf3 Day Johnson:\b0}
+{ look at? Definitely first and foremost, again, I would recommend taking a look at the Google Cloud docs. Oh my God, you and your }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Google Docs, man.}
+{\pard  \line \par}
+{Man, they're just that good. Might have be an advertisement for Google }
+{\pard  \line \par}
+{\b\cf3 Day Johnson:\b0}
+{ Docs, honestly. They're really that good. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Google Cloud threat detection is not something just spoken }
+{\cf2 [00:01:00]}
+{ about enough. Fortunately, I had Day Johnson from Datadog who has done some research on this and spoke at fwd:cloudsec about this exact topic.}
+{\pard  \line \par}
+{What are some of the common GCP threats that you should be aware of? What are some of the common attack vectors from a GCP perspective if you're trying to become a threat detection engineer. This is a great episode for you as well. Also, if you're starting off on just the thinking of how do you even start doing threat detection in Google Cloud, this is definitely an awesome episode for you.}
+{\pard  \line \par}
+{So I'm grateful. Thank you to Day Johnson for coming on the show and talking about his methodology on how he thinks about it, and also thank you to all the audience members who were there at live episode sharing their perspective, and I think I must say, some of the methodology that was discussed, I would say patent pending on some of them.}
+{\pard  \line \par}
+{So, You would enjoy the conversation about how do you identify a threat or a problem that is existing? How do you continuously monitor for it and how do you eradicate it? So all that a lot more in this episode. If you are someone who's listening to this conversation for the second or third time and probably knows someone who's doing threat detection or wanting to go down that path in Google Cloud, well Google Cloud Security Month is here.}
+{\pard  \line \par}
+{And please make sure you share this }
+{\cf2 [00:02:00]}
+{ episode with them so they get to know a bit more and all the things that was spoken about during the interview. I will leave them over here in description of the show notes as well for you to kind of check it out later. And maybe make some more threat detection frameworks or find some new threats in Google Cloud.}
+{\pard  \line \par}
+{But if you are here for the second or third time, definitely make sure you leave the review rating or follow us on our social medias, like YouTube and LinkedIn, cause that's where we go live every week. And it also helps more people find out about cloud security podcasts. So we can talk more about cloud security, cloud native security, and how AI is disrupting the world of cloud.}
+{\pard  \line \par}
+{I hope you enjoy this episode with Day and I'll see you in the next episode of Google Cloud Security Month in the next one. Alright, talk to you soon and enjoy the episode. Peace }
+{\pard  \line \par}
+{ by bringing developers and security together. You don't have to choose between speed and security. Develop fast, stay secure.}
+{\pard  \line \par}
+{Hello, welcome to another episode of Cloud Security podcast, and today is the beginning of new month for us. Thursday after Independence Day, I think the 4th of July, }
+{\cf2 [00:03:00]}
+{ we wanted to start off with Google Cloud Security Month, and for this, I have someone special. It's a repeat guest, but always special to have you, my friend.}
+{\pard  \line \par}
+{How's it going, }
+{\pard  \line \par}
+{\b\cf3 Day Johnson:\b0}
+{ Day? Good. All right. How about yourself, Ashish? }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Good. Good. For the two people on the internet who don't know who Day is, could you tell us a bit about yourself, Day, and how'd you get to where you are today? Man. }
+{\pard  \line \par}
+{\b\cf3 Day Johnson:\b0}
+{ Yeah, definitely. So my name is Abisola Dayspring Johnson typically go by Day. Most people know me by Day Cyberwox either on YouTube or Twitter or Instagram.}
+{\pard  \line \par}
+{But I am a detection engineer at Datadog. So basically focus on putting out detection content, threat research, and also like sharing my knowledge about all of that stuff out there, whether it's through content or talks and stuff like that, but also a content creator as well. So I've been making on YouTube for the last three years, basically just sharing my journey on cybersecurity, cloud security, and a bunch of other stuff as well.}
+{\pard  \line \par}
+{So that's a high level overview of who I am }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ you dropped off the part about, you can definitely check out his vlogs, his workout }
+{\cf2 [00:04:00]}
+{ channels. He's got a lot going, so I'll definitely recommend checking out his YouTube channel as well as you kind of go along finding out what Day does on the internet.}
+{\pard  \line \par}
+{But thankfully, you're also a detection engineer, which is kind of like the topic that we have from a Google Cloud perspective. I wanna start off by something which is, what are some of the common threats in G C P that are publicly known? You can talk about secret ones as well, if you know any, but just share the public ones for now.}
+{\pard  \line \par}
+{Yeah, }
+{\pard  \line \par}
+{\b\cf3 Day Johnson:\b0}
+{ so I think one that most people are typically familiar with is like the one with service accounts, right? That's always the one that mostly comes to mind, like, so especially with service accounts in Google Cloud, whether they're default service accounts or even just like regular service accounts, they typically.}
+{\pard  \line \par}
+{Tend to sometimes be overly permissive or if there are no guardrails in place within your Google Cloud environment, they could be overly permissive and also like grant access across like folders, projects, which could lead to multiple lateral movement or privilege escalation vectors that could potentially just like leave your Google Cloud environment just totally compromised. That's typically the }
+{\cf2 [00:05:00]}
+{ biggest one. There's also the possibility of like their service account keys being publicly exposed, and those keys are practically immortal. So basically they live for like, I think it was about 8,000 years or so. Oh geez.}
+{\pard  \line \par}
+{Wow. So they constitute a majority of the threat against Google Cloud. But there's also other things like, you know, with like storage buckets, like exfiltration, I believe. Like there's minimal. Login for certain ways by which like exploitation can be done within Google Cloud, which like causes some level of like low visibility with that activity.}
+{\pard  \line \par}
+{And yeah, so like that's like with storage buckets, also with like compute instances. Same thing for like most other cloud environments, right? If you're not properly configuring those or. Let's say like with SSH keys and stuff like that, those could potentially get compromised with the project metadata, which we'll go into later on.}
+{\pard  \line \par}
+{But the major one is the service account, right? Cuz it's A major identity within Google Cloud. Like that's typically like the biggest threat model or threat towards Google Cloud environments. Oh cool. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I'm }
+{\cf2 [00:06:00]}
+{ definitely amazed at how many that you were able to list out. So that's a pretty good thing.}
+{\pard  \line \par}
+{Good. But for people who probably are new to the GCP world, how do you go about doing threat detection in GCP in the first place? Like what's the thought process like there? Yeah, }
+{\pard  \line \par}
+{\b\cf3 Day Johnson:\b0}
+{ that's a great question. When I actually first started at Datadog, where I currently work at, I had practically zero knowledge of G C P.}
+{\pard  \line \par}
+{My manager was like, Hey, take a look at this. And that was like one of my first tasks I was working on. I was like, Hmm, I don't know anything about Google Cloud. So went on Google and did a Google search for, All the possible resources I could find on like Google Cloud, right? So basically starting with like IAM which is the major foundation for everything cloud basically, because you're dealing with like identities, access policies and all of that.}
+{\pard  \line \par}
+{So I just started by basically reading up the Google Cloud docs on, IAM actually. Like the Google Cloud docs. I think I told someone this a while back, like, I actually enjoy reading the Google Cloud docs and they're like, I don't know about that. But I like the docs. They're very well detailed, give you a lot of information about how things are supposed to be configured in Google }
+{\cf2 [00:07:00]}
+{ Cloud and just understanding exactly what Google was thinking about in terms of that.}
+{\pard  \line \par}
+{So I think before actually going into the detection engineering piece, it's first important to start understanding like how the cloud environment works, how resources are configured in the environment, what resources exist in the environment. Cuz you can't really. do detections for things you don't understand or things you don't know how they can be configured or misconfigured or things that you don't know, like what threats exist against them.}
+{\pard  \line \par}
+{So it just started with learning all of these different services and then taking a look at how are these services used normally by developers or engineers, cloud engineers, DevOps engineers? What does that normal look like? And then how. Would an attacker potentially think of how to exploit this service the way a developer would normally use this service?}
+{\pard  \line \par}
+{Right. That's basically how I approached it, and most of that was just basically either reading the docs, watching YouTube videos, or playing around a Google Cloud. That's like the best way you can actually approach learning Google Cloud or learning how to detect threats within Google Cloud. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Interesting. One question that comes to mind, right? Because most people would've gone }
+{\cf2 [00:08:00]}
+{ down the path and fortunately because you came from a background which was, did not have the baggage of another cloud provider.}
+{\pard  \line \par}
+{Cause I imagine most people were just gone, oh, this is what AWS looks like, so I should probably use the same. Did you actually have that kind of thinking as well? Because I feel there is a lot more material for AWS on the internet. Then GCP period, like I think the only people talk about Google Cloud Security is Cloud Security podcast.}
+{\pard  \line \par}
+{No one else talks about it. }
+{\pard  \line \par}
+{\b\cf3 Day Johnson:\b0}
+{ Yeah. Yeah. We're definitely right about the fact that there's a lot more material content courses, resources about a w s out there. I mean, it makes sense because they're the majority of cloud service provider. And I would say like one of my initial instincts was, Well, I have some knowledge about aws, AWS security, and AWS threat detection.}
+{\pard  \line \par}
+{I should be able to translate that knowledge to Google Cloud and I was very wrong. So here's the thing, right? Across all cloud providers, there's definitely commonalities, right? Whether it's like the shared responsibility model, the basic functionality of services, whether it be compute. }
+{\cf2 [00:09:00]}
+{ Or whether it be storage or whether it be serverless or it's like database, whatever it is, there's basic commonalities across all cloud providers.}
+{\pard  \line \par}
+{However, when you start getting into the intricacies of how these things actually work, there's differences. For example, like the way identity and access management works in Google Cloud, it's completely different from how it works in aws. Now. The principles are basically, you know, the same with roles.}
+{\pard  \line \par}
+{Policies, permissions, all of that, but in more areas than you could imagine. There's different things that exist within Google Cloud in terms of how roles are configured, right? There's the, this owner role, there's like a viewer role, there's an editor role. You don't necessarily have those a w s, you have those managed policies that kind of have all these things with, oh, you have like the administrative user, all of that and all, there's like AWS, managed roles, but didn't necessarily always translate exactly to what it means in Google Cloud.}
+{\pard  \line \par}
+{So, I almost made that mistake, or I actually did make that mistake of trying to translate my knowledge from AWS to Google Cloud. But I think the point at which I realized it was }
+{\cf2 [00:10:00]}
+{ indifferent was when I came to the conclusion that you have to look at each cloud provider holistically as its own cloud provider.}
+{\pard  \line \par}
+{So you can't necessarily immediately want to. Lift and shift your knowledge from AWS to Azure and Google Cloud. Of course, there's the underlying foundation that will never change when you're going deeper into like intricacies of how things are actually configured and how to actually detect threats from within this cloud environments.}
+{\pard  \line \par}
+{Then you have to look at the cloud environment holistically, and in this case, I had to look at Google Cloud holistically and how the services and how things work in Google Cloud specifically and holistically. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I think funny, someone else also related to this as well, so Albert on LinkedIn just kind of mentioned, oh boy, that's happened to me as well.}
+{\pard  \line \par}
+{The difference between AWS and gcp. . But the point still remains, I guess maybe the thinking could be used. And I think when we were talking about this, you kind of spoke about the whole threat modeling by service as an example framework as well.}
+{\pard  \line \par}
+{And a lot of people, I mean, I don't know if that's kind of part of your. Initial assessment or where do you see that in your process? But how do }
+{\cf2 [00:11:00]}
+{ you explain it to people? Cause like people may not even know what threat modeling by service is, is cause threat modeling is thrown like a, I don't know, it's like disco word, just like throw it everywhere.}
+{\pard  \line \par}
+{Yeah. So what is threat modeling by service and is there an example thinking there for how you use that for detection? }
+{\pard  \line \par}
+{\b\cf3 Day Johnson:\b0}
+{ Yeah. So I would say like there's no official term or framework or definition out there about threat modeling by service. This is just something that I started to approach as I started to do more Google cloud detection.}
+{\pard  \line \par}
+{I actually plan to like, Spend some time actually developing the idea to something and probably giving a talk on it later. But basically, I think it's a really, it's a straightforward approach to build detections for Google Cloud and approaching it from a perspective of looking at each service holistically and how to approach threat detection for each service.}
+{\pard  \line \par}
+{And this could be helpful if you're like in an environment where you use specific Google Cloud services. So this could mean going to the service or going to the Google Cloud docs and taking a look at. What the service is able to do, right? What are the various API actions like Google has? A lot of documentation about the possible }
+{\cf2 [00:12:00]}
+{ a p i actions that are available for each service, right?}
+{\pard  \line \par}
+{So what can you do? Can you like create an instance? Can you create a network, a firewall, a gateway, whatever the case is? Now look at these different actions in ways by which they will normally be used. Like the fundamental reason why they exist, right, is for them to be used for. The cloud, right, for developers or engineers to use them for specific reason, but there's also ways by which attackers will also use the service.}
+{\pard  \line \par}
+{So it starts from first of all, like looking at the service, what does it do, and then what actions are possible for this service and how can I take a look at this from both the lens of its intended usage as well as malicious. She was rich, so. If you see like a create instance, a developer or a cloud engineer or whatever the case is, might create an instance in order to deploy host like some application or whatever, or run some computer, whatever, right?}
+{\pard  \line \par}
+{That's legitimate usage for the compute instance, right? To create an instance. Well, an attacker on the other end will. Create an instance to mine cryptocurrency. So when you've looked at it whole from the perspective of what a developer would do, and then you also take the lens of the }
+{\cf2 [00:13:00]}
+{ attacker. You can look at it from this lens of, okay, when a developer is going to create an instance to run some application or whatever, they're gonna do it from, let's say, our company's ip, or they're gonna do it from a residential IP or whatever the case is.}
+{\pard  \line \par}
+{However, if an attacker is going to do the exact same action, right? There might be preceding actions I could use as you know, some audit trails or whatever to like, I'll augment this detection or that attacker will probably do this from maybe a hoston IP address, like another cloud environment IP address, or a Torah IP address, right?}
+{\pard  \line \par}
+{So you're basically looking at the exact same action, which is a create instance action, but you've looked at it from this is what normal would look like, but at the same time, taking a different lens. This is what not normal would look like, which would be from the lens of the attacker. So if you take that approach to like each service that you're dealing with, whether it's compute, storage, and look at all these different actions you can come up with.}
+{\pard  \line \par}
+{A ton of detection possibilities, and then you can then slowly like narrow your scope down. What fits the threat model of my particular Google Cloud environments? What deviates from what I thought was normal }
+{\cf2 [00:14:00]}
+{ within our actual Google Cloud environments, how are developers or cloud engineers or whatever the case is actually using this service and how can I think of what deviates from this normal in our environment to what an attacker would.}
+{\pard  \line \par}
+{Potentially do with this service to exploit it within our cloud environment. So it's the current lead developed idea of how, like I approach third modeling per service and I'm gonna eventually like develop it into a more flesh out idea. But that's currently how I'm thinking about }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ it. Interesting. Cause I kind of love what you have as an, as a mindset from a framework perspective. Because just so many services, man, it's like, yeah. Is there a good starting point as well? Because I'm talking every cloud service provider is releasing hundreds of services. What would be, I think you kinda mentioned service account earlier, but.}
+{\pard  \line \par}
+{I don't know if that's what you'd recommend as, Hey, start here first. What's a good service that people could start looking at as a good, safe ground to do some threat detection exercise? }
+{\pard  \line \par}
+{\b\cf3 Day Johnson:\b0}
+{ Honestly, I think just start from, IAM right. Honestly, IAM just like, helps all the pieces come together. I mean, for me, right?}
+{\pard  \line \par}
+{Cuz if I didn't understand how identity and access management worked in Google }
+{\cf2 [00:15:00]}
+{ Cloud, everything would just fall apart because that's the glue for all the pieces. So like, just go. Honestly, I might be biased because I actually just, I don't know. I just weirdly love reading the Google Cloud doc, but honestly, just go read the Google Cloud doc on IAM}
+{\pard  \line \par}
+{they have all this information about how IAM you know, roles, work, service accounts. Even. Even how to properly configure service accounts, what to do, what not to do, start with that and then start, you know, approaching different things. There's also like open source projects, I believe, of GCP Goat as well, which have some really commonly attacked services and how they attacked within Google Cloud.}
+{\pard  \line \par}
+{So just any other goat web goat or whatever. You can try it. You can check it out and just like play around with those things and get familiar with those very common attack paths within Google Cloud. Yeah, and just develop your knowledge from there, you can then, Start looking at each service more and more specifically, like, okay, let me sit down and look at what would a threat look like from a storage perspective.}
+{\pard  \line \par}
+{What are attackers already doing in terms of exploiting Google Cloud storage services? Or how can I look at it differently? Right? Or how are we }
+{\cf2 [00:16:00]}
+{ currently using the storage service and , what are some gaps that are not currently being detected or talked about by which we can actually start looking at approaching threat detection for our storage services, for our internal Google Cloud environment.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh, I love that approach. And I also, I think we've got a couple of answers from Eric as well, because Eric has a very similar process to you. He called out something, which is interesting as well. We can do an exercise called Path to PWN. I'm gonna say patent pending from Eric to identify. That's a good one, man.}
+{\pard  \line \par}
+{I mean, if you ever do something, I think that would definitely sell Path to PWN to identify attack path to our crown jewels based on the identity services protocols, et cetera. I think that's a good way to kinda explain the identity attack path. Cause I guess identity is a new perimeter. Michael calls out, no legacy roles, owner, viewer, editor.}
+{\pard  \line \par}
+{Any thoughts on this as well, man? }
+{\pard  \line \par}
+{\b\cf3 Day Johnson:\b0}
+{ Yeah, so those are like, I believe the basic roles within Google Cloud, so it's like owner, viewer, editor. I think there's a new one, I'm not sure, I don't remember it specifically, but basically like those roles group, multiple permissions within them. So like if you want, let's say }
+{\cf2 [00:17:00]}
+{ a lot of access without giving full access, it would be like an editor role if you want the user to be able to like just be able to view things, not be able to make any right actions or give them a viewer role if you want them to have.}
+{\pard  \line \par}
+{All permissions to give them the owner role. And I think there's some limitations in terms of setting more granola permissions beyond what already exists that Google Cloud gives you with these different }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ roles. Thanks for that, Michael. And yeah, just definitely keep sharing. Go David. I think he, he's kinda like you, man.}
+{\pard  \line \par}
+{Totally. Just basically loving reading these documentations like that kiss for documentation. Yeah. }
+{\pard  \line \par}
+{\b\cf3 Day Johnson:\b0}
+{ I love it. David. Yeah, the docs are really good. They're just like aesthetically pleasing and I actually, I like reading, but not if you read a lot of API docs I have to do , for my job. I've definitely seen some really terrible ones and Google Cloud is definitely up there for really good ones.}
+{\pard  \line \par}
+{So yeah, I actually enjoy }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ it. I feel like it's like the medium of cloud service documentation, is that what }
+{\pard  \line \par}
+{\b\cf3 Day Johnson:\b0}
+{ we're calling Google? I completely agree with that, and I honestly think for me, like ranking the docs will be Google Azure. And aws Azure also has a really, really nicely done docs, }
+{\cf2 [00:18:00]}
+{ but Google is just really up there for me.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh, okay. Cool. All right, so David and Dave both are recommending this. I should just check out just for the beauty of it, I should check }
+{\pard  \line \par}
+{\b\cf3 Day Johnson:\b0}
+{ out Google Docs. Yeah, yeah. Honestly, like, I mean, even if you don't learn something, you just accept and enjoy the aesthetically pleasing view of those }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ docs. I'm wanna do that.}
+{\pard  \line \par}
+{thats gonna be my screen saver after this, but the, you were kinda mentioned attacker as well, so I think probably worthwhile knowing for people who are already, like Eric and others that are threat detection engineers and others maybe looking to go into that path as well in the Google Cloud space, what are some of the common attack vectors that you see, or at least you came about in your research when you were trying to build threats around G C P?}
+{\pard  \line \par}
+{\b\cf3 Day Johnson:\b0}
+{ Yeah, so I think the very first one, again goes back to like service accounts, just for context, right? Service accounts are identities within Google Cloud. Basically, they're supposed to interact with resources on your behalf. Right. So they're basically like your cloud robots doing things for you as a human, right?}
+{\pard  \line \par}
+{So you just tell 'em what to do, make sure that they have access to the service you want 'em to interact with, and they basically }
+{\cf2 [00:19:00]}
+{ perform those activities for you in Google Cloud. Now, the thing with service accounts, just the multiple other access vectors from aws, which is very common, will be like, The keys, right?}
+{\pard  \line \par}
+{The service account keys, so like aws, you have your access key id and for service accounts, you also have these keys as well, right? They're actually a public private key here. Basically what this keys allow you to do is get access to the service account programmatically and basically sometimes these keys can get exposed, right?}
+{\pard  \line \par}
+{Basically maybe someone hard codes these keys, or just mismanages these keys and the attacker gets access to them. So that's typically a way by which attackers could. Get access to Google Cloud environments. And this is like very, very common. We probably probably might have seen like threat reports about it, but it's typically like the initial access vector into Google Cloud environments.}
+{\pard  \line \par}
+{On the topic of service accounts as well, it's also creating those service account keys, right? So that that could either be done for like persistence. So like if you have those keys, you can always use them to continuously programmatically access Google Cloud, or they can create new keys for another service accounts that might have more permissions that you might not initially have.}
+{\pard  \line \par}
+{\cf2 [00:20:00]}
+{ And then that could also be a. Privilege escalation vector. And then there's also adding an external identity as an owner within Google Cloud. So within Google Cloud, you have the ability to invite people into your Google Cloud project in order to be owners of this project, right? So if you own a project, you basically have full access to everything within this project.}
+{\pard  \line \par}
+{So you have the ability to invite someone over into the project to assume this owner role. Basically, an attacker could invite another identity. That is somewhat related to Google, so basically like a Gmail, Google, Google Mail or whatever is somewhat related to Google Cloud. Basically, you have the ability to actually invite another, that identity into Google Cloud to be an owner, basically have entirely full access over this environment.}
+{\pard  \line \par}
+{Then there's always like your storage threats for like exfiltration,}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ interesting. Wait, so are you saying that I don't wanna scare people, but I'm just assuming that because similar to Microsoft Azure, office 365 is kind of part of the Azure Suite. Mm-hmm. And if I lose my access to my Gmail, it's my office }
+{\cf2 [00:21:00]}
+{ corporate Gmail, not my personal Gmail.}
+{\pard  \line \par}
+{I potentially have given someone access to my Google Cloud as well, depending on what the user is doing. }
+{\pard  \line \par}
+{\b\cf3 Day Johnson:\b0}
+{ Not necessarily, except if they've already been invited into like a Google Cloud }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ project. Right? Right. So if they were invited, then technically I have basically potentially given that access away.}
+{\pard  \line \par}
+{\b\cf3 Day Johnson:\b0}
+{ Yeah, it's funny because like if you have an email address, sometimes when you wanna create a Google Cloud project, It automatically like already has one attached to like your email address, which is kind of weird. But basically if you have that Gmail address and someone invites you over into a Google Cloud project as whatever owner of you or whatever the case is, you have the permissions that they have invited you as.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Ooh, that. That definitely is an interesting thread that I don't think many people think about people, because usually in most companies, corporate it is looking after Gmail. They're not concerned by Google Cloud or whatever for them. It's like, oh, I'm the admin for Google Admin. I do that. You do your, what you do anyway, security people.}
+{\pard  \line \par}
+{So that's an interesting and probably a unique one as well. And you also called out the service account being like the robot user that automatically gets assigned. Yeah. So is it }
+{\cf2 [00:22:00]}
+{ possible to still see them and to your point, have threats being detected on it automatically? Or is that something that when not easily detectable?}
+{\pard  \line \par}
+{\b\cf3 Day Johnson:\b0}
+{ Yeah. So the, the approach for this actually from a threat detection perspective, I was waiting for us to get into that. I was just talking about how the threats with them and in terms of approaching how to detect this. So in terms of like these Google Cloud service accounts, so if a attacker compromises the Google Cloud service account, they will typically be using it from outside of Google Cloud environment.}
+{\pard  \line \par}
+{And typically it would be from some anonymizer or something that would. Not make it possible to trace it back to them. So we can easily detect this by looking for any time these service accounts, or in this case like default service accounts, whether it's the compute engine service account or the app engine service account is being used from outside of Google Cloud.}
+{\pard  \line \par}
+{Whether it's like malicious ip, which we might have been able to infer that through, like threat intel enrichment or if it's being used from an AWS IP or an Azure ip or another hosting IP address or anything that shows that it's not from within Google }
+{\cf2 [00:23:00]}
+{ Cloud, which if it's from within Google Cloud, would probably be seen something from like a Google Cloud Shell or from a compute engine or from an IP address range that's within Google Cloud's IP address range.}
+{\pard  \line \par}
+{But anything that is outside of that would be very much worth taking a look at. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Any services you call out that people should keep an eye on, like, I mean, you obviously call out the low hanging fruit to be IAM with service account. Any other service that comes to mind that people should be mindful of?}
+{\pard  \line \par}
+{I mean, the, most of the threat detection you've found are around those services. }
+{\pard  \line \par}
+{\b\cf3 Day Johnson:\b0}
+{ Yeah, this is one. This one's actually a really interesting one we did some research on. Basically, this is with the BigQuery service. BigQuery service is a Google Cloud data warehouse, and when you make a query, you have the ability to export this query, either to like an external storage.}
+{\pard  \line \par}
+{I remember now it was like some research from like GitLab or something, but you have the ability to export the results of this query to an external storage, which could be like maybe your. Google Cloud storage bucket or an S3 bucket or an Azure blob storage, so an entire has access to Google Cloud and might have access }
+{\cf2 [00:24:00]}
+{ to BigQuery, can basically export the results of whatever they might have searched for within BigQuery to say an S3 bucket or an Azure blob storage.}
+{\pard  \line \par}
+{And that basically is like very easy. Exfiltration, depending on whatever data you might have within that data warehouse. So this is one whereby like if you're expecting your query results to be exported to internal Google Cloud storage buckets, or not to be exported at all, and you're seeing them being exported to a diverse three buckets or Azure blog storage buckets, then that's definitely like, How you can approach detecting that.}
+{\pard  \line \par}
+{Because if an attacker is willing to like take information out of your environment, they'll probably be putting in somewhere else that is controlled by them, which might be an external storage bucket. So that's another one that I don't think is like as common in terms of threats or detections within Google Cloud.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Ah, interesting. I love the example of BigQuery because that also opens up the other Pandora's box, which is, it's not just the Google Cloud services, but you're also looking at Google. Now, we spoke about Google Workspace with Gmail, also talk about BigQuery. It's all these extensions, for lack of a better word, which are just }
+{\cf2 [00:25:00]}
+{ scary, and people should kinda like, oh, what are these tentacles that are coming out that I should be also looking at?}
+{\pard  \line \par}
+{Not just just thinking about from a Google Cloud perspective, but people who are trying to do threat detection. They can also look at, Hey, where does this end up? And what are some of the other services that may be kind of related but may not technically be called Google Cloud ? I love that Eric has a comment about the whole Google Cloud credential stored in access token or DB file on admin works station is another attack vector.}
+{\pard  \line \par}
+{Yeah. Bad guys can use it to impersonate the user. Yeah, }
+{\pard  \line \par}
+{\b\cf3 Day Johnson:\b0}
+{ that's actually, that's a really cool one because like from your personal machine, right? So if you have your credentials stored on the machine, there's been like some malware that has scripts that actually looks for your config file, your Azure like config file, and I think now Google Cloud credential and basically parses that data, extract it, put it in the zip file, and then sends it back to the attacker.}
+{\pard  \line \par}
+{So like that's definitely one. This is also like where proper credential management comes in. So maybe not using that method of authentication. I know for AWS you can use AWS vault, but I've actually not looked }
+{\cf2 [00:26:00]}
+{ into a better solution for Google Cloud managing like Google Cloud keys or static credentials.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh, awesome. And thanks for that Eric, and keep coming man. So we've kind of spoke about credentials. We kind of spoke about identity, but we touched on the whole Google buckets as well. But is there like a whole compute credit thing as well, like from a computing image creation is also something that you, I think so for context, the idea for this talk came from your talk at fwd:cloudsec as well.}
+{\pard  \line \par}
+{I'll definitely recommend peoeple check out. And one of the examples that we kind of spoke about was around the whole compute image creation in Google Cloud. Are there any thoughts on that and what examples you gonna share from there as well? }
+{\pard  \line \par}
+{\b\cf3 Day Johnson:\b0}
+{ Yeah, so this is one that is also not as commonly identified.}
+{\pard  \line \par}
+{It's typically a precursor to some sort of like crypto mining attack or attack towards compute engine. So basically like an attacker would do a compute image creation API call in order to create like a compute image that best fits what they wanna do for their crypto mining activity. And then that would be followed by like, say like a compute network and then multiple }
+{\cf2 [00:27:00]}
+{ compute.}
+{\pard  \line \par}
+{ Instance creation. This is one that you can chain with multiple other events. So if you see a chain of events with image creation, firewall creation, network creation, and then compute instance creation, that could potentially be a much higher fidelity sort of like detection that you could use to identify crypto mining attack. But yeah, it would typically be like a very, very compute and intensive image that you'd see in that. That would also come from knowing what images are typically used within your environment. Right? And what is this new image that's being created? So if you identify like this deviates from, oh, this are the typical images we use.}
+{\pard  \line \par}
+{For our computer instances within our environment, then this is like a much higher fidelity detection. And also if you're able to like sort of chain that with multiple other indicators, like I said, when a network rule is created, when a firewall rule is created with some specific indicators and then you have multiple computer instances, that's another one that you could use for a Google Cloud threat detection.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Awesome, and thanks for sharing that as well. The reason I wanted to call that out is because from a business use case perspective, most people out there are building applications in Google Cloud similar to what other people are doing in cloud }
+{\cf2 [00:28:00]}
+{ service providers. And a very obvious thing if you're using some kind of compute is that there is an image and having this awareness is definitely pretty awesome as well.}
+{\pard  \line \par}
+{So thanks for sharing that. Ive got a question here, and this was gonna, I kind of gonna be my last question anyways from a technical perspective I'm looking to switch to detection engineering and I'm kind of stuck between skillset.}
+{\pard  \line \par}
+{I need to make the switch. Any advice will be greatly appreciated. }
+{\pard  \line \par}
+{\b\cf3 Day Johnson:\b0}
+{ Yeah, man. So I'm fairly new to my detection engineering role. I've been at Datadog for about a year and five months now. So like I'm still really new to this whole engineering thing. I've been learned a lot, by the way, I actually have a video on this in my channel, but I think it really starts from like having an engineering mindset.}
+{\pard  \line \par}
+{The engineering mindset is different from what an analyst mindset. So from my perspective, working as a threat analyst for about two years before going into engineering, the engineering mindset is different in the sense that. You're now dealing with problems and you're looking at them from a different perspective, right?}
+{\pard  \line \par}
+{So the problems you're dealing with, and this might not be too specific to detection engineering, but I'll start with like a high level. So problems is like starting }
+{\cf2 [00:29:00]}
+{ by first knowing what a problem is, right? So problem might be like, we don't have coverage for threats against our Google Cloud storage environment.}
+{\pard  \line \par}
+{That's a problem. But are you actually able to identify that is a problem? As simple as it is, and that's one thing I struggled with. I didn't know what a problem was, started with like actually knowing how to identify problems. Then the next step is like, what is the outcome of the problem you're trying to solve?}
+{\pard  \line \par}
+{What is the end goal of this? So in that case, it would be okay, we would want to have five quality detections for our Google Cloud computer environment, and then, The next step is owning the problem and solving the problem. So owning the problem is, okay, how do you actually approach solving this problem?}
+{\pard  \line \par}
+{What stakeholders need to be part of this, right? Do we have the resources we need? And that goes more into detection engineering piece, which I'll go right in a second. But basically is how do you follow through from start to finish of actually completing. To get into a solution for this problem. And then I think the final piece is making a problem to be long lasted, a solution to be long lasting.}
+{\pard  \line \par}
+{So like when you actually solve the problem, make sure you solve it in a way that is sustainable so that you're not }
+{\cf2 [00:30:00]}
+{ continuously having to go back and refix things all the times, but you're mostly maintaining your solution to your problem. Now, in detection, engineering wise, I think learning detection, engineering.}
+{\pard  \line \par}
+{Should be approached from what you're detecting, right? So whether it is not just limited to cloud, it could be if you're in an active directory environment, if you're dealing with SaaS applications, approaching to detection engineering, like starts from actually understanding what you're trying to detect.}
+{\pard  \line \par}
+{Like I said, for Google Cloud, it started from understanding the what Google Cloud is, how the resources are configured, how these different things exist within Google Cloud. And then from there, then started to take a look at these. Individual pieces of this software or tool or cloud environments are trying to do detection, engineering for.}
+{\pard  \line \par}
+{And then just playing around with it, finding ways by which attackers perform different exploits or attacks against the environment and also how you can approach detecting it. And that kind of sounded repetitive and not making much sense, but I think like that's the best approach. It's like just really doing it and also just really applying an engineering mindset to everything you're doing.}
+{\pard  \line \par}
+{And over time. You get better at it, you develop those skills and also when you're surrounded with other }
+{\cf2 [00:31:00]}
+{ engineers, like you just learn a lot from }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ them. So, awesome. Thanks for that, Day. , but I think you're in a good place.}
+{\pard  \line \par}
+{What you're doing right now, connecting with Day and connecting with others and everyone who's in the chat as well, is a great way just to know what other people are doing as well. And if I can add a couple more ideas, I probably would say to the methodology that Day called out and even Eric called out with the whole Path to PWN or looking at threat modeling by service.}
+{\pard  \line \par}
+{If you have something like a github repository to what they said, the engineering mind, if you just come up with something interesting, hey, this is what I learned on the internet. Or an open source just to say this is why I feel service account is bad. I think putting yourself out there. Would definitely start making people look at you as a threat detection engineer as well.}
+{\pard  \line \par}
+{That, I mean that just like that's what I did for the whole cloud security piece, and I feel that should definitely be applicable for threat detection as well. But I don't know, Dave, if you agree. Yeah, I }
+{\pard  \line \par}
+{\b\cf3 Day Johnson:\b0}
+{ think having your ideas either challenged or validated by other people who do what you do is also a really great way to learn.}
+{\pard  \line \par}
+{So whether, for me, it was putting my ideas out, like, lemme say this, one of my biggest }
+{\cf2 [00:32:00]}
+{ fears is something I'm saying on a podcast or like on a talk or in a video is wrong. And I've had that happen to me multiple times, especially in my videos. I. But like, it's a way to learn. Of course you wanna make sure you're doing your research, but when you're putting yourself out there like that, you're opening yourself up to other people who are going to have opinions, maybe even criticize, whether that's positive or negative, your ideas, your thoughts and how you're thinking about things, how you're approaching things, but also a really great way to like, Gather feedback that you might not have gotten because you might not be in an environment to get that feedback.}
+{\pard  \line \par}
+{And when you get that feedback and you keep applying it to get better, it could really accelerate your growth and your learning, especially if you're not in a place where you're in that role currently. Just having access to the world, the internet that can do that for you could really, really help you grow.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Awesome. No, thanks for that. Hopefully that was valuable for you. So last question for you, man, I think, which was before we go into the whole non-technical fun questions where people learn about this man.}
+{\pard  \line \par}
+{Cause I think obviously , other people maybe be curious. So as well, where does one start with these kind of threat detection exercise? Are there any resources that you kind of called out }
+{\cf2 [00:33:00]}
+{ that would be helpful for people to look at? }
+{\pard  \line \par}
+{\b\cf3 Day Johnson:\b0}
+{ Yeah, definitely. First and foremost, again, I would recommend taking a look at the Google Cloud docs.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh my God, you and your Google Docs, man. Man, they're just that good. Might be an advertisement for Google Docs, }
+{\pard  \line \par}
+{\b\cf3 Day Johnson:\b0}
+{ honestly. They're really that good. You can learn a lot from them, and I also think they're like all these. I haven't taken them personally, but they're like some Coursera courses on the Google Cloud certifications as well.}
+{\pard  \line \par}
+{That could be another venue to learn about these different things. Just basically understanding like how Google Cloud works. But I think another thing is like reading threat reports. If there's a threat report out there from, whether it's companies like Palo Alto or Wiz or Orca Sysdig or Datadog, like when we put out all this information, these are things from practitioners who are in the front lines who are actually doing research, finding threats.}
+{\pard  \line \par}
+{So like read those threat research, like read. Google, Google Cloud releases like threat reports, I believe every year, every now and then. So read those threat reports, right? Those things contain valuable information about how practitioners in the field who are actually in the trenches, for lack of better words, }
+{\cf2 [00:34:00]}
+{ are approaching security or approaching threat detection or approaching attacking, compromising Google Cloud environments.}
+{\pard  \line \par}
+{That could really help you learn how these concepts are being applied in the real world. And then the third thing I would say is, Create your own Google Cloud environment. You're not gonna be able to learn if you're not actually like getting your hands dirty with these things. So basically like create your own Google Cloud environment, actually.}
+{\pard  \line \par}
+{Like try some of these attacks on your own, see how they work, see if you're able to like figure out all the things outside of that. There's also GCP goat, basically it's. Just like any other goat project just basically gives you 10 different attack paths for Google Cloud. That's a great way to get started with how to attack Google Cloud and learn about all of that.}
+{\pard  \line \par}
+{So those would be my recommendations. I've also been working on some Google Cloud D F R R labs that I will be talking about more later on of the year. But basically these are forensics and incident response labs tailored around Google Cloud. Basically you have access to all these Google Cloud logs and you're tasked with analyzing them with JQ and finding what an attacker did within Google Cloud.}
+{\pard  \line \par}
+{So keep an eye for those when I }
+{\cf2 [00:35:00]}
+{ eventually release }
+{\pard  \line \par}
+{them. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Wow, awesome. And I think Eric agrees with you and completely agree. Be wrong as often as possible and as fail as fast as possible. I love this episode, man. Both you and Eric are just dropping gems and everyone else is just dropping gems in this.}
+{\pard  \line \par}
+{Everyone should be preaching Google Cloud security now, but with the group in front of you. }
+{\pard  \line \par}
+{\b\cf3 Day Johnson:\b0}
+{ Yeah, no, absolutely. I think there should be more talks, more conversations around Google Cloud security. . I actually enjoy working with Google Cloud as much as most people might not, but I, I actually think there should be more things out there and I'm doing my best }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ to, to put more.}
+{\pard  \line \par}
+{I, I feel this wave of Google Cloud people come to like day Day. }
+{\pard  \line \par}
+{\b\cf3 Day Johnson:\b0}
+{ Yeah, absolutely. Let's start a new, like a tribe, a new coalition of people who support Google Cloud. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh, you heard this here first, people with I'm starting a coalition. Yeah. Yes, we can. Is basically the }
+{\pard  \line \par}
+{\b\cf3 Day Johnson:\b0}
+{ motto we're going with. Absolutely, yes, we absolutely can.}
+{\pard  \line \par}
+{I honestly, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ it's note, I agree and I think kinda like what you're doing, we are obviously working on filling the gap as well, so it definitely is valuable. I think another reason I wanted to call out was I maintained this repository, which is like a shameless plug for GitHub. Oh }
+{\cf2 [00:36:00]}
+{ wow. }
+{\pard  \line \par}
+{But towards the end, I've definitely got some non-technical questions for you because talking about. Technical threats for a long time. What do you spend most time on when you're not working on threat detection? Man? What's your workout regime? }
+{\pard  \line \par}
+{\b\cf3 Day Johnson:\b0}
+{ It's funny how that was like your exact follow up question.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ No. What do you do normally outside of just doing }
+{\pard  \line \par}
+{\b\cf3 Day Johnson:\b0}
+{ threat detection? Honestly, these days I've content, so like I've been really trying to dig deeper into my creativity. So really coming up with new content ideas, new video ideas, just different things to make my content a lot more engaging. And also channel my combination between creativity and engineering and just content creation.}
+{\pard  \line \par}
+{So I've been really just holding more into that and sometimes I spend some time lifting heavy weights. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh, of course. Lifting heavy weights, right? This, what's the, something that you're proud of, but that is not on your social media? }
+{\pard  \line \par}
+{\b\cf3 Day Johnson:\b0}
+{ Mm, that's a great one. I honestly, I think I'm just proud of my growth. I might have some of those on my social media, but personally I'm proud of }
+{\cf2 [00:37:00]}
+{ my growth in like various areas of life, whether that be like with relationships, family, financially, mentally.}
+{\pard  \line \par}
+{I've really had a lot of growth over the last couple of years and I'm really proud of that. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That's pretty awesome. Thanks for sharing. And, but you know as well, what's your favorite cuisine or restaurant that you can share? }
+{\pard  \line \par}
+{\b\cf3 Day Johnson:\b0}
+{ Hmm. Favorite, honestly, I think I might have said this the last time around, but it's still Nigerian food, man.}
+{\pard  \line \par}
+{It's, it just tops it for me. All of it, all the Nigerian food. You can never, I can't go wrong with Nigerian food. I don't think anyone can go up with }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Nigerian food. Wait, so what's your favorite Nigerian dish that you can recommend to people who have never had Nigerian food }
+{\pard  \line \par}
+{\b\cf3 Day Johnson:\b0}
+{ before? So my favorite might not be your favorite, especially if you don't have high like pepper tolerance.}
+{\pard  \line \par}
+{But my personal favorite is ofada Rice and ofada Stew. However, if you don't have really good pepper tolerance, I would have you start with jollof rice. That is like the beginner, this is like your entry level application towards getting deeper into nigerian food and, and then you go hardcore after that and you just, I wouldn't even have to like encourage you.}
+{\pard  \line \par}
+{You will seek it by }
+{\cf2 [00:38:00]}
+{ yourself. Oh, really? Oh. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ All right, I'll look that up next time I'm around as well, man. Hopefully I get some Nigeria for doing just to break bread with you as well. Absolutely. Where can people find you on the internet, man? Just continue the conversation. Where can they find you? On the }
+{\pard  \line \par}
+{\b\cf3 Day Johnson:\b0}
+{ internet?}
+{\pard  \line \par}
+{Yeah, you can find me on Instagram and Twitter at day cyberwox, which is already on the screen and also on YouTube at day cyberwox or cyberwox, whichever one. And yeah, that's about it. You can find all of my Discord things either in my video descriptions and all of that, and you can follow me on LinkedIn here at Day Johnson.}
+{\pard  \line \par}
+{Well, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I think we should start saying threads as well. So now this is a new social media. }
+{\pard  \line \par}
+{\b\cf3 Day Johnson:\b0}
+{ True, true. You can follow me on threads as well as Day cyberwox. Yeah, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ fair enough. Like I wonder at a point where like this, I'm just gonna drop a QR code, just scan it and just like move on with your life.}
+{\pard  \line \par}
+{Yeah, yeah. }
+{\pard  \line \par}
+{\b\cf3 Day Johnson:\b0}
+{ Absolutely. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. Yeah. But I appreciate your time man, and thank you so much for everyone else who joined us as well. Hopefully it was insightful and we'll continue the Google Cloud security conversation next week as well. But for now, thanks everyone, and I will see you next episode please.}
+{\pard  \line \par}
+{Thanks Day. See you. Thanks }
+{\cf2 [00:39:00]}
+{ for having me.}
+}

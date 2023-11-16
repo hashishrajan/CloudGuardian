@@ -1,0 +1,486 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red250\green138\blue59;
+\red128\green128\blue128;
+\red216\green34\blue146;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ Hey man. Welcome. How's it going? How good morning man.}
+{\pard  \line \par}
+{Fantastic. Cool. So before we get into it, I know a lot about you . I've known you for years , through the work that you do for the community, community hero APN Ambassador , and everything.}
+{\pard  \line \par}
+{But so people who do not know what was your part into the whole cloud security space? }
+{\pard  \line \par}
+{\b\cf3 Ian McKay:\b0}
+{ Yeah, so I started off in thinking about cloud security. Even before I got into the industry, I started off playing with things like virtual, private servers and those low cost. Seven management tools learn the basics around server administration, the basics around security and authentication and things like that.}
+{\pard  \line \par}
+{And I felt like that was really good. Why did you just learn? I'm a very learn by doing sort of person, I don't really tend to, go through training and things like that. I just tend to break things and figure it out from there. And even from there, I moved into the industry and then went the basics.}
+{\pard  \line \par}
+{General administration and in an on-prem environment. So that's things like managing firewalls and VPNs and the server in sort of environment. And then when AWS released , }
+{\cf2 [00:01:00]}
+{ in the Sydney region and I started to, touch into cloud environments I believe the company I was working for was doing some sales environments at the time, and they really wanted to access that remotely and without any hassles.}
+{\pard  \line \par}
+{And so I started to spin up. Environments in the cloud. And I learned a lot about, how it works differently in the cloud and how it's not necessarily about firewalls and things like that anymore. It's more around identity and what that really means in the cloud, which is very different. In my journey with consulting, it's met a lot of great people.}
+{\pard  \line \par}
+{I joined. Partner network ambassador program, where we met, like we said, and eventually became an AWS community hero for a bunch of the publications and the talks and things that I do online. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So maybe the first one we should start off with considering you've had a long history of working in the space as well. How different is IAM in AWS or I guess compared to on-premise. }
+{\pard  \line \par}
+{\b\cf3 Ian McKay:\b0}
+{ Yeah, it's very different sort of feeling in on-premise you're dealing with firewalls and net goes and your general }
+{\cf2 [00:02:00]}
+{ basic security it's that's usernames passwords, usually backed by an LDAP server and things like that.}
+{\pard  \line \par}
+{When you move into the cloud, it's very different identity. Suddenly it doesn't mean only your user identities, but also means. The components that make up your computer as well. So your servers and your things that are really serve like serverless Lambdas things like that. And so suddenly those servers take on their own identity and they have privilege to do things or not do things.}
+{\pard  \line \par}
+{And that's a very different way of thinking when you're working in a traditional service environment, everything is just network isolation and you can see of the. The compliance and that sort of thing is still trying to catch up with that idea of identity in the cloud and trying to make sure that that's correct.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ She has interesting, so for people who are watching it, I'm just curious if anyone knew that there are more than one identities in AWS, I guess the whole robot user concept. Where things could be happening.}
+{\pard  \line \par}
+{Like it could be Ian credentials, but it's not technically. Ian what, I mean, I hope, I wonder how many of you believe in knowing new about the }
+{\cf2 [00:03:00]}
+{ difference between on-premise and identity as you explained it, and whether they have you known that there are robot users, as well as the key. So. Since you've explained it what are some of the the building blocks for doing identity in Amazon.}
+{\pard  \line \par}
+{Cause I think my aim with this episode is also to help people understand just the broad idea space, but they haven't started on it or all the way up to they're doing it, but they probably are not aware of everything that could be done with it. So from that perspective, what are some of the building blocks for?}
+{\pard  \line \par}
+{\b\cf3 Ian McKay:\b0}
+{ Yeah. So in, IAM there's a few things that you need to understand pretty, high level, the main things you're going to concentrate on are things like roles and policies. When you talk about user identity, although we have the traditional IAM users, that's moving away from that space at the moment.}
+{\pard  \line \par}
+{And that's usually termed as a longtime credentials, perhaps. With your identity. Now we're seeing a shift into Federation and identity via social provider or by some of the major players out there, like Okta author or things like that. And so, although. Those users have different ways of }
+{\cf2 [00:04:00]}
+{ coming into the environment.}
+{\pard  \line \par}
+{In the end, they still have policies that are attached to them. And policies are statements that say, you can do a number of things, or you can not do a number of things. And this is what we call our allow or deny actions internally. And so these statements have a bunch of resources. So that's the things.}
+{\pard  \line \par}
+{And those resources can sometimes have conditions as well. So you can do X to this resource, or only when this condition is met. So it's this time, or this resource is of a particular type of things like that. And so we write these,IAM policies to define what that means and define the rules about how things communicate within the class.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And so to your point, then the roles but there are these service roles and stuff as well. Like what are those, like, how are they different? }
+{\pard  \line \par}
+{\b\cf3 Ian McKay:\b0}
+{ Yeah. So we mentioned that earlier that servers now have identity, but even managed services in the likes of valuables have identity now. You can say that, although this particular service is part of the cloud and part of what's coming to the cloud, you can still }
+{\cf2 [00:05:00]}
+{ deny access to that service, to achieve what we call the least privileged in the environment.}
+{\pard  \line \par}
+{And this concept of least privilege just kind of a difficult one to achieve and to understand, but basically what it means is you should only be allowed to do the things that the service or the identity needs to do. And no more. So this prevents you from, if those credentials leak having a broader impact against your entire environment, and it will impact the things that are in its immediate vicinity.}
+{\pard  \line \par}
+{It's like a blast radius containment, a sort of concept. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Okay. And maybe this is a good point to kind of bring in that in how AWS itself has all these subcategories, as you mentioned as well with sub service roles and like IAM roles and everything. Is in a world where we are, I guess, moving quite fast.}
+{\pard  \line \par}
+{Thanks to DevOps. You being the devops guy from Sydney . It's also, asking a lot of people to manage a lot of things really well. And the scale of it is just going out of hand sometimes as well. What's your opinion on using, say AWS given tools for managing identity }
+{\cf2 [00:06:00]}
+{ vs , Open source.}
+{\pard  \line \par}
+{\b\cf3 Ian McKay:\b0}
+{ Yeah, so this AWS tries their best to provide the tools that you need to manage your environment. But we've seen time to come in again, that isn't always the case. And it was sometimes breaks its own guidance in this space. So really sickly, you should be looking at the tools that are popular in the open source community, within identity, and having a look at what they actually doing.}
+{\pard  \line \par}
+{A lot of the times, these tools are trying to. fix a specific problem insecurity. And sometimes these problems are really focused on enterprise and sometimes these problems are really focused on the basics within security. And so, most people that I talk to you, I generally advise to do a mix of the AWS managed tools.}
+{\pard  \line \par}
+{And when you see the gaps, you can substitute that with the open source tools or even in the SAS providers. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right. So to your point then well, I guess you can, you can choose to bring in the SAAS provider tool or it can do otherwise, but at what point do you think people kind of have to make that call?}
+{\pard  \line \par}
+{Like what's that someone with, I don't know, five people think you have to make that call or, I mean, I imagine there's some best practices there as well. }
+{\cf2 [00:07:00]}
+{ At what point do people have to kind of start saying, Hey, this is not good enough for me. And it need to kind of bridge or, , take a pivot.}
+{\pard  \line \par}
+{\b\cf3 Ian McKay:\b0}
+{ Yeah. When you're, when you're really starting off with. AWS will protect you generally. So you don't really need to branch off if you're a five or 10 person company, and you have maybe one or two engineers working on this, the AWS tools do do the basics of what you need, where it kind of becomes a problem is when you experienced that growth phase.}
+{\pard  \line \par}
+{And suddenly you're starting to do with new problems that you might not have dealt with before. So things like insider threats or things like lateral movement from an attack, a specific. When you're just starting out, you're not really focused on those things. Everyone is trusted. And if that person becomes compromised, your company's compromised no matter what, then there's no avoiding that.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right. Also it says more than a pro I mean, I guess, a measured risk approach, I guess, for lack of a better word. Yeah. Okay. So maybe another way because the reason that the thought for that question was also behind, , how you have mapped. Permissions and especially the ones that just don't have any API calls in there.}
+{\pard  \line \par}
+{I'll let you drop }
+{\cf2 [00:08:00]}
+{ what the project as well, but what made you code on that part and what was the I guess the tool and everything. So if you don't mind sharing that story for the audience as well. Yeah, }
+{\pard  \line \par}
+{\b\cf3 Ian McKay:\b0}
+{ sure thing. So I've recently I've been solicited number of tools that are in the,IAM specific space and that's talking about mapping the API calls that you make to edit a service.}
+{\pard  \line \par}
+{To the,IAM permissions that mapped to it. So you might've seen permissions like EC two colon describe instances for example. And they relate to the API call. Describe instances within the ECE two service. And generally you can look at them and most of the time they mapped one-to-one, but sometimes they don't actually do that.}
+{\pard  \line \par}
+{So sometimes if you do a S3 dot lists buckets, for example, that actually maps to the, I am call S3 list all my buckets. And so sometimes you get this weird mismatch. I constantly saw a lot of people getting this wrong and I'm seeing some problems in that space. And so I really wanted to create a mapping that shows you how X relates to Y in that API to IAM space.}
+{\pard  \line \par}
+{And so, there's a project out there called }
+{\cf2 [00:09:00]}
+{ permissions.cloud permissions that cloud now expense to both not only I, I w S but also to Azure and GCP now. And you can basically use that to look up. How x matches to Y and what are the various implications of that as well? So there's a privilege escalation potential, or if there is a resource exposure, potential and things like that.}
+{\pard  \line \par}
+{So it's been a guide that goes above and beyond what AWS would generally provide, which is just the permissions themselves. Right. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So would you be able to use permissions dot cloud to understand I guess if you're truly doing least privilege based or an IAM role, or how would I. }
+{\pard  \line \par}
+{\b\cf3 Ian McKay:\b0}
+{ Yeah, it's a really excellent for trying to go down that path of least privilege.}
+{\pard  \line \par}
+{They actually, what came out of this was the generation of the mapping, which is, over a hundred thousand lines. And, that mapping really backs this tool that I made called IAM live that IAM live tool basically looks at your environment real time as it runs either locally or in. And generates the IAM policy dynamically.}
+{\pard  \line \par}
+{So it will look at your network traffic and say, yeah, this coal had these, properties against it. And therefore }
+{\cf2 [00:10:00]}
+{ the ARN and the action should be this. And so you can really quickly generate the, your least privilege policy, but it's a bit of an advanced tool. , it's one for those who really want to go deep on least privilege and the way that you would achieve that.}
+{\pard  \line \par}
+{But it helps if you have. large applications, which really there's some really hard to kind of press reference from the drip system, the traditional ways of doing that, which is looking at CloudTrail logs and using some of the source tools in that space to, overprivileged something. And then reduce that back off to that.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So this flips the script on that, is that why you feel it's a bit more advanced because I think }
+{\pard  \line \par}
+{\b\cf3 Ian McKay:\b0}
+{ So this takes it back a bit from, looking the general way that we used to do this with things like, cloud trial scrape pro and the IMX analyze a recently introduced from AWS was that they would over privilege something with admin access was something similar to that.}
+{\pard  \line \par}
+{And then observe the calls that were made and the permissions that were made real time. And then eventually scale that back. That's kind of scary to me. So this kind of flips the script in that you can actually block the, permissions as they happen, and then gradually }
+{\cf2 [00:11:00]}
+{ introduce those permissions.}
+{\pard  \line \par}
+{So you start from zero and go up to the permissions that you need rather than starting from everything in producing it back. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ All right. Okay. So kind of like falling AWS principle as well, where AWS kind of, doesn't give you access to everything many kickoff on this, you get a role. So similar to that, basically you start from the point of least privilege and then you're given more roles and everything.}
+{\pard  \line \par}
+{And then you just basically to do some, the roles. }
+{\pard  \line \par}
+{\b\cf3 Ian McKay:\b0}
+{ Yeah, at least pretty much, this is the kind of learning concept because there is a various stages of least in least privilege. So at least privilege to some much mean, oh, I scrape it down to S3 Coinstar and I was keeping it down to just the service or I Skype it down to just the action and not, and wild Cod resource, for example.}
+{\pard  \line \par}
+{So there's a lot of different levels of least privilege, I guess you could say that isn't very clearly defined. If you're doing some of this, it is a lot better than doing none of it. So it's one of those continuous improvement sort of things. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. And it's funny with, IAM specifically in AWS as well.}
+{\pard  \line \par}
+{It's always considered complicated and, we kind of spoke to the difference between the whole on-premise world, }
+{\cf2 [00:12:00]}
+{ as well as in the new world. Where do you see as some of the patterns for identity? I imagine a lot of people look at I didn't, you didn't go. Oh. And as soon around this conversation, when people talk about, I have an active directory, I haven't been main controller around premise moving to cloud.}
+{\pard  \line \par}
+{And I just want to make sure that I have a domain control. quote unquote login with the windows credentials. What are some of the implementation patterns that you see from that perspective? Cause there's an identity perspective from say you logging into a console, getting roles and all that.}
+{\pard  \line \par}
+{And then there is another concept of identity. , which is kind of where it just goes back to shape and people talk about domain controls and active directory and, AWS, what are you seeing over there in that space? }
+{\pard  \line \par}
+{\b\cf3 Ian McKay:\b0}
+{ Yeah, so there's a lot of different implementations, especially in a user identity web.}
+{\pard  \line \par}
+{This implementation can go kind of wrong. Usually people. Have a really fundamental problem with understanding the roles internally about who has access to what and what permissions they need to do their job. And so sometimes you can get this mismatch about the roles that they're actually granted }
+{\cf2 [00:13:00]}
+{ and the things that you intended to grant them.}
+{\pard  \line \par}
+{So that's a problem in this space and of course, securing the boundary is also a big problem in that. It's very hot. Let people do what they need to do, but also contain the blast radius, I guess, especially when you have public services that are things like cloud crowdfunded, S3 buckets, and all the types of stories that might potentially be publicly exposed and edit versus traditionally had this problem where buckets would be exposed to the world.}
+{\pard  \line \par}
+{And they've introduced so many controls around trying to get that right. But now even, even though pockets started off secure by default from the very start, it was very easy to kind of unlock that and introduce that to the world. And it was just putting a lot of barriers in front of that to make sure that that doesn't happen because in the end, if it's confusing for customers, then they're going to this configure it.}
+{\pard  \line \par}
+{So that is the general. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ so to your point then, is there some responsibility with AWS as well cause how a lot of people talk about the fact that officiate AWS, Hey, security is the number one responsibility, but you almost feel that as }
+{\cf2 [00:14:00]}
+{ a cloud service provider, and this is not mean dishing on AWS, but it's trying to again, get a sense of.}
+{\pard  \line \par}
+{Considering you're the community hero as well as the APN ambassador where people like you and I get to talk to people from AWS quite closely is the, but it, should we be asking them to be more responsible for this as well in terms of making it super easy? Because every time I spoken to someone aboutIAM and in AWS, it's not like, oh my God, I just want to like, so people will try and make sometimes 25 $30.}
+{\pard  \line \par}
+{Or sometimes they try and go. We only want five. IAM roles. I don't care about. What else do you need? If those five, IAM role to define everything. I'm sure you mix up, you see a mix of that as well, but do you find the complexity can be reduced quite drastically by AWS themselves? They actually kind of focused on that.}
+{\pard  \line \par}
+{ I don't want to blame the AWS IAM team, but I'm just curious your thoughts on this. }
+{\pard  \line \par}
+{\b\cf3 Ian McKay:\b0}
+{ Yeah, I think that's evolved at a time. I know AWS have really struggled in thinking. The services, team's thinking in the way that engineer's thing versus thinking about how a customer thinks. And a lot of the times they don't }
+{\cf2 [00:15:00]}
+{ really match up.}
+{\pard  \line \par}
+{So you'll see implementations that are very , engineering specific, but when it actually comes to how it actually works in the real world, it's not intended, it's not really what people expect. And so you can still sort of get this mismatch and it's not the engineer's fault. They're just doing kind of, what is the scope that they're trying to do?}
+{\pard  \line \par}
+{Requirements and implement them literally. Whereas when it comes to the UI and the testing of that, sometimes it just falls short. And a lot of the times that's actually because, the AWS need to secure that. AWS wants to make sure that things aren't linked early and the use of testing pools are probably fairly low.}
+{\pard  \line \par}
+{And they're obviously have internal testing as well. That's the sort of cost benefit trade-off that they would have, and , it's a hard problem to solve. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So they're moving towards more customer rather than , engineering based approach. It's }
+{\pard  \line \par}
+{\b\cf3 Ian McKay:\b0}
+{ something that they've tried to evolve on over time. They haven't traditionally done this super well in the past, but they've started to really understand and take on the customer feedback. So even though they had all of the controls that could secure }
+{\cf2 [00:16:00]}
+{ buckets in the past, I have a time that introduced , more layers and more layers.}
+{\pard  \line \par}
+{And I'm using the system, the easy example, quite a few times. So they just have to implement , these extra ways to really drill into the customer that now you're what you're doing is a huge risk. Please, please don't do this. But they have to kick the features there because they don't deprecate features, especially in AWS.}
+{\pard  \line \par}
+{And sometimes it's legitimate reasons to have public public facing objects. Sorry. It's all very complicated. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I'm just curious now for people who are watching on a scale of one to 10 with one being not novice and 10 being expert, how people rate themselves in terms of that IAM knowledge or even the complexity that they have, cause I normally find that. It gets complex really quickly, based on the scale of number of people. Number of roles, number of teams, checkpoint is starting off with us in a startup with like, I don't know, like less than 10 people, everyone can hire an IAM user and , you swing around like, oh, that's Ian, oh, that's Bella .}
+{\pard  \line \par}
+{Or that or someone else, but in a world where scale is obviously quite hot, What are you }
+{\cf2 [00:17:00]}
+{ finding as some of the best practices for IAM in AWS? Especially as people kind of scale from say I was just using,IAM using the beginning now. I know I have legit use cases. Are, do you see people's scale? }
+{\pard  \line \par}
+{\b\cf3 Ian McKay:\b0}
+{ Yeah. So I think , there's a few good tips in this.}
+{\pard  \line \par}
+{Some of this is from AWS and some of this is advice that wouldn't take from anywhere. So things like starting your boundaries. System early. One of the best ways to ask you to do this is to use a service control policies in most organizations. The reason I say that and not something like permission boundaries is that permission boundaries kind of get in the way you have to kind of work in a bit of a different way.}
+{\pard  \line \par}
+{When you're managing your roles, when you talk about things like permission boundaries, the SEP is a really simple there. This is the things that I'm not allowed in your environment full stop. And so if you want to do something simple like ban a region, because we never want to deploy into Ohio for example, then we can do that very easily.}
+{\pard  \line \par}
+{And so. Getting those boundaries in early means that you won't interrupt your developers . And when they do eventually hit those things }
+{\cf2 [00:18:00]}
+{ there, that's one of those things I'm not allowed to do. And so it's really easy way to to get started. Obviously there's the basics like, enforcing MFA on your user accounts, whatever the identity system is.}
+{\pard  \line \par}
+{So you can start an,IAM users if you don't have anything, but I highly recommend using NMS. SSO actually makes things a lot easier. And one of the weird ones is to set up a billing alarm. Like that is the number one thing that everyone should do in AWS. And that's not just for your cost controllers, but it's also a subtle indicator that something's going wrong in your account.}
+{\pard  \line \par}
+{If suddenly your bill goes up to something sky high, , you've been compromised, , you need to get in there and stop things, stop damage before it becomes. Have a think about least privilege, but don't go crazy all at the beginning. Feel free to use the managed policies at the beginning, and then start to produce that back into more customized discrete policies as you grow.}
+{\pard  \line \par}
+{But you can start off with a managed policies. That's okay. Have a think about things like lateral movement. So if X to Y and Y can talk to Z, then technically you've got a }
+{\cf2 [00:19:00]}
+{ path from X to Z. And so you should really think about. How that works and what kind of boundaries you want to put in place to stop that flow of data and reduce the blast radius.}
+{\pard  \line \par}
+{. And there's also a lot of things that AWS say that aren't really recommendations. And this is where it's going to get kind of controversial for some people. So everybody traditionally said to use IAM groups to sort permissions between a number of users . You can do this pretty well in AWS SSO, but the,IAM version of groups.}
+{\pard  \line \par}
+{I wouldn't recommend. The reason I don't recommend this is that it works poorly for deny actions. And so deny actions don't really work effectively against IO groups because groups is kind of a second class citizen in terms of the identity space. And so I wouldn't recommend using that. I would, you can apply that to the certain roles that you're assigned to users, but not to the iron group specifically.}
+{\pard  \line \par}
+{So I'd avoid that. And one of the things that. People use this sort of get out of jail free card in terms of trying to secure, a lot of }
+{\cf2 [00:20:00]}
+{ resources is a back or tag based access control. And I really wouldn't advise that that's one of those foot guns that can really easily hurt you. If you don't know what you're doing.}
+{\pard  \line \par}
+{Cause tagging when it came out was traditionally not a. Secured core. It was generally thought of as, oh, this is good for management and observability and billing and things like that. But now that we're starting to use it for privilege and who can access what it turns into this really easy way for compromise to happen.}
+{\pard  \line \par}
+{And I've done some research into some various exploits in the tagging space that really show , how brutal this is. And so I wouldn't advise going down that tag based access control route would really think about that traditional a role-based access control or specifying discreet resources in the cloud.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So you recommend a role-based permission, I guess, leading with role-based permission rather than the tag-based permission. }
+{\pard  \line \par}
+{\b\cf3 Ian McKay:\b0}
+{ Yeah, absolutely. Yeah. I think , this is pushed that some people are going }
+{\cf2 [00:21:00]}
+{ towards a little heavier now, but in my experience, it's really good way to get compromised unintentionally.}
+{\pard  \line \par}
+{So you might have the best of intentions and try to reduce who can tack what and things like that. But even services themselves can arbitrarily tag resources. And you might not even know that that is the case, especially using privileges that you don't even know. So a lot of service activation, calls can actually tag resources as they go through that.}
+{\pard  \line \par}
+{Or a lot of the creation calls can add tags without having the underlying taking permission. And so it's really hard to control who can access what in that space. And so I really don't advise going down that. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah, so you can see the surprise. And a lot of people are thought to just sort of conference drama as well.}
+{\pard  \line \par}
+{Interesting view on tagging. And just to take that knowledge a bit more deeper. Cause how AWS kind of always tells you, Hey man tag everything, everything you can find, that's how you identify. To your point. It was used as a measure for estimating costs or business unit is responsible.}
+{\pard  \line \par}
+{Like a lot of security folks were even saying that, Hey, you should use }
+{\cf2 [00:22:00]}
+{ a tagging as a way to identify if there is an event or an incident that you need to investigate how do i quickly find out although, well, tagging as a best practice has not really been effective for a long time. It in itself, that's a whole different problem.}
+{\pard  \line \par}
+{But cause I remember there was east part, I said, come out for a help. We will help you find resources that are not tagged. So you can tag them. Like there was like even products for that. What's your opinion on the whole I guess incident response with where you're going to we're relying on tagging.}
+{\pard  \line \par}
+{So what do you see people do with that? }
+{\pard  \line \par}
+{\b\cf3 Ian McKay:\b0}
+{ Yeah. So I still think tagging has its space for the organizational management of resources or identifying things like compromised resources and using that as a billing engine or a management engine, a gripping resources for specific actions that that's still valid in this.}
+{\pard  \line \par}
+{But I think even when you have those things actually lends itself more to the potential for compromise because so much automation and things like that have the ability to tag. And when you have that ability to tag, you can also have that ability to }
+{\cf2 [00:23:00]}
+{ use a permission-based tags, because there is no differentiation between what tag is being used for permissions and what tag is being used for management and cost and things like that.}
+{\pard  \line \par}
+{And so. That's why I say that this is a problem in the tagging space. Right, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ right. And what about these other tools that they're coming up with? That there's a whole access advisor plus. Yes. Yeah. So access analyzer, trusted advisor has now changed. It's like a few more tools that are coming to the space to help you identify kind of like what we were talking about earlier, where instead of starting off with least privilege, there is encouragement from AWS as well togo down the path of Hey , we've assessed the services that are being used.}
+{\pard  \line \par}
+{And I think access analyze it as this. Like what's your opinion on some of the other IAM tools that they've added? }
+{\pard  \line \par}
+{\b\cf3 Ian McKay:\b0}
+{ Yeah. So they }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ are }
+{\pard  \line \par}
+{\b\cf3 Ian McKay:\b0}
+{ trying to play a bit of catch up with the open-source community. To be honest, we've had CloudTrail based analysis for quite some time in the open source community, with multiple different products doing this sort of space and a few SAAS providers doing the same thing.}
+{\pard  \line \par}
+{And. I think I mostly just trying }
+{\cf2 [00:24:00]}
+{ to get ahead of that game and trying to bring that more back into the ecosystem. Some of this is kind of going against their own recommendations as well, but I can see why it'd be native for someone who is not at that level of understanding exactly what least privilege is because it's still hard, even for the most experienced of us.}
+{\pard  \line \par}
+{So they're bringing in these sorts of try and bridge the gap of. They're doing some really good jobs with things like using the policy analyzer to give you warnings about invalid policies, the policies that might not be effective and things like that. And so these are really good quality of life improvements that they're making.}
+{\pard  \line \par}
+{Especially within the console experience. We there's nothing here that changes anything about how IAM worked or. About how that kind of implementation happens, but it's more advisory. It's more understanding what your policies are doing and checking if there's something that you might not expect.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right. So maybe that's a good segue into my next question then, I guess, from a scaling perspective, we kind of spoke about, yep. We can do this, but lot of }
+{\cf2 [00:25:00]}
+{ talk about the use of CIC for this as well. And for least privilege. And so I can go into the whole supply chain side of things as well. But with the CICD and least privilege in terms of, IAM what's like in that context, what's your perspective on that?}
+{\pard  \line \par}
+{Has that, should they be CICD services? Let's just start with, I should, they, should we use them to createIAM , and then maybe you can go from a perspective of,IAM . What's your thoughts on CICD systems and least priviledge.}
+{\pard  \line \par}
+{\b\cf3 Ian McKay:\b0}
+{ Yeah, least privilege. And in the context of CICD for me is one of those opinions that's changed over time.}
+{\pard  \line \par}
+{I used to think that CICD service should attempt to be least privilege and only have the ability to do, the very bare minimum of what they needed to do. But the concept of the very bare minimum of what they need to do is actually everything in a time. Right. So, when you're. Scope expands and you need to do more things in CICD .}
+{\pard  \line \par}
+{It's actually a bigger business risk in my opinion, to slow down developers in the way that they can. And can't deploy these actions by trying to }
+{\cf2 [00:26:00]}
+{ least privilege the CICD roles, in my opinion, CICD and the service built around it, should form part of a trusted environment just the same as source control repository do, if your source control, is compromised, you're basically done.}
+{\pard  \line \par}
+{ That's pretty much just a fact of life and a similar thing happens , in CICD. And so you should still attempt to reduce the privilege that users have and what actions they can perform, but in what they can perform in your environment, I tend to err on the side. More available than less available and just know those really, high sensitivity resources and actions, so protected service roles and things like that, that you can still put deny actions on, but everything else is fair game, in terms of what should actually go through CICD , , I aggressively think it should be everything, to the point where it's, it's kind of, yeah.}
+{\pard  \line \par}
+{We have these arguments about if there's a one-off action, these arguments are internally to the consultancy I work with. If there's an action that you perform once, should it be automated? And, , we have this argument about yes or no, because generally you can }
+{\cf2 [00:27:00]}
+{ just document these things and if they ever need to happen again, then the documentation will show what you need to do.}
+{\pard  \line \par}
+{But , when you're trying to. Redeploy adopter, what is really strictly going to be a disaster at this point, if you're trying to go through this entire thing again, you're really going to want to have everything at your disposal. And that's why automate everything within your environment is a huge step.}
+{\pard  \line \par}
+{Oh, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ actually, that's a good point. Cause if you have a lot of manual steps in between the automated sets, you clearly in a scenario for disaster recovery, just going through everything, Hey, something stopped working on because there's this, document that's there for a manual step that we had to do because one step that was, yeah, I can imagine that.}
+{\pard  \line \par}
+{So, and maybe that's a good segway into the whole, if the CICD pipeline is supposed to be all the similar privilege to like, I guess similar importance as a source code . Do you find that because there was multiple patterns for the CICD world as well, where one CICD that deploys into all different environments.}
+{\pard  \line \par}
+{Then there was like this whole Baton of once the parent environment, the source control. And I mean, it's a conversation of privilege data as well for }
+{\cf2 [00:28:00]}
+{ CICD pipeline. Where do you stand on that? I'm curious. }
+{\pard  \line \par}
+{\b\cf3 Ian McKay:\b0}
+{ Yeah, I totally stay on the side of, again, the CIC D is a trust environment and. Trusted access into your development environments, your production environments, and everything in between.}
+{\pard  \line \par}
+{Some of this is actually going to depend on your, promotion lifecycle. So a lot of people have different ways of doing it. I tend to go on the side of immutable out of that. Where an artifact should be the same on dev on staging, on prod, everywhere that it goes. And just those environmental configurations, the only things that change.}
+{\pard  \line \par}
+{And so that way you can ensure that we've tested on the X, the exact same thing is happening. Why? Other people tend to go on that side of, okay, now that we've done our testing in a dev wrench, we can now merge that into the production branch and then just see if everything kind of works together. But.}
+{\pard  \line \par}
+{I've seen that go kind of wrong sometimes where unexpected things happen when two or more features come together and then they clash and on the spectrum of ways. I tend to go, I tend to err on the side of immutability where it's possible, but everyone has their own opinions. }
+{\cf2 [00:29:00]}
+{ We could spend another hour talking about all the various ways that it kind of impacts, but, yeah, I, I did go down that path and }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I think that's a great intro and so quickly switch gears to some of the question that came in,Ive got a question here from Tom. Are there any resources that visualize, IAM like a good map of an ERN, but mission and people as they relate to each other. Good question, Tom. }
+{\pard  \line \par}
+{\b\cf3 Ian McKay:\b0}
+{ Yeah. So that's a really good tool out there from the Duo labs team from, Duo labs and Scott Piper called cloud mapper .}
+{\pard  \line \par}
+{That's a really good way to visualize things in the IAM context about who can talk to what, and that trip versatile kind of a way of doing things. So that's a great open-source tool by that tool or that group, a lot of SAAS providers do this very well as well. This is one of those things that I do concentrate on in terms of visualization from an entire environment perspective.}
+{\pard  \line \par}
+{And you can also do this. Tools like former to where it look at your resources and find those correlations themselves as well. Doing that map is a really good exercise internally, especially if you try and attempt to do that yourself before you use the automated tool and figuring out how that kind of changes , your perspective.}
+{\pard  \line \par}
+{Sorry, not }
+{\cf2 [00:30:00]}
+{ fun challenge. Cool. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ All right. Thanks. Hopefully that answered your question, Tom, feel free to ask a follow-up. So I think that's a good segway also into the fact we spoke about using CD on scaling. We kind of started the conversation with a lot of patterns are shifting towards having more Federation, more people going towards a part of, Hey, I don't want to manage up individually.}
+{\pard  \line \par}
+{IAM users. I want to have some kind of Federation to it. What's like the maturity scale for these kinds of things in a AWS context. Cause. People who are listening to this already have a service roles is what what's CICD as well. What's like a maturity scale that you think for people to at least start here.}
+{\pard  \line \par}
+{Like if you don't, if you haven't done anything with IAM start here. And this is kind of like the next level of God level, I guess, for lack of a better word }
+{\pard  \line \par}
+{\b\cf3 Ian McKay:\b0}
+{ Focus on those things that are immediate threats to your business strategy. And when you're at a start up generally, what that's going to be is external attackers, trying to compromise your system.}
+{\pard  \line \par}
+{And then you use lateral movement to basically take you down. So. Focus on things like backups, trying to make sure that you have those copies of your data because you're }
+{\cf2 [00:31:00]}
+{ busy without backups. If you're compromised, your business is wiped out. So have those backups have those backups tested, make sure.}
+{\pard  \line \par}
+{And that's a really hard thing because there's a lot of effort that goes into testing these backups, even if that turns into a once a quarter or once annually sort of deal still makes sure that that kind of works and that you understand the process of doing that. So backups number one, Don't focus too much on least privilege for your own users in a startup phase that grows over time.}
+{\pard  \line \par}
+{You don't have to really focus on that, but , there's a whole lot of different considerations in this space. So when you're growing, you're going to think about least privilege, DAAS , SAAS your dependency, scanning your secrets management, your incident management, even to the point of chaos engineering, all those other fancy things that we have now.}
+{\pard  \line \par}
+{But you don't have to consider all of these shirt away. These are very, advanced sort of, things that you really need to focus on as you scale, not as you start up anybody that's going to protect you. And most of the other cloud providers will actually protect you by default from the start.}
+{\pard  \line \par}
+{They just relying on you not }
+{\cf2 [00:32:00]}
+{ to make insecure configurations out of the box, which is kind of hard to do. As long as you follow the guidance. And most services will have the best practice. In that space. So the guidance on IAM security, best practices is really good place to start to go, to get those basics.}
+{\pard  \line \par}
+{And looking at things like the edible well-architected reviews is a really good way to think about what your application is doing and what things you have in place in your organization. You don't have to solve all the challenges. So that's something like a well-architected review. Has you just have to identify that these are risks.}
+{\pard  \line \par}
+{We accept these risks and we'll address them eventually. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Interesting. So, and maybe a sprinkle, a bit of a CPO on top, as well as you were saying in the beginning. So speaking of, if }
+{\pard  \line \par}
+{\b\cf3 Ian McKay:\b0}
+{ you can get ahead of the game, , it's very helpful. So putting that your SCPS in, making sure your developer roles and not overly privileged, like if you can get away with.}
+{\pard  \line \par}
+{She had plastic }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ on as well. Right. Cause I think the least privilege would be pointless for that Cloud trail as well. I imagined so CloudTrail have definitely have that one as well. }
+{\pard  \line \par}
+{\b\cf3 Ian McKay:\b0}
+{ Yeah. So there's, there's a few things that you should have on }
+{\cf2 [00:33:00]}
+{ a butterfly and the AWS guns will give you that information as well.}
+{\pard  \line \par}
+{Things like cloud trialing in your environment just apply it once in north Virginia, and have a multi-region. It included management events. , that's the quote configuration that you really need. And if you can use an STP to protect that cloud trial and the destination, which is probably an S3 bucket, at all cost.}
+{\pard  \line \par}
+{So you basically just deny everything from touching that, in that way, you need to log into over an account to manage it and do anything else to it. When you don't don't ever use an already account, unless you have to. Really account is for creating your account, making your user identity, and then getting the hell out of there, put MFA before you get out of there.}
+{\pard  \line \par}
+{But get out of there immediately to not use your real account for anything else. Because that's, that's one of those things where a lot of things , and do a lot of bad practices in there. So make sure you try and avoid that. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So just curious, why north virginia for Cloud Trail why not.}
+{\pard  \line \par}
+{\b\cf3 Ian McKay:\b0}
+{ So in a west north Virginia is a special sniff. I courageous where, when we talk about things like global services is technically homes }
+{\cf2 [00:34:00]}
+{ for most of the global services in north Virginia. And so things like CloudTrail and management events now, are exposed for the global services in north Virginia.}
+{\pard  \line \par}
+{And that's why we say to put that things there, you just still have your applications and things like that in the other region, that's closest to you. So in our case, that's a Sydney region, but in your case, that might be Melbourne region later this year. But for those management events and things like that, you're going to see that north Virginia is a special snowflake that which you have to consider, and Things like cloud trail should probably be home there.}
+{\pard  \line \par}
+{Things like you should consider maybe putting SSO there because of the various implications that that has as well. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ The reason I'm asking this question is also because we've got already information for the UK, Israel all over Europe as well. All those people may be listening to this and going wait.}
+{\pard  \line \par}
+{So does that mean. Data sovereignty kind of, cause the cloud trail is pretty much ordered log of every identity that's out there right. In, in AWS. Cause I mean that's out of the window. }
+{\pard  \line \par}
+{\b\cf3 Ian McKay:\b0}
+{ So, so when people generally talk about data sovereignty, they're only talking about the }
+{\cf2 [00:35:00]}
+{ data that is relevant for their customers.}
+{\pard  \line \par}
+{So that's your PII, that's your customer data and things like that. This is general knowledge that a lot of AWS is distributed system. So things like , your customer data in S3 will most likely stay within that region and your databases will stay in that region and things like that. But although you should consider, your backup plan to have a similar home sister region, if you can help it.}
+{\pard  \line \par}
+{Sydney was traditionally Singapore, but it might be Melbourne north or New Zealand in the future. But within the management events, that's generally a global action. So things like DNS in route 53, that's a global entity. If you're accessing DNS from the UK, you're going to hit one of the funding regions, DNS service, or the CloudFront props that are close to that.}
+{\pard  \line \par}
+{Your location over there. So those management events will come in through those regions and you need to be, thinking about how that works from a global scale. And that's why that kind of takes effect. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And I'm so glad I have you talk about IAM as well , many of my go-to person }
+{\cf2 [00:36:00]}
+{ for it. So probably one last question where can one find out about IAM}
+{\pard  \line \par}
+{cause I feel like just relying on AWS docs. Probably not. It's not just in. That's hence the reason you've kind of created open source tools and not have other people have kind of gone down the even Scott Piper and everyone. So where do you normally ask people to start to understand? I am, because there are companies where IAM are whole departments and I'm sure they would want to go super deep into it as well.}
+{\pard  \line \par}
+{So what's your recommendation for that? }
+{\pard  \line \par}
+{\b\cf3 Ian McKay:\b0}
+{ Yeah. So docs are definitely the sort of place to start, but there's a lot of really good resources online, the reinvent and the reinforce talks from AWS as well are really good to dive deep into certain topics. IAM as one of them, but you can go deeper into the mission boundaries or SCPS or access analyzer and things like that.}
+{\pard  \line \par}
+{When it's, when you move outside of community resources out there, there's some great talks from. Both conferences and just directly from education providers. So, people like Andrew Brown, putting out content all the time to give you an understanding about what it is, what are the things you should }
+{\cf2 [00:37:00]}
+{ be looking at?}
+{\pard  \line \par}
+{Cloud security podcasts is a great example of sort of resources that you can learn from that. Look up, you user groups, so your meet ups, there's physical. In-person. Eventually, meet ups that'll talk sometimes about these topics and things like Reddit and the slack groups as well. There's a cloud security forums, slack group.}
+{\pard  \line \par}
+{If you look that up, out there, that's, that's really good and contains a lot of us, sort of a more experts talking about cloud and identity and the things that are impacting us on things like that. Okay, great. I'll look that up as well. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Awesome. And I think Tom made a really great comment. Progress over perfection is a great idea in one term I a hundred percent agree with that.}
+{\pard  \line \par}
+{So, where , can people find you connect with you on IAM , and talk about AWS community, as well as the whole ambassador program as well, we get people. }
+{\pard  \line \par}
+{\b\cf3 Ian McKay:\b0}
+{ Yeah, I'm on Twitter at, at I doubled in double 0 3, 6. I'm on get hub as well under that same alias, LinkedIn on the same way, how he is come find me.}
+{\pard  \line \par}
+{If you want to talk, shop for free to DM me we can talk about whatever you want and. Yeah, we can start some more arguments }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Thanks so much for coming in, man. And for }
+{\cf2 [00:38:00]}
+{ everyone else who's tuning in appreciate you guys hanging out and we have one more episode for this month before we close off the IAM month, which is going to be next weekend, but I will see you then, and thanks so much for joining and I will see you the next episode.}
+{\pard  \line \par}
+{Thanks again. Alright. Thanks everyone. Bye. }
+}

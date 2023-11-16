@@ -1,0 +1,400 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red114\green179\blue114;
+\red128\green128\blue128;
+\red102\green0\blue204;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\b\fs48 Gafnit Amiga\b0}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ I love the fact that , you asked your husband to create an ECR yeah, to test it. I'm gonna attack someone, but I'm gonna attack someone legally. So it should be your husband, I guess technically he can't complain against you, so, yeah, I think, but that's also important is kind, understand for people who are, listen in that , the potential impact of the vulnerability is beyond your own account.}
+{\pard  \line \par}
+{If you use AWS ECS and AWS ECR as a service, then this episode is for you, especially if you have your crown jewels or important applications running on those services. In this episode I had Gafnit Amiga, who's a VP of Security Research at Lightspin. Come and talk about the recent vulnerability she discovered in AWS ECR, which is the Elastic Container Registry.}
+{\pard  \line \par}
+{She was able to identify undocumented APIs, which allowed her to delete. Any ECR container, you heard me right? The person who's listening in or watching this on the other end, you could delete the containers that I had as public in my own AWS account. So that's how scary this was. Fortunately, the response from AWS was amazing from the }
+{\cf2 [00:01:00]}
+{ time it was disclosed and responsibly disclosed to aws, within 24 hours of fix was in production, and we had the solution already available for everyone.}
+{\pard  \line \par}
+{So it is not a problem, right now in this episode, we spoke about how she discovered the ECR vulnerability and maybe lessons you can learn to do yourself. What are some of the common attack paths that people should look out for or misconfiguration people should look out for in the AWS ECS service?}
+{\pard  \line \par}
+{Also, if you are someone who's using ECS and EKS what are some of the standards you should be looking out for as potential attack parts for yourself. Let me give you a hint. IAM still the most important thing in the world for AWS, so that was something that definitely was a highlight, I hope. Enjoy this episode of Cloud Security Podcast in our breaking the AWS Cloud month.}
+{\pard  \line \par}
+{And if you know someone who's trying to get into the cloud security research space or just wants to know how to break into an AWS ECS service, definitely share the episode with them. I really appreciate when you share your episode with your peers on LinkedIn, on other social. If you're watching or listening to us for the second or third time, I would definitely }
+{\cf2 [00:02:00]}
+{ recommend following us on our social media, on LinkedIn, YouTube for video.}
+{\pard  \line \par}
+{Apple, Spotify, Google Podcast, and other podcast platforms for our audio version. And if you're feeling generous enough as well, definitely leave us a review or rating on Spotify and iTunes. It really helps us find interesting guests that we can bring to you to talk about cloud securities so you can do your job of a cloud security person better or find an interesting angle to get that next cloud security job.}
+{\pard  \line \par}
+{I hope you enjoyed this episode. I'll see you in the next episode. Take care. }
+{\pard  \line \par}
+{When you're developing an app, security might be treated as an afterthought with functionality, requirements and tight deadlines. It's easy to accidentally write vulnerable code or use a vulnerable dependency, but Snyk can help you secure your code in real time so you don't need to slow down to build securely.}
+{\pard  \line \par}
+{Develop fast, stay secure. Good developer Snyk.}
+{\pard  \line \par}
+{Hey, go. How are }
+{\pard  \line \par}
+{\b\cf3 Gafnit Amiga:\b0}
+{ you? Hey. Hey, Ashish. Thank you for having }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ me }
+{\pard  \line \par}
+{me. Not a problem. Thanks for coming in. Good time to start. about talking about AWS ECS as }
+{\cf2 [00:03:00]}
+{ well, but before we go into it, if you could., briefly introduce yourself and how did we get into the whole cloud security space? }
+{\pard  \line \par}
+{\b\cf3 Gafnit Amiga:\b0}
+{ Sure. Well, so my initial background is actually from networking. And then I moved, to application security.}
+{\pard  \line \par}
+{Because after observing what people are doing and how they attack, I thought like, well, I want to do it. And while I was doing lot of application security research and and design reviews and pen tests, it was really a mixed of work. I realized how much , I tend to get things that are related to cloud.}
+{\pard  \line \par}
+{Like eventually, you found , the vulnerability. You found an SSRF and, you got into a cloud workload and so well, what's next? What is this cloud? Everyone is using cloud and the right before Covid, I started , to take it as a project to get deep into the cloud. . Before that, all I knew is more about EC2 and S 3, but not like to know deep about the cloud and what are the main and the deep architectures of the }
+{\cf2 [00:04:00]}
+{ services.}
+{\pard  \line \par}
+{So During Covid, I started with IAM , I really love authentication and authorization services, and I think that IAM is a really great one and complex one. So it was a hard start, to get all that , as a start. But I think that once, you know, IM, it's really , you get to understand the AWS mindset and how they think because all the services almost, yeah.}
+{\pard  \line \par}
+{Like most of them are using And then I start to, to learn one by one. Of course I didn't finish even today, even not half of them, but yeah, but really fell in love with cloud security. Like it's an endless zone. It's I feel it, it's like , to still keep doing the application mindset, but in a huge scale.}
+{\pard  \line \par}
+{So it's fun. . }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. And I think it's, we kind of spoke about this before the livestream started as well for people coming online more, but I, we were talking about how cloud security is a very small community in itself and people don't realize that cloud is kind of like the edge and cloud security is the edge of the edge.}
+{\pard  \line \par}
+{And I think, I thought it was really }
+{\cf2 [00:05:00]}
+{ interesting that a lot of us are in this field. It feels like a lot of us are in this field and there's a lot to learn with 300 plus services from AWS, Azure, Google Cloud, and keep increasing. Pretty awesome and I think I'm really glad that we are doing a whole month on breaking the AWS cloud as well.}
+{\pard  \line \par}
+{ Because we are talking about ECS and ECR cause I'm assuming some people would not even know what ECS is, so maybe that's could be a great place to start.}
+{\pard  \line \par}
+{, What is ECS and What is ECR? }
+{\pard  \line \par}
+{\b\cf3 Gafnit Amiga:\b0}
+{ Yes, sure. So actually both of them are a real like founded services in in aws. So, ECS is, a managed service in AWS that helps you to manage containers at scale. It's a container orchestration service. Where you can declare what do you want to run, what is the scale?}
+{\pard  \line \par}
+{You can specify the images, the CPU that you, , it's similar to if you're familiar with Kubernetes, so it feels the same,, but it's still different. Mm-hmm. And you can attach The role that , you wish to, to provide to those containers that are going }
+{\cf2 [00:06:00]}
+{ to run. And if, for example, if you want your tasks, to communicate with other services in aws.}
+{\pard  \line \par}
+{So this is how you do it. You provide 'them . The credentials by attaching an IAM role. Yeah. And so this is an an ECS and ECR is a service in aws, but that allows you to have your own registry. You can say that the public ECR is somehow similar , to the docker hub. So , you have your own registry.}
+{\pard  \line \par}
+{You can have you have a private and a public registry mm-hmm. And there you can create your own repos to store there, your images where you can freely pull and push them. Of course, that you can enforce authentication and authorization. But the public registry is.}
+{\pard  \line \par}
+{exactly for the case where you don't want, where you want to, to provide a public image, where everyone want to, let's say example, for example, that you have an agent that you wish everyone to freely use so you can push it to, to, to a public repository. And yeah, anyone, even without having an AWS credentials or an account, can pull the image and use.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right. And that's kind of }
+{\cf2 [00:07:00]}
+{ where I think the conversation becomes even more interesting with E C R specifically. So if I got that right, it's basically for people who are using containers the registry is where you store your operating system for the container or container OS and ECS is that container registry where all the operating system is and ECS is. Service, which talks to ECR to build your application or contain an application in a managed aws. Did I summarize that correctly? }
+{\pard  \line \par}
+{\b\cf3 Gafnit Amiga:\b0}
+{ Well, so you can put more things that are not just in os in the ECR, you can create the applications themselves that when you run, the moment you run , the application is actually running so you can specify when you declare what is the spec for the task. in ECS you can put the address for an image that which is stored in ECR. And then the moment the container is up the used image , for running the container will be the image that is stored in the ECR , if that makes sense.}
+{\pard  \line \par}
+{\cf2 [00:08:00]}
+{ }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Kind of does. And I think I've got a question which I was gonna ask, but someone has already asked. Vineet to ask a question. Is ECS and EKS both Kubernetes orchestration engine?}
+{\pard  \line \par}
+{\b\cf3 Gafnit Amiga:\b0}
+{ Yeah, they both they are container orchestra. That's exactly what, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ what. . Awesome. There you go. Well you've answered the question as well. Thanks. Thanks for that question, Vineet. Okay, so now since you've defined ECR and ECS and ECR seems to be a lot more than a registry to what you said it could be an application as well.}
+{\pard  \line \par}
+{How do normally people use it? Like I think sounds like there's a lot of things in there. What are some of the common use cases that you've heard of or seen people use? ECS and ECR combination }
+{\pard  \line \par}
+{\b\cf3 Gafnit Amiga:\b0}
+{ well, so ECR is the place where you host your images. Mm-hmm. , so it's basically can be for, for anything.}
+{\pard  \line \par}
+{The moment you have the image that , you want , to use this can be a private image. So, for example today, I think that most of the companies. Are building their application as an images and store them in their registries. And then , the moment , the pipeline is running and you }
+{\cf2 [00:09:00]}
+{ want to deploy your application, so the images are being pulled from those registries.}
+{\pard  \line \par}
+{So for, sensitive parts, of course, of the application. The one that is the the secret of the company. They will not be public. They will stay in a private and authenticated Registries, but for things that you wish everyone to use. So then, you can put it in a public registry.}
+{\pard  \line \par}
+{Mm-hmm. , I know that you can use ECR the same way you are using Docker Hub to Yeah. To ship your images and to enable everyone to use them. But that's for the public. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right. And to your point public would just mean anyone should be able to use it. It's similar to a GitHub, I guess for lack of better word, if it was a GitHub for containers rather than I guess op operating systems.}
+{\pard  \line \par}
+{\b\cf3 Gafnit Amiga:\b0}
+{ I think that , the more similar one is , the Docker hub, same way you can search for images in Docker hub. \\ , and you even have already , the pool command that you can run Docker pool and to pull the image directly from Docker hub, the same way you can do with public ECR ripples.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So. Okay. Cause this }
+{\cf2 [00:10:00]}
+{ is probably a good time for me to introduce the ECR vulnerability that you had discovered. Could you walk us through, what was it first, and then we can go into the thinking process.}
+{\pard  \line \par}
+{\b\cf3 Gafnit Amiga:\b0}
+{ Sure. So actually I started to dig in ECR specifically in the ECR gallery, public gallery. Mm-hmm. Because I wanted to have another enrichment for I like spin recon tool, which is our attack surface discovery tool. Yeah. And then I, I saw that all public repositories are being published in the.}
+{\pard  \line \par}
+{ECR public gallery. Mm-hmm. . So I want , to understand, well, how can I like , to correlate between, the name of the search domain and the repositories that this domain might have in the public gallery. Mm-hmm. . And then I saw and of course, everything that I do in, in my life is going through Burp.}
+{\pard  \line \par}
+{So then I saw in the request , the suffix of the internal. And I thought to myself, well, so if it's internal,, why can't I see it? So I started , to search for the, for , the action itself in the search. }
+{\cf2 [00:11:00]}
+{ And then I got into, I found a JavaScript file that contained the search action, but also lots of other actions that had , the same suffix, , the internal suffix, all of.}
+{\pard  \line \par}
+{Where actions related to ECR Public mm-hmm. , but they had a really big similarity to the actions in also for some of them had actions from the E C R private one. And then I, I even, I got like, well, , what is it? Is it, is it public? Is it private? Is it just for the gallery? So I, I started to create, The tables exact, the same sketches that you see in the tables that you see in the post.}
+{\pard  \line \par}
+{This is exactly what I do during the research itself to organize , the data that I see. Yeah. Of course that I, I unify it a little bit after that because the original one is a mess, but yeah, but I, I started to compare the actions and found. Well if that's, the actions that I can trigger.}
+{\pard  \line \par}
+{Some of them I didn't recognize at all, and they were }
+{\cf2 [00:12:00]}
+{ like, put images, delete images and I thought, , what will happen if I will trigger them so in order to trigger them, this was the difficult part because you need, to understand what is going to be the structure of the request.}
+{\pard  \line \par}
+{And it's a black box because it's an undocumented actions. And , we need to figure out, how can we do it. So , I started to explore the service from anywhere that I can do like, to pull the images using the Docker c Alliance to see what are, the actions that are being used , to map each action to its trigger, what causes the trigger.}
+{\pard  \line \par}
+{Mm-hmm. . And to start, imagine what maybe happens in the backend and to find things that maybe. gives you indications for, well, maybe you are right or maybe you are wrong. Mm-hmm. And after I understood. What is the structure from the JavaScript , it's just a, a lot of guesswork, but you need to do smart guess because some of them are, were goods.}
+{\pard  \line \par}
+{So I started, to send, the request. Of course, it's signed request in AWS, so you need , to do it using a script. }
+{\cf2 [00:13:00]}
+{ Mm-hmm. . And so I started to send the request hoping that one of them will delete the image tag. Finally this was the one I I tested first. And yeah. And at the moment it deleted the image.}
+{\pard  \line \par}
+{I immediate, I told my husband, you have to create one in your account because I want attack you. Yeah. So yeah, it was, a really. A lot of like tailor made work. Yeah, yeah. But yeah, but that was the finding, so the impact of the finding, if I wasn't clear during the explanation is that it by activating those undocumented APIs, an attacker could put any image wishes in any one of the public.}
+{\pard  \line \par}
+{ECR registries to update existing ones to delete images from any public ECR registry. It's a really high or critical severity issue because you know, imagine. Existing pipelines that using images from ECR. Yeah. And they will keep pull to pull the image and use it as they usually and always do.}
+{\pard  \line \par}
+{\cf2 [00:14:00]}
+{ And. , I hope that companies use validations and inspecting the content of the images , to be sure it's not malicious, but an attacker could infect existing images even in accounts that are verified by AWS and to actually spread to a lot of workloads. It doesn't matter if it's local cloud environments, Kubernetes environments, almost everywhere.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Awesome. I love the fact that , you asked your husband to create an ECR yeah, to test it. I'm gonna attack someone, but I'm gonna some attack someone legally. So it should be your husband, I guess technically he can't complain against you, so, yeah, I think, but that's also important is kind, understand for people who are, listen in that the potential impact of the vulnerability is beyond your own account.}
+{\pard  \line \par}
+{You know how people have. Assumption that, oh, account is, and AWS account is my highest level of segregation and Gafnit's AWS account, I can't access, she can't access my AWS account until I actually tell. But now we are entering a space where we are }
+{\cf2 [00:15:00]}
+{ allowing access to public resources and it.}
+{\pard  \line \par}
+{Basically by finding out those undocumented APIs, you were able to identify, Hey, I can put and delete containers if I want you in an ECR R And to your point, put containers with potentially infect an existing container as well. And talking about infecting containers and what that would look like. I think Vineet had a question around does AWS have vulnerability scanning for container images in ECR?}
+{\pard  \line \par}
+{\b\cf3 Gafnit Amiga:\b0}
+{ Yeah, so you can scan the images and have the scan the images that you put there and, have the results directly from AWS. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. I think AWS inspector, I think is the name of the service, }
+{\pard  \line \par}
+{\b\cf3 Gafnit Amiga:\b0}
+{ right? I think I don't know if it's inspector, but I know that directly in the panel of ECR you have the option to scan.}
+{\pard  \line \par}
+{But I don't know what is there. I know that they have two types of scans. They have an easy scan and they heavy a scan. , two types. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah, I think there recently announced it, so may, well, I guess it is definitely possible an inspector to use that as well. Cause earlier inspector could only do EC2 instances.}
+{\pard  \line \par}
+{Now it can do. Lambda }
+{\cf2 [00:16:00]}
+{ functions as well as ECR registry. }
+{\pard  \line \par}
+{\b\cf3 Gafnit Amiga:\b0}
+{ I believe it can, I just don't know if the one , in the console, the itself is the same one. Yeah. Ah, but }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ yeah. Oh yes. Yeah. I don't know if they use that. or something else maybe. Yeah. Well, Vineet you can let us know if you find that out, man.}
+{\pard  \line \par}
+{That'll be awesome. And I think that's the point from Jimmy as well. The best way to imagine ECS and EKS is to. Not think of it as underlying technology. It's more what you want to manage from that service as well. I think I agree with that as well. Awesome. I think I've got one more comment coming in.}
+{\pard  \line \par}
+{Oh. ive got got Jimmy again. Scan when pushed to ECR plus inspector. All right. Okay. So when it is pushed out and Ruben thank you so, so much sharing the recommendation as well for ECR image scanning scanning. Awesome. There you go. There's a lot of resources being shared as well. So we've walked through the process.}
+{\pard  \line \par}
+{So we, put through the thinking process, we understand how bad this was as well. The undocumented API is something that came up in our last conversation last week with Nick as well.}
+{\pard  \line \par}
+{what was your thinking like when people say undocumented api, what are we really talking about? Because a lot of people just think, well, I normally go to the API documentation page. }
+{\cf2 [00:17:00]}
+{ That's not gonna tell me what AWS API I is. It's just gonna tell you what I can use. So what's your thinking normally when I, when you're trying to find out undocumented APIs }
+{\pard  \line \par}
+{\b\cf3 Gafnit Amiga:\b0}
+{ I personally not trying , to find and not documented the APIs, but you encounter one, so, ah, right. Like when I an api, when you see an API that works in the same way with all the other actions that you have to specify the target action and you need to, to sign the request, and you.}
+{\pard  \line \par}
+{Like it, it behaves the same way, but you cannot find any explanation for that action. It's not documented in the documentation. So it means , that if it has a body, you don't know what are the body parameters, what it it expects to get, what , the action actually do in the backend., it's not clear.}
+{\pard  \line \par}
+{So I treat those ones as an, a undocumented api. And then you need , to do a guesswork and to start thinking, well,, what does it expect to get in order to be activated? Yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right. Do you know how, you mentioned }
+{\cf2 [00:18:00]}
+{ as you were kind of discovering the process and you identified that put and delete actions were available.}
+{\pard  \line \par}
+{And using JavaScript function as well. So I'm assuming it was on the console and the JavaScript that you were using was just making API calls and cuz these are standard H G D P verbs, which is your put post. Like, so I think is that also part of the thinking where, oh, okay. The, based on the function that I'm trying to do, , what are other standards?}
+{\pard  \line \par}
+{Cause it's not that AWS has created their own standard, they're still using, like, if they're using Kubernetes, that's an open source thing as well. If there's a vulnerability in Kubernetes, potentially it could creep into AWS as well. Is it potentially in containers or Docker specifically? It could creep into this as well.}
+{\pard  \line \par}
+{Is is that I guess also a great way to think about how to research. Cause I, the reason I'm asking this question Yeah. Is also to understand. , how can other people start this journey as well? Like the same thing that you are doing at the moment. You are obviously inspiring a lot of people when you disclose vulnerabilities.}
+{\pard  \line \par}
+{I always find it interesting }
+{\cf2 [00:19:00]}
+{ for people to like, I think like for example, what are some of your common attack techniques that you love in the AWS space? }
+{\pard  \line \par}
+{\b\cf3 Gafnit Amiga:\b0}
+{ Well, so, but first I, because you said something really, really important is the behavior of the console. AWS themself are, of course, that the console is using eventually the AWS api, , they have one API that they expose}
+{\pard  \line \par}
+{they're using it the same way, even from the consoles. If you will inspect , the behavior of the console, for example, like sending the network through burp. . You can see the, actions that are being used. Yeah. And in some services you can see you can find out new actions that you were weren't aware of before.}
+{\pard  \line \par}
+{Mm-hmm. And you can start playing with it. So this is a really nice way. To compare the services, to open, the API and to in the documentation API and to see what are the actions and then to see how they're being activated also through the console. Yeah. So this is, yeah, this is a nice thing to do. Having the console they might have }
+{\cf2 [00:20:00]}
+{ more things because it's eventually it's a different application . , even, the way for the authentication. So they have cookies, but the console might be a little in some services different from the, the options that you have using the CLI.}
+{\pard  \line \par}
+{Interesting. Yeah. That's, that's one thing. But the attack techniques that, that I like. So and what I recommend to start with, I really like to explore Services but , in a wide way to, , before , even thinking how would I attack it first , to really under understand it, but from all angles.}
+{\pard  \line \par}
+{So the ECR for example to use it from . Any way that AWS allows me using the docker, using the console, using the gallery, like to inspect it from all ways to see all the actions, and then , to build like a map of what are the, possible entry points, how things are working with each other, and then , to think, well, where I'm going to dig in and.}
+{\pard  \line \par}
+{to start adding }
+{\cf2 [00:21:00]}
+{ payloads. Yeah. But I think that's for beginners. And this is something that also Nick said, , not only for beginners, but in general Having a look on less popular services and new services. Mm-hmm. , it's a really good way to, to start exploring in AWS because I I think that the popular ones are a lots of researchers already. Looked, but of course if you have some passion for a specific service, so and and you can make it even better. So it's welcome. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Interesting. And are there any not so common services that you know of off the top of your mind where people can look at what's the, it comes to your mind?}
+{\pard  \line \par}
+{\b\cf3 Gafnit Amiga:\b0}
+{ I , actually, the one that I want to explore is is the API gateway. I always get to the API gateway and then stop, and then start . So this is one that I have to at some point, but less common ones. So maybe things that also involve, applications like deify and you have Elastic Beanstalk, and all those are, they're }
+{\cf2 [00:22:00]}
+{ not that, not popular, but. I think that they can be an interesting places to, to look at. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Actually, that's an interesting one because Elastic Beanstalk is an interesting service because a lot of people were using Elastic Beanstalk quite heavily for a long time, and there was no ECS, there was no EKS. But now EKS and ECS are popular and people have kind of forgotten all the workload that's already running on elastic beanstalk and I don't know how many people are upgrading the elastic beanstalk as well. So that would be really interesting if people identify applications that are potentially running an older version of Elastic Beanstalk as well. So I kinda like the elastic Beanstalk example. So maybe so that we can kind of put like a blue team hat as well.}
+{\pard  \line \par}
+{So we've been talking about attacking for some time now. Just so that people, we don't scare people away. What can people do as a check on their side? , are there like benchmarks or something that you recommend people normally should look at in their AWS accounts or even if it's not from a research perspective, like a lot of people listening in would be }
+{\cf2 [00:23:00]}
+{ responsible for protecting their AWS accounts.}
+{\pard  \line \par}
+{ Are there things that you normally recommend people should use as a benchmark to, Hey, I should at least do these things? It doesn't have to be an exhaustive list. Even if you have top five things that come to your. That would be awesome to share with people. Hey, check these top five things before you put any application into an AWS account.}
+{\pard  \line \par}
+{\b\cf3 Gafnit Amiga:\b0}
+{ Yeah. Sure. I think , the first thing is , to know your environment. I know it sounds obvious, but in environments tend to be really, really large and , it's hard , to be aware of everything. So to know your environment, to know what is the expected behavior and how things should work that's a really good place to, to start.}
+{\pard  \line \par}
+{Mm-hmm. But then To take care for neglected assets and a good hygiene. So , if you manage groups and things like that, make sure that you don't forgetting about them and just keeping them on the side because for an attackers , to take advantage for neglected.}
+{\pard  \line \par}
+{Things, , it's way easier because, }
+{\cf2 [00:24:00]}
+{ no one will notice. And they might be left unpatched in some situations. And another thing to, take care of is really the, all the identity part. And this is something that we really put a lot of focus also because eventually you can see in reports. this is the most common way for an attacker to get into your environment for , the last couple of years already. So having to enforcing like least access privilege model and to make sure that each one can do only the things that he needs to do.}
+{\pard  \line \par}
+{Yeah. That would really improve the security of the environment. . And because, you know, even if an attacker found the way to bridge into your environment, it's really prevents him from moving laterally inside environment and taking over the entire account. That's a different scale of of an }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ attack}
+{\pard  \line \par}
+{yeah, no, thank you for sharing that. That's pretty awesome as well. I was, I thought you might have the sixth one there as make sure your husband has an AWS account. }
+{\pard  \line \par}
+{\b\cf3 Gafnit Amiga:\b0}
+{ }
+{\cf2 [00:25:00]}
+{ Yeah, I'll, that's important. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That's important. Yeah. Make your husband a wife or partner have an aws the most }
+{\pard  \line \par}
+{\b\cf3 Gafnit Amiga:\b0}
+{ important for testing to attack you.}
+{\pard  \line \par}
+{Coming }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Definitely for testing purposes only. So, okay. I think that thanks for sharing the top five. , what's your focus of cloud security research for 2023? Anything top of mind? . }
+{\pard  \line \par}
+{\b\cf3 Gafnit Amiga:\b0}
+{ Well, so these are the directions that I hope to, to get into first maybe not to, to be focused only on AWS because I have some unexplained , always getting into the AWS services investigations.}
+{\pard  \line \par}
+{But . To explore more in the about like networking services proxying behavior related to services. Mm-hmm. Yeah. This is things that I wish to do this year. Yeah, that's that, that's the }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ plan. . Awesome. And for people who are probably tuning in wanting to learn more about cloud security research as well I I think the best way to explain it is how common is it for people }
+{\cf2 [00:26:00]}
+{ to. Get attacked by a, a really sophisticated vulnerability. You know, I think what you've discovered with ECR that's been resolved and is gets resolved with everyone and you got the credit from AWS for that as well, is it quite common?}
+{\pard  \line \par}
+{Cause a lot of people ask the question of, Hey, I don't know if AWS or I can trust AWS. Is it quite common for AWS vulnerabilities to be discovered? Or it's like, I think in your experience of working in the cloud security space yes. It gets discovered by, it's still far and few that it's not that we are finding vulnerabilities every month.}
+{\pard  \line \par}
+{It's just like, oh one today. And I don't know, one was six months ago or one year ago, but they can all get resolved. So should people not trust AWS? I guess that's another question that }
+{\pard  \line \par}
+{\b\cf3 Gafnit Amiga:\b0}
+{ people might ask. Of course. , the answer is people should trust AWS and there is a lot of good, more than bad in having. Your environment managed and I can tell that , the time to fix in production this time was amazing. It was in less than 24 hours really. }
+{\cf2 [00:27:00]}
+{ It's really, I, I, I personally didn't experience such a quick. From the moment I submitted to the moment it was in production, it was really amazing work by the AWS security outreach team and also the, the ECR team, that fixed the issue.}
+{\pard  \line \par}
+{Yeah. Yeah. Yeah. But, the moment your environment is managed, so you have automatically all , the patches for even known CVEs and issues that, they're doing most of the work. Yeah. But still you need , to keep you know, the shared responsibility model that we all have. , you have the areas where you need, to take care , of the security of your applications and , to scan your images and to make sure that your pipeline is secure.}
+{\pard  \line \par}
+{So, That's the things that, we need to do. I don't know how common is that vulnerabilities are being discovered in AWS because I believe that there are , some that we are not aware of. But I hope, that more researchers that we will have in the cloud. We are increasing the chances , to find and to fix it before it's being used for bad }
+{\cf2 [00:28:00]}
+{ intentions. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And because I this is kinda like , the tail end of the interview for me to ask this question as well. What are some of the common misconfigurations in ECS or even EC R for that matter, that people should be aware.}
+{\pard  \line \par}
+{\b\cf3 Gafnit Amiga:\b0}
+{ So in ECS, it comes back to in my opinion, to identity , the role that you attach to. The ECS task you need to make sure that, it has , the minimal permissions that he needs and to do the task, and not more than that, not to provide a full access to some service. So for example, if you want to use a resource in S3, so to specify the specific object, or at least the bucket, but not S3, full access permissions.}
+{\pard  \line \par}
+{That's the, the best thing I, I would recommend to do. And also the people that joined also said to scan the images. It's a really good practice, but also to enforce authentication , for the private ECR to make sure , who can do what. There is a difference between being able to push images and to pull images. To make sure that you are aware of who can do what }
+{\cf2 [00:29:00]}
+{ with your service. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ No, that's good advice. Last question. What resources do you recommend people , someone who's listening in get super inspired, oh my God, I want to be like Gafnit and I wanna be a Cloud Security Researcher}
+{\pard  \line \par}
+{what do you recommend where they start? Are there any free labs or things that you've used in the past or you'd recommend to people that can be useful for them to become cloud security researchers? The. }
+{\pard  \line \par}
+{\b\cf3 Gafnit Amiga:\b0}
+{ I really recommend to start with knowing very good IAM, and that this is a very core service , to be sure that, you know all , the features that you had, the evaluation logic.}
+{\pard  \line \par}
+{Because it's going to be used , in so many other services. And after that I personally didn't use labs, but I, I create my own labs. I, I choose a service getting to the documentation and doing the get started like like I was a developer that wants to use this. . Yeah. So this is what I do.}
+{\pard  \line \par}
+{I first come in with that mindset and following the steps, reading }
+{\cf2 [00:30:00]}
+{ in the documentation what it should do may sometimes you have an architectural designs and. so you can get to know more and more. Mm-hmm. . And after, after doing that, then I start to think, well, so of course all, , when simulating all the things I transferred through burp to see how, what is the APIs that are being invoked, but then , to find the locations. where things might get wrong and , to start focusing on those areas. Mm-hmm., and I can say that at start it can be hard, but the more and more services you explore, it's getting better . because AWS themself are using AWS services to build their, their environment and the backend.}
+{\pard  \line \par}
+{So like for example, in the ECR, the fact that they're using AWS Cognito identity pool really helps me because I know identity pool, I know how it works. , I know what might get wrong in the backend. So it helps }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ right. Well that's pretty awesome and thank you for sharing that as well. So definitely making your }
+{\cf2 [00:31:00]}
+{ own lab is a great way to at least start preparing for it as well.}
+{\pard  \line \par}
+{So that's kinda like the end of the technical questions. I do have three fun questions so people get to know you a bit more as well. Not at all Technical. So I'll quickly go through them. Just three questions. What do you spend most time on when you're not doing cloud security?}
+{\pard  \line \par}
+{\b\cf3 Gafnit Amiga:\b0}
+{ Wow. Actually currently }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ learning your husband AWS account. ? No, no. }
+{\pard  \line \par}
+{\b\cf3 Gafnit Amiga:\b0}
+{ Learning for my master degree. Yeah. Alright. So ] , that's the what I'm doing when I'm not researching cloud services. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Wow. Well, hope good luck with your master's degree as well. Thank you. Thank you.}
+{\pard  \line \par}
+{ Next question. What is something that you're proud of but is not on your social? }
+{\pard  \line \par}
+{\b\cf3 Gafnit Amiga:\b0}
+{ That is not on my social media. Yeah. Wow. It's not on my social media, but in, in some way. But I'm really proud of of the team that I managed , to build here in, in Lightspin. I think it's I really proud of them.}
+{\pard  \line \par}
+{It's really keeps my, keeps me like warm to see , how they are. how they're getting into it. Because as you said finding people that are already cloud experts, , }
+{\cf2 [00:32:00]}
+{ it's almost impossible. Yeah. So like to see where they started and where they are today, it's amazing. And I, this is really something that I'm really proud of.}
+{\pard  \line \par}
+{Well, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ you can definitely rewind this interview for them and the next team meeting for them as well. See people I told you about this . Final question. What's your favorite cuisine or restaurant that you can share? }
+{\pard  \line \par}
+{\b\cf3 Gafnit Amiga:\b0}
+{ In Israel there is a restaurant called the Coffee Bar. I really like this one. It's }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ a restaurant with a name like coffee bar, not coffee.}
+{\pard  \line \par}
+{No. Okay. Okay. I will definitely recommend checking that out when you come in next time to Tel Aviv. I'll definitely check that out. But that's pretty much what we have time for. Where can people find you on social media if they wanna follow up or get in touch with you about cloud security research?}
+{\pard  \line \par}
+{\b\cf3 Gafnit Amiga:\b0}
+{ So both on LinkedIn and Mastodon. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh, sweet. And I'll leave the link forward in there as well. Thank you so much for joining us, and I will see you on the next episode.}
+{\pard  \line \par}
+{We are talking about continuing the breaking the AWS month, but for now, thank you Gafnit, and thank you everyone for joining. We'll see you in next episode. Seeya peace. }
+{\pard  \line \par}
+{\b\cf3 Gafnit Amiga:\b0}
+{ Thank you. }
+}

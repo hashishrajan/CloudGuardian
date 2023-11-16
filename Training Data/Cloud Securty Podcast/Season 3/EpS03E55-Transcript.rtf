@@ -1,0 +1,646 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red114\green179\blue114;
+\red128\green128\blue128;
+\red102\green0\blue204;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\b\fs48 Justin Garrison\b0}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ Let me containerize that for you. Did you know that Google had a quote unquote pre kubernetes container orchestration service? I did not know that in this episode we spoke with Justin Garrison from AWS to understand what What AWS EKS is? Where would you make a choice between AWS EKS ECS VS Fargate? Cuz there's so many of them now.}
+{\pard  \line \par}
+{And we also spoke about some of the possibility for what different architecture types are, what kind of thinking you have to go through from a security perspective. What would you do if you have to deploy a new application today? What kind of, some of the choices you would make? How would you scale AWS EKS in an environment which is really large like an enterprise would, whether you would give one cluster per business unit, or would you just give a whole account and just keep that there?}
+{\pard  \line \par}
+{Separate from billing purposes, all that, and a lot more In this episode where we talk about AWS, EKS and everything around it. If you are someone who's trying to understand AWS EKS, how it is different from your bare metal kubernetes, whether you should use bare metal or switch to EKS you should definitely check out the }
+{\cf2 [00:01:00]}
+{ service and you should definitely check out the episode and maybe share it with other people who may be trying to learn about AWS EKS , at least level 100.}
+{\pard  \line \par}
+{And especially with announcements from AWS Reinvent, it's also something which you should be keeping an eye on. As always, we appreciate all the support that you provide us on the podcast episodes helping us rank top hundred. So please feel free to share this with any colleague or friend who, who you feel would find value from this episode.}
+{\pard  \line \par}
+{And as always, I appreciate your support. Thank you so much for doing that. And if you are listening to this episode for. Second, third of fourth time, or maybe even to the podcast for the second, third of fourth time, I would definitely appreciate if you can subscribe to our socials. We are on Apple, Spotify, on YouTube, LinkedIn as well.}
+{\pard  \line \par}
+{So feel free to drop us a review on iTunes and Spotify as well. It really means a lot leaving those reviews means that future guests can know that, hey, this is a reliable podcast that can come to you and people enjoy listening to it as well. So thank you for all the support for that. And we are back this weekend with our final episode for this season, which is the }
+{\cf2 [00:02:00]}
+{ Amazon reinvent.}
+{\pard  \line \par}
+{Yes, Amazon reinvent went through last week, and we were there in person. Got a lot of conversations, met a lot of you as well. Thank you for saying hello and taking pictures with us and coming on my vlog, which is on LinkedIn, on our YouTube as well now. So, definitely, check those out if you haven't already. And on this weekend, I'm looking forward to distilling some of the AWS Keynote, as well as any other announcement from a cloud security perspective as well.}
+{\pard  \line \par}
+{So definitely tuned for that. But for now, enjoy this episode with Justin Garrison from AWS talking about what is AWS EKS? Enjoy }
+{\pard  \line \par}
+{when you're developing an app. Security might be treated as an afterthought with functionality, requirements and tight deadlines. It's easy to accidentally write vulnerable code or use a vulnerable dependency, but Snyk can help you secure your code in real time so you don't need to slow down to build securely.}
+{\pard  \line \par}
+{Develop fast, stay secure. Good developer Snyk.}
+{\pard  \line \par}
+{Welcome, welcome. }
+{\pard  \line \par}
+{Yeah , thanks for having me.}
+{\pard  \line \par}
+{I'm so looking forward to this man. I think we've had a lot of }
+{\cf2 [00:03:00]}
+{ questions about EKS and especially at AWS Reinvent last week, I think, I feels like ages are ago now, but last week there are a lot of conversation. There was a lot of around the EKS kubernetes space as well.}
+{\pard  \line \par}
+{So I'm looking forward to kind of hopefully peeling off a few more layers for this for, but before we start, what was your pathway into the space man? Like what, how did you end up in working containers? }
+{\pard  \line \par}
+{\b\cf3 Justin Garrison:\b0}
+{ I guess I picked the path , of I was trying to solve a problem and I got sucked in. Was at work trying to solve this problem of, we had a bunch of servers and all of our developers were deploying applications with different run times of things.}
+{\pard  \line \par}
+{They, some of 'em wanted Python, some wanted Python two seven. Someone said, no, I need Python two 10. Someone wanted Ruby and they wanted 18 different versions of Ruby and node, and all of these run times got really hard to kind of manage on a server. And right around that time, there was some different options available, but containers were coming out and I was like, well, let me look at this thing.}
+{\pard  \line \par}
+{It seems like it's gonna solve my problem. Which introduced more problems, right? Like I, Hey, I solved the old problem of like, I don't care about like, run times being mixed on a host }
+{\cf2 [00:04:00]}
+{ anymore because they were containerized. Yeah. But it then created this other problem of container sprawl, where before I had too many servers and now all of a sudden I had too many.}
+{\pard  \line \par}
+{Containers, and I didn't, I was like, oh, where's that one running? What does this do? How do I scale these things? And that's kind of led me directly into orchestrators. And I was just like, oh, you have something that manages all of your containers, just like you have something that manages your VMs, right?}
+{\pard  \line \par}
+{Yeah. Like I have VMware that manages my VMs. I have AWS manages VMs, , and then I can just focus on what's on the VMs and containers are similar, where I had too many containers. And it's just like, how do I make sure I can maintain all of these things, as a, small team, as a single person doing a lot of.}
+{\pard  \line \par}
+{And that's }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ how you ended up on Kubernetes? }
+{\pard  \line \par}
+{\b\cf3 Justin Garrison:\b0}
+{ Yeah. I mean, my path kind of led me there. I was actually really resistant to Kubernetes at the beginning where Right, what I was doing with Kubernete or what I was doing with containers. I was just running 'em manually. Like, I literally had a spreadsheet and I had, this server had these containers on it.}
+{\pard  \line \par}
+{This is how the low balancer worked., and I was able to maintain that at a small scale of maybe a dozen containers. And at that point I was }
+{\cf2 [00:05:00]}
+{ like, you know what? It's hard for me to take a vacation. It's hard for me to train someone else when something goes down. We need new deployments, whatever. So like, let me look into these orchestrators.}
+{\pard  \line \par}
+{And at the time Mesos was out and Mesos was, the big Mesosphere was like, the container orchestrator of choice. It did other things. But containers was one of the things it could do . , and I really liked that Mesos was initially really extensible, where it's like, oh, you can create all these custom schedulers and all this stuff.}
+{\pard  \line \par}
+{And I was working at a place that had custom schedulers for other workloads and I was like, oh, well maybe we can shift some of that into containers. And Mesos seemed to fit and I'm also not a Java developer. And the more I dovan, , I was like, maybe this isn't }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ like }
+{\pard  \line \par}
+{\b\cf3 Justin Garrison:\b0}
+{ Java. I, I think it's fine. I think it's fine language if people.}
+{\pard  \line \par}
+{People are very productive with it. And I think that's great. I am not very productive with it and so I avoid it when I can . And, but when I was looking at extending it, I was like, well, I have to extend it with these libraries and all these things that added on top of this ecosystem, which was very Java }
+{\cf2 [00:06:00]}
+{ heavy.}
+{\pard  \line \par}
+{And it was just very, it was foreign to me where I was just like, I didn't understand how to even get started with a lot of that. So went directly from that was like, well this nomad thing looks really cool cause Hashi Corp had nomad that came out. And I was like, well it also, it does is, has almost no extensions, but it had a great integration to the HashiCorp Stack and if you're using console and Vaults and these other tools that HashiCorp makes, it slides right in there perfectly.}
+{\pard  \line \par}
+{And I was like, you know, like maybe this is the way forward. . And it also worked with non containerized applications, which was kind of a big deal for me at the time. And I was just like, oh, maybe this could fit. And I always thought Kubernetes didn't have extension points. Early on, we didn't really talk about how to extend it.}
+{\pard  \line \par}
+{We didn't talk about custom schedulers, we didn't talk. We just, how do you run a cluster? Yeah. And, and so at that point I was just like, well, , I thought Kubernetes was one thing, and I, I sat down and I actually was like, well, how does the API work? How can we actually extend it? And I realized that the Kubernetes pattern, the API patterns were so reliable that it was really }
+{\cf2 [00:07:00]}
+{ easily extendable just early on, even when there wasn't hooks for everything.}
+{\pard  \line \par}
+{And so I wrote a scheduler and bash. I just was like, I sat down for, you know, a couple nights and I was just like, okay, let me see if I could just, if I can understand how to create a pod and make it run on a node and I schedule it with Bash, then I can understand the api. And so I did that and I was just like, okay, now I understand why this works the way it does, why it was set up the way it was, , and then I just started exploring more of what the ecosystem of Kubernetes. Brought in where it had so many tension points and so many options just to control different infrastructure. We get load balancers and storage and all this stuff that you didn't get with necessarily the other options outta the box.}
+{\pard  \line \par}
+{And so, right. I just kept diving in. I was like, okay, I understand why this is important. Now I understand what problem these pieces solve, so let me just keep going. And so I just, I kept doing that. I just kept building little bits of knowledge at a time solving one problem after another. And }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ that kind of leads me to the whole AWS EKS which is a managed kubernetes thing}
+{\pard  \line \par}
+{so consider the topic itself is }
+{\cf2 [00:08:00]}
+{ AWS EKS explained how to you and considering now we have a background for, you know, containers orchestration and like, oh, okay. So now we kind of trying to make it better with, but in, in spite of other options, why kubernetes stood out and the extensibility of it as well.}
+{\pard  \line \par}
+{How do you explain AWS EKS to people, for people who may have not have heard of it, or maybe reinvent was the first time they heard of AWS EKS? }
+{\pard  \line \par}
+{\b\cf3 Justin Garrison:\b0}
+{ , the docs will say it's a managed Kubernetes service. Right? , it's a Kubernetes that you don't have to worry about how it works.}
+{\pard  \line \par}
+{And I think that's really important if you've ever run Kubernetes. Mm-hmm. , because once you've actually tried to run it, you're just like, actually no, this isn't, this isn't a lot of fun. Like this, this part of it I don't really like. And, and so the thing that it solves though is it just, it gives you some opinions about how it should be set up, how it should be run, how it should be scaled, that a lot of people initially.}
+{\pard  \line \par}
+{You don't need to worry about, you could just start really small and say like, Hey, I can run an API server. And I was running it on-prem. I had bare metal hardware. I had created my own like system D unit files. I'm like, okay, run }
+{\cf2 [00:09:00]}
+{ this part then run this part and then run that and we're good and I can create that.}
+{\pard  \line \par}
+{And it was reliable because the hardware had redundancy built and it had dual power supplies and, you know, load balancer. All this stuff was like just built in because that's how the hardware was set up. But , in a more dynamic environment, where, you know, scaling happens in a cloud environment where workloads come and go, where you're trying to reduce some costs where it's not like upfront purchasing of hardware.}
+{\pard  \line \par}
+{Some of that, like how you set it up matters because you want it to be dynamically flexible. EKS it has the opinions of AWS. How do we think we should create a highly available Kubernetes api? And so on the backend, we spread that across multiple availability zones. We say like, Hey, you shouldn't be running this in a single machine, single availability zone that's just not highly available for business critical workloads.}
+{\pard  \line \par}
+{There's all these things that we kind of bake into it. Yeah. At, etcd, the database behind Kubernetes. You know, like how do you scale that? How do you run it? What, where should those, you know, live? How do you, you know, do that sort of stuff? There's all this nitty gritty stuff }
+{\cf2 [00:10:00]}
+{ when you're looking at the backend.}
+{\pard  \line \par}
+{You're like, actually, I just wanna run an app. Like, how do I just like, give me an API that deploys an application? I have a container now how do I run it? And yeah. And it's, and it's a great option. It's just like, I'm gonna trust at some point that the expertise of AWS, is reliable enough to know how to scale, you know, this api, and now I just want to run my workloads on top of }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ it.}
+{\pard  \line \par}
+{ Oh, that's a pretty good explanation as well, because I think a lot of people are not looking at it for, oh, just to manage kubernetes service without knowing the nuances of it. So thank you for explaining that as well. I think another confusion that a lot of people talk about, and we get asked quite often is the whole difference between EKS, ECS and fargate.}
+{\pard  \line \par}
+{What are these e ECS and Fargate as well, and maybe why would someone choose one over the other? }
+{\pard  \line \par}
+{\b\cf3 Justin Garrison:\b0}
+{ Yeah, so ECS is the orchestrator that AWS. A long time ago it was, it was really focused on Docker was this thing. And a lot of people were realizing at the same time that I was realizing it, that like, I had a bunch of containers and I need an orchestrator.}
+{\cf2 [00:11:00]}
+{ }
+{\pard  \line \par}
+{And Kubernetes wasn't there yet. It wasn't, it didn't, I think it was announced maybe when ECS, I'm trying to remember what year it came out. But it was like pre 1.0, like no one should be running this in production. Like, we don't know. This was like a thing that, Google put out and open source, but it wasn't even the first orchestrator that Google had put out.}
+{\pard  \line \par}
+{A lot of people don't remember. There was a pre, a pre Kubernetes containerized thing called, let me Containerize that for you. That literally is a GitHub repo. No way. That was, it was, yeah, it was this container orchestrator that like no one really knew about. No one cared about. I remember seeing it, I remember like, oh, this is interesting.}
+{\pard  \line \par}
+{Let me containerize that for you. Was their initial like public borg sort of thing and Right, and they released that, but it was just like, it never went anywhere. Kubernetes came later. It's just like, Hey, we need something more extensible. We want something that's more flexible. Cuz let me containerize that for you.}
+{\pard  \line \par}
+{Wasn't that. . So at the time, like you couldn't tell when Kubernetes launched that it was gonna be the thing, cuz again, Mesos was there, Mesos was this huge deal. Lots of companies ran it at big large scale and, and Nomad was there and it was, you know, Hashi Corp was pushing a }
+{\cf2 [00:12:00]}
+{ lot into like batch workloads and how to run stuff.}
+{\pard  \line \par}
+{And it's like, hey, this also exists. Neither of those fit really with like the cloud model, the AWS model of like, hey, what if we have autoscaling groups and EC2 instances and how does that work with dynamic load balancers and multiple AZs and multiple zones? And they were kind of exploring some of that in a lot of ways.}
+{\pard  \line \par}
+{But a lot of 'em still considered like, you have a data center, what does a data center look like? And in a region you have multiple data centers. That's an availability zone is another data center. So it's like, hey, how do we make this scale a little better? How do we make it fit a little more? So ECS is great because the two biggest things I love about ECS it's versionless.}
+{\pard  \line \par}
+{You don't have a version, you don't have to worry about a version. You can deploy a containerized workload on ECS You don't have an API version. Kubernetes is is very strictly versioned and you have to upgrade Kubernetes every six to eight months. It's your job to like, Hey, we have to now make sure this is upgraded and updated.}
+{\pard  \line \par}
+{ECS don't worry about it. }
+{\cf2 [00:13:00]}
+{ Like you can, when you create new nodes, they'll get the updates. You can, you know, create clusters, but the clusters , are good for that. And I love that about ECS. It's a very simple kind of control plane and for my workloads that integrate into ECS or into AWS, absolutely wonderful.}
+{\pard  \line \par}
+{I worked at Disney streaming. The entire platform was built on ECS. We ran all of Disney plus at launch on ECS, and I was responsible for that infrastructure. Like that was literally like my job, with three other people. Like we ran the ECS infrastructure and I loved how simple it made everything about operating large containerized clusters to make it just easier to have, okay, developer, you deploy this thing, we'll make sure it, you know, scales properly.}
+{\pard  \line \par}
+{All that. Yeah. Fargate a lot of people equate it there to like, oh, ECS and Fargate are the same, or Fargate is somewhere else. Like Fargate is a way to run some compute workloads, a containerized compute workload. And you can think of Fargate more like EC2 than ECS. EC2 gives you a vm, it gives you this, this VM instance, }
+{\cf2 [00:14:00]}
+{ and you SSH in , it gives you basically a way to run a kernel.}
+{\pard  \line \par}
+{Fargate is a little above that where it's like, Hey, you can run a containerized workload if you are, if you have a container, a container spec that says, Hey, the metadata of the container says, run this command. We'll give you the vm, we'll give you the kernel. All you need to do is bring us that container with the run option, and we will extract the container and run it.}
+{\pard  \line \par}
+{And so it's one layer above where a VM is, but similar to EC2 rather than ECS. And so under ECS the container Orchestrator, you can use Fargate under Kubernetes, you can use Fargate or EKS, you can use Fargate. It's a different type of run, you know, like where your computer is happening. And, and it's, it's an EC2 comparable.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh, awesome. And Kennedy just shared the GitHub URL for that, let me containerise that for you. Thanks for sharing that, Kennedy. So at what point would someone pick one over the other? Like, it sounds like they're all solving individual problems. , }
+{\cf2 [00:15:00]}
+{ at what point do you see people pick, say, EKS vs ECS versus like, oh, I'm just gonna go fargate and let their top player be whatever.}
+{\pard  \line \par}
+{\b\cf3 Justin Garrison:\b0}
+{ Yeah. They have, again, strengths and weaknesses, right? It's just like, what are you trying to accomplish? What I usually tell people if they're like, I'm a developer, I wanna run a service. I want it to be either an API or a website, or I just want something available online. I almost every time will tell them, start with Lambda.}
+{\pard  \line \par}
+{Don't worry about orchestrating, don't worry about containers. Don't worry about, start with Lambda. Start with a function. You can containerize a, a lambda, you know that you ship. Lambda and say like, Hey, I have a container. lambda run this thing. That is the simplest way to get started and I love starting there.}
+{\pard  \line \par}
+{I am a big fan of functions. I use a lot of functions and step functions and serverless options. But I almost always tell someone, start with Lambda. At some point there's a threshold of either you wanna run third party software, which won't run in Lambda, but unless it's packaged for Lambda. Or there's some level of like, I just need a little more flexibility in how this application runs.}
+{\pard  \line \par}
+{\cf2 [00:16:00]}
+{ Or I need to run longer than 15 minutes and I don't wanna use step functions for whatever reason, whatever it is, that like, hey, at some point I'm either or, you're getting too many requests a month, right? Like, cuz Lambda scales amazingly well, but there is a cost benefit of, Hey, I could run one instance that gets, you know, 10 million requests a day, or I can run 10 million invocations of Lambda.}
+{\pard  \line \par}
+{And at some point there's like a tipping point for for cost. And so there's a lot of reasons you might change from Lambda to a container. At that point, usually I tell people, start with, go to ECS if your enterprise, if your environment is simple and you're running everything in, in AWS, absolutely go to ECS AWS Co-pilot is a command line tool, which will containerize your application and ship it to ECS easily.}
+{\pard  \line \par}
+{Like that's, it is super fast and awesome. It's, it's sim not Heroku necessarily, but it can package up the container and ship it and you, you don't have to worry about the cluster even. It's just like, Hey, just make this thing autoscale. There's also like Docker ECS has a plugin, like you can take a docker composed }
+{\cf2 [00:17:00]}
+{ file that you run locally for development, which has multiple containers, multiple services interacting, and you can say Docker compose, you can do Docker ECS}
+{\pard  \line \par}
+{they'll run that compose file directly in ECS amazing tools to make it easy to onboard into ECS we get a lot of enterprises that are very complex. They have very complex infrastructure, but even more important, , their architecture of. Communication within the organization is complex. Who manages what, how they have access to things.}
+{\pard  \line \par}
+{Who do they have to talk to to say like, I need a load balancer. These other things, those sorts of stuff are really difficult for some enterprises to kind of just split the responsibility in these services that are a little more vertically aligned. Where my lambda typically is also gonna be, I declare my DNS, I declare , my gateway, my load balancer, my storage, my database.}
+{\pard  \line \par}
+{I'm the developer that does everything. Cause I do Lambda ECS is very easy to do that as well. If your team is relatively small or your }
+{\cf2 [00:18:00]}
+{ ownership is vertically broad, where you can manage everything from the lower ends to the high end of the application, great ways to vertically integrate those things.}
+{\pard  \line \par}
+{Kubernetes, you can do that. , but I don't usually recommend it. Kubernetes. Again, we have to manage about upgrades. We have to do some cluster services inside of the cluster to say, oh, how do we, you know, how is external DNS get mapped? How are our load balancers there? What storage are you using? Those have expertise at different levels, but the developer just like, I just wanna do my app.}
+{\pard  \line \par}
+{Like, don't make me focus on all that stuff. I just want this little sphere. I want my container, and you handle everything else. And that's a great model. Once you say, Hey, now we have separation of ownership, or even one developer team. You don't want them interacting with the other developer team, right?}
+{\pard  \line \par}
+{Like you have two apps and you can separate into name spaces, and you have some of these like softer boundaries in Kubernetes and RBAC and all the stuff that you don't necessarily get in something like ECS. And so I usually recommend going to Kubernetes when either you want to use something that comes from the }
+{\cf2 [00:19:00]}
+{ ecosystem that you don't.}
+{\pard  \line \par}
+{Build it yourself. Something like linker d or there's all these like ecosystem tools within Kubernetes that you can just like, ah, just download it and run it. Or if your organizational structure, your communication structure and ownership boundaries start to become a little more horizontal than vertical.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Interesting. As a very good explanation, and I think I never thought about this way because most of the conversation that I would have is generally around people would ask, Hey why would I use AWS EKS over kubernetes like, as in like the bare metal Kubernetes. , is there a scenario similar to that in your mind for bare metal versus EKS?}
+{\pard  \line \par}
+{Like, would you actually, because I tend normally tell people you should just go for the managed version, but would you agree or , where do you stand on that? }
+{\pard  \line \par}
+{\b\cf3 Justin Garrison:\b0}
+{ Yeah. It again depends on ownership and flexibility , and inside of, let's say you. You wanna run it yourself, you wanna run Kubernete yourself.}
+{\pard  \line \par}
+{You can go look at Kubernetes the hard way. It shows you all the manual steps. You can get a, a cluster that's running, and in that case, you don't have to upgrade it. You can just let that run forever. But }
+{\cf2 [00:20:00]}
+{ CVE comes out, you have to patch it, you have to do something because if you don't keep it updated, at some point you might hit a problem where it's like, oh, you know what?}
+{\pard  \line \par}
+{Like, you either want a new feature or there's bugs or there's security vulnerabilities. In those situations, you're like, actually I do need to upgrade this. How do I make my upgrades faster and safer? If you've ever dealt with etcd as a database, it's a distributed database. It is not something that's like trivial to just say like, oh, anyone can run this.}
+{\pard  \line \par}
+{No, I've actually had to dump etcd databases and restore them. I've had Kubernetes clusters that I've built on-prem that ran for so long that my certificates expired. . Oh. And I didn't realize my certificates expired until I was like, oh, no one can run workloads. What's going on ? , and realize that like, oh, I only made one year certificates.}
+{\pard  \line \par}
+{Like, oh, , I should have thought ahead on that, but that was a problem that I had to fix. And, and so all of those sorts of things, it's like, you know what? I didn't want to have to deal with certificate upgrades or renewals. Right? Like, I wish just someone else was doing that for me. And all of those things.}
+{\pard  \line \par}
+{And also like scaling the, }
+{\cf2 [00:21:00]}
+{ the API server itself. When I'm like, oh, in a static environment, OnPrem, I only had, I think it was six machines total. Like I had six servers, and that's as big as my kubernetes cluster stuff that I didn't need anymore. It was six. And so I didn't need to like dynamically scale , my API server.}
+{\pard  \line \par}
+{But again, in a cloud environment, when you have bursting workloads, when you have a lot of jobs come in, API servers need to change a little bit. And so like a lot of people are like, oh, well then am I the one that has to do that? Do I have to go turn that knob and say like, oh, scale that up. So a lot of that stuff that people are just like, I don't wanna think about this.}
+{\pard  \line \par}
+{I don't wanna do this anymore. I don't wanna have to worry like, is this gonna happen properly? Great. You know, and I also think EKS is one of the best ways to do anything in general. Like, like even if you wanna do some of that stuff, the, the time that it makes sense to, I want to, I have to run Kubernete myself is like, I need flexibility or I need a setting that isn't available in EKS}
+{\pard  \line \par}
+{yeah. I need a version that's not available. Things like a custom scheduler, like as custom scheduler flags. Like, oh, you know what? Like I need }
+{\cf2 [00:22:00]}
+{ this weird, this setting that maybe isn't something everyone uses. Or I need alpha features in the API. EKS doesn't expose alpha features in the API because those features are likely to go away and we don't want people to get burned when they have to upgrade and the feature's gone.}
+{\pard  \line \par}
+{So those sorts of things are absolutely, they make sense. I still wouldn't roll your own, I still wouldn't go out and say like, oh, we're just gonna build it from scratch ourselves. In those cases, I would go to a tool like Kops or kops, which is, you know, a Terraform based sort of let's create a cluster.}
+{\pard  \line \par}
+{There's cluster API, which will also create clusters with more raw cloud resources. So you can say like, just gimme EC2 instances, put API server over there. You can do that stuff with tooling today that you probably couldn't do back in the day. But I wouldn't do it yourself, but if you do need to manage it, if you need that flexibility, then yeah, it makes sense to, okay, well now I need to own this.}
+{\pard  \line \par}
+{My responsibility is, I also have to upgrade it and maintain it. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And maybe think about from a team management perspective as well, how many people need to hire if you worked for whatever reason you wanna go on a holiday. Can't just be one Justin looking }
+{\cf2 [00:23:00]}
+{ after the entire Kubernetes on-premise deployment as well.}
+{\pard  \line \par}
+{Right. Awesome. By the way, this is a great answer and I'm loving it. So a question just came in from Ketan a long time supporter of the podcast as well as well. Hey, Ketan and hello Ashish and justin, managed service provider, Rackspace in the news. And at it appears a cyber incident is impacting their hosted Microsoft Exchange environment.}
+{\pard  \line \par}
+{The control plane is a vital component for of a Kubernetes cluster. Are there any differences on how cloud providers protect the Kubernetes API server and control plane versus on-premise deployment? }
+{\pard  \line \par}
+{\b\cf3 Justin Garrison:\b0}
+{ Let's start with an on-prem deployment. My on-prem deployment was behind a load balancer, so anyone could, you know, route traffic to that load bouncer.}
+{\pard  \line \par}
+{But the network in the data center and from the users that were on-prem was pretty much flat. There was no firewall between me and the load balancer and the instances , I could SSH into machines that were in the data center. That was kind of a flat network. It was, the sort of the , castle analogy, right?}
+{\pard  \line \par}
+{Where it's like the firewall protected us from the outside world and once you were }
+{\cf2 [00:24:00]}
+{ inside, I could route to anything. Yeah. Yeah. , lots of data centers, lots of companies do it that way. And then you could VPN and you can get into the, you know, into the castle walls and, and you can access anything internally, right?}
+{\pard  \line \par}
+{There's this where services ran was inside there, but there was no additional authorization between you and the API server once you were there. , and we've seen in some cases where that was like, oh, you know what, someone clicked on an email and then someone had inside access and that was a problem because it's like, oh, immediately, once their machine was compromised, they had access to the network.}
+{\pard  \line \par}
+{And the network had no other authentication mechanisms or anything in place that said like, oh no, you can't do this. You're not allowed to do this. If you could get to a machine, you essentially could move horizontally within that network. In a cloud environment, that's very different, right? If you get onto an EC2 instance, you have IAM roles.}
+{\pard  \line \par}
+{immediately. Like you can't make other API calls. Everything has to go and is authenticated through. IAM in AWS so if you can, even, if you can }
+{\cf2 [00:25:00]}
+{ get on a box that might have some identity and then you just say like, oh, , this box can access this database or can access this endpoint, you absolutely, , that might be a problem.}
+{\pard  \line \par}
+{But that is like the scope of what you can access , as that identity. You might even be able to get an identity of a user from, within the cloud. Right? So like if I GitHub right? I'm on GitHub. I find AWS credentials. I find an AWS credentials file, right? Like that's like a thing that exists and is a problem because occasionally those gets pushed up there and those have access to whatever that IAM principle has access to in the cloud.}
+{\pard  \line \par}
+{The Kubernetes API is fronted by a load balancer that checks those identity that'll say, Hey, do you have access to this? So even though the API server is available on, at a. Load balancer, I still need to provide it credentials. So I can't just like get on the network. I can't maybe necessarily like get someone to, you know, click an email and all of a sudden I'm available.}
+{\pard  \line \par}
+{There are, again, depends on situation. I might have hard }
+{\cf2 [00:26:00]}
+{ coded credentials on my server, on my system and you could steal those and then go do something. Or I might have short-lived tokens and I can say, oh, are these tokens valid? And I can expire those tokens immediately if I know there's a problem.}
+{\pard  \line \par}
+{So inside of I am, I can say like, oh, revoke it. Like that's, that token is no longer valid or that user is no longer valid and I don't need to worry about necessarily expelling you from the network because you can't do anything now. Cause again, that everything comes down to how that IAM role is being authenticated and mm-hmm.}
+{\pard  \line \par}
+{And so that is one of the big differences where, assumes you are who you are based on where you're located on the network. The other is, is all about who you are based on some identity. And you can two factor that you can O I D C you know, you can do all sorts of stuff to, to control the other side of it , by knowing who the identity is and, and immediately revoking it.}
+{\pard  \line \par}
+{If someone's on your network and you need to get them out, you have to pull a plug that's, you have to like get, like get them off the network as soon as possible. Because there's no other way to kind of revoke that because it's kind of open in those cases. So , that's kind of }
+{\cf2 [00:27:00]}
+{ a pattern we've seen over and over again.}
+{\pard  \line \par}
+{But that's, yeah, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I think the probably follow up question to that then is the whole Kubernetes api, my understanding is in the EKS context, it's public facing. Is that right? As an internet facing, So does that add complexity for, cuz you know, maybe that's kind of where Ketan's question is coming from.}
+{\pard  \line \par}
+{If you were to host a Kubernetes environment on your on-premise, your APIs server is internal, quote unquote, with the Kubernetes API itself, being on the public interface or internet, , how would you protect something like that?}
+{\pard  \line \par}
+{ Are there things to protect the control thing? Like, the reason I say this is because the example that I think I'm thinking of, if Tesla had the Kubernetes API server made available on the internet. Now, I don't know if it was an AWS or whatever it was, but that was the first time people realize, oh shit, if I have access to Kubernetes API server, endpoint, I can do whatever.}
+{\pard  \line \par}
+{So, I mean, kind, kind of feels like a crucial endpoint, I guess, from that perspective. So what are some of the protection things people could do around it? Well, }
+{\pard  \line \par}
+{\b\cf3 Justin Garrison:\b0}
+{ I mean, we can look at how does }
+{\cf2 [00:28:00]}
+{ e EC2 is publicly available on the internet. The EC2 APIs. The AWS API for EC2 is publicly available on the internet, and it's protected again, by IAM, and, and having access to having a role that allows me to authenticate.}
+{\pard  \line \par}
+{Yeah. And so in the same way that the EC2 API is available on the internet, the Kubernetes API for your EKS cluster is also available on the internet, both protected by IAM and so, oh, right. If you're not worried about EC2 in your AWS account being compromised, then , your Kubernetes API is similarly protected.}
+{\pard  \line \par}
+{The Tesla right example was actually a load balancer for the Kubernetes dashboard. It wasn't the Kubernetes API, it was the Kubernetes dashboard that they created a load balancer for that was public. And the Kubernetes dashboard has no authentication. , they created a load balancer that has zero authentication and there was a bug in the dashboard.}
+{\pard  \line \par}
+{I think it was a bug. Actually the dashboard lets you run workloads. Like I can just go to the dashboard, zero authentication and I can start running workloads. And, and so that pod, that workload }
+{\cf2 [00:29:00]}
+{ allowed, had access, RBAC access into the rest of the cluster. And so they exposed an API that had zero authentication and that was a problem.}
+{\pard  \line \par}
+{Anytime you're exposing anything that has no authentication, that on the public internet, that is absolutely a problem. Doesn't matter if it's the Kubernetes or whatever. Every AWS API has authentication in front of it. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah, actually that's an interesting point cause sorry, when I said , public facing, I just assume it was not the standard, Hey, use this URL to access anything.}
+{\pard  \line \par}
+{EKS I thought it's like if I have a cluster deployed in EKS I don't know, cluster 1 23 or whatever, that has an api, which is something like, I don't know, Justin is awesome. Dot com. I'm just making up your URLs, obviously, but that, is that the case for the, OR is that still No, that's one of the case.}
+{\pard  \line \par}
+{It is. It is literally just the public endpoint for e EC2, S3 and all the other services. That's the public endpoint, }
+{\pard  \line \par}
+{\b\cf3 Justin Garrison:\b0}
+{ You will get a separate public. Load balancer for the cluster, you will get a load balancer specifically for that cluster that's routing. }
+{\cf2 [00:30:00]}
+{ Hey, this is the random, you know, ALB for the domain, for the load balancer for that cluster.}
+{\pard  \line \par}
+{It is still fronted by IAM access. Like I can't make Kube control calls to it without having an IAM token to then say, oh, authenticate me so I can actually make a call past that load balancer. But the load bouncer, because like how like Amazon console is fronted by a load balancer, like that's literally, like it runs with a load balancer in front of it with IAM in front of it.}
+{\pard  \line \par}
+{And so the API is, is similar in that way where the, the EC2 API the AWS API they run in a very similar manner to how an E K S cluster would run where it's a load balancer with credentials in front of its. , and so , the authentication mechanism is the same where you have to have, an IAM token identity to be able to get past that load balancer.}
+{\pard  \line \par}
+{right? }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So when I'm driving a Kube for, for context for people, kube control or kube cuddle I guess when we type the command it goes to a public endpoint to communicate and say, Hey, hi, I'm Ashish. This is the IAM role for Ashish and }
+{\cf2 [00:31:00]}
+{ this is what we wanna create as a cluster. Yeah. }
+{\pard  \line \par}
+{\b\cf3 Justin Garrison:\b0}
+{ And the CLI command does have, in your, your configuration file, we'll tell it how to get a credential.}
+{\pard  \line \par}
+{There's actually a plugin that runs based on your, whoever you are, whatever you know, account you're in, or region you're in, it'll actually go run, fetch that token for you. So there's a thing that happens in the background. So in kube Yeah, kube control. In the config file it says, oh, whenever I try to access this api, go get me a token.}
+{\pard  \line \par}
+{And that just happens automatically. And so a lot of enterprises, well, again, we'll do that. You can go fetch your token temporarily cuz , they might have AWS console fronted by . a third party. I have O I D C provider over here. I have Okta, I have something else that's fronting my access into aws.}
+{\pard  \line \par}
+{And so they'll, you get access outside of AWS that gets trusted back into aws. It's like I can go get an Okta token and then go send that back and that, you know, works on the backend to get me actual AWS credentials that are temporary and can expire. And that }
+{\cf2 [00:32:00]}
+{ was, are actually what gets sent to the load balancer when I make that request.}
+{\pard  \line \par}
+{Awesome. Yeah, that }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ definitely answers my question as well. Thanks for that question as well. Ketan. And by the way, that's very good question, and for anyone else who's listening, I think I'll, the 50 people out here feel free to ask a question or we may drop it a drop in, a hello as well if you feel like, feel, like sharing what you thought some Kubernetes as well.}
+{\pard  \line \par}
+{will }
+{\pard  \line \par}
+{\b\cf3 Justin Garrison:\b0}
+{ point out that beyond that load balancer, right, one layer into Kubernetes, Kubernetes has RBAC role-based access control. And so within Kubernetes itself, you also have an id. and you have a user that lives inside the cluster and that user can do certain things inside the cluster.}
+{\pard  \line \par}
+{And that was one of, again, one of the things I said that was different a lot of times between something like ECS and and Kubernetes where ECS relies on IAM where we can say, Hey, you can have access to the cluster, but what you can do in the cluster, again, might rely on your IAM credentials in Kubernetes, once we get into the cluster, once we get to the API server, we're reliant on RBAC within the cluster, and you have users, you have different permissions for those }
+{\cf2 [00:33:00]}
+{ users inside the cluster itself.}
+{\pard  \line \par}
+{So there is another layer there that's like, Hey, if I'm an admin on the cluster, I can do whatever. But if I'm a developer, maybe I can only see one name space or I can only make one deployment or edit certain things. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That's an interesting, or maybe, and go kind of goes back to the difference between your EKS as well as ECS usage in general, but also if you wanna manage two sets of RBAC as well rather than just one.}
+{\pard  \line \par}
+{Would that be? And }
+{\pard  \line \par}
+{\b\cf3 Justin Garrison:\b0}
+{ in a lot of ways you can think of it. I don't know. I mean, this is a security podcast, so like, I think of it like Linux, right? Like I have a user on my Linux system. I can SSH in, I can do some things, but I might also have SE Linux. I might have this other layer of security that allows me to do other things on the system based on my identity.}
+{\pard  \line \par}
+{And so it's a separate, it's outside of Pam, it's outside of my username password. But now inside of the machine, like, oh, I can't edit that file. I, maybe I could even do sudo to like, yeah, modify something. But I could still have SE Linux as a layer that says, no, you're not actually allowed to do that unless you change the SE Linux }
+{\cf2 [00:34:00]}
+{ availability.}
+{\pard  \line \par}
+{So again, I don't know how familiar everyone is here with like the, had these other layers that other systems do this exact same thing where there's an external piece that's like, oh, we want to control things either more tightly coupled to what they're doing. Where inside of Kubernetes, we know a lot more about Kubernetes and we can map some of those verbs and users to the things they can do.}
+{\pard  \line \par}
+{Awesome. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I think maybe it's a , good segway into just understanding what's required in deploying. Like, I mean, I guess when people say I'm gonna deploy a cluster in EKS what is that typically involve? I guess? Maybe if you start from, I mean, you don't have to go into the detailed technicality of it, but for people who are just trying to hear this and go, okay, I understand that part.}
+{\pard  \line \par}
+{I just had the differences. , what kind of a challenge am I looking at? Cause you mentioned the Terraform, the kube as well earlier. What would that kind of thing play, like, what would a typical cluster look like, I guess, in AWS EKS maybe that's a good question to start with }
+{\pard  \line \par}
+{\b\cf3 Justin Garrison:\b0}
+{ the. The main two things you need for an an E K S cluster }
+{\cf2 [00:35:00]}
+{ is you need the actual cluster control plane, which is, it's the API server, it's all the stuff that AWS manages, and you need some way to run workloads.}
+{\pard  \line \par}
+{You need some sort of compute capacity attached to that cluster. And so when I say, Hey, run this pod, it can go somewhere because you can't run workloads on the API server. It's just like you wouldn't wanna run you know, a Java instance on your database server, right? Like database servers are database servers, API servers or API servers and app servers are app servers.}
+{\pard  \line \par}
+{And you keep those things separate. And Kubernetes is, again similar. My control point, when I say create a cluster, it creates all the stuff AWS manages. And then you say, now I need a way to run stuff on the, on top of that cluster, there's a command line tool called EKS Control, which is, makes that sort of process simple or simpler to kind of just like the defaults you get.}
+{\pard  \line \par}
+{If I do EKS control, create cluster. , it knows I need a cluster, I need a network for that cluster to exist in, right? Like my workloads have to have a network, they have to have security groups, they have to have IAM roles, and then they have to have compute. Like that's like the layer of how you get compute in AWS.}
+{\pard  \line \par}
+{Some }
+{\cf2 [00:36:00]}
+{ people in a corporate environment don't have access to create IAM roles. They don't have access to create VPCs, they don't have access. Again, it's like if it's horizontally split, you're gonna have to go email someone and say, oh, can you create this for me? Can you do that for me? Hopefully your environment has a way to do that.}
+{\pard  \line \par}
+{Programmatically infrastructure is code where like I can go look at Terraform somewhere and I can say like, oh, here's the VPC I can use, or here's the IAM I can use, or here's a pull request to add new resources. But at some layer you're dealing with a lot of infrastructure and just getting that infrastructure in place , is kind of complicated.}
+{\pard  \line \par}
+{In complicated environment. And again, if I'm start with Lambda, I say I wanna create a Lambda, I actually get an IAM role, I get a VPC, I get a security group, I get a load balancer, I get all that stuff. But it's a little more automated because it's narrowly scoped. So like this one function does this thing.}
+{\pard  \line \par}
+{Kubernetes is meant to be a shared service. And that's one of the big things that makes it different is everyone's using the same API server. Everyone wants different compute, everyone wants different VPCs and network. And I IAM, and all this stuff gets complicated because everyone wants to work }
+{\cf2 [00:37:00]}
+{ together.}
+{\pard  \line \par}
+{And I have kids. And if they play in the same toy box for too long, right, there's gonna be a fight. So it's like, oh, you know what? Like I wanted to play with that. No, you can't have it. And like that's how it happens when people, any people at any age are trying to share and sharing is sometimes really hard.}
+{\pard  \line \par}
+{But if you wanna create it and you wanna play around with it, EKS control. One command, you can get a cluster with workloads, with VPCs in your own AWS account. This is how I learned Kubernetes when I was making my batch scheduler. I would go create a cluster at lunch and I would turn it off when I was done, you know, playing with it for a little while.}
+{\pard  \line \par}
+{I did that for, I don't know, maybe a week or two, just poking at things. And I think my bill was like 4 cents, because you can run a cluster for an hour for really cheap, and it was like just, you know, just run it for an hour, turn it off, run it for an hour, turn it off, and, and those, that sort of like, makes sense, like, I'm gonna focus on this for a little bit of time and I just turn it off when I'm done. You can do that over and over again., you can just, you know, because Kubernetes is so strongly. Tied to this infrastructure as code where I could get }
+{\cf2 [00:38:00]}
+{ a cluster the way I wanted. You can also run clusters locally. You can run it on your laptop.}
+{\pard  \line \par}
+{You could say like, oh, give me these other, you know, options that run locally. But I wanted a load balancer. I wanted to see how storage worked. I wanted to do all that stuff without doing out my laptop. And, and creating those instances on demand is, is really one of the huge benefits of the cloud.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Interesting. Maybe the next question from my side is the whole scaling aspect then, cuz I think to, you mentioned the fact that as long as you can control the, the vertical aspects, it's a great way to go for ECS or whatever, but when it's horizontal, that's when you got, , you normally prefer going down the Kubernetes path where it's a lot of great responsibilities.}
+{\pard  \line \par}
+{And so, I mean, I guess it's a scale which is horizontal in terms of scaling in general , in an organization as well. Usually the whole order scaling and I guess those kind of things are usually spoken about. I, in my understanding in the Kubernetes concept, it's just me adding more pods into the scale just to scale it out.}
+{\pard  \line \par}
+{Does it go beyond that where I could have multiple clusters or is it, is the architecture pattern normally set for one EKS cluster, per }
+{\cf2 [00:39:00]}
+{ EKS and I have to have multiple EKS or how, how does that work when I'm trying to scale, like I'm a starting a company today? . I just want to have only kubernetes but I got 400 applications.}
+{\pard  \line \par}
+{\b\cf3 Justin Garrison:\b0}
+{ Would I, how good are you at sharing? Right? Like, how good are your developers at sharing? That's like where it breaks down. It's just like, Hey, if those teams hate each other, yeah. They're not gonna want to use the same cluster. And that's just how it kind of comes out now in a lot of ways where it's like a actually how you're comes company communicates, matters more your architecture , than the other way around in a lot of cases.}
+{\pard  \line \par}
+{And it's a weird kind of way that it's evolved into that. But that is how I see it a lot of times where it's like, actually, you know what, like those teams just don't get along. We're just gonna give 'em separate clusters and that's fine. You can have one cluster per application, per team, per environment, whatever you want.}
+{\pard  \line \par}
+{It adds operational, just like you had VMs. VMs were the same way. It's like, oh, you know what? Like, could these two teams share a VM. probably not give them separate VMs. Oh, now they need a dev vm. Oh, you know what? They wanted to test VM for this other thing. Oh, they wanted a VM for that. }
+{\cf2 [00:40:00]}
+{ Now you had like 20 VMs and you're just like, oh, like that was kind of difficult.}
+{\pard  \line \par}
+{That was something that wasn't easy to maintain and manage and you're just like, oh, what version is that vm? I don't know. Kubernetes is very similar when someone's just like, oh, just give 'em a new cluster. Give 'em some, a new environments name spaces help you in some cases, cuz you can kind of run multiple workloads that don't always interact with each other.}
+{\pard  \line \par}
+{But a lot of people that I run into don't need whatever we consider scale or like, there's like this scale that's like, oh, I can run a lot of workloads and there's this scale that's like my team and communication structure is like really complex. Mm-hmm. and, and what a lot of people mean when they mean scale is they're just like, I just don't want to have to think about it.}
+{\pard  \line \par}
+{Like, just don't make me wake up in the middle of the night and like, , increase my amount of nodes by five and then go back to bed, right? Like, I just want it just to scale automatically. I just want something to happen without me having to do stuff. Yes. And you mentioned, you know, the horizontal pod autoscaler great option, right?}
+{\pard  \line \par}
+{Like you could throw it in there and say like, Hey, if I get more than this amount of request per second, }
+{\cf2 [00:41:00]}
+{ or my CPU starts going up, or my memory's up, whatever it is, then add another pod and we can just scale that. But then you're like, oh, now I need to scale my nodes. I need these nodes that scale horizontally as well.}
+{\pard  \line \par}
+{We created carpenter, which is a node autoscaler which is a, what I consider what I call a workload native autoscaler, where if the workload comes in and says, Hey, I'm just a engine X container, just let me run wherever. Great scheduler. We'll put it in there. We probably don't need anything. But if a workload comes in and says like, I need a gpu, and you don't have any GPUs in your cluster, how do you get there?}
+{\pard  \line \par}
+{And usually it's like, I gotta go email the person that like, oh, I create the EC2 instances and now I need to go in and, and put an EC2 instance in there that has a GPU and I need to put that in an autoscaling group. So if more people want GPUs, I can scale those. Carpenter are just like, no, no, no.}
+{\pard  \line \par}
+{If your workload requests a GPU or certain type of instance or certain regions region spread or something like that, like it'll just do it for you. It's just like, oh no, I, we actually can figure this out. We can just like take all of EC two, }
+{\cf2 [00:42:00]}
+{ every instance type that's available and whatever you're declaring that you need, we will give it to you.}
+{\pard  \line \par}
+{We'll just provision those workloads based on what , those EC2 stances based on what the workloads need. And it makes that sort of operational aspect a lot easier. But it also can scale 'em back down. Right? Like once your pod's like, oh. Horizontal pod oil scaler, make these go away. Cool. Carpenter will also scale them down and make them all fit.}
+{\pard  \line \par}
+{We have some things called consolidation where we'll actively look at the cluster and say like, Hey, you know, you're not actually using a lot of, you have pods on all the nodes, but they're all like 50% used, maybe 40% used. Let's consolidate 'em. Let's just take some of those and get rid of some of the instances we don't need and we can shrink the amount of usage of, or amount of instances and increase the the utilization.}
+{\pard  \line \par}
+{And so there's that sort of stuff that happens automatically. And that's what I like to think of it as like scale is like we just do things automatically based on what the workload says it needs. So would }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ you say each business unit word, cause a cluster can have multiple nodes and one node }
+{\cf2 [00:43:00]}
+{ can have multiple pods.}
+{\pard  \line \par}
+{I guess the hierarchy, the way it's here. So do you normally see people use one cluster about business unit? or do you see them go well, one cluster per organization and multiple nodes for each. So one node per business unit or something like, is there a recommendation there? }
+{\pard  \line \par}
+{\b\cf3 Justin Garrison:\b0}
+{ Again, it all depends on like how well people share oh, good. If groups share, well then you don't need multiple clusters. If a workload fits inside a cluster and clusters can get really large a lot of people will do multiple. Accounts or multiple clusters just for financial reasons. There's like, I just wanna figure out like, how much does that team cost?}
+{\pard  \line \par}
+{And so they like give them a whole separate AWS account and they're like, the barrier for our cost structure is AWS accounts, and if that's the cost structure and we have a finance department that says we have to bill based on these accounts, then so be it. That's how we're gonna split it up. And you don't want clusters, spanning in multiple accounts, so they get individual clusters as well.}
+{\pard  \line \par}
+{and that's how they, a lot of times it's a cost optimization infrastructure in a lot of ways isn't }
+{\cf2 [00:44:00]}
+{ generating money. It's infrastructure itself. It's just like, how do I generate money? I need to pay this much money to generate this much money. Yeah. And, and a lot of times that's what it comes down to in business is like, Hey, who's the one that controls the wallet?}
+{\pard  \line \par}
+{They're the ones that are probably gonna say at some level what the infrastructure looks like, and so that is a big part of it too. Again, it's like, in, in the Lambda world, in the ECS worlds vertically stacked, simpler organizational structures. Those make a lot of sense sometimes. Cause it's like, actually, you know what, like the person who manages the cost is also the person that deployed it.}
+{\pard  \line \par}
+{Yeah. It's like the, the developer was like responsible for that. So they're the ones that can tell you. Okay. That's }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ a, that's a really good point as well. So maybe another and adding more layers to this as I guess as we kind of create this, so separate accounts for business unit, would I still have multiple cluster in the scenario where I have a dev cluster and a prod cluster and a prepod cluster or, cause you know how the whole bluegreen thing that Amazon talks about as well, how would that operate in, because that you, what you called }
+{\cf2 [00:45:00]}
+{ out, if you go for a managed Kubernetes version, which is like an EKS as well, you have to do upgrades through Kubernetes quite often.}
+{\pard  \line \par}
+{So how would you kind of put that into implementation?}
+{\pard  \line \par}
+{\b\cf3 Justin Garrison:\b0}
+{ depending on how large the clusters are, I typically actually recommend people upgrade in place. Right. If I have a, a super critical business vm, I have a machine Yeah. And I need to upgrade it from, you know, Ubuntu, you know, the last version to the new version. I'm not gonna buy another super expensive machine, install it, switch it, and then like, switch the cable real fast.}
+{\pard  \line \par}
+{That's just, it's not, it doesn't make business sense because a lot of time is a lot of financial investment. Yeah. If I have a Kubernetes cluster with a hundred nodes running business, critical workloads, if I wanna do bluegreen, I need to create another cluster. I need to create another a hundred nodes, and then I need to slowly migrate every workload over.}
+{\pard  \line \par}
+{Some people say, oh, it should be automatic C I C D. Right. It's like, but actually, . There's other things that depend on that. Like O I D C endpoints, how I authenticate to the cluster might change. It changes from one cluster to }
+{\cf2 [00:46:00]}
+{ another. How DNS gets routed, it's actually a little bit, I have to have like weighted d n s between the clusters or load bouncers that span multiple clusters.}
+{\pard  \line \par}
+{And typically inside of a cluster, a load balancer spans multiple pods. It's not going to another cluster, it goes within the cluster. And so at that point, once you have all this external infrastructure that depends on that cluster and it is a lot easier to do an app update, app upgrade. inside the cluster.}
+{\pard  \line \par}
+{Rather than say like, oh, here's a new vm. Let me go ahead and shift things over. Because it's just a lot faster. It's a lot more I don't wanna say it. It is really reliable. Cause that's how we do it. That's how AWS does it. Like we have, you have an update button. I'm, I'm literally, I had five clusters today that I went through and I just clicked the upgrade button.}
+{\pard  \line \par}
+{There's like all of 'em. It's just like, yeah, update all of those. It's just, I just run these clusters. I want them updated and I don't have to think about it again. Managed EKS service, you don't have to think about it. I click the button. If you're using carpenter, it'll automatically upgrade when new nodes get provisioned.}
+{\pard  \line \par}
+{If you're using managed node groups, there's another click button. You just say, yeah, upgrade that too, and it'll just cycle through all of them and upgrades it for you. Again, }
+{\cf2 [00:47:00]}
+{ great option for managed services. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Interesting. So to your point then, as you do the click upgrade, how however long it takes, would the machine be available also, would the cluster available for use while it's upgrading, or would it stop working?}
+{\pard  \line \par}
+{\b\cf3 Justin Garrison:\b0}
+{ Yeah, it's fully available. It does a rolling upgrade of the component. So on the control plane we have, again, we have three nodes, s e d, it does a rolling upgrade for those. It has different API servers. It does a rolling upgrade for those, for nodes. If I have a managed node group, again, let's say like a hundred nodes, it will cycle.}
+{\pard  \line \par}
+{ It'll add one at a time and remove one, and the workloads automatically just kind of shift with that. You can also set and say like, oh, actually I want you to replace more than one node at a time. You actually, there's a knob for that where you say like, oh, do five at a time. Do 10 at a time. I just want this to go faster.}
+{\pard  \line \par}
+{And you can do that. It's, carpenter is a little bit different where carpenter, you can set a total time for the instance to exist. You say like, Hey, this instance shouldn't exist more than a week, and at a week it'll get removed, and if you need more nodes, it'll create the new ones. So at that case, it, it all depends }
+{\cf2 [00:48:00]}
+{ on like how carpenters set up of just saying like, Hey, we'll eventually replace all these nodes and they'll get the latest version, but.}
+{\pard  \line \par}
+{We want it to be automatic. We want it just to like the cluster runs, we don't have to worry about it. Again, load balancers, do the load balance thing. Storage does the storage thing. DNS does the DNS thing. And we didn't have to shift anything. We just said like, oh yeah, no, just slowly roll these things out at this lower level.}
+{\pard  \line \par}
+{Same thing with deployments and pods, right? In Kubernetes, I have a deployment which creates replica sets, which creates pods. If I wanna create new pods, if I wanna roll out new pods, I don't go and necessarily create a new cluster. I increment the version of my deployment, which increments the version of my replica set, which changes out all the pods underneath.}
+{\pard  \line \par}
+{And we're doing it at the, you know, DNS says my cluster is here, all the API server behind it, they all roll. And all the workers that actually have the workloads tho those roll as well. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So what do you, and, cause we have been talking about like an ideal architecture as well. What do you see people struggle with when in EKS?}
+{\pard  \line \par}
+{Is there any examples that you know of and maybe why they struggle with it as }
+{\cf2 [00:49:00]}
+{ well?}
+{\pard  \line \par}
+{\b\cf3 Justin Garrison:\b0}
+{ \\ it's not a. Simple thing. Because again, like we've taken what used to be a data center and we've boiled it down to this API that we call Kubernetes. Like everything that is involved in Kubernetes used to be part of the data center.}
+{\pard  \line \par}
+{Again, your network, your security groups, your load balancers, your IAM roles, your storage, your compute, all of that stuff, like those were separate people's concerns. Like different people did that stuff. I mean, if you look way back in the day, there was probably one person that did it in a data center and they were like, that was the data center person, but they also probably didn't have very many of them.}
+{\pard  \line \par}
+{Right? Like a person can't scale to like hundreds of instances. Like there was, okay, I can manage one storage. I have servers at my house, I manage them, it's fine. I have, you know, five in the closet over here. I have two in my garage and I have a couple hard drives over here. I can manage that. Okay. I also manage the switches.}
+{\pard  \line \par}
+{I also manage the network. I also manage the access points. Like I can do some of that stuff. inside of an environment that multiple people are supposed to use. This stuff gets very }
+{\cf2 [00:50:00]}
+{ complex pretty quickly because you have to know how does that security group interact with that vpc, interact with that. IAM role interact with that instance.}
+{\pard  \line \par}
+{And all of those things tying together do get complicated. Mm-hmm. , and a lot of people just upfront are just like, I don't understand how the pieces fit. You can understand the Kubernetes API really well. You can understand the workloads inside of Kubernetes really well and still not understand how it fits within the broader infrastructure, where it runs AWS on-prem, whatever it is.}
+{\pard  \line \par}
+{All that stuff is still difficult, and so people just try to take it all in. It's like, I need to learn Kubernetes. Like you, you realize you're learning like all of a data center, like that's not like feasible for everyone to be an expert in all of those things. Like you can sliver out a piece of Kubernetes and learn that really well, and that's great and that's a, you know, something you should do.}
+{\pard  \line \par}
+{And that's one of those reasons, again, like if I go back to Lambda, . A lot of that stuff has so many opinions. It's, it's not as, I don't wanna say it's not as flexible, but it is, it has a lot more opinions on how a Lambda runs. A lambda runs a certain way. You have to }
+{\cf2 [00:51:00]}
+{ write your function a certain way. You get this amount of input, and then you can spit it out to different services.}
+{\pard  \line \par}
+{And all of those services are managed. I don't have to operate them. I, I just have to figure out like, what data does that one need? Well, how do I get an event bridge into my Lambda? How do I get an S3 bucket over here? And all of those opinions reduce the amount of options. Kubernetes is very flexible and you're, again, you're building a data center.}
+{\pard  \line \par}
+{And so that's all those knobs, all that flexibility helps enterprises, helps complex environments adopt it, but does not help individuals to learn it. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right. Talking about learning as well, where do you normally recommend people learn about EKS or maybe people who are inspired after listen, adjusting like, yep, sounds like, sounds awesome.}
+{\pard  \line \par}
+{Justin, I'm gonna learn Eeks today. Where do you normally send people to? Learn about e K s and how they can start using it and operating at scale. }
+{\pard  \line \par}
+{\b\cf3 Justin Garrison:\b0}
+{ Yeah, I, I like hands-on learning. We have a site called e ks workshop.com, which will walk you through, like, let's create a cluster, your very first cluster.}
+{\pard  \line \par}
+{Let's create, you know, put a workload on it. Let's make a load }
+{\cf2 [00:52:00]}
+{ balancer, let's autoscale it, all that stuff. E ks workshop.com has a great hands-on information. I also like having fun with videos and explaining things in different ways. So like, containers from the couch.com is, is my team's YouTube channel.}
+{\pard  \line \par}
+{We do all sorts of you know, in interviews, announcements but then just like walkthroughs on like, Hey, how does this thing work? Let's explain something with a whiteboard. We have YouTube shorts on there. If you're used to TikTok, like go, I made a bunch of shorts this year that are just like, one minute.}
+{\pard  \line \par}
+{How does this thing work?, how would I explain something to my five year old that they might understand or at least be entertained by?, and maybe they understand it a little bit more. And those are all areas that like, I, I like to explain things that way and just try things and, and see if it clicks for people.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ It's pretty awesome, man. Thank you. And yeah, I think this got message from Ketan as well saying, Hey Justin, thank you for lending your insight and experience. Ashish, looking forward to your analysis with AW re Invent. Oh yeah, definitely. We're looking forward to that as well, Ketan. Thank you. So I've got, this is towards the tail end of our episode as well.}
+{\pard  \line \par}
+{I've got three questions which are non-technical for }
+{\cf2 [00:53:00]}
+{ people to get to know Justin a bit better. The first one being, what do you spend most time on when you're not working on cloud? All hardware, no matter. }
+{\pard  \line \par}
+{\b\cf3 Justin Garrison:\b0}
+{ I like hardware. , I love, I I have, I literally have three of these compute boards on my desk.}
+{\pard  \line \par}
+{If you've never seen my, my Kubernetes cluster that I built for on-prem, my, my cubernetes, it starts with a c cubernetes ne. It's, it's behind me on the floor over here. I'm still working on it, but I, I love hardware. I have raspberry pies. I do soldering. I made like custom name badges with lights and embedded systems.}
+{\pard  \line \par}
+{So I, I love the actual, like, making lights. Blink was like kind of why I got into computers. I'm like, you can do what? Like, I could write some words over here and something in the physical world changes. That's awesome. , like, I love that aspect of it. So I, I do that a lot. I just, I love learning new embedded systems, new chips and just how hardware kind of fits together.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I would leave a link for that in the show notes as well then. Awesome. Second question. What is something that you're proud of but is not on your social media? }
+{\pard  \line \par}
+{\b\cf3 Justin Garrison:\b0}
+{ That's not on my social media. I mean, yeah. Like I'm really, I'm really proud of my kids, my }
+{\cf2 [00:54:00]}
+{ family. Like that's a, like, I never really thought I was like, growing up like a family person, like I never really, like, kids weren't like amaz, like I wasn't like, oh, I have to have kids when I grow up.}
+{\pard  \line \par}
+{And then I had kids. I'm like, this is awesome. Just because I get to experience life with them. Yeah. I get to like go through like what it's like to like learn new things and especially learn things a generation later. Yeah. When I was learning things 20, 30 years ago and how they're learning things today are, are really, really different.}
+{\pard  \line \par}
+{They're similarities, but they're really, really different. And being able to be part of that journey, but also being able. , like build some things that they're able to learn from. I, I, I worked at Disney. I have a, oh, yeah. Disney animation shirt on. So like when I was working on the movies, my son saw my name in the credits and was like, you did this.}
+{\pard  \line \par}
+{I was like, yeah, like, I did it by writing software. Here's how software made the movie. And I could help explain those things to him and understand that like, you can do it too. Like there are options for anyone to be able to write software and, and be kind of a, a nerd in a lot of ways and still do things that like }
+{\cf2 [00:55:00]}
+{ impact the world and have different impacts in different reaches depending on just like what the actual outcome is.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That's pretty awesome. Thank you for sharing that. Final question. What is your favorite cuisine or restaurant that you can share? }
+{\pard  \line \par}
+{\b\cf3 Justin Garrison:\b0}
+{ Hmm.}
+{\pard  \line \par}
+{Favorite cuisine or restaurant? So, I've lived in Southern California my whole life. There's a lot of amazing Mexican food down here. There is a local Mexican food place called Pattys that is like, there's. Cash only. There's a line every day. I've been eating there for 20 years. Wow. And I get almost the same thing every time.}
+{\pard  \line \par}
+{And they get a potato bean, rice and cheese burrito. And it is amazing. And it has become like this staple at my family now. Cause my wife introduced me to it and, and we'd go almost once a week. Now it's like the one place that I know that I'm a regular. Like they, they know me. I'll call 'em ahead of time.}
+{\pard  \line \par}
+{I'm like, Hey, I want my burritos. I'm like, Okay Justin. Those they know. Like it's, oh, really? It's, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ oh, you by name on phone. }
+{\pard  \line \par}
+{\b\cf3 Justin Garrison:\b0}
+{ Yeah. Yeah. I don't even like, I don't have to say my name, but like when I walk up to the door, like, yeah, we'll get your order. Hold on a second. And like, they just know, like, that's like that I've been coming for 20 years almost every week.}
+{\pard  \line \par}
+{And, and that's definitely }
+{\cf2 [00:56:00]}
+{ like the place that I go to the most. Right. I will say though, this past year in, in 2022, I traveled a lot and in Spain and in Thailand, I had some amazing Indian food that I have never had before in my life. Like I just, like, there's Indian food in Thailand and Spain. Yeah, I know.}
+{\pard  \line \par}
+{Like I, again, I didn't travel very much and there's not a lot of really good Indian food down here in Southern California. Not that I've found maybe proper, maybe in San Diego, but I'm kind of in between. Right. And so I'm not at like those like real hubs very often. And so those. Amazing to me where I was just like, I did not know Indian food could taste this good.}
+{\pard  \line \par}
+{And so, like there's a couple places this year that I'm like, if I went back to Barcelona or Thailand, like I would fine those restaurants again and I would definitely eat that food again. Cause that was amazing. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Well, I would definitely follow in your socials for knowing when you're actually recommend those places out there as well.}
+{\pard  \line \par}
+{Talking about socials as well, where could be finding on social media to reach out to you, man. }
+{\pard  \line \par}
+{\b\cf3 Justin Garrison:\b0}
+{ If they . Go to justin garrison.com I've actually been spending a lot of time on my own blog, just like, let me make sure that I'm writing }
+{\cf2 [00:57:00]}
+{ stuff that I own. I've been on Twitter for a very long time, but I have not been spending time on it for the last month or so.}
+{\pard  \line \par}
+{Like most of us out here. Yes. Yeah. So I have a YouTube channel that I've been spending more time on and, and my blog. And that's kind of like the two places. My blog does have other links like LinkedIn and Reddit and stuff like that. But I don't spend as much time on those. I've just been trying to like, what does it look like to do less stuff but own a little bit more of it?}
+{\pard  \line \par}
+{And so I'm, I'm doing less of the like, outbound I'm everywhere and just kinda like, Hey, I wanna own some of this a little bit going forward. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ It's pretty awesome man. Thank you for sharing that and I'll leave the links in the show notes as well. And thank you so much for spending time with us and explaining AWS EKS in such detail as well.}
+{\pard  \line \par}
+{I'm hopefully we can actually bring, bring you down for probably a layer deeper onto level level 200, 300 conversation. But I appreciate you hanging out with us and thank you so much for spending your evening with us. Yeah, thank you so much for having me. Thanks everyone else we will see you on this weekend to talk about the AWS reinvent analysis, which is probably the last episode for the year, for the season.}
+{\pard  \line \par}
+{And I'll see you.}
+}

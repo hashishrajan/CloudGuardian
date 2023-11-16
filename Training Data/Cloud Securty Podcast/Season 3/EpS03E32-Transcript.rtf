@@ -1,0 +1,641 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red250\green138\blue59;
+\red128\green128\blue128;
+\red216\green34\blue146;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\b\fs48 Kinnaird McQuade\b0}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ hey, welcome. Kinnaird how are you, man? }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ I'm great, man. How are you }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ doing good. Thanks for coming in, man. I'm really looking forward to this conversation, man. }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ Yeah, same. Thanks for having. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Not a problem. So Kinnaird before we start, I mean, out of the entire audience that we have of over 10,000 people who listen to this episodes, For people who may not have heard about you with a one or two people who may not have heard about you.}
+{\pard  \line \par}
+{ What's your journey into the whole cloud security space? Let's start }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ there. I started out out of college doing web app pen testing and application security and got into threat modeling.}
+{\pard  \line \par}
+{And I really liked viewing things at that high level view. And then thinking like an attacker, right. but I met my mentor at the time and started working on building out a cloud security consulting practice eventually ran that practice. And then. Moved to Salesforce and got into open source.}
+{\pard  \line \par}
+{And that's really where my career blew up. Like after I released cloudsplaining and policy century that's where I got connected with a lot of folks between the cloud security slack, and then just folks on Twitter. }
+{\cf2 [00:01:00]}
+{ And it's where I made all my cloud security friends. So it's been a wild ride.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ , I can see that I've been following some of it as well. So I'm so glad to have you come on the show as well. And considering we're talking about guardrails as well. Cause a lot of people don't even know what guardrails are. I mean, I imagine people think of the actual guardrails on the side of the road.}
+{\pard  \line \par}
+{So what are guard rails and what's that context in the whole cloud space, but maybe in AWS. }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ Yeah. Sure. So there are just generally speaking provider enforced guard rails, and then customer enforced guard rails. So the idea behind them is that they prevent you from deploying insecure things in the first place. So some examples would be um, like AWS service control policies, so that even if you're the root account user in a child account, then you can't do certain insecure things or in Azure there's Azure policies customer enforced guardrails would be things like Infrastructure is code policies or piggybacking off of a C I C D pipeline that you have to make sure that insecure configurations or whatnot aren't deployed in the first place.}
+{\pard  \line \par}
+{Right. But }
+{\cf2 [00:02:00]}
+{ I've been, thinking more about guardrails and there's this focus on the preventative guardrails, stopping people from doing things, but if you think about like the actual physical guardrails, they don't just stop people who are about to blow off of a cliff.}
+{\pard  \line \par}
+{ I haven't been a driver in this position, but , if I'm starting to swerve yeah. I might bump it and then come back on the road. Right. So, I feel like we should, as an industry expand our understanding of guardrails to be those quick things and quick controls that you can do to quickly correct the developer after they've done something, let them know, get them back on the right path.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So to your point then with the CSP provided or the customer provided one cause I'm thinking more from a perspective of if I'm listening to this and going, okay. I guess I've got some from CSP already. They give me a few, can I just rely on them and I don't have to rely, like I don't have to create customer provided guard rails.}
+{\pard  \line \par}
+{Can I just fully just make my environment rely only on the CSP provider? }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ Well it, depends more }
+{\cf2 [00:03:00]}
+{ the degree to which you can rely on. It depends on the cloud provider. So Azure has more extensive guardrails than AWS. Their Azure policies are extensive. I wrote a tool that did a talk for cloud set last year that really , I }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ link the talk.}
+{\pard  \line \par}
+{Well, I think it's definitely what checking out. I think's a point it's different from different CSP rather than say I guess, because I'm considering me talking about AWS. Yeah. And definitely, it's what does it really mean for. Relying on just one or the other, I guess is good. Cause I imagine people will listen this and go, well, I guess I've got, it's already there by AWS.}
+{\pard  \line \par}
+{I'm just gonna use that. Why do I have to worry.}
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ Well, it's really limited. Right? So, you want to use those on the preventative side for preventing the egregiously bad things or things that you as an organization decide you wanna enforce. So service control policy that applies to is appropriate for some organizations, but not others is just for example, running a Lambda out of a VPC, right.}
+{\pard  \line \par}
+{Now it's actually kind of complicated to get Lambda's running out of a VPC. So you're gonna enforce that }
+{\cf2 [00:04:00]}
+{ everywhere in every organization. I don't think so. Right. Yeah. But so there are some things that might not apply in all organizations.}
+{\pard  \line \par}
+{And if you want to get as much context as possible, you're gonna end up having to do customer provided guardrail. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And I think to add to what you were saying as well, just a great example on the Lamba should run from VPC. Another one that I came across quite often is, oh, you shouldn't be able to delete databases.}
+{\pard  \line \par}
+{Like last thing you want is your production database being accidentally being deleted. Like no CSPs gonna tell you that, Hey , just database is kind of not being done. So from that perspective as well, I think you're on the money there. I've got a question here from Vineet as well from as well. Is the AWS guard rails free.}
+{\pard  \line \par}
+{ I think it's a great question. I would love for you to kind address that as well, if that's }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ right. So things like service control policies are definitely those are free. So, and then as you expand to other things like , there are other like monitoring things that , can get expensive, but yeah service control policies are definitely free.}
+{\pard  \line \par}
+{Awesome. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Thanks for }
+{\cf2 [00:05:00]}
+{ that question. I think worthwhile calling out as well. When we talk about guard rails, we are not talking about, I guess, a particular service , thats worthwhile clarifying cuz. Cause you mentioned two services, just them monitoring services as well as the SCP.}
+{\pard  \line \par}
+{So in your mind, when you think of guardrails, what are services that come to your mind? }
+{\pard  \line \par}
+{Are there other services that come to mind, what people can use to implement guardrail?}
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ I would focus a lot on the customer provided guardrails, like , with infrastructures code checking and and stuff like that, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And how would you describe I guess to your point mentioned the word preventative and detective what's the difference there?}
+{\pard  \line \par}
+{Like as in like maybe being proactive? What's the difference? Yeah. }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ So for example, if I'm. Let's say that I write some terraform code that opens up an S3 bucket to the world or has encryption issues. And I run checkov against it or another infrastructures code auditing tool.}
+{\pard  \line \par}
+{Then it can pick that up. Let's say for I'm running that out of a C I C D pipeline. It can pick that up and you can decide to block it }
+{\cf2 [00:06:00]}
+{ or allow it and just alert on it. So in practice Alerted blocking on a ton of rules is going to be really difficult for some organizations depending on the culture and different challenges that you might have. I've soured a bit on the preventative guardrails. as time has gone on, I think the monitoring and like quick alerting or allowing developers to be able to exclude certain things based on context. And then you zoom in on those I think that's as time has gone on and seeing where the industry has gone, I think that's become more practical.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right? So wait, so preventative is more practical }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ I think it's less, I think it's doing preventative guardrails for egregious things is effective. Like right. You really should. There's no reason why you shouldn't be doing blocking public access with S3 bucket.}
+{\pard  \line \par}
+{Yeah. There's no reason, right? Yeah. But other things like certain encryption of certain services is it practical to block? Absolutely. Everybody from doing that? Not always. Right. }
+{\cf2 [00:07:00]}
+{ So, no. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. And to a point then what are examples of I guess you mentioned the detection part, cause I think if you would zoom out a bit, we are talking about guard rails and I wanted to address at least the folks who would be working with this, like folks like yourself and organizations who are either creating it or working through it.}
+{\pard  \line \par}
+{What are I guess maybe what's a great place to start. This as well. Cause I don't even know there's a benchmark or something like this. Is there a benchmark? }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ So I mean, it's really just a lot of advice from folks online and different lists of controls. }
+{\pard  \line \par}
+{I do have something from my OWASP talk last year where I put together some recommended list of like Checkov rules. to help people get started. So I mean, if you look at it from a practical lens, right? Let's say there are no guardrails. There are no real controls in place.}
+{\pard  \line \par}
+{And you're trying to get set up with infrastructure is code auditing, right? Yeah. And you already have developers using C I C D pipelines to run infrastructure as code. If you start enforcing preventative guardrails. Right now in this situation, }
+{\cf2 [00:08:00]}
+{ you're going to block them from being able to deploy anything.}
+{\pard  \line \par}
+{Right. If they already have issues, right. So what is your option? First? You get some visibility. You start you put things into audit mode and then you have to buy down the bugs, right? You have to eventually get it down to zero or. Get to the point where you can flag a bunch of things as exceptions, but yeah, you gotta stop bleeding. You kinda have to approach from both sides. Right? So like defensive Terraform modules, like it's kind of like defensive libraries, right? Where you have Terraform modules that have like secured your, what you consider be secure defaults, right? Yeah. Getting getting teams to use those so that they do pass the test and getting them to adopt those.}
+{\pard  \line \par}
+{And that's a process. It's a, it's a long journey, right? }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I'll probably get into the whole, how do you start one and build one later on as well in the show, but maybe the next half would be to get into how do you even scale this? To your point, we have figured out.}
+{\pard  \line \par}
+{We have a guardrail for S3 bucket. Shouldn't be public. We have a guardrail for you. Shouldn't be able to delete databases which are }
+{\cf2 [00:09:00]}
+{ production databases or whatever. And I don't know, like we can come up with a hundred more depending on the organization, but the question, which is probably the big one is it.}
+{\pard  \line \par}
+{It's great when you, and I say this for one account. Clearly, it's not the common norm these days that people only have one AWS account, people have scaled up to two, three, sometimes hundred thousand hundred of AWS account. Yeah. So 1000. Yeah. How does does one work with scaling this? }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ Well, you have to figure out how you have to be able to measure it, prioritize it, and then figure out how you can buy down entire sections of it. Right. So, oh, right. And, and it depends. So if you look at. Creating a hypothetical scenario, right? Like, let's say that, okay. We throw some monitoring on there, we're using some paid CSPM tool.}
+{\pard  \line \par}
+{And we see that people are assigning the administrative access policy to a bunch of roles. Or we're seeing that, , There are misconfigured S three buckets all over the place, right. You can, based on what you're seeing and based on customer feedback and the }
+{\cf2 [00:10:00]}
+{ numbers you can figure out okay.}
+{\pard  \line \par}
+{Out of all of these, what are the most critical issues? And then. What are different strategies that I can use to help buy down those issues? And I really think that as far as cloud misconfigurations go infrastructures code is the best way to handle that. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So infrastructure is the best way to go start with this guardrail, }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ Infrastructure as code and having others adopt it right.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right, right. also to your point This needs to be a certain level of maturity in the organization to be already starting to use infrastructure score, to kind of go on this path effectively. }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ It depends on the size of the organization, but yeah. I mean, first of all, you have to be able to measure things, right.}
+{\pard  \line \par}
+{And be able to see how many misconfigured resources you have and which ones are the most critical. So whether that's using things that come from the cloud provider or open source tools or paid tools, right. So first you have to measure it. That's the very first thing.}
+{\pard  \line \par}
+{So, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ yeah. And that would be individual to each organization as well, to what you were saying. Yeah. }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ }
+{\cf2 [00:11:00]}
+{ Depending on what you're choosing what's within your budget, et cetera. Yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. And it's funny. Cause when we started talking about scaling, the first thought that came to our mind was maybe we'll use C I CD pipeline.}
+{\pard  \line \par}
+{Cause that's what people keep throwing at it. So is there a part for CICD pipeline in anywhere in this? }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ Yeah. Yeah, definitely. This C I C D pipeline is a really good insertion point if you're doing infrastructures code and you're pulling V CIC pipeline, it's a really unique insertion point to be able to audit for these kind of things.}
+{\pard  \line \par}
+{So. Right now, not everything is in fact, like always reflected in the C I C D pipeline. Sometimes folks might make changes in production, or maybe you have some vendor cloud formation stack that is actually going in creating infrastructure that isn't reflected in your infrastructures code or some Lambda changing things.}
+{\pard  \line \par}
+{Right. But For the most part, if you have C I C D, if you can deploy things via infrastructure as code, that's a really, really good place to start buying down to }
+{\cf2 [00:12:00]}
+{ monitor things and start buying down classes of bugs. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right. I think, and I love Kip. Could you explain the whole buying out classes of bugs?}
+{\pard  \line \par}
+{Cuz a lot of people, I don't think they understand the concept because for them it's like, I'm gonna use a web example, but it could be anything else, like could be cross out scripting. Oh, okay. I need to get rid of cross out scripting, but what you're talking about is scaling. So can we zoom into the whole take out classes of bugs cause you and I get it, a lot of other people may get it, but some people will like, what are they on about?}
+{\pard  \line \par}
+{So how would you describe removing classes of bugs to people who may not have heard of the concept. Yeah. }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ Yeah. So it is kind of similar to if we're comparing the infrastructures code to like APSEC right. It is kind of like those defensive libraries, like, or just having some libraries that will do the job for you, right?}
+{\pard  \line \par}
+{Like, I mean, we with SQL injection, the risk in that. OWASP , has recognized that, Hey, the risk of SQL injection has gone down a lot because everybody's using ORM libraries these days. Right. And so rather than wrong }
+{\cf2 [00:13:00]}
+{ running like raw SQL queries. Yeah. So similarly, if you see some systemic issues across your environment and you trace that back to where that's happening at the source whether that's looking at the source code yourself, or just working with dev teams then.}
+{\pard  \line \par}
+{You can figure out where are these misconfigurations coming from? Like, if there are thousands of IAM users, there's probably some automation that has something to do with that. So, if you can figure out where that source is and then eliminate those problems at the source, then you're you're gonna find later on that you won't have as many bugs being opened or you won't have any as many results happening from that CSP tool.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yep. Yep. And so to summarize, I think what you're referring to is basic identifying. If you see more than one of a particular bug, well, a bug in this context could be IAC bug, but you're kind of like, oh, is there an automation that I maybe is scaling this out? I address that, I think I can address the whole problem rather than just finding }
+{\cf2 [00:14:00]}
+{ individual accounts to look at.}
+{\pard  \line \par}
+{Oh, okay. Account number one, account number two, account number three, and account number all the way to 80. That's not }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ practical. Yeah. Yeah, exactly. I mean, you have to zoom in on some of those results and it's kind of like taking samples. Right. And I find it's really useful to interview folks about what they're doing and how they're using the cloud, even away from just security things.}
+{\pard  \line \par}
+{And I love talking to people in the industry about this and how they're using the cloud, even folks who are not security , you find out a lot about why certain security things happen and some cool things about what people are building.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Wait, so what's the most I wasn't gonna use the word scariest, but what's the most interesting, let, just say that what's the most interesting way of you. Someone told you that this is how we use cloud }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ Well, I'm really into serverless these days. So I find it to be really interesting, the teams that are all serverless or they I see it more with some startups or some orgs within bigger companies where they just don't have any EC2 instances or stuff like that.}
+{\pard  \line \par}
+{That's crazy to me. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. Wait, so using cloud, just as, }
+{\cf2 [00:15:00]}
+{ as serverless, the entire thing is built on server. Yeah, }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ yeah, yeah. I haven't talked to a lot of folks who are like that, but that fascinates me, so, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ yep. Yep. I think it does fascinates me as well because we did a whole month of this end of 2021 mm-hmm and we had someone that they had made a product, which was just on monitoring performance of Lambda.}
+{\pard  \line \par}
+{Now for people who may have worked on AWS Lambdas Monitoring it working through it. It's insane now, but when you have a whole organization that just runs only on Lambda, imagine how do you troubleshoot anything or monitor anything? So observability, man. I mean, they got purchased by VMware, I think, but great product.}
+{\pard  \line \par}
+{But to your point, the definitely fascinates }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ me as well. Yeah, . They do it with observability tooling, man. There's my life before observability tooling. And there's my life after they're two completely different things. Yep. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Hundred percent I think. We definitely need more observ in our life as well.}
+{\pard  \line \par}
+{Yeah, too bad }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ you can set break points in Lambdas, ? }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ No, that's it that, I mean for people who, I mean, we need }
+{\cf2 [00:16:00]}
+{ to do a whole episode on Lambda as well, but I think the other thing that people talk about on, and going back to the whole security guards as well, we spoke about how do you scale it and I guess, how do you kind approach it?}
+{\pard  \line \par}
+{I guess a lot of people they would just be looking at building a security program for AWS. A lot of people maybe starting off today. And my understanding is you've done some work in that as well. You've kind of thought about how do you start implementing an AWS security program.}
+{\pard  \line \par}
+{How would you describe the building blocks for say someone to build an AWS security program? Where does even one start with these kind of things? }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ The things that will really help you out is having some kind of application inventory and resource inventory, being able to view everything from that big picture view across all of your different accounts and for the love of God, stop using IAM users and move over to AWS.}
+{\pard  \line \par}
+{So, or like some other identity management solution. There's basically no good reason that I can think of for using IAM users except for IAM acces keys and sticking them on premise VM. I really can't think of }
+{\cf2 [00:17:00]}
+{ one then monitoring and detection and those are the really big starting blocks.}
+{\pard  \line \par}
+{So I would definitely advise that anybody who's starting out check out Ram McCarthy's cloud security hearing blog posts. Fantastic. And Scott Piper's AWS security roadmap. Those are the golden standards that I point everybody too. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Sweet. Oh, so use, so started IAM and then use the reference points, like the ones by done by Scott Piper with cloud security roadmap. What was the other one? }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ Sorry. And cloud security orient hearing. So I believe , it's a weird word. I didn't know what it was before, but I think it's, it's the whole idea is when you're getting familiar with you're just dropped into an, I think it has something to do with CA driving.}
+{\pard  \line \par}
+{It when you're dropped into an environment and you have no idea what's going on, how do you orient yourself and get familiar with what's happening in those AWS accounts. So, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ wow, there you go. you definitely take that from you and that the show notes as well.}
+{\pard  \line \par}
+{Yeah. }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ For things that you can kind of pursue in parallel, right. Is the identity stuff and like application inventory, starting }
+{\cf2 [00:18:00]}
+{ using infrastructure as code monitoring and detection }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ secrets manage to }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ kinda keep like yeah, exactly. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Definitely. And I think I feel. There is definitely a lot that can be done, but after a certain point becomes very organization specific as well, to your point, if you're using Lambdas or if you're just a serverless organization, I mean, is C is probably, I don't know that important, I guess, in servers context, but would you consider a Lambda world would be IAC driven?}
+{\pard  \line \par}
+{Yeah. }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ I really like the pattern where you separate your infrastructure from your application code. So if you think about it once I get my infrastructure in place I'm gonna be updating my application code a lot more than the infrastructure code.}
+{\pard  \line \par}
+{That's fine. Yeah. So being able to update that application code quickly is important and being able to roll that back is important. And I sometimes I don't wanna wait until my Terraform pipeline is done running 15 minutes later, just to make a little tweak, ? }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Wait. So would you describe your approach to this as more have.}
+{\pard  \line \par}
+{like I a dedicated Terraform of }
+{\cf2 [00:19:00]}
+{ whichever tool people wanna use for IAC have that as a separate, I separate C CD pipeline, if, for lack of better word where it just builds the infrastructure and a separate one for the application. Cause I mean, and I'm just curious because some people say, oh, the entire application should be on one CICD pipeline.}
+{\pard  \line \par}
+{Cause technically Terraform should not change anything, but it's still gonna go through it. But yeah, I'm curious what your thought process. }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ Well, that's a pattern that I'm currently really into. I'm not gonna go ahead and say, everybody needs to do that, so oh, fair enough. Yeah. I think everybody uses the Sam CLI framework from AWS would would would beg to differ.}
+{\pard  \line \par}
+{So I like that one too, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ but I hate clapping. Yeah. Fair enough. Cause I personally find it hard to decide as well. Cause sometimes to your point you may have one dedicated for application and technically things like Terraform or any other ISE languages. They should not really recreate the entire infrastructure unless you've changed something.}
+{\pard  \line \par}
+{It should just go through it and go, well, okay. It's only change an application, just gonna make, make a change in application. So, yeah, I'm definitely curious if people only who are listening in, }
+{\cf2 [00:20:00]}
+{ have a vote on one over the other, definitely feel free to leave that a commented. Definitely leave a question as well.}
+{\pard  \line \par}
+{If you have any questions about this. So maybe the next segway could be on this. We spoke about the building blocks of security program. And we clearly scaling is not about CICD Pipeline pipeline because not everything is covered over there. Mm-hmm what would you say about scaling security? As guardrails in general?}
+{\pard  \line \par}
+{I think so a lot of people. May not have the concept of what does scaling security look like. And that's kind of one of the reasons why, even though we have guard rails,, how do you find security scaling in an AWS slide? Like I think guard rails probably is one component. Are there other things as well to you have the example of IAM don't use IAM users use a more scalable version of single sign on like when you zoom out of it and maybe someone like yourself, who's trying to implement this. When people ask you what scaling security, what does that really mean for you in an AWS context? Yeah. }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ Well, I mean, we think about }
+{\cf2 [00:21:00]}
+{ scale and how many people are within an organization. Right. And I think about scaling security controls is really about how many people do I have in my organization.}
+{\pard  \line \par}
+{And how quick can I tell them that they're doing something wrong that they need to fix it. Right. There's a huge difference between, okay. I have some misconfigured resource where we're not enforcing a hard preventative guardrail yet. How long does it take to tell the developer that, does it take them?}
+{\pard  \line \par}
+{Is it before the build, if it's preventative or before it's deployed, if it's preventative, if it is it at infrastructure's code, , is it if it's preventative or did they get a slack notification right after they make a modification in prod? Right. So or is it 24 hours later or, , months later when somebody sees it manually.}
+{\pard  \line \par}
+{Or when they run a tool or when some consultant runs a tool a year later. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. Well, they're definitely interesting scenario to food for thought so , how would you say if I ask you about guardrail scaling itself, then like how does }
+{\cf2 [00:22:00]}
+{ one scale guardrails cause to your point, then if the organizations are described like that, how would you describe scaling security, guardrails come security controls?}
+{\pard  \line \par}
+{Or would you say they're the same security guard security? I would, I }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ just think that having as much automation as you can. To whether that's preventative or detective and having that quick feedback loop to developers is going to make you as successful as possible. Some people solve that through some paid CSPM tool with slack notifications and prioritizing which ones they alert developers about and which ones they don't.}
+{\pard  \line \par}
+{Some people solve that through infrastructure. As code stuff and a combination of that and monitoring alerting. Right? So it depends on the organization }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ glad mentioned the paid CSPM part. Cause I imagine a lot of people listening to this may go, do I need a paid solution for doing all of this awesome things that can have mentioned?}
+{\pard  \line \par}
+{Or can I just do this no open source and you are a huge, kinda like me. You are a huge supporter of open source as well. So curious from you, do you need open source only? }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ }
+{\cf2 [00:23:00]}
+{ I think a lot of innovation happens in open source first. So and I think that, I don't wanna say that everybody should use some paid tool because , I've been the sole person who's responsible for cloud security in an organization before.}
+{\pard  \line \par}
+{And man, I'm not gonna get approval for all this stuff. Like I don't have the budget for this. Right. So yeah, so. , if you do have the budget and you're able to shorten the time to get value in, , you don't have to get dedicated headcount for certain things, depending on the tool, like it's useful to maybe consider buying something, but you can get a lot of stuff done with.}
+{\pard  \line \par}
+{Just things that are an open source. So it just, it really depends on where you are. So I did a whole talk on the whole, like using different open source tools to lock down your AWS program. So it's totally possible. So, but , right. I think about it from the point of. The whole used open source tools versus buy cloud security tools.}
+{\pard  \line \par}
+{And I think especially for smaller teams or just non Netflix as the world, et cetera not everybody can afford to have dedicated engineering teams for }
+{\cf2 [00:24:00]}
+{ every little category of cloud security tooling. Right. Fair enough. And so sometimes that's not even the best solution for the organizations who decide to do that.}
+{\pard  \line \par}
+{Some huge organizations they end up dedicating like five really expensive engineers to address an issue that they could have just spent like a lot less money on getting a product. Right. So, I mean, they're like anything, there are trade off. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Very well balanced answer.}
+{\pard  \line \par}
+{Can I just say to your point then from a team perspective, then as you were referring, like some people may not even have the option. It might just be one person looking after the end entire cloud security of like, I don't know, hundreds of AWS accounts. What are some of the team skills that you think these days people should have from a cloud security perspective and maybe Not just thought security, but someone who probably has to be to what you said, one person has heard this interview and like, oh great.}
+{\pard  \line \par}
+{And I have to implement a security program in AWS on my hundreds of AWS accounts. I'm only little, all me. How would you say I guess we've already spoken about how they would approach it, but what kind of skillset would they require to do something }
+{\cf2 [00:25:00]}
+{ like this? }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ Yeah. Well, I mean, You have to have the curiosity to like go tinker with things and like willingness to learn and having a background with some coding experience definitely helps, but I mean, I started out in the cloud security space with I, I started writing Python.}
+{\pard  \line \par}
+{I think it was. Two years ago. Right. So yeah, so, , just having a willingness to learn and a sense of practicality and the ability to like prioritize things and not chain developers. Those are like the most important personal qualities, but skill wise being able to think about things from a risk prioritized perspective and understanding the The cloud provider itself.}
+{\pard  \line \par}
+{I think that, , certifications aren't everything, but it's a, a good sign and a good intro to things to , in the AWS space to get that associate certification, get that security certification as long as you're actually doing those things. And not just trying to pass the test, the labs are where it's at.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ What? No. Yeah, you're saying I won't get a job if I just do certifications. . Yeah.}
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ Yeah. , }
+{\cf2 [00:26:00]}
+{ I'm actually terrible at certifications. And I guess I can say this now, cause I'm considered an AWS security expert, but I failed the AWS associate certification the first two times. So, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ oh right. Well I failed the professional one. The first time I wrote it. So , you and I are that different man.}
+{\pard  \line \par}
+{I think it, yeah, even though it is funny, I don't know if that's the right, exam to judge the kind of skillset people have. Yeah. Maybe, }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ but it's about the On the job experience, , and are you actually, like if you actually go and build something using some of those services, then you're gonna learn a whole lot more than, , just studying the slides or.}
+{\pard  \line \par}
+{Or following one lab. Right. So, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ yeah. I know we joke about this, but it's also the thing where you can look at projects around your existing organization as well, which could be in cloud. There's so many other ways to get the experience. Yeah. And they there you go.}
+{\pard  \line \par}
+{I don't think you'll pass the AWS 60 special. Without really learning. I agree. I think the, so Zinet on the money there, , we would not pass the AWS exam just because we are learning and we are }
+{\cf2 [00:27:00]}
+{ like, oh, we can go back to the office and implement all of this.}
+{\pard  \line \par}
+{Yeah. But I feel like, I dunno, I don't get intro to it. Yeah. But I, I know if I'll derail the whole what do you call it? The AWS certification exam just by calling out the fact that it's very AWS centric. Like you almost have to kind of, oh I, and I'm sure other people who are listening to this would agree that it's more like when you're giving an exam as well.}
+{\pard  \line \par}
+{Was this service released? Cause I would've answered this question in a way that I don't know something I was raised yesterday, but the exam hasn't updated for six months or one year or whatever. And they ask you part service, which doesn't even exist anymore or it's not even used properly. So yeah. I'm sure that , people have instances like that as well.}
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ Well, there are also , they're also created by AWS. , I feel like sometimes they're a bit of an advertisement for some of the different services that they have. And , they're not gonna go in and say, this is the riskiest thing with AWS cloud, or this is really bad and you need to stay away from this.}
+{\pard  \line \par}
+{You really need to not do this thing. They're not gonna take that tone or really show you the really bad things and that can happen. So if you want a }
+{\cf2 [00:28:00]}
+{ good kick out of like what the bad things that can happen in AWS, I'd definitely say check out Nick fish hacking the cloud.}
+{\pard  \line \par}
+{Yeah, it's a really good like cloud like cheat sheet for , different commands and different things that you can do when you're trying to. Like escalate privileges, or really do anything when you like establish a foothold in the cloud environment. So yeah. Yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ A lot of fun.}
+{\pard  \line \par}
+{Perfect. I wanna question from Ben as well in your experience, is there a certain life cycle or timeline that works well for implementing a security guard rail and transitioning it from a detective to a preventative control?}
+{\pard  \line \par}
+{Great question Ben }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ Yeah. So, I mean, the timeline kind of depends on how many bugs you're dealing with. So. You wanna get to a point where you're buying down some of the bugs. You have some ways of making sure that they're not going to inflate. So you have some Terraform , I keep using the \\ defensive Terraform modules example.}
+{\pard  \line \par}
+{But and then at a certain point, you grant exceptions for all the people who are really lagging behind so you can put things into enforcement. So my }
+{\cf2 [00:29:00]}
+{ experience that's been most effective and then you buy those remaining ones down. So, , it's a journey I really wanna stay from giving an arbitrary deadline. Cause I don't want your boss to get mad at you if a little bit longer cuz if you have some teams that are strangling behind. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. Fair enough. And that's a great question from Ben as well, because I think it's worthwhile calling out that just because something starts off as. Detective control. It should always remain on detective control. It should slowly transition onto like, it should become a practice rather than, yeah. Hey, I'm preventing Ashish from opening up the S3 Bucket to the internet. At some point you kind of have a transition, so it kind of becomes like a norm in the organization instead of just waiting, right?}
+{\pard  \line \par}
+{Yeah. }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ Yeah, exactly. Exactly. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Sweet. Actually, I've got a comment from Vineet as well. When renew cert starts, they make you go and check new certs. Oh, right. Okay. There you go. They make you to go check, but I, I wasn't aware for, thanks for Vineet cool. All right. We are towards the tail end. I'll just go. One more question. . What's your recommendation for like, I think we are going into a space where. We spoke about }
+{\cf2 [00:30:00]}
+{ how to scale, what security guard rails are. How does one even learn about this stuff?}
+{\pard  \line \par}
+{Like I think what was your approach to learning about scaling security guard rails that maybe you can share with other people who are thinking about going this? I'm assuming you would not say AWS }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ documentation. Yeah. Or AWS control tower. That that would not be my recommendation. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ that is not where I learned that.}
+{\pard  \line \par}
+{I don't, I've never heard anyone just say, oh yeah, you can learn scaling security from AWS documentation. Definitely not. Yeah. So what, what your }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ approach? My, honestly, my approach was , I got on that cloud security forum, slack, and I , I was just talking with other people about what we found to be effective or different, cool controls that you could put in place.}
+{\pard  \line \par}
+{That's where I got into SEPs and good. Like getting down to least privilege, IAM policies, et cetera. So, I mean, one of the cool things about cloud security is that , we're still very early and we get to help. Define what security in the cloud means. Right. And so Yeah.}
+{\pard  \line \par}
+{ I think I got into cloud security like six years ago. Right. And so there was none of }
+{\cf2 [00:31:00]}
+{ that stuff. Right. And , even a few years ago there were a lot less like standards or like awareness about some of these different things. So, I mean, I think.}
+{\pard  \line \par}
+{The thing that's helped me the most is just being involved in the community. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. Good point. And I think to what you said as well, I don't know if, how many people realize we're still scratching the surface of cloud security in yeah. , like you and I have been in this for over five years, six years, but it still feels like, oh, we still, obviously, sometimes you still say the same things that you were saying like six years ago.}
+{\pard  \line \par}
+{Yeah. But sometimes like, oh, that's new. I think , I, I kind of had that moment, but I don't know if you had those moments as. }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ Yeah. Yeah, definitely. So I yeah, I think the the next stage of cloud security tooling really across, and I think this goes beyond just cloud security or like CSP M kind of tools is tools that understand prioritization.}
+{\pard  \line \par}
+{ I know a lot of security vendors like to show like, Hey, we found all these crazy critical findings at a certain point. If you're just showing a ton of critical findings that have no context, people are just gonna write you off, ? Yeah. And }
+{\cf2 [00:32:00]}
+{ so helping security engineers prioritize.}
+{\pard  \line \par}
+{And I think, , applying graph theory in some kind of way is that's where the next generation of security tools in general, like not even just cloud I think that's, that's where they're gonna be. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Wait say don't drop the word observability in there now suddenly it's like, that's all are in}
+{\pard  \line \par}
+{Yeah, }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ man. Observability is just like some it's it's having like tracing IDs and, , just putting them everywhere in your structured logging and then }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ throw around. Although I joke about it, but that's much more harder than what you would think it's to implement. Yeah. Cause like, have you tried doing. }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ Yeah. Yeah. It's yeah. It's pain. Total pain. Yeah. Oh my }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ God. Like I think it's the metrics that I'm like, what am I really using as my telemetry? And I'm like, like, this is OK. I know this is, I know. I dunno if it's actually, maybe that's a great last question then.}
+{\pard  \line \par}
+{Do you think the observability platform, at least in the little experience you may have had, I'm just, this is my curious, personal question where observability is at that stage, where it can be started. We can start using them for }
+{\cf2 [00:33:00]}
+{ say cloud security. }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ Yeah. Cause right. I recently ventured into trying to figure out some auto diagramming tools and right.}
+{\pard  \line \par}
+{They're for serverless. Okay. I don't want to be too extreme here, but a lot of them are really terrible. And so I'm only able to really get a good service map going like it it's some of. Tools are better with like, if I have EC two instances sitting in a subnet, but honestly, after spending so much time building those kind of infrastructures, I want to not have to handle servers and infrastructure as much as possible.}
+{\pard  \line \par}
+{And so the only way to get like a really good service map going is with those observability tools I feel like. and , if you have Lambdas talking to all these different services in AWS, you're not always going to see that they're actually doing that unless you're tracing it.}
+{\pard  \line \par}
+{So I think those kind of tools can add more context into what is actually happening in your account and then the different points at which like the different attack factors that could be present. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Sweet. And I've got a good comment from Zinet as well }
+{\cf2 [00:34:00]}
+{ that's good to hear. Asisha I was in cloud security around 10 months and sometimes going crazy.}
+{\pard  \line \par}
+{Why? I don't know so much yet. The more you learn, the more, , nothing. Yeah. That's exactly right. Do you have any thoughts on what's your experience in cloud being so far? Can. }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ Just with all these new services coming out and yeah. Yeah, that's fine. Yeah. I mean, , it's crazy. It's difficult for everybody to keep up.}
+{\pard  \line \par}
+{So, I mean I think when I first wrote like policy century, I think there were 150 different services and what are we at? Like two 50 or something like that? Yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I wouldn't be surprised. I'm pretty sure re:invent is coming down the road as well. So there's another 50, 60 coming. }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ yeah. Oh yeah, for sure.}
+{\pard  \line \par}
+{And, but the cool thing is with that, there's a lot of opportunities for cool security research into some of these different services. And I know there are standards on for any interested security researchers out there. I know that we have existing lists of privileged escalation and different security ways of escalating privilege different risky permissions, et }
+{\cf2 [00:35:00]}
+{ cetera.}
+{\pard  \line \par}
+{For miss Schiff and cloud, but there are a lot more out there that hasn't been covered and there's some cool research coming out. , later this year from some folks. And if you're interested, there's still a lot of opportunities and a lot of a good way to make your mark and help define what cloud security really means.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Actually it's a good point. Cause even cloud security research too. , it's definitely been one of those services. You almost hear that and go, , do we still have to go on the path? The next it it's absolutely required on the money. And as I say that, I go distracted again, but so Zinet would like to know more about the auto drawing tool.}
+{\pard  \line \par}
+{, what was your conclusion after finding all the auto drawing? }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ Oh Yeah. The, like the import, your infrastructure kind of tools that are like, not the, I don't want to get into some of the observability tooling that I like. Cause I don't want to seem like I have any affiliation with some of them, but, and I also don't want to dunk on some of these auto drawing, drawing tools, but wait, so I will say that lucid chart their, their pricing has gotten to be way too expensive.}
+{\pard  \line \par}
+{So. }
+{\cf2 [00:36:00]}
+{ Right way way, I'm not paying hundreds of dollars a month for that as an individual. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Cause there's a free one called broader. I, I think I, I kind of commented on your thing. There was like a 3d diagram one as well, which is, yeah, I think they're free. Like, so there's plenty, but I think to Zinet's points maybe don't recommend a person, but what was the conclusion of how you should approach auto drawing?}
+{\pard  \line \par}
+{I guess. That, which is, is there another way apart from us importing my entire cloud formation template or my entire infras, such hooking up AWS accounts? Is there any other way of outside of that? I mean, }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ I will say that there are a lot of opportunities for tools in that space. So I would love to}
+{\pard  \line \par}
+{I mean, cause the thing is I'll go and I'll create a diagram of my AWS infrastructure. And I hope that anybody reading that , a few months or years into the future, realizes that it is an artifact from that point in time because it grows and it changes. Right. And so, yeah I hope more and more auto diagramming tools }
+{\cf2 [00:37:00]}
+{ come out that can.}
+{\pard  \line \par}
+{That aren't terrible. Yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. And to, to your point, it's where, to what you said, you may have deployed a version may using cloud formation template and AWS has that drift detection or whatever that they have as a service.}
+{\pard  \line \par}
+{They can see the drift, but not everyone's using cloud formation template. . Some people may just go, I'm just gonna use Terraform and build using that. I don't have to use anything else. So yeah. . Did you wanna add anything to that? }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ I just think about infrastructures code that like on the serverless side we have a, there's still a long way to go.}
+{\pard  \line \par}
+{And that, , I think the serverless framework folks are Really onto something. But I don't think that as an industry, we're there yet with infrastructures code. So think about this. Right? So AWS Lambdas have have a cool feature where you're able to. Do blue green deployments by pointing between different Lambda diversions and rolling it back, right?}
+{\pard  \line \par}
+{Yeah. I, service framework has a plugin for that, but I mean, it's a community given plugin and, , there's, I don't see other infrastructures code tools }
+{\cf2 [00:38:00]}
+{ using something like that. And Man like Kubernetes folks get automated rollbacks. Why can't we have that? , why can't we have preferably open source framework that will allow us to take advantage of of that kind of thing outside of one vendor tool.}
+{\pard  \line \par}
+{So, and something that everybody uses. So, I mean, I think there's a big opportunity there for somebody to go build a framework. Hopefully you can do roll idea. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Well, yeah, well, there's a startup idea right there for anyone who's basically sitting auto rollback as well. So wait, so if you're saying someone should make a tool Zinet, we could inspire you as well.}
+{\pard  \line \par}
+{Hopefully that's a great question to , inspire all this. You could totally do a startup. What was it again? Auto roll auto }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ rollback. I'm I'm gonna go use some buzzword wordy phrase right here, but some Kubernetes for serverless thing. That would be really nice. Yeah. Being able to get those automated roll serverless.}
+{\pard  \line \par}
+{Oh, there you go. Yeah. Fair enough. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Thanks for that by hopefully you find a tool which is helpful. Yeah. Unfortunately we don't have a recommendation at this point in time. We're a, a comment from Jyoti as well, few services interrelated, but we're slightly. }
+{\cf2 [00:39:00]}
+{ Slide functionality update.}
+{\pard  \line \par}
+{It's cool. But tricky intellectual based on requirements. Oh, I think they're referring to the services that are being and how you would apply security to it. I think. Yeah. Thanks for sharing that Jyoti Terraform has graph features you, but not that good. Have you used the graph features in Terraform?}
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ I've generated the diagram before and , even if you just have a few resources it's way too detailed for, I think it's more related to like the internals of Terraform and what they use rather than anything that would be useful for viewing the actual architecture.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Sweet, cool. Right. I don't know if, I mean, you've had a very different experience, but thank you for sharing that as well. And sounds like we, it is great. It's a great podcast episode or live stream and you, towards the end, you kind of come up with a startup. So thanks to Zinet, Vineet, Jyoti and Ben for the great question and helping us brew a startup up idea over here while before you even finish this.}
+{\pard  \line \par}
+{That was pretty much what I had for the show, man. Where can people find you to connect with you and probably talk more about scaling AWS guard rails and all the other projects that you're working on?}
+{\pard  \line \par}
+{Yeah. }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ I mean, best place to }
+{\cf2 [00:40:00]}
+{ contact me is probably on Twitter or in the cloud security slack. There's the best, I don't really check LinkedIn. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. Also fair enough. I don't know how well, unfortunately I do quite, quite a bit on LinkedIn, so there you go. Twitter has many hidden talents, I think it's worthwhile highlighting.}
+{\pard  \line \par}
+{Zinet used to be a lawyer as well before she moved into cloud security. It's amazing. The kind of world we come, we have where so many different talents kind of come in yeah. From different fields after doing for so many years. I definitely love hearing more people who are from a very different background and coming to technology and going to cyber security.}
+{\pard  \line \par}
+{So thanks for sharing that, man. Yeah, }
+{\pard  \line \par}
+{\b\cf3 Kinnaird McQuade:\b0}
+{ for sure, man, we all have awesome little things about us. So yeah, a hundred }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ percent I think we definitely have a lot of people . So for people can find you on Twitter and for everyone else. Thank you everyone for tuning in definitely check out the entire episode on YouTube, but leave a comment if you have any questions for either me or Kinnaird and we'll be happy to answer them later on as well.}
+{\pard  \line \par}
+{Thank you so much. Thanks everyone. Yeah. And thanks for having you I'll see you next week, but maybe hopefully we can have Kinnaird. Yeah.}
+}

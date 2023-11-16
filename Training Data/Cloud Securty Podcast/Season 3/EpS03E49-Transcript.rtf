@@ -1,0 +1,575 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red216\green34\blue146;
+\red128\green128\blue128;
+\red250\green138\blue59;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\b\fs48 Jim Bugwadia\b0}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ Compliance is code and Kubernetes. I don't think I've ever used those two words together, but there is a possible future where you can have both of them together. Welcome to this episode of Cloud Security Podcast. Today we are talking about policy management and how you can have policy as code, compliance as code in a Kubernetes project.}
+{\pard  \line \par}
+{For this, we had Jim Bugwadia from Nirmata. He spoke about kyverno and open source. We spoke about things like why is there a need for policy management and why is kubernetes not solving this problem on its own? It has pod security, which does a great job of securing a pod for people who understand that that's the smallest unit that you can find for a container in Kubernetes.}
+{\pard  \line \par}
+{But on the other extreme, you have applications that are being hosted, like literally. You can have a Windows desktop being provided to your end user from capabilities. That is going on today. In the kubernetes world, we are people using kubernetes in meat clusters. They're using in submarines, in fighter jets.}
+{\pard  \line \par}
+{So all these extremes and policy as something has not been spoken about too much, and in this }
+{\cf2 [00:01:00]}
+{ episode we try and uncover for the need for. Policy management. What's the difference between kyverno OPA? Cause sometimes it's like walking into a shopping mart. When you look at the CNCF image, it is like you're looking at, I'm gonna walk this aisle.}
+{\pard  \line \par}
+{What am I gonna pick? Am I gonna pick Argo CD or Trusted API or kyverno? Or I may choose another combination of GitOps and something else. So we spoke about that as a measure for how do you walk down that path . And where do you even start with policy management? If you wanted to start talking about policy management, you probably want us like a small list.}
+{\pard  \line \par}
+{I mean, it is a complex world. The easiest thing you can do, and I can, this is a tldr version as well on the policy management space. You can find the business requirements, the compliance requirements, as a way to start off the conversation and map some of them to policies and then apply. And maybe when you try to apply them on kubernetes, that's when you might need a open source project like Kyverno or OPA, which is an open policy agent.}
+{\pard  \line \par}
+{We spoke about the difference between the two as well. And as always, if this is something that you are trying to }
+{\cf2 [00:02:00]}
+{ learn or , a colleague or a friend who's trying to learn more about kubernetes, security and policy management and compliance is code cause they're trying to make the kubernetes environment a compliant one, please do share the episode with them.}
+{\pard  \line \par}
+{As always, really appreciate you sharing the episode as well as sharing how much you're learning with it. It really helps us quite. Talk to a lot of people and help a lot of people understand this, that the world of cloud and cloud security and cloud native security is quite complex. And we are talking about all of that to help people out.}
+{\pard  \line \par}
+{And as always, if you're there on iTunes or Spotify, if you're watching this on Spotify or on YouTube channel, feel free to drop us a review or rating. It really helps us find more guests and it makes me really happy. So thank you so much for doing that. We have a few more episodes for kubernetes security before we close out the month.}
+{\pard  \line \par}
+{And if you. Attending Kubecon which is in Detroit next week. So have a good time. I would love to hear your feedback on what do you think about the Kubecon this year before the next episode. Feel free to connect with us on our socials and feel free to share your feedback there. Whether you feel Kubecon North America was }
+{\cf2 [00:03:00]}
+{ totally worth your time as well.}
+{\pard  \line \par}
+{I will see you next episode of cloud security Podcast on another kubernetes security episode. I hope you have a great time and have a safe week. Enjoy, by the way, Happy Diwali every person celebrating Diwali as well, so I hope you have a great Diwali celebration with for all the Indian fellow sisters, brothers, and persons out there as well.}
+{\pard  \line \par}
+{Talk to you soon. All right, take care. Bye. Peace. }
+{\pard  \line \par}
+{\b\cf3 Jim Bugwadia:\b0}
+{ By bringing developers and security together, you don't have to choose between speed and security. Develop fast, Stay secure.}
+{\pard  \line \par}
+{Hey, Ashish, pleasure being here. Thanks for having me. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh, thank you for coming in. For people who may not know who Jim is, if you can probably start with just a brief intro about who you are and where you are these days, and how you got you where you are today.}
+{\pard  \line \par}
+{That'll be awesome. }
+{\pard  \line \par}
+{\b\cf3 Jim Bugwadia:\b0}
+{ Absolutely, yes. I'm Jim, Bugwadia , co-founder at Nirmata, as well as a maintainer on kyverno, which is a policy engine. We created for Kubernetes. So just going back a bit in terms of, , my path to where we are today. }
+{\cf2 [00:04:00]}
+{ So I'm a software developer, still pretty active. Both, , an open source as well as some of our other products. Starting out after I got my grad school degree back at the University of Illinois in Chicago I started in the telecommunications network management space. So to me what was always fascinating is how software gets applied and how it transforms our daily lives, }
+{\pard  \line \par}
+{and perhaps the most complex domain I could find at that time. Telephony and, and seeing, , it's mission critical. It's, it's almost, , you need it for life. We all take it for granted, , but there's a lot of complex software that works together to make all of that happen.}
+{\pard  \line \par}
+{And that's where we learned about, , large scale distributed systems building these type of global networks , and managing software at. So yeah, , I guess after that, , I moved to Silicon Valley, San Jose, where I currently reside in about 99. Worked at a number of different startups and eventually ended up founding Nirmata, , in 2013 with my co-founders Ritesh, }
+{\cf2 [00:05:00]}
+{ Damien.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Awesome. With the being the the CNCF project for free. Well, for free it is free for policy management in the kubernetes space. I , just wanted to start with the foundational pieces. I think there's usually always helpful cause we get a mix of people who may be new to kubernetes, but trying to learn it.}
+{\pard  \line \par}
+{But we also have people who are probably quite veteran in this space as well. How do you define Kubernetes Control Plane }
+{\pard  \line \par}
+{\b\cf3 Jim Bugwadia:\b0}
+{ yeah, great. Great question. Right, So going back again to my days in the telecom space, if you look at any complex system, there's a layered architecture model that telecommunications introduced, which got adopted by networking as well as now of course with Kubernetes and distributed systems.}
+{\pard  \line \par}
+{So you have your management plane, which is kind of like the top level , and. Coordinates, manages, configures, does fault, , observability, things like that across your entire system. Yeah. Then you have your control plane, which in telephony is used for signaling as well as, , protocol }
+{\cf2 [00:06:00]}
+{ management.}
+{\pard  \line \par}
+{For us today, it's more like keeping. In the Kubernetes world, it's schedulers, so if you think about what, how Kubernetes works, everything is a control loop. You declare your desired state and configuration, and the controllers make that happen. Like they place a pod, they will make sure that your application is self healing.}
+{\pard  \line \par}
+{Even for other. Add-ons as , custom resources. It's the same idea. You would write controllers for that. So all these controllers run in the control plane. And then finally you have a data plane, which is where your applications and the communication, the data for your system resides. Yeah.}
+{\pard  \line \par}
+{Now the whole idea is decoupling these planes and making the system highly reliable, highly, , self healing and fall tolerant. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right. Talking about controller, another word that keeps coming up with Kubernetes is admission controller. What is }
+{\pard  \line \par}
+{\b\cf3 Jim Bugwadia:\b0}
+{ that? Yeah. So es , as a modern system, everything goes through API calls, }
+{\pard  \line \par}
+{yes. So, most distributed modern systems are API first and }
+{\cf2 [00:07:00]}
+{ in Kubernetes, any operation that you want to do, whether it's through kube cuddle or other management tools. Goes and issues. An API call. An API call goes to different phases like authentication and authorization, and then there's a next phase is admission controls, and what that means is, Kubernetes because it's designed to be plugable, it's designed to solve a broad amount of use cases.}
+{\pard  \line \par}
+{You can have your own admission controllers, which inspect every API request. Mm-hmm. , and then can allow or deny that request or can trigger other automation and trigger other. Things based on that API request, it's an extremely powerful building block, which lets us do things like what kyverno does for security and for automation, and it works seamlessly with the control plane components for kubernetes.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right. Cause I mean that kind of leads me into the whole policy management thing as well. If you have admission controller, why do you need a policy management, I }
+{\pard  \line \par}
+{\b\cf3 Jim Bugwadia:\b0}
+{ guess, , yeah. So }
+{\cf2 [00:08:00]}
+{ the thing is, so let's step back and think about what policies are and, and as a developer, if somebody comes, if, if like my, , when I was.}
+{\pard  \line \par}
+{Working at, at larger companies. If my manager came to me and said, Hey,, let's apply policies. I'm like, What are you talking about? I don't wanna deal with this. Go away, let me do my work and I don't need more policies. But. Today, if you look at the cloud native way of doing policies, it's very different.}
+{\pard  \line \par}
+{And think about Kubernetes is the first, , platform designed for DevSecOps. Mm-hmm. . It brings together these three roles and these three roles need to collaborate on, , on various aspects of the. System. So how do you do that? Now, of course you could have tickets and you could be on Slack trying to collaborate, which is great.}
+{\pard  \line \par}
+{You should do that. But at the same time, we need something better. We need something automated. The whole world has gone with, of course, in the last couple of years. Distributed and , we want to be async in our communication. So what better way than, , expressing policies as a digital }
+{\cf2 [00:09:00]}
+{ contract, policy as code?}
+{\pard  \line \par}
+{Make sure it's something that we manage just like we manage our apps or other software. Assets and allowing these different roles to collaborate on it. So the whole idea is policies defer dramatically based on the organization, based on the compliance requirements. There are some standards, of course, which all of us should be applying for any Kubernetes cluster, }
+{\pard  \line \par}
+{and. It's a bit scary how many folks end up in production without thinking of this. So like pod security standards, which are native to Kubernetes. Now, you definitely want to apply, but to be able to manage pod security even in a flexible manner, you need plugable admission controllers, which lets you.}
+{\pard  \line \par}
+{Customize the policies to your needs. And that's where projects like kyverno and others come in to allow that policy definition and declaration much like you can do with other resources. in kubernetes }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ All right. So wait, pod security, which I think was deprecated off beyond a certain point, }
+{\pard  \line \par}
+{is that }
+{\cf2 [00:10:00]}
+{ something that we would've been, like the primitive version of policy management where before became open source? What were people doing then? }
+{\pard  \line \par}
+{\b\cf3 Jim Bugwadia:\b0}
+{ Yeah, so they're still built in policy constructs, right. So like network policy built in into Kubernetes. RBAC is built in into Kubernetes.}
+{\pard  \line \par}
+{Things like pod security policy, psps were built in into Kubernetes. Now they're deprecated. There's something called pod security admission, which was its replacement . So those still exist, and that's like a baseline you need to kind of understand and start, , applying for your overall security posture and model.}
+{\pard  \line \par}
+{However, , there's a lot more things that are required. Let's take an example of a pod security, so yes, you could en enable pod security admission, which does namespace level pod security. But what if you need more granular controls? What if you want better reporting? What if you want, , some way of sharing these pod security policies again, }
+{\pard  \line \par}
+{using policy as code. In those cases now, you would look at something like kyverno or other alternatives in }
+{\cf2 [00:11:00]}
+{ the community, which will provide a better implementation of the pod security standards to provide more flexibility, et cetera. But keep in mind, pods are only one. The basic level, yeah. Right.}
+{\pard  \line \par}
+{So there workloads on top of pods like deployments, staple sets, demon sets. There's several other things like services. There's add-ons like istio and , or like, , linker de for service mesh. So the list goes on and on. So you also wanna secure those. You, There's nothing native that Kubernetes provides for those.}
+{\pard  \line \par}
+{Configurations and to secure those, which is where a policy engine becomes super critical. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So is this the same when people go for like a managed kubernetes as well? How the cloud source providers have their version as well? Maybe bare metal kubernetes doesn't allow that. How does this work in like a managed kubernetes context?}
+{\pard  \line \par}
+{\b\cf3 Jim Bugwadia:\b0}
+{ Yeah, great question. there's this notion that because you go to, , let's say a cloud provider and get a managed Kubernetes, they have to be thinking about security. And they }
+{\cf2 [00:12:00]}
+{ do, they do the best they can, but. In every cloud provider kind of will show you their shared security model, }
+{\pard  \line \par}
+{yeah, yeah. And in that shared security model, guess what? You're responsible for securing Kubernetes. They are giving you the control plane components, but any workload, any pod that runs in there, that's the responsibility of the user. You cannot turn around and, , say, Hey, , somebody kind of, , had a container.}
+{\pard  \line \par}
+{Our workload had a container escape. They exploited something. , that's the user's responsibility. And Kubernetes is, , insecure. Even with pod security admission, the default setting for pod security admission is privilege, which means you can run anything. Right. And, and it's designed, , to be easy to get started with, easy to use.}
+{\pard  \line \par}
+{Cuz there's always this contention as you very well know between security and usability, so you, you want people to adopt projects. You want 'em to get, and, and if you make it too restricted from the beginning, , it just, there's too many hurdles to get started. So, okay. So }
+{\cf2 [00:13:00]}
+{ you lean towards that usability, but you really a as , a platform.}
+{\pard  \line \par}
+{Or a, as anybody , responsible for production Kubernetes, you have to understand that shared security model, even with managed , service providers or if you're using vanilla Kubernetes, the same applies, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ and okay, so we are still shared the shared responsibility model path with that.}
+{\pard  \line \par}
+{We can take down the part of, so to your point, If there is no option, like from a pod security perspective, kubernetes doesn't provide our out of the box anything, we gonna go down the path of kyverno or any of the other OPA or whatever else that kind comes, are being released by people at that point in time.}
+{\pard  \line \par}
+{I imagine in my mind. So that's just one cluster, but most organizations, these have multiple clusters as well. Yeah. how does this kind of scale to that }
+{\pard  \line \par}
+{\b\cf3 Jim Bugwadia:\b0}
+{ level? One minor, , kind of thing to point out though. So Kubernetes does provide pod security admission built in, }
+{\pard  \line \par}
+{right. Yeah, Yeah. And, and it's good to enable that. kyverno , our kind of position on that is yes, use pod security }
+{\cf2 [00:14:00]}
+{ admission and use kyverno to complement and to manage. In a more flexible manner. Right. So that's what gives you the best security posture. Yeah. So, but to your point, , how do you manage at scale?}
+{\pard  \line \par}
+{ And today, if you kind of look at, , enterprises are running, , there's a case study from like Mercedes-Benz or somebody, they're talking about 800 clusters, yeah. It sounds like that's a lot, well, yeah. Imagine managing 800 production clusters deploying things, version control, security.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ With the two people team as well. , }
+{\pard  \line \par}
+{\b\cf3 Jim Bugwadia:\b0}
+{ Right. That's the other constraint, yeah. So to pull that off, you have to adopt cloud native best practices like GitOps, , moving to everything as code, making sure all of your declarations for your. Cluster config. And today we have projects like cluster api, which are just dramatically game changers for that, }
+{\pard  \line \par}
+{so through cluster API and other things, you can now have Kubernetes manage other Kubernetes clusters. So it's like, oh, inception for Kubernetes, so you, you }
+{\cf2 [00:15:00]}
+{ kind of have your Git repos, which are managing these declarative configurations. You use cluster API to spin up and manage these other clusters.}
+{\pard  \line \par}
+{But you have to make sure, again, through policy as code, each one of those clusters is secured. You put the right policies there, but it's all driven through Git , it all starts with a pull request, . Right. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Wait, that's awesome. So, and, but it's almost like who's watching the watcher, I guess, kind of thing then what's the who's thinking on the cluster API then?}
+{\pard  \line \par}
+{\b\cf3 Jim Bugwadia:\b0}
+{ Yeah, so one thing, cluster api, because it's Kubernetes native, , you're kind of, again, using Kubernetes to manage clusters. kyverno integrates very well with that, so you can use kyverno policies. To watch cluster API resources, both for automation as well as security.}
+{\pard  \line \par}
+{And in fact at GitOps Con I have a talk, , with a product manager from Intuit and we are gonna talk about , exactly this use case and how kyverno can be used to secure and automate some of these cluster API functions. So, yeah, pretty interesting, , kind of spin on things, }
+{\cf2 [00:16:00]}
+{ but.}
+{\pard  \line \par}
+{To go back to the management at scale type of challenge. , we are seeing it, It's very interesting, so we work with very large enterprises as , from Nirmata, our company perspective. And as we see, , them adopt Kubernetes. It's not just changing how they're managing applications, it's changing every IT process within their enterprise, }
+{\pard  \line \par}
+{they're moving to more using. Git NPR model for infrastructure provisioning, even for deploying VMs on top of Kubernetes, to say you want a new Windows desktop, guess what? Create a pull request. We don't need, , a ticketing system. We don't need any of that. And as long as you're using, in that case of, instead of cluster api, you would use a project called Cooper.}
+{\pard  \line \par}
+{It will spin up a virtual machine in Kubernetes. You assign it to the user and everything's tracked through Git as the system of record. Kubernetes now becomes the new system of delivery. What can }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ you do that, I don't realize you could do that with Kubernetes absolutely. Yeah. It's like, So wait, }
+{\cf2 [00:17:00]}
+{ so there would be a desktop that would be, I mean, I guess, for lack of a better word, the VMware equivalent that from the back in the day where we had, Oh, I need a virtual machine, Mr.}
+{\pard  \line \par}
+{Or Mr. And that is being done by a pull request and I will get a desktop. }
+{\pard  \line \par}
+{\b\cf3 Jim Bugwadia:\b0}
+{ Yes, you can get a Windows desktop running on Kubernetes. It's actually, , it's a VM in a container. Yeah. But the end user, it looks like a. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ What, And so can you, I I always thought that wasn't that like an anti pattern to have like a really big image on like a pod as }
+{\pard  \line \par}
+{\b\cf3 Jim Bugwadia:\b0}
+{ well, So there are some tradeoffs, }
+{\pard  \line \par}
+{so }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ yes. Like that trade off, I mean Yeah, to your point, but to what you're saying is, is possible to do that. }
+{\pard  \line \par}
+{\b\cf3 Jim Bugwadia:\b0}
+{ It not only possible, but , the, , cloud providers have been doing that for quite a while . So when you get, , for there to maximize their, , kind of revenues and margins they are running you, when you get a vm, it's not, , running necessarily as a vm.}
+{\pard  \line \par}
+{It could be running as a container based on which cloud provider }
+{\cf2 [00:18:00]}
+{ you go to. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ yeah, that's right. I mean, I think apparently serverless is also all containers in the background anyways to begin with. . Yeah. So we're definitely living in a world. Container is probably the back end. It feels like.}
+{\pard  \line \par}
+{I guess the reason I was surprised was because your serverless functions are primarily just like, Hey, hello world, or something small. I get like a workspace to work on using a container or background, }
+{\pard  \line \par}
+{\b\cf3 Jim Bugwadia:\b0}
+{ , which is long lived. It's stateful. Yes. I mean that those, cuz typically you say, Well, containers are great for stateless shortlived apps.}
+{\pard  \line \par}
+{That's great. That's no longer the case. Right. And what we are also like with projects like cross plane, which is another CNCF project , that allows you to provision cloud resources so you can use Kubernetes to spin up a S3 bucket . And you can use kyverno to secure that, so you can have a policies that's saying, all of my users or this team can only spin up S3 in this particular region.}
+{\pard  \line \par}
+{It has to be, , encrypted. It has to be secure. , you can have all those policies. So it's a completely different, it's a game changer. }
+{\cf2 [00:19:00]}
+{ }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Wow. Well that is a great game changer}
+{\pard  \line \par}
+{so this is mind blowing for me. Maybe just so I can level the playing field as well, what are some of the common use cases where people kind of think about policy management? Cause I think to what you mentioned to scale pod security and to scale across and what your policy will look like . One of the obvious use cases that come to my mind is, Oh, if I already have an information security policy for an example, everything should be encrypted.}
+{\pard  \line \par}
+{Yeah. I can use a policy management engine to deploy that policy across kubernetes. Is that the use case or what are some of the examples you see of }
+{\pard  \line \par}
+{\b\cf3 Jim Bugwadia:\b0}
+{ Yeah, that's a great example. Right, So data protection, data encryption, those are very key use cases. Yeah. So the three categories, , Usually advocate our customers to start with.}
+{\pard  \line \par}
+{The first is basic pod security, so make sure you're good with that. You understand how that's managed and how to do that at scale. And by the way, with every version of Kubernetes, pod security also changes, so it's not a static }
+{\cf2 [00:20:00]}
+{ thing. You have to keep in mind, you need to kind of keep up with those changes.}
+{\pard  \line \par}
+{You need to understand what that means for your workloads. When new CVEs come up, we are constantly like, , creating policies to help with that as well. So that's the first level. The second level is workload security where just like we talked about, , it's not just about , a pod, but it's like your service.}
+{\pard  \line \par}
+{Making sure you're using encryption at rest, encryption in transit, things like that. And all of that is done through workload at that layer, so like your services, your deployments, your state, full sets making sure your volumes have the right, , kind of, , again, configuration, et cetera.}
+{\pard  \line \par}
+{And then finally, there's a ton of best practices, which also have a key impact on security. So, Deployments, most clusters are shared. cause Kubernetes says it's guts, it's a bin. Packing, scheduler you to get the maximum value from Kubernetes. You want it to pack, , applications on a, some subset of resources.}
+{\pard  \line \par}
+{So , to be able to do that , how do you kind of come up with the right }
+{\cf2 [00:21:00]}
+{ tenancy model? How do you come up with things like making sure that if somebody doesn't as a health check and if their pod keeps spin, It doesn't impact other applications on that same cluster. So for all of those, there's tons of best practices.}
+{\pard  \line \par}
+{So if you go to the kyverno.io page, there's almost like 230 community driven policies across these three categories, and then finally, like if you , kind of want to go one level about. Nowadays, container image signing verification is critical. , in fact in the US there's federal mandate that anybody supplying software to the, , government has to provide, SBOM, has to start container image signing, verification, things like that.}
+{\pard  \line \par}
+{, so that becomes a very key use case, so those four, I would say are a good starting point. But then as you bring in other things, if you're using Kubernetes, like we were talking about, For other things you would want to look at security at those layers. . }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. Yeah. I think nowadays conversation is not even considered complete if you don't mention SBOM three }
+{\cf2 [00:22:00]}
+{ times, at least , it's like SBOM SBOM .}
+{\pard  \line \par}
+{But I think, yeah, to what he said the chain of custody has become definitely quite important these days. If you have over 200 plus policies , from the community. Is there like a, I don't know, like a top 10 or like a or top 10 or a top five that you normally recommend to people? Cause I feel like it'll be overwhelming for people everyone else who's listening into this conversation.}
+{\pard  \line \par}
+{For, for them they're like, Well, that's great. 200 plus policies, but which one do I start with? So, is there like a small list that you normally recommend? Yes. }
+{\pard  \line \par}
+{\b\cf3 Jim Bugwadia:\b0}
+{ So policies are a building block, they're the how you're doing things. So to kind of start with, and what we do as well as other vendors in the space is you wanna map these policies into categories and into, what do you wanna achieve from an organizational level.}
+{\pard  \line \par}
+{So if, for example let's say OWASP top 10 for Kubernetes is important. , you can map these policies to a scorecard. Yeah. And you can say, Okay, to implement this, here's what I need to do. And each policy. Or each of those standards }
+{\cf2 [00:23:00]}
+{ may translate into multiple policies and controls, yeah.}
+{\pard  \line \par}
+{So when you have that mapping, then it becomes extremely powerful. In fact, , in the community, I'm a co-chair of the policy working group, and that's where we are discussing this continuous compliance, compliance as code, as the next level about policies, cause policies are not, , nobody like wakes up and says, I want more policies today, }
+{\pard  \line \par}
+{to come up, but hope not. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I mean anything else in their life, , }
+{\pard  \line \par}
+{\b\cf3 Jim Bugwadia:\b0}
+{ So it's more like, what does my organization need? How do I achieve that? And how do I push , move my business forward, yeah. So for that, compliance is extremely important, achieving that. And , whether it's the OWASP stop 10, whether it's pci, whether it's the NSA hardening guidelines.}
+{\pard  \line \par}
+{pick your standards and we are seeing a lot of organizations starting to build internal standards to say, for secure kubernetes, here's my enterprise standard and I wanna make sure every cluster is compliant. So if you kind of think of it from that perspective, you can, , the policy is yes, there }
+{\cf2 [00:24:00]}
+{ could be a lot, but you could put them in three or four categories and that becomes a.}
+{\pard  \line \par}
+{Simpler from a mental model perspective, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ right. Is kind of what people normally recommend for resolving vulnerable across an organization as well. You can't just solve all vulnerabilities like one to three, four, but what you can do is, Hey, let's look at all SQL injection, or let's look at all crosshead scripting this bigger category and go with that.}
+{\pard  \line \par}
+{Is that kind of sounds like very similar. }
+{\pard  \line \par}
+{\b\cf3 Jim Bugwadia:\b0}
+{ Very much. Let's take an example, you start with NISST 853 and maybe there's like some, recommendation there that says everything must be encrypted. Yeah. So you can take that and you could say, Okay, for me to achieve that recommendation.}
+{\pard  \line \par}
+{Here are the four policies that must. , pass, mm-hmm. . And then you have, , policy as codes. So you're making sure, So how do you prove to an auditor every cluster has those policies. How do you make sure the policies that are actually working are doing what they're supposed to be, }
+{\pard  \line \par}
+{and capture the results for those. And then how do you map that back to your standard that you started out with and say, Okay, now I can tell Tuesday, October 5th , }
+{\cf2 [00:25:00]}
+{ yes, this was my posture and this policy's passed, so I was compliant to the standard that I want to. Recommend or mandate for my organization.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right. I know you kind of co-chair the policy group that you were mentioning. Yeah. How do you see people do compliance in kubernetes using policy management? I know I'm putting the spot for this, but if there're an example, like to what point about the NIST framework}
+{\pard  \line \par}
+{I have four policies in there. Like how do you even show that? So would that be the gitops flow that I say, Oh, my pull request and everything kind }
+{\pard  \line \par}
+{\b\cf3 Jim Bugwadia:\b0}
+{ of going through, , So that's the idea, so you want to even take that and policy management. And one of the reasons why kyverno resonates so much in the community, in the Kubernetes community is because it allows, that gitops workflow for policies, }
+{\pard  \line \par}
+{it's just policies are just. A Kubernetes resource policy reports are a standardized, by the way, , the kyverno reports are in a standard format, which the policy work group gave, kind of chartered as well as , and it's not just kyverno }
+{\cf2 [00:26:00]}
+{ reports, you could have reports from.}
+{\pard  \line \par}
+{Runtime engines like Falco, as well as kubearmor, you could have reports coming from, , vulnerability scanners like trivia and others. So there are community based adapters to take all of these and offer the policy results in a standard format, which is super critical to completing that loop.}
+{\pard  \line \par}
+{Cause policies are one piece of your overall security puzzle. You still need other tools to complete that, yeah. But if you put all of this together and now when you have the standard results, the next thing we're building, and by the way, , commercial vendors like my company as well as other companies, we provide these solutions on top of these open source building blocks.}
+{\pard  \line \par}
+{But, , even in the community, we are exploring to say, how do we at least define that mapping? How do we make it easy for anybody? And can we control that mapping as code itself, so why not make that a Kubernetes? Which is in your management plane or in the policy parlance, it would be in your policy, administration point or your pap.}
+{\pard  \line \par}
+{Yeah, so that would be, , something }
+{\cf2 [00:27:00]}
+{ that's managed in a management cluster, but then all of your user clusters, will ensure that they're reporting that and feeding that back so you can get the right results and compliance reports. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right. And do how many people who have successfully gone through.}
+{\pard  \line \par}
+{\b\cf3 Jim Bugwadia:\b0}
+{ Scenario . At some organizations, but very few have. And, and this is where better tooling, better projects is required. Yeah. So there is a lot of ongoing work. , and it's across companies like our company as well as then, , like several other larger companies. Involved in the policy working group, also in sig security to promote these sort of ideas and patterns.}
+{\pard  \line \par}
+{But the first thing for the last 12 to 18 months, look, I mean, maybe like 18 months ago, if you asked somebody Kubernetes policies, they're like, Yeah, it has policies. What do I need to do? Yeah. So the first step was make sure everybody understands that. And once we have the policy building blocks, now we can get to a higher level.}
+{\pard  \line \par}
+{Business functions, which is where the value's at. Yeah. And and that's what we, we are super }
+{\cf2 [00:28:00]}
+{ excited about. Actually, that's }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ a good point as well, because policies by itself don't make any sense unless they tie up to a business function. Cuz how do you sell it to the I guess the business owner, at the end of the day, they're the ones who are saying yes or no for a policy, whether encryption or no encryption.}
+{\pard  \line \par}
+{They're the ones who are kind of putting the foot down for. Yeah. So that, that's you, you're finding people are finding value from that perspective as well, that they would link policies to business? }
+{\pard  \line \par}
+{\b\cf3 Jim Bugwadia:\b0}
+{ Absolutely. Absolutely. So it's very critical, like, again, if you want to say, okay. I want, software supply chain security, }
+{\pard  \line \par}
+{as an example. Yeah. But what does that mean? , it's great that an organization wants that. They want to improve their posture there, but how do you translate it into policies? How do you get back the results? And in the past, the. Typical thing has to be to say, Okay, let's find a vendor who can do this.}
+{\pard  \line \par}
+{But that world has changed right now. You want more flexibility, you want more open source projects. You want things it's more pluggable with systems like Kubernetes. So that's what makes it very powerful. And there's }
+{\cf2 [00:29:00]}
+{ this rise of platform engineering that goes with that. Yeah.}
+{\pard  \line \par}
+{Which takes on the security role. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right. Cause compliance as a code is an interesting one as well because I think a lot of people, to your point they come up with the idea that, okay, my four policies for encryption are based on my NIST 800 or whatever, and I go on the path of implementing them. Now is this like a, primarily a kyverno concept, or is this like kubernetes by itself natively supports?}
+{\pard  \line \par}
+{\b\cf3 Jim Bugwadia:\b0}
+{ So no, Kubernetes doesn't support it. So you would need a policy engine to enforce those configurations. Right, Right, right. And in the past, like in the early days of Kubernetes, you would have to rely on a proprietary product or tool. Yeah. What, , we have done with the policy working group and now with kyverno as a policy engine focused on Kubernetes to make that a lot easier to. Again, this changes per organization, cause just imagine, So you say, Okay, I need encryption. Yeah. But some organization may say, Look, I'm already using encrypted SSDs, so I'm }
+{\cf2 [00:30:00]}
+{ gonna change that to meet my needs. Yeah. If you need that flexibility and in the past that just wasn't possible.}
+{\pard  \line \par}
+{But now with kyverno, you can. And with, so that's. Moving those policies into declarative Kubernetes configurations. That's the innovation. And again, the game changer, Right. For that kyverno brought to the table. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And so Kubernetes can go to a level of saying it can understand if the container is encrypted or not, or signed or not as well?}
+{\pard  \line \par}
+{Or is it like more to your point? That's a policy defined cuz it, pod security cannot do this, where it can say, Oh my, the container that I'm using is signed. It can't do that by itself. }
+{\pard  \line \par}
+{\b\cf3 Jim Bugwadia:\b0}
+{ No, it cannot. Yeah. So you would need additional policies. So Kubernetes has all the constructs. So think of it this way, }
+{\pard  \line \par}
+{kubernetes it's a toolbox. Yeah. It gives you all the tools, but it doesn't know what you're trying to build, so you have to get the blueprints, you have to understand what you're trying to build and, and kind of. Figure that out. Now, part of that, , of course, is the policy and governance.}
+{\pard  \line \par}
+{So Kubernetes gives you all of the constructs to encrypt software to make sure through admission }
+{\cf2 [00:31:00]}
+{ controllers, to check for signatures or SBOM before allowing something to run. Yeah. Whether you do it or not is up to you. Right, so that a policy engine comes in and then there's another kind of layer, This gets a little bit meta, but it's like, okay, if you're using policies across all these clusters, who's managing the policies?}
+{\pard  \line \par}
+{ So that's where git ops comes in. It's a very interesting, but you complete that full loop and get the policy reports to results, and then of course, , create the right business value again, which is where everybody should be. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Feels like there's a maturity curve here, if I were to put this on a scale, And people just gonna be going, Oh, Jim, this is so awesome.}
+{\pard  \line \par}
+{This is exciting. I wanna do policy as code compliance is code to the extreme as well. Convince the auditors to accept that. What do you feel is a maturity curve for something like deploying a policy engine into an organization , with kubernetes? , nowadays, I've got bare metal kubernetes, I've got managed kubernetes.}
+{\pard  \line \par}
+{I've got like a lot of complexity there as well. Yep. How do you , normally see organizations do in the conversations }
+{\cf2 [00:32:00]}
+{ you've. Where does one normally start and how, how mature can someone get? Right, }
+{\pard  \line \par}
+{\b\cf3 Jim Bugwadia:\b0}
+{ Right. So you always wanna crawl, walk, run, so you wanna kind of first start with your simple steps of which, which gets you there.}
+{\pard  \line \par}
+{So making sure every cluster has a policy engine, and, , regardless of which policy engine you choose At least get a policy engine in place. Making sure you can start managing these policies for your organization just like you would manage Kubernetes resources is super important, }
+{\pard  \line \par}
+{if you're relying on a vendor to give you the the policies, you're kind of doing it a little bit wrong, you have to think a little broader than that. You have to make sure that , you're comfortable with managing. And, by the way, policies are not just for security, but also for automation.}
+{\pard  \line \par}
+{And kyverno was the first to bring that innovation into the space as well, because we trigger, like, , generation of resources, mutation of resources based on policies that can be set, so that again gives you a very powerful toolbox to solve a lot of complex problems in }
+{\cf2 [00:33:00]}
+{ Kubernetes, which, Couldn't be done before.}
+{\pard  \line \par}
+{ Like one simple, and this is maybe , kind of spoiler alert, but one of , the demos that I was still referring to at kubecon what, , one challenge is if you're spinning up these clusters, how do you register the cluster back into your gitops controller and you could write another, , custom controller for that.}
+{\pard  \line \par}
+{, if you kind of are have the knowledge of creating your Go Kubernetes controllers. Yeah. If you, or you could, you would have to kind of have some code or a manual handoff, kyverno can fully automate that. So it would be working with, and we are gonna show that across Argo CD and Cluster api and how to just make that automated end.}
+{\pard  \line \par}
+{Right, But what, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ what is a typical mature pipeline, for lack of a better word? Cause you mentioned Argo CD and cluster API and stuff as well. Mm-hmm. , I imagine there's a particular reason why you went down that path of, oh, cluster API and Argo, CD and kyverno together. Is that what a mature, like a really mature kubernetes pipeline.}
+{\pard  \line \par}
+{\b\cf3 Jim Bugwadia:\b0}
+{ It's one }
+{\cf2 [00:34:00]}
+{ implementation. the nice thing about CNCF is there's alternatives to everything. So there's flaws, of }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ course. Like shopping market, like, like what kind of toothpaste you need? Mint flavored or like, I feel like it's like a shopping check cart . You can keep adding. }
+{\pard  \line \par}
+{\b\cf3 Jim Bugwadia:\b0}
+{ Yep. Yeah, I mean the landscape is just , it's amazing to see how quickly it has exploded and continues to grow at a very fast clip.}
+{\pard  \line \par}
+{Right. So, but yeah, just looking at, , so the building blocks here are, you need, , some pars controller and the two leading ones are. Flux and Argo cd. Right. You need a policy engine and the two leading ones are kyverno OPA, which is Open Policy Agent. Yeah. And then you need, if you're doing cluster provisioning on this, you have to pick your, , path to how are you gonna provision infrastructure?}
+{\pard  \line \par}
+{You could pick cluster API or you, which is supported by the way, by the Kubernetes community itself. And every major, there's about 12 to 15 different club providers who are now, , Creation of clusters through that. Or you could pick a project like cross plane, which lets you not only spin up }
+{\cf2 [00:35:00]}
+{ clusters, but also infrastructure, }
+{\pard  \line \par}
+{which is very powerful. So you can configure AWS infrastructure in kubernetes or Google infrastructure, whatever your cloud provider is, right. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ As you go through the shopping cart channel, I guess, for lack of better word, you pick up providers.}
+{\pard  \line \par}
+{I guess I imagine the recommendation is to think of policy first before you go down the path of CICD, Gitops and all of that }
+{\pard  \line \par}
+{\b\cf3 Jim Bugwadia:\b0}
+{ that. Well, so, and because you also want to apply policy in your gitops pipeline, yeah. So for example, Flux has adopted kyverno. It is, , if you are deploying Flux, you're already using kyverno, }
+{\pard  \line \par}
+{, for Multitenancy and some other use cases. And, and we see that as a growing kind of thing, cuz you also wanna apply certain policies in your pipeline. Before something even gets to admission controls, cause I, if you're doing a defense in depth, kind of zero trust model, you have to check at every level A and the sooner you can give the feedback back to your developers or whoever's requesting, , the application deploy or the code or the }
+{\cf2 [00:36:00]}
+{ infrastructure, the better, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ This is definitely fascinating for me because also I'm just saying, trying to think from an average perspective, average person perspective, who's listening to this and understanding the complexity of kubernetes sometimes gets really overwhelming as well. Yeah. And to what he mentioned. Okay, I've made my choices a far maturity curve that I wanna stick with and I'm go on the path of, sounds like as a team that's trying to do Kubernetes security, you have learn a lot of things. Like it almost feels like you have to understand the Argo cd, for lack of better word, for how make policy for that? How do you make policies for your I guess watch to watcher? So kyverno itself for how, I mean is this RBAC or whatever, and then you go next level gitops and everything. Where do you see things kind of go in terms of is the future that we are gonna be primarily policy as code ? Compliance is code }
+{\pard  \line \par}
+{\b\cf3 Jim Bugwadia:\b0}
+{ driven. I think that's a very interesting kind of pathway on. Right. So, And the goal here is not to, again it, it's more to drive automation and to drive secure self-service, and I, I really }
+{\cf2 [00:37:00]}
+{ like the combination of those words cuz if you think about it, self-service is not difficult, }
+{\pard  \line \par}
+{I mean, you can provide self-service, but doing secure self-service is insanely difficult unless you have the right tools and the right. , technology's in place. So that's where we always kind of think of, and that's one of the reasons why we've said for kyverno from the beginning, look, just doing security is not enough.}
+{\pard  \line \par}
+{You need security plus automation. You have to be able to, , trigger some powerful automation, workflows, things like that. Combining the two is when the magic happens, yeah. So we believe kyverno has that potential to simplify that. And if you adopt kyverno across your pipelines, whether it's Flux or Argo cd and if you adopt kyverno as your admission controller and as your runtime scanner, you are like 80% there, }
+{\pard  \line \par}
+{and then just with open source policies and other things, you can go from like zero to secure literally in in minutes, which is. Fascinating , in terms of what's available, the powerful tools and }
+{\cf2 [00:38:00]}
+{ constructs and things that are available, then you can step back and start customizing the policy, doing the compliance mapping.}
+{\pard  \line \par}
+{So those can be a phase two or phase three. But yeah, to get started, get the policies in place, get the policy engines, and figure out what's just like, any security realm, you would start with a threat model and say, okay. Do we want to accomplish here? start with that and say, What are we trying to secure?}
+{\pard  \line \par}
+{Let's get the basics and then let's get to the business value, because that's what devsecops is all about. Yeah, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Definitely great answer there. I think the conversation would be incomplete if we don't kind of talk about the , shopping mart between like a kyverno and OPA as well. So what's the difference between the two for people trying to make a choice between OPA versus kyverno ? Yeah, you can talk good and bad and the ugly, I }
+{\pard  \line \par}
+{\b\cf3 Jim Bugwadia:\b0}
+{ guess. Absolutely. by the way, I'm, , not I, I like what OPA brought to the table, so they were the first policy engine within cncf, , and it's not like policies were new concept, everybody, , we are all understand policies and what it }
+{\cf2 [00:39:00]}
+{ does, like even if you're doing like active directory, you have your group policy.}
+{\pard  \line \par}
+{We all know what that is, that's right, that's right. So that's not nothing new. But what OPA did was it said, Okay, let's come up with a common language. They chose to go the domain DSL route. So they created their own language called rego for, authorization. At first, but then they were saying, Okay, the, we could have broader use cases then that we can plug it into things like Kubernetes and, , it provides value.}
+{\pard  \line \par}
+{It kind of, but before we launch kyverno, by the way, And OPA was, already popular. Right. And we were really debating is there a need for another policy engine in the kubernetes space? Cause , choices are great, but like you said, it's overwhelming. If you go and look at the toothpaste aisle and you see like, yeah.}
+{\pard  \line \par}
+{A gazillion different choices. Like, where do I start? Just gimme something that works and I wanna move on. Right, Right. But tell me what, what is better? Yeah, So, so the main problems we solve with OPA, which is why, , and as we spoke to our customers, we }
+{\cf2 [00:40:00]}
+{ spoke to the community and the cncf , we kind of checked with a lot of folks in the CNCF before we , made kyverno a sandbox project.}
+{\pard  \line \par}
+{We have graduated already to incubation in about, , 15 months, which, pretty fast given the timelines. Yeah. But there, what we heard is OPA, , I understand the use cases, but rego is not what I want to use. I don't have a team of rego programmers. Ah, I don't want to build a team. And every time I build a team, , they leave.}
+{\pard  \line \par}
+{I don't want to rely on vendors to give me these policies. I need to manage my own policies. Right. Yeah. Yeah. And what we did is we stepped back and look at this and we initial. kyverno was built as a module in Nirmata, but then we open sourced it. They said, Why? Leverage Kubernetes. Kubernetes is extensible.}
+{\pard  \line \par}
+{Like we were just talking about. You can, you can provision vm so why can't you provision policies, yes. And why not? So whether you, , I mean maybe there's, there's a camp that says, Okay, Kubernetes is still way too complex. Way too, too much, but. If you spent the time }
+{\cf2 [00:41:00]}
+{ and effort to learn Kubernetes, you understand how to manage Kubernetes resources.}
+{\pard  \line \par}
+{You've invested in tooling around that. Yeah. You use all of that for policies, why come up with something foreign, which you have to, , kind of fit in and try to deal with all that complexity and then you're managing that policies, policy, results. All of this has Kubernetes resources. It's very native, it's seamless for DevSecOps teams and, and the other thing we decided is to say, look, We're not trying to, we wanna make kyverno full featured.}
+{\pard  \line \par}
+{We don't want to, to build both from an open source project and a business model point of view for our company. We didn't want to do something to say, Hey, you have to come to us to simplify kyverno. And that never scales. So we're like, Look, you should be able to use kyverno on your own. We were happy to have your use kyverno on your.}
+{\pard  \line \par}
+{And we want to give you as many policies as possible. Right. So, and the community has been fantastic in, in contributing and growing that. Right. One thing we're very proud of in the community compared to }
+{\cf2 [00:42:00]}
+{ other communities where you see a lot of vendors, but very few end users. Yeah. Our contributors are end users.}
+{\pard  \line \par}
+{Yeah. So you're like this, this is awesome. Cause it's the actual users who are driving our roadmap, who are driving the policies and, and , of course it comes with, , so we hear the feedback very quickly. If there's a single, , challenge in kyverno, we will hear it, cause it's in so many production clusters running at scale that all of those things becomes very critical.}
+{\pard  \line \par}
+{But going back to the main differences, so it's that policy. kyverno is kind of, you can think of it as a no code for policies, although you can manage those as declarative resources and apply all the policy as there's no other language to learn, the second thing is reports and policy results of it.}
+{\pard  \line \par}
+{It's meant for DevSecOps, so you don't have to go to some external tool or some other. Finding these results, they're very much geared towards, , your developers to see that results and to understand how to deal with that. Yeah. And, and the third thing I'll point out is that security plus }
+{\cf2 [00:43:00]}
+{ automation.}
+{\pard  \line \par}
+{So OPA can only do the validation and checks. It cannot do any of the automation. So you are left on your own to kind of do that automation, which we believe is the missing piece , in getting to a higher level of, , policy as code security, as code compliance as code. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That great information and Rego definitely has its challenges from what you, if you kind of ever go on the social media where you probably hear a lot of people complain about rego as well.}
+{\pard  \line \par}
+{So all the power to people who learn rego. Nothing wrong with that, but there's, if there's an easier option, maybe you wanna , walk down that path as well. Absolutely. Another question that I get quite often is the different between kyverno and gatekeeper and we kinda touched on this, but like if a quick brief version on that as }
+{\pard  \line \par}
+{\b\cf3 Jim Bugwadia:\b0}
+{ well.}
+{\pard  \line \par}
+{Yeah, absolutely. So open policy agent is the engine which kind of provides rego, but gatekeeper is the admission controller, which also includes open policy agent , and is able to apply those policies. At admission controls in Kubernetes, yeah. So kyverno, it's a single }
+{\cf2 [00:44:00]}
+{ project.}
+{\pard  \line \par}
+{You don't need gatekeeper plus open policy agent and, and , it even runs, by the way, as a command line, so you can run it outside your clusters and apply policies in your CICD pipeline. It's just , one project, one tool. So, but that's, The role of gatekeepers to bring OPA into Kubernetes. It also defines some constraints and other things on top, which you can manage as Kubernetes resources, but ultimately, your policies have to be written in rego.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And so this is kind of where the admission control we spoke about that is already there in kubernetes. That maps well with kyverno, so kyverno is working with admission controller from }
+{\pard  \line \par}
+{\b\cf3 Jim Bugwadia:\b0}
+{ kubernetes, is that yes. So kyverno operates as an admission controller. It receives every API request. So if you download and install kyverno, it self registers with the API server as an admission controller.}
+{\pard  \line \par}
+{It receives every API request as a web hook . Both for validation as well as mutation. And then can you, it applies your configured policy set to those API requests. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right. Okay, sweet. Now , that's pretty much it, I feel like the more we }
+{\cf2 [00:45:00]}
+{ talk about this more, there are depths of complexity to each of the, I mean, we kind of briefly touched on a lot of topics, but there's a lot of depth to a lot of those topics as well.}
+{\pard  \line \par}
+{Where do you normally recommend people start with policy management and start learning about it? Cause it sounds like a very complex topic as. }
+{\pard  \line \par}
+{\b\cf3 Jim Bugwadia:\b0}
+{ It can be, but , hopefully with all the work going on in the community as well as through other, , ecosystem partners we are making this easier and easier to operate and manage at scale.}
+{\pard  \line \par}
+{Yeah, so certainly to start with, kyverno.io is our, , kind of one stop shop for the project. There's links on there to join the community. We. Typically hang out on the Kubernetes Slack, so that that's where, you can come ask questions, get, , started with kyverno. There's also the policy working group within the Kubernetes and CNCF community.}
+{\pard  \line \par}
+{So certainly if you're interested in policy or just wanna kind of talk about how to use it, that's the right place to come to. And there's also Nirmata, so like companies like us and other vendors who are providing commercial tool solutions to kind of complete the }
+{\cf2 [00:46:00]}
+{ picture. For enterprises. Awesome.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ No, that, that's kind of, Thank you for sharing that. }
+{\pard  \line \par}
+{Awesome. Now, well that's pretty much what we have time for, man. Thanks so much for coming in and making people find you, by the way, and Nirmata as well. Yeah, }
+{\pard  \line \par}
+{\b\cf3 Jim Bugwadia:\b0}
+{ so jim@Nirmata.com is my email, so pretty easy to get to or Jim Bugwadia on Twitter or any of the Kubernetes or CNCF Slack channels. And would love to hear from folks on, , where they would like to see some of these technologies and tools.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. Awesome. Well thank you so much for your time. I think I'm taking away compliance as code as my biggest takeaway from this actually. People who wanna achieve that and wanna upscale that. This is definitely a path forward. But I really appreciate you coming on board talking about kyverno and sharing why there's a need for us to talk about policy.}
+{\pard  \line \par}
+{Maybe not the first thing in the morning, but definitely something you should probably consider talking more about as well. But I really appreciate this. Thank you so much for coming in, man. I appreciate. }
+{\pard  \line \par}
+{\b\cf3 Jim Bugwadia:\b0}
+{ Thanks for }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ having me. Thanks everyone who with tuned in online.}
+{\pard  \line \par}
+{We'll see you next episode on the Cloud Security podcast. You soon. Peace.}
+}

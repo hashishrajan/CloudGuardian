@@ -1,0 +1,509 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red216\green34\blue146;
+\red128\green128\blue128;
+\red250\green138\blue59;
+\red0\green209\blue178;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ Jasmine, if you could start with your intro and I would love to share what your story is like in the space. }
+{\pard  \line \par}
+{\b\cf3 Jasmine Henry:\b0}
+{ I feel like it is both complicated and boring, which is not, not great. I'm Jasmine Henry I'm field security director at Jupiter one. And I feel like I did not intend to be a person who specialized in doing like applied graph stuff at cloud.}
+{\pard  \line \par}
+{Like software startups, but that's kind of what my career has ended up and that's great. , I started gosh majored in Russian and Antarctica, undergrad wanting to get a PhD in Russian, but it was, , financial crisis of 2008 through, , several years afterwards. So there was no funding.}
+{\pard  \line \par}
+{So I went to help desk Then I did cloud native development, and then I got a graduate degree in analytics and then I did security. And then I used Jupiter one to scale security from series a to C at a different cloud native startup. And now I'm in a role that kind of blends all of this and applied research.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Over to Yeah. Thanks again. }
+{\pard  \line \par}
+{\b\cf4 George Tang:\b0}
+{ Ashish longtime listener, big fan. So really excited to be here. My name is George }
+{\cf2 [00:01:00]}
+{ Tang. I'm a principal solutions architect. Which means I help our customers be really successful platform, but my career also didn't really start in cloud or security. I got an accounting degree actually.}
+{\pard  \line \par}
+{So I was an accountant. I got my CPA knew I didn't want to do that five or 10 years in, but it just took me a while to figure out what I did want to do. And so a few pivots later, big breaches went back to grad school. Got a degree in cybersecurity and, , I spent about 10 years in different external consulting roles.}
+{\pard  \line \par}
+{But this is my first gig at a startup and I'm loving every second. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So that's awesome. I love the fact that the two folks that I have here both of you started a non cybersecurity background, but today you have cyber security roles are at least in the space. It's interesting it's a slight tangent here a lot of people were always say that, do I need a cybersecurity degree to get into cyber security? But you can always start in accounting or you can start off learning, Russian, and you can always join later on }
+{\cf2 [00:02:00]}
+{ as well. So it's pretty good examples. So thank you for sharing that. }
+{\pard  \line \par}
+{\b\cf3 Jasmine Henry:\b0}
+{ Yeah, there was a point in my kinda early mid twenties when nobody would hire me because I didn't have like specific workplace experience with routers. I was working in cloud that was not considered security at the time. And. It's amazing how, how much things have shifted. , I recently spoke with CSO, Uber, and her recommendation to people who want to end up at insecurity is to get as many broad experiences as possible.}
+{\pard  \line \par}
+{And I feel like that's, that's relevant. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. So today's topic is all about asset management and think it's one of the most misunderstood are probably underestimated effort wise that people think about it in the cloud space.}
+{\pard  \line \par}
+{ Maybe Jasmine, if you can start with, what is asset management cloud. And why does one need one in general? . Why does it make sense to have one? }
+{\pard  \line \par}
+{\b\cf3 Jasmine Henry:\b0}
+{ Sure. Well, asset inventory is CIS critical controls wanting to, , maintain, maintain, not create once a quarter, but maintain an inventory of all hardware and software.}
+{\pard  \line \par}
+{And I think that once upon a }
+{\cf2 [00:03:00]}
+{ time, actually I do have a relevant story here. I had a professor in graduate school who did some work at an automotive company in the U S in the late seventies. And his job involved, walking around, providing support to all of the employees at this automotive manufacturer had a computer.}
+{\pard  \line \par}
+{It was about a dozen of them. And so he wore a floppy bag or floppy disks on his belt which at the time, , I think it was GM. I don't actually know they had like 10 computers today. The average organization based on reasonable. Completed has 32,000 device assets. 90% percent of which are cloud.}
+{\pard  \line \par}
+{Like the scale has changed a lot. The, the rate at which things change a lot, especially now that computers don't take up an entire room. So it is a, it needs to be an active practice that involves, , compiling data and meta data in real time.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. }
+{\pard  \line \par}
+{\b\cf4 George Tang:\b0}
+{ The first one to tell you, asset management, the term, not sexy, in fact, you }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ know, it sounds like a }
+{\cf2 [00:04:00]}
+{ phone thing. Is that like a gun? }
+{\pard  \line \par}
+{\b\cf4 George Tang:\b0}
+{ Exactly. I just get into the most exciting faces, but actually mean that I look at asset management really simply. One question insecurity that if you can answer perfectly and you can maintain securities you always have to maintain, it's never like a final destination, but to me, the question is what do I have?}
+{\pard  \line \par}
+{And is it secure? So it's actually two parts. And that question, if you can answer it well, you've done asset management, so I'm sure we'll get into it more, but that's how }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ it looks at it. It's just a good way to put it because we have a few examples that popped up in recently. Like we had the log4j in December.}
+{\pard  \line \par}
+{Just primarily would have been easy for people to pick up and solve if, , if people knew exactly what they were using, . But a lot of people had, like, had moments that are, we don't have a proper asset management. Cause I wonder cause why would have those questions come up? So what do people normally do when they don't have a, something like, I don't know, like an asset management system, where are they starting in the piece of paper or what are the.}
+{\pard  \line \par}
+{\b\cf4 George Tang:\b0}
+{ Think there's two ways }
+{\cf2 [00:05:00]}
+{ to look at it. Like I've been an Auditor for a long time and in previous lives, there's that way, but also just as a security practitioner, dealing with a lot of our customers and the general answer.}
+{\pard  \line \par}
+{Unfortunately is incomplete and kind of static or out of date spreadsheets. And that sounded like the. , the starting point. And then for companies that are a little bit more resource and technically savvy, there's some home grown solutions that give them some type of asset listing or visibility for different types of assets.}
+{\pard  \line \par}
+{But }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I think you bring up a good }
+{\pard  \line \par}
+{\b\cf4 George Tang:\b0}
+{ point. Like what is an asset? We didn't really talk about that. . You mentioned, you mentioned a couple of incidents, , we're not the names specifically instance. Assets could be open sourced code components that are used in your products. Application code assets might even be your third-party vendors that might have access for customer support into your environment.}
+{\pard  \line \par}
+{Or maybe assets are just generic. Like the generic definition. The old definition is like my computer and the two VMs. I spun up to do some }
+{\cf2 [00:06:00]}
+{ testing, but it's everything in between. And then a lot more. }
+{\pard  \line \par}
+{That's my piece. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That's a good point to mention though, because to your point, if people are using spreadsheets, And I wonder if it's also split between different departments as well.}
+{\pard  \line \par}
+{So it's not only say, even though this is the clarity report cost, but it's the asset management pieces beyond the clouds or cloud security or cybersecurity space as well. The asset management and accounting, what we were alluding to earlier is asset management in internal it as well. So if you have service desk, they are doing asset management as well.}
+{\pard  \line \par}
+{, we're not even accounting for that. Now as we kind of move forward with the whole internet of things and all the other beacon devices that you can come across in, depending on the organization you're in I'm assuming asset managers, not for everything. So asset management, is that only for cloud or can you just do, like, how broad can we go , like how broad an Asset can be?}
+{\pard  \line \par}
+{\b\cf3 Jasmine Henry:\b0}
+{ Well, , if you were really into some radical math, which might be George, you could probably start trying to like, okay, }
+{\cf2 [00:07:00]}
+{ Included IP and like organizational wisdom, but that's not really something I've personally done or worked around. But I think that you bring up a really good point, which is that it asset management, , maybe you're scanning and laptops putting on , fixed asset tags is not the same as asset management.}
+{\pard  \line \par}
+{I think that an asset, the simplest definition that I can, I can wrap my head around is that it's something that adds the attack surface. It's data. It's devices, it's networks, it's users and it's applications, which applications includes code components source. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Actually, we know what were we talking about? What is it like, why is it important though? Cause , I keep going back to the whole example because I've worked with quite a few listeners over here.}
+{\pard  \line \par}
+{I actually don't know how many people actually use asset management.}
+{\pard  \line \par}
+{But so based that I'm coming from. Sounds like a good thing to have. , I want to know what I have and what could potentially be adding to my taxes. But is this a problem to the point that maybe we're not doing this . So what's wrong with spreadsheets, }
+{\pard  \line \par}
+{\b\cf3 Jasmine Henry:\b0}
+{ like, . So there's an ESG stat.}
+{\pard  \line \par}
+{That's about, I think it's four to }
+{\cf2 [00:08:00]}
+{ five months old that says that 70% of companies have experienced consequences due to an unmanaged undiscovered, , or asset that that was not in the purview essentially. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Really for this as well. }
+{\pard  \line \par}
+{\b\cf3 Jasmine Henry:\b0}
+{ Yeah. I think that there are real consequences that happen often.}
+{\pard  \line \par}
+{If you're not doing automated asset discovery, }
+{\pard  \line \par}
+{\b\cf4 George Tang:\b0}
+{ My thoughts are in the past, it was asset management has always been pretty. Like I've always thought it's kind of foundational. I think part of the reason why it's getting more exposure in recent years is because of. Move to the cloud. Historically enterprises, their environments were generally behind the VPN through a VPN behind a firewall, .}
+{\pard  \line \par}
+{There was like kind of a a boundary that was understood and everything inside you could sniff the wires scan, scan to identify what all was on the }
+{\cf2 [00:09:00]}
+{ network. Well, in the cloud today, Especially when you think about companies that give their developers kind of free rein to build tests, , whatever.}
+{\pard  \line \par}
+{It's just hard to keep track of. What is being spun up and down assets are really ephemeral and dynamic. Like you can't like go to a data center, count the racks. , unless you're an AWS employee or something, but you, otherwise you cannot go account racks. ? And so these things are, are, are being spun up, being used and they might be left there, or they might be, might disappear after an hour or 30 minutes.}
+{\pard  \line \par}
+{So it's really hard to keep track. And that's just when you think about infrastructure, but now. Companies are using hundreds of SaaS applications that have API access to data. And oftentimes it's both ways read and write. And then you layer in more and more components. So that's why I think asset management is becoming or getting a little bit more attention because ultimately if you don't know what you have, how can you protect it?}
+{\pard  \line \par}
+{And how can you even figure out is your posture }
+{\cf2 [00:10:00]}
+{ secure? }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. And to your point, so does this mean the challenges for asset management in cloud versus on-premise or it has been traditionally are a lot more complex as well, because to your point, , as it should be coming up and down going just disappearing in a matter of minutes, but, and that could also mean if the asset to Jasmine's point earlier, if it was an asset that is important and adding to your attack surface, someone compromised it, but by the time you got to it, 40 gone away.}
+{\pard  \line \par}
+{How do you kind of trace back for whether it existed? Like, is there a lot more complexity in cloud when it comes to asset management and that's, and that's kind of where, especially if you're not really solving. }
+{\pard  \line \par}
+{\b\cf3 Jasmine Henry:\b0}
+{ Yup. And I feel like you you hit on a really interesting concept, which is isn't an entire asset life cycle can exist without a human doing anything like without a human touching, anything without a human deploying, tearing it down, like in the case of many scenarios, including auto scaling, , auto scaling groups.}
+{\cf2 [00:11:00]}
+{ }
+{\pard  \line \par}
+{I think that if you're scanning in laptops, if it's something that you're touching to deploy this asset, you might be okay with manual. If not like automation is the first and last resort. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ . And yeah. So any other complexity that comes with going into cloud?}
+{\pard  \line \par}
+{Cause I feel like it's, there's, the scale will be a challenge as well. Cause , I can only imagine spreadsheet is going what, 10,000 rows, 16,000 rows. And if there are assets coming up and down and you're trying to maintain a record of all of them, but then you keep removing them, adding them. Like how does, what does asset management at scale look like?}
+{\pard  \line \par}
+{\b\cf4 George Tang:\b0}
+{ Asset automation at scale looks like API interconnectivity and bringing a system of record together for all the disparate toolings technologies and platforms that are provisioned in a general enterprise organization. To like you think about the corporate it team, they have their stack of tooling.}
+{\pard  \line \par}
+{You think about. The cloud infrastructure }
+{\cf2 [00:12:00]}
+{ team, the developers, the security team, like when you start thinking about it, there's dozens, hundreds of tools that could each serve as their own source of truth. Like maybe jam is the source of truth for the Mac book. And maybe, , AWS for the cloud infrastructure, there's dozens and dozens of these tools.}
+{\pard  \line \par}
+{When you think about scale the dynamic of femoral illness and how a lot of these assets are defined by code, like Jasmine said, you can't put your, you can't touch a lot of it. Yeah, a system of record to, to a platform that brings in all these sources of truth together via automation through API APIs is how I see the future.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Fair enough. And so that car comes for the fact that whether something is already present or was present for a few minutes versus something that's basically long living it, at least able to catch it, all of those. So you have a complete picture and maybe to your point, you can probably extend that to inter life.}
+{\pard  \line \par}
+{\b\cf4 George Tang:\b0}
+{ Yeah. And , the part, like, since you brought the spreadsheets again, it's the part that these API }
+{\cf2 [00:13:00]}
+{ APIs and these platforms allow us to do is once you configure it, like you just set up how frequently you want the data assets refresh, ? Like we don't have to ask, , George or Jasmine to update the spreadsheet quarterly with the latest export from the software.}
+{\pard  \line \par}
+{Yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And then you're going to actually use it down into Jasmine and George for real things, instead of just maintaining spreadsheet. }
+{\pard  \line \par}
+{\b\cf3 Jasmine Henry:\b0}
+{ Extensively. Yes, but no, I do not do manual asset inventory. I feel like , there's a few good decisions I've made in my life. Just a small handful. One of them was putting , automated.}
+{\pard  \line \par}
+{Inventory and places. One of like the first three things I did when I created a security program. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. I wonder it's the automated asset inventory is an interesting one because I, I don't know how many people are even open to the idea. Cause I do find that when you talk to different people, it's asset management done by cybersecurity for the assets that attack, can add to the attack surface. Who's looking at this. }
+{\pard  \line \par}
+{\b\cf3 Jasmine Henry:\b0}
+{ My case, it was, it was security , plus }
+{\cf2 [00:14:00]}
+{ compliance privacy. It was also dev ops and I was starting to get pretty good at kind of surfacing certain things from, from, , assets for executives through, through dashboards. How many instances do we have in Europe?}
+{\pard  \line \par}
+{Because that was GDPR. Posture question, which of our developer identities like are approving their own code commence because a great asset inventory system will show the relationships between, , Misconfigurations events, assets. And those are the sorts of things that executives actually care about.}
+{\pard  \line \par}
+{Not, , thirty-five radar charts that show your feelings on risks, which I've definitely stayed up all night making. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Because that makes me quick question then. So then since you're talking about compliance, then it's a lot of people have a compliance requirement for asset management. Is that what drives this?.}
+{\pard  \line \par}
+{\b\cf4 George Tang:\b0}
+{ There is like, like Jasmine mentioned CIS high trust and a few other like compliance regimes or standards, }
+{\cf2 [00:15:00]}
+{ frameworks, whatever cinema you want to use actually require an asset inventory. But historically, like most companies don't truly have.}
+{\pard  \line \par}
+{Realtime automated asset inventory that really captures a comprehensive view of their assets. They'll generally like show auditor's spreadsheets. It'll be enough to suffice to get the rubber stamp, to move on. But from a compliance perspective, like in the past, how auditing usually works is if I've come in to audit you, I'm going to ask you to ask your team, to generate a static point in time, dump of all of your databases and servers.}
+{\pard  \line \par}
+{I'm going to point my finger at like 25% of them. And then you take those 25% I selected and you bug your engineers to capture screenshots, showing that the servers and the disks are encrypted or whatever the requirement is. And nobody likes that you don't like that. Like your engineers definitely don't like it.}
+{\pard  \line \par}
+{And even the auditor doesn't like it. So we have a real opportunity here with technology now with these modern asset management inventory tools to have not only like a, a, a }
+{\cf2 [00:16:00]}
+{ holistic. Comprehensive view, but to move from what compliance was for 50 years, which is the once a year exercise, ? Everyone gets nervous the week before the auditor comes you sweat and the auditor closes their door.}
+{\pard  \line \par}
+{You're don't to see that guy for another year, we can move into continuous monitoring. Your environments are changing by the time we finished this conversation at a normal modern enterprise software. Dozens hundreds of mergers and deploys into production like that, that environment is not static. So the next year, when that auditor comes back, when I come back, what am I, , what's this, what is this like a audit that we're doing, ?}
+{\pard  \line \par}
+{Like, does that even make sense? }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yep. I think you raised a good point as well there, because as you kind of go through the audit audit exercise itself, a lot of times people are going through multiple spreadsheets, multiple people that were interacting with. Just to get the real-time view of this and to what you were saying as well, having having the ability to challenge the norm.}
+{\pard  \line \par}
+{That }
+{\cf2 [00:17:00]}
+{ was, Hey, I just worked, I just asked you for a screen snapshot of these 20 boxes and just 20 box may have been there for 20 years, but there was all these other hidden boxes that probably would never sit in that. And that was the day of light and those audit as well, because they're just well hidden and you don't even, you don't even share that in.}
+{\pard  \line \par}
+{And the view that he sh , nowadays you're screen sharing because everything's online, but maybe you just have a window, which is just how you partial view of the whole thing, not the whole thing as well. So if, if there is an opportunity here to challenge compliance cause I, I want to get into a bit of a tooling's thing as well.}
+{\pard  \line \par}
+{Like, so in dance of. We know what is an asset. We know why asset is important. We also know asset management platforms are probably very good idea as well for someone to consider. If, especially if you want to know things like, Hey, if log4j was to happen again, I probably had at least have a real time list of where possibly I could have had.}
+{\pard  \line \par}
+{\b\cf3 Jasmine Henry:\b0}
+{ Dependencies and packages. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Perfect. }
+{\cf2 [00:18:00]}
+{ My first introduction to asset management is the years ago in a spreadsheet was basically heavy use AWS, or may not.}
+{\pard  \line \par}
+{It wasn't, AWS was more like we use IBM. We use this data center thing. We have some other software. It was just literally a list of the application itself, or if it's like a application before, but that was. You would never go into the whole what's it called? What language is being used or whatever it is, because I want to, the introduction of SBOM coming up.}
+{\pard  \line \par}
+{\b\cf3 Jasmine Henry:\b0}
+{ I actually have a trivia question for you is if you're willing to play, what percentage of code assets in an organization do you think are third party versus homegrown? }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I would feel a lot more. Then w so if I were to put a number to it, I can't really put enough.}
+{\pard  \line \par}
+{ I would probably even say 60% or be third party, 40% actually, maybe I'll rephrase this. 60% is third party remains 30% is scored and libraries written by other people and then 10% police what you're actually writing. That makes sense. }
+{\pard  \line \par}
+{\b\cf3 Jasmine Henry:\b0}
+{ Actually , }
+{\cf2 [00:19:00]}
+{ you're pretty close. So 8%.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yes. }
+{\pard  \line \par}
+{\b\cf3 Jasmine Henry:\b0}
+{ Yup. Yup. So there is really significant third-party exposure. I was actually recently cracking up because my CSOs analogy, it involves piles of horse manure, but he's like, , we cannot actually solve this problem. We can only manage it with things like SBOMs and with asset inventory, , solutions with knowledge graphs that allow you to.}
+{\pard  \line \par}
+{Understand relationships and dependencies. And then I think also two other things that help, but don't solve it. Vendor consolidation, turn off a legacy system. If it no longer serves you like that really takes a lot of security time. }
+{\pard  \line \par}
+{\b\cf4 George Tang:\b0}
+{ With all the last couple of years, the events involving whether you want. Yeah. I call it security of the software supply chain and the, , Linux foundation, the cloud native computing foundation. I like their four Cs that they did find. When you think about the cloud, you have to secure, ?}
+{\pard  \line \par}
+{The actual cloud infrastru. And then you }
+{\cf2 [00:20:00]}
+{ worry about like clusters that workloads are running on the security of the containers. And then lastly, the code that's running. So like the four seasons that's I think a really nice way to look at, , when you consider what an asset is, is all of those things.}
+{\pard  \line \par}
+{And then some your SaaS applications, your end points, your users, . All of that stuff. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So now since you're going to have highlighted the fact that, okay, asset management is challenging, complex, and in the, probably not a great idea to start doing it on a spreadsheet. Is there like for people who we, , we've been talking about automation for some time as well.}
+{\pard  \line \par}
+{Is there like some open source tooling or what do people normally use? I want to go automate stuff. Cause I know we on Cloud security news, we recently covered I think the source tool from Jupiter, one star gaze. I want to say, sorry. STARBASE star base. Oh, I'm having something money. I wasn't really close.}
+{\pard  \line \par}
+{ That was like a pretty cool release as well because you kind of had like. Graphical view of where assets could be like. So, , w what's the role, what's the role? These current tools would }
+{\cf2 [00:21:00]}
+{ play in an asset management context.}
+{\pard  \line \par}
+{And should, when do people go for paid paid tools versus just using open }
+{\pard  \line \par}
+{\b\cf3 Jasmine Henry:\b0}
+{ source? I'm a realist as somebody who spent a lot of time working at startups that do not have infinite budget. I think that open source is certainly. A very valid approach. And I also think that you can use open source to kind of validate like a use case or, , grow into maybe where you eventually want to be.}
+{\pard  \line \par}
+{There a lot of good open source tools. Thank you for the shout out to STARBASE. There is there as graph QL there, sparklers Neo four, J you essentially need the ability you need to graph data model so you can classify assets. And you can classify the relationships and you need a query language. That is, that is the two things you need and you can find it from several different open source products, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ ?}
+{\pard  \line \par}
+{So a query language, what was the other }
+{\pard  \line \par}
+{\b\cf3 Jasmine Henry:\b0}
+{ one? You need to graph data model. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Okay. And the combination of that is a great start doing asset management. The biggest }
+{\pard  \line \par}
+{\b\cf3 Jasmine Henry:\b0}
+{ of, there's a third element, which is you need to be compiling data and metadata on assets, }
+{\cf2 [00:22:00]}
+{ so you can play all the data, you classify it with the data model and then you use the query language to query it.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Okay. So why a graph model? Why not our database? . }
+{\pard  \line \par}
+{\b\cf3 Jasmine Henry:\b0}
+{ Okay. So I have strong opinions on this. I think that securities now are actually, we're really dealing with search problems that are, , it's, it's a matter of analytics. And so Google used knowledge graphs, which are a. Semantic model.}
+{\pard  \line \par}
+{It's been around since the seventies to classify new types of data and discover new relationships in real time. And that is how Google can refer you to a restaurant that, , two blocks away that that just opened up. If you're looking for a place to eat And I think that we need to scale that model, the security like it's tested, and we have the same issue where we need to be adding new asset types and understanding relationships and not reinventing the wheel.}
+{\pard  \line \par}
+{Every time we have a new asset type added, we need to be fitting it into a dynamo. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Would it be the same knowledge graph model that's applied in cybersecurity is. }
+{\pard  \line \par}
+{\b\cf3 Jasmine Henry:\b0}
+{ Yep. And within social media }
+{\cf2 [00:23:00]}
+{ networks not the S yeah, , not the exact same model, but }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ guess the essence of it. So maybe let's get it enough.}
+{\pard  \line \par}
+{It can actually help. So and this is just me curiosity from a algorithm perspective. So a knowledge graph would be in a cybersecurity context would help you identify your attack surface end points, like things that could be potentially taken over. And how do they relate to each other?}
+{\pard  \line \par}
+{Would that be a good example for what a knowledge graph can give you? Exactly. }
+{\pard  \line \par}
+{\b\cf3 Jasmine Henry:\b0}
+{ Yep. It classifies the assets and it classifies a relationship types, which our relationship is not necessarily negative or positive, but combinations of relationship, like a. An asset that is critical and it is also like misconfigured and it's also related to like, people shouldn't be accessing it.}
+{\pard  \line \par}
+{Like that is, that is an actual risk that you should probably be worried about }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ found like it should be a team inside cybersecurity, or these are individual looking at this on an ongoing basis, spelling that graph. Cause it sounds like a great idea, but I don't know. Is that not an individual thing or is that just basically, I'm just going to }
+{\cf2 [00:24:00]}
+{ make this open source and leave it, what what's the, what do you see in the industry?}
+{\pard  \line \par}
+{\b\cf4 George Tang:\b0}
+{ So we've been harping a lot on like, what is an asset? Why is, why is it important to know what your assets. And how they're configured, where they live, who owned them, whatever we believe we have a very biased view.}
+{\pard  \line \par}
+{We also believe that it's just as important to understand those relationships that exists between your assets. So I think there was I think it goes back to Microsoft distinguished engineer, John Lambert. Maybe there's a saying that defenders think in lists like spreadsheets tables and attackers thinking graphs.}
+{\pard  \line \par}
+{Because if you think about when someone is trying to. Find a way into an enterprise environment. There's that attack surface that we talked about? That's that posture from an enterprise perspective is so broad. Like there's so many possible weak links. If someone manages to get a foothold in any one of those.}
+{\pard  \line \par}
+{Possible points on the posture. They're going to think, where can they laterally horizontally, }
+{\cf2 [00:25:00]}
+{ vertically pivot to, . It's not always just like a straight shot to the database that has my customer's credit card information. It's like the hops aren't always lateral. You might have to make some weird zig-zaggy journey through the system, as you figure out what you can take advantage of in terms of privilege, escalation or whatnot.}
+{\pard  \line \par}
+{So ultimately understanding these relationships, for example, in AWS, Knowing what I am policies I have is great. Knowing what permissions, those policies allow to what resources is great, but we didn't need to know like which roles, which users, which groups can assume those policies and use those permissions and like what resources can they possibly, have .}
+{\pard  \line \par}
+{Read admin access to. So that's why we believe relationships are so important, but ultimately back to the open source question, there's a ton of tools. Jasmine rattled off. And I know that idea of like we're talking about, oh, assets are so broadly defined. It's so many things to consider. I think starting from somewhere is great.}
+{\pard  \line \par}
+{? You don't need a hundred percent visibility day, }
+{\cf2 [00:26:00]}
+{ day, one hour or two it's you slowly build adding more sources of data, more systems of sources of. And ultimately it's like just like security. It's an ever-growing ever continuing what journey we're hopefully if you zoom out enough, the progress is positive, ?}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yep. And to your point, then if you have built a solution like that, you have, whether you've used opensource, but I, at what point do people have to go for a paid solution, like, is it a tipping point optimist? Or are they normally just happy with open source tools and go, oh, I think this is all my problem.}
+{\pard  \line \par}
+{I'm just. }
+{\pard  \line \par}
+{\b\cf3 Jasmine Henry:\b0}
+{ With the engineers, you can get really, really far with open source. So I think it's, it's really pretty individual. I'm going to put in our chat here. Sheesh. I've got a list of, I don't know pretty comprehensive list of , open source resources, some of which are our companies, but they're open source and then really great other projects as well.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Awesome. I will definitely share that in the show notes as well, later on as well for people to join in. Awesome. Thank you for the, that. Oh, yeah. Cartography }
+{\cf2 [00:27:00]}
+{ the cartography from lifters. That's pretty cool as well. I've actually heard that before. So the interesting point then becomes, okay, so if you had the skill set in your team, you probably go a long way with opensource asset management, if you really want to.}
+{\pard  \line \par}
+{So flicking that back on to, , asset management automation . It's individual to the company to kind of do automation. Okay. We kind of come back to the scale thing again. Cause I, I feel like with the cloud space that we are kind of focused on this kind of very primary audiences as well.}
+{\pard  \line \par}
+{You can start building an asset management graph using open a paid solution as you're kind of going through that process. You find an accountability partner as well for, Hey, these assets are managed by, I don't know if Ashish manages this really weird looking software over here, which has just happened.}
+{\pard  \line \par}
+{I don't know how many you've used. Haven't been used to 30 years, but we just have to maintain it because this is one particular thing that this thing does. So we might have examples of those as well. So accountability, I feel is an important part as well. }
+{\cf2 [00:28:00]}
+{ Scaling graph. This, is there anything else people should think about when scaling asset management?}
+{\pard  \line \par}
+{Apart from the fact that, oh, I've got everything. I've got my old softwares, new softwares. I've got my cloud beacons. I've got my accountability sorted. I've got a graph that looks pretty sexy enough that I'm going to go, okay. The songs is all my questions. If you want, if I was in a attacker or our defender, anything else people should be thinking about?}
+{\pard  \line \par}
+{We're building an asset management system that is for the modern cloud. }
+{\pard  \line \par}
+{\b\cf3 Jasmine Henry:\b0}
+{ I feel like the question that really interests me personally, selfishly, is , once you've got all this data in this graph, how do you surface what's actually interesting and relevant. The research I'm going to be doing next is going to be an attempt to figure out Well, how well anomaly detection, , scales to cloud, which I suspect is not very well.}
+{\pard  \line \par}
+{Cause I think that cloud is a lot more chaotic. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ You find anomaly detection is easier if }
+{\cf2 [00:29:00]}
+{ we are able to do asset management, ?}
+{\pard  \line \par}
+{Cause then you get to go know the behavior of, Hey, these are how the assets are behaving and the anomaly to zoom it's destroying database. But is that easier if you have an asset management system for doing. }
+{\pard  \line \par}
+{\b\cf3 Jasmine Henry:\b0}
+{ I can personally attest that in a real world environment, the asset management system gave significantly more actual results than other tools such as this certificate is going to expire in 30 days.}
+{\pard  \line \par}
+{Yep. I want to act on that versus I'm not pointing fingers, but maybe some cloud threat , systems. Can be total black boxes and yell at you, , 300 times an hour}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ . Yup. That I've seen that as well. }
+{\pard  \line \par}
+{\b\cf4 George Tang:\b0}
+{ The question you asked, I look at it the other direction. I just don't have enough experience to speak as to having how having a asset management platform or good governance over your assets may or may not increase anomaly }
+{\cf2 [00:30:00]}
+{ detection, but I will tell you the inverse, the classic story is.}
+{\pard  \line \par}
+{Hey, we use a really fancy SIEM tool that fires a bajillion alerts. And a lot of it's noisy. A lot of it's noisy cause it's like false positives are low, low priority stuff, but even when something important or seemingly worth looking into comes in, maybe it's an IP. Maybe it's a, FQDN a Mac address, the hosted whatever companies that you're talking about with scale.}
+{\pard  \line \par}
+{There's so many teams, it is a humongous struggle to figure out who should I go talk to about this identifier that, that triggered on my alerting system, ? Yeah. It takes folks hours, maybe days to go hunt down the developer or the team and taking figure out where this asset belongs.}
+{\pard  \line \par}
+{. And so when you mentioned accountable, That's a big thing for me. It's if you can like tag your assets at the source when you spend the month. But yeah, those are my thoughts. I don't know about if the increase in anomaly detection, I will tell you though, the anomaly detection is }
+{\cf2 [00:31:00]}
+{ meaningless.}
+{\pard  \line \par}
+{If you can't act on it, ? Like you can bring all the signals in the world to somebody, but , people have, , they have limited working hours. They have to prioritize. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Maybe a good question too. A good follow up question. Do you kind of bring this home would be like, we have spoken about asset asset management, but what are some of the different maturity levels?}
+{\pard  \line \par}
+{, we obviously have open-source solution open source solution that we can use. And to Jasmine's point, you can take it all the way and have an amazing viewpoint of what assets are and how we can probably manage them. But what does a maturity morbid for this? Where do people what's the level one?}
+{\pard  \line \par}
+{And then what would be level five level 10, kind of a thing for asset management. I }
+{\pard  \line \par}
+{\b\cf4 George Tang:\b0}
+{ know Jasmine has a. Jasmine, I, }
+{\pard  \line \par}
+{\b\cf3 Jasmine Henry:\b0}
+{ I, I really appreciate the fact just very deeply that you asked about a model because then I wouldn't thought about it. I don't, I don't know that it's, it's there though. So I really want George to argue with me }
+{\cf2 [00:32:00]}
+{ level one.}
+{\pard  \line \par}
+{No, what you have in real time. Maybe that's actually level two because not everybody gets to level one. Majority of people don't get to level one. So know what you have in real time. Level two would be. Like achieve not only the principle, the spirit of like the CIS controls, where you need to know what you have in real time and some things about it.}
+{\pard  \line \par}
+{Who does it belong to? How critical is it would probably be a big one. There, a level three would probably be apply a graph model or some sort of other mechanism to understand relationships and dependencies. What is this? , vulnerable code library, actually impact being able to trace that and then level four would be just being so perfect that your developers always tag assets at the time of creation, you have a, like just gorgeous ass bomb.}
+{\pard  \line \par}
+{It's like on your website. You're really surfacing insights. Well from asset management to executives and they like are looking every day to see, , how's your, how's your attack surface changing. But, , if anybody ever gets there, }
+{\cf2 [00:33:00]}
+{ let me know.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I'm not going to blame anyone over here, but I, I know exactly a few companies that I've seen in the past as well, a to your point level one itself has never happened. It's updated. It's a bit like a week before to what George is saying a week before the audit. And I'm like, oh, we should because it's just maintained for He has maintained a week before the auditor comes in and probably people forget about the auditor, the leaves until the next word comes in.}
+{\pard  \line \par}
+{But anything to add, George? }
+{\pard  \line \par}
+{\b\cf4 George Tang:\b0}
+{ I think Jasmine hit pretty much all of it. I would just, the only thing I would add is if we ever get there and this is, or if, if folks ever get to the point where they feel really comfortable knowing everything in anything they have at any given moment in time Whatever framework your company adopts, whether it's CIS critical controls, whether it's NIST, CSF, whether it's NIST 853, whatever it is, then you start applying these requirements or like standards across your assets.}
+{\pard  \line \par}
+{So one example is }
+{\cf2 [00:34:00]}
+{ whatever framework you, you decided to go with your, it, you choose it. You also are able to enumerate any given. The 400,000 S3 buckets you have, then you start looking at the actual S3 buckets to see if they're secure and configured to the best practices. . Do I have encryption at rest are my bucket object policies set the way, et cetera, et cetera.}
+{\pard  \line \par}
+{But ultimately this is a journey, ? And so I don't want to understate that progress is what we're going after, not perfection }
+{\pard  \line \par}
+{\b\cf3 Jasmine Henry:\b0}
+{ progress, but I also have a philosophical question. Should, should maturity models be curve adjusted to where. Like should level one always be a level three or no, like, should we maintain our standards?}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I kinda come from my mindset that people should always there's always one level up, you can go for and that's just me thinking about everything in life, . I, I feel like there's always a, oh yeah, we've been doing this. Cause with taking the cloud example as well, even, they keep evolving every day.}
+{\pard  \line \par}
+{You would always feel, , as a, as a CSO, I always feel. I may feel I'm level three level }
+{\cf2 [00:35:00]}
+{ four now, but I won't be surprised if just as I keep like finished this conversation and someone has created something, which I have no idea about. And I don't find out about it until tomorrow or whenever the scan runs, .}
+{\pard  \line \par}
+{\b\cf3 Jasmine Henry:\b0}
+{ Yeah. Well, I I'm a firm believer that some security which sometimes the, the way that you can do some security is by doing some compliance. And it's better than it is better than nothing. It is not all or nothing. A little bit is better than nothing. Don't }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ the compliance standard because they realized people were not even caring about it.}
+{\pard  \line \par}
+{They're like, well, if you make it a compliance standard, people will start at least making a spreadsheet out of it. }
+{\pard  \line \par}
+{\b\cf3 Jasmine Henry:\b0}
+{ Well, yeah. , PCI DSS literally says it is intended to be. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ There you go. You don't want to put, we don't wanna put too much pressure on you guys just it's made in a spreadsheet at least do that much.}
+{\pard  \line \par}
+{ It gets a good point for us to go toward the tail. End of it. I thank you so much for coming on this. I really appreciate the information that you folks have shared and at least highlighted the importance of why asset }
+{\cf2 [00:36:00]}
+{ management is something people should be considering. And thank you for all, for hanging out everyone.}
+{\pard  \line \par}
+{Who's listening in as well for people who wants to connect with you. Maybe after this, I talked a bit more about asset management, where can they find you folks? It Jasmine, if you wanna go }
+{\pard  \line \par}
+{\b\cf3 Jasmine Henry:\b0}
+{ first you can reach me at Jasmine. Henry@jupiterone.com. I'm on Twitter , at Jasmine Henry 10. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Awesome. Thank you.}
+{\pard  \line \par}
+{I'll put them in shownotes as well. What about you George, where can people find you?. I }
+{\pard  \line \par}
+{\b\cf4 George Tang:\b0}
+{ prefer LinkedIn. So just linkedin.com/george Tang. Email works, George dot Tang and Jupiter one.com. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I'll I'll share the links for all of them. That's all for today. And I will see the remaining audience next week. We are starting the cloud native security month and for everyone else, enjoy a great weekend. See you peace.}
+}

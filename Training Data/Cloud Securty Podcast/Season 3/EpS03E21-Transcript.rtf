@@ -1,0 +1,515 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red250\green138\blue59;
+\red128\green128\blue128;
+\red216\green34\blue146;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ Hey Paul Welcome }
+{\pard  \line \par}
+{\b\cf3 Paul Schwarzenberger:\b0}
+{ hi, I'm great. Thanks Shannon. Thank you so much for having me on the show. I really appreciate your insights. No problem. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I just want to say welcome and thank you for staying up late for us. The UK time is not the most friendliest, but I appreciate you hanging out late with us. So maybe the first place to start could just be the fact could you tell us a bit about yourself in terms of where you are today and our professional journeys?}
+{\pard  \line \par}
+{\b\cf3 Paul Schwarzenberger:\b0}
+{ Yeah, sure. So I've been in a cyber security, it security than men cyber security for over 20 years. And around seven years ago I was working for a government department in the UK I really wanted to migrate. We decided to migrate the, one of the biggest and most important applications and systems in the UK to public cloud.}
+{\pard  \line \par}
+{And that's what I sort of that convinced me to just concentrate purely on cloud security, et cetera. About seven days ago, I've done nothing else. I haven't taken on any work that apart from class security work. So that's sort of how that started and that's, so it's not about as many people in cloud do with Amazon web services, AWS.}
+{\pard  \line \par}
+{And then about three years later, I went for an interview }
+{\cf2 [00:01:00]}
+{ for a for a job. And. At the interview. I forgot. I didn't actually ask what cloud it was. So and then I , got the job, got the position and then turned up at work the first day. And I just sort of assumed it would be AWS. And so the first meeting I had with everybody, they said, oh yeah, what cloud are we?}
+{\pard  \line \par}
+{I'm having this digital transformation too. They said, oh, Microsoft. Okay then fine. I had a little bit of experience with them. I, by the way, , I know that a lot of people, including Microsoft say Azure, but for some reason, I think maybe being from the UK, I just say, , please speak your opinion.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Well, Azure, well, fair enough. But maybe. }
+{\pard  \line \par}
+{\b\cf3 Paul Schwarzenberger:\b0}
+{ Yeah. Yeah. So anyway, so then I spent a couple of years working on as yet all of that as a security. So that was a, that was really good. I'd also developed a course on it. And then about two years ago I had the good fortune. Well, it's probably good, fortunate, partly a conscious decision to get some experience in Google cloud security working for one of the banks.}
+{\pard  \line \par}
+{One of the major banks in the UK that is doing a digital transformation. Yeah. To the cloud. And so, yeah, so then I was sort of managing is multicloud security. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yes. multi cloud security. }
+{\cf2 [00:02:00]}
+{ And maybe that's a good site because now for multicloud security, we're talking about zero trust as well. So maybe a good segway is to, just to level the playing field for everyone.}
+{\pard  \line \par}
+{What is zero trust according to you and why is it so popular? }
+{\pard  \line \par}
+{\b\cf3 Paul Schwarzenberger:\b0}
+{ Yeah, well, it's really has been the one of the buzzwords for the last year. Hasn't it? But actually it's not really quite it's not like it's just arrived actually. , this sort of the concept has been around for a while. So about the time that I started in, I just security for 20 years ago, plus and in those days, This may seem strange, but everybody came into the office and worked in an office and a company laptops, desktops.}
+{\pard  \line \par}
+{Yeah, that was about it. And then occasionally, sometimes people have VPNs to connect in and the laptops have antivirus on and that was it, ? So, and in those days that was considered secure. It actually it, at the time that was a reasonably secure way of doing everything. So yeah, there was have a really help perimeter and then trust everything inside the network.}
+{\pard  \line \par}
+{And of course now even more so after the pandemic, , we're }
+{\cf2 [00:03:00]}
+{ all working from home where connecting any device. And there's really no such thing as a secure network anymore because the attackers have become more , clever with their techniques and you can if they can quite easily get into different networks.}
+{\pard  \line \par}
+{So , we can no longer trust those hard boundaries. So as I see is that there are trust know, it's really about Vera making decisions on. Who and what, and when to allow access. So evaluating somebodies identity the device that connected from the location they're connecting from , and the condition circumstance to that device, then making a decision, should we allow access or not, depending on what information application, data or systems they're trying to access.}
+{\pard  \line \par}
+{So a much more intelligent, fine brained decision. And that then means that. Anybody can connect from anywhere. And usually it means you don't need the more traditional VPNs either, which is good from a usability point of view. If it's, , all that. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yep. And so to your point, the reason we got this buzzword popular also because of the whole pandemic and work from home kind of being, I guess, spreading more often and more people, the whole }
+{\cf2 [00:04:00]}
+{ hybrid normal or whatever they're calling it now.}
+{\pard  \line \par}
+{That's, what's triggered the need for zero trust to get so much. }
+{\pard  \line \par}
+{\b\cf3 Paul Schwarzenberger:\b0}
+{ Yeah, no nothing. That's absolutely right. So yeah, and also the move to more and more applications being in the cloud and less applications being on premise. And , people's expectations are now that they should just be able to open the web browser or just connect to what they need to connect to.}
+{\pard  \line \par}
+{So there's a strong user expectation as well of, , ease of use. But yeah, the question is how to do that skill and how you can do that. Skilly is with the zero trust. Well, that's easier said than done. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. So what would you say are some of the fundamental components of implement and because you're talking about Azure as well for if one is thinking of doing a zero trust implementation in Azure, where some of the components that you kind of would have to think about from a from a zero trust perspective in Azure.}
+{\pard  \line \par}
+{\b\cf3 Paul Schwarzenberger:\b0}
+{ Yeah, sure. Important sense of pieces of, of any zero trust solition is indentity? So that's really core to the starting point because , who should be allowed access to this particular data. So Microsoft has, your active directory, which is abbreviated as UNT. }
+{\cf2 [00:05:00]}
+{ And if anybody doesn't know as your ID is, I guess it's sort of started out as a cloud version of the traditional on-premise active directory.}
+{\pard  \line \par}
+{Then it's really ended up as almost quite a separate sort of product a completely different sort of service really, but it is still it's an identity provider. So is your ID is, is quite central to the Microsoft zero trust sort of solution. And is your ID is used. As the identity source for both Microsoft 365, which used to be office 365.}
+{\pard  \line \par}
+{So that's your exchange, email, SharePoint, online teams and those productivity applications. But then it's also used as the identity source for Microsoft. Subscriptions and resources on Microsoft as yet. so that's absolutely, , a key central part of Microsoft's overall solution. And then for complete Microsoft zero trust.}
+{\pard  \line \par}
+{Microsoft is your ID is then LinkedIn to all sorts of different other Microsoft and Azure services. So, , that includes Microsoft defender Which is the endpoint security }
+{\cf2 [00:06:00]}
+{ solution. It includes Microsoft defender for a density, Microsoft effect, Microsoft like defenders. So there's lots of defenders there's defend the fit cloud.}
+{\pard  \line \par}
+{There's, yeah, defend the for cloud apps. And so all of these different services link him as. And port manager, which is part of in chain and is your D application proxy, which can be used for on-premise access. So depending on the customer's requirements and how far you want down that zero trust journey, you can plug in all these different services into as your ID.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right? And so, cause you mentioned identity and then we spoke about the endpoint. I guess from a component perspective, I'm thinking that there's the identity component. There's a networking component for how would . I authenticate Paul onto this network and building up zero trust for that. If I were to kind of break it out like that, so people can kind of in their mind go, okay, I've got these 1, 2, 3 things that I think humor at more non product level.}
+{\pard  \line \par}
+{Would that be, what else would you consider in there? So identity network }
+{\pard  \line \par}
+{\b\cf3 Paul Schwarzenberger:\b0}
+{ Yeah. So there's the identity there's network and then other important aspects are device }
+{\cf2 [00:07:00]}
+{ compliance and device status and location. And then also Yeah. Yeah. Also continuous threat monitoring and threat intelligence as well.}
+{\pard  \line \par}
+{Yeah. So all of those different aspects will all sort of plug into a sort of holistic, is there a trust solution? Right. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And I think it's worth calling out as well. Cause so you sounds like Azure is probably the center of it cause you, but to your point, I didn't realize probably the most crucial part of doing a zero trust in any form.}
+{\pard  \line \par}
+{How does Azure AD being, not the traditional active director? Why is that more better suited? Because I imagine people are listening in and going well, I've worked Microsoft active directory on premise. why do I need to have Azure AD for zero trust? Why not just use that one? So is it because it's better in terms of better suited for.}
+{\pard  \line \par}
+{Identity in a Microsoft online zero trust kind of a world. Is that why you prefer Azure AD? }
+{\pard  \line \par}
+{\b\cf3 Paul Schwarzenberger:\b0}
+{ Yeah. Most organizations who are sort of windows Microsoft shops and have active directory, maybe started with active directory on premise, maybe fall service and internal systems and had maybe exchange on premise.}
+{\pard  \line \par}
+{\cf2 [00:08:00]}
+{ Most of them are. Well, many of them have already moved to Microsoft 365 and others are moving because why look after and maintain a complex , Microsoft exchange infrastructure on premise, when you can use exchange online, , Y look after SharePoint servers and patch them when you can just use SharePoint online, and they'll want to use teams as well.}
+{\pard  \line \par}
+{And teams is obviously a cloud-based service. So most Microsoft windows sort of shops. So. Many have already moved to office 365. Anyway, in which case they have to use as your Ady because that's the other entity source of Microsoft is fine. But the good news is that you can vary that doesn't mean you have to get rid of your on-premise domain controller and active directory because as you would expect, , Microsoft has all sorts of cool.}
+{\pard  \line \par}
+{To think identity is from the on-premise active directory to the cloud, namely as your Ady connect. So , that's sort of one of the reasons but the other reason is there's much better integration. From Azure AD into all of the other cloud services. So as much more suitable for, , a cloud, the cloud sort of world that we live in now I guess the }
+{\cf2 [00:09:00]}
+{ other key component of a zero ID when it comes to zero, trust is a security feature called conditional access.}
+{\pard  \line \par}
+{And conditional access is where you actually set the policies, the zero trust policies and decisions, because that's where you're saying. This particular user group is allowed to access this application and get access to this data. But only if they're coming from a corporate device from a particular country and their device, hasn't got any evidence of being of malware, for }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ example, right.}
+{\pard  \line \par}
+{I suppose that's a good point. And Vineet had a comment as well saying Azure identity protection is also one of the re one of the good reasons for going for Azure. }
+{\pard  \line \par}
+{\b\cf3 Paul Schwarzenberger:\b0}
+{ That's a , really good comment for me, ? So thank you for highlighting that. And yeah, , identity protection is one of many great security features of a zero day.}
+{\pard  \line \par}
+{One point to just mentioned before I forget just to be so clear with everybody is like, when you start using a zero ID, you might think it's secure out of the box. Unfortunately it isn't there's no disrespect to Microsoft or anything. , , it almost has to be done like that so that people can get }
+{\cf2 [00:10:00]}
+{ started in a straightforward way.}
+{\pard  \line \par}
+{And there's not too many barriers to entry, but you do need to do work to. Azure AD secure or more secure and it's important to do that. And one of the things that you will need to do for that is purchase a, a D premium P two license, ideally, which then gives you all of the security features because quite a few of the best security features in Microsoft as your age.}
+{\pard  \line \par}
+{, they are part of the sort of premium tiers of or you can also, that also comes included if you get the CDC. Yeah, that's right. Exactly. Yeah. That's the one, that's what I was looking for. , if you want to go down this path and it's really, it is worth considering very strongly.}
+{\pard  \line \par}
+{But just to come back to identity protection that is a really good feature, which I think is, does require premium is your, the premium, I believe. And , some of the things identity protection can do is that it can change. Right. So it, because with the zero day, and this is another advantage of using a cloud service, because with the CRA date, you'll hash passwords in the cloud.}
+{\pard  \line \par}
+{So what Microsoft can actually do is they can look at all those hash }
+{\cf2 [00:11:00]}
+{ passwords and then see if there's any evidence that that is get a username and passwords have been compromised in any of. , the many, many leaks that we get on the dark web and, , pay, spin and so on. So it will actually tell you if a password has been compromised.}
+{\pard  \line \par}
+{So that's one sort of feature identity section. So that's a good one. And then another sort of feature is that it can alert you to people doing things like like impossible traveler. So, logging coming from. , Melbourne and then five seconds later from, , China or whatever, or UK for that matter as well.}
+{\pard  \line \par}
+{Yeah, exactly. So that's a good feature and then also anonymous logins as well. So people trying to connect, you might want to say. Well, we don't want to allow anybody to access from , Vajra VPN. I say that, or at least not access these particular applications and data, so yeah, it's a , good shot.}
+{\pard  \line \par}
+{On the other hand. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So kind of bringing back to the zero trust then. So we have Azure AD from a identity perspective, and you kind of mentioned a few more Microsoft defender. I just took to your point, I just heard Microsoft defender, then there's like mark of endpoint, proxy identity.}
+{\pard  \line \par}
+{So yeah. }
+{\cf2 [00:12:00]}
+{ So with the other components that we spoke about from a networking perspective, Well, so how we kind of spread out with the first answer. Well, okay. So we had the identity broken down by the Azure AD is a great tool for that. And then we kind of go down the layer from a networking perspective.}
+{\pard  \line \par}
+{What do ? And maybe a good place to start actually is, is there an implementation. I always feel when we talk about zero trust, it's not enough examples of an implementation. We will talk about what would an example of a zero trust solution in Microsoft Azure, look like even if it's the most simplest one.}
+{\pard  \line \par}
+{\b\cf3 Paul Schwarzenberger:\b0}
+{ Yeah. So Microsoft, they have actually recently published some Architectures for zero trust, which is definitely worth looking at if you're considering a bank down in this rate, they're very good, very comprehensive. They're in a PowerPoint format. So it's fairly straightforward to sort of understand and they do go through and they start with the principles of zero trust from a Microsoft perspective, which.}
+{\pard  \line \par}
+{Actually it's a very clear and then and then they have a sort of high level architecture, then they have a really more detailed level architecture. So, and it's, it's all visual. So that's }
+{\cf2 [00:13:00]}
+{ notes to the PowerPoints as well. And that just came out fairly recently. So yeah, so that, that would be what I'd recommend.}
+{\pard  \line \par}
+{We wait, where you could start. Yeah, as a sort of reference, if you're going down the Microsoft route facility. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right. And are there any examples of a zero trust and an Azure and production that you're aware of? You don't have to give company names or whatever, but I'm just curious if you have seen in your experience, people are reaching a certain stage of say they can be zero trust in Azure.}
+{\pard  \line \par}
+{Have you seen any production deployment? }
+{\pard  \line \par}
+{\b\cf3 Paul Schwarzenberger:\b0}
+{ Yeah, , I've helped to implement that. At what sufficiently the UK government department, and then also more recently the , smaller business that does does work for government. And , I suppose what I'm gonna say, is there a trust isn't something you either have, or you don't have, it's really a journey, ?}
+{\pard  \line \par}
+{So the first and with most organizations , they'll have reached a certain point and then you can gradually sort of improve on that. So for example one of the first things to do is to make sure that everybody's using a single identity source. So that's been absolutely sort of crucial and to to where Okay.}
+{\pard  \line \par}
+{Using cloud apps at the moment, we're all }
+{\cf2 [00:14:00]}
+{ using different cloud services and it's very easy for people to go off and say, right, what is this cloud service and that cloud service, but it's really important as a security professional to say, well, okay. I only use cloud services that have in a SAML, I will have two integration so that you can all use single sign on for the same identity.}
+{\pard  \line \par}
+{Cause otherwise, , identity just gets completely out of control. So you're using a central identity sources of good stuff. And then the next stage really is to make sure that people are using corporate devices. And, and like for example, , this could be, if in that completely, the Microsoft sort of world, this would be, could be laptops built with endpoint manager and , Microsoft.}
+{\pard  \line \par}
+{Hello. And so through automation and centrally controlled. So then if you get people using those devices and then you can start putting in some conditional access policies. Yeah. I was only going to allow connections to certain applications and systems from those devices. , and then when it comes to, and then that can apply to both Microsoft 365, , so access to your email SharePoint teams, but then it could }
+{\cf2 [00:15:00]}
+{ also apply to Microsoft.}
+{\pard  \line \par}
+{This year, as you can say, particularly for, as your administrators, they're only allowed. , do any administrative tasks. , know, if they're coming from , corporate approved laptops and we verify them with multifactor authentication, , and then you can take it a step further and then you can say, okay, we're going to use Microsoft defender for endpoint, which there's really advanced way of checking, , finding out whether anybody's compromised somebody's laptop or.}
+{\pard  \line \par}
+{And if there's any evidence of that, then just quarantine their laptop. I've seen that very effectively actually, because I was working at a well actually when it was a government department, we we got a pen tester to test one of the laptops. We gave him a laptop and tested it. And it starts with doing all the usual sort of privilege escalation and trying to grab credentials and using mini caps and so on.}
+{\pard  \line \par}
+{Microsoft actually detected this extremely quickly with their so , machine learning and intelligence systems and then completely cut off any access. So then the answer to that, so I don't get too many things like, oh, well you were cut }
+{\cf2 [00:16:00]}
+{ off. ? So so then we have to actually then approve that, that.}
+{\pard  \line \par}
+{The allowed access so that he could continue testing. So I was pretty impressed with that, actually. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That was good. Okay. So to your point, I think it's a good for people who may be thinking about how to kind of go about the implementation part of journey. And those are really interesting milestone.}
+{\pard  \line \par}
+{So first off, get your identity in order. That sounds that's exactly what it sounds like Samuel as a, so if possible, get your endpoint in order. So does it work in a BYOD context as well? Or is it, does it have to be issued by the organization? Cause I don't know if Azure kind of works in that space.}
+{\pard  \line \par}
+{\b\cf3 Paul Schwarzenberger:\b0}
+{ Oh Microsoft. And Azure AD absolutely does particularly with endpoint manager, which is also known as in tune. So with endpoint manager, you can manage devices and this isn't just windows devices. That includes Mac books. That includes. I phones or Android , so all of these devices can be managed to in tune.}
+{\pard  \line \par}
+{And again, that can all be linked into conditional access policies to serve and who can access what, and then also. , there's sort of two options with Microsoft endpoint manager. One }
+{\cf2 [00:17:00]}
+{ option is to actually for the corporate to manage the device and then not, everybody's comfortable with that from a BYD.}
+{\pard  \line \par}
+{Cause there's the other one, my company. Why should they manage ? So in those situations they do have a an also. Mobile application management with that enrollment.}
+{\pard  \line \par}
+{So what that basically means is securing the apps, but not securing the whole device. . It works well very well for Microsoft apps and there's some other apps. Yeah, third parties that have integrated with the system as well. So that's a way that you can.}
+{\pard  \line \par}
+{Yeah, email onto your device. And then you can also use another Microsoft service that Microsoft information protection, which can actually encrypt data on within at an application level know. So then you can do things like, , stop forwarding of emails to a personal account or prevent people from printing off.}
+{\pard  \line \par}
+{, something from a word document, , so you can do things like that if you want to as well. So lots of }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ options, it sounds like data is also a really important part of the whole zero trust space, essentially. That's the crown jewel that you're trying to protect as well. So to your point, we have control over identity.}
+{\pard  \line \par}
+{We have control }
+{\cf2 [00:18:00]}
+{ over the endpoint itself. Are there other components as well? Like from a data perspective that, , that does make me just figure out one example. I'm just saying, trying to think of. Organization that is trying to do zero trust. Once they have control over identity, once they can have control over endpoint, the network component.}
+{\pard  \line \par}
+{Probably the only thing you're looking for at that point is, Hey, is my data. Is there any DLP kind of a thing that's going on? Also around DLP as in like, how do I prevent data leakage or is Ashish trying to be I dunno, really shady today for some odd reasons it's trying to take out like megabytes of megabytes, gigabytes of data.}
+{\pard  \line \par}
+{ so I, I bear considerations around that as well in zero trust space. }
+{\pard  \line \par}
+{\b\cf3 Paul Schwarzenberger:\b0}
+{ Oh yeah, absolutely. So in the, , at the moment we, we're mainly talking about Microsoft settled the Microsoft side.}
+{\pard  \line \par}
+{Microsoft. , the one thing I will say about Microsoft particularly recently is they do keep changing the names of things particularly the last year. So I've really tried to keep up with it, but I think the latest name is Microsoft purview. P U R V I E w. I was, I think it did previously had it has a different name, but yeah, you used to be easier per view, but now it's Microsoft purview and what that can be used to }
+{\cf2 [00:19:00]}
+{ discover and classify data.}
+{\pard  \line \par}
+{So yeah, there absolutely are services where you can discover and classify that. And that's both on-premise and in the cloud and both in, as your storage and as your SQL databases. So you can discover and classify data. And then you can, if you, depending how far you want to go, you can then make decisions on , both from an access point of view, who can access that data.}
+{\pard  \line \par}
+{But then also , does certain data have to be encrypted and so and then w , you mentioned briefly DLP which is slightly different, but there, there is also, it might be. So a DLP solution in the cloud , and services that help to secure cloud apps as well, which is important.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right. And everything. I imagine everything comes from the whole eat five licenses for people who are mostly enterprise, usually are licensed as well. }
+{\pard  \line \par}
+{\b\cf3 Paul Schwarzenberger:\b0}
+{ This whole path that you really do need that. Yeah, you do need that. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So would you say that the zero trust implementation in the Azure space doesn't own, it doesn't need to be predominantly using Azure components.}
+{\pard  \line \par}
+{It could be external third party components as well in there. I guess , every vendor that you speak to out there is trying to solve zero Trust. Do you see }
+{\cf2 [00:20:00]}
+{ other third-party vendors into this? Obviously there's two camps for everything. One is the fact that we want to be fully Azure or use only Azure services and do everything over there.}
+{\pard  \line \par}
+{Don't get like, which is very of what people say, quote unquote, cloud-first kind of car companies. And there might be companies which have been there for years. Like I dunno some of the institutional companies out there that have been there for 20 plus years before cloud even existed, they bought all these third party tools and now.}
+{\pard  \line \par}
+{They are starting to hear Paul talk about this on the podcast and go like, okay, I'm going to do leader trust, but I've got all these third-party softwares that I've already bought from before. Are there like is it practical to go down the path of using a third-party vendor as well? Or do you recommend.}
+{\pard  \line \par}
+{We're trying to do zero trust in Microsoft Azure to use Azure services to build a zero trust solution. I think it was a long question, but hopefully that made sense. In terms of, do you have a preference for sticking with only Microsoft provided services or they can there be a good balance between Microsoft services and vendors for zero trust implementation?}
+{\pard  \line \par}
+{\b\cf3 Paul Schwarzenberger:\b0}
+{ Yeah, }
+{\cf2 [00:21:00]}
+{ that is a really good question said I would sort of lean towards just sticking with Microsoft, because firstly, the feature set of the Microsoft security services , has improved massively over the last five or 10 years.}
+{\pard  \line \par}
+{So where it was previously, you sort of had to go to a specialist service for this, every job, but maybe email security and anti-phishing for example. So maybe 10 years ago, most enterprises would go to a third party for that because they felt they needed to. Yeah, the full sort of functionality and, , at a reliability that they were sort of expecting, but then, yeah, so Microsoft has massively improved, I would say over the last five or 10 years , their security, the threat intelligence and , their central monitoring.}
+{\pard  \line \par}
+{And , they have 70 customers so that, , they can very quickly, if it, once they identify what. Type of phishing message. They can apply that to all of their customers. So increasingly what I've seen is quite a lot of organizations who were previously using third parties decided to move to the Microsoft one.}
+{\pard  \line \par}
+{Microsoft equivalent solution like defender for endpoint, }
+{\cf2 [00:22:00]}
+{ for example instead of the more traditional, , antivirus and give us some of the email security systems. So partly because they're already paying for it and then the five licensed, but, but more importantly, because. It then integrates with all the other components very well.}
+{\pard  \line \par}
+{And that's particularly so with zero trust. So with zero trust as I said with the Microsoft in the Microsoft world, that all sits around Microsoft as your a D and conditional access. What you can then do with those conditional access policies is you can link those into, for example, endpoint manager Microsoft defender.}
+{\pard  \line \par}
+{So then you can say, , for instance, only Azure AD laptops can connect and W even if they do connect, we're not going to allow anyone to connect who has a risk score of more than, , sort of medium to say a high risk, high or critical risk score as defined by Microsoft defender for endpoint, because , their endpoint might be compromised.}
+{\pard  \line \par}
+{So that, that sort of end to end integration does work really well. If you do stick with a Microsoft suite of services, that it's going to be much harder to implement. The policies }
+{\cf2 [00:23:00]}
+{ solutions in those particular areas. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Interesting. So would you consider that Microsoft has become this almost platform for lack of a better word, where as long as you were in the ecosystem, they will be.}
+{\pard  \line \par}
+{Things will be a lot more easier because I think to your point, because my memory from years ago, it was just always, oh, for everything. I had to go for a separate product. And cause it's almost like you have a license from Microsoft. You do, there are certain things I can do, like group policies or whatever, and I active directory.}
+{\pard  \line \par}
+{And that was kind of like the complexity. You could go down the parts of bar for everything else. You were kind of going, oh, I want to buy this separate solution. It's not really integrated. And like, you kind of have like a hacky Vail. How do I manage security, but now there has been so much improvement that Microsoft has kind of made the whole Azure space.}
+{\pard  \line \par}
+{If you want to, you can make it like an fully integrated platform. Is that, would that be correct? }
+{\pard  \line \par}
+{\b\cf3 Paul Schwarzenberger:\b0}
+{ Yeah, I would say so particularly on the Microsoft 365 sites. So particularly on the end points and the Microsoft 365. And, as the rad, , especially those, those sort of areas Yeah, you can pretty much do it pretty much everything that most enterprises want to }
+{\cf2 [00:24:00]}
+{ do.}
+{\pard  \line \par}
+{Yeah. There's a microsoft service in that sort of ecosystem, particularly if they're. If that's where that organization's coming from, , if they're coming from a windows sort of back and by the way, , it's interesting. So most of the organizations I've been working with in this area move they've sort of generally moved away from group policy.}
+{\pard  \line \par}
+{ I've worked with group policy the past and exactly. , so now the way that, people are moving is you don't even join your windows, laptops. An on-prem domain controller anymore. You've joined them directly to Azure AD and then you have the managed by endpoint manager in tune and , using this windows.}
+{\pard  \line \par}
+{Hello. So the laptop can be sent directly to a new staff, so this open it up and then it automatically just gets configured and so on. The good thing about that is don't need the grid policies anymore. And with endpoint manager, , there are a whole other built-in Sort of pre-canned security policies that are sort of equivalent to the old school, , secure, hardening a laptop with group policies.}
+{\pard  \line \par}
+{So we can get rid of group policies now, which }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ is good. Oh, thank God for that. Like when, on the best features to deal with }
+{\cf2 [00:25:00]}
+{ what a comment here from Vineet as well. Azure also leverages Azure arc to onboard securities, a VM for AWS and G. }
+{\pard  \line \par}
+{\b\cf3 Paul Schwarzenberger:\b0}
+{ Yeah, no, that's absolutely right. It's interesting actually that Microsoft and Google have both moved into more into multi-cloud security.}
+{\pard  \line \par}
+{And AWS is quite interesting. So yeah. So let's see. I do have the zero arc. Yeah, Google has sort of an ethos and a. So I'm sure AWS will come out with something sued on multiple clouds. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So maybe just this, that could link onto the whole zero trust thing as well. And thanks for that comment as well, by the way we need.}
+{\pard  \line \par}
+{So with the Azure arc, you're bringing in AWS as well as GCP resources. And so does that mean your zero trust solution can extend onto that as well? Like would you, would you be able to get. What do you mean? This is just virtual machines from there. So }
+{\pard  \line \par}
+{\b\cf3 Paul Schwarzenberger:\b0}
+{ I think its virtual machines but also kubernetes and containers in clusters }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ and stuff }
+{\pard  \line \par}
+{\b\cf3 Paul Schwarzenberger:\b0}
+{ can come in as well.}
+{\pard  \line \par}
+{I think he said, but I haven't, , it must be, I haven't tried as Europe, myself. I haven't used it myself. So that's my impression, but please check it out for yourself. Yeah, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ no, , I'm just curious in terms of like you, how we spoke about integration for zero trust in the Microsoft Azure }
+{\cf2 [00:26:00]}
+{ ecosystem.}
+{\pard  \line \par}
+{As long as you're in the ecosystem, you can use different conservative. I wonder if if you've seen this is where cause I think, I guess one of the things we started this conversation with was everyone has some form of cloud in their organization already. Now you may have started with Azure now.}
+{\pard  \line \par}
+{We're also seeing that a lot of companies are going multi-cloud as well. Would you see a space for zero trust solution that may have started in Azure to be able to extend that to, I don't know, GCP, which you have imported as well, like as. }
+{\pard  \line \par}
+{\b\cf3 Paul Schwarzenberger:\b0}
+{ , absolutely. , particularly for for applications.}
+{\pard  \line \par}
+{So yeah, so, so given that Azure AD has the ability to connect applications that are running in any cloud. Someone was there, Sam, a law to compliance. So yeah, and then you can apply the same conditional access policies and so on. So you can have an application, a data in GCP, you could use AWS single sign on, for instance, for , logging in as an administrator to Amazon web services.}
+{\pard  \line \par}
+{But yet you could do that from Azure AD and I'm gonna have to actually implemented that a couple of organizations. I think gave a paper on that on the fwdcloudsec, the 1st }
+{\cf2 [00:27:00]}
+{ fwdcloudsec conference and at the demo as well. So yeah, so it's absolutely you can use as your ID, as the identity source and apply zero trust sort of policies, , to control who can act.}
+{\pard  \line \par}
+{Especially as an administrator or as an application user with clouds, , with that, that are running in GCP or AWS. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Awesome. And what are some of the challenges? Cause I know we've been talking about more solutions how people, what people can think about or when they're trying to do zero trust in Azure and maybe multi cloud as well.}
+{\pard  \line \par}
+{What are some of the challenges that you've come across while you're going to the part of implementing zero trust? }
+{\pard  \line \par}
+{\b\cf3 Paul Schwarzenberger:\b0}
+{ The main challenges of how I've come across, what's a, well, some of the challenges that come across there really. Those organizations that want to, and this is probably most organizations that need to allow access some form of privileged access , or even just access to applications to to third parties and contractors and possibly contractors using their own laptops, for example.}
+{\pard  \line \par}
+{And then that gets a bit harder because you then have to decide. You might have fit for the permanent employees, might all be using for, for example, }
+{\cf2 [00:28:00]}
+{ windows 10 or windows 11 laptops that are sort of quite locked down and corporate issue, but then you might want to say, well, I've got this third party consultancy coming in and needs to give them access sort of on Monday.}
+{\pard  \line \par}
+{How can I go about doing that securely? So that's one of the challenges and either the good news is there are ways. that there are ways that you can that you can support that. So see your, I has business to business options so that if the collaborating organization is also a Microsoft 365 customer, they can just log in with their own credentials.}
+{\pard  \line \par}
+{And you can, you can invite them as a guest onto your, as your ID, so that that's a useful feature. And I've used that. And in some cases where you might have contractors who may maybe want to use their own personal MacBook or something depending on how locked down do you want to make everything?}
+{\pard  \line \par}
+{Another option is then to set up as your virtual desks. So you've actually got literally a virtual, , windows 10 sort of machine or a windows 11 machine for users to connect on remotely. So then you can lock that down, but then }
+{\cf2 [00:29:00]}
+{ that does all get more complicated and more costly.}
+{\pard  \line \par}
+{But if you're really serious about security then , you might sort of have to go down that route. So there are solutions, but yeah, it's more complex than we'll work, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ right? So at your point, but the third party being an interesting one as well there. So maybe , another one to kind of talk about it also from a monitoring perspective as well, we spoke about solution implementation.}
+{\pard  \line \par}
+{We spoke about challenges and I think that anomaly, cause I'd like to cover from a, for a new doc, cause this is the first time we're covering zero trust as well is from a monitoring perspective. Would the monitoring be any different to what you would do in a normal non zero trust environment? Or like, , we going to have the example of how, if as she shows in Melbourne today, but suddenly five second later he's in China or London or wherever.}
+{\pard  \line \par}
+{, that's identity protection, but from a zero trust perspective, what are we really monitoring? }
+{\pard  \line \par}
+{\b\cf3 Paul Schwarzenberger:\b0}
+{ Well thinking about the Microsoft side, then I do have some really , good tools for monitoring. So so there's Microsoft defender, portals and Microsoft have done a really good job over the last few years.}
+{\pard  \line \par}
+{They worked very hard to bring together. About, I don't know, five or six different portals all }
+{\cf2 [00:30:00]}
+{ into one portal. So there's now there is now a single portal , which will provide a lot of these alerts. So it will say it will. If you log into that portal, there would be an alert that Ashish has tried to do something naughty, , so they would come up there.}
+{\pard  \line \par}
+{And then of course you can set up alerts so that individuals get emailed or messaged or slack channels, , depending on how you want to do things so that is actually really competitive. And then you can when you're investigating, you can sort of dig in by the console and find out more details.}
+{\pard  \line \par}
+{So that works very well. And then of course, real to have Microsoft Sentinel, which is , one of the first sort of fully cloud-based themes security information and event management systems from any of the main providers. And that can also be used , to. Do sort of more proactive searches for different types of practically go hunting for threats.}
+{\pard  \line \par}
+{And of course that also has all the Microsoft threat intelligence feeds going into it as well. And it has a whole load of standard alerts and incidents that will be generated from what Microsoft learned from all of their different customers. On the Microsoft side, they would be sort of the tools to, }
+{\cf2 [00:31:00]}
+{ to use.}
+{\pard  \line \par}
+{And then, , that they're quite well CIM so that , in my experience, , you can really tune in how many alerts you want to get to sort of minimize , this sort of amount of false positives. And then you can set policies to decide, , when do I actually want to be alerted.}
+{\pard  \line \par}
+{' cause I know that another sort of thing you can also do is to say, well, I care for some things like somebody who's trying to email something sensitive out of the organization. Maybe one credit card number, , we might say, well, that could just be their own.}
+{\pard  \line \par}
+{So just give them a warning and don't alert centrally. But if somebody to. Upload a file to SharePoint with 20, , a hundred or a thousand credit card numbers, then actually block that and create an alert. , so a lot of it's about fine tuning, so that the number of alerts. , you, you only get alerted on the sort of the most important things and there's a sort of self-learning capability for people as well.}
+{\pard  \line \par}
+{So that makes sense. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Cool. So that's cheap it's Azure Sentinel is definitely a pretty awesome practice from what I've seen in the Azure space as well. It's really interesting to see a cloud provider coming up with a CIEM, which was really interesting. And I think Google now }
+{\cf2 [00:32:00]}
+{ has their own version coming up as well, or it's already there.}
+{\pard  \line \par}
+{But to your point, it'd be really interesting what AWS does considering they were already the first in the market, but now feels like from a security perspective Microsoft, Azure and GCP are definitely leading the race in a lot of }
+{\pard  \line \par}
+{\b\cf3 Paul Schwarzenberger:\b0}
+{ ways. Well, in some, well, I'm possibly more. On the identity end point side fair.}
+{\pard  \line \par}
+{Certainly doing a lot more. So we haven't. So for example, with GCP, you've got , beyond trust as they, as they a trust solution, which is really good for people coming from. Yeah. Particularly if your identity sources, Google, , workspace, sub G suite directory. So they are both very strong, particularly the end point side, but , we don't want to take away from the fact that AWS has got some really awesome security services, particularly for the, , for cloud.}
+{\pard  \line \par}
+{For cloud workloads, particularly even if, perhaps not quite as many on the endpoint and the side. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh yeah. But I feel like in dumps of the whole the monitoring user behavior, distilled shield work, like, , even the what's Guard Duty that they came up with as well. But it's more focused on the network side.}
+{\pard  \line \par}
+{And to your point, it doesn't, it won't do, , it does }
+{\cf2 [00:33:00]}
+{ identity for a better to say, Hey, it looks like a suspicious login, but sounds like Azure has done like the whole ID production. More like the level of, okay. I can integrate all these tools together and find out the behavior of Ashish logging in for five minutes later.}
+{\pard  \line \par}
+{Cause I ended up with can't do that. }
+{\pard  \line \par}
+{\b\cf3 Paul Schwarzenberger:\b0}
+{ Yeah, no, that's that's right. That's part of, that's really the history of Microsoft. Yeah, the fact that you've got Microsoft 365 is one of the most popular productivity suites, , in the world. So yeah, so a lot of it sort of arises from that, that side of things.}
+{\pard  \line \par}
+{But then also it does apply to the cloud in the two. Yeah, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I was also going to ask cause mean, cause I think this is all great conversations as well, but I'm sure we have people who are trying to learn more about this as well. Cause we kind of towards the tail end of the interview where can people learn more about zero trust in the Azure space or maybe even zero trust in general, if you have been finding more resources that have been helpful.}
+{\pard  \line \par}
+{\b\cf3 Paul Schwarzenberger:\b0}
+{ Yeah, so, well, partly because of you, we're going to be talking about this and I sort of had a quick look at it's actually quite hard to find that much. On the Azure side, one thing I did want to mention it is , for people going down this sort of direction. , and also I did mention }
+{\cf2 [00:34:00]}
+{ about, is your ID, do you just want to mention that, that we do have so there are some center for internet security benchmarks that are well-worth.}
+{\pard  \line \par}
+{If for securing this year 80 well, those are really good that there's a suspension mark for as your ID. And there's a suspension mark for Microsoft 365. If you're starting out with other, is your ID working with Azure cloud or your and all you're looking at is your ID four monks offices, five, , either way it's really that they are both very well-written.}
+{\pard  \line \par}
+{And they did take you to. All the different steps you should take, , to sort of, , gradually improve the security of your environment. So that would be worth looking out for people in particular on the Microsoft and, and sort of zero D side. Yeah. And then more generally. We think zero trust , because it's a lot of organizations have come out with , their products recently in zero trust.}
+{\pard  \line \par}
+{, there's probably 20 or 30 or probably even more, but , at least a large number of organizations that are coming out with that. This is the zero trust solution that will just buy it from us. And that everything will be fine. Yeah, I'd say it's quite hard to get a sort of objective sort of view of }
+{\cf2 [00:35:00]}
+{ this.}
+{\pard  \line \par}
+{But , I guess what I would say is fit new organizations that are sort of wanting to go down this journey. What I would sort of say. It's not off by thinking about your requirements. So I think about your uses the different use groups by the, of, whether you have got collaborators and contractors, think about the devices you want to connect to.}
+{\pard  \line \par}
+{Is this going to include mobile as well as laptops and desktops? And think about the data and applications, and then also, , start off thinking. Yeah, well, what's your identity provider and a good starting point is from a zero trust journey , is whatever your identity provider is. So, , if your identity provider.}
+{\pard  \line \par}
+{Microsoft is here and D then it's worth strongly considering the Microsoft sort of ecosystem for zero trust. If , your identity provider is, , Google workspace, directory of G suite, then B, and if you're more interested in GCP, it's well worth clipping up the Encore. And but also by all means do obviously, , consider and look at all, some of the many other offerings that are out there, some of which do look very good as well.}
+{\pard  \line \par}
+{Yeah. So I think as this becomes a more mature space, there'll be more independent assessments. Like I look for instance for is }
+{\cf2 [00:36:00]}
+{ there a Gartner magic quadrant on this and that there isn't yet, but I'm sure that there was one in progress. There's a Gartner report, but it just lists about 20 companies.}
+{\pard  \line \par}
+{So it doesn't really give any advice }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ as to talking about Gartner and their love for acronyms and Gartner. Oh, well, I guess , they got gotten a quarter since. Where do you see the whole CSPM space in this world? Cause , I know, I feel like zero trust and CSPM are kind of two separate things, but to what you were saying, because ultimately a lot of this is from, from a zero trust perspective, you're trying to do monitoring and all these other things.}
+{\pard  \line \par}
+{Do you feel like the CSPM and space for people who maybe have a mature zero trust practice? It's does CSPM still play a role in that cloud security posture manager or a Kubernetes security posture manager? Like, }
+{\pard  \line \par}
+{\b\cf3 Paul Schwarzenberger:\b0}
+{ yeah, absolutely. So is there a trust is more about securing access from individuals and end points to data and applications and making the right decisions as to who can access what posture?}
+{\pard  \line \par}
+{So kind of security posture management is really more about making sure that your cloud isn't }
+{\cf2 [00:37:00]}
+{ misconfigured, yeah. And so all of the three class APS this year, GSP all have their own. Cloud security, posture management for their clouds. And then of course you've got third parties. , people like Palo Alto, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ C S C I E M just entitlement management.}
+{\pard  \line \par}
+{Like, , Gartner loves the acronym. This keep coming up with more . So there's one other one that I came across recently was well, fairly, not recently, but like a few months ago, C I E M, which is more about identity and entitlement. }
+{\pard  \line \par}
+{\b\cf3 Paul Schwarzenberger:\b0}
+{ , that sounds like, , satellites were a trust.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ , the problem that they're solving or these people are solving is more around. Oh, so she has access to. I dunno, AWS Azure, Google cloud, but more importantly, he has got admin access to one or the other. And like, it's kind of like managing my entire agreement cause managing identity across cloud providers itself is a challenge as well.}
+{\pard  \line \par}
+{And that's got to do what you said earlier. I think you nailed it on the head. Two different problems as well. One is basically making sure the identity that is logging into the application is something that someone that you trust and the other one is more around. That's great. But how do I manage access across on and off 20,000 }
+{\cf2 [00:38:00]}
+{ employees that I have in the cloud across multiple cloud providers?}
+{\pard  \line \par}
+{So very different problem to solve, I think, but , if there's another one that you've just mentioned that is CWP cloud work your production too, as well as. Then there's C NAB. It's like, it's gone into a point where now you just have to have like a separate dictionary for what the different abbreviations are.}
+{\pard  \line \par}
+{But I'm with you on that. Maybe I won't confuse people more anymore. Where I just heard, when we were talking about last week, what happens to all the other cloud products that we have to buy? Would they eventually kind of merge into this kind of thing as well with Azure, maybe. Yep. But what only the future we're dealt, }
+{\pard  \line \par}
+{thank you so much for the this and thank you so much for staying up late for us as well.}
+{\pard  \line \par}
+{Where can people find you if they have any followup questions or commentary that required from you on. Or even Microsoft Azure }
+{\pard  \line \par}
+{\b\cf3 Paul Schwarzenberger:\b0}
+{ or even disappeared,}
+{\pard  \line \par}
+{cloud security. So probably linked LinkedIn is probably best. So you can easily find me. There's only one. Well, there's only one Paul Schwarzenberger that works in Azure. You can email me also, paul@saladoff.net, C E L I D O r.net. I am on twitter, but I'm attending not to, I don't really use }
+{\cf2 [00:39:00]}
+{ Twitter for direct messages much, but that's at Paul Schwarzenberger }
+{\pard  \line \par}
+{so but yeah, LinkedIn is probably the best one. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I'll leave the link in the show notes as well for the podcast episode. Thank you so much for this. Thank you Paul, for joining us and sharing the knowledge of zero trust is better with our first.}
+{\pard  \line \par}
+{So thank you so much. I'm looking forward to home having more conversations with you in the future and the podcast as well. So thank you so much and thank you everyone else. Who's joining us. }
+{\pard  \line \par}
+{\b\cf3 Paul Schwarzenberger:\b0}
+{ Ah, thank you. Thank you. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Thanks everyone for your time.}
+{\pard  \line \par}
+{And I'll see you next episode. This weekend fear. }
+}

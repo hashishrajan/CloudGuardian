@@ -1,0 +1,385 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2639
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 TimesNewRomanPS-BoldMT;\f1\froman\fcharset0 TimesNewRomanPSMT;}
+{\colortbl;\red255\green255\blue255;\red97\green167\blue95;\red0\green0\blue0;\red109\green109\blue109;
+\red81\green0\blue192;}
+{\*\expandedcolortbl;;\cssrgb\c44706\c70196\c44706;\cssrgb\c0\c0\c0;\cssrgb\c50196\c50196\c50196;
+\cssrgb\c40000\c0\c80000;}
+\paperw11900\paperh16840\margl1440\margr1440
+\pard\sa360\partightenfactor0
+
+\f0\b\fs28 \cf2 \up0 \nosupersub \ulnone Ashish Rajan:
+\f1\b0 \cf3  \cf4 [00:00:00]\cf3  There are a lot of security people who probably hear about Terraform, but they usually leave it for the developers or the engineering team to kind of work on it. So maybe to kind of set the scene and to basically level the playing field for everyone who probably has heard of Terraform, but barely knows enough to be dangerous, help them become dangerous.\
+What are the different kind of flavors for Terraform that you would see in an organization?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Mike Ruth:
+\f1\b0 \cf3  What we noticed was that simply through submitting a PR, we could actually go and exfiltrate all of the secrets that existed, like all of the environment variables and all of the environment variables of the worker itself directly from a PR.\
+So if you kind of look at the reference architecture, right, if you kind of conjure that in your mind, the idea is you could submit malicious code. The malicious code would kick off a dry run, a plan. And through the plan itself, we could actually exfiltrate all those secrets and either send secrets that were defined back to the output of Terraform if you had, like, read access, but it was actually just as easy to send it to some sort of external listener to be able to grab all of the secrets that the workspace was configuring \cf4 [00:01:00]\cf3  or needed.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  If you have been working with infrastructure as code, you probably have heard about Terraform, but you may not have heard about the supply chain risks that may be involved in using Terraform in your organization. I Terraform you, after you hear this interview, you probably would look at the way Terraform has been implemented into your organization.\
+Now there could be different ways to it. I do want to call out HashiCorp has done a great job of at least giving you the options to protect your organization, but it's just about anything else. Like the same way cloud is there for you to protect, but it depends on how you configure it. The same applies for Terraform as well.\
+In this particular interview, we had Mike Ruth from Rippling. He's a senior staff security engineer there, and he did some research on what kind of supply chain risk is possible from a Terraform perspective? He found three things that we spoke about. He also spoke about which one of them probably requires a bit more investigation at your end.\
+And if you haven't already considered it, definitely a valuable episode for people who may be considering themselves as a organization that works primarily on Terraform as infrastructure as code and possibly Buildkite or other kinds of CICD, \cf4 [00:02:00]\cf3  you can probably think about how you can apply these to other CICD implementation of infrastructure as code.\
+In case you're wondering why I'm talking about infrastructure as code is because last week we had the episode of code to cloud or cloud to code. The month of September is month of infrastructures code on cloud security podcast. That's why we're covering it. It's the second episode in this round. If you have any questions about this, feel free to drop them as a comment, or if you're listening to this on the podcast, definitely feel free to send us an email.\
+And we're more than happy to answer more questions about the infrastructure as code side, because we definitely find that after a certain level of maturity of doing cloud, a lot of people are already using infrastructure as code and whether you know it or not you're definitely leaving yourself exposed there\
+so I hope you enjoy this episode with Mike and worthwhile calling out if you are part of the cloud security bootcamp that you're running every month, which is for free, which is on cloudsecuritybootcamp. com. You probably would see the Terraform security episode later this month as well, because that's what was voted in.\
+It's a free bootcamp. Feel free to join it if you want, but the idea is to at least share some Terraform security fundamentals so that people can start working on how would they start securing Terraform and hopefully some of that information is \cf4 [00:03:00]\cf3  available for you from this episode as well. Feel free to share this with your colleagues and friends or family who are learning about Terraform and how to secure it.\
+I hope you enjoyed this episode and I'll see you in the next episode for infrastructure as code on Cloud Security Podcast enjoy. Peace. Hello, welcome to another episode of cloud Security Podcast. Today we're talking about software supply chain controls for Terraform and for this Ive got a really good friend of mine. We're talking about having him for so long on the podcast.\
+I'm super excited to have him. Hey Mike, how are you man? Hello. I'm good. How are you? Good. Thanks for coming on the show, man. And I'm super excited for this conversation, man. But to kick things off, Mike, for people who don't know who you are, could you share a bit about yourself, man? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Mike Ruth:
+\f1\b0 \cf3  Sure. Yeah. My name's Mike.\
+I'm a security engineer over at Rippling. Previous tenures at companies like Brex and Cruise and VMware. I've been about 13 years in the industry, mostly focusing on security engineering and software engineering. I'd say my biggest focus kind of in order would be the cloud sec and infrasec space. More recently, you know, software security supply chains and maybe some detection and response when needed, which I suppose is all the time.\
+So yeah, that's kind of where my \cf4 [00:04:00]\cf3  interest is in and experience lie. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Awesome and well, the first place to start is the whole Terraform concept as well, because you're talking about Terraform and we are talking about Terraform and supply chain, all of that, but worthwhile calling out what is Terraform to begin with, because some people may not even know what Terraform is, what is Terraform and why is it important again?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Mike Ruth:
+\f1\b0 \cf3  It's a good place to start. And you know, I bet a lot of people that are looking at the Cloud Security Podcast probably have a good idea, but for just in case, for those who don't, or as a primer, yeah, Terraform's a tool that is super helpful on the infrastructure as code or configure as code space. So it allows you really to automate using a lot of configuration files, how to, you know, sort of automatically deploy infrastructure into predominantly cloud environments.\
+So. AWS, GCP, Azure things like this. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Sweet. And would you say, why is it so much popularity behind it? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Mike Ruth:
+\f1\b0 \cf3  Well, I think that we might need to take a step back and look at HashiCorp in general and all the tools that they create. I think one of the things that they do really well, one is they've made all their tools open source.\
+So they're really easily \cf4 [00:05:00]\cf3  adoptable. But also they've made them particularly platform and cloud agnostic. Or at least have support for all of those places. Right. And I think that with the advent of, you know, cloud environments becoming so popular, the tools with which you want to automate those resources with got super popular as well.\
+So, you know, we've sort of seen this pattern of looking at infrastructure as pets, that individual instance is super important. You want that specific piece of hardware to run that specific application. And then, you know, you don't really want to touch it. We've kind of transformed from that paradigm to, Oh, well, you know, that instance really isn't all that important.\
+We can tear that down and bring it back up. In a moment's notice, and it can be kind of exactly the same. And so Terraform is really good at doing that. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  I guess I almost want to do a primer for the importance of this as well for the security folks , from an infrastructure as code perspective, would you say Terraform has pretty much become like a standard?\
+Cause, and as you go into the supply chain, maybe this would make more sense. Why Terraform in the context of supply chain is probably important as a conversation as well. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Mike Ruth:
+\f1\b0 \cf3  Sure. Yeah, I think it is important and there are plenty of tools that are kind of \cf4 [00:06:00]\cf3  similar, especially from the, your platforms and your cloud providers, right?\
+You've got like cloud formation and go build and run and those types of tools for Google and Azure, but you also even have like tools like Flux and Argo, right? That kind of do similar continuous deployment style operations and wherever it is that you're trying to. deploy, but Terraform is really good because it kind of can do all of those things as well.\
+So, you know, I think what we tend to see is that we want to automate these sort of golden paths, if you will, to use sort of a, I guess, a Netflix term where it's super easy for engineers and developers to kind of use the same sort of repeatable pattern over and over and over again. And then everyone, you know, the SecOps teams or the DevOps teams or the infra teams, or whoever it is, can really focus on one specific area.\
+And they can make that the easiest deployment method, but also kind of the safest deployment method. So I think that's kind of where this concept of, you know, software supply chain really is brought up, right? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  And the software supply chain basically being driven by the fact you have infrastructure as code, which could be either Terraform or another form of infrastructure as code.\
+Obviously we're talking \cf4 [00:07:00]\cf3  specifically about Terraform. It's worthwhile calling out. I think the way I wanted to structure this was we could probably. Set a quick primer for Terraform, because I imagine there are a lot of security people who probably hear about Terraform, but they usually leave it for the developers or the engineering team to kind of work on it.\
+Sure. Maybe we can start with the primer and then we can talk about some of the research that you did with a really good friend of yours, I believe. Oca? Yep. Yeah, Oca perfect. Yeah. Cause we'll talk about that as well. So maybe to kind of set the scene and we basically level the playing field for everyone who probably has heard of Terraform, but barely knows enough to be dangerous.\
+Sure. And help them become dangerous. What are the different kind of flavors for Terraform that you would see in an organization? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Mike Ruth:
+\f1\b0 \cf3  Yeah. Yeah. So they're kind of, I'd say three, maybe four flavors. Terraform tool started, like we mentioned as a open source tool. Right. And that tool was oftentimes used and it still is today kind of directly from a developer endpoint or workstation.\
+Right. It's kind of like a CLI with a bunch of binaries in it. And it's responsible for taking, you know, these terraform files, these config files with a handful of other sort \cf4 [00:08:00]\cf3  of parameters and environment variables and pointing to a specific environment. Usually it's a cloud environment and then it can deploy all those things.\
+But, you know, as time went on, there was sort of scalability challenges with that. There's also security implications of course, too, where, you know, all of the credentials to your dev environment and your prod environment, and they're spread across like your entire engineering workforce that can get kind of spooky.\
+Your blast radius is kind of huge, right? So HashiCorp kind of realized that you could productionize this. They were probably seeing lots of companies doing it themselves. And so they created two offerings, right? One is enterprise and one is cloud. So Terraform enterprise and Terraform cloud. And one is a hosted version, like self hosted.\
+So that's sort of on prem or on your own cloud. You run all the compute and make all the configuration choices there. And then the cloud version is something that, you know, HashiCorp provides where you can allow them to manage all the infrastructure themselves. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  So more like a SaaS version of Terraform, but you don't have to manage infrastructure for it.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Mike Ruth:
+\f1\b0 \cf3  Exactly. You can choose to, if for what it's worth, like there is a bunch of workers that even we can talk about that. Yeah. Yeah. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Perfect. Yeah. I'm trying to limit the follow up question because \cf4 [00:09:00]\cf3  it almost becomes like a Terraform pitch. Like, Hey guys, you should use Terraform, without making it sound like a sales pitch for, Hey, you should use the open source version of Terraform.\
+The reason I think it's important is also because some people may find that people would say Terraform, but they don't really go into the deeper level of whether it's an enterprise version, cloud version, and I think that. The specific example that you called out in the whole research that you and Oca did was around the whole Terraform cloud piece.\
+And we'll get to that in terms of like the different components, like I'm thinking more for an architecture perspective, when people do deploy Terraform, what are they looking at? And in your mind, what are the important components to think about from a Terraform perspective?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Mike Ruth:
+\f1\b0 \cf3  Sure. Yeah, this is really the, what you get. I feel like when you sort of use this enterprise versus trying to build your own or use the open source version. So kind of the internal workings of these products I think is kind of where the question's going there. They tend to have this concept of like organizations and workspaces and those are like logical boundaries.\
+That allow you to sort of associate them with individual environments. So you might have like a workspace for a dev environment and a workspace for a prod \cf4 [00:10:00]\cf3  environment. And now you've got that isolation where you can set up access control directly on top of those. You can add individual environment variables or parameters, you know, things like credentials to be able to access that environment.\
+Things like this, and inside of the workspace itself, then you have a state file, which Terraform uses kind of acts like the name implies as what is the source of truth running in that environment so that when you have an incoming change that comes in, you can use that state file to cross reference.\
+The changes that are coming into what is actually has already been deployed and configured in your cloud environment, and then it can kind of give you a diff between those two things. So the state file is kind of the big thing that is associated with it. The last thing may be worth mentioning are.\
+Providers the open source version too, but the providers are like, you know, this binary that's responsible for knowing about all of the APIs and all of the parameters and everything that's associated with like that specific cloud, that specific environment, right? So you'd have like an AWS provider, a GCP provider, Azure and Kubernetes provider, \cf4 [00:11:00]\cf3  et cetera, et cetera.\
+So that's actually what's running on like the compute, the workers for Terraform themselves. And that's how it knows how to go and make all those changes. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  So state file becomes like a really important file at that point in time.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Mike Ruth:
+\f1\b0 \cf3  For sure. Yeah. Right. Because it has everything that what you're doing inside of each workspace.\
+It can also end up having sensitive credentials too, which is something we can talk a little bit about in a second. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  I guess it sounds like in terms of an enterprise or a cloud version, is there any additional, like maybe, I don't know, plan, apply, read, we kind of. Talk about the workspace in terms of permissions and stuff.\
+Cause I think we were talking about like a whole another complexity with permissions as well. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Mike Ruth:
+\f1\b0 \cf3  Sure. Yeah. So, you know, if we take a look at kind of a company's journey and maturity to using some of these infrastructure as code tools, we talked about that open source version first, right? Where we have all of the credentials, all the source code, everything sits right on, you know, an engineering workstation.\
+That's a little spooky. And then we eventually move that away. We can get rid of those credentials and then we can instead perhaps give credentials to Terraform itself. Right. And then we've offloaded that responsibility. Then \cf4 [00:12:00]\cf3  we can set access control on individual workspaces. So you might want teams to be able to run plans, but you might only want the owners or admins to be able to view state or actually apply or things along those lines.\
+So you actually have the access control. And it's basically like CRUD functionality. They call them different things, right? Like a plan is a dry run and an apply is like a right based action. So they call them slightly different things, but they're basically like CRUD permissions against those, those workspaces.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Right. I think, so it sounds like this is a good foundation for people to understand what are they dealing with when they work with. the Terraform concept, or at least Terraform in their environment. Now, since we have laid out the primer for what Terraform usually would have and what security people will be facing, if you were to talk about from a hypothetical reference architecture perspective, what would you say, we spoke about the maturity of, Hey, people normally start with open source because they have talented infrastructure people who build it and all of that.\
+It gets to a complex point. Now you're multi cloud, the scale of it is too large to manage with just doing AWS CloudFormation or a ARM template or a Bicep or \cf4 [00:13:00]\cf3  whatever else you want to go down the path of. What would be, I guess, in your mind, a problem with the typical architecture that you see?\
+And maybe what is an example of architecture you probably see in an environment? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Mike Ruth:
+\f1\b0 \cf3  Sure. So like, you know, we talked about going, like you said, right. From credential sitting directly on laptops or workstations to actually being able to interact with Terraform. But when we, Oca and I, when we looked at sort of our research, what we wanted to do is kind of look at the best practices that existed for what we expected this reference architecture, like a typical implementation of Terraform.\
+Would be at anywhere from, you know, an SMB to an enterprise, right? And I think when looking at it from that lens, what you have to look at is how version control plays a part here, right? Because this is important both for security purposes, as well as for usability purposes. Typically, we don't necessarily want everyone at the company to learn a new tool like Terraform, but they probably know version control particularly well. I would say GitHub is probably the most common one, right? And so now you can actually pivot away from giving everyone credentials to your Terraform \cf4 [00:14:00]\cf3  enterprise, your Terraform cloud implementations, and instead just allow them to submit PRs to a repository. So now you've got repositories that can actually link to workspaces and Terraforms.\
+You might have you know, a repository or a subdirectory within a repository map one to one to a workspace and that workspace then maps to your dev environment, right? And then you have another subdirectory in your Terraform repository, which maps to a different workspace. And that workspace then maps to the prod environment and your cloud, right?\
+And so what you begin to see is now you can actually go and submit PRs. To your repository, there's a webhook that gets established and configured that allows you to run those dry runs right when a PR gets created. And then you have someone who kind of owns that repository or the owners of the workspace that can go and review the dry run.\
+They can go and review the code. They can take a look at it and they say, Oh, Hey, that makes sense. Give it a plus one, merge it, and then the changes get applied. So it's very similar to a software development life cycle now. And this is kind of what we would envision a reference architecture looking like.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  What did you guys \cf4 [00:15:00]\cf3  discover as you were going through the journey in terms of the findings? We kind of landed on the whole software supply chain conversation. It's probably a good time to open that Pandora's box, I guess. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Mike Ruth:
+\f1\b0 \cf3  This is the exciting part, I think. Yeah. So we found three things. But, you know, maybe a bit of a setting the stage here, right?\
+So when we take a look at best practices and reference architecture, you know, in the back of our minds, we're thinking, is this actually safe? Are these best practices actually okay? And that was where we sort of started to poke and prod. And so what we wanted to sort of start with was what can every engineer, every individual, the company do, they can do X.\
+And so we started with, well, every engineer at the company. More often than not can submit a PR to a Terraform repository. I spoke at BSides last year on this topic, right? So at this point I kind of asked the audience, like show of hands, how many people allow this and you know, all the hands went up for the most part.\
+And that makes sense because it's good user experience or developer experience to be able to allow anyone to submit PRs for you, right? But this is where we contend that. This is actually a \cf4 [00:16:00]\cf3  problem. And so listeners might be like, well, why is submitting a PR problem? Right? So this is where our findings come in.\
+This is the good stuff. So what we noticed was that simply through submitting a PR, we could actually go and exfiltrate all of the secrets that existed, like all of the environment variables and all of the environment variables of the worker itself directly from a PR. \
+So if you kind of look at the reference architecture, right? If you kind of conjure that in your mind, the idea is you could submit malicious code, the malicious code would kick off a dry run, a plan, and through the plan itself, we could actually exfiltrate all those secrets and either send secrets that were defined back to the output of Terraform if you had like read access, but it was actually just as easy to send it to some sort of external listener to be able to grab all of the secrets that the workspace was configuring or were needed to actually run.\
+So that was finding number one. So finding number two is similar style attack chain, malicious PR gets submitted from anyone at the company or any engineer at the company that would actually run. And what we could do is we could actually extract the state \cf4 [00:17:00]\cf3  file from any other workspace from one workspace or any workspace.\
+So the idea here is we could actually run a PR against that dev environment, a dev workspace, and we could actually get the state file and perhaps any sensitive material inside of the state file for a prod workspace instead. And, you know, some of the secret materials or the sensitive information that might be in a state file, you might have things like certificates or private keys.\
+This is pretty common if you need to sort of programmatically deploy load balancers or ingress for your infrastructure, especially if you're using something like a Kubernetes environment, you might try to do encryption and transits. You might use KMS and store some of the ciphertext and the plain text in there.\
+You might want to use your Terraform workspaces to provision things like database credentials and things like that. It might land in there. It's not necessarily best practice, but we've seen it. So there's a lot of, you know, scenarios or use cases where credentials end up or secrets end up in the state file.\
+And so that we can go and fetch them for any other state file that exists. And then the third and final finding, which I think is the scariest \cf4 [00:18:00]\cf3  one here, and this is what we call sort of the apply on plan bypass. So what we were able to do is we were able to through a non merged non code reviewed PR actually perform a Terraform apply within the context of a Terraform plan.\
+So we could actually bypass the whole plan cycle, get down onto the underlying file system of the Terraform worker itself and perform a Terraform apply. And since it has all the same sort of credentials and permissions that the Terraform worker was able to just go and actually perform the apply instead of actually doing the plan. So it was a pretty interesting stuff. Maybe a little spooky as well. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Yeah. I mean, definitely sounds a bit spooky, but what would you say? Cause I mean, obviously you covered the three parts. Cause most people would have answered this question by saying, Oh, actually I do a threat modeling session.\
+So clearly, you know, and cause I know HashiCorp has one as well. And we spoke about that when people are looking at deploying Terraform. And , the things that you called out sounds more like, okay, I should be mindful of who can do the PR thing. Who can send a PR as a \cf4 [00:19:00]\cf3  developer, but you want to maintain the ease of someone being able to deploy a PR to a Terraform. How do you detect this? Like, cause it's almost like a logical flaw. Cause in my mind, people do threat modeling. They're not thinking like this, right? They haven't really gone on the deep level of a, I guess, of a hacker mindset yet, you and Oca went.\
+What are people doing about this at the moment? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Mike Ruth:
+\f1\b0 \cf3  Yeah, I mean, I think that over the years from kind of, I'd say 2020 to 2021 till now, I think this type of attack through sort of supply chains have gotten more and more attention. And so I think perhaps there are better tools. But at the time, while we were looking at it, there really wasn't much that was available.\
+You know, I think. HashiCorp has what's known as Sentinel or more, more recently run tasks. And that was all type of policy enforcement that tried to sort of provide you with an advanced language that can do a whole bunch of, you know, checks or, or policy based enforcement. So, but the biggest, and so we've actually seen sort of customer testimonials that have said, Oh, you could do allow lists or deny lists, and we could prevent dangerous providers and things along these lines from running.\
+The problem though, was that \cf4 [00:20:00]\cf3  they ran in the context of an apply and not in the context of a plan. So when we were performing all of our attacks through a plan, we were able to bypass a lot of these controls. It's also particularly difficult to audit, too, because you either need to know that that PR is coming in and looking at the contents of the PR.\
+And for the record, Oca and I were pretty, I felt like we were kind of clever, because we would actually nest multiple commits. So the initial PR changes looked pretty benign. And we'd also pretend like it was an error. And so we would actually close the PR. So they actually had to go particularly far into the commits history and the parentage to find any sort of nasty, like code sample.\
+So if someone was just viewing it, they were like, Oh. That this person accidentally submitted a PR and they closed it. Okay, done, you know, and then not look, but so that was really hard to sort of envision sort of the attack from that perspective. The other perspective is going in as like maybe an admin of Terraform, or perhaps you're trying to send your logs to a SIM or something along those lines, but you don't get the data, the output of the plan from in those logs.\
+All you get is like a run \cf4 [00:21:00]\cf3  ID. So now you need to be cognizant of a run ID mapping to some sort of nasty, you know, PR and then go and chase it that way. It was pretty unintuitive and it wasn't really easy to sort of see. So particularly difficult to find. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Yeah. I mean, there's no SIEM or logging or any of that that's going to work in that context as well. Cause in my mind as a blue team member, I'm going, okay, maybe a SOC team can pick this up in the logs.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Mike Ruth:
+\f1\b0 \cf3  Yeah. Right. But the logs don't actually have the run results because obviously sensitive things are potentially ending up in there, or it's a little too verbose.\
+You tend not to have the output of individual work and jobs being done in a SIEM. So you didn't actually get that. That's not to say that nothing could work. I mean, there are mitigations. When we've had these findings, we're like, Hmm, I think we're onto something. So we actually with HashiCorp directly, we're like, Hey, what do you guys think?\
+And they were like, Oh yeah, that those look legitimate. So we had conversations to be like, well, what can we do? Right. Yes. One of the things they came up with, like you mentioned, was their security model, kind of the threat model. And that kind of, I think, allows operators \cf4 [00:22:00]\cf3  to get a better understanding for like what should we do and what should we know about or what are potential problems based on configurations or misconfigurations.\
+And then they also kind of worked on best practices and even a couple of mitigations for some of those findings, like as an example. So finding number two, we talked about that state file problem. Yes. Go and fetch state files anywhere. The reason that that was actually possible is that when a worker for Terraform attempts to do any sort of job, whether it's to perform a plan or to perform an apply, it has a token called the Terraform run token or an Atlas token, and that's granted to the worker and it uses that to go and fetch state, it started overauthorized.\
+And that's why you could go and get the state in any other workspace. So it could reach anywhere versus just having like one workspace where it's supposed to go and fetch it. So yeah. This was perhaps an oversight, but they worked on it and they fixed it. So then you can actually, by default, you don't get access to any other state file for any other workspace, except for the one that the plan is actually being run for.\
+And if you, for some reason you needed the state file for another \cf4 [00:23:00]\cf3  workspace, you can sort of apply those permissions back on in the configuration panel, dashboard or in the console. So that's a really good way to reduce the blast radius for finding number two. So that, you know, they worked on those findings.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  That's awesome to hear that they were pretty onto it as well. Cause you almost, well, I guess nine out of ten times people expect the vendor to make some changes so that their life is easier as well sometimes. So maybe kudos to them for doing it. I definitely feel good on them for taking the responsibility for it as well.\
+Yeah. I guess, because to what he said at where we started the conversation on how state file is important, which is pretty much what is deployed in there. And if someone wants to change that, that can get picked up though, right? If I were to change the state file and apply it, that would get picked up.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Mike Ruth:
+\f1\b0 \cf3  Yes, it would. So if perhaps you were like, trying to be malicious and make changes and somehow you got the state file changed. Yeah. The incoming changes would be, it would be pretty obvious, right? Like, let's say for some reason you deleted the whole state file, right? And then someone else came in and provided a legitimate PR or a legitimate change.\
+The output of that plan would be like, oh, you're changing everything, you know? And then it'd be like, wait, \cf4 [00:24:00]\cf3  what's, what's happening here? Right? Yeah. So that's pretty noisy and you wouldn't necessarily. want to do that. Or alternatively, if you tried to submit a malicious PR and it got applied through normal circumstances, that malicious code or those malicious resources would also end up in the state file.\
+And that's not something you probably want from an attacker's perspective either, because then someone can look and be like, Oh, Hey, wait, what was this nasty, no resource thing that you've written. But finding number three because it actually runs the apply outside of the context of the plan. There's no state file that gets updated at all.\
+So we actually might work that whole problem or that whole, you know, potential,\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  you basically bypassing the entire thing. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Mike Ruth:
+\f1\b0 \cf3  Yeah, it's because what happens, right, is there are a bunch of different providers that you can use to basically run anything that you want on like the file system itself. No resource was the one that we chose, but there are multiple things and there's a whole remote marketplace that HashiCorp provides you for all this cool utility and functionality to pull in.\
+That third parties have implemented. That's a dangerous like landscape, right? If you're pulling \cf4 [00:25:00]\cf3  in something that you don't know about and it does some nasty things, you could find yourself in trouble, but they actually provide you with a whole bunch of ones to do that yourself. So we used no resource.\
+And the idea is you can run like a Python script or a bash script or some, anything that you want. And when that resource gets triggered. It actually runs that on the file system. And so you can sort of escape from this idea of a plan and do whatever you want on that underlying file system. So it can be pretty spooky because of that, especially if you take into consideration that like your Terraform workers, they're responsible for deploying everything in your environments, right?\
+Whether it's a dev or prod or whatever. So they probably have admin based credentials into your cloud environments. And if you have access to the underlying file system, you probably have access to the credentials that they're using, whether it's like an assume role, right? If you're using AWS or maybe it's a GCP service account or an Azure service account, whatever it is, that's a scary spot to be in if you're trying to defend against this stuff.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Well, at this point in time, probably people are scared and tuning out as well. So you're like, okay, I guess this is the end of the world anyways. So maybe to reel \cf4 [00:26:00]\cf3  us back in from I guess some of the options that are available, I think there are static code analysis. And I think that that can be done to at least do some preliminary things.\
+Because to your point, the two findings you called out are probably difficult to test for and pick up on is there something that they can do? Like, I don't know, static code analysis does this, but anything they can do to kind of manage this on their own? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Mike Ruth:
+\f1\b0 \cf3  Yeah. So I guess first and foremost, if you were like, you know, a user experience be damned, what you could do is you could turn off the speculative plans from the PRs.\
+The plan results that you kick off, you could disable that webhook. And that would actually stop all of the version control based attacks that we have, right? Because chances are, I mean, unless you give your engineering teams access to run up plans directly against your Terraform services, which is less common and against best practice. So I, you don't see that as often, you can actually prevent all of these types of attacks and doing so the problem though, with disabling that webhook is, you know, as a code reviewer, you're kind of in the dark. Now, someone submits this PR with a bunch of code and you have no dry run to see what it's actually \cf4 [00:27:00]\cf3  doing.\
+So you kind of have to look through the code itself. And that is a really bad user experience. So it doesn't really work. Now you mentioned static code analysis. This was something that was asked actually in my talk at the end of questions last year. So it's possible that something like status code analysis could work.\
+The biggest challenge that we have here, like let's say you tried to use whatever tool, you know, It's right, like maybe it's a Semgrep or some sort of tool that allows you to write custom rules. If you put that rule at PR time, the webhook for Terraform kicks off the plan kind of in parallel, right? So you might actually be able to find something perhaps that's creating a new nasty resource, but you're not actually able to do anything about it because they're running in parallel.\
+So you'd have to be cognizant of how to serialize those. types of things to actually run your static code analysis or whatever check that you want to run. Maybe it's just a GitHub actions flow or something, right? You have to do before you kick off a plan and that might be more common. You might see that type of pattern more often than not in companies or organizations \cf4 [00:28:00]\cf3  that have taken their open source version of Terraform and productionized it themselves versus buying the enterprise versions or the cloud versions. So that's because you have a bit more freedom and ability to configure it. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Oh, yeah, because I guess to your point, Terraform cloud would be the SaaS version, so you may not have as much flexibility on how much you can do with that as well. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Mike Ruth:
+\f1\b0 \cf3  True. Although I will say, you know, we talked about policy enforcement, I think that policy enforcement might be the future here. You know, HashiCorp and these types of supply chain providers give us a way to run things before anything runs on, any sort of plans or dry runs or applies run beforehand.\
+If you can check that. So one of the good things that I've seen happen, right, is. These sentinel policies, which are now called run tasks. I mentioned they used to run only before and apply these days. They've actually pulled that further up. They kind of shifted left and they allow you to run, run tasks before a plan.\
+So if you have the right logic in place, or if there's like a third party provider that gives you a module to run in a run task, to check for some of these dangerous, you \cf4 [00:29:00]\cf3  know, providers that are being made, that might be a legitimate step on. I think that's a really interesting place for research for folks.\
+If they're kind of worried about this and they have this type of environment, this reference architecture, that's a good place to go. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  And what, maybe since you mentioned module worthwhile calling out, cause a lot of security teams build their own modules as well, which has helped make that paved path as you called out the network module earlier.\
+What is a module for people who probably won't even know that, Oh, what is this module thing? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Mike Ruth:
+\f1\b0 \cf3  Well, so I guess a module is, you know, like the name implies it's a way to sort of instantiate a set of Terraform resources in a very repeatable manner, right? So the only thing you have to do versus needing to go and create a dozen root resources, or maybe it's you need to create an S3 bucket, for example, instead of ensuring that everyone at the company who's creating them knows exactly the secure by default patterns that need to be run.\
+You just create a module with all the best practices in it, and they can just go and instantiate that module and they'll kind of get for free all of those correct configuration patterns. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  All right. So basically you can have a library of \cf4 [00:30:00]\cf3  modules, which would be to your point, bundling up things you want to be part of your paved path that people.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Mike Ruth:
+\f1\b0 \cf3  Yeah. And for what it's worth, not sure if that'll necessarily help with the findings that we had, but it's a very good best practice to implement and you should definitely do that in organizations if you're using Terraform. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Any other best practice you recommend people should kind of think about as they're looking at reviewing Terraform in there, because I imagine after this conversation, a lot of people are going to look into their Terraform deployments and go, okay, what flavor of Terraform are we using?\
+Hopefully they're informed about it now, whether you use some kind of permissions, how they manage and what kind of resources, is there any best practice? And it doesn't have to be like a whole exhaustive list, but top three that come to your mind, maybe.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Mike Ruth:
+\f1\b0 \cf3  Sure. I would say that the first thing to do is probably look at what your access patterns are for both the Terraform services themselves and for the repositories that are associated with Terraform, right?\
+Make sure that the permissions management on all your works spaces are sane, right? Chances are you don't need to give plan and apply or maybe even read to basically anyone at the company, except for the people who need to do the code review of incoming requests, right? \cf4 [00:31:00]\cf3  So you can lock down permissions in a pretty strong way there, but then on the version control side of things, maybe you don't need everyone at the company to be able to submit PRs.\
+Maybe there is a review or an access request prior. There might be a little bit of developer experience regression there. Now, no one can do it, but they have to ask to get permission to submit PRs. But at least now you've limited. It's not everyone at the company can do it. Now it's a small, frequent flyers.\
+If you will. The second thing I'd say is maybe, you know, just read the documentation that they have about that security model that HashiCorp created based off of kind of the conversations that we had with them, that does a really good job at describing a lot of these attack chains, right?\
+Where you can start at verging, you know, submitting a malicious PR and getting a bunch of different things because of it. It also kind of gives you an idea of what is an out of scope when they've created their threat model. So just being sort of prepared and having the knowledge, knowing the strengths and weaknesses of what you're building, I think is always helpful.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  I guess one obvious question that comes to mind at this point in time is the same way when people started cloud security, a lot of people were like, Hey, I've \cf4 [00:32:00]\cf3  done security for a long time. I can pick up cloud security. I feel there's a question over here for that as well, where, yes, great idea, Mike, I'm going to try and go and find out this and implement these best practices.\
+Cause I imagine, and this is at least my personal experience when I was trying to like, we're trying to do, we have a cloud security bootcamp where we're talking about Terraform and I was trying to learn that. And I realized there's a whole nother learning curve. It's like kind of learning Kubernetes.\
+Now you have another parallel, you have Terraform, Kubernetes, and now you also have AWS, Azure, Google Cloud. The pie keeps growing. Yeah, do you find that was there any prior knowledge of Terraform required when you went down this path of discovering this? Because I mean, a lot of the jobs may involve us as security professionals thinking about what threat model can look like for our particular application, but we may actually not know the nuance of it, which is kind of where the gap was for cloud security when it first started.\
+I mean, now we've come a long way. Is that the same in Terraform you kind of have to delve yourself into Terraform world before you go down this path? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Mike Ruth:
+\f1\b0 \cf3  I think that , it's inevitably going to help. You're sort of a ramp up in knowledge is going to only be faster if you've \cf4 [00:33:00]\cf3  got some basis of experience to pull on. Right? Like I think a good analogy would be if you know what half a dozen languages learning that seventh language is probably going to come to you much faster than if you were just starting off with like your second language or something along those lines.\
+So you could see all these patterns in like. If you've started to review and you've gotten a degree of expertise in AWS, and then you move to GCP and you had a lot of expertise there, you know, all of those things that you've learned are going to transfer over to learning Azure next, if that was like the third thing that you were learning, right?\
+ Or whatever, you know, order you do it in, like, so inevitably when you look at sort of the secure supply chain style tools, where you're looking at your CI tools, like. I don't know your Jenkins, your Circles, your Buildkites, and then the CD tools, like your individual cloud based ones or your Terraforms or your Argos, like the patterns kind of emerge and you start seeing those things.\
+So they make it just that much faster to come up to speed on this type of stuff. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  How did you start picking it up? Cause I imagine that there are pointers there that you can share with other people \cf4 [00:34:00]\cf3  for what is your approach to learning Terraform and it could be simple as one of those Kubernetes the hard way that build your own Terraform and then take it there as well.\
+I imagine there's part of that answer as well, but was there some thought, how did you approach it? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Mike Ruth:
+\f1\b0 \cf3  Yeah, I think there's two benefits. One is, you know, having a group of people who already have good experience in one area, you can look at what best practices are and you can find those repeatable.\
+So that perhaps if you go to another organization or somewhere else, you know, what like good reference architecture looks like, that's always beneficial and valuable, but alternatively being hands on and actually going and understanding how anything works is going to be probably, at least for me, the fastest way to learn something.\
+So if you need to go and configure these things or make changes in Terraform repositories or whatever it is, like you're going to get that knowledge through hands on work. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  And as you're talking about the good practice and good patterns. Is there, at least in your mind, after working in the Terraform space for some time, I also imagine people don't have the reference architecture for it.\
+This is what maturity looks like. If I'm starting on a Terraform open source today, what you \cf4 [00:35:00]\cf3  said, it's basically credentials on a developer's laptop. Is there in your mind, and totally fine if you don't have an answer for this, because I know I'm kind of throwing in the deep end with this, where what would that maturity look like at stage one?\
+It was just like, Oh, I'm like. To your point, Airbnb, Netflix, and all of that, that kind of scale. Is there like a pattern in your mind that you see, Oh, this is a great practice. Cause I imagine most people listening to this, a lot of them would already have Terraform would be possibly open source as well, but may not have the skill set.\
+So as they're learning this, is there, would you say like a good grounding for, Hey, if you do these, like the top three things that you mentioned. Then you're good, like that left, left hand side. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Mike Ruth:
+\f1\b0 \cf3  Well, I think it really depends on the reason with which you mature, I feel like with the implementation of your Terraform environment is probably going to scale directly with like the company that you're with, right?\
+Smaller companies aren't going to invest as much effort into productionizing probably a lot of the automated infrastructure or infrastructure as code based tools. So the open source version might just be fine for them because they're trying to iterate quickly and they're prioritizing completely other things, \cf4 [00:36:00]\cf3  right?\
+If you're a company of five, 10, 20 people. Maybe you've got one infra person. You're lucky probably to even have a security person. So chances are, you're not going to like dive into the deep end and productionize an entire Terraform enterprise, like deployment would be okay with using the open source version of Terraform because your priorities are somewhere else.\
+So I think you see that maturity grow as the company matures itself. And then you've got more people focusing on, Oh, the security side of things are important, or, Oh, the automation and infrastructure side of things are important. So I think that's where that. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  And would you say, I guess, infrastructure as code has also been linked to the whole policy as code thing as well, where, I mean, I guess maybe in my mind, I'm going, Oh, the left hand side people do exactly what you said.\
+They're lucky to have a security person in the team to actually give them direction. But the stage two of it, when you first started growing, you probably start as simple as if you have some compliance requirements, you can manage that through Terraform either as a blueprint for this is how you build infrastructure, or you could just say, this is how I check that you have Terraform done the right way. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Mike Ruth:
+\f1\b0 \cf3  Yeah. Yeah. I \cf4 [00:37:00]\cf3  admittedly don't know all of the players in that space. I mean, I can think of maybe like Resourcely , is a good company that is focused in there. And you know, it's with a handful of the folks over there. So shameless plug, I guess for them.\
+Those types of tools I think are perhaps that space to help with that, you know? So if you don't know what you don't know. But you have some sort of programmatic or technical control that you can implement to solve that gap in your knowledge. That seems particularly valuable. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Awesome. This is great.\
+Thank you for taking my random question between as well as a thought, because I'm just, as you're kind of going through this, I realized, actually, I wonder if people have a sense of maturity in this context as well, because no one really talks about what does maturity in a large scale infrastructure score deployment looks like everything's automated. I don't think it is, but sure. But thank you for that question. That was the last technical question that I had, but I had some fun questions for you. Three not too many, non technical, obviously. So people get to know a bit more of you. First one being, what do you spend most time on when you're not working on Terraform and research and all of that?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Mike Ruth:
+\f1\b0 \cf3  Hmm. Let's see. \cf4 [00:38:00]\cf3  So most recently it's been fitness kind of starting in COVID. So now it's like working on my health and nutrition. I've like, I've picked up rock climbing. That's been a lot of fun. That's probably a big thing. You know, I like watching TV shows and playing games and all that sort of stuff.\
+You know, we have a you know, there's like a Thursday game night where a bunch of my friends from across the country, I'll play, play games. So that's probably how I'm kind of awesome. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  That's pretty cool. Thursday game night sounds like a great idea. And what is something that you're proud of, but that is not on your social media?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Mike Ruth:
+\f1\b0 \cf3  Something I'm proud of that's not on social media. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Hmm. I dont think you are a big social media person to begin with, right? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Mike Ruth:
+\f1\b0 \cf3  I mean, you know, I, I kind of, I'm more of a lurker, I feel like, than I am a... \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Fair enough. I like the word, like, I'm a bit of a lurker, but usually people like, would have families or things they've done, but is there anything that you wanted to call out? Yeah, yeah. I mean, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Mike Ruth:
+\f1\b0 \cf3  I've been really busy. Planning a wedding actually right now. So that's equal parts. Exciting nerve wracking. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Yeah. Well, that's definitely something to be proud of. Well, all the best for it.\
+So I congratulations. I think, I hope it all goes well. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Mike Ruth:
+\f1\b0 \cf3  The final question. What is the favorite \cf4 [00:39:00]\cf3  cuisine or restaurant that you can share with us? Ooh, cuisine or restaurant? Oh, gosh, you know, we. We are big foodies. I live up in Seattle area, right? So we're kind of always going out and trying to choose new things.\
+I love sushi. I love getting nigiri or like a curry bowl from a Japanese style restaurant. But Indian, I'm a big fan of too. Yeah, I honestly, I, I can go for lots of different things. Vietnamese coffee, I'm a big fan of. Oh, wow. I like the \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  sugary stuff as well because that's, that's, isn't that condensed milk in there?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Mike Ruth:
+\f1\b0 \cf3  Highly caffeinated is kind of my, is where I'm a big fan of. It is kind of sugary. You're right. And I try and go less sweet, but Oh, yeah, no, I mean, I don't want to, I don't want to get into the coffee side of things that you feel very strongly about. I know I was going to say, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  I'm like, sorry, I probably should have held back over there for a second.\
+Like, okay. But I appreciate another foodie as well, man. Thanks for sharing that. For sure. Where can people find you on the internet if they have any more questions about the whole Terraform and doing Terraform security at scale? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Mike Ruth:
+\f1\b0 \cf3  Yeah, you can find me on LinkedIn, you can find me on Twitter. You know, I don't spend too much or x I guess is what it's called these days.\
+Yes, . Yeah. Yeah, I would say those \cf4 [00:40:00]\cf3  are probably the most common places to find me. Sounds good. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  And I'll leave that in the description as also people can find where you are. But thank you so much for coming on the show, man. I really appreciate your time and thank you for sharing your knowledge as well.\
+Great chatting with you. Nice episode. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Mike Ruth:
+\f1\b0 \cf3  See ya.}

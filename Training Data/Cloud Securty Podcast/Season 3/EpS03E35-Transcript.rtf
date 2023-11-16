@@ -1,0 +1,620 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red250\green138\blue59;
+\red128\green128\blue128;
+\red216\green34\blue146;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\b\fs48 Kyler Middleton\b0}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ Hello? }
+{\pard  \line \par}
+{\b\cf3 Kyler Middleton:\b0}
+{ Oh everyone. Hey Ashish. Thank you so much for having me. Not }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ a problem. I'm so glad we could come here and just pump up the energy. But no matter how busy a day you've had. For people who may not know you, what was your journey into cloud security space? }
+{\pard  \line \par}
+{\b\cf3 Kyler Middleton:\b0}
+{ I grew up in Western, Nebraska, you know, the tech hub of the United. No, I grew up very rural Western, Nebraska, farming, driving tractors, doing irrigation, lifting heavy stuff. And when I learned that sitting indoors, playing on computers was a job. I was thrilled and I haven't worked a day since. So I've just been self-educating.}
+{\pard  \line \par}
+{I have a minor in web design. That's the closest I've come to like formal education in this stuff. The rest of it is. Playing around messing around and I love cloud for that. You can just go do it which you should do. You should do it. And we'll talk a lot about that. I'm sure. But now I'm a cloud architect, DevOps engineer.}
+{\pard  \line \par}
+{I teach I'm Pluralsight course. I do all sorts of blogs and I'm busy. I need to sleep. I need to now I, I think we're gonna do this today. I }
+{\cf2 [00:01:00]}
+{ need to go up a nap. I think. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah, you, you and I both HLA. I think we definitely feel like we do too much sometimes, but I'm sure it it's one of those ones where when you, when you get that feedback from the community and I, I guess once people start coming online and ask their questions as well, but I realize it, I guess it's a good thing that the foreign and few people are creating content are doing the right thing by actually sharing what they're learning.}
+{\pard  \line \par}
+{So helps a lot of people, especially like in, in healthcare space as well, which I, I. It's probably looked at by cybersecurity as a space that does not get much attention. And a lot of people have given up as well thinking, oh, this is too hard. Mm-hmm I normally would like to sort of start this conversation by just talking about what kind of services, like when people talk about healthcare lifestyle, what does it really mean?}
+{\pard  \line \par}
+{I guess, for people who don't even know about the industry and you kind of work, you work in the industry. So what are some of the services that kind of people would see around them that are trans classified as he. }
+{\pard  \line \par}
+{\b\cf3 Kyler Middleton:\b0}
+{ . So healthcare in the United States in particular is one of the }
+{\cf2 [00:02:00]}
+{ regulated industries where if you're touching PCI, which is the payment card industry, so credit card, financial stuff, or if you're touching healthcare information, like this person has diabetes, this person takes this drug, blah, blah, blah, genetics information like 23andme.}
+{\pard  \line \par}
+{That kinda stuff is all healthcare data that is stored about you. All of that data that is gathered up through. Anywhere anymore. If you use my chart, it's gathering your data. Thankfully you're a service for it, but that's the cost. And they are aggregating all of that data together and anonymizing it and selling it to researchers.}
+{\pard  \line \par}
+{So hopefully it ends up as good in the end. It's not just selling you widgets on Facebook. It's actually helping figure out which drugs have downsides, which drugs have upsides and maybe improving healthcare a little bit. Just a little bit, cuz it is a really tiny bit complicated industry. Yeah, just a little.}
+{\pard  \line \par}
+{So hopefully that's, you know, part of something that drives me is I got to improve the world a little. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Just a little, yeah. I mean, cause if you think about it, everyone kind of }
+{\cf2 [00:03:00]}
+{ has had, unfortunately unfortunately has had a hospital experience and like there's all these technology around them. Some people may have tried accessing their own records, like, but you know, like they're told by doc, by the doctor for why do you wanna look at your own records?}
+{\pard  \line \par}
+{But. Irrespective, it's definitely something that is migrating in the cloud as well. Especially for the kind of data that it has, kinda what you were touching on as well. Yeah. What are some of the examples of why this is regulated? Like what kind of data is in there? Are we talking that makes it such a highly regulated space?}
+{\pard  \line \par}
+{\b\cf3 Kyler Middleton:\b0}
+{ . Well, first of all, my daughter is eight and a half months old and already has like a MyChart entry and gets insurance bills. And I have a login for her and we created like a YouTube kit. So like the data that we create. These days is from inception, literally when you are conceived and you have your first doctor's appointment records are created about you, that store your healthcare information right.}
+{\pard  \line \par}
+{And what illnesses you've had, what sicknesses you've had, all of that stuff is stored and aggregated advice. Things}
+{\cf2 [00:04:00]}
+{ is hopefully used for good. But also all of these services that nurses use doctors use that store your healthcare information and make. Accessible to down the cost of healthcare, hopefully access that data and we have to secure it because in, in the wrong hands that's your life, that's your healthcare that's whether you had to take in STD drug at some point, like really invasive stuff.}
+{\pard  \line \par}
+{That's really very sensitive. So that's the reason that legislatures watch out for it and protect it. And there's all sorts of audits and laws around protecting that data. The Macy industry. Expensive and complicated and scary and really fun and cool for me. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ yeah, well, . And I think too what are some of the security challenges considering we're talking about securing this, and I think a lot of this is being digitized these days to what you said, like your eight month old daughter has an insurance.}
+{\pard  \line \par}
+{I can't believe it's insurance that, that young. And I mean, I guess I, I get the whole YouTube kit and stuff as well. Like those kind of subscription business started for that. Like what }
+{\cf2 [00:05:00]}
+{ kinda. Challenges you foresee for people who are trying to, and it doesn't mean, I mean, we, we go into the detail as well, but just at a high level, just like zooming out of bit.}
+{\pard  \line \par}
+{Just if someone was to tell you about regulated environments, what are some of the obvious security challenges that you would obviously think about? I, I imagine it kind of crosses over to other industries as well, but what are some of the top tier, I mean, maybe top three that comes to mind. }
+{\pard  \line \par}
+{\b\cf3 Kyler Middleton:\b0}
+{ . It's.}
+{\pard  \line \par}
+{Storing really sensitive data and making it available to only the services and people that need it. And hopefully never people, hopefully it's just automation and computers and ETL jobs that sort of transform the data and do something useful with it, like, like big data analytics but also preventing that data from leaving.}
+{\pard  \line \par}
+{Or preventing it from leaving in a state where it could identify someone. So packaging it where it's anonymized, because it's, you know, aggregated a million people healthcare records and 30% of them have blah, blah at gene, stuff like that. Yep. I don't know if I'm answering the question. Exactly. No, you }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ are.}
+{\pard  \line \par}
+{And I think I was }
+{\cf2 [00:06:00]}
+{ gonna, I was kinda hoping you'd probably add HIPAA in there as well. That's kinda like the big one mm-hmm cause I, I guess that kinda goes into the whole regulated space. I maybe if you can share what HIPAA is and why is that relevant for the healthcare }
+{\pard  \line \par}
+{\b\cf3 Kyler Middleton:\b0}
+{ space? . HIPAA is the most misspelled acronym that I have ever seen in it.}
+{\pard  \line \par}
+{And that is saying something there's a lot. H I P AA it's the healthcare protection act, something, I'm sure I'd miss some of the letters. But it's the federal law that governs. Penalties for not needing HIPAA compliance. So anyone that manages or touches healthcare data in any way needs to be certified and meet compliance regulations in terms of specifics, like you need to encrypt data at rest.}
+{\pard  \line \par}
+{You need to encrypt at a certain level when it's in transit. But also process wise, it governs how your business is built. Like if someone calls on the phone and says, Hey, I promise I'm John Smith. Can you please email my medical records to no, of course we need you to prove it. There's two of FA there's authentication.}
+{\pard  \line \par}
+{You need to prove who you are. All that kind of stuff is written into the law and it changes all the }
+{\cf2 [00:07:00]}
+{ time and we're always doing our best to keep up with it. But really it's just good guidelines really, hopefully is the goal is it helps us all get stronger and better and we keep raising the bar and we keep making ourselves more secure.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right. And so to your point, What I guess there's HIPAA, there's this, like if people were to listening to this and going into okay. I'm I'm in that environment where trying to move into cloud I'm in the healthcare space. What are some of the building blocks that people were think about when thinking about say building AED infrastructure and application tool possibly in AWS, what are some of the building blocks?}
+{\pard  \line \par}
+{\b\cf3 Kyler Middleton:\b0}
+{ There's so much, and they're all hand in hand, which makes it really hard to get started. Cuz you have to build that momentum cuz it's too many things. Yeah. So first of all, the AWS or any cloud provider maintains a list of services that are HIPAA compliant, that, that meet different regulatory frameworks.}
+{\pard  \line \par}
+{That's a very good place to start at this point. Most of the core }
+{\cf2 [00:08:00]}
+{ services do, but when new services are introduced, they often don't meet that step yet because you know, it's in progress or they're. Bolting on that security stuff. So make sure that the services and resources you deploy are compliant because otherwise there isn't a security.}
+{\pard  \line \par}
+{There is no way to get there if they're just not compliant. Second of all, in AWS in particular logs are disabled for everything by default, which is terrible. And it's cuz they wanna, you know, they wanna charge you a little bit of money to turn it on just a little, little bit of money. So for every service, every resource you enable, you need to enable logging.}
+{\pard  \line \par}
+{You need to make sure those logs go somewhere that you can get to and you can store them and you're gonna be paying some money for that. But you need to so making sure your logs are enabled and. Aggregating them somewhere useful. Splunk is incredible. Elastic search is incredible. There's a lot of services out there.}
+{\pard  \line \par}
+{That'll help you do this. But log everything everywhere and then read the log. That'll help, you know, what's going on in your }
+{\cf2 [00:09:00]}
+{ environment because it's, it's, you know, it's a S it's lots of people in lots of regions across the entire world can create something that's exposed to the internet. It lag two seconds.}
+{\pard  \line \par}
+{And that's new that used to take a firewall request to a net ops team. It doesn't anymore. You can deploy it in a minute. Any systems admin can, and that's really powerful. But a little scary. So you gotta, you gotta look out for that. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And what, what about from a, I guess networking perspective? Because I think maybe so like some of these security architects who may be listening to this conversation, they might think of this from a, I guess, more structural perspective for building blocks to them.}
+{\pard  \line \par}
+{Oh, what are we doing for identity? What are we doing for networking? So maybe if you kind of zoom into a bit more of that, like, what are some of the things that you consider from a networking perspective? Cause I imagine. I don't know if any cloud first health companies, but maybe they do exist. But I imagine most companies out there who are in the healthcare life, life science well, I guess healthcare space, technically they all }
+{\cf2 [00:10:00]}
+{ are primarily legacy.}
+{\pard  \line \par}
+{They have a lot of, I guess, on-prem softwares and stuff that we're already using. So what, what are some of the things that people might consider from a network security perspective for a regulated environ? Would that be really different to like a normal environment? }
+{\pard  \line \par}
+{\b\cf3 Kyler Middleton:\b0}
+{ . Yeah, absolutely. Because networking works differently.}
+{\pard  \line \par}
+{So in AWS, in particular, that's my, my expertise area. So I'll come back to it a lot. Yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ This is the topic as well. So }
+{\pard  \line \par}
+{\b\cf3 Kyler Middleton:\b0}
+{ AWS, it is, there's no layer too. There's no broadcasting and Mac addresses. There's nothing. So like. You don't think about what that means, but there's no more ha pairs of ASAs because there's no V R R P there's no HS, R P there's no layer two failover at all.}
+{\pard  \line \par}
+{So you need to find cloud native services that can support failover. If you're gonna have like a floating IP or you you're writing Lambdas. And that's like, that's a whole new world for network engineers. You're not configuring an ASA pair. Writing a Lambda that's Java that runs every 10 seconds of monitor stuff.}
+{\pard  \line \par}
+{And like that's a whole, }
+{\cf2 [00:11:00]}
+{ whole other world. It's really interesting. But also most of the native services and clouds have lots of options. So there's not just an ASA. There's also the, the firepower equivalent. That's like layer seven that can read through URLs that can do SSL description, but those services are new to the cloud.}
+{\pard  \line \par}
+{They're just not. Robust and mature as you'll find in a data center, there's not like big beefy nexus host. There's just like these services that you click a button and it turns on and hopefully it works, but you don't know. And to your point earlier where everyone is a, is a legacy player, I think that's true, but I think absolutely everyone in every industry is trying to move into cloud because it lets you be really agile and move really fast.}
+{\pard  \line \par}
+{And if you Don. Get there to that agility, that quickness a startup's gonna take your lunch. So even the big players are, they're scared. They, they need cloud. They have to have it even, even in the healthcare space. Yep. Absolutely. The regulat }
+{\cf2 [00:12:00]}
+{ regulation helps to keep little startups out. Cause it takes a lot of money at lawyer time to like get up to compliance, but absolutely.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Interesting. And to your point about in a specific hybrid example, where say, let's just focus on the majority population of healthcare, which is legacy and has a on premise to your point, they get, oh, they hear Kylo. We here talk about cloud security, cuz she she's a cloud security check. They're like, oh my God, this is amazing.}
+{\pard  \line \par}
+{Let's get, let's all get into cloud. Now. They all got jumped into the cloud. But suddenly it's like, well, we have this on premise, which we kind of have to hold onto for some time. What would your considerations be for network security from that perspective? Cause there's a few more that float around. So I'm curious to know what, what do you normally recommend from from your perspective for healthcare, where it's a regulated environment?}
+{\pard  \line \par}
+{What's the pattern that you go for for network }
+{\pard  \line \par}
+{\b\cf3 Kyler Middleton:\b0}
+{ security? Keep everything private as much as you can. There's express routes that are private links between your data center and the cloud. And they're just }
+{\cf2 [00:13:00]}
+{ circuits. Like you call up a century link, you'd call up a circuit provider and they can provide that for you.}
+{\pard  \line \par}
+{And then you don't even need a VPN. It never touches the internet. It's literally like an NPLS style circuit that connects you to the cloud to AWS. And a lot of services too. You can. Configure them to stay within your borders within your VPC, which is your virtual little data center in a box to never go out to the internet for anything you can do local DNS, you can do local, a lot of services through endpoints that bolt that service into your VPC.}
+{\pard  \line \par}
+{And then you don't really need to worry about. A lot of the encryption, a lot of the public exposure, like there's not hackers getting at your stuff. It's within the safe little secure box, which is what you want it to be. That's what you're used to with your data center is there's the big firewalls. And I don't wanna scare you, but as you move in to cloud, you can start to move your.}
+{\pard  \line \par}
+{Identity authentication inbound towards the middle. So the old model is there's a }
+{\cf2 [00:14:00]}
+{ data center, there's big walls. There's, there's, you know, you know, fire power and guns on the borders and barbed wire. And then in the middle, once you're in, you know, it's squishy, you can get to everything. Yeah. Yeah. And that's usually how people start in the cloud bit.}
+{\pard  \line \par}
+{As you get there, you can move towards a zero trust model of the world, which means you have identities that each service or a person owns, and they're only allowed to do the specific stuff that's required. That takes a lot of overhead to build a lot of automation. I have some Terraform talks about it.}
+{\pard  \line \par}
+{You wanna learn. But you're able to really secure a lot better in the cloud. Once you're there. It's scary. You can do a bad job just like you can in a data center, but you can do a much better job than in a data center once you're there. Interesting. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And I've also seen patterns or maybe HIPAA more specific question about HIPAA.}
+{\pard  \line \par}
+{Cause a lot of people may like what they do with PCI. If you have an application that needs to be PCI compliant, They normally scope it out to say, Hey, this is my PCI. This is my VPC. This is my account. This entire account needs to be PCI compliant. Everything else is non PCI because outta the scope.}
+{\pard  \line \par}
+{\cf2 [00:15:00]}
+{ Right. So I don't have to worry about that. Is there something similar that's done from a networking perspective or HIPAA as well? Cause I, but I imagine everything needs to be HIPAA compliant. You can't really go well. That technically is not heavily held data cuz technically everyone's a held data. Is there like boundaries like that, that people can consider for HIPAA as well, where they may only have a small portion for HIPAA and not the entire thing.}
+{\pard  \line \par}
+{\b\cf3 Kyler Middleton:\b0}
+{ Absolutely. People talk about the cloud, like it's amorphous and it's one thing, but really like AWS is VPCs, which is a little network, like a slash 16. It's pretty common. And you can have 50 of them if you want. So imagine 50 data centers and you connect them. However you. Or not. I see some PCI or HIPAA compliant places have different VPNs and you connect to the PCI compliant VPN, and that's the three VPCs over here or the, you know, non PCI that's the other 47.}
+{\pard  \line \par}
+{So you can bridge them and use filtering, use all sorts of cool security tech or. }
+{\cf2 [00:16:00]}
+{ }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yep. Yep. Cool. So that's good to know. At least you can actually separate them out as well. What about, I mean, I guess if you were to kind of, you touched on the identity we spread earlier as well. What's your thoughts on identity for a HIPAA compliant or HIPAA regulated environment?}
+{\pard  \line \par}
+{\b\cf3 Kyler Middleton:\b0}
+{ I am, is everything particularly in AWS? I don't wanna knock AWS cuz I am is really powerful, but it's, it's JSON files. It's flat J O that's hard to like, it's great for computers, but it's hard for people for humans to parse. What actions do you need? What what things are missing when it doesn't break?}
+{\pard  \line \par}
+{It's kind of not very intuitive to figure it. So when I'm talking about identity, if you're not familiar with that, there's roles, users, policies in AWS, and a role is an identity, a principle that like a host owns or a service or a human owns, and that's who you are. So you've proven who you are and then your authorization is the stuff you're allowed to do, which is the policies that are attached to it.}
+{\pard  \line \par}
+{And within AWS or within a }
+{\cf2 [00:17:00]}
+{ cloud, you are able to do only the stuff that you are granted the. To do and that applies to your, your resources too, your, your machines, your, your programs which is really powerful. You can tell your automation scripts that they're only allowed to touch the resources that they're supposed to, and they have nothing else.}
+{\pard  \line \par}
+{And there's just not really a corollary for that in. Data centers. I know active directory does some cool stuff. You can do filtering rules. There's nothing as powerful as I am in the cloud. It's, it's very, very powerful for regulations and really just for general security. Cause the goal is not to hit the compliance check.}
+{\pard  \line \par}
+{Mark. The goal is don't get hacked or if you do limit the scope, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And, and pretty good practice as well. Cause we kind of started over the conversation. And to your point, I, there is definitely believe identity is probably the main piece in the whole thing. Well, cause once you have the identity access, you basically like you're in, like, if with the more permission you have, the more screwed up situation you're in.}
+{\pard  \line \par}
+{When, when that identity information is lost, I guess from a }
+{\cf2 [00:18:00]}
+{ application billing perspective, you kind of mentioned the fact that every business out there is excited about cloud. What's moving to cloud because they realize there's the start. You can get. Another important aspect for the whole space of cloud, as we know it is C as well, and I normally there's multiple ways to this out, but what are some of the security ations you have for C that are used in a he environment?}
+{\pard  \line \par}
+{\b\cf3 Kyler Middleton:\b0}
+{ . I love automation. So CICD pipelines it's any way to deploy code generally D driven through like a get server. So like a GitHub or an Azure DevOps or a Jenkins where code is stored and then it is processed to deploy. Somehow it's, it's built, it's pushed it's whatever. I think it's so powerful because when you are doing.}
+{\pard  \line \par}
+{Manually, you have to know all the steps. You have to be the expert that knows I'm gonna run TF Lin. I'm gonna tear test. I'm gonna validate. If you can automate it, if you can }
+{\cf2 [00:19:00]}
+{ write a pipeline that does it, you just need one expert, one time to write all the steps out and then you can run it a thousand times.}
+{\pard  \line \par}
+{Some of the code that I've written is run hundreds of times a day and it does all sorts of smart stuff. And I just have my feet kicked up. I don't even see it. . I love that it's so powerful. So in the healthcare space in particular authentication and authorization is really important. So it all comes back to identity.}
+{\pard  \line \par}
+{When you require two FA, which is a requirement for HIPAA, how do you have a, an automation server that runs every five seconds? Get a two FFA prompt and hit approve. You can't, you need an exception or you need an alternate method for it to prove itself really strongly who it is that it's not someone else doing something malicious.}
+{\pard  \line \par}
+{It's actually this thing that you've authorized. And that can be challenging. There's some services like O I D C that allow specific branches specific. Services to run and no other service. So it kind of passes metadata along with I'm trying to do something, and this is who I am, and this is my attributes.}
+{\pard  \line \par}
+{Mm-hmm that }
+{\cf2 [00:20:00]}
+{ really helps that really helps lock down who you are specifically. And earlier today, I just posted on media about this. You could have a Kubernetes cluster pod launch, and it can assume an IM role assume an identity in AWS. Only the service account assigned to that pod can assume the role and do the thing.}
+{\pard  \line \par}
+{And everybody else fails, even if it's in the same cluster, which is good. Cause trust no one always be looking over your shoulder, lock that everything down. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So to, to your point then about the authorization and authentication, one of the things that is quite common, well, it shouldn't be, but it is that C CD gets a lot of permission.}
+{\pard  \line \par}
+{Like, you know, the , which kind of goes out the window where it's one C, C pipeline, which is cause kind what a lot of people recommend. It has a real permission. It has access to dev prior test every environment as well. So probably the more powerful C I C D and more, I guess. Well, not more but less number of C CDs makes it even more exposed for lack of better }
+{\cf2 [00:21:00]}
+{ word for such scenarios.}
+{\pard  \line \par}
+{Where do you stand the whole one? C I C D for. Infrastructure, one CS CD for application or one CS CD for the entire application, including infrastructure, application, everything. Cause I mean, you're a massive telephone fan. People who might go through your me medium page would realize that. So coming from a telephone world, I imagine most people over here without using some kind of automation, they could be using something from their Amazon provider, like a cloud formation template or CLI or whatever.}
+{\pard  \line \par}
+{Where do you stand in the whole CICD pipeline? Cause I saw obviously one applic. Most people may have 30, 4300 applications. So what are your thoughts on the whole CSTD or at least a number of CSDs for, for this? }
+{\pard  \line \par}
+{\b\cf3 Kyler Middleton:\b0}
+{ . So in the old days, you, you needed a new server for your app. So you submitted a ticket and someone wrote a, a PO and they ordered it.}
+{\pard  \line \par}
+{And six weeks later, it arrived at a box and anymore, that's not how it works. You, you deploy a server in two minutes, you }
+{\cf2 [00:22:00]}
+{ deploy your app in another three. It's incredible. The way that this tends to work when people first get started is there is a Terraform repo, and it links up with, you know, you have to have your application repo, cuz someone is building your application somehow.}
+{\pard  \line \par}
+{Yep. And you have them separate and you have maybe the Terraform called the app. So if you need a new server, you say Terraform, build it and then Terraform does a what's called a web hook or a post or something to trigger the other app pipeline to deploy your app to the new server. Yeah. That's really common.}
+{\pard  \line \par}
+{That's okay. But as we develop infrastructure as code, what, what Terraform does cloud formation arm? We start to see the application and the infrastructure grow together because they are the same thing. They are both code now and just, we are bound to put them together. So I think as we develop, like, if you're new to this, just start learning it that way.}
+{\pard  \line \par}
+{Cuz that's where we're gonna be in six. Where infrastructure is the application. You see this really commonly with }
+{\cf2 [00:23:00]}
+{ containers or serverless. Like if you have a Lambda and you're developing that and you wanna deploy your, your new app, it doesn't make sense to package the app and then give it to Terraform.}
+{\pard  \line \par}
+{And then Terraform builds, like just have one pipeline do one thing. And package it and deploy it. And it, it takes much less time. It's less, less complexity. So I think they'll grow together. I think they're oh, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ so, so have two. So one for, if such a one for application or have one for both. I think }
+{\pard  \line \par}
+{\b\cf3 Kyler Middleton:\b0}
+{ that's the way that it used to be.}
+{\pard  \line \par}
+{I think the way that we're gonna be in six months that everyone's gonna do is one, because everything's gonna be built together and deployed together. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So if I have 30 applications, one C I CD for 30 or 30 C CD for 30 applications. }
+{\pard  \line \par}
+{\b\cf3 Kyler Middleton:\b0}
+{ I would think 30, but it starts to be how your application is architected.}
+{\pard  \line \par}
+{Do you wanna have 30 different pipelines run? And that problem's not as scary as it seems because you can set automated triggers. I, I built something like a year ago that when one pipeline is merged, cuz you, }
+{\cf2 [00:24:00]}
+{ you changed code in one path. It runs like 50 pipelines and who cares? Cuz like I'm not doing that manually.}
+{\pard  \line \par}
+{My feet are kicked up. So it depends on how you wanna build. I don't think there's really a huge pro calling. I don't wanna take a, you know, an aggressive stance. Yes. Yeah. They're equivalent as, as we scale out as scaling out, gets easier. Who cares if it's five or if it's 50, cuz I'm not running them, they're running automatically.}
+{\pard  \line \par}
+{Ah, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ good point Kyla. Cause I think I, to a point, a lot of times when these position I had a lot of people take a strong stand toward multiple. Sorry. And sometimes the opposite is just because of the, we use case they might have may have the architecture. So it's so complex because I guess we are talking about a scenario where people are using IACS.}
+{\pard  \line \par}
+{I don't know if every organization out there is even DevOps to begin with. Automation is like, right. This is priority. Number two. Cause they have to have the agile and DevOps box ticked off before they can go into automation before they can do I even think about ISC? So maybe for people who }
+{\cf2 [00:25:00]}
+{ may not be using ISC, I.}
+{\pard  \line \par}
+{And maybe manually doing things. I don't know why they would do it, but if they were doing it manually would these challenges be a lot more harder? I imagine like the click ops world as I like to call it, it's not easy. Cause how important this culture as well for this, because there' a lot of moving elements here.}
+{\pard  \line \par}
+{I'm trying to kind of summarize it into one, but I, I definitely find that in a world where there is no DevOps, there is no IAC. The challenges that you spoke about from a network perspective, from an identity perspective from C C, D I, well, there will not be a C CD, hopefully if you're not IOC, but what .}
+{\pard  \line \par}
+{How different would that world be? Like? I imagine what, what was your challenge before the whole DevOps and every world kind of came in? Cause I imagine you've been in the space for a while. Thoughts on, }
+{\pard  \line \par}
+{\b\cf3 Kyler Middleton:\b0}
+{ I, I think culture is everything like a third of my RSA talk a month ago with, with CG who was on this, this podcast earlier.}
+{\pard  \line \par}
+{Yeah. Was just on that, the power and the importance of culture. So }
+{\cf2 [00:26:00]}
+{ as an example, when you start to do infrastructure is code it's code that you commit somewhere and people review it and they're judging your code and it can feel like they're judging you. Why did you do this? Can feel like you're stupid and you shouldn't be here.}
+{\pard  \line \par}
+{And. That's really hard. You have to get over that in your, in your own heart and with your team to know that it gets called blameless culture. A lot that if something has happened, that's wrong, that, you know, you broke something, you committed code that was wrong. Mm-hmm, . Your team needs to support you and figure out why it was permitted.}
+{\pard  \line \par}
+{What process allowed it? Did someone approve that shouldn't have, it's not just you, you didn't just do it alone. Your team collectively did it. And that's the point of DevOps. That's the point of automation is it's your collective aggregated smarts together. And if something falls through the cracks that's everybody's fault and you all need to work together to fix it.}
+{\pard  \line \par}
+{And I dunno if I answered the question, but I love }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ talking about no, you kind of did. I think culture definitely is a huge part. Maybe from a technical perspective as }
+{\cf2 [00:27:00]}
+{ well, do you reckon? I imagine in my mind, when in a traditional environment, these things will take a long time, right? I think just the whole CS, CD, DevOps and everything.}
+{\pard  \line \par}
+{So culture definitely ticked off from a technical aspect as well. How long were the projects? I've never been, I've worried on identity project for a healthcare department. And I remember. The play. Cause you know, in the cloud world, we've talked about six months. Oh, six months too long I can do since one month or two months.}
+{\pard  \line \par}
+{Cause I've got some automation. I imagine these used to at least the identity project that we are gonna work on for a hospital that was gonna take us a year. This is just one tiny hospital in Victoria. Right. So I imagine it was that's the case that used to be for deployment before the whole DevOps and cloud world came in.}
+{\pard  \line \par}
+{That would that be an accurate picture of }
+{\pard  \line \par}
+{\b\cf3 Kyler Middleton:\b0}
+{ what it used to be? Absolutely. And it's, it's so hard to do it right every time. And that's what you want. Right? When you do a deployment, when you build a resource, you want it to be built correctly. And that's so much easier said than done anyone who's ever clicked, }
+{\cf2 [00:28:00]}
+{ like new instance for an EC two instance in AWS, it asks you like 15 questions that are esoteric.}
+{\pard  \line \par}
+{Like you've never heard of half of those words before. And if you do it wrong, your, your server doesn't work. And that that's a problem. Like if you have. Three experts that are building your servers. They're gonna get it right 99% of the time. But if you have 25 people or a hundred developers that are deploying servers, they're gonna get it wrong, like 30% of the time.}
+{\pard  \line \par}
+{And then you need to go and figure out and fix it. And that tax is something that you get rid of with automation and it's expensive. It's time consuming. You have to train your whole team to use, get to build pipelines, to understand all this silly automation stuff. But that's the tax that you're attacking is stuff went wrong.}
+{\pard  \line \par}
+{30% of the time something broke cuz you, you, you know, you deployed 50 resources to support this out. A couple of them are wrong or logging's turned off or they're deployed insecurely or that's risk to }
+{\cf2 [00:29:00]}
+{ your business. That's risk to your technical uptime. Your CIA is under attack by that tax and automation fixes it.}
+{\pard  \line \par}
+{Automation can help a lot. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Fair enough. And to your point about automation, maybe even at an account level as well from an AWS perspective, is there a lot of automation done there as well in that space? Cause I, I imagine this like, you know, the whole AWS organization and all that, like those kind .}
+{\pard  \line \par}
+{How are they different for regulated hype, I guess regular healthcare department, department or environ. }
+{\pard  \line \par}
+{\b\cf3 Kyler Middleton:\b0}
+{ An SEP or a service control policy is a part of the AWS organization, suite of tools. And it is fences that you can put in that says when you create a server, it has to be this size. When you deploy an instance, it has to be private.}
+{\pard  \line \par}
+{It has to be internal. And remember how anyone in your org can deploy something that's public and uses password password for the password. You can say just don't permit public. Or turn it off for five minutes. So someone had }
+{\cf2 [00:30:00]}
+{ deployed something that has gotten permission. It's really powerful, but it can also be kind of scary because there's no log only mode it's just enforced immediately, which really scares me cuz like what if I do it wrong?}
+{\pard  \line \par}
+{And the answer for most of that in cloud is just have multiple data centers. Just have multiple VPCs, there's a dev and stage in PRD and you roll your code forward and your infrastructure, your SEPs, your application everything's code. So just start it in dev and test it. And if it doesn't work, fix it before you roll it forward.}
+{\pard  \line \par}
+{So there's not just one data center. Now you're gonna have 50 and you just need automation to keep track of it. That's cloud get. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Like, and probably, and I think too, what you have been saying, I'll probably repeat this at this point in time. It sounds scary, but it's not, isn't it, once you, once you start working apart }
+{\pard  \line \par}
+{\b\cf3 Kyler Middleton:\b0}
+{ incredibly cool and, and it can be scary.}
+{\pard  \line \par}
+{And there's some boundary keeping like go to stack exchange and say, Hey, how do you use Terraform? And people are gonna }
+{\cf2 [00:31:00]}
+{ say, you need to go get another job. How could, and that's that stuff drives me crazy. I don't have an education in this. I learned reading internet articles and messing around, and I published a ton of stuff on my medium.}
+{\pard  \line \par}
+{That's just really easy to get to. I call it the let's do DevOps series. That's really simple language. It doesn't assume you know anything. I try to find and share resources like that. Where if you don't know anything at all, and you're terrified you're shaking in your cowboy boots. Like I was, when I first started before I got fashion.}
+{\pard  \line \par}
+{You can go figure it out. You can go do it. Cause that's really powerful. And I know I keep not answering your question. Technically, when you get started, start running Terraform from your computer in a dev account, that's not anything prod personal sandbox. Start figuring out how it works. Terraform is definitely where I would start with arm and cloud formation have benefits, but Terraform is everything everywhere.}
+{\pard  \line \par}
+{Now. It's huge. Go do it. It's awesome.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:32:00]}
+{ Probably drop the mic over there and walk away Highland . }
+{\pard  \line \par}
+{\b\cf3 Kyler Middleton:\b0}
+{ So I have example pipelines for everything for AWS, for Azure, if you want pipelines that will deploy your code and walkthroughs of how to deploy them. I have all that on medium. It's all GitHub code that I've shared publicly for free. So you can just go steal it, borrow it, take it, modify it, do whatever you want.}
+{\pard  \line \par}
+{Build cool. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I would definitely share that like in the show notes as well. And I think maybe one, one theme that I'm taking from this, right. I think people may be listening into this conversation or may, may have come with a preconceived notion that actually Kai's gonna talk about all the challenges she's having in trying to deploy security in HIPAA compliant environment.}
+{\pard  \line \par}
+{But for like, we've been talking for almost 40 minutes now, and I think it's, it's really interesting. The, the team is very similar where it's automation. And automation that scales. And then there is like IM take care of like most of the recommendations that you've made already similar to what anyone else would make from any of that environment.}
+{\pard  \line \par}
+{Almost sounds like }
+{\cf2 [00:33:00]}
+{ you're talking about letting security drive compliance instead of compliance drive security. Does that make sense? Like I think, what am I getting this }
+{\pard  \line \par}
+{\b\cf3 Kyler Middleton:\b0}
+{ right as a team? Absolutely. Cause the goal is not to pass your audits. You need to, you should pass your audits, do that. But the goal is to be as secure as possible while still being just incredibly agile.}
+{\pard  \line \par}
+{And you can do that with cloud. You have to research, you have to learn, but you can do it. And this is fun. This is I get to talk. And it sounds like I'm an AWS expert and I know all this and I don't, I know I I'm like in the bottom half of the room of your viewers right now, But I can Google. I can read, I can read all the Terraform documentation.}
+{\pard  \line \par}
+{I can read all the AWS documentation. And if you do that, you're an expert. You can do it, cuz there's so much depth and breadth to cloud. And so if you learn how to do it, you build it yourself. You can teach your team how to do it too. And that makes you valuable and improves your team too. And I, I that's, all I talk about is culture and }
+{\cf2 [00:34:00]}
+{ attitude.}
+{\pard  \line \par}
+{Just go in Hupa you know, like just go do it because that's all I ever did. That's all I have ever done. And it's worked really well and you should do it too. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Interesting. Wait, is that isn't not a Jewish word, Kupa. }
+{\pard  \line \par}
+{\b\cf3 Kyler Middleton:\b0}
+{ It is. I'm not Jewish. I just love their words. They're fun. I, I love that }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ as well. Cause it's a, you similar word in the Indian language Hindi, which means exactly the same thing, but sounds very much similar.}
+{\pard  \line \par}
+{It's like, it's quite just. But and tell TOPA, I think it from the epic artist, but I can't do that. . It's definitely. Oh, there go. Steven just mentioned the same thing as well. Yes, let's please make compliance side effect of great security hundred percent of the money. That's pretty much team over here.}
+{\pard  \line \par}
+{Thanks for that. We've spoken about a lot of things about identity and network. We've spoken about like the CD pipeline as well, and we've defined an account level.}
+{\pard  \line \par}
+{What do we need to do now with the team or automation and kind of stands today? We obviously kind have }
+{\cf2 [00:35:00]}
+{ to think about the elephant in the room these days, which is containers and serverless, which you kinda touched on earlier about serverless comparison. I definitely find that. Sweet. I I'll, before I kind of dig, dig into the question, are, is it okay to use container serverless in a HIPAA compliant environment?}
+{\pard  \line \par}
+{Is that even possible? }
+{\pard  \line \par}
+{\b\cf3 Kyler Middleton:\b0}
+{ Yeah. Yeah, absolutely. And I love it. I think it's even better. So for anyone that isn't aware, let's catch 'em up. So in the olden days you have a VM, you deploy your application on it. It's long lived. You keep it forever. You name it, Frank, or Steve or Jedi or whatever, January, whatever you want.}
+{\pard  \line \par}
+{And you get to know its idiosyncrasies, cuz it's long lived. That is your pet. Versus your cattle in the serverless container world, where if your container does something wrong, that's a cattle and you just shoot your cattle. And that's an unfortunate metaphor, but that's how containers in serverless work.}
+{\pard  \line \par}
+{You don't have long lift compute. If something goes wrong, you destroy it. And you redeploy it from scratch. You have all of it in automation. and it's really }
+{\cf2 [00:36:00]}
+{ powerful when you build stuff like that. It takes a lot of time, you know, all of those installing like Java and Chrome and notepad and everything you needed on your server, that's really annoying to do.}
+{\pard  \line \par}
+{But once you get there, you can iterate really rapidly. Some of the C I CD builders I've built, we rebuild them every day and deploy them every day. And you just have unit testing that says like, does it still work? Cool. Send it live as much as you can automate your patching faster than a human can keep up.}
+{\pard  \line \par}
+{Across a huge scale, a huge fleet. And that's, that's awesome. In terms of HIPAA compliance. Absolutely. Kubernetes is interesting here in serverless, in containers. Generally they have an IP, at least when they're live serverless, just when it's live. And you can scan it, you can use your security tools to analyze it statically as code, or when it's running and see like, is it secure?}
+{\pard  \line \par}
+{Is it doing what I expect is, is someone hacking it in. You generally, don't it, there's an overlay network. That's just within the Kubernetes, you know, nonsense box. And it's hard to scan. You need tools that are }
+{\cf2 [00:37:00]}
+{ specifically built for that to get to it. Kubernetes is the Lamborghini of services. It does everything.}
+{\pard  \line \par}
+{And if it breaks like you better fly to Italy to get the part, cuz it's expensive. But it's really powerful and you're gonna see it everywhere. If, if you haven't in your environment. Get ready. Cause it's coming. So maybe you can be that guy, be that girl, be that them take care of it. Learn Kubernetes, cuz it's coming.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And to your point then obviously to your pointing is not a problem when it's versus a pet that you're dealing with, didn't realize you can you get an IP for serverless and you can scan it when it's running live. You kinda mentioned that. How does }
+{\pard  \line \par}
+{\b\cf3 Kyler Middleton:\b0}
+{ that. Absolutely. So serverless is just code that you hand off and that's it.}
+{\pard  \line \par}
+{And there you go. Yeah. A of us run my code, but generally it's run many times over for atomic workload. So like when you go to Twitter and you upload a picture and your picture's too big, right. You didn't scale it to the exact size. It }
+{\cf2 [00:38:00]}
+{ needs to do this really rapid rescaling. and send you back the other one.}
+{\pard  \line \par}
+{And that's, that's a really classic example of serverless, cuz it doesn't need to retain any data. It can just spin up and run and send it back. So generally, because it has to send, it has to have an IO. It has to have an IP. That it can connect to. And it's, it's not very common to scan serverless when it's up, unless they're long lived jobs.}
+{\pard  \line \par}
+{So like the Twitter photo site, that's like one second. There's not enough time to scan it. But if it's running all of your services, like Netflix and Google have a lot of containers and serverless services that are Lu lived at our, with you gotta scan em, you gotta find out what's going on. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Is that because it's a HIPAA requirement for, do we scan?}
+{\pard  \line \par}
+{Is that why you folks are scanning? }
+{\pard  \line \par}
+{\b\cf3 Kyler Middleton:\b0}
+{ No, I it's just a security security should drive compliance, like even said, I love canine security, Steven. Cause one }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ of the examples that you talk about is like the fact that you can install antivirus on a container or a server and most compliance challenges require to have an }
+{\cf2 [00:39:00]}
+{ antivirus or a compliance.}
+{\pard  \line \par}
+{Like I think in certain scenarios, I still feel. Antivirus makes sense. Like, I think I was doing this work for a particular company as a CISO. And one of the things that we used to have as a problem was basically, it was like a what do you call it? Like a, a document upload site. Now you could be a hacker uploading a virus onto our site.}
+{\pard  \line \par}
+{So it had to be scanned by antivirus. Right? So like with, with containers, inland is all antivirus. Right. I, unless I'm missing the picture here, there's all antivirus there. So that's okay with HIPAA. }
+{\pard  \line \par}
+{\b\cf3 Kyler Middleton:\b0}
+{ There generally is scanning. There's not always antivirus in a traditional sense. So if you're used to VMs, you just have an installable package that scans the files and keeps track of that in containers you share the kernel.}
+{\pard  \line \par}
+{And that's interesting. If you don't understand that, read the Wikipedia, it has tons of good info. But because you're sharing the kernel, you can often have antivirus that exist outside the container that is looking inward. That has transparency. It can x-ray the container in, so }
+{\cf2 [00:40:00]}
+{ you don't often need to have antivirus within the container.}
+{\pard  \line \par}
+{And there's also other services that can scan it, live, scan it as it's running, however, There's a different model. That's really similar. When you're deploying stuff like in Kubernetes, in particular, you can have side car containers that sit within the same virtual networks, the overly networks, and just be an implant that's controlled that does network style scanning, but also has really deep and powerful connections to the host.}
+{\pard  \line \par}
+{That are doing the data ETLs that are doing all the touching. So it can reach into those containers that are live and scan them and mess around with stuff and shut down services if it needs to. So it's basically like an anti antivirus octopus. Yeah. If no, one's registered that business in yet. That's a good one.}
+{\pard  \line \par}
+{Yeah. And it just gets in there. It can, can secure your containers when they're. But if you get the opportunity to like hit 'em at multiple points, so you're writing containers, right, right. As code. So you can scan them when they're static and then you're, you're blowing 'em up. You're running them kind of the same way.}
+{\pard  \line \par}
+{The }
+{\cf2 [00:41:00]}
+{ antivirus is scan viruses. You, you execute it in a little box and you can see how it works and see if it runs. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And okay guys, that's this interesting point then. So from your perspective, for people who are listening to this, I, cause we get, have a lot of security managers and lead decades and stuff, listening to this conversation as well, often they would ask, they would say, listen to someone on the podcast.}
+{\pard  \line \par}
+{Like Kyla sounds amazing. She's spoken about all these amazing things and I'm ready to start today. Like, what do I need to do? So I guess the question that I get from them quite often is around the team skillset. Like what, what, what should. And obviously I can understand this is different. Our application, let's not go complexity, but in general, what would you say is the like a minimum skill you would think that people would have in teams that are trying to automate a lot of stuff?}
+{\pard  \line \par}
+{\b\cf3 Kyler Middleton:\b0}
+{ . So I guess . I'll try to focus it on HIPAA, but really it's it's general because everything is. You need a foundational }
+{\cf2 [00:42:00]}
+{ knowledge, just like in a data center, there's still IPS. There's still firewalls. There's Nat. There's, there's all of the things that you're used to compute and bra and memory and Prometheus is monitoring your host.}
+{\pard  \line \par}
+{All that still applies. Cloud is infrastructure. That's flexible and dynamic, but it's still infrastructure. There's servers. There's firewalls. There's stuff. You're used to. And what was the rest of the question I got too excited? }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ no, no, that that's totally fine. I think it, it was more, the skill set that's required in.}
+{\pard  \line \par}
+{\b\cf3 Kyler Middleton:\b0}
+{ . Yeah. I have a non-answer that I really like, cuz it's tricky. Getting used to not knowing the answer. When you're a network engineer and you've been working on nexus boxes for 15 years, you know exactly how the cam table works and the buffers and how to do an SFTP transfer. In AWS, there's like 14 ways to run containers or something like that.}
+{\pard  \line \par}
+{Cuz they invent a new one each six months. So. As that stuff evolves because it is constantly being updated. That's one of the cool things you get by paying me a little bit extra for cloud is there are }
+{\cf2 [00:43:00]}
+{ new services and new features to existing services that are literally coming out every single day. So get plugged in to those service announcements, figure out what is happening, what is coming because you might be able to use it.}
+{\pard  \line \par}
+{And that agility, that speed. That's what gives you an advantage in crowded marketplaces or in blue ocean marketplaces? }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Cool. And if, I guess the finally question on this, then from a ING perspective, where can people learn about this kind of stuff as well? To your point, you mentioned when you try and go online and what was it, secure stack or stack exchange or whatever you might maybe stack }
+{\pard  \line \par}
+{\b\cf3 Kyler Middleton:\b0}
+{ over.}
+{\pard  \line \par}
+{Yes. Although it's an example of a, it's a bad example, cuz they will tell you you're dumb and like that's not helpful for anyone. Yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ But I guess there are people asking questions that are. Like, how do you ask scale security? And there might genuine people out there, but where do people go and learn about this?}
+{\pard  \line \par}
+{And maybe what was your experience of learning? How to scale security in a HIPAA compliant way, was there any documentation or any resources that you came across that were really }
+{\pard  \line \par}
+{\b\cf3 Kyler Middleton:\b0}
+{ helpful? . Security's }
+{\cf2 [00:44:00]}
+{ a hard thing to define because security is just knowing how stuff works really well. Yeah.}
+{\pard  \line \par}
+{And so when you wanna learn security, really, you wanna learn what your topic subject matter is. So you need to read the docs, you need to deploy it yourself. Me personally, I plugged into a bunch of newsletters that are really excellent. I hope you don't ask me the names cause I don't remember any of them.}
+{\pard  \line \par}
+{But something I find really useful is reading the. AWS API pages or reading the AWS Terraform provider resource pages. Because they're really simple. You're not gonna get 10,000 words on how something works. You're just getting all the flags and you can kind of interpret, you can derive what this thing does and the important decision points that you're gonna have to make.}
+{\pard  \line \par}
+{Cause those pages will say, this is required. This is required. These three are optional turn 'em on. If you want. That's really, I love the cliff notes nature of it, and then you can go do it. There's probably a lot of resources. I've written a Pluralsight page. I have a medium blog. There's tons of good }
+{\cf2 [00:45:00]}
+{ information just on Google away, but really in cloud, the power is do it go deploy it, figure out how it works.}
+{\pard  \line \par}
+{Click the buttons, break it six ways, but do it in a sandbox. Don't do it in pride and go build it. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Awesome. Thank you so much for sharing that. And that's kinda like most technical questions that I had. I've got three more questions, but totally not technical. Just for, to get you a bit more also called the fun section of the podcast as well.}
+{\pard  \line \par}
+{Yes. Cool. And we are all about getting fun having some fun, at least. So the first question that I have is what do you spend most time on when not working on cloud or te. }
+{\pard  \line \par}
+{\b\cf3 Kyler Middleton:\b0}
+{ I used to be a rock climber in a past life. When I had free time. Right now I have an eight and a half month old. Who's adorable Kennedy rose.}
+{\pard  \line \par}
+{She's so cute. She mostly sleeps through the night, except for last night. She knew I was coming on. I think And she's amazing, but when I get back to it, it's gonna be concerts and five Ks and rock climbing. It's my favorite things to do. Oh, I have seen a ton of }
+{\cf2 [00:46:00]}
+{ techies in rock climbing too. I think it's something to do with the problem solving nature.}
+{\pard  \line \par}
+{Like it's very analytical. Yeah. But yeah, I be, you should do a, you should do a survey of your listeners. I'd be curious. I would }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ definitely should do that. Cause I think I, one survey that I came across is definitely a lot of ex-military folks are in cyber security. Like a lot. It's just like, if you kind of just do a general stat somewhere, someone had served for the country.}
+{\pard  \line \par}
+{And, but I guess I can appreciate why this, that blue team kind of mentality comes in from that exact same thing. You're trying to protect the company from all the bad people or whatever. So maybe that's kind of where it comes from, but that I've definitely done that. I think I should definitely done one for rock climbing.}
+{\pard  \line \par}
+{Cause I know a few people who I'm pretty sure in rock climbing as well. So for the next question, what is something that you're proud of? But it's not only social media. }
+{\pard  \line \par}
+{\b\cf3 Kyler Middleton:\b0}
+{ Ooh, that's a good one. Over the COVID pandemic, I was going crazy. Like all of us, you know, sitting at home, watching the office for the fifth time and I }
+{\cf2 [00:47:00]}
+{ decided to rewire the house.}
+{\pard  \line \par}
+{So I read all of the electrical in my yourself, floor, myself. I just, you know, I, I know a little bit electricity enough to not get electrocuted. And I was like, let's just do it. Let's just, I'm kind of a confident person. I don't, you I'm sure you can't pick that up here. So I just went and did it and I, I redid the plumbing and the basement.}
+{\pard  \line \par}
+{I, I replaced all sorts of stuff and. All the light fixtures, just for fun. Wait, are you certified }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ in this or you just like, }
+{\pard  \line \par}
+{\b\cf3 Kyler Middleton:\b0}
+{ no, I didn't get electrocuted. I'm still here. So that that's the plus. That is definitely a plus no one should pay me for the work that I've done. Cuz you do it just like the CLA you do it wrong a couple times.}
+{\pard  \line \par}
+{Then you learn how to do it. Right. It was a lot of fun and I, I survived. We all just have to survive the COVID and then we'll, you know, still be here when it's gone one day. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ One one day, one day, for sure. And, and thanks for sharing those story as well. So, final question. What's your favorite cuisine or restaurant }
+{\cf2 [00:48:00]}
+{ that you can check?}
+{\pard  \line \par}
+{\b\cf3 Kyler Middleton:\b0}
+{ Oh, I'm really easy. Like I love my ramen. Favorite cuisine. I went to an Ethiopian restaurant a couple years ago, and I have this sort of bubbly light bread that you tear off. And you sort of thank you. Yes, I I'm terrible with names. It was incredible. And I left, I moved here to follow my partner around and I miss it all the time.}
+{\pard  \line \par}
+{It was so good. I love to eat food that is too spicy for me. And then I just am sweating and feel terrible, but it's so good. It's very addict. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Did he have the food in the, a plate maybe you shared with your partner as well? I think at least the one that did serve in Melbourne, it's like everyone on the table gets one big as plate and the bread is to spread across at like massive bread and just like all these different well, I guess some curries and some like solid, I guess not curd versions of food, I guess.}
+{\pard  \line \par}
+{But is that how you guys get it served or at }
+{\pard  \line \par}
+{\b\cf3 Kyler Middleton:\b0}
+{ least when you were. Yeah, it was family style, which is the, the USA way of }
+{\cf2 [00:49:00]}
+{ saying it. But yeah, it was just in the middle and you, my I brought my mom who's maybe listening. Hi mom, if you're there. And she was not a fan and we went to McDonald's on the way home afterwards.}
+{\pard  \line \par}
+{so she could have dinner. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Sorry, mom. Yeah. It's it's not, it's not for everyone. I I'm I'm I, I can respect that about your mom as well, but I it's definitely something in a quiet taste as well, because it's such a. Different cultural experience as well. You go through that, you know, it's like, I think funny my sometimes we talk about this and my friends were like the prison board, like where people just like have the hand in front of the plate and it's like, it's mind plate my food.}
+{\pard  \line \par}
+{And it's almost like that, but this is almost like, no, it's one big for the entire family and everyone shares it. So everyone is actively making a choice for. Am I eating too much? Are, is there enough for like the spouse or whoever's on the table with them? So I think it's definitely great. I love it. And we've had a, a couple of, I think we have had one Ethiopian guest in the past as well.}
+{\pard  \line \par}
+{So I gotta learn a lot about Ethiopia food around that }
+{\cf2 [00:50:00]}
+{ point. So that, that was kinda like the episode. And thank you so much for participating in it as well. But folks who wanna get in touch with you, where can they find you connect with you and know more about the whole regulated space automation and all the other awesome stuff you talk about as cloud security check.}
+{\pard  \line \par}
+{\b\cf3 Kyler Middleton:\b0}
+{ . I have so many places to find me. I decided to make a bookmarking site that just has it a click away for me more than anyone else. Kyler dot OMG dot. LOL is the hilariously named website that you can find me at. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And I, I double the show notes as well, but thank you so much for doing this. I really appreciate this.}
+{\pard  \line \par}
+{And thank you for join in and shout out to Steven for dropping your question as well or dropping your comment as well. Thank you so much. And Kyla, I'm looking forward to having you again. I think we had a great, I personally enjoy my conversation with you. So I'm looking forward to seeing what else Kim, we can talk about in the future as well.}
+{\pard  \line \par}
+{Hopefully you're excited as well. }
+{\pard  \line \par}
+{\b\cf3 Kyler Middleton:\b0}
+{ Yes I am. That sounds lovely. Thank you everyone. And thank you so much for having me. No problem. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right. See everyone. See ya. Peace.}
+}

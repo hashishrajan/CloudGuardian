@@ -1,0 +1,502 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red0\green209\blue178;
+\red128\green128\blue128;
+\red250\green138\blue59;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\pard  \line \par}
+{\b\cf1 Pushkar Joglekar:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ Hey Hey everyone, glad to be here. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ I'm so glad you came in, man. I think we definitely needed more. Talk more about this field. That's coming up in and around us. We just haven't really brought it into light yet. So I'm glad we could walk event, brought things to light in. So before we get into it, we want a few more people coming in.}
+{\pard  \line \par}
+{Could you share a bit about for people who may not know who you are because you've been. In my vicinity for a while and the CNCF cycle for some time as well. Could you share a bit about your professional journey into the whole cloud native security space? }
+{\pard  \line \par}
+{\b\cf1 Pushkar Joglekar:\b0}
+{ Yeah, so, I'm a secure senior security engineer at VMware Tansu, but I am also a very active in open source community, especially in the last couple of years.}
+{\pard  \line \par}
+{So. Started in Kubernetes cloud native world, about six, seven years ago, where Docker was getting a lot of visibility and a lot of adoption. So I started working on that from an end user perspective in like very large end user company. And then I was the new person in the security team of people who have been veterans in the security domain for many, many years and }
+{\cf2 [00:01:00]}
+{ awkward was something new.}
+{\pard  \line \par}
+{I was the, also, they were like, Hey, let's give this to the new person. And so they were, they basically asked me like, can you figure out about how people are using Docker? And that's how I really started worked there for several years. Got really deep into it or. Multiple years, 10 Docker led to Kubernetes then led to working and getting part of community.}
+{\pard  \line \par}
+{And it was really about, instead of making a cloud native secure for one company, why not make it for everyone? So that's all, that's why I switched to VMware, which allows me to give, do open source work as part of my day job. And so far it's been great. One year, one month. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ That's pretty awesome. So you get to work on open source tool actually, cause , that's probably a good segway into like, cause you mentioned open source as well.}
+{\pard  \line \par}
+{Cloud native is primarily open source tools as well as nothing else with open-source tool. So it's pretty awesome. You got to pay to work on open source too. So what is a cloud native so that people can get that primer and everyone's in the same level field. And when you say cloud native security, what do you really mean?}
+{\pard  \line \par}
+{\b\cf1 Pushkar Joglekar:\b0}
+{ Yeah, exactly. }
+{\cf2 [00:02:00]}
+{ So it's basically about, if I have an application, I want to run it, you could run it on a phone, you could run it on a laptop, you could run it on your refrigerator. But if there is an application that you run on a cloud, there are some things that are common across clouds, whether you're running it on public cloud or private cloud.}
+{\pard  \line \par}
+{So in those cases the way you build that application, the way you deploy. The way you continue to upgrade and update. It has some specific patterns and design that get applied and those together make an application cloud native and make a platform where you can run multiple apps, cloud, native security, that application, that platform on any of the clouds is really what cloud native security is.}
+{\pard  \line \par}
+{Oh, }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ right. And so what are some of the examples of cloud-native projects that people would have heard of, which is around them, but they don't realize that cloud native. And obviously there are a lot of projects I can imagine, but I'm sure there's a lot of common ones as well. }
+{\pard  \line \par}
+{\b\cf1 Pushkar Joglekar:\b0}
+{ Yeah. Yeah, exactly. So, I mean, few things come to mind, girly.}
+{\pard  \line \par}
+{It's like the. Thing that made it really popular. The whole concept }
+{\cf2 [00:03:00]}
+{ of cloud native is Docker over a period of several years, almost a decade and next year, maybe. And then that led to the more popular orchestrators like Kubernetes which was the first innovative, like freely valid adopted violet operated orchestrator for cloud native apps.}
+{\pard  \line \par}
+{Then we had some really. Different apps who thought about solving common problems in all the clouds by writing it in such a way that they're cloud-native so things like how she called Walt console. Adopted the microservices, architecture and design and led the way in terms of development of cloud native.}
+{\pard  \line \par}
+{And then now we have several more things like, different rent times, like container ready. Then we have, multiple tools that do service mesh. And then there are BPF tools like psyllium. So it's, it's really been growing and growing and growing, and just really started with one or two tools that caught the attention of.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Right. So, so technically when people talk, about Kubernetes, they're talking about, one of the projects of cloud native, right? They're not talking about cause main kubernetes by itself is just not, that's not the }
+{\cf2 [00:04:00]}
+{ entirety of Cloud Native. }
+{\pard  \line \par}
+{\b\cf1 Pushkar Joglekar:\b0}
+{ Yeah, exactly. Yeah. And it's easy to imagine that because it really started with Kubernetes.}
+{\pard  \line \par}
+{So, and Kubernetes continues to be kind of the foundation around and on top of which multiple other tools are being developed. But then there are so many other things that you need to. At a new app in Kubernete securely, anyone, Kubernetes is not one thing. It has like four or five different components.}
+{\pard  \line \par}
+{I, and all of that together really is going to make your whole environment cloud native. Yeah. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Because it's hard to imagine a place where it got so popped so popular that, , there are definitely roles that are coming up to specialize in that. And I think there's a lot of companies around the world that I'm adopted.}
+{\pard  \line \par}
+{ Quite widely, they're putting them into production as well. And is that kind of one of the reasons why there's are there specific roles for this? Like there's enough? I mean, there are a lot of open source projects in the world , right? This is clearly not the only one. So what do you think gave it that drive?}
+{\pard  \line \par}
+{why did people adopt this over all the other open source projects? }
+{\pard  \line \par}
+{\b\cf1 Pushkar Joglekar:\b0}
+{ Yeah, I think the , first thing I know, }
+{\cf2 [00:05:00]}
+{ if I understand your question correctly is, was. Why do people care about securing something that is cloud native? And why is it really caught attention of everyone where there are no dedicated roles for that?}
+{\pard  \line \par}
+{So for me, it, it really feels. Culmination of multiple things. So five, six years ago, I think there was, maybe not five, six, or around that time. Probably there was a first role that was published by some company, which said we want people who know Kubernetes and that kind of created a really like a cascading effect of multiple roles asking for Kubernetes and.}
+{\pard  \line \par}
+{So there is a different people are coming at it from different angles. I think one angle is like, you are going in terms of this new, shiny thing that's going to solve my problem. And some people are coming into this world saying, oh, what is the business value of adopting this? And has that option increased?}
+{\pard  \line \par}
+{And important business, critical applications started getting built and deployed on top of Kubernetes, suddenly securing that whole box became really important. And then everyone was like, }
+{\cf2 [00:06:00]}
+{ okay, we need to know people or have, have people in our team who can tell us how to secure it, because it feels like.}
+{\pard  \line \par}
+{Maybe some tool will help me, but I don't know how do I apply this tool for, my environment. I don't know whether it will cover all the threats I care about. I don't know when I'm migrating from a centralized monolithic architecture to microservice architecture, how my security is going to look different.}
+{\pard  \line \par}
+{So all of those things came together and now people like me kind of just focus on that and really have fun doing it. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ That's pretty awesome I think it's pretty cool that you get to work in a new space. I think working in open source is, was always used to be something that people do that. And they're volunteering time.}
+{\pard  \line \par}
+{Like there, they do their nine to five job. And that's basically what to what you said. It's true business value because you're working on proprietary software and office and all that, like basically, but the whole open source world has definitely opened the eyes. Actually there's more to this, like, , we should actually be contributing into how we can make this better.}
+{\pard  \line \par}
+{ Okay. Going back to this Kubernetes got really popular. There was a lot of adoption, high value business assets kind of }
+{\cf2 [00:07:00]}
+{ started being built on Kubernetes at that point in time . Obviously people started asking for Cuban. So, what does every day look like for people working in this space? I mean, like, I, it's such a new thing.}
+{\pard  \line \par}
+{I'm wondering what's a day look like in your life, I guess. }
+{\pard  \line \par}
+{\b\cf1 Pushkar Joglekar:\b0}
+{ Yeah. So I think for me, I was sort of surprised how foundations of security, really helped me getting more familiar and better at what I do regardless, even without thinking about what cloud native would mean in terms of security. So the people I worked with in the past really helped me get those basics.}
+{\pard  \line \par}
+{Right. And they used to give me time, to learn. Basic things like how PLS works and how certificates works, how CA works. And then all of those things, especially in case of Kubernetes, which is really big on certificate authorities, it all came together and helped me. So for me, that is something I try to do.}
+{\pard  \line \par}
+{Like I have to learn something every day, every day, or at least a day in my week. I like to focus mostly on learning and then. Apart from that, there are so }
+{\cf2 [00:08:00]}
+{ many things like one little bitty management. How am I managing my secrets? And then what are the problems that everybody is trying to solve?}
+{\pard  \line \par}
+{What are the new tools that are helping solve problems that are more relevant now versus maybe two, three years ago? So typically I would look at. Day job things like, okay, what it is do I need to care about, how do I assess whether this one really matters to me? How do I make sure that I can accept that fix?}
+{\pard  \line \par}
+{And then this is all useful and possible when I'm able to threat model my entire. Where I'm able to figure out, okay. In my cloud native environment, what are the threats I care about? What are my weak spots and data flows, which are really important for me. So I take a look at that, figure out what to do.}
+{\pard  \line \par}
+{And then 50% of my time goes there. The rest of it is really like, how can we make Kubernetes more secure? How can we make all the other things around Kubernetes, more secure? So I ended up working in different communities at CNCF and Kubernetes level. Get to work with people all around the world, having same }
+{\cf2 [00:09:00]}
+{ goals like me and just trying incrementally to make everything more secure than it was yesterday.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ All right. And that's probably a good segway into a question that came in from Chris. Chris Watkins has a question. What are all the parts of a cloud native architecture? It's kind of like the Mike was going to be my next question. What does an application look like in this kind of. }
+{\pard  \line \par}
+{\b\cf1 Pushkar Joglekar:\b0}
+{ Yeah. So that's a good question.}
+{\pard  \line \par}
+{I think, probably I am going to hand 100% miss some things, but I'll try my best in terms of like, kind of explain it through a story. So I have an application. I want to run it in a cloud native way. Right. What I will do is. Figured out. Okay. What image, container image. I want to package it in. So I would create a Docker file and write everything that I need in that Docker file.}
+{\pard  \line \par}
+{And then build that container image. That's going to run my application. Now I have that image. If I send it to. And see a, you run this command, it will run on their machine the same way on my side. So the next thing is now I want to run it in production. Everyone is happy with this app image. So I will push it into a container registry, which is basically, like a }
+{\cf2 [00:10:00]}
+{ laboratory of container images where you can pull a book.}
+{\pard  \line \par}
+{And put it back or pull a book, take it home and then bring it back in a few days. So similar to that, it's you push that image. It goes into the registry and now whichever environment has access to that. Registry can take it, and basically by pulling that image into any cloud server. So if you work in any.}
+{\pard  \line \par}
+{You and you go there and do Docker pull it, we'll pull it. So now the problem is like, I can't keep pulling my images wherever I went to run it. So I need some thing. Make sure that my images and containers run in a way where I don't have to worry about if it goes down for some reason. So that's where orchestrators come in, where things like Kubernetes give you guarantees saying that, okay.}
+{\pard  \line \par}
+{I will run your application. In three different notes where one instance of your application each will run. And if one node goes down, I will make sure I'll find another node that will run the instance that has gone down. So with that guarantee, now I know }
+{\cf2 [00:11:00]}
+{ my obligation is always going to be on.}
+{\pard  \line \par}
+{My obligation is up. But nobody can access it because it's running in a private network. So that's where load balancers come in and things like service mesh come in, where if you need to talk to each other. So once the application is accessible to everyone, then on client side, you start accessing it and creating business value.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ All right. Okay. So kubernetes is basically helping you scale the architecture in a lot of ways in a way that it's reliable and aware highly available. }
+{\pard  \line \par}
+{\b\cf1 Pushkar Joglekar:\b0}
+{ Yeah. Yeah, exactly. It's sort of like, I know for sure if I tell Kubernetes something, unless Kubernetes cluster itself goes down. I know for sure.}
+{\pard  \line \par}
+{It's going to do what I told it. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Okay. So just to extend that, analogy then to, I guess to Chris's point is I guess where the question is coming from. So from a security perspective, the fundamentals were not really changed them. Like, so it sounds like apart from the addition of Kubernetes being the orchestrator, there are other parts, obviously like what you mentioned with Docker container or like the things that would be images, but from a security }
+{\cf2 [00:12:00]}
+{ fundamental perspective, it should still be.}
+{\pard  \line \par}
+{I guess it's still protecting the application. So you mentioned start modeling earlier than boarding supplies. Once you have builders, I guess there's an architecture component as well, where you kind of think about identity authentication, authorization, encryption, back governance, restore, all that. So cloud native was just one component of all of that or cloud native answers to most of them.}
+{\pard  \line \par}
+{And we just look after identity and like, is there a separation like that as well in that. }
+{\pard  \line \par}
+{\b\cf1 Pushkar Joglekar:\b0}
+{ Place where this sort of feels different compared to monolithic architecture and securing. That is some things that we assumed were static or not. Change a lot in this architecture. So as an example, IP address in a monolithic static architecture, I always do.}
+{\pard  \line \par}
+{My note is going to have this IP address. So if this particular node or a server wants to talk to another node or server, and there is a firewall in between, I could write a rule in the firewall saying these two servers are okay to talk to each other now because I'm running }
+{\cf2 [00:13:00]}
+{ multiple applications on my.}
+{\pard  \line \par}
+{And those applications get assigned IP addresses dynamically. My rule will not work if I just applied based on the IP address. I know at that time. So those things change and also the separation of duties, and separation of concerns apply a bit differently. So if I am a platform provider for Kubernetes, It's a worry or concern is going to be, how can I deploy Kubernetes cluster in the most secure way possible, but I will not care about whether your application is secure and I will let you decide how you want to secure your application.}
+{\pard  \line \par}
+{And same thing, but in the opposite senses, if I am an application owner, I'm going to make sure my application is more secure and I'm going to zoom and hope that you as a provider are doing a good job of securing the cluster. I'm running my application on. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Interesting. So because the, the, the finding is W one of the things that I thought of and I had read, cause this question was, I always meant we have so many }
+{\cf2 [00:14:00]}
+{ products in cloud native man.}
+{\pard  \line \par}
+{It's like we had a topic on William Morgan came in last week and he spoke about. So especially, and then there is capabilities and I'm sure there's like EBP, EBP F is like, then there is the OPA, like there's so many projects in the car. How does this all? Cause I, I imagined when you would answer that question about learning architecture in my head, I'm going, you talk about service mesh.}
+{\pard  \line \par}
+{This is how heart talks to OPA, then there's the kubernetes. And so is that nor how these applications are built? Like, is that just like maybe I'm misinformed in. }
+{\pard  \line \par}
+{\b\cf1 Pushkar Joglekar:\b0}
+{ Yeah. So all of these tools are helping solve a problem, basically. So if, if we take a look at service mesh, I now have instead of 10 monolithic apps, I now have a hundred apps.}
+{\pard  \line \par}
+{Okay. All of them want to talk to each other and they are all reading in different languages. I don't know how I'm going to make sure they're always mutual TLS enabled, and they are always communicating through encryption channels live on TRS. So what service mesh really allowed us to do is run a sidecar along with your application, and we will take care of that problem for you.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ What }
+{\cf2 [00:15:00]}
+{ that would be inside your board? }
+{\pard  \line \par}
+{\b\cf1 Pushkar Joglekar:\b0}
+{ Yes. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Oh, so you still need to better as a platform there. And on top of that, you will have service mesh, which will do that mutual TLS spot. And then there will be over to do the authorization policies as well. }
+{\pard  \line \par}
+{\b\cf1 Pushkar Joglekar:\b0}
+{ Yeah. So the OPA could work with, or without service mesh where now I want to figure out even for.}
+{\pard  \line \par}
+{Securing Kubernetes. Sometimes I want to make sure I want to allow some parts. I don't want to allow some parts. So in that case, you can also use OPA saying if you're running an application that wants to run as privileged part, I'm going to disallow it as a platform provider and let to your point in a service mesh.}
+{\pard  \line \par}
+{People could decide to use OPA in perspective for authorization where service, you can talk to service B, but I don't want it to talk service. See, so I'll define that policy in one place. And then the good part about these architectures is once I defined that policy, I can apply it across multiple clusters.}
+{\pard  \line \par}
+{So I have to define it once and then it can be applied across multiple clusters. So it makes it }
+{\cf2 [00:16:00]}
+{ easier for us to define what we want. And to the point about IP addresses, the identities now is not static. So my IP address is always going to be different. So now I have to define my own workload identity using things like spiffier Spire, for example.}
+{\pard  \line \par}
+{And then they allow me to help. Identify myself and authenticate myself by myself. I'm saying I'm an application. So if I'm an application, I will say, Hey, this is my identity. This is the proof of it. And now you, if you accept this proof, you should allow me to do whatever somebody has defined for this application to be allowed to be done in this question.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Right. I think I, I'm pretty sure people are going to rewind and go back to this particular part of the interview again and again, cause this is the most confusing part about the little cloud native space where you almost always hear, because if you look at the landscape project thing that CNCF has, man, it's, there's like at least 50 applications in there and you're going, do I have to use all of that or, oh, by the way, hopefully that answers your question, Chris.}
+{\pard  \line \par}
+{Thanks that, Yeah, }
+{\cf2 [00:17:00]}
+{ I, I look at that and go, do I have to use all of them to have a cloud native run application, but what I'm hearing from you is actually you don't need all of it. You just need certain components of it. And to what you even said in the beginning of the interview, if it solves a business value, maybe that's when it would make the most.}
+{\pard  \line \par}
+{Would }
+{\pard  \line \par}
+{\b\cf1 Pushkar Joglekar:\b0}
+{ that be right? Yeah, exactly. Like my, at least my perspective always is if something is going to solve a problem, I will use it otherwise I don't need it. And there could be situations where I don't know a problem exists. And then I will just give myself grace to accept that fact that I made a mistake.}
+{\pard  \line \par}
+{And then use that tool later when. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Right. So maybe, and now if I ask you the same question again with the whole what are some of the main components when people think about application, which is a cloud native application, like fresh off, may it basically some widget, you and I just came up with the next facebook.com idea, and we're going to build that today.}
+{\pard  \line \par}
+{And we wanted to build that in Kubernetes I said, why would I even do that? Like out of curiosity, what makes people go for. Cloud }
+{\cf2 [00:18:00]}
+{ native tools will build. Cause it's not that you can't scale. I mean, we've been scaling for a long time, right? I mean, it's not like Kubernetes, is this, Einstein equals MP square kind of formula?}
+{\pard  \line \par}
+{Or is it the, that kind of a }
+{\pard  \line \par}
+{\b\cf1 Pushkar Joglekar:\b0}
+{ thing? Yeah, I mean, so it, it really is something, potentially contrasting in terms of whoever you ask people will have different answers for it. My perspective is that if I don't have access to a cloud, I did could not even see in real life how something skills. But if I have Kubernetes running, in, let's say my Docker desktop on my laptop, I can run multiple load cluster there and see things actually work and scale as I want.}
+{\pard  \line \par}
+{So it really sometimes the word is you misused, but it really democratized the scaling and the performance of how you can deploy something. And it will automatically scale, regardless of which cloud you're using. That's I think in my opinion, the best reason to use Kubernetes, where if you don't know where you are going to end up deploying your cluster or deploying your }
+{\cf2 [00:19:00]}
+{ application, I think with Kubernetes will help you deploy it anywhere where a cloud support school, genetics cluster.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Okay. So I get this now. So it's basically, I mean it would it be cloud-agnostic than I used to. Okay. So that's that kind of sounds like great point. So I should definitely be able to build my entire application as a whole. And for some reason I started in AWS, but I started to hate it and I'm just going to go to the next guy and I go to Azure or, or I go to GCP or IBM or Oracle cloud, and I'm filling with.}
+{\pard  \line \par}
+{The application exactly the way I built it on the first part and move it to next. }
+{\pard  \line \par}
+{\b\cf1 Pushkar Joglekar:\b0}
+{ Right, right, exactly. I it's all, I think software throughout multiple years, even before I was born, has been about creating abstractions that are easier to build on top of, so these days, like we don't even think a lot about current code or compilers alone, most of the software engineers.}
+{\pard  \line \par}
+{So similarly, like if I don't have to worry about what cloud I'm using and how do I scale it on this particular cloud. Then it just makes it easier and creates business value where I don't have to figure }
+{\cf2 [00:20:00]}
+{ it out and teach multiple engineers how to do something. And then there, it is easier to explain the business value out of it.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ So coming back to the question. So I understand how different a cloud native application would be. I kind of also understand that all these different components of service mesh and everything else is going to open everything that's going to go in.}
+{\pard  \line \par}
+{So if I were to kind of, draw a line on the sand with, okay, if I weren't cloud agnostic and I probably need scale orchestration in a way that I'm able to do a lot more things in a scalable way. I go for cloud native. So at what point would I go for something like an Amazon EKS or Azure Kubernetes service as well?}
+{\pard  \line \par}
+{So what role do those guys play in this? }
+{\pard  \line \par}
+{\b\cf1 Pushkar Joglekar:\b0}
+{ Right. So remember earlier in the discussion, we said the separation of concerns. Problem is different here, where I, as a cluster, want to worry about securing my cluster. I will assume you are doing a good job of securing your application and then vice versa for somebody who's an application owner.}
+{\pard  \line \par}
+{So if you're }
+{\cf2 [00:21:00]}
+{ using something which is running Kubernetes in the cloud, and you're just going to get a URL, an endpoint where you, point to your cube CTL, then I'm assuming that. Cloud a provider who is providing a me a. Kubernetes cluster is going to secure that cluster, right school. If I don't want to run my own cluster, then there could be good reasons for it.}
+{\pard  \line \par}
+{Then I would use something that is managed by somebody else where my only responsibility is my application and my pod. And then as long as I see. I can use it. And then if I need to build things so like service or apply things like service, special network policies on top of it, I can do it as long as the cloud supports it and the cluster underlying supporting.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Interesting. Okay. So that brings me to the next question then, I guess, so if we are able to do that and I guess Amazon takes care of everything or an Azure takes care of it. The only draw to say being purely cloud native. And when I say pure cloud native, I mean, you build in cloud in Kubernetes containers and just packaging it and moving it, grip it between different applications.}
+{\pard  \line \par}
+{\cf2 [00:22:00]}
+{ Then you would probably only do that if you don't want to be responsible for the platform. So I imagine the whole security responsibility kind of transfers over to Amazon or Azure as well. If you go for services like. At that point, we would be able to say, if we are using a traditional one, you kind of still have to think about backup disaster recovery and all that stuff would still be your responsibility.}
+{\pard  \line \par}
+{But if you use the Amazon or Azure or Google cloud version, they take care of all of that. Even the G the Google cloud wasn't, which is, I guess they possessed our it's their project, right. That started off. Go Kubernetes. }
+{\pard  \line \par}
+{\b\cf1 Pushkar Joglekar:\b0}
+{ So Kubernetes did start in Google, but then now it's more like a neutral project managed by separate foundation, probably worth exploring that more.}
+{\pard  \line \par}
+{But to your point, the ideas of a backup and recovery and making sure that, I'm not losing my data or if a node goes down, I'm sure. The new node is going to take its place. Those things get taken care of by the cloud, but in simple terms, With very minor changes. My deployment }
+{\cf2 [00:23:00]}
+{ DMS, which is my definition of how my application should run in Kubernetes is not going to change a lot, regardless of which Kubernetes provider I'm going to deploy my application.}
+{\pard  \line \par}
+{And so I think that's the biggest benefit you get by having that abstraction layer instead of running. Just on any cloud and then you sort of have to stick with how they define their application. Right? }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Cause I, I sometimes describe this thing as a, so the people you don't have to talk about apple, iPhone, and Android.}
+{\pard  \line \par}
+{I familiar explain this like that. If you want to be in control of your OS and I dunno, just like hybrid pulled apart and everything, you probably would go down the path of I'm going to use Kubernetes to build all this and do it from scratch, but you don't really care about the oil. You just want to use your phone and you just want to Android or OSU doesn't really matter.}
+{\pard  \line \par}
+{Whichever one you go for, then you go for these Amazon Azure and Google cloud kind of services. Would that be a good analogy to kind of put this across for people who may not have. }
+{\pard  \line \par}
+{\b\cf1 Pushkar Joglekar:\b0}
+{ It's it's very similar. Another analogy I've heard recently is buying your own house and renting an }
+{\cf2 [00:24:00]}
+{ apartment in a big building where you don't have to worry about.}
+{\pard  \line \par}
+{Plumping gutters, electricity, gas, anything like that, and making but, in case of if you're owning your house, you have to take care of this. But then the benefit is you get to play around with the land you have, and you can do whatever you want there. But in case of an apartment, you're kind of limited with in scope in terms of what you can do, but you get multiple different advantages.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yup. Yup. Fair point. Cool. I want another question from Rama here, from architecture point of view, where do we start? Is it from standpoint, then other layers like service special OPA, et cetera, or should we step up, start from a bigger picture and drive deeper into each layer. If it's like a chicken and egg situation to me.}
+{\pard  \line \par}
+{\b\cf1 Pushkar Joglekar:\b0}
+{ Yeah, it's stuff like, I'm assuming this is more from security architecture, point of view. So what I would say is like, forget all the tech stack and tools and everything , we should ask, ourselves and the team we're working with, what do we care and what are we worried about going wrong for my application?}
+{\pard  \line \par}
+{So if let's say. I }
+{\cf2 [00:25:00]}
+{ am. Social media website, like you were suggesting earlier, I care about availability. I want to make sure it's always up. I want to make sure like the login and password credentials are secure when user is trying to log in. So I want to make sure, like, I want to do mutual TLS and I want to make sure it is never.}
+{\pard  \line \par}
+{Un-encrypted in my cloud. So then I would want service mesh. So that's an example. And then things like if because I want something always available, I would want things like Kubernetes, because then I will have some guarantees of it running. Always being up based on what I have defined and from security perspective, you would want to figure out in this case, whether my data is secure and in those cases, then you would also want to make sure you have disaster and backup recovery.}
+{\pard  \line \par}
+{So for those, then you will use cloud native tools that provide that. So. Like I said earlier where instead of, because the tech stack is so huge and the landscape is so vast, it's so overwhelming and confusing. So just focusing on what I care about, what my }
+{\cf2 [00:26:00]}
+{ team cares about, what are we worried about will automatically lead us to a tool that might solve that problem.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Right? So instead of taking a technical approach, because go back to the fundamentals of security, And they take it from that. I think that's probably like 20. }
+{\pard  \line \par}
+{\b\cf1 Pushkar Joglekar:\b0}
+{ Yeah. And if we have to go like one level deeper here, I would define what I care about, what I worry about into different categories of threats. So I use my.}
+{\pard  \line \par}
+{Threat modeling, a mechanism called stride, which is puffing tampering, repudiation information, disclosure, denial of service and elevation of privilege. So I try to categorize what I care about, what I worry about into those six and then figure out, okay. These things matter to me. And then. Which category I really care about among all of them and focusing on that and then go from there.}
+{\pard  \line \par}
+{ I also wrote a perspective of how to secure Kubernetes with those categories in mind, in one of the books with Nigel as well. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Oh yeah. I definitely give a shout out to the book as well. A Nigel Poulton right. Yeah. , so that entire }
+{\cf2 [00:27:00]}
+{ thing the stride structure of doing chart modeling, that totally works in this context.}
+{\pard  \line \par}
+{What are some of the examples of each one of these components or the curiosity? If you can, if I may bring in the sport, are there any examples that you can think of for each one of those Friday? }
+{\pard  \line \par}
+{\b\cf1 Pushkar Joglekar:\b0}
+{ Yeah. So let's take, like, if I'm threat modeling using slide four, Kubernetes, and we picked spoofing, I would want to make sure that if I'm using cube CTL to access my cluster, I know.}
+{\pard  \line \par}
+{The person who is saying they are accessing the cluster is the same person actually accessing the cluster. So for those things, I would ensure that I have a mutual DLS, so where API server can authenticate itself. And me as a user can authenticate myself using some level of. Authentication.}
+{\pard  \line \par}
+{And then you can have plugins, like at that provider where you can say, I will use my iLab credentials to authenticate myself to APS server and then APS contacts with your iLab directly and says, Hey, somebody saying they are this, can you verify? And then it verifies and gives you a response back. So that would be spoofing.}
+{\pard  \line \par}
+{And then we can go on like for other fibers. Well, }
+{\cf2 [00:28:00]}
+{ if we have time }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ think. So the only one that I can think of, which I would, I'm curious about is the I integrity is just encryption, I imagine. }
+{\pard  \line \par}
+{\b\cf1 Pushkar Joglekar:\b0}
+{ Yeah. You mean a tampering or information disclosure? }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Well, yeah, so maybe I should, a good point would be if you have one example for each one of them, if you're, if you don't mind, because it's so interesting looking at a cloud native application, and I don't know how many people have done threat monitoring for it.}
+{\pard  \line \par}
+{So I'm just curious. So we give you examples out there. As as well, if you're okay with that. Yeah, }
+{\pard  \line \par}
+{\b\cf1 Pushkar Joglekar:\b0}
+{ yeah. Go for it. Let's do that. So tampering and this really applies not only for Kubernetes. Any application that you're running on top of Kubernetes, but I'm just using Kubernetes itself as an example of how to apply it.}
+{\pard  \line \par}
+{So in case of tampering, it would be, I have my data store in Kubernetes where I'm storing everything in at city. I want to make sure anything I'm storing, including. Configuration my deployment configuration my secrets, my network policies are not tempered in a city. So how do I prevent that? So one thing is, as an application owner, running something on Kubernetes cluster, I never need access to }
+{\cf2 [00:29:00]}
+{ my.}
+{\pard  \line \par}
+{So restricting that access would be a good idea. And then having again, mutual TLS between a city and APS would be a good idea where nobody else randomly can access it. CDN start tampering with data. Then we have a reputation where if I'm running something in Kubernetes and I'm doing some activity as a platform provider, cluster owner, I want to make sure that I have.}
+{\pard  \line \par}
+{Audit logs of every action done on my cluster so that if something went wrong, I can figure out which event caused it and who triggered that event. So we have Kubernetes audit logs that give answers to what, where when, and then based on that, you can figure out the answers to how and why. So having those audit logs enabled with the appropriate rules would be a good idea to prevent non-repudiation.}
+{\pard  \line \par}
+{Yeah. Then we have information disclosure where again, I am storing, let's say all my secrets in Kubernetes by default, Kubernetes secrets are not encrypted. So that means that is going to be bad idea if we keep it that way. So then applying things like }
+{\cf2 [00:30:00]}
+{ encryption config. Deciding to use KMS to encrypt secrets in a city or using a completely different secret provider and using that to store your secrets instead of storing it in Kubernetes, that could be one example.}
+{\pard  \line \par}
+{Then we have two more left. So denial of service. So denial of service could be now. I have my parts and accidentally I have injected a four bomb in my application. So what Fort bomb basically does is it will start eating up your. The resources on a node. And if it keeps going, it will exponentially keep eating up your resources on our node.}
+{\pard  \line \par}
+{And then eventually your node will run out of resources and it will start affecting other parts. So for those things, we can do things like applying requests and limits for pod, where we are able to say, okay, this is. The max limit, after that, we're going to kill your report. And then in the new one, we'll spin up.}
+{\pard  \line \par}
+{And then once this happens multiple times, then the cluster provider can say, Hey, your part is being killed multiple times. Something is wrong. And then last one elevation }
+{\cf2 [00:31:00]}
+{ of privilege is something like I am an application owner. I don't want access as a owner of my cluster where I'm cluster admin. So for those having our back policies.}
+{\pard  \line \par}
+{That linked to your ldap groups, and then you're able to give the restrictive access to your cluster so that multiple different teams can share a cluster and still be able to see a specific point of view in your cluster instead of seeing everything on a cluster }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ also, by the way, thank you for doing that.}
+{\pard  \line \par}
+{Cause I think I, I'm pretty sure I'm going to cut a snip or that's fried example. It would definitely be something that people who go back to court often. Thank God it's gone for me as well saying. We need to bring Pushkar again. So much to learn from him so that people are definitely getting value from this event.}
+{\pard  \line \par}
+{To your point, we've applied the threat model. You've done stride. And now we even have examples of what could be as stride component that could go into this as well. Is there sounds like, I mean, because the way you explain it, the sound make it sound so easy as well.}
+{\pard  \line \par}
+{I'm presuming there's some challenges with people come across in this space. Like what do you hear people struggling with the most in this space? In the }
+{\cf2 [00:32:00]}
+{ whole cloud native security space? }
+{\pard  \line \par}
+{\b\cf1 Pushkar Joglekar:\b0}
+{ Yeah, I think the first thing I would say is. Jumping into securing something without spending enough time to understand it.}
+{\pard  \line \par}
+{So in one of my talks last year, I maybe a couple of years back, actually, I said that you can secure something if you don't under. So I still believe that, and I was lucky enough to be given time to understand and learn something that was new. I was literally asked until you can explain it to me so that I understand it, who has never read anything about it, spend as much time as you want.}
+{\pard  \line \par}
+{So that really helped me. So once I understood what Docker is, what Kubernetes is. Bart is, or what are the different components in Kubernetes then? After that I was able to poke holes into it where I was able to see, oh, what if this happens? Or what if that happens? If this happens, do I care about it?}
+{\pard  \line \par}
+{And that's where then slowly, slowly I started figuring out, okay, this is where my thread part is going to look like. So I really spent a lot of time reading. Talking to people who know more than me just }
+{\cf2 [00:33:00]}
+{ asking questions and trying to understand it, taking notes, and then trying to figure out how to secure it.}
+{\pard  \line \par}
+{I think if that's the common thing I've noticed, like people jumped way too ahead and it's sort of similar to doing advanced calculus when we're just learning algebra. So. Remembering to do that and just being patient with yourself, like, okay, I don't know everything. So I have to start from somewhere. So let me start from my understanding what I'm trying to secure.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yep. That's a good point. And I think probably that's a good segue into the question that Vineet had much earlier. What do you recommend as a cloud native security pathway for business? Because it sounds like there's a, to your, what you were saying as well with our nose diving into something that you've run this.}
+{\pard  \line \par}
+{Where do you recommend for people who may be listening to this and going, oh man, I'm so inspired. I want to be working on open source. Our capabilities become like a cloud native security engineer. What do you recommend as a path? }
+{\pard  \line \par}
+{\b\cf1 Pushkar Joglekar:\b0}
+{ Yeah. So there are really multiple paths. It depends on what you like to do yourself.}
+{\pard  \line \par}
+{So if you are more like a hands-on learner where I just want to dive deep and }
+{\cf2 [00:34:00]}
+{ run something in Kubernetes, then there are multiple. YouTube videos, blog posts, documents in Kubernetes website itself, which allow you to do something very quickly, minimal, requirements like just having Docker running on your laptop is most of the times.}
+{\pard  \line \par}
+{Good enough. And then if , okay. I like to watch videos more and learn from it, whereas this, reading books and reading stuff, then you can focus on that because the good thing of being involved in a vibrant community like this one is there is so much to learn. And so many resource materials in different formats, including things like this podcast where you will just can listen things and probably learn a bit.}
+{\pard  \line \par}
+{So figuring that out is important and. If you, and then also at the same time, if you feel like, oh, I don't know anything, I should just keep learning for like six months, seven months, eight months. That's also a bad idea because then you sort of create your own bubble and don't figure out what really matters.}
+{\pard  \line \par}
+{And sometimes you go too deep into something or remain too shallow at some level. So once you feel like, okay, I'm getting a gist of when maybe }
+{\cf2 [00:35:00]}
+{ I know 50%, 60% of what I wanted this dive into some open source communities. Cloud native computing foundation has a slack that's open for everyone. Kubernetes community has a slack open for everyone, and then just try to see different channels that interest you.}
+{\pard  \line \par}
+{And then. Watch different KubeCon videos from past events. All of them are in YouTube. Everything, all of them are free. There is no payroll or anything like that. So you can search anything. You want pick a talk from there, read it or watch it and read anything that they have linked. And then slowly and surely you will start to get hang of it.}
+{\pard  \line \par}
+{And once you started getting hang of it, that's the right time to ask. Do I want to keep going or do I want to do something else? And once your answer, then you can keep going or you can skip this because this is not the only great thing happening in the world. And you might find something that you might be more successful in.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ That is great advice as well, by the way, I will say because there are so many projects in CNCF as well. They be a full spectral starting off in kubernetes as well, because that sounds to be the foundational layer to a lot of cloud native and the better off }
+{\cf2 [00:36:00]}
+{ starting there as a project.}
+{\pard  \line \par}
+{Or is that too big a project to start fellows? Should they should go for }
+{\pard  \line \par}
+{\b\cf1 Pushkar Joglekar:\b0}
+{ something else? Yeah, I think in my personal opinion, it's. How to start on a project that's cloud native. If we don't have a basic understanding of Kubernetes, it doesn't have to be at a level where you can write a hundred page book about Kubernetes.}
+{\pard  \line \par}
+{But if you can submit up in a diagram and a one pager, I think that's good enough information to know first. And then you can pick a project based on whatever your incentives are to start working on it. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Awesome. All right now. Thanks for that. And I think you have answered Vineet's question as well. So thank you for that as well.}
+{\pard  \line \par}
+{Actually, that makes me think, just to summarize question where he's asked question is the bar. Oh, become a good engineer. Good cloud engineer with doubt having experience in programming before. So maybe taking a step that step further, say for someone wanted to be a cloud native security engineer. Does he, or she, or whoever is the spine looking at this question and going, oh yeah, of course the question.}
+{\pard  \line \par}
+{Do they need to have a programming knowledge? Like, do they need to know some programs? }
+{\cf2 [00:37:00]}
+{ Have }
+{\pard  \line \par}
+{\b\cf1 Pushkar Joglekar:\b0}
+{ This is one question that gets asked a lot in community as well. And I have met people who. Cannot program be very successful in cloud native space by just, bringing their strengths. So some people are really good writing docs and reviewing docs, and they just ended up becoming part of the different, special interest groups in Kubernetes, which focus on docks.}
+{\pard  \line \par}
+{Became really great at it. Then some people really are good with people, and they are able to bring people together to solve problems and then make Kubernetes better and more secure. So people did that. And some people were like, I don't know programming, but I want to get into this space. And I'm going to give myself time to learn programming and start.}
+{\pard  \line \par}
+{Yeah, there have been people like that as well. So it's really up to you. Like try it out for a few months. See if you like it, see what interests you more. What makes you sort of excited and keep doing it until you feel like, oh, I've done enough. And then do something. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah, actually, that's pretty cool. And when you say programming is what, like calling out, you're not talking about Java }
+{\cf2 [00:38:00]}
+{ or you're talking more about scripting languages, is that right?}
+{\pard  \line \par}
+{Or Kubernetes native command }
+{\pard  \line \par}
+{\b\cf1 Pushkar Joglekar:\b0}
+{ language, I guess. Right. So a large majority of cloud native apps are written in. The , most of the people who use Kubernetes will end up using something called the YAML , which is sort of a scripting language, which allows you to define how to run your application.}
+{\pard  \line \par}
+{So. Always have to be very good with data structures and algorithms to even contribute to Kubernetes, as long as you're either willing to learn or do something that you already are good at with some , many programmers are not good at then that is a very valid path to success. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Awesome. Well, thank you.}
+{\pard  \line \par}
+{And hopefully that answers your question as well. Thanks for that question by the way. }
+{\pard  \line \par}
+{Cloud Security Podcast is going to be in San Francisco in June. I think so, but thanks so much for this man. I really appreciate the time that you spent with us as well. I know we are on the hour as well, so where can people reach out to you?}
+{\pard  \line \par}
+{So if they wanted to kind of have follow up questions and, or know more about this. }
+{\pard  \line \par}
+{\b\cf1 Pushkar Joglekar:\b0}
+{ Yeah. So I have my website, which I can maybe put in the comments. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Okay. }
+{\pard  \line \par}
+{\b\cf1 Pushkar Joglekar:\b0}
+{ Sounds good. So I have my }
+{\cf2 [00:39:00]}
+{ website, first name j.github.io, where you can find all my social media handles. But I'm more active on Twitter than LinkedIn.}
+{\pard  \line \par}
+{So if you want to reach out, just tweet at me and I try my best to. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Awesome. And thank you so much for doing this for us as well. I hope you have a great session, so thank you. I can't wait to have you again. And you just mentioned it that great session. Thank you again. And for everyone else, we will probably see you next weekend for another episode of the cloud native security, which is running cloud native security month.}
+{\pard  \line \par}
+{As in support for KubeCon and CloudNativeCon, which is happening next month in may, it's happening in Spain. But you can definitely hang out there virtually and yeah, I think I'll be in London next week. So that next week livestreams vary from London. So let's see how that pans out. But. I will keep you posted and I'll see you folks in from, from London next week.}
+{\pard  \line \par}
+{And hopefully we can have Pushkar as well next time, because definitely there are a lot more questions need to get answered. So thanks so much for your time, everyone. And we'll see you next episode next weekend. And I will see hello from }
+{\cf2 [00:40:00]}
+{ I'll say hello from London next week. Right? Thanks everyone.}
+{\pard  \line \par}
+{Thank you, sir. }
+}

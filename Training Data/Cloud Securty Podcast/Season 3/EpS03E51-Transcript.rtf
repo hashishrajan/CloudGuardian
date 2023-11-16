@@ -1,0 +1,576 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red216\green34\blue146;
+\red128\green128\blue128;
+\red250\green138\blue59;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\b\fs48 Nandesh Guru\b0}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ Did you know supply chain and ransomware is a thing in the cloud as well, especially in AWS. There are a lot of examples out there, and this is exactly what we spoke about in this episode of Cloud Security Podcast. We had Nandesh Guru, who's an engineering manager in VMware. We spoke about common examples of supply chain attack, ransomware attacks in the AWS contexts, and how does it affect the broader cloud space as well in terms of Azure, Google Cloud, broader public cloud.}
+{\pard  \line \par}
+{We also spoke about how you can start working towards resolving these things, or at least getting an understanding of how you can work towards not having a supply chain attack scenario in your organization, or probably even a ransomware, attack scenario in your organization. Then we spoke about the cloud security posture management space, how that's gonna evolve for people who remember the four generation of CSPM video that I did last year.}
+{\pard  \line \par}
+{We spoke about the fifth generation and possibly the sixth generation . What does a customer expect from a cloud security posture manager? They want a holistic cloud management platform and not just. Cloud security posture manage tool that tells you this is a cis benchmark you should apply to.}
+{\pard  \line \par}
+{Now this is a jampacked episode. Again, great discussion with }
+{\cf2 [00:01:00]}
+{ Nandesh. We spoke about the challenges that are there in the current space from CSPM perspective. CIEM, what is CSPM and how CNAPP kind of took into a place as well. And if you know someone who probably is looking at, in getting information about supply chain ransomware attacks in the cloud context with some example.}
+{\pard  \line \par}
+{Definitely share the episode with them, and in case you're here for the second or third time, definitely consider following, subscribing to our socials. We talk about cloud security every week on our podcast, YouTube, LinkedIn, Twitter. I can keep going on about social media and the audio podcast platforms.}
+{\pard  \line \par}
+{If you are findings valuable, it really means a lot of any share, some feedback. So thank you for everyone who shares their feedback on shares, the episodes on social media as well. It really means a lot. I hope you enjoy this episode with Nandesh Guru and. See you in the next episode of AWS Security in continuation of our AW security month, which is November, 2022 in celebration of AWS re:ivent}
+{\pard  \line \par}
+{by the way, if you're coming to AWS, re:ivent, Cloud Security Podcast is coming to AWS re Invent as well, and we are releasing a new project. If you haven't seen that yet, Ill, leave a link for the teaser for }
+{\cf2 [00:02:00]}
+{ the new project that we have announced for AWS three Invent as well. But otherwise, enjoy the episode and I'll see you next episode for AWS Security on the Cloud Security Podcast.}
+{\pard  \line \par}
+{See you next episode. }
+{\pard  \line \par}
+{\b\cf3 Nandesh Guru:\b0}
+{ By bringing developers and security together, you don't have to choose between speed and security. Develop fast, stay secure.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Welcome Nandesh thanks for coming in man }
+{\pard  \line \par}
+{\b\cf3 Nandesh Guru:\b0}
+{ thank you for having me. Long time listener. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I know, and I'm so glad you came in, by the way. You have the OG mug. I've got an OG mug as well, man. Thanks for coming in. Thank you. Well, for people who don't know you, I imagine there's only one or two people in the crowd who probably don't know you. If you can share a bit about yourself, how you are, where you are, and what }
+{\pard  \line \par}
+{\b\cf3 Nandesh Guru:\b0}
+{ you've been up to. Yeah, sure. Before I get into that, I wanna just just mention a couple of things that I've been long time listener.}
+{\pard  \line \par}
+{I've been listening to your episodes since the early days, 2019, I believe end of 2019. You started 2020. And I remember this app they used to use to record the podcast. , you mentioned that app. I'm like, guy guy's amazing. He wants to inspire the }
+{\cf2 [00:03:00]}
+{ community. Like he wants to show how easy it was for to record a podcast and you can do it.}
+{\pard  \line \par}
+{And that kinda like, that showed me a lot. They want to give back to the community, want to get, you know, getting inspired. So thank you for that. Yeah, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I appreciate them and thank. . }
+{\pard  \line \par}
+{\b\cf3 Nandesh Guru:\b0}
+{ So about me, my journey into cloud security wasn't conventional. I had yet to gain experience in cloud security, and that didn't happen until 20 18, 20 20.}
+{\pard  \line \par}
+{But before all that I was I trade back in engineer. I build distributed systems. And in 2016 I went to this I joined a startup called CloudCoreo. And I went it was mainly around helping customer with the cloud security space. And I go into the interview, I talk to the CTO, really nice guy, amazing mentor of mine.}
+{\pard  \line \par}
+{And he mentioned about this. Big problem in cloud security. this cloud space and security. This is 2016 we're talking about. I just took a leap of faith, joined the startup, and then I got to really understand the space and back then cloud security.}
+{\pard  \line \par}
+{Space was so nascent, was so new. No one even knew what a cloud security, posture management supposed to do, yeah. People were }
+{\cf2 [00:04:00]}
+{ doing some basic security check, like , looking at a property on S3 bucket its, public or not, or security group support open to the world things like that.}
+{\pard  \line \par}
+{Something really basic right. But the approach this startup was doing, I think we were the first one to do that, is we took all that config from the cloud assets and model has a graph db like a graph model, so that was really cool context and I'm really proud of being part of that journey. Sort of inventing that. And this is what sort of led to us VMware acquired us in 2018. So that was again, a really cool experience to go through that acquisition, that transition, that the journey being fourth engineer on the team, really small team, so, Basically I had the front row seat to do everything happening.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So you were part of the whole you know what, people nowadays wanna have that visually graph thing , so probably one of the first folks who even work on something like that. Yes, }
+{\pard  \line \par}
+{\b\cf3 Nandesh Guru:\b0}
+{ exactly. Exactly. And, , now every security product has that, Right. This is like, Yeah, I was gonna say }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ like, I mean, Now it just falls like a, Oh, you don't have that?}
+{\pard  \line \par}
+{Why did you have }
+{\pard  \line \par}
+{\b\cf3 Nandesh Guru:\b0}
+{ that? Right. Like, there's no connection to any }
+{\cf2 [00:05:00]}
+{ resources. how does it make sense?}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Man, I think this is probably maybe a good place to start is also what is a supply chain attack and in the AWS context, people hear about that in the application context. What is the supply chain attack in the AWS }
+{\pard  \line \par}
+{\b\cf3 Nandesh Guru:\b0}
+{ context? Yeah. So I'm gonna take a step back here and really talk about the cloud native application, }
+{\pard  \line \par}
+{so there are four main phases of supply chain risk. Let me start with that. See, the first one is the code itself, the application that you're building. Yeah. And organizations are looking for ways to quickly bring their product to market, innovate quicker, so they are using open source and you know, with open source comes lots of other baggage with that vulnerability use with that.}
+{\pard  \line \par}
+{So that's the first place that there's a risk of supply chain, yeah. Once you build that application, the next step is to, well, if you're deploying in a container, then you need you need helm chart or some sort of a base container image to deploy the container application.}
+{\pard  \line \par}
+{So that's the second. Vulnerability risk factor. Yeah. Now, so, so you got the application, you have the container ready to go, image ready to go. }
+{\cf2 [00:06:00]}
+{ You have to now deploy to the cloud. So for that, you need to build the cloud infrastructure again. You are using terraform or cloud formation templates.}
+{\pard  \line \par}
+{A lot of 'them has default settings or misconfigurations and you end up getting , more of that risk part of that supply chain, yes. And then finally the supply chain from the governance side, like you want to use vendors to monitor your infrastructure to understand what type of workloads you have.}
+{\pard  \line \par}
+{And just for that, you're giving them access to your environment. And in a way you're sort of opening up , from that supply chain risk. So in a way, ultimately , you're taking on this compound risk, that's what I call it, across all this different phases, and this is what sort of makes it very hard, very hard to sort of get things in control.}
+{\pard  \line \par}
+{And this is the challenge that most of the organizations are going. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right, And so to your point, then a cloud native application, that's what they're trying to build toward. So supply chain attack are there like different kinds of it, or are they just like, I mean, what would be an example of a supply chain attack?}
+{\pard  \line \par}
+{If you wanna, is there a real world }
+{\cf2 [00:07:00]}
+{ example maybe that}
+{\pard  \line \par}
+{\b\cf3 Nandesh Guru:\b0}
+{ you can share? Yeah, The first one supply chain, , traditionally, hijacking updates, you sort of get updates, , any software, any modern application Oh yeah.}
+{\pard  \line \par}
+{Updates. So you, you get updates and attacker can, you know Put in the malicious binary in there, and then that way you end up getting that new update. the other one is undermining code signing, , you sort of breaking the bill system, signing bill system. And then you sort of push your own update to that.}
+{\pard  \line \par}
+{The third most common one that, that we see is the open source this is where the threat actor would. Maintain, first of all, get the access to the environment where the package is hosted for, for example retain the same functionality of the package and then sort of ingest this malicious code to steal secrets or do whatever in it.}
+{\pard  \line \par}
+{And then push that to the package repository where it was hosted. And this is where down dependencies download those packages without knowing what they are actually. . Oh, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ and sorry. That's interesting because as the way I kind of play it out for }
+{\cf2 [00:08:00]}
+{ people who may I guess may not understand context, but cuz , you're already running your application, you haven't done anything different, but the person who has the open source code, who has updated the dependency for, I don't know, whatever malicious, like every time Ashish types in his user name, password.}
+{\pard  \line \par}
+{I log that and I send that to my attacker or. I could make that as a depedancy library, which you just ingest into your code and everyone just keeps using the same without even knowing it. }
+{\pard  \line \par}
+{\b\cf3 Nandesh Guru:\b0}
+{ Yeah, exactly. And, this is actually a real example that a real hack that happened. Right supply chain where a Python library, a package, a popular Python package context was updated by this attacker.}
+{\pard  \line \par}
+{And with the intention to exfiltrate a bunch of AWS secrets from your environment. So, the attack was so simple. Let me share that. Right. So what happened was , a developer used a domain with the email address, with a domain to create account Yeah. In some repository.}
+{\pard  \line \par}
+{PyPi and and is a popular package management repository. Where he, he did push that context package and then and everything was fine. It }
+{\cf2 [00:09:00]}
+{ was, it was a popular package is, it has 22,000 downloads weekly. And it's been used by most of the applications basically, because of this Use case. Yep. And the attacker found out that the domain address associated with the email, which the developer used to begin with has been expired . So guess what he did? He spent $5 to re-register that domain. Yep. And created the email address and went to the repositories.}
+{\pard  \line \par}
+{They forgot password. The email address came to him. Reset the password. No, zero code. Zero code, zero scripting, nothing. Is this all manual? Right. Obviously he had the code to detect all those of course accounts, which were had domain, but, in this actual hack, there was no automation, just all manual work. But somehow, now he had the open source, so basically had to just add this new additional code to Still secrets. Yeah. and then he published that new update version to the repository and it impacted over 3 }
+{\cf2 [00:10:00]}
+{ million users and exfiltrated over a thousand AWS secrets. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Wow. so Vineet just asked a question it's probably kind of related to what you were saying earlier.}
+{\pard  \line \par}
+{How do you evaluate code scanning tools to use? I mean, do you use different tools for different use cases? }
+{\pard  \line \par}
+{\b\cf3 Nandesh Guru:\b0}
+{ Yeah, there is a software composition analysis Yeah. Analysis process. And there is a static code analysis and then dynamic code.}
+{\pard  \line \par}
+{So, there are different categories of tools depending on what you wanna do which the focus is there. Yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. Awesome. Yeah, I'll probably add one more thing that as long as you find the right tools to talk about open source versus a static code analysis hopefully that helps Vineet, but it is just definitely a very different category.}
+{\pard  \line \par}
+{But I think to what you were saying earlier, the cloud native space as well as the code space is kind of combing slowly. So you can't talk about cloud infrastructure without talking about code scanning, dependency and stuff as well. I think the kinda example that you used about the dependency thing as well.}
+{\pard  \line \par}
+{So hopefully that answer your question Vineet, me, but I guess if you have a follow up question, feel free to ask. And he loved the example that you gave us. Well, by the way, and there was an amazing hack. So supply chain attacks. We kind of gave a good }
+{\cf2 [00:11:00]}
+{ example there about the PyPI thing from Python. That was like a pretty, pretty scary one.}
+{\pard  \line \par}
+{And sounds like it affects not just AWS, it affects every CSP out there. Is that }
+{\pard  \line \par}
+{\b\cf3 Nandesh Guru:\b0}
+{ yep, yep. Exactly. Because, you know, secrets are in the environment and any applications that you run either , on VM or containerised system, you can steal them, so yes, it could affect any cloud.}
+{\pard  \line \par}
+{ but was wanna call out that hack was actually a researcher who just wanted to show the potential. So he admitted like, Hey, I, I hacked this. He called it out, he explained the whole thing, right. So he just wanna show like what the impact could be. He says he did not use the credits for any malicious use, but again, just wanna show how easy it was for anyone to go and do this hack.}
+{\pard  \line \par}
+{And there are so many packages out there, npm and so many of the repository where accounts are just out there with email address, with expired domain. So this hack. I bet most of us has some sort of open source application that we use in production right now that could have this potential risk.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Wow. And to, to your }
+{\cf2 [00:12:00]}
+{ point, I think worthwhile calling out because there was stat that came out to some time ago. I think 75 to 80% of the code that's written by most organization is open source cause libraries and kinda things that you can look at it as well. }
+{\pard  \line \par}
+{\b\cf3 Nandesh Guru:\b0}
+{ Yes, I. You know, this is something that, you know, it's easier to reuse the code, }
+{\pard  \line \par}
+{yeah, No, no brainer. And also it's faster to bring the product to the market, so why not? }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That's the business initiative anyways, cause that's what they're trying to push you towards, that you should just like, push it out in the market as soon as possible kind of a thing as well.}
+{\pard  \line \par}
+{So, okay. In, in that case, Maybe switch over to , the ransomware side as well then how does that kind of play into a AWS world? How does ransomware, Oh, actually, what is ransomware? Cause I didn't even know how many people know what a ransomware is. What is ransomware? }
+{\pard  \line \par}
+{\b\cf3 Nandesh Guru:\b0}
+{ So ransomware is a type attack where threat actor will will sort of get hold of your business critical data and.}
+{\pard  \line \par}
+{Either copy and then delete it or encrypt it and then put a note for you saying, Hey, you can get this data back once you pay some }
+{\cf2 [00:13:00]}
+{ ransom. So this is the ransomware attack is so, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh, right. Feel free to put that in, kind of put some money in or Bitcoin into it.}
+{\pard  \line \par}
+{And what's the use case for that in the AWS context? Like how would this play. }
+{\pard  \line \par}
+{\b\cf3 Nandesh Guru:\b0}
+{ Yeah. So, from the traditional ransomware attack on the VMs is no different than data center, you, you can have the same VMs run instances running on within the cloud.}
+{\pard  \line \par}
+{Yeah. And then you can , compromise those publicly accessible, EC2 instance, or exposure , to public or even to the supply chain attack that I was talking about, so somehow you get access to the environment and then you can just look around what type of you can install the malware, which sort of encrypts the data.}
+{\pard  \line \par}
+{And then you can also share that. The attacker can then also spread that to other instances so that's nothing to do with the cloud, but one particular attack that we see in the cloud is with the S3 service, so S3 is a very, very popular service to store all the objects.}
+{\pard  \line \par}
+{ And this is where the attacker , will simple just have access to those via supply chain or somehow get all of the creds and copy all those data from the S3 bucket and then deletes them. And then if you }
+{\cf2 [00:14:00]}
+{ want data back, you'll pay some ransom, so, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ But , would it limit itself to S3 bucket or can it be like a, I don't know, Azure blog storage or one of the other ones?}
+{\pard  \line \par}
+{Can it affect that }
+{\pard  \line \par}
+{\b\cf3 Nandesh Guru:\b0}
+{ as well? Absolutely. Any storage services which we can store data can be a fair play here. Right. Actually, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ cause that kind of reminds cause the traditional example that people use for ransomware is more like, Hey, I clicked on a phishing link.}
+{\pard  \line \par}
+{Someone downloaded something, they took over the machine . And now all that I get on my screen is hey, pay the money or you don't get your data back. This is kinda like a bit more sophisticated , in the cloud space. So it's like you almost like, Cause I mean there was another stat that , I was reading somewhere like 50% of the corporate data is in S3 buckets these days.}
+{\pard  \line \par}
+{And everyone's , using it to some extent. And I think to what you said, it's a very popular service as. A AWS S3 bucket and misconfiguration in that is also what leads to data breaches as well. That whole, my S3 bucket is public to the internet, although that's a lot more not heard of as much with the ransomware sort of things.}
+{\pard  \line \par}
+{I think you kind of gave me an example of what the encryption side as well, just before. So }
+{\cf2 [00:15:00]}
+{ how would it play out in an encryption context, I guess. So I get the part. Oh, your S3 bucket is public. I copied the data. I would left a note there for you. Hey, Nandesh, pay me, blah, blah, blah, a Bitcoin and I'll give you your data back.}
+{\pard  \line \par}
+{Is there the other one which you're talking about, the encryption part. How does that work? Yeah, }
+{\pard  \line \par}
+{\b\cf3 Nandesh Guru:\b0}
+{ so this is more of a, a hypothetical situation. A scenario, , it's hard to sort of exactly play out the, the way I'm explaining it. But this is one way it could happen, }
+{\pard  \line \par}
+{right. There is this kms service in a AWS key method. So and , it's basically to manage, create and manage your cryptographic keys to encrypt your data. Yeah. And there are two type of keys. One is AWS manage, you know, as it says, managed by AWS with customer manage, which is managed by customers and which has a high degree of control on what permissions you can give to this key and who can use it.}
+{\pard  \line \par}
+{Yeah. Now in the more practice here , would be, , you give one particular system to encrypt the data only and other system to use the key to decrypt the data. So }
+{\cf2 [00:16:00]}
+{ that way, it's basically you have a segmentation of duties and you not sort of one particular system is not doing the both thing, }
+{\pard  \line \par}
+{yeah, yeah. But this could be also leveraged by the attacker. Where the attacker could be that person can only give one way access. They can only encrypt the data from the victim's account and to decrypt it is you have no access to that. The only way you can access is by this way of giving the access to the KMS key.}
+{\pard  \line \par}
+{Ah, oh, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ right. Okay. So you take over the, basically the encryption key. So you, you still see the data, but it's }
+{\pard  \line \par}
+{\b\cf3 Nandesh Guru:\b0}
+{ encrypted. Encrypted. And when you open, it says access, because you don't have access to decre. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right. Okay. Fair enough. Okay. Yeah. And oh, and so the hypotheticals over there is that they have had a.}
+{\pard  \line \par}
+{IAM role is something that's allowed them to change the encryption , I guess, key. }
+{\pard  \line \par}
+{\b\cf3 Nandesh Guru:\b0}
+{ Yeah. So, no, typically the IAM role is very permissive, yeah. It has a permissions to encrypt, re encrypt. You know, if it's encrypted already, you have permission to re encrypt the data. Or is this KMS star wild card action, basically.}
+{\pard  \line \par}
+{\cf2 [00:17:00]}
+{ Right. Anything you can do on this from the KMS service to any resource. Right. And this is where sort of you can use the key from the hackers cloud account, for example. Yeah. And, hacker can then go and encrypt all the. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I think I laugh at this, but I think I definitely don't want to downplay , the emphasis on not having a star permission for kms as well.}
+{\pard  \line \par}
+{I think, you know, people talk about you should not give your IAM role admin star access, or you should not give S3 star access. Or you should, but not many people talk about the KMS part. So , I'm glad you're calling it cause that's why I'm like, actually that's true. We talk about, IAM quite often, we talk about S3 bucket quite often, but not many people talk about KMS.}
+{\pard  \line \par}
+{And AWS came as, no one talks about the fact, especially because Amazon themselves recommend, Hey, you should probably try and split your key into encryption keys, separate decryption keys separate. One team has access to encryption. One team has access to decryption , that way you can make sure that oh, accidentally someone, you know, gets access, they can't do anything about it.}
+{\pard  \line \par}
+{So maybe this is kind of where our own security and defense might actually, you know, come and }
+{\cf2 [00:18:00]}
+{ bite us in the back, I guess. Awesome. So now we have kind like laid out the two scenarios probably I should would this affect broader than your, like we spoke about the blob storage and stuff would be affected as well.}
+{\pard  \line \par}
+{Do you reckon these kind of scenarios sounds like they should be, but they can be applied to other CSPs as well? }
+{\pard  \line \par}
+{\b\cf3 Nandesh Guru:\b0}
+{ Yeah, I mean well other for first of all, call out like other services as well, like anything that use kms KMS is highly used service for encryption, so it's used for elastic search, open search now and then a bunch of others.}
+{\pard  \line \par}
+{Anything that EBS snapshot encrypting, while , any of those things, any of those systems can have it. Also true for other CSPs as well. There's a key wall sort of similar to KMS and in Azure and also crypto key for GCP as well. So you have policies, you can control that. So yeah, similar attack scenarios is also a fair game there as well.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I think I'm gonna throw a spanner in there as well. Cause you know how people, Amazon always recommends hey use all the Amazon services and I think, I don't want people to walk away from this and going, Oh, I think what a Nandesh and Ashish actually is saying is don't use }
+{\cf2 [00:19:00]}
+{ the cloud native service. We should just buy, I don't know, one of those hashicorp vault or something for kms.}
+{\pard  \line \par}
+{And that way all my problems are solved , but I think the logically the problem would still exist. Yes. It's the whole point of not having awareness of your key, I guess, is that. }
+{\pard  \line \par}
+{\b\cf3 Nandesh Guru:\b0}
+{ Awareness and also the control, like you wanna make sure that you sort of pin down those permissions to the right users human or machine users.}
+{\pard  \line \par}
+{Make sure that you have those understanding before you, why you're giving them that access and Yeah. And have a good control on that. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah, and I think it's probably a good segway into the whole space. That's great. We spoke about ransomware, we spoke about supply chain, and I think we, you and I spoke about the whole, I did this video on the whole four generations of CSPM as well.}
+{\pard  \line \par}
+{And the reason I bring that up is because does a CSPM play any role in supply chain attack or ransomware attack? And maybe what is CSPM ? Cause I don't even know how many people know CSPM as well over here now. }
+{\pard  \line \par}
+{\b\cf3 Nandesh Guru:\b0}
+{ Yeah, CSPM Cloud Security, Posture Management solution. Yeah. It's, it's essentially understanding your posture in the cloud.}
+{\pard  \line \par}
+{And the solution will. first of all, collect all }
+{\cf2 [00:20:00]}
+{ that data and then really understand how things are configured, and then show all the findings to, hey, you have S3 bucket, which, is publicly accessible, or you have, this EC2 instance, which is also publicly accessible or not encrypted }
+{\pard  \line \par}
+{, things like that, so this is also true for Kubernetes too, so you have the KSPMs sort of side of that. It definitely helps, , first thing you wanna do is get the inventory of your assets. Understand , what are your public assets versus encrypted, you have the data as a crown jewel for any organization.}
+{\pard  \line \par}
+{Make sure you. Right encryptions. There you have the right tagging, first of all. So you know where things are, , how we manage them. And then based on that, , you wanna make sure that you sort of have the right mitigating control. If it's , a business critical data, you, you have encryption enabled and there are other different layers that they can go enable as.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Would the supply chain would be kind of covered by CSPM as well, or is that something that There'll be parts of it. }
+{\pard  \line \par}
+{\b\cf3 Nandesh Guru:\b0}
+{ It's a gray area for sure. There are some things that CSP will not cover. Right. It's, again, like CSPM has this definition, which is evolving }
+{\cf2 [00:21:00]}
+{ and we can talk about that as well, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I definitely, I think it's while calling out , because what we have found is it's like the four Cs of Gartner no one cares about is what I use as my talk. Because it's kind of like, has become that thing where people have used CSPM but CSPM has butchered so much now.}
+{\pard  \line \par}
+{People hate the word CSPM and, but then there's still version existing from it. So maybe to your point then that the whole, where does this in the CNAPP evolution, how does that kind of play into this role as well for supply chain? }
+{\pard  \line \par}
+{\b\cf3 Nandesh Guru:\b0}
+{ Yeah, so, so. You know, I just want, give some background first , }
+{\pard  \line \par}
+{so this customers sort of have moved on from CSPM. They don't want just cloud, like you mentioned. They're actually also running that container to the, you know, in the cloud environment. Yep. And they want protection for the cloud native application. Right.}
+{\pard  \line \par}
+{This is the whole idea, yeah. And all the way from scanning the container image even before that, like scanning the Git Repo for any of those you know, malicious code there and also , the images also the infrastructure. Once you have the infrastructure, the next step is to understanding how the }
+{\cf2 [00:22:00]}
+{ containers sort of interact with the infrastructure and what part has access to what service, to what load balance or outside in your AWS or any of the cloud environment.}
+{\pard  \line \par}
+{Yeah, so having that. Visibility understanding is also very critical. And this is what customers are sort of looking out for now. Like, they want the complete solution not just C S P M. Aside from all that, they also want to have a CIEM which is another acronym, the entitlement management service.}
+{\pard  \line \par}
+{So , to understand, and this is all kind of bringing back together. Permission. This is the, IAM is the perimeter of the cloud now, yes. And you wanna make sure a good understanding of your permissions that you're giving to your principles. Either, you know, IAM users or roles or what have you, }
+{\pard  \line \par}
+{ And then you also have the anomaly detection. Right. Guard duty is one of the examples from AWS., there are other examples from Azure and GCP as well. And then, and then other vendors are also coming up with their own U E B A solution to sort of compensate the gaps there. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. , the journey to kind of solve this has grown and become a lot more complicated, }
+{\cf2 [00:23:00]}
+{ even though like a lot of people still say, Hey, use a CIS benchmark as a good starting point. And would you say people have kind of evolved from a CIS benchmark as well, even though that's used as an example, beginning with it?}
+{\pard  \line \par}
+{\b\cf3 Nandesh Guru:\b0}
+{ Definitely they are looking for more, CIS is definitely a starting point. And it's more from the compliance point of view, but there's still a lot of gap there. That you can't just rely on CIS benchmarks and call it done. You have to do more. Yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Like, I think CIS benchmark won't help you with the supply chain or like ransomware.}
+{\pard  \line \par}
+{It's not gonna talk about any of that. And to your point then. Okay. So if that's the case, is there a easy win here for people? Cause I imagine, I mean, we get a mix of people who listening.}
+{\pard  \line \par}
+{They're people who are enterprise, have big teams behind them. They probably already have some kind of CSPM tool. They're already working with that. But then they're also like the other spectrum of people. There's a lot of startups that started using cloud as a thing as well. And I don't imagine they have a lot of budget to kind of work on these things.}
+{\pard  \line \par}
+{Do you, or even the expertise to kind of work on these things as well, where do you see them normally kind of work and operate or maybe even work }
+{\cf2 [00:24:00]}
+{ on solving this problem at their scale? have you seen examples of it or what do you want me to recommend people there? }
+{\pard  \line \par}
+{\b\cf3 Nandesh Guru:\b0}
+{ Yeah. So , my answer will be a little biased here because from the vendor's perspective, }
+{\pard  \line \par}
+{so again, this is from the cloud point of view, you have a different problem that you're solving, security is not your sort of, Main thing that you wanna spend, resource your energy. You know, first of all, you have to you have limited energy resource if you can offload that to some other solution, even cloud native solutions.}
+{\pard  \line \par}
+{Doesn't have to be vendor could be any of that. Yeah. Cloud }
+{\pard  \line \par}
+{native }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ solution. I mean, they're not free still, like the, I mean the guard duty that you mentioned, they're not free, but they're still at least available for the use. Yeah, }
+{\pard  \line \par}
+{\b\cf3 Nandesh Guru:\b0}
+{ right. But you know, it's hard to manage. If open source is great, there have so many open source out there, pro steam pie cloud query that, you know, , I can go on, }
+{\pard  \line \par}
+{ And it's great. You know, it's, it's great hackathon project. If you have one or two accounts, it's great. You do a snapshot and you're done. And you call like, but this is the continuous thing, like you cannot just stop by day, you know, doing it yesterday and like, hey, Good for another month here, guys, that's not gonna work.}
+{\pard  \line \par}
+{It's a continuous effort. You have to be at it every single day. }
+{\cf2 [00:25:00]}
+{ Right. And security can no longer be a second thought, like after thought, in my opinion. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Actually, that's a good point because it's not longer. You know how earlier people would say deploy any software? I think this is back in, I'm gonna call VMware here.}
+{\pard  \line \par}
+{Like back, back in the day when people used to have a lot of virtual machines that used to run and actual data centers. It wasn't like a ongoing thing. Yes, you had a SOC team monitoring, blah, blah, blah. But these days your environment is getting new services, like AWS re:invent's gonna come in and there's gonna be a new, at least, I don't know, two, 300 new services gonna be announced as you even go towards that there'll be lot services announced as well.}
+{\pard  \line \par}
+{So the whole notion of your environment is not changing, is not true anymore. You're introducing new services without even you wanting to have new services. There are new services being. introduced and you kind of have to keep adapting to it. So you can't just, to your point say, Oh, I've done my part. I think I'm good.}
+{\pard  \line \par}
+{I've ticked all the CIS benchmark things. I've done what Nandesh said, I've taken care of my keys as well, so I'm good. You can't }
+{\cf2 [00:26:00]}
+{ just do that cause your key maybe used for on new storage, service that make it released and you have }
+{\pard  \line \par}
+{\b\cf3 Nandesh Guru:\b0}
+{ no idea. Exactly right. This is going to be an ongoing effort and this is sort of, you know, , I can sort of imagine this for, you know, why do people.}
+{\pard  \line \par}
+{Not have self-managed Kubernetes. They use managed Kubernetes because they don't run all that themselves. That's not their expertise. It's a headache. And we all been through that. We all started with self managed Kubernetes, and then we go to EKS GKE AKS and other product managed Kubernetes.}
+{\pard  \line \par}
+{And we're like, Thank God this is such a great relief to us because now we can focus on the actual stuff. And rather than having the system up and running all the time, because yeah, two 50% of my energy right there, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ A hundred percent. I think. The other part is also we told, you, spoke about the whole.}
+{\pard  \line \par}
+{4 generations of CSPM . But you said there was fifth one as well. I think the four generation for, for context for people. There was a YouTube video that I did for 4 generations of CSPM I think you had kind of called out the fifth generation ti. I mean, I can do a very short summary, but you, I feel like YouTube probably do a better job as well.}
+{\pard  \line \par}
+{And you can add the fifth one }
+{\cf2 [00:27:00]}
+{ in the end. Jonna, quickly go through how you see the CSPM space evolve as evolved }
+{\pard  \line \par}
+{\b\cf3 Nandesh Guru:\b0}
+{ as. Oh man, you gotta put me on the spot here. . }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh, I mean we went from agent to Agentless and from Agentless started basically doing CWPP inside it as well because you mention kind fifth generation as well. I think the very first version I still remember. Was very compliance driven. It's more like, Hey, CIS benchmark. will solve all the problems for you. And I think unfortunately, that was probably a great start for people who did not know what cloud security was.}
+{\pard  \line \par}
+{But now to what you said earlier as well, we, it evolved so much. That is so much data in there as well and so much complexity. How do you describe the fifth generation? I'll probably link, put a link on the four generations of CSPM in the, in the show notes so people can see it. Like how do you discuss the fifth generation?}
+{\pard  \line \par}
+{\b\cf3 Nandesh Guru:\b0}
+{ So that was last year or this year? When was }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ this? Uh, No, that was like last year video. And still I through, Well, so things' }
+{\pard  \line \par}
+{\b\cf3 Nandesh Guru:\b0}
+{ are now from there and I can, I can give you more information now. Oh, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ so it's }
+{\pard  \line \par}
+{\b\cf3 Nandesh Guru:\b0}
+{ generation of building mean. Like I say, it's no longer CSP M game play anymore. Right. It's a complete }
+{\cf2 [00:28:00]}
+{ solution that customers looking for.}
+{\pard  \line \par}
+{ CSPM is great. It's definitely a subset of that. It's the biggest subset of the cloud posture. But there containers, , there is a CIEM the entitlements that we talked about. There is a Anomaly detections out of that malicious activity. So those are like, and then you also need the CICD scanning as well.}
+{\pard  \line \par}
+{Part of that, it's like a lot of things now, customers are, Well, CD scanning is part of CSPM now. I mean, it's not part CSPM, but it's like that completes cloud. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh, right, Yes. Yeah. Expectation is there. Yes, that's right. Because you're using CICD well, what do you, what do you have for my CICD? I just can't use a CSPM tool.}
+{\pard  \line \par}
+{\b\cf3 Nandesh Guru:\b0}
+{ But anyways, I think, to your point , what we talked about the fifth generation, real time. We talked about the context, which is sort of, you kind of mentioned about, but context now is like one step into the layer where Kubernetes containers, part of that context as well is like the layers and other containerized applications.}
+{\pard  \line \par}
+{Part of that, I think there's a point that I talked about where you have automation when the new cloud accounts. Onboard it. Like, you know, we, we talked about having }
+{\cf2 [00:29:00]}
+{ a dedicated cloud account per workload or per system, create. But then you have so much overhead now , to go and onboard those, create roles, , so you can go provision for these solutions.}
+{\pard  \line \par}
+{So those are some, you know, things that you want to automate and make it more easier to manage operationalize, there are things that you want to create Projects for each. So, you have this center entity in the organization sort of managing all the cloud accounts, but then you wanna delegate that to responsibility to the indi individual team owners say, Hey, I created this segment for you, or this project and this are all the accounts part of that.}
+{\pard  \line \par}
+{Now you manage it. Now you can have alerts coming to you, findings, you have to resolve it. This is your thing. So you sort of democratize that to across the whole organization. So that has to be part of , the solution. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah, and I think to what you rightly called out as well, because now no one uses one AWS account anymore.}
+{\pard  \line \par}
+{Hopefully they don't, but multiple AWS account comes with like, okay now I've got all these free accounts, but most }
+{\cf2 [00:30:00]}
+{ people that I end up speaking to, they have about three, 400 AWS accounts. and if on, }
+{\pard  \line \par}
+{\b\cf3 Nandesh Guru:\b0}
+{ on the lower side, on the lower, end, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I'm like, we've on the lower end. That's right.}
+{\pard  \line \par}
+{Yeah. On the lower end. And you almost hear that and go like, Holy shit. Oh, you have 300. And then, Yeah. Yeah. We have kubernetes, we have containers, we have serverless, like, and you, the complexity is just so intense that you almost feel like, Oh, so what does your team look like? Does your security team know?}
+{\pard  \line \par}
+{How to secure Lambda, How to secure containers kubernetes like these are different technologies as well. These Aren all just like the same thing. It's like knowing, oh, I know Java and I know, I don't know, like.net, like you know, their programming languages, but they're still quite different in the way they operate and work and how that would be.}
+{\pard  \line \par}
+{So yes, maybe a general expert, like do you feel like the feel is getting complex as well? . }
+{\pard  \line \par}
+{\b\cf3 Nandesh Guru:\b0}
+{ Yeah. Yeah, definitely. Right. there's so much that you're to keep up with. I think that's again, education, learning that's number one for sure. That everyone, like you to your point, is a new service that.}
+{\pard  \line \par}
+{That is being }
+{\cf2 [00:31:00]}
+{ introduced by a team to solve a particular problem. Then you need to know about it, , how to secure it. So , things like that. And also you know, , this is another, , I was still gonna talk about the, the next sort of step after this, the fifth generation, which is in CNAPP}
+{\pard  \line \par}
+{, that's great. There's a new thing happening now is where this, I know organizations are being multi. Like we, we, multi-cloud is here to stay. There's no way I'm gonna lock into, into AWS. Sure. The, the team can be in a AWS, but then organization has hundreds of teams and they can use whatever cloud is right for that need.}
+{\pard  \line \par}
+{Either Azure, gcp, or AWS. So, Are you going to have from any multi-cloud to, to manage it, you gotta do security, you gotta do cost, you gotta do automation, you gotta do operations. So many things. So, and then are we going to provision , and different roles for all those different access so that vendors can do costs separately and security separately, and automation separately.}
+{\pard  \line \par}
+{This is not manageable, you're opening up more and more attack surface, like we talked about with supply chain. Yeah. More and more }
+{\cf2 [00:32:00]}
+{ risk. So, you know, now it's going beyond like, I want a cloud management so, Everything, please. Right. This is what they are looking for, this is what}
+{\pard  \line \par}
+{the next step is }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ actually, that's a good point. Cause to quote, even what you were saying earlier about CICD pipeline is also a thing, and then there is a whole thing about cloud native versus vendor versus open source as well, in terms of the kind of tooling you may have in your environ. I mean, just within that, we've already spoken about two completely different scenarios, and then on the other side we have the different kind of compute that we have that runs as well.}
+{\pard  \line \par}
+{And I mean, yeah, man, I think in a lot of ways, What I'm also hearing is for, everyone who's listening in and thinking, Oh, I don't know if Cloud security's future, kind of like you listen to this and go like, Oh my god. It is complex, but it also means complexity means they need people to solve the problem.}
+{\pard  \line \par}
+{So I think we are gonna be employed for a long time, like, let's just say that. }
+{\pard  \line \par}
+{\b\cf3 Nandesh Guru:\b0}
+{ Definitely . Yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I think of got Gabriel saying he's really enjoyed the discussion as well. Thanks for Gabriel. Appreciate that man. I think that was a good call man. I think }
+{\cf2 [00:33:00]}
+{ that like my last question as well, but where do people can learn more about these kind of supply chain ransomware and more common attacks?}
+{\pard  \line \par}
+{Where can they find more information about this or learn? }
+{\pard  \line \par}
+{\b\cf3 Nandesh Guru:\b0}
+{ Yeah. So definitely there are communities out there. Cloud Security Forum is one of my favorite communities out there. I recommend everyone here to go join that community. Great group of people. Also, I actually got lot of my learning from following your previous guest Ashish}
+{\pard  \line \par}
+{thank you for having that community going and, you know, people share on LinkedIn. So following them has been really. Great. CSP is also doing do really good job in calling that out in the documentation. So that's also really cool. And there are other vendors as well, they do a really good job in, in sort of calling out and dedicated looking for all these issues to, you know, to bring up.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. Well that, thank you for sharing that. I'll probably put the notes to our own podcast on the you as well, . I've got a few questions as well, which I was just a fun question mention towards the end so we can switch over to that as well. First one being, where do you spend most time on when not working on this cloud technology thing?}
+{\pard  \line \par}
+{\b\cf3 Nandesh Guru:\b0}
+{ }
+{\cf2 [00:34:00]}
+{ Oh, okay. So I have two young kids, so you can probably imagine they keep us very busy. I actually start my work early. I, I work on the East coast. I was, I'm the West coast in the US By what? East Coast Hours? Cause my team is there. So six to three. And then after three, , I'm done three, 3:00 PM So rest of the afternoon to myself.}
+{\pard  \line \par}
+{I take my kids to after school activities, which is fun, Nice for me. And then on the weekends,, we go for hikes. Seattle's really good outdoor. So hiking is great and museums, we below going to museums. So it's what I }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ do. Awesome. Well, it sounds like you have a fun day planned out, which is pretty good.}
+{\pard  \line \par}
+{Which kinda leads me to the next one. What is something that you're proud of but is not on social media? }
+{\pard  \line \par}
+{\b\cf3 Nandesh Guru:\b0}
+{ Yeah. This is something I haven't shared publicly ever. I I lost someone very close to. Because of pandemic in Summer of 2020. Wow. Pretty good though, man.}
+{\pard  \line \par}
+{It was, it was, it was really one of my tough times tough times of my life. And I was in really bad state. I was looking for some way to. Take all the pain and convert into some purpose. And there are three things sort of, I came out of that whole experience. The, the first one is, you know you only get one life.}
+{\pard  \line \par}
+{So if }
+{\cf2 [00:35:00]}
+{ you, if you wanna do something, now is the time. And that change everything. I reached out to you in 2020 after that experience. Like, dude, I, I'm not afraid of rejection. I, I want to go and. Connect with people outside. So I, I highly encourage everyone to go do, you know, go follow your dream if you really, now is the time to do it.}
+{\pard  \line \par}
+{I also got the opportunity to be on the, on a big stage at a VMware explorer, which was. I had a big phobia of being on the stage of public speaking, but I did it. I overcame it. That was awesome. So I'm just on that journey of continuous improvement. So the second point was, you know, become a lifetime learner, be a, have a growth mindset.}
+{\pard  \line \par}
+{You always want to continue growing. Yeah. And then the third one is, is that you know five, 10 years from now, people are not gonna care about what features you're gonna release, what product you're. They're gonna, they're gonna feel they're gonna remember how you made them feel. Yeah.}
+{\pard  \line \par}
+{That's pretty good. Right, Right. So, so I think I'm really proud of that trans transformation that I've been through. I want to }
+{\cf2 [00:36:00]}
+{ continue building on that foundation and keep growing. So I'm really proud of that. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That's pretty awesome, man. I'm really proud of you as well for kind of, you know, transforming yourself.}
+{\pard  \line \par}
+{And I, I think it, it's funny, I think before the pandemic, a lot of people should talk about the fact that lived every day, like your last day. But I think a lot of people really connected with that and what it really meant through the pandemic, especially the countries and cities that went through lockdowns.}
+{\pard  \line \par}
+{That have a very different experience for a lot of people as well. Staying away from loved ones, some, and unfortunately losing some loved ones as well, so, And I thank you for sharing that, man. I appreciate that. And final question, what is your favorite cuisine or restaurant that you can share? }
+{\pard  \line \par}
+{\b\cf3 Nandesh Guru:\b0}
+{ So I'm not big of a foodie but I I, I love the company that, you know, so here and me, we can go get a hot dog and that would be the best.}
+{\pard  \line \par}
+{Oh, perfect. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Totally do that, but should already break bread together, I think. Okay. So it is a, is there a go-to meal that you normally go for? Like what's your almost like a daily staple. Everyone has like a one daily staple. Is there a daily staple? }
+{\pard  \line \par}
+{\b\cf3 Nandesh Guru:\b0}
+{ So seafood is really good in Seattle, so I, I definitely enjoy that.}
+{\pard  \line \par}
+{So, you know, kids are }
+{\cf2 [00:37:00]}
+{ also, you know, pretty big in having seafood sushi for example. So, yeah. That's }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ awesome. No, thank you for sharing that. So I just wanna quickly comment address a few comments that came in. Vineet really enjoyed the session. }
+{\pard  \line \par}
+{Zinet great episode as well as Vote for Ashish at the Sans GMA award vote for Zinet as well cause she's there as well nominated. So, but like both, both of us. Thanks you. I, I really appreciate support as well. But dude, that's for what we had time for. Where can people find you and connect with you when they are more, know more about supply chain, ransomware and all this }
+{\pard  \line \par}
+{\b\cf3 Nandesh Guru:\b0}
+{ world?}
+{\pard  \line \par}
+{Yeah. I'm active on LinkedIn, so please connect on LinkedIn and we can definitely chat more. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Awesome. Right. I'll leave you on LinkedIn credentials. Oh no credentials, but LinkedIn link there. Please don't, don't my credentials. , you can totally pass your credentials if you want. Right }
+{\pard  \line \par}
+{\b\cf3 Nandesh Guru:\b0}
+{ there,}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ seven. But dude, thanks so much for this man. I really appreciate that. And thank everyone for tuning in. We'll see you again on the next AWS, security episode. See you. Peace. Thank you. Ashish.}
+}

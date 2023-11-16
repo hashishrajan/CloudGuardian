@@ -1,0 +1,487 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red102\green0\blue204;
+\red128\green128\blue128;
+\red114\green179\blue114;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\b\fs48 Kirsten Newcomer\b0}
+{\pard  \line \par}
+{\b\cf1 Kirsten Newcomer:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ technically speaking, Using containers and Kubernetes can improve your security, but it requires making adjustments to how you manage security. }
+{\pard  \line \par}
+{My security team just has had a tendency to talk in terms of thou shall'nt, here are the requirements and they haven't needed. To understand , the how for so long that in some cases and I love my security colleagues, but in some cases on some teams, security folks know what, but they no longer remember the why behind the policy.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Hi there. Welcome to the Kubernete Security Month. Last year we spoke a lot about Kubernete security being one of the fastest growing space in the cloud native industry, I guess, or sub-industry if you wanna call it. But what we didn't cover is how much it has evolved since the last time we spoke about, and I think it had about 70% or 80% growth overall in just one year in the adoption.}
+{\pard  \line \par}
+{And turns out the adoption hasn't really slowed down in 2023 }
+{\cf2 [00:01:00]}
+{ so far. We are media partners for Kubecon Eu and as part of that we had a few conversations and one of those person is Kirsten Newcomer. Kirsten and I spoke about how the evolution of kubernetes security has changed the way a lot of people have looked at security in the cloud native landscape.}
+{\pard  \line \par}
+{What it has meant for Zero trust, what it has meant for supply chain security. What does it really mean for security people to change their perspective on how security needs to be done in Kubernetes context? We also shared some examples, so if you have never heard of any of these terms or we just wanna understand how kubernetes security works in general, we definitely have you covered in this episode.}
+{\pard  \line \par}
+{If you know someone who's trying to learn about kubernetes security or is someone looking at. Just the overall picture of how do I think about kubernetes security in 2023, if I should learn that or not. Then this is the episode for you. We spoke on a wide variety of kubernetes security topics and what to look out for in 2023, I hopeyou enjoy this episode}
+{\pard  \line \par}
+{and as always, if you know someone else who is interested in learning what kubernetes security, definitely share this episode with them. We will be talking more about kubernetes in the whole month }
+{\cf2 [00:02:00]}
+{ of April, 2023 for kubernetes security as we go and attend Kubecon EU as well as we bring you insight from the Kubecon conference.}
+{\pard  \line \par}
+{I hope you enjoy this episode, and if you're here for the second and third time, I would really appreciate if you drop us a review and rating if you are listening to this on iTunes, so Spotify, or if you're watching this on our YouTube channel or LinkedIn, definitely give us a follow, subscribe and hit the bell icon if you're not already doing it, so you get notified when the next episode is out.}
+{\pard  \line \par}
+{Cause we talk about cloud security every day and all week? We are also running something called a Cloud Security bootcamp, which is a free bootcamp, which you can find on on our YouTube channel. Definitely check that out and if you have any questions, definitely drop them as a comment. Enjoy this conversation about evolution of kubernetes security with Kirsten Newcomer and I will see you in the next episode of Kubernetes Security Peace.}
+{\pard  \line \par}
+{Hope }
+{\pard  \line \par}
+{you're enjoying the episode so far. A quick word from our sponsors Snyk who are having a special event Snyk launch on April 4th, 2023. They're gonna be talking about how to. And develop securely in the cloud. And you can register for this free on their website }
+{\cf2 [00:03:00]}
+{ snyk.io/events/snyklaunch . Now let's get back to the episode.}
+{\pard  \line \par}
+{Hi, }
+{\pard  \line \par}
+{\b\cf1 Kirsten Newcomer:\b0}
+{ you. I'm good. How are you, Ashish. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Great. Great. First of all, I think for people who do not know who Kristen is, could you share a bit about yourself and how you got into the whole Kubernetes space? Sure. }
+{\pard  \line \par}
+{\b\cf1 Kirsten Newcomer:\b0}
+{ So Kirsten Newcomer, I'm currently at Red Hat as director of security product Management. Responsible for security capabilities across our Kubernetes based platform.}
+{\pard  \line \par}
+{OpenShift, I've been in the software field for longer than I generally admit to, so I, I started as a system admin. I've done quality engineering, I've managed a release engineering team, moved into program management and product management from there, which I've been doing product management for, gosh.}
+{\pard  \line \par}
+{Probably about 20 years or so at this point. And have kind of, you know, had the opportunity throughout my career really to be thinking about security capabilities. I've been working largely }
+{\cf2 [00:04:00]}
+{ with enterprise customers throughout that time and, and they have strong security needs. So I've kind of had a chance to think from dev to ops and how security plays in all those spaces.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Well, it's a good segway into my next question as well about the security needs for most organizations as well being Kubernetes month and talking about kubernetes security, cuz we have kubecon EU coming up soon as well. Yes. The intent behind kubernetes, it's gone way beyond than the first version of Google when it came out.}
+{\pard  \line \par}
+{How do you see the kubernetes security market today? Like, I think last year a lot of conversations were focused around the, all the default misconfigurations and oh, we want to use it. But I mean, you know, there's a, there's a lot of mixed information about kubernetes security last year. I'm curious, how do you see kubernetes security in 2023, and how has it evolved .}
+{\pard  \line \par}
+{\b\cf1 Kirsten Newcomer:\b0}
+{ Yeah, I think you're right to say it's mixed. There's been a, a really strong evolution kind of early on. }
+{\cf2 [00:05:00]}
+{ Kubernetes didn't even include role-based access control but as containers became more and more popular, Organizations knew they needed orchestration. Over time, Kubernetes sort of won the container orchestration wars.}
+{\pard  \line \par}
+{And as that happened, right, more and more enterprises adopted it and the need for security became Stronger within the community, right? So more advocates for security capabilities in Kubernetes, even within the community. Which has been terrific. And then in 2019, in particular, the C N C F open source to Kubernetes security audit, which was great to see that investment and I think brought a lot of attention to.}
+{\pard  \line \par}
+{Within the community to thinking about how do we address these? And it wasn't so much about vulnerabilities, those folks are used to thinking about and managing and addressing. It was more the broader platform and kind of thinking about the threat vectors , and how do we protect against those. , and then }
+{\cf2 [00:06:00]}
+{ separately you asked about sort of security. We move beyond the core platform cuz there are capabilities within the platform itself to secure the environment and the workloads running on the environment. But also very early on while the orchestration wars were still sort of happening.}
+{\pard  \line \par}
+{You really saw an explosion of startups who moved into container security and then Kubernetes security because traditional security tools really weren't designed for managing the Kubernetes environment. And so that happened for a long time. And now in the last year or so, I think we're starting to see people thinking about. As people have moved many workloads into the cloud now, it's not just container and Kubernetes security. It's okay. How does that play with my broader cloud security environment as well? So, so it's been an interesting evolution. Do you }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ feel like Kubernetes is still quite }
+{\cf2 [00:07:00]}
+{ popular? I think last year was maybe before that it was like 80% growth or something.}
+{\pard  \line \par}
+{Is that still the case? }
+{\pard  \line \par}
+{\b\cf1 Kirsten Newcomer:\b0}
+{ It, yeah, I do. Absolutely. It's still very popular., and you know, , huge growth, huge adoption, new solutions being built on top of Kubernetes regularly. That said, I think where a lot of the community is investing right now, like the core platform is really in good shape.}
+{\pard  \line \par}
+{It's the capabilities on top of the platform where a lot of investment is happening. Things like K Native for serverless and Istio for service mesh backstage for developers. Sort of a whole range of community projects that are, you know, designed to make it even easier to work with and use Kubernetes.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ I mean, maybe even outside the technical aspect of it, what's keeping kubernetes so popular? You know, I would've thought with the managed kubernetes service that came from cloud providers and one would think that, okay. It should just blend into }
+{\cf2 [00:08:00]}
+{ what you said as well. People are looking at the broader, how does Kubernetes fit into my cloud securities landscape?}
+{\pard  \line \par}
+{What's the non-technical reason for this popularity as well? Mm. Is there one? }
+{\pard  \line \par}
+{\b\cf1 Kirsten Newcomer:\b0}
+{ I would have to say when it comes to non-technical, I, I'm gonna fall back on open source as kind of the key driver for popularity projects that really have a strong open source community or technical solutions that have a strong open source community have t he opportunity to innovate and thrive in ways that are harder to at scale, in ways that are harder to achieve when they're not open source. So I think that that was partly why kube itself won the orchestration wars and why so many people are building upon it. It's just a very vibrant community and t There is that you know, there's, there's that opportunity to influence whether you're an individual contributor, whether you're working at a company that's using Kubernetes and, and therefore that's why you're engaged. It's }
+{\cf2 [00:09:00]}
+{ become a skillset also that is transferable because it is so popular.}
+{\pard  \line \par}
+{Right. Just, I, I think open source makes a big difference. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ I think open source are, I almost feel like it's two sets to the same coin where on one side people are really forthcoming about open source and the other side, they're almost the first word that kind of comes to their mind, supply chain. And yes, I don't mean it in the context that I don't believe in it.}
+{\pard  \line \par}
+{ I totally am a open source supporter, but I, I think. Maybe this is what makes security in the kubernetes space a bit more challenging as well. Cuz I guess I'm curious how widespread is the usage? Like in what kind of industries have you seen kubernetes where one would not think Kubernetes would be used?}
+{\pard  \line \par}
+{Cause a lot of people still Yep. Maybe have a bias like I do where maybe only tech companies use it or is it only the case. }
+{\pard  \line \par}
+{\b\cf1 Kirsten Newcomer:\b0}
+{ No, I've seen it in, in tons of verticals. It's in financial, it's in telecommunications. A lot of 5G networks. , the core computing are built on }
+{\cf2 [00:10:00]}
+{ Kubernetes. It's expanding into radio access networks.}
+{\pard  \line \par}
+{There's Kubernetes at the edge. I see it in transportation. Organizations are building their solutions for managing, you know, when you're tracking your package delivery, right? A lot of those solutions , are built on Kubernetes, delivered on Kube. Also, if I need to do the logistics for all of my, you know, what's the best way to distribute my packages given all the places they're going?}
+{\pard  \line \par}
+{I see it in automotive simulating. Connected car communications pretty much anywhere there is software, air the hospitality industry, airlines I'm sure I'm gonna forget something. It is pretty much everywhere I look. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ I think someone even mentions it's being used in submarines }
+{\pard  \line \par}
+{\b\cf1 Kirsten Newcomer:\b0}
+{ as well. Yep, no doubt it is.}
+{\pard  \line \par}
+{Yeah, absolutely. Have like, wait, }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ somebody uses kubernetes containers and it's }
+{\pard  \line \par}
+{\b\cf1 Kirsten Newcomer:\b0}
+{ on the space station. Oh wow. Yeah. Yeah. So it's cool stuff. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah. Oh, wow. I mean, }
+{\cf2 [00:11:00]}
+{ maybe no wonder that attracts a lot of people as well. They wanna work on cool stuff rather than whatever the cloud is offering, I guess. , but maybe , another way to look at this is because to what he called out it, if it's so widely used across multiple verticals and security has.}
+{\pard  \line \par}
+{I won't say hasn't embraced it. I would definitely say it looks at kubernetes as another challenge because the way it was described last year was, oh, kubernetes is a data center within a data center. It's people finding another way to escape security. Like, what are some of the challenges in securing a Kubernetes container out of curiosity, the way you see it maybe, and you can focus on, I guess, the soft part or the, the technical part, however you wanna feel fit.}
+{\pard  \line \par}
+{\b\cf1 Kirsten Newcomer:\b0}
+{ Sure. I, actually think technically speaking, Using containers and Kubernetes can improve your security, but it requires making adjustments to how you manage security. And I think some of the reasons for the skepticism is that we still have. A split. Like it's not just about }
+{\cf2 [00:12:00]}
+{ technology, to your point about the soft points, right?}
+{\pard  \line \par}
+{People in process matters too. And in some ways, you know, the explosion , of containers and coup into the tech world and the enterprise use. Kind of parallels what happened when virtual machines were first introduced and everybody had to sort of scramble to wrap their brains around this new technology.}
+{\pard  \line \par}
+{And what does it mean to, from the securities perspective, right? How do I. Tackle that. And it, the reality is that the principles, the same security principles apply that same concept of, you know, ensuring that principle of least privilege is followed that you want to manage authentication and authorization integrity matters.}
+{\pard  \line \par}
+{You know, network security matters. Minimize running of privileged workloads. All of those principles are still the same. How you implement them is different and. Many }
+{\cf2 [00:13:00]}
+{ organizations over the years, they've developed structures of, especially enterprise organizations, right? If I'm not a small, maybe cloud native tech company, I've got my app dev team, I've got my ops team, and I've got my security team.}
+{\pard  \line \par}
+{And my security team just has had a tendency to talk in terms of thou shall'nt here are the requirements and they haven't needed. To understand the how for so long that in some cases and I love my security colleagues, but in some cases on some teams, security folks know what, but they no longer remember the why behind the policy.}
+{\pard  \line \par}
+{And in order to make this shift, because the technology is different, you need different tools. You know, you can't just do perimeter based security applications, don't have static IP addresses in this world. So I need to know the why so that I can think through. }
+{\cf2 [00:14:00]}
+{ How to do this in a new environment and have a conversation.}
+{\pard  \line \par}
+{And, and while we've been talking as an industry for a long time about DevSecOps, it's still not quite there, right? DevOps is More present, DevSecOps, not as much. And, and so really, and then you add in that a lot of organizations, especially during the pandemic, they started accelerating their move to cloud.}
+{\pard  \line \par}
+{And now I'm adding in kind of two layers of a sense of loss, of control, right? So it's a new environment, a new technology that maybe I'm not as familiar with. How do I help my team meet the goals when I'm not as familiar? And they're moving into the cloud where I don't have as much control. It's a shared responsibility model, so it takes, it takes time for people to adjust and honestly, it's gonna happen.}
+{\pard  \line \par}
+{The business I, the business I think, are driving the push in both cases. The businesses }
+{\cf2 [00:15:00]}
+{ get agility, they get faster time to delivery. The developers love it. Security matters and supply chain security matters. I wanna circle back to why that's particularly important for Kube. But you have to figure out how do I bring all of these teams together to make this happen?}
+{\pard  \line \par}
+{And that requires some change in culture, , and that's sometimes the hardest thing. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ I love that also because I don't think. We were successful in doing DevSecOps for a long time and now we have to do DevSecOps in cloud. We have to do DevSecOps in Kube as well. Yeah. What are some of the, because you know how you mentioned that the whole static IP address does not exist?}
+{\pard  \line \par}
+{ :I loved it also because it opens another, I guess, peals another layer for this conversation, which is what are some of the things that we have to unlearn as people who may have had. A lot of experience in security. Yeah. Know exactly the fundamentals, know the principles and to your point, maybe even know the why behind the policies.}
+{\pard  \line \par}
+{Yeah. What are some things that people who may have not experienced it yet, what do they have to unlearn to work effectively in a Kube }
+{\cf2 [00:16:00]}
+{ environment? }
+{\pard  \line \par}
+{\b\cf1 Kirsten Newcomer:\b0}
+{ One of the places I'd start, and it brings us back to supply chain security is never patch a running container. So when you, if you're used to an environment where like we all wanna apply, If you're in the security fields, you wanna apply those patches as quickly as you can to address newly discovered vulnerabilities.}
+{\pard  \line \par}
+{But we're used to being able to step in a traditional environment. I can step into a running environment, apply a patch and move on, , and maybe it takes, you know, a little bit longer for the app dev team to put that into their build process. If I'm running a containerized application in Kubernetes, and this is one of the key reasons people like Kubernetes, I can scale up, I can scale down.}
+{\pard  \line \par}
+{I do this in a declarative fashion. I've told Kube I always. want 3 instances of my web front end running at every time. If one of those goes down for some reason, what's gonna happen is Kubernetes is gonna notice and it's gonna deploy a new instance from the }
+{\cf2 [00:17:00]}
+{ image. So if you've patched that running instance, there's no guarantee that that patch is gonna be stable, that, that it's gonna like be there for a long time.}
+{\pard  \line \par}
+{You need to rebuild the container image with that patch built into it. And then redeploy. And this is one of the reasons that DevOps and therefore DevSecOps become so important. And so now I need to work. With both my ops team and my app dev team in new ways, and figure out how do I help them get this information early.}
+{\pard  \line \par}
+{It's part of the reason I think the conversation around Shift Left security has kind of been so much a part of, of Kubernetes conversations. But I also, I'm not gonna find everything by shifting left, right. New vulnerabilities show up every day, so I also need to have a communication process for when something new shows up.}
+{\pard  \line \par}
+{How do I }
+{\cf2 [00:18:00]}
+{ inform the dev team? Right? So from my devs, my SEC ops environment, push it back to Devs sec. But they're the ones who are gonna rebuild and redeploy. It's my app dev team or my dev ops team. And again, back to that kind of sense of lack of control One of the ways I've seen organizations adapt to this is by doing everything as code, right?}
+{\pard  \line \par}
+{Deployments as code. So yeah, I gotta improve my C I C D process. I can't rely on manual stuff, but that whole approach to C I C D, to managing my apps, that can be used for my platform too, that can be used to manage my deployment of Kubernetes itself. And when I'm doing everything as code, I get auditability, traceability, all, all sorts of really interesting things that I used to just think were ops related.}
+{\pard  \line \par}
+{Right. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ I'm so glad you mentioned IAC as well. I feel a lot of people get nervous with IaC and I think the more we talk about it, and to your point, maybe it's a fear of lack of control. As you kind of go down }
+{\cf2 [00:19:00]}
+{ that path, how do I know what's being deployed?}
+{\pard  \line \par}
+{How do I know what's being changed? And the whole notion of using some kind of a Git repository and all of that is still very foreign in the security context. So maybe that's where it comes from. But do you find that people are open to the idea of IaC. Like I think in fact maybe a couple of weeks ago I was talking about using IaC to do security changes to firewalls and other things as well, because people are asking a security product, I need APIs.}
+{\pard  \line \par}
+{Yeah, yeah. Do you see that pattern emerging? }
+{\pard  \line \par}
+{\b\cf1 Kirsten Newcomer:\b0}
+{ I do, and I think you're right that some people are nervous, , but I think sort of another way , to circle it On the people side of things, right, is security teams historically haven't needed to understand the tooling that app dev teams use, right?}
+{\pard  \line \par}
+{And here we're talking about. Infrastructure as code, security as code, policy as code. Now that does mean I have to kind of learn new tools and a new language. And I don't mean like yaml or, maybe I have to learn that too, right? But I have to learn source control tools, et cetera. But }
+{\cf2 [00:20:00]}
+{ honestly, people have been doing.}
+{\pard  \line \par}
+{Infrastructure is code in many ways for quite some time. Terraform, Ansible, , there's a lot of tools out there. So I think the really interesting part though, about where things are headed right now, especially since the Solar Winds attack, is that anytime you're doing things through a pipeline, you need to now focus and think differently about the security of your pipeline.}
+{\pard  \line \par}
+{The wins with infrastructure is code. Security is code. I get auditability, I get traceability of who made what changes. When I get version control, I get you know, a whole different, nobody has to touch the running environment. Instead, I make the change here and I push it. But that also means I need to be thinking about the integrity of my pipeline and the integrity of the code.}
+{\pard  \line \par}
+{So this is where new projects like Sig store become really interesting. Right now I have a signing }
+{\cf2 [00:21:00]}
+{ solution that is designed to be used in a pipeline and to be used with a source code repository or things like that rather than, Signing solutions that get tied to Enterprise cas where you have to wait for manually for something, right, , and tecton Kubernetes native pipelines, Argo cd.}
+{\pard  \line \par}
+{I now have more tools for validating integrity. Tecton chains, sig, store cosign , and tracking that all the way through. But I do have to, again, that's a new shift left for my security including if you're doing, you know, whatever type of security as code, whether that's firewall, configuration, whatever it is, you wanna be sure that.}
+{\pard  \line \par}
+{When you're storing it as code, you know who touched it last and it hasn't been tampered with since it was last touched. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ And yeah. I'm so glad you we are having this conversation because I think I definitely would love for people to open up to the idea of using Yeah, a lot more IaC and yeah, to your point, It probably comes with maturity and I feel a lot of organizations, }
+{\cf2 [00:22:00]}
+{ especially traditional organizations, we kind of touched on the fact that telcos are using kubernetes.}
+{\pard  \line \par}
+{Mm-hmm. I even heard someone say meat factories are using }
+{\pard  \line \par}
+{\b\cf1 Kirsten Newcomer:\b0}
+{ Sure, sure. Manufacturing. Absolutely. Yeah, yeah, yeah. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah. And to your point in this context, a lot of people may. Be from those industries and think, well, IAC is not I something I have to worry about because I don't know, it's a meat factory for lack of a better word, or lack of a better example.}
+{\pard  \line \par}
+{Yeah. Where do you find the conversation kind of go towards when people think managed cloud service provider solutions solve these problems for them if they don't have to think about IaC? Would you agree that? It does or it doesn't? Cause I, I have my own personal opinion, but I'm keen on your side. No, no.}
+{\pard  \line \par}
+{And I'm }
+{\pard  \line \par}
+{\b\cf1 Kirsten Newcomer:\b0}
+{ interested, yeah, I'm interested in your opinion too. So I, I think that certainly the cloud provider is doing , a certain amount of management. So if we stick with Kubernetes, right? If I'm using Kubernetes from a cloud provider, they're managing the control plane. Mm-hmm. And, and back to the 2019 C N C F kube security audit.}
+{\pard  \line \par}
+{One of the }
+{\cf2 [00:23:00]}
+{ biggest challenges is managing Kubernetes, is getting the deployment of all the kube components. Configured correctly in combination with how they work with the operating system and all the hardening you want at the host OS layer. And so if you are, you know, using, a kube distro from a cloud provider, they're gonna manage the control plane and they're gonna deploy the worker nodes for you, right?}
+{\pard  \line \par}
+{But your applications in the end. Running container is a process on a host operating system, and so you still have a shared responsibility here, so, You need to know that the configuration of that infrastructure meets your expectations for your security needs, and those security needs vary. Depending on the different type of organization.}
+{\pard  \line \par}
+{Healthcare is another place where there's a, actually a lot of Kubernetes and I care a lot about privacy of my data. Also, }
+{\cf2 [00:24:00]}
+{ so the infrastructure, you know, again, if I'm using state collapse, which more and more organizations are, I might have a database running on Kubernetes, that means I've got some attached storage.}
+{\pard  \line \par}
+{So I still need to be thinking about how is that attached storage secured? How is the data managed? So it's kind of like, yep, the cloud provider's doing some things for you, but there's still this big layer of responsibility that you have to be thinking about. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ So my opinion is very similar to what you just shared as well.}
+{\pard  \line \par}
+{Yeah, and I also believe there's another limitation with the whole cluster management of, so you know, our kubernetes, the scale comes from or not just from the fact that you can scale up to have multiple nodes or multiple pods, it's also multiple clusters. And how do you manage that across the board? Yeah.}
+{\pard  \line \par}
+{A lot of examples of people I had conversations with, a lot of people use the cloud version for, I think it's like one cluster per application. I've seen that. }
+{\cf2 [00:25:00]}
+{ Yeah, and I, I don't know, like I, I don't think it's a, maybe it's the Yeah, use case they have, but like what do you see as a good pattern to be, because I also feel there is two sides to the industry.}
+{\pard  \line \par}
+{One is like . To your point, they were born native. Right? They done the right thing from day one. They, some of them even made their own version of kubernetes from the Google Source code mm-hmm. And did a fork and all of that. Yeah. And then there were the, I guess, for lack of better word, they came in as stage two and they started adopting the one versions from aws, Azure, Google Cloud.}
+{\pard  \line \par}
+{Mm-hmm. Thinking Google Cloud would be the closest to mm-hmm, the core source source code. , where do you see. The line between maturity of these organizations. In terms of, how would you describe for people who, maybe from one of those organizations on the right, which are stage two, what does a mature kubernetes practice look like?}
+{\pard  \line \par}
+{And we don't have to go like for large scale, but I'm just curious for an example perspective, where do you see the deployments to be more mature? Like what would be an example of. So that people }
+{\cf2 [00:26:00]}
+{ who are working on one cluster and where they have put every application in there, instrument application as well where do you see as a, as a patterns for if you were to put produce on a scale?}
+{\pard  \line \par}
+{With maturity, least maturity being on the left and the most mature being on the right, what are some of the examples of that? Yeah, }
+{\pard  \line \par}
+{\b\cf1 Kirsten Newcomer:\b0}
+{ I'm not sure I'm gonna answer it exactly the way you phrased it, so you can redirect me if needed, but Yeah. But I think you're absolutely right. I have seen, especially when organizations adopt kube from a cloud provider, those Kubernetes distros are generally designed as single tenant systems.}
+{\pard  \line \par}
+{That's kind of, if you care about security or management, , you're gonna be thinking about it that way. And to your point, if somebody's trying to get around you know restrictions in an organization, they might get approval for, oh yeah, that app's okay, because it's not as important to the business.}
+{\pard  \line \par}
+{You can go put that in the cloud. And so these individual teams kind of go do their own thing and have their own clusters. One of the real }
+{\cf2 [00:27:00]}
+{ challenges though, is that each of those clusters has its own control plane. And you start having your costs go up, right? you're, you know, instead of, whereas an organization that's able to take advantage of a multi cluster environment, they can have one control plane with multiple different teams from their organization using that same cluster as long as they are doing the appropriate rback and micro segmentation with Kubernetes network policies.}
+{\pard  \line \par}
+{Typically you need to understand more about how to secure, how to use Kubernetes to secure Kubernetes to do a multi cluster deployment. So when we circle back to your maturity, you're thinking around maturity in some ways. You really have to be more mature with Kubernetes to do the multi cluster work.}
+{\pard  \line \par}
+{ There's kind of a another pattern too, right? So there can still be good reasons to have separate clusters. Maybe. I }
+{\cf2 [00:28:00]}
+{ have some apps that require P C I D S S compliance, and when it comes to auditors, they're still learning this environment as well. I mean,, they probably even understand it, sometimes less than some others.}
+{\pard  \line \par}
+{So I might just have one cluster to minimize the scope of audit for my auditor, right? All my P C I D S S apps go there. But I'm still gonna need. Clusters also for application for data locality, right? I may have restrictions on where my data can reside, whether that's for California for G D P R or whatever it is.}
+{\pard  \line \par}
+{I might need clusters in multiple regions. So even if I'm really good at multi-tenancy and I understand all of that, I may wind up with multiple kube clusters. Which means that now I have to start thinking about how do I apply security and governance across all of those clusters, and how do I do that in an }
+{\cf2 [00:29:00]}
+{ auditable way and a manageable way?}
+{\pard  \line \par}
+{At scale. And so I think when we really get mature, it's when now organizations are investing in multi cluster management solutions and multi cluster security solutions because they've got reasons for that. Legitimate, you know, governance reasons for that separation , or had to have multiple cluster.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ I'm glad you mentioned governance and compliance. I was gonna say, cause we spoke about Telco, we spoke about fintechs. How does all of this play a role? Because, I mean, when cloud came in, we already were struggling explaining audits what cloud is, and now. With Kube. Do you feel auditors, obviously I appreciate the challenge that they have to keep updating themselves in technologies.}
+{\pard  \line \par}
+{Do you feel the current landscape at the moment is considering it's such a popular technology, they're also accepting Oh wow, we have to do kubernetes as well. Is there a lot more awareness of. How people are I guess }
+{\cf2 [00:30:00]}
+{ auditing Kube environments, because one of the biggest challenges we had for cloud was they just didn't understand how the cloud was so different to the traditional one.}
+{\pard  \line \par}
+{Is there similar challenges or is it better in Kube world? }
+{\pard  \line \par}
+{\b\cf1 Kirsten Newcomer:\b0}
+{ I think it's been evolving. , and I think that back to the as code topic. Mm-hmm. You know, one of the things that I think can make a real difference is, you know, managing compliance as code too. Right. So solutions like OpenSCAP Open SCAP stands for Security Content Automation Protocol.}
+{\pard  \line \par}
+{It's a standard from nist National Institute for Security and Standards in the States., it works with formats that auditors do understand. So if you can. Minimum automate compliance with technical controls using a solution like that. There are others out there. A lot of the container in coops, security startups that they've been around for a while now.}
+{\pard  \line \par}
+{I have a hard time calling them startups, but automating Kubernetes }
+{\cf2 [00:31:00]}
+{ compliance was a big part of where they focused and center for internet security has had the Kubernetes benchmark and the Docker benchmark and so. Automating that compliance for technical controls and outputting a report in a human readable form helps the auditors a lot.}
+{\pard  \line \par}
+{And then there are organizations who really have, you know, who are focused in auditing who've made it their business, to understand this environment. So while it's still a concern, I think it's moved fairly quickly. In terms of, you know, FedRAMP, P C I D S S, hipaa. And I do get a lot of questions about it, but usually I don't find that I personally need to talk to an auditor.}
+{\pard  \line \par}
+{It's more that I need to help the ops team understand how they're gonna address it, and then they're able to talk with the auditor.. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ To your point about working with the auditors to, I guess, you know, make this }
+{\cf2 [00:32:00]}
+{ change, I would imagine it's the same challenge working with security people as well for dev and ops.}
+{\pard  \line \par}
+{I think we spoke about devsecops just before. What's the easiest way for a lot of security people to transition into this new way of thinking? Because kubernetes is popular, granted. There is such complexity even in Kubernetes. these days as humans are humans, we make something simple, complex as well. We have a cloud managed version, we have a unmanaged version.}
+{\pard  \line \par}
+{We have a, I think I saw kubernetes anywhere version as well. What's the best way to approach it, I guess where, that's where I'm coming from. Cause a lot of people. May hear this and go, oh, this is too complicated. I'm just gonna reject it. What's the right recommendation you share with people to how to approach kubernetes security in an organization, especially when Yeah. There has been a complexity in those implementation. }
+{\pard  \line \par}
+{\b\cf1 Kirsten Newcomer:\b0}
+{ Yeah, conversation makes a big difference. Like , when we were talking about DevSecOps earlier and kind of the need to break down pillars, I think it's a two-way thing.}
+{\pard  \line \par}
+{ }
+{\cf2 [00:33:00]}
+{ There was a trend I'm not hearing as much , about. Four or five years ago about a bso business Information Security officer. I don't hear that term very much anymore, but embedding a security professional with an app dev team. From the beginning is gonna make the difference. And also, if you are a security professional and your business needs Kubernetes, again, it's kind of like we're in interesting times economically, right?}
+{\pard  \line \par}
+{You want your business to survive. Being agile, being able to move quickly, being able to deliver new functionality quickly, scale quickly, innovate is really important. As a security person, it's professional. It's to your benefit to find a way to spend time with the app dev team, with the ops team, understand why they want Kubernetes, what's the benefit to the business, and then as a security professional, help them understand.}
+{\pard  \line \par}
+{Because it's not, }
+{\cf2 [00:34:00]}
+{ it's not really about yes or no, it's about business risk. So help the app dev team understand why you are asking them to do the things you ask them to do, and ask them and the ops team to help you understand how we can meet those goals together. So even if you don't wanna dive in and go learn Kubernetes, right?}
+{\pard  \line \par}
+{There's some great content out there. There's Kubernetes by example. There's , a lot of tutorials, things that you can do to go get hands-on. But even if you don't have the time to go get hands-on, go talk to your app dev team. Go talk to your line of business. You know, have some conversations that are two directional, right?}
+{\pard  \line \par}
+{Why are they doing what they're doing? Why do they need it? And where are you coming from? What are your goals? Because you both want the business to succeed. Yeah. In the end. Yeah. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah. Yeah. A hundred percent. And I, I think you've touch on the right topic there with communication as well, because I think this is kind of where the DevSecOps piece started.}
+{\pard  \line \par}
+{Why us? }
+{\cf2 [00:35:00]}
+{ Security people not talking to the developers in the first place thinking we have all the solutions and I, granted enterprise is different. There's a process and everything , to follow. Another topic that comes up quite often is whole zero trust thing now being popular as well. Yeah. Where do you see that?}
+{\pard  \line \par}
+{I think a lot of people that I'm talking to so far, like we only in March and a lot of people have said that zero trust is a high priority for them this year. Where does zero trust play a role in Kubernetes world? }
+{\pard  \line \par}
+{\b\cf1 Kirsten Newcomer:\b0}
+{ And this is another place actually where you know, again, there's some new terminology to learn, but the concepts underneath it , are still the same.}
+{\pard  \line \par}
+{So when I think of Zero trust, right, it's like, start with denial and then open up only where you need to. Actually, Kubernetes can make that pretty straightforward. You can start with zero users or one cluster admin, right. And then yeah, slowly, slowly add the users. And you can do that in an automated fashion because everything is API driven.}
+{\pard  \line \par}
+{Yeah. You can, similarly, it's a }
+{\cf2 [00:36:00]}
+{ cluster, it's a collection of nodes or servers. You can segment that environment using Kubernetes network policies, which have been around for a while to ensure that. , and you can start also with the cluster having no access. No external access to the cluster, you can open that up slowly.}
+{\pard  \line \par}
+{Kubernetes network policies are still a work in progress in some ways, and they're pretty complex to use. But they do give you micro-segmentation and then finding solutions that help make recommendations for you. And there are tools emerging that help make better recommendations , on your network policies or even go in a layer above and using something like Istio.}
+{\pard  \line \par}
+{To ensure that I'm doing, I'm encrypting pod to pod traffic by default, and I'm doing that layer seven security with something like Istio. So you can absolutely do zero trust networking. You can do the RBAC with }
+{\cf2 [00:37:00]}
+{ zero trust, , and Kube has really. Started expanding a lot of the networking functionality as well.}
+{\pard  \line \par}
+{But you do you, that's a place where, so identity. Authorization authentication, workload identity. We're starting to see more investment in workload identity solutions like Spiffy Inspire and how they connect to cloud workloads. Or cloud services, right? How do I connect my, my workload running on Kube to that?}
+{\pard  \line \par}
+{Cloud service integrity. We talked about sig store earlier. There's also quite some investment in the community in confidential computing and confidential containers, and then attestation , at the host operating system level. And this is a place too where there's some advantages in cloud when it comes to confidential computing because you need attestation service.}
+{\pard  \line \par}
+{Different chip sets can have different attestation. Solutions. And so when you're working with a cloud provider, they tend to have the attestation }
+{\cf2 [00:38:00]}
+{ services that work with the hardware that they're supporting. So identity integrity, isolation. Again, isolation via networking, but also Linux solutions, secure computing profiles.}
+{\pard  \line \par}
+{Sorry for geeking out on you. Things like that, that actually are starting to be . Easier to put in place. Pod security admission, right? Making sure that I minimize the privilege of workloads. Things like Kyverno and OPA gatekeeper for admission control. It's just a ton of stuff out there, but it's kind of like the auditor question.}
+{\pard  \line \par}
+{It's like, how do I translate all of these capabilities and map them to how I'm trying to achieve zero trust? It's doable, but it's giving me a great idea for a, there's probably a white paper out there on it already, but I, I'm thinking, oh, maybe we need another one. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ I think so. I, I definitely feel there's a need for a white paper and the zero trust space because I mean, I Zero trust as a concept or a topic itself is still }
+{\cf2 [00:39:00]}
+{ evolving as a lot of people would say.}
+{\pard  \line \par}
+{Like, we've done parts of it. And with now SBOM and everything else kind of being popular as well. Mm-hmm. I'm not just throwing another acronym as security people do just throw another acronym into the conversation. Like but , do you feel SBOM also is affecting the kubernetes space in a lot of ways?}
+{\pard  \line \par}
+{In terms of the, in, I guess, the investments that you would see? Cause you know, how you just mentioned about I guess workload identification or workload segmentation is becoming, getting a lot of attention. Is SBO M bringing a lot of attention to certain parts of Kubernetes as. Yeah. }
+{\pard  \line \par}
+{\b\cf1 Kirsten Newcomer:\b0}
+{ The interesting thing about SBOMs and software bill of materials, for anybody who hasn't heard the acronym, who's listening, but I think this audience will have heard, I was at C N C F security Con in Seattle in February and mm-hmm SBOMs , were a big topic of conversation.}
+{\pard  \line \par}
+{For me it's fun because actually software build materials have been around for 15 or or 20 more years. They were primarily. A focus for folks who were trying to ensure that they weren't }
+{\cf2 [00:40:00]}
+{ violating the G P L license open source license. So folks would, you know, use what's now called an S C A a software composition analysis tool like Black Duck or Palomita.}
+{\pard  \line \par}
+{These names may not mean anything to some people to analyze their. Find the components, use that data to map, to open source licenses so that they could be licensed compliant. So, and I actually had the pleasure of working on s Spdx 1.0, which is a standard for producing SBOMs . , so that was really fun. So what made them so prominent right, was the Solar Winds hack.}
+{\pard  \line \par}
+{And if you think about how that's shown up in the Kube community, so Tecton, again,, a Kubernetes native pipeline that you can deploy as codes. You write , your tasks, everything's stored as codes. You can deploy it to any kube cluster, you can redeploy it to a different kube cluster. You'll then they recognize the need for attestation.}
+{\pard  \line \par}
+{Of the content moving }
+{\cf2 [00:41:00]}
+{ through the pipeline as well as the, the tasks themselves and enter tecton chains, which does that, and then enter Sig store, which makes it easier to add signing into that process. And. Kubernetes community has adopted SIG store for signing all the code that they produce from the community itself.}
+{\pard  \line \par}
+{So there really has been , this emphasis, this renewed emphasis on attestation and integrity of content. And so when I think about my software bill of materials that is, if I am treating a container image as immutable, I should get a software, build material with that.}
+{\pard  \line \par}
+{And I should know always what all those packages are and I should be able to, if I'm checking in my running environment, you know what is still in that container? I should be notified if suddenly a new package shows up. }
+{\cf2 [00:42:00]}
+{ Right. That's a big deal. So it's kind of interesting , cuz again, the concept has been present for a long time, but now it's being looked at in a whole new.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah, and I think I'm, I didn't even realize it's been there for 10, 15 years. Cause I mean, we've been talking about SCA for some time, but that has always been the case. Yeah. }
+{\pard  \line \par}
+{\b\cf1 Kirsten Newcomer:\b0}
+{ Most people didn't think about it that way. And there's some new stuff happening, which I'm kind of excited about too, which is crypto bill of materials.}
+{\pard  \line \par}
+{Right. Well, right. Think about quantum computing. And as quantum computing becomes real, what are the post quantum cryptographic algorithms that I'm gonna care about? And do I need to know what crypto is present in my environment, my app, my infrastructure, in order to evaluate whether I'm using Secure Cypress?}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Ooh. Yeah, that sounds like another conversation we need to have. I know, I know. But maybe another whole episode on that as well. I do wanna leave people with }
+{\cf2 [00:43:00]}
+{ something that they can probably use as a foundation to kind of start learning about these things if they have not. Cause a lot of people would just be curious.}
+{\pard  \line \par}
+{They might be seeing inklings of Kubernetes conversations coming in into their day to day. Where do you recommend people should start from a, cause it's quite complex. You have a choice of going cloud, managed or Kubernetes anywhere or wherever. Like in your I guess, experience of looking at all these landscape that you're looking at, at the moment, there's a lot more complexity because there's a whole question about a, yes, we wanna use open source, but who's gonna be liable in case something goes wrong?}
+{\pard  \line \par}
+{Like that's kind of where people pay for support. Where do you think people should start learning this from? Because for a people from start learning from scratch, I guess security, people learning from scratch versus people who have done or split between, should I do cloud-based?}
+{\pard  \line \par}
+{Should I just go full cloud native or kube native? Where do you recommend them? Mm-hmm. They start. }
+{\pard  \line \par}
+{\b\cf1 Kirsten Newcomer:\b0}
+{ Well , for learning about Kubernetes and people have different learning styles., there are some great books for on Kubernetes security, and }
+{\cf2 [00:44:00]}
+{ I'd start with Kubernetes Security. If you're , a Linux geek or a Linux.}
+{\pard  \line \par}
+{Os person, you can drill down on container security. Those are kind of two different layers. The container security is much more, especially for Linux containers, right, about how do I manage cgroups and secure computing profiles. It's a different level. Kube security is, It's much more about the Kubernetes components , and managing those.}
+{\pard  \line \par}
+{There's some great books out there. O'Reilly has has some of those. But also if you're a hands-on person I mentioned it a little earlier, there's kubebyexample.com, which has gives you a chance, you know, for free to do a bunch of hands-on learning. Including it has a security best practices track that you could leverage.}
+{\pard  \line \par}
+{And I will say also that the Kubernetes documentation I, I think, is pretty searchable and very useful. So definitely kubernetes.io has a lot of great resources as well. And then in terms }
+{\cf2 [00:45:00]}
+{ of cloud versus so you can have a private cloud, right? You can have Kubernetes deployed on premises to create a cloud, and, and, and you can use cloud provider again.}
+{\pard  \line \par}
+{If you wanna do some hands on, try it out with, with one of the cloud provider Distros kubebyexample. You don't have to spin up your own cluster, right? You've got that done for you, you can play around. But maybe after that you're gonna want , to spin up your own cluster and, and take a look at the c i s benchmark, right?}
+{\pard  \line \par}
+{That's if you're a security person, that'll give you some pretty low level hardening stuff. . That also I think provides some good context on how you secure a kube environment. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ So ask awesome advice. One final question. Where do you see the. I guess emerging pattern between a cloud managed kubernetes versus people still going, I can be cloud agnostic, I'm just gonna make my little cluster and keep, you know, keep migrating that from Google, Microsoft, }
+{\cf2 [00:46:00]}
+{ apple, private, cloud, whatever.}
+{\pard  \line \par}
+{Is there a pattern that you're seeing emerge? }
+{\pard  \line \par}
+{\b\cf1 Kirsten Newcomer:\b0}
+{ So the folks who are going to do their own kube and move it around, I don't think that's gonna last because it's really not cost effective, right? So either you're gonna look for. Kubernetes distribution that you can use across those clouds.}
+{\pard  \line \par}
+{Or you are going to wind up working with Kubernetes on one cloud or multiple clouds, but their own kube distro, right? Because it kind of, it starts to become the value is in the workloads. And why would you know? You wanna spend your time building your apps rather than maintaining the platform and there are a lot of people out there to help you maintain the platform.}
+{\pard  \line \par}
+{Yep. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yep, a hundred percent. And thank you for calling it out as well. Great answer. I a hundred percent agree as well. To your point about the app is what we tend to protect. We not trying to build a }
+{\cf2 [00:47:00]}
+{ new technology. We're just trying to make sure the app can go faster and still be secure.}
+{\pard  \line \par}
+{and its being deployed as well. So thank you so much for all the information as well. And. I definitely enjoyed the conversation, but maybe people who want to continue having the conversation about Kubernetes security and the evolution of it with yourself, where can they find you on the }
+{\pard  \line \par}
+{\b\cf1 Kirsten Newcomer:\b0}
+{ internet?}
+{\pard  \line \par}
+{Mostly I'm on YouTube. I, there are a bunch of recordings on YouTube. I'm on LinkedIn. Apologies folks. I don't do Twitter. So, but I'm definitely, is anyone doing }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Twitter? I dunno, who does Twitter anymore?}
+{\pard  \line \par}
+{Cool. So it's, I would put your linkedin link onto the show. notes as well. But thank you so much for coming on the show. I really appreciate this and I'm looking forward to having these conversations again. }
+{\pard  \line \par}
+{\b\cf1 Kirsten Newcomer:\b0}
+{ Great. Thank you, Ashish. It was wonderful. So thank.}
+}

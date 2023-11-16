@@ -1,0 +1,459 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red250\green138\blue59;
+\red128\green128\blue128;
+\red216\green34\blue146;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\b\fs48 Shakshyam Shah\b0}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ Hey man, how's it going? }
+{\pard  \line \par}
+{\b\cf3 Sakshyam Shah:\b0}
+{ Good. How are you? Thanks for playing that, man.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ No problem, man. Thanks for coming in. , it really means a lot when I have folks who are adjusting the livestream times on as well with me . So I appreciate you for doing that.}
+{\pard  \line \par}
+{I know who you are. Some of the other listeners may know who you are. People who don't know who Sakshyam. Can you give us a bit of intro about yourself and how you got to where you are today? }
+{\pard  \line \par}
+{\b\cf3 Sakshyam Shah:\b0}
+{ Hi everyone. I am Sakshyam Shah and I live in Kathmandu, Nepal. I'm a cybersecurity architect by trade.}
+{\pard  \line \par}
+{Been in the security industry for almost eight years. And I have been in both offensive and defensive side of security. And speaking about the topic today's topic itself. So part of my almost five years of my career in cybersecurity has been exclusively in infrastructure, access control, and privileged access management space.}
+{\pard  \line \par}
+{So I was involved in building infrastructure, access control solutions in my previous work. And currently I work in teleport where part of my job is to help engineers get started in cloud }
+{\cf2 [00:01:00]}
+{ infrastructure, security, secure access space in both cloud and cloud environments. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Awesome. So maybe that's a good segue into the topic straight away then privileged access management, I think.}
+{\pard  \line \par}
+{What does that mean for you and how is that different? Say for people who may know, I think I know what Privilege access management is and like the traditional context, how is that different for infrastructure and say cloud versus where it used to be, but before you're going to go into it, if you can tell us what you, how do you define Privilege Access Management?}
+{\pard  \line \par}
+{\b\cf3 Sakshyam Shah:\b0}
+{ Privileged access management has always been like, so we, so in any organization, so we trust employees and engineers with some roles that they can use to do their work in their during the job, or like, so. To prove this access management has always been that ensuring that they do not miss utilize those roles and privileges, or also ensuring that their roles are not compromised by adversaries and are misused against your organization, organization.}
+{\pard  \line \par}
+{Right? So privileged access }
+{\cf2 [00:02:00]}
+{ management has all this. That thing that ensured that the trust that you put give to your employees and your contractors or third-party vendors are not misutilized and used against you. So that's the privileged access management space. So talking about how it relates to more infrastructure.}
+{\pard  \line \par}
+{The core concept of privileged access management remains the same either we talk about traditional environment or cloud environment, right. Predicting keys to the kingdom, right? So it's the same concept, but I think where it differentiates is how the underlying infrastructure itself has evolved throughout the years.}
+{\pard  \line \par}
+{So that requires us to think of a different approach to those concepts. To give you an example on those parts like how can we retain or why we need to think rethink our approach of privileged access management is I think primarily we can categorize those into three parts first one being.}
+{\pard  \line \par}
+{So I think there is a massive increase in the attack surface for infrastructure, right? So if you, if you talk about traditional }
+{\cf2 [00:03:00]}
+{ environment, traditional infrastructure so typical enterprise would have a fleet of windows servers, a couple of Linux servers, a big clunky installation of a database.}
+{\pard  \line \par}
+{Right. So, and maybe they have ERP systems in few internal website and tools and networking devices, right. Firewall, router and switches. Right? So typically these used to make up what the internet infrastructure uses. Now if we take that into modern infrastructure, right? So the whole. Of even the hosting, a single big clunky servers doesn't make sense.}
+{\pard  \line \par}
+{And people prioritize using microservices and we give autonomy to each individual team inside organization. They can deploy their best in class database. They like it. They can deploy the best technological stack. They like it use best in class programming language or similar suites of tools. They like it.}
+{\pard  \line \par}
+{And then again, Like using many }
+{\cf2 [00:04:00]}
+{ microservices rather than a single service means that you obviously have many, many servers running in your infrastructure. And then modern organization are not bound to typical use of typical software suits and they use multiple teams, use multiple suits of softwares as they seem the required for their daily jobs.}
+{\pard  \line \par}
+{So that means that there are lots of, lots of attack. Surface has grown trout, the. More modern infrastructure operations, right? So that drastically increases the attack surface. So if you'd compare that to traditional environment. So even in today's case virtual account of compromised versus account of a junior website, developer and marketing team can like reg have organized.}
+{\pard  \line \par}
+{Security space, right. So nobody wants to reply to be defaced. And so that's just part of an example. And so there are many such areas, so that's the one part I think the other part is the change in the workforce itself, right? So lots of automation machine to machine access going on, and that's the change in workflows as well.}
+{\pard  \line \par}
+{\cf2 [00:05:00]}
+{ And the third point is on that if we can connect. Is there is increasing sensitivity of privileged accounts. Right. So to give you an example, what would happen if in traditional environment and adversary again, compromise a root password of a single Linux server, right? So like for example, to Q an example, again, go in and let's execute our RF minus RM minus RF.}
+{\pard  \line \par}
+{Right? So, and delete the whole surgeon. If you take that example in modern cloud native or cloud space, like, so that superpower that we give to his ops teams in automation can be used as superpower by adversary as well. Right. They can just execute single command, acute CTL, delete namespace, XYZ, prednisone production environment, and delete the whole namespace or the everything that's running the namespace.}
+{\pard  \line \par}
+{So, so the sensitivity of the previous account itself, Increased a lot in modern environment. Interesting. }
+{\pard  \line \par}
+{So, and }
+{\cf2 [00:06:00]}
+{ I think all three of them that you mentioned are very fascinating at the same time. A lot of people may or may not be aware of this as well, because I think the second one that you mentioned where microservices, as well as all these different, new using language that you want use any can compute that you want.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That's where kind of the Kubernetes side of things has come up as well. Is this, and maybe taking that a step further because we are in the cloud native models. How what's different between like a cloud one environment in managed privileged access versus a Cuban or DS one, would that be similar or are they.}
+{\pard  \line \par}
+{\b\cf3 Sakshyam Shah:\b0}
+{ I think so. D again, the concepts are similar, but speaking about platforms so Kubernetes give you much more control to operate the whole infrastructure. Right? So it, it lets you manage your run, your own private infrastructure. So that means there are many things related to controlling, privileged access to Kubernetes platform itself.}
+{\pard  \line \par}
+{Right. So And for example, you may want to control privileged access to Kubernetes API itself, the control pain. And }
+{\cf2 [00:07:00]}
+{ then you also want to secure the privileged privileges that you assigned to a pod, a namespace how do you define pod security policies and stuff? So there are platform specific things that you need to take care of, but then again, most of the things are similar.}
+{\pard  \line \par}
+{How you control access to a database that's hosted in communities, how you control access to internal website, web application tool that is hosted in Kubernetes. Right? So all those, those things are similar. If we take contexts of both traditional and communities environment, }
+{\pard  \line \par}
+{Right. I mean, so it sounds like when you're saying all this and to work to your point concept, hasn't really changed.}
+{\pard  \line \par}
+{Why is there a need for something new in this space? And like, I mean, yes, there are new challenges. So are the old tools don't work or are they not suited for a modern tech stack is like what what's making. People think of the change for the psychos. I thought like, you know, things like SSH sword RDP is, or we know hardwired.}
+{\pard  \line \par}
+{If we do a machine maybe what makes it }
+{\cf2 [00:08:00]}
+{ stand? What makes a modern tech stack stand out that where the traditional approaches, even though the conceptually they are same, they fail. }
+{\pard  \line \par}
+{So Please wear like a traditional privileged access management solutions fall short is iTunes. So all those things are similar on both traditional and cloud native environment.}
+{\pard  \line \par}
+{So the solution that has been existed so far they are not designed to be well adapted to the cloud native workflows itself. Right. So and that's one of the. That we see so far, the other thing is how to unify the Kubernetes workflow with the traditional workflow. Right. So throughout the year, so many organization, they started in a co-located data center, they moved to cloud and they are now moving to cloud native infrastructure.}
+{\pard  \line \par}
+{Right. So, and if you, if you look at those org types of organization that they, they, they have almost three different kinds of infrastructure in their whole organization. Right? So the one, one of the challenge there is }
+{\cf2 [00:09:00]}
+{ how do you conduct. Those policies are privileged management controls that you have been applying to the traditional environment and that were applied to a cloud environment, and that will be applied to a cloud native environment.}
+{\pard  \line \par}
+{Right? So the, one of the main challenge, the two. Solutions have is how do you consolidate all those things? So at the conceptual level, they are same, but then how to integrate and adapt to the workforce. The workforce are very, very much different. So that's where the pain of why traditional solution might not work in the modern }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh, I, I think I know what you mean.}
+{\pard  \line \par}
+{So, like for example, the Kubernetes API access is probably not as the same as SSH. Technically you're just doing a file update and because things like privileged access management, cause I did, I didn't the access management in the beginning of my career. And I always remember this whole thing around the project management is about recording sessions for what people are doing as well in terms of.}
+{\pard  \line \par}
+{I have logged in as an admin and traditionally these admin account used to be like a.one }
+{\cf2 [00:10:00]}
+{ account or dot admin account against mine. Cause I, I technically would have two identities. So is identity also being challenged at the same time in this cause I fought for me or can identity remain the same way I could have a shisha and she start one or she started admin and she started admin is kind of the privileged part.}
+{\pard  \line \par}
+{So. I can still separate that out and don't have to manage policies like that, or the policies still fail. Like I'm just curious from an identity perspective as well. Has that really changed much between a traditional world and a cloud native world? }
+{\pard  \line \par}
+{\b\cf3 Sakshyam Shah:\b0}
+{ I think so in the traditional world, so identity, we're more focused towards the user}
+{\pard  \line \par}
+{It was, how do we authenticate and authorize the users access to systems and services, right? Yeah. But in, I think the measure of the workflow that is around in cloud native environment are mostly related to machine to machine access. Right? So the there are third-party tools that access to your infrastructure in an automated fashion.}
+{\pard  \line \par}
+{There are CA CD pipelines that are integrated to your cloud native infrastructure. Right. So, so now that, that }
+{\cf2 [00:11:00]}
+{ means that we have more use cases of machine to machine access. That means that there are a solution that falls short on how do I assign this roles and identities to existing. They are able to assign those roles and I didn't use to user access, but they fell fall short in assigning identity to the machine and machine access.}
+{\pard  \line \par}
+{So that's, that's a one part of it. The way it And again, comparing to the cloud native environment. So most of the things are like happening in an automated fashion, right? So there's not a good connection between the or typical identity management and infrastructure access, man. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh, because the identity is actually technically not in use.}
+{\pard  \line \par}
+{It's more for a machine ID that's in use rather than say Asheesh logging in. It's actually a robot user configured by logging in or in Kubernetes scenario, you have defined it in a CI CD pipeline. What the new conflict should be. And the API just met. For you. So I think like there is no user in question here, cause I was going to ask the whole privileged access management as a mitigation }
+{\cf2 [00:12:00]}
+{ for, or I guess a lot of compliance controls and otherwise a lot of people talk about it's all about role-based access control, as long as you do our back.}
+{\pard  \line \par}
+{Right. Your privileged access management should be, but it should be perfect. Like, is that being challenged in this space as well? Or that still applies? }
+{\pard  \line \par}
+{\b\cf3 Sakshyam Shah:\b0}
+{ I think so. Our back is again. So the way I countered that is, so that was a challenge already in traditional environment as well. Right? So you assign our bag, but there's no way properly to ensure that the assigned privileges will be used correctly or like in an ethical way.}
+{\pard  \line \par}
+{And that's what insider traits are about. Right. And then again, the other cases that, so how, how do you know that once they are compromised? That impact our lesson and the blast radius are contained. Right? How do you know, how, how fast can you identify that if the privileged account has been compromised?}
+{\pard  \line \par}
+{Right. So I think those are the pieces that are, we're always }
+{\cf2 [00:13:00]}
+{ challenged by traditional way of assigning roles and privileges. Right? So if, if there is the account is compromised, like how fast can you detect that the account was compromised and maybe log that account disabled that. Similar kind of stuff.}
+{\pard  \line \par}
+{Right. So I think those were the things that we're always challenged. It's simple in terms of like solves most of the cases, but what happens when they are misutilized. So that, that is, that is the whole concept of previous access management }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ and. Although I've been challenging you on the whole, how is it different from traditional?}
+{\pard  \line \par}
+{Why do I even care about a new field Jackson management? I think you've done it. You've done really well to talk about why the traditional model should be challenged. Maybe my followup question to all this is then what should we be looking for me and the listeners. When we think about privacy privilege, access management, say in cloud or in Cuban cities or whatever modern stack may look like for us, what are some of the things we should look for?}
+{\pard  \line \par}
+{Whatever approach, whether it's an open source or a paid }
+{\cf2 [00:14:00]}
+{ software, whatever we will look for, what should we be looking for as a component for a a tool which was be cloud native. And to your point helps you kind of, I think I'm, maybe I'm asking the question a bit more by saying centralizing policies and stuff as well.}
+{\pard  \line \par}
+{Like, so what, what qualities should we be looking for in a privileged access management strategy that we would have for a cloud native world? }
+{\pard  \line \par}
+{\b\cf3 Sakshyam Shah:\b0}
+{ Okay. So to answer that, I think the role of privileged access management solution is again to lessen the risks of misutilized of the privileged accounts itself, and also limit the blast radius when the privileged accounts are compromised.}
+{\pard  \line \par}
+{Right? So that should be the core part of privileged access management solution. And. She would like to enable that, to allow that is, I think we need to rethink about how the privileged accounts are managing themselves. Right? So the first part of it being, how do you manage the credentials related to privileged accounts?}
+{\pard  \line \par}
+{Right. }
+{\cf2 [00:15:00]}
+{ So traditionally we have been like many people organization. I think all of them are using password based authentication in one form or another. So I think passwords are bad. So if you relate that to a privileged account, what happens when a privileged accounts password is compromised? Right? So there is no way to do that.}
+{\pard  \line \par}
+{There is like child. It is challenging to invalidate passwords, right? So, and users always use weak passwords. Like even if they use strong passwords, right. There are way to compromise password because that it has, it is associated with many rigs can be compromised with fishing can be prone to brute force attacks.}
+{\pard  \line \par}
+{Right. So much, so many stuff. Right. So the first part we see is. The problem is with related with the credentials that are assigned to privileged accounts. It's even. If you take that to machine, to machine access. So most of them are authenticated with API tokens, right? So even API tokens are some sorts of passports in disguise.}
+{\pard  \line \par}
+{\cf2 [00:16:00]}
+{ Right. So once they get stolen, you can invalidate them. Right. So the token rotation. Yeah. It's a challenging part. If you have one service that's access, managing access to infrastructure, I think you can manage password or API token or keys rotation for a single service. But if you have multiple many services talking to each other I think that will be challenging in that part where you have to rotate many keys and tokens around time, and that gives most teams don't follow security, best practices of peer period, or periodically rotating them.}
+{\pard  \line \par}
+{All right. So I think the main problem is related to passwords and similar type of credentials. And that's where the modern privileged access management solutions. So look to our us assigning password list, authentication mechanism to privilege account, right? So you almost in that way, you can eliminate the whole risk associated with the compromise of credentials.}
+{\pard  \line \par}
+{Chances of misusing credentials to exploit vulnerabilities and so on. So I think the first part is moving to our }
+{\cf2 [00:17:00]}
+{ password. Let's start. Maybe use modern password, less solution as such as way bald 10 or use certificate-based authentication and similar sites. So first thing is moving to our sponsored list solution that that's what a modern privileged access management route offer.}
+{\pard  \line \par}
+{The second thing is I think, how do you like directly integrate with the workflows that engineers already are doing in their everyday job? Right. So. Engineers being engineers. If you force them to do it different way, like they're all this find a way to bypass that control and they'll find it one way or another and they'll do stuff.}
+{\pard  \line \par}
+{So I think the best part of security is a good security solutions to always integrate. The tools and workflows the engineers already have, right. And a more and traditional privileged access management context. So you would require an engineer to go into Pam solution authenticate with that solution, retrieve credentials.}
+{\pard  \line \par}
+{And in many cases you have to use the }
+{\cf2 [00:18:00]}
+{ tools provided by those privileged access management solution. They did not use to work with the tools or command line tools or favorite database client tools, similar kinds of stuff, and they would force you to use another tools. Tools extra shells. Right? So, and they would force engineers to work that way.}
+{\pard  \line \par}
+{I think more privileged access management solutions should integrate to the workforce that engineers already have, so that security can be brought to the workload that is already being used in. The daily operation. So I think those are }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ the two parts and I think the, the solution you're referring to and I've been it, it's the name of it?}
+{\pard  \line \par}
+{Ryan's is Noah's Ark. So I'm just going to use you, I'm going to drop that in there. And I, I I'm, I know exactly what you're talking about. Definitely doesn't make you make any friends, but so password less, as well as using some kind of workflow which integrates with where developers are. Can you expand a bit on the second one?}
+{\pard  \line \par}
+{Because I think it's a. It's an interesting one where I would have taught in a cloud context, you have a jump walks and then }
+{\cf2 [00:19:00]}
+{ you use a jump box to SSH into any box. Maybe you're deep inside your AWS account or Azure subscription. You have a database subscription somewhere, which is only accessible through a jump host through multiple hoops over.}
+{\pard  \line \par}
+{Is that what a developer would be using as well? Or is that my infrastructure security engineer brain kind of going, like, what are some of the examples, I guess, of this workflow that you just kind of mentioned and how can security integrated. }
+{\pard  \line \par}
+{\b\cf3 Sakshyam Shah:\b0}
+{ Okay. So I think for security to be in, in terms of access to be properly implemented, the solution has to like be able to understand the underlying protocol itself.}
+{\pard  \line \par}
+{Right? The traditional way of doing that was like through open, SSH jump box somewhere and allow every make everyone to access databases, assets, servers, or even windows servers to that John box. But the. Limitation to that is that as I said, jump box, they want to speak as such per protocol. Like they can }
+{\cf2 [00:20:00]}
+{ Tanelle any protocol underneath the search protocol, but again they are not protocol or per se.}
+{\pard  \line \par}
+{So good solution has to be able to understand and support the underlying protocol itself to get the visibility over what's going on over every infrastructure connection. Right. The solution has to a proper solution. It has to be a good asset proxy, or for example, it has to be a good database proxy.}
+{\pard  \line \par}
+{If it's controlling access to database, it has to be a good SCTP proxy. If it's controlling access to web services, it has to be good. RDB proxy. If it's supporting access to windows servers, right. The solution has to be well integrated at the protocol level so that the privileged access management solution has full visibility and control over access that's going underneath.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh, okay. I get that then. So to your point, if we're in a way, a lot of way, we're challenging that entire notion of just simply SSH, but the other one, the password less one as well. }
+{\cf2 [00:21:00]}
+{ How does that fit? Because that's essentially requires you to have a key. Right. So Howard is the whole passwordless kind of thing, kind of fit into this kind of workflow.}
+{\pard  \line \par}
+{\b\cf3 Sakshyam Shah:\b0}
+{ So for SSI as such, or also supports a certificate based authentication, right. Although the form of the certificate is somewhat relate is similar to the keys, but it's still an certificate. Right? So in that case, so it's SS supported certificates are a bit different at the Poplar acts five or nine certificates.}
+{\pard  \line \par}
+{Yeah. But, but, but then You can add context to certificate based at indication. Right? So for example, you can give a scope, assign a scope permission to the certificate, right? So the user is only able to access these sorts of servers. You can like hardcore or dynamically assign that to a certificate.}
+{\pard  \line \par}
+{And the best part of the certificate is that you can also assign a short-lived expiry so that they automatically get. Are technically speaking their }
+{\cf2 [00:22:00]}
+{ time will be expired at certain timeframe and will not be able to use that anyone will not be able to use that certificate after certain period of time.}
+{\pard  \line \par}
+{Right. So that's how certificate can help in. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh, and would that be issued based on my credentials? So Ashish just logs in with his grandchild, but I, instead of me getting an SSH key, I'm just getting a SSA certificate, which I can then use to just shortly over that I use. I guess SSH into a jump post that, that I can use to access my my database, which is in the deepest layer of my AWS account.}
+{\pard  \line \par}
+{And it should still be, I mean, like, I guess, how do you, because the one thing that people talk about privileged access management is also the fact that. You mentioned new qualities, which was having integrated integration of security into an existing workflow for security having more than password as a way of authenticating.}
+{\pard  \line \par}
+{And I guess because we're waiting, password is hard and I totally get that even with the API is having a whole life cycle behind it. I'm not even going to, going to talk about }
+{\cf2 [00:23:00]}
+{ the whole shared credentials that people have as well for privileged access, because you don't want to have too many there's license issue and all that.}
+{\pard  \line \par}
+{So I'm not going to go into that as well, but just to think from a perspective of, okay, I've got those too. One more thing that people would concern themselves with is how do I kind of audit or how do I log what Ashish has done as a privilege? Like w what kinds of things they should be looking in a privileged access management strategy for.}
+{\pard  \line \par}
+{Okay. I need to have an approach where it's not just password. I can go for the SSS certificate that you mentioned. I'm assuming there's an RDP current as well. And the second one being you integrate into the workflow, but what am I looking for? Am I, or how am I auditing? What I'm doing is accurate. Can I stop the behavior or is that even a thing that's not possible?}
+{\pard  \line \par}
+{I know the Noah's Ark thing reminded me of that thing. They used to do these recordings of the session. Is that something that is possible in a cloud native world or, or is there something even better? }
+{\pard  \line \par}
+{\b\cf3 Sakshyam Shah:\b0}
+{ Speaking about recording, I think it's more possible in the }
+{\cf2 [00:24:00]}
+{ cloud native world. Right? So everything is, yeah, because everything is software defined, right.}
+{\pard  \line \par}
+{So we can like have everything good, the traffic, everything that can go through the privileged access management system and that can be recorded. I think that that's the flexibility. We have more in cloud native solutions. Otherwise, if you take that example to traditional environment where you have to monitor axes that are being made to a hardware devices, right?}
+{\pard  \line \par}
+{So th that there are many challenges in that part, but I think that's a more in the favor of cloud native environments, right? And obviously you part of the privileged access management is recording the activities that users are machine performs in an attentive. I tend to get it and authorization that that's core part of privileged access management, right.}
+{\pard  \line \par}
+{We record signing in and signing out events. Right. And even including every commands they use they execute in the station. But to answer to your question, I think the way I see it personally is privileged }
+{\cf2 [00:25:00]}
+{ access management should be more focused to. How do you ensure that the misuse, again, misuse of privileges are are listen, right?}
+{\pard  \line \par}
+{And then again, how fast can we identify or how can we like reduce the chances of getting the privileged accounts compromised itself and how do we reduce the. When a privileged account is compromised. So monitoring again, it's, it's a core part of it, but there's so much that can go into monitoring, right?}
+{\pard  \line \par}
+{So we can set up automated fashion to to to understand the pattern of users, how they have a daily pattern of access to certain systems how machine to machine communicates in a certain pattern in a daily environment. If you can detect an anomaly in the pattern, then you can might send, send an alert go back to a privileged access management system and see the recording of whole session like that.}
+{\pard  \line \par}
+{That is a part, but that can scale only so much. Right? And so privileged access management solutions should be focused more towards listening the risk of }
+{\cf2 [00:26:00]}
+{ a compromised privileged accounts. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Interesting. So in a way, 'cause, you know, how the Noah's Ark example that I keep going back to where, and you kind of touched on this as well.}
+{\pard  \line \par}
+{They give you access to the box through our restricted common terminal, and we're all talking about, Hey, no, you should integrate into something that I'm already using as a, as a dev ops engineer or a developer. So are we, okay. So far as a quality for what we should consider for our privileged access management, you should also look for things like.}
+{\pard  \line \par}
+{How do I keep a log of what commands have been run and to your point about the anomaly, the anomaly pattern as well. So, so it is possible to kind of monitor to a bad pattern that, Hey, this Ashish's profile usually comes in, does a SSH command comes in and looks at the, I don't know, standard inputs turn outward and make sure that engineers is running on this box.}
+{\pard  \line \par}
+{But one day he decides to suddenly start spraying the network for what ports are open. Like that kind of normally can be detected as }
+{\cf2 [00:27:00]}
+{ well as not these days with privileged access. }
+{\pard  \line \par}
+{\b\cf3 Sakshyam Shah:\b0}
+{ So previous access management records, those kinds of activities, right? So that, that those data can be fitted into the other logs that and, and SOC environment you get along with other services.}
+{\pard  \line \par}
+{So you can correlate those, those datas and. And come up with assumption on that part. Yes. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right. And how do you scale this? Cause I I'm thinking, you know, this is like, I dunno, man. I think these, these days everyone's trying to be the next Facebook as well. So no, one's really thinking about it. Just associations, Shushan, suction, just trying to access the cloud enrollment.}
+{\pard  \line \par}
+{It's not just. It's like multiple teams, hundreds of teams. And how does this kind of thing scale like, and maybe is that where people kind of switch between open source and paid solutions as well? I don't even know. }
+{\pard  \line \par}
+{\b\cf3 Sakshyam Shah:\b0}
+{ No. So I think so. So that's my, that was my point earlier as well. Right? So the Mo monitoring part in the privileged access management solution, they can scale only so much.}
+{\pard  \line \par}
+{Right. At some point they. They }
+{\cf2 [00:28:00]}
+{ can do, they will record. They can record every activities and such, but they can do so much in the monitoring site. It w it highly scales in modern workforce, where there are many, many thousands of users, thousands of machine to machine communication and such. So that's why it more than a privileged access management solutions should be focused towards how can you reduce the risks of the privileged accounts getting from.}
+{\pard  \line \par}
+{And also they should be able to reduce the risks that once the privileged account are compromised, what solution can the Pam solution bring in so that they are content in a way that they can be pivoted to a further extent. Right? So that should be a core part of the modern privileged access management.}
+{\pard  \line \par}
+{So. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And to your point, because it's all software defined, it should be possible to not be }
+{\pard  \line \par}
+{\b\cf3 Sakshyam Shah:\b0}
+{ yes, yes, yes. Right. So everything is offered to van. You can control that to a much greater extent, right? So in traditional workflows, most of the }
+{\cf2 [00:29:00]}
+{ stuff we're doing manually, right? So that was hard to do that in automated fashion.}
+{\pard  \line \par}
+{But now we have that opportunity in cloud native environment modern, privileged access management is able to do that. Should be favorite. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. Awesome. I think that's more, and I'm curious as well, is there a question that you get asked quite often more privileged access management that I haven't asked you yet?}
+{\pard  \line \par}
+{I'm curious is there, cause I feel like I've covered at least from my curiosity perspective, I've covered the traditional language because coming from a world of identity access management where the Noah's Ark thing was very popular in my world for a, for a long time. And it was very. Clunky installation used to take men.}
+{\pard  \line \par}
+{I don't know, God knows six months, seven months, we just install this thing as well. And that's why I can't name the exact name of this Noah's Ark because I'm sure they come after me after this. But but I'm sure they've changed by now, right? So I'm not saying that they are still doing what they were doing 10 years ago, because there was no cloud back then as well that people are working on, but they might've changed.}
+{\pard  \line \par}
+{But it, it makes me think that what other }
+{\cf2 [00:30:00]}
+{ things people should think about. Especially people like me who are from a traditional environment, who's now adopted cloud cloud native. What other things are we probably not asking that we should, that you get asked quite often? Like, is there a question that I haven't asked you, we should be asking people like about the new world of privileged access management and cloud native world?}
+{\pard  \line \par}
+{\b\cf3 Sakshyam Shah:\b0}
+{ Yeah, I think so. Prunus access management or even access management. And that trick got like has a history have been historically like taken for granted, right? Let's be because access management to to a certain extent has, is a solved problem. Right. So if you talk about like SSI drama, right? So it was introduced in nineties.}
+{\pard  \line \par}
+{We had already introduced in nineties. Most part of access management hat has been always, already been right. Brought to the market we will long before. Right? So that's, and again, most of the products or }
+{\cf2 [00:31:00]}
+{ platform themselves bring the concept of privilege management, role assignment, role creation, and how can you secure those stuff as well?}
+{\pard  \line \par}
+{So, so I think these are the reasons that privileged access management itself. Now, how have all those been taken for granted, like people care, but then as in the way of in the view of compliance or one, if you are like big, big fortune 500 companies, and you have to think about compliance in that regard, but I think that is also the case that, that that's why so many data breaches security breaches are due to the compromise of the privileged account.}
+{\pard  \line \par}
+{Right? So that's, that's the one part of it. I think so moving forward is how can we integrate privileged access manager, concept of privileged access management into, again, the daily workflow of access requirements that is in every organization, right? If you can like. Combine and grid those two things and bring security }
+{\cf2 [00:32:00]}
+{ and the normal way of access to us and make it as a same thing.}
+{\pard  \line \par}
+{I think that that's a part where everyone should be talking about and should be thinking about their security strategy of securing privileged accounts. I think }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ that's a good point. How do you cause to point actually what you've already said is absolutely right. SSH and RDP has been soared since the nineties.}
+{\pard  \line \par}
+{Right. And you may talk about the fact that yes, we are trying to reduce. Yeah. And if you tell that to a developer or their manager, yay. I'm all about that, man. I'm just doing, making sure my assets using or shared over everything. So how do you sell something? Like, and by seller, what I mean is like I am a securities, a CSO.}
+{\pard  \line \par}
+{I have to convince my team for. Using a privileged access management solution, whether it's open-source or paid or whatever, or even if it's Noah's Ark. W what do you see as a way that people are able to accept or are able to kind of sell the idea of, Hey, you need privileged access management into a team, apart from the compliance around, Hey, we }
+{\cf2 [00:33:00]}
+{ have compliance number 1, 2, 3, 4.}
+{\pard  \line \par}
+{According to that, we should be recording sessions for privileged access. Is there anything outside of that that can be used as a way to. I guess, to, to sell the idea that maybe we should do privileged access management better instead of just using our current credentials for privilege, as well as non-private Jackson.}
+{\pard  \line \par}
+{I I'm always, I don't want to have users that are always admin. I want them to make a conscious thing to say, I'm switching now to an admin person. So that's why I have to do all these extra things. So do you find that, how do you sell that thing to other development teams? }
+{\pard  \line \par}
+{\b\cf3 Sakshyam Shah:\b0}
+{ Okay. So to, to that. As fresh, I start with the open source thing.}
+{\pard  \line \par}
+{Right. So I think if we are to speak about the cloud native environment, I see personally, don't see any reason to go with non open-source tools on that part. Right. So, because the whole ecosystem is built around open source. I think everyone should start with. Solution, right? Yeah. So but in that part, how do you like tell X, Y, Z team to even use an open source tool }
+{\cf2 [00:34:00]}
+{ and that would get in their daily way of workflow and require them to change their water rights.}
+{\pard  \line \par}
+{So that's where I think the the important part of selling the idea of privileged access management is how can we actually solve. Integrate with the daily workflow of the developers of the engineers have security teams, right. So that they don't need to go to different con context and how they have been accessing their servers and their services in the dairy Dario for.}
+{\pard  \line \par}
+{Right. So, so for example, if you already, you can integrate privileged access management solution. I do the tools they already use and all the magic of privilege controls happens in the background magically. Right? So people want care at that time. Right. But if, if you force them to use a different tool, if you force them to like reauthenticate every time let's say so, or if you've don't integrate with the tools they already use, if they are using communication tools, for example, the chat platform like slack and matter most, if }
+{\cf2 [00:35:00]}
+{ you don't integrate with those stuff, People will find it very hard to use that solution.}
+{\pard  \line \par}
+{So, so the important part is how to integrate with, again, the workflow of the developers and engineers that are already being used. Right. So they don't find it very hard to like get, they don't think they are challenged to use a different system. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right. So making, it's almost seamless for them to start using something like this.}
+{\pard  \line \par}
+{It's sort of like a, Hey, there's an extra step that. Yeah. }
+{\pard  \line \par}
+{\b\cf3 Sakshyam Shah:\b0}
+{ Yeah. So that's, that's where also the capability of the privileged access management systems comes in, how they can integrate well, well, with the tools, the all the engineers and developer already use, right. And also how does solution can support and speak the native protocols like database wire protocols as such protocols, RDB protocols and native labels, so that the solution can integrate with the.}
+{\pard  \line \par}
+{Tools and services everyone uses in organizations. So that's, that's where the capabilities of modern privileged access management comes }
+{\cf2 [00:36:00]}
+{ in. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Awesome. No, thanks so much for this man. I really appreciate this. I think it's definitely a great introduction into the whole space of how someone can manage privileged access management.}
+{\pard  \line \par}
+{For infrastructure, whether it's cloud or cloud native in in the modern context. Now that's pretty much the end of the technical questions that I had for you. I definitely have a couple of actually three fun questions, which we ask our guests towards the end. I'm going to start with the first one.}
+{\pard  \line \par}
+{That's pretty straightforward. Just to get to know you a bit more the first one being, what do you spend most time on money and not working on technology or this privileged access management stuff. }
+{\pard  \line \par}
+{\b\cf3 Sakshyam Shah:\b0}
+{ Okay. I think when I'm not working mostly watching movies or listening to music. That's why I'm doing some similar lazy stuffs, man.}
+{\pard  \line \par}
+{Oh, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ fair enough. Well I enjoy that lady stuff as well. So I'm with you on that one. The second question being, what is something that you're proud of? Part is not only a social media. }
+{\pard  \line \par}
+{\b\cf3 Sakshyam Shah:\b0}
+{ So I'm hardly active in social media. So I didn't tell me the stuff that are not in my social media. Yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Perfect.}
+{\pard  \line \par}
+{So w }
+{\cf2 [00:37:00]}
+{ what is that something that you're proud of that you've obviously clearly haven't shared much on social media. So what is something that you're proud of? }
+{\pard  \line \par}
+{\b\cf3 Sakshyam Shah:\b0}
+{ Okay. I had Mandera. Mm. The quick one I remember right now is like so yeah, so the college where I studied, so now, so they have like allocated a whole lecture hall on behalf of my, of my name.}
+{\pard  \line \par}
+{It's I think that there's a proud moment to hear. Yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Wow. You have an entire classroom with your name on it, like as in, so is that because I don't know, what was the what was the thing that encouraged them to go down that part? Like as in giving you that honor, that sounds pretty awesome as well, by the way.}
+{\pard  \line \par}
+{Congratulations. }
+{\pard  \line \par}
+{\b\cf3 Sakshyam Shah:\b0}
+{ Thank you. I think so based on my work, so. Like I had, so if talk about Nearpod, so it's a small space, the whole security team and security committee, a small space. And I think it's based up on my contribution to the security ecosystem. }
+{\cf2 [00:38:00]}
+{ Oh, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ right. Okay. Now, crustaceans, man, that's pretty awesome to be able to, at least, I mean, it may be small, but it's not too small.}
+{\pard  \line \par}
+{Let you know, there's only one section function site shy in the entire Naipaul. So that's why, Hey, it was only one person. So we should make so clearly kudos to you for doing something really amazing that God recognized, man. So final question. What is your favorite cuisine or restaurant that you can share with us?}
+{\pard  \line \par}
+{\b\cf3 Sakshyam Shah:\b0}
+{ Yep. So I'm a footie per person, man.}
+{\pard  \line \par}
+{I, I love every cuisine. That sounds, that tastes delicious. Right. So }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ what's your current favorite dish and I'm sure it's not more MAs I'm sure it's more than most. }
+{\pard  \line \par}
+{\b\cf3 Sakshyam Shah:\b0}
+{ Well, by the end of the day I think the Nepalese cuisine is }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ pretty awesome though. I think }
+{\pard  \line \par}
+{\b\cf3 Sakshyam Shah:\b0}
+{ yeah. Yeah. Yeah. No matter where I go. And w w what cuisine I eat, like after a few days, I have to eat the nucleus foot.}
+{\pard  \line \par}
+{Yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Fair }
+{\cf2 [00:39:00]}
+{ enough. That's a good way to look at it. Cause I definitely find that we have a few more places in Melbourne that we are really far enough. I think even though I'm here in London right now, I'm pretty sure we'll, we'll have a lot of the moments as well as goat curries over here as well. If ever find that, but dude, thanks so much for sharing this as well.}
+{\pard  \line \par}
+{I really appreciate this. And where can people find you? If they have more questions that are managed privileged access to cloud and cloud native. }
+{\pard  \line \par}
+{\b\cf3 Sakshyam Shah:\b0}
+{ I think can ping me on LinkedIn so that that's the, at least, the least a place where I'm at least active as mediums. Yeah. All }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ right. I'll I'll leave a link for that on the, yeah.}
+{\pard  \line \par}
+{I'll leave a link for your LinkedIn account onto the website as lots of people can go onto it, but thank you so much for doing this, man. I really appreciate your time and I'm really looking forward to having you hopefully soon and talk more about the projections access value space as well. And for.}
+{\pard  \line \par}
+{Thank you for tuning in, and we will see you on the, we obviously on a couple of days when you're back in Melbourne with the next episode of cloud native, and we've got two more episodes to go before we end the month. But for now, thank you }
+{\cf2 [00:40:00]}
+{ section and thank you everyone else who kind of came on. Hey, thank you.}
+{\pard  \line \par}
+{Thanks. Thanks man. No problem, man. Alright. See everyone. Bye.}
+}

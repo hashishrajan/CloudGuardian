@@ -1,0 +1,650 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red216\green34\blue146;
+\red128\green128\blue128;
+\red250\green138\blue59;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\b\fs48 Christophe Parisel\b0}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ How to become a cloud native Security architect is a question that we get asked quite often. Cloud native as a space is growing quite rapidly. Kubernetes had a 70% adoption increase over the last couple of years. That is massive. If you're a solution architect, technical architect, or a cloud architect trying to become a cloud native security architect, then this is the episode for you.}
+{\pard  \line \par}
+{We had Christophe Parisel who was talking about how we transitioned from being a technical architect in on premise to becoming a cloud security architect, and then now he works in cloud native security architecture. Working on Kubernetes cluster. This was a really interesting conversation to talk about.}
+{\pard  \line \par}
+{What is the complexity of working in an enterprise space as an architect? The kind of counterweight you have to have when you're trying to talk to Amazon, Azure, Google Cloud, they tell you that use solution, but you kind have to balance that with what you already have in an organization context, maybe from a secret management perspective, from a network security perspective, the whole confidentiality, integrity and availability.}
+{\pard  \line \par}
+{The principles that the whole information security space or cyber }
+{\cf2 [00:01:00]}
+{ security space is built. This was a great episode. If someone who's about to become a cloud data security architect or is trying to get into the space, definitely share the episode with Friend, your Colleague, your social media.}
+{\pard  \line \par}
+{It's really helpful for them and it also helps us find more people that we can help out as in the space as well. I hope you enjoy this episode, and if you are coming in for the second third or fourth time and if you haven't subscribed to the iTune podcast or the Spotify or even watching this on our YouTube and LinkedIn channel for cloud security podcast, I would definitely love it if you can subscribe and follow because that lets us know that.}
+{\pard  \line \par}
+{The community's behind what we are trying to create and they're trying to support us. So sharing information like this and following and liking this is really helpful for us in finding new people, and I'm super grateful for it. So thank you. This was also an episode going into the Halloween weekend. We have a special video coming for the Halloween special on Monday, so definitely keep an eye out for that on our LinkedIn pages and YouTube channel.}
+{\pard  \line \par}
+{And I'll see you on the next episode, which is the beginning of our AWS security month, which is starting next week because towards the end of next month is AWS Re Invent. And this month hopefully you enjoyed kube Con as well. }
+{\cf2 [00:02:00]}
+{ And if you have any experience with kubecon , you can share that as well. Otherwise, we are definitely coming to AWS re:invent and if you're there, would love to catch up and say hello to you as well.}
+{\pard  \line \par}
+{So definitely feel free to reach out. And as always, I appreciate your time and I hope you enjoy this episode with Christophe Parisel because it was totally valuable. There were so many conversations online as well. Definitely check that out and I will see you in the next video. Enjoy this video. }
+{\pard  \line \par}
+{When you're}
+{\pard  \line \par}
+{developing an app, security might be treated as an afterthought with functionality, requirements and tight deadlines.}
+{\pard  \line \par}
+{It's easy to accidentally write vulnerable code or use a vulnerable dependency, but Snyk can help you secure your code in real time so you don't need to slow down to build securely, Develop fast, stay secure. Good. Developer Snyk.}
+{\pard  \line \par}
+{Hey Christoff, thanks for coming in then. }
+{\pard  \line \par}
+{\b\cf3 Christophe Parisel:\b0}
+{ Very happy to be here. Thanks for inviting me, Ashish. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I so glad you came in. It is like one of the probably most requested topic, especially because this is a kubecon month as well, and there are so many people who have been architects for a long time, like security architects.}
+{\pard  \line \par}
+{and }
+{\cf2 [00:03:00]}
+{ other architects, They're trying to transition to how do I become a cloud native security architect. Last time we did a cloud native security engineer, and I'm so glad we can do the cloud native security a as well. . So a good place to start could be maybe if you can tell us a bit about yourself and I guess , what was your background and how'd you end up being like a cloud native security architect? Yeah, }
+{\pard  \line \par}
+{\b\cf3 Christophe Parisel:\b0}
+{ sure. So when I started I started in the cloud in for what, in 2015?}
+{\pard  \line \par}
+{It's, it was seven years ago already. So before that I was a technical architect working of course on premises for a big big company. And so it was like by chance that I became a cloud architect because , we were rather early bird in adopting the cloud. It's already seven years ago, so , I was at the right place and at the right time.}
+{\pard  \line \par}
+{And I was fortunate enough to sort of join the boat of the transformation to the cloud, very early bird. And it was really a fascinating time because it was really the beginning, if you remember, in 2015, it was really the beginning of the cloud. It, we were talking mostly about infrastructure as a service and }
+{\cf2 [00:04:00]}
+{ all the staffs that came later was not already there.}
+{\pard  \line \par}
+{And, so many, many things were to be pioneered and discovered at that time. And so it was really an interesting time to stop. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Awesome. And think to what you called out seven years ago, that is pretty much like the beginning and not many AWS services. Not much maturity in the security space as well.}
+{\pard  \line \par}
+{Exactly. I mean, I don't even know if cloud native exists. Maybe it did, but it wasn't really that popular . No, no, }
+{\pard  \line \par}
+{\b\cf3 Christophe Parisel:\b0}
+{ you're right at that time we, I don't think we talk about cloud native for what I, understand. The term kind really started to become popular when we talked about kubernetes , .}
+{\pard  \line \par}
+{Yeah. In 2013, 14 well, a bit later on 17. It's in 2017, which really it took off, , it become very popular. Yeah. And it was the Google guys who minted the, the term, I'm not too sure, but it was about that time that we spoke a lot about cloud native . }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. They made a documentary around on this as well.}
+{\pard  \line \par}
+{And I mean, by the way, people who haven't checked the Kubernetes documentary they should definitely check that out. I definitely found that Google, once they kind of made it a thing, it's not only like everyone's got }
+{\cf2 [00:05:00]}
+{ cloudnative, everyone wants to be like Google, but a lot of people have different definitions for cloudnative.}
+{\pard  \line \par}
+{How do you define cloud? }
+{\pard  \line \par}
+{\b\cf3 Christophe Parisel:\b0}
+{ So for me, cloud native, I agree. There are many definitions there. two meanings for me to it. And I often, I use native cloud and not cloud native. We have the cloud native is more or less what Google defined. I mean, it's really using stuff that you can do on-premise.}
+{\pard  \line \par}
+{So for example, I'm talking, I'm thinking a lot of it, of course, infrastructure code is really typical of what is for me, cloud native programmatic deployments. And shouldn't be called infrastructure code anymore, but maybe nearly application code because, or middleware code, because we can do so much now with just code.}
+{\pard  \line \par}
+{So for me it's all these capabilities that's cloud native. so all of what you think when you think about Terraform and all those stuff, it's, for me, it's cloud natives. These are tools that can be provided by anybody, but that won't work well on premises. And yeah, but also Native Cloud for me, Native cloud is different.}
+{\pard  \line \par}
+{ It's related, but it's really using the capabilities of the cloud providers themselves out of the box. }
+{\cf2 [00:06:00]}
+{ And and these capabilities can only provided by themselves. So it means the three majors, Google, Amazon and Azure. There is no much competition. You can't have really third parties in native Cloud.}
+{\pard  \line \par}
+{It's really those three. And you try to, to make do with what you have. And of course, you are a little bit vendor locked. But for me it's using the capabilities natively and often , it's all free as well meaning you have the pay per use feature, but then once you pay for your consumptions, it's free.}
+{\pard  \line \par}
+{And often security services, native cloud security services are often free. And that's good to know and because they are sometime very powerful and we will have the opportunity to talk about this today. Yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I love what, how you kind of placed it, because I wonder, kind of like you and I, people have been in the space for a long time, like earlier yourself, they were technical architects before as well, and they may not have.}
+{\pard  \line \par}
+{Understood this fact that, oh, there are native services in cloud service providers that can be used to do security. People who may not be converted, and people who may still think I need, I }
+{\cf2 [00:07:00]}
+{ don't know, a palalto or Snyk or something, or these other solution to do protection or security in my cloud environment.}
+{\pard  \line \par}
+{ When you and I were talking about this, you kind of spoke about the whole negotiation thing that you have to do as well for. Using a, I don't know, an existing service versus using a cloud native service. how do you kind of convince people for, why do you feel cloud native is important in the first place?}
+{\pard  \line \par}
+{Given a choice, what should people think about when they're thinking about being, choosing a cloud native service? }
+{\pard  \line \par}
+{\b\cf3 Christophe Parisel:\b0}
+{ Oh, right. That this question would be for cloud engineer. For cloud architect,. You wouldn't put this like this. That , the architect is before a strategist.}
+{\pard  \line \par}
+{Yeah. So he works for the corporation and the architect, the cloud architect, is more responsible for the posture, the security posture, and the strategy that goes behind this. While the cloud architect will more discuss about products and about what is the right service. Yeah, it can be a lift and shift.}
+{\pard  \line \par}
+{In some cases, if it is a strategy of the enterprise, then it's a good, again, maybe in five years they will move on and to more }
+{\cf2 [00:08:00]}
+{ native stuff. But there's no good and bad reason for using an old service or a good service. It has to be rationalized. It has to be explained in terms of corporate strategy, in terms maybe of financials gains, head count , gains and how difficult it'll be according to the maturity of the staff, your operating model you have.}
+{\pard  \line \par}
+{So it's not just zero, one, black and white. It really depends. And that feature team people are a really important role to play because , we talk a lot about microservices and culture around microservices. Yeah. And what I like about it is that everybody has this little garden.}
+{\pard  \line \par}
+{And he's responsible for what he does in his little garden. And sometimes maybe a feature team will decide to use something that's been used for 15 years , in the corporation. Author will use something that is brand new serverless. And maybe it's not, It's still in preview. It's a valuable model.}
+{\pard  \line \par}
+{And I like this idea of microservices because we know that it's, in many cases it works and that the architect is must step back and you must like, organize and }
+{\cf2 [00:09:00]}
+{ put consistency around all the bustling about services and the decisions people make. And, we will have two levels of of expertise, I would say.}
+{\pard  \line \par}
+{Yeah, in terms of service. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Interesting. And I'm glad you kind of answered this as well because next question was gonna be, what are the responsibilities of a cloud-native architect? Like, does it really, like, , you've obviously been a technical architect before on premise, and a lot of listeners who we are maybe listening to over here are probably still technical architects looking to transition into that cloud native architect or a cloud security architect role.}
+{\pard  \line \par}
+{Do the responsibilities change quite a bit between like the two, }
+{\pard  \line \par}
+{\b\cf3 Christophe Parisel:\b0}
+{ If you are an architect, it's already difficult to to transit to towards the job of an architect. So if you are an architect, it's, it's already a huge it, it should something very important.}
+{\pard  \line \par}
+{What is difficult or in the cloud specifically when you're an architect, is you are the heart of the , the cloud transformation journey, right? So you have to deal with three important driving forces. The first one is, of course, you are facing the cloud provider front, I would say.}
+{\pard  \line \par}
+{ And }
+{\cf2 [00:10:00]}
+{ there is an imbalance here, I would say, because you, , the provider has an army, let's say, of solution architects, folks that work for him. Yeah. And you are a lot more or less alone facing them, and you have to, to act as a counterweight to what they're selling because their interest is that you succeed in your journey.}
+{\pard  \line \par}
+{Of course. And so what they, try to to explain to you , is very logical and very useful. But you always have to keep in mind that the solution architects don't know your information system and they don't know your culture and your enterprise culture and have the complexity to move.}
+{\pard  \line \par}
+{So sometimes , you have to take all this into account. That's why architects are used to that kind of negotiation. But it's a little bit different with solution architects because Usually they're opinionated, I would say more than maybe others. And, and I, myself also who works on the other side, I'm also opinionated, so it's not a criticism, right?}
+{\pard  \line \par}
+{We are all opinion somehow, otherwise , we wouldn't be architects. But this is the first element. }
+{\cf2 [00:11:00]}
+{ It's the imbalance between you and a lot of solutions architects that you made, you may face who are telling the same thing to you. And, and yeah, maybe you, you could say, Okay, maybe it's a right thing to do.}
+{\pard  \line \par}
+{No, not necessarily the right thing to do. Or not just exactly like this. We have to adjust the. The way we, we do, and it's a really, the job of an architect is really , to step back to have some critical thinking , and especially in the cloud, it's not easy because if you're just starting in the cloud, you don't have necessarily all the bullets and all the , you don't necessarily know , what's behind the cloud.}
+{\pard  \line \par}
+{So you have to have expertise while you are not still expert to make your own judgment. This is the first driving force, , the cloud provider itself. Second driving force is your own IT . Normally IT is driving the transformation journey that's right in sync with a business.}
+{\pard  \line \par}
+{But as a security architect, you have to adapt to the strategy, right? Because they are leading the way. But in term of security, you have , to drive this. And it's not easy because }
+{\cf2 [00:12:00]}
+{ usually the it and the business want to move fast. They think it's easy. They have other examples. They can always compare to what others do.}
+{\pard  \line \par}
+{And the success stories are more you remember, is more easily success stories than failures . So sometimes it's good pressure on you to go as fast as them. And the security does not always go as fast. So you have to to to speed up usually Yeah. From , you used to do on premises.}
+{\pard  \line \par}
+{And the last thing is that, It's a transformation, right? A cloud transformation. But it's not only a transformation for the IT and the business, it's a transformation for all the IT workflow processes, people that you have internally, right? You have those people and what does it mean for them?}
+{\pard  \line \par}
+{Cloud transformation. Are you going to move all the controls onto your processes to the cloud? Like a kind of lift and shift, but not a lift and shift of a set, but lift shift of security processes. Are you going to build something from scratch? it has an opportunity here, right?}
+{\pard  \line \par}
+{Yeah. To, to rethink your internal security processes. Is that your role also to security architect? He }
+{\cf2 [00:13:00]}
+{ must take into account all these and explain, to the CISO there's a lot of communication skills related to the transformation for the security team.}
+{\pard  \line \par}
+{Explain also to you the cio, how you want to make things, ? So that's, for me, that's a three. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ , I love how you said this as well because too, what you called out as well, there is a balance to be found between, and this kind of links to the question that this came in from Gabriel as well.}
+{\pard  \line \par}
+{It sounds like cloud native security architect is a solution architect. But I say to what you're saying is that a solution architect is somewhat, design solution probably is from aws or has a very similar interest for, hey, you should use AWS route 53 or you should use aws. I don't know, insert service here.}
+{\pard  \line \par}
+{But you as an organization know that you probably have another provider for this already, but AWS trying to sell I don't wanna sideline only aws. I'm sure Azure, Google the same. You're right. Yeah. So it, as an architect, you kind of have to make the call for, is this the right solution for me or is }
+{\cf2 [00:14:00]}
+{ this gonna work with the organization that I'm working for?}
+{\pard  \line \par}
+{Is it gonna balance with what we already have so we don't spending money and consuming a new service that we don't need? Or even the other part, where am I working with a solution? To design something which is too hard to manage cuz there's an operational thing as well here. Like, No, no. Did I miss anything in terms of how different it is?}
+{\pard  \line \par}
+{Your solution architect? I }
+{\pard  \line \par}
+{\b\cf3 Christophe Parisel:\b0}
+{ think it's exactly it. Yeah, exactly. The only thing is too complex. You said it could be too complex. Usually the cloud is easier to integrate to the parts to integrate than in on premises. So it's rarely too complex, . But , the change to the it's really disruptive in terms of the technology and this is what is more difficult to to dip to like, let's say to deep dive.}
+{\pard  \line \par}
+{Yeah. Yeah. Because you have to add the security dimension to that and to say take security dimension is often overlooked because, we have a tendency to, well, not less now, but we used to think that because we consume services from past services platform as a service, it's already for you.}
+{\pard  \line \par}
+{Everything is }
+{\cf2 [00:15:00]}
+{ set and, and ready to be used, which is far from true. You have a lot of things to do as part of the cloud security model , to do on your side. And, and so , it's not that complex to integrate, right? Yeah. But it's complex to to manage your risks, especially related to }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ this.}
+{\pard  \line \par}
+{Yeah. And maybe dangling the whole cloud native versus using , existing service as well. Now, hopefully Gabriel, that answer the question, and if you have any follow up, feel free to ask that as well. We need this message saying he loved the explanation. Thank you. And we answer the question as well.}
+{\pard  \line \par}
+{What's your experience in terms of culture to move into a cloud native environment? }
+{\pard  \line \par}
+{\b\cf3 Christophe Parisel:\b0}
+{ How would I say the culture to move into cloud environment? It's when you have an enterprise where there is a strong push to move to the water cloud, you must, as a security guy, do all that is possible.}
+{\pard  \line \par}
+{So that , you don't block this move, right? The adoption. Yeah. So it is often security guys have the tendency to say, Okay, this is new. We don't know what it is. We are going to put gates, and gates and gates between you and the product. , and that }
+{\cf2 [00:16:00]}
+{ it is really, really something that will kill the adoption, especially on the developer side.}
+{\pard  \line \par}
+{So we must foster if we have this chance that there is a culture of change, we must foster this culture and a company is this culture rather than put the put roadblocks on in underway. And what is really fantastic with the cloud is that you can do it actually, sometimes it's not that easy to to control, let's say to put security in, in stuff in a way that is not so not to pain for users.}
+{\pard  \line \par}
+{But in the cloud, you have many ways to be as seamless as possible. And, you, you must explore the seamless path as much as possible. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. And maybe another thing to add over there is just to understand services from your cloud service provider as well.}
+{\pard  \line \par}
+{So to your point, the culture transformation is a bit more easier because, you may not be an expert in the service, but you understand if I was to secure this service, what I should be doing in what our native services I could use. Is that right? }
+{\pard  \line \par}
+{\b\cf3 Christophe Parisel:\b0}
+{ Yes. It's always difficult, but that to become an architect, , we have a lot of architects here, I guess so I, they won't discover something new.}
+{\pard  \line \par}
+{But , if you want }
+{\cf2 [00:17:00]}
+{ to be a real an expert in architecture, there's no 30,000 ways to do it. You have to practice, you have to experiment by yourself. You have to deep dive into the products. Otherwise you are going to talk about something which is very theoretical.}
+{\pard  \line \par}
+{Right. And , you can't act as a counterweight to what I was just saying here, right? Yeah. So it's very important to have an innate knowledge of the products you're talking about and because otherwise it's a decision you take now. Will linger forever in your enterprise. , we always talk about technological debt, it's security debt can be also a kind of technology debt if you take it the right, the wrong decision because you didn't think about all the capacities or, and all also the potential risks related to the construction of service.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Ah, that's a good point. Hopefully that answer your question Vineet by the way. I appreciate that. That's a great question. I'm glad we kind of came into a segway in terms of the thinking on how someone would design the application.}
+{\pard  \line \par}
+{So as a cloud native security architect, you're obviously that you're thinking in mind if there's a service }
+{\cf2 [00:18:00]}
+{ just cloud native. I would prefer using that for security. , is there like a methodology or a framework that you think of when you're trying to design an application or an architect an application in cloud?}
+{\pard  \line \par}
+{\b\cf3 Christophe Parisel:\b0}
+{ We have something, we as a security guys something which is overlooked and it's very important, especially during the cloud transformative journey for security guys is to, clinging to the risk analysis. Yeah. If, how, I know it's a lot because the architects must be also risk analysis experts, but it's, it's really important to to not overlook risk analysis.}
+{\pard  \line \par}
+{And then just because , we always say, Okay, we are going to to rely on this study, a third party independent study. It says, It's okay. It's all fine. Okay. Go for it. Nope. No. Yeah. The reason why we do risk analysis is because what we want to implement in terms of architecture patterns is context dependent, right?}
+{\pard  \line \par}
+{It depends on where on your enterprise. It depends on your operating model, depends on the budget you have and so you really have to take the context into account and the posture. I, we didn't talk to enough }
+{\cf2 [00:19:00]}
+{ about the security posture. I will talk it maybe in a minute, but the posture you take and the posture is a strategic choice.}
+{\pard  \line \par}
+{Really heavily drive the mitigations at the risk that you can cover in the cloud. So risk analysis, it's all school old fashion, less people do it now because I don't know exactly why, but it's very important to identify the risks independently from meter attack metrics or whatever, ?}
+{\pard  \line \par}
+{ And know your risk. And, and then even if you don't mitigate all them, at least you have identified them and that they're here and you shouldn't miss any risk. and that's why you need to deep dive into the services as well. Yeah, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That's a good point as well because to what you just called out enterprise still use a risk matrix for making decisions like it's a business risk, technical risk, security risk, whatever the risk is.}
+{\pard  \line \par}
+{, I totally believe, and I hope it is still being used and I definitely define services are secured based on risk level as well. So to what you called out earlier, and if I were to put an example to it, if you're going to adopt a service which is }
+{\cf2 [00:20:00]}
+{ non-compliant, That's a risk from a compliance perspective.}
+{\pard  \line \par}
+{you maybe in , breach of your compliance policies or whatever, or, Yeah. Probably another example, we were making this video the other day around top 10 AWS misconfiguration. One of the things that came up was use of non-compliant AWS services. Cuz , well we may be required to do a PCA compliance, but we may use a service that is not PCA compliant from aws that's technically breach of contract or breach of industry standard.}
+{\pard  \line \par}
+{So how do you find the, two what you said, counter with the balance. How do we kind of find the balance as well? Think. That's why I find that fascinating as well. }
+{\pard  \line \par}
+{\b\cf3 Christophe Parisel:\b0}
+{ Yes. Yeah. Exactly. And that's where we, we add the most value as a security architect. We should focus, this is my opinion, we should focus more on the framework, the security framework that we're going to put into place, into the cloud, and really the applications themselves, application security.}
+{\pard  \line \par}
+{If we talk about code it's something that we, it's, it's not much, just not too much disruption. When you go to the cloud, when you think about it, you have your software factory. You have your controls, }
+{\cf2 [00:21:00]}
+{ your. Yeah. And we, it's not, , the priority to, it's more the job maybe of the cloud engineer to, to to do that, , to secure the code and the part of the applications.}
+{\pard  \line \par}
+{But the framework, the general way we are going to to secure in a scalable, in service agnostic way, I would say, even so in some cases how are we going to safely consume the services? it's, where we should put the emphasis as a classic }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ architect and maybe talking specifically about native services, like, , like nowadays even, you can even get a managed kubernetes service as well in different providers.}
+{\pard  \line \par}
+{Does this kind of thinking change for applications you built using kubernetes clusters? }
+{\pard  \line \par}
+{\b\cf3 Christophe Parisel:\b0}
+{ : So the man that Kubernetes and the cloud is really in a way that. Weird situation, I would say, because it doesn't fit very well into the past model. You can use kubernetes as a yes, of course.}
+{\pard  \line \par}
+{Yeah, no problem. You internal it yourself. It's fantastic. It's very useful for the past. It's less clear you, when you say who is }
+{\cf2 [00:22:00]}
+{ managing kubernetes in the past, actually, you open the door to many many questions, , and it's sometimes very difficult. It really depends on your culture and your enterprise, your operating team model once again.}
+{\pard  \line \par}
+{If you work in a small startup, it'll be perfect maybe to use the managed Kubernetes service. Yeah. But if you think about, if you have hundreds of feature teams, are they all going to be Kubernetes masters? How are they going to manage the intricacies of the configuration and when there is a problem in production, there will be woken up at 5:00 AM in the morning or 4:00 AM and how are they going to trouble?}
+{\pard  \line \par}
+{shoot the kubernetes cluster it's, or, or how do they perform? A migration of cluster? Yeah. Sometimes, , you have to do, you can do Luin migration or whatever, but it's not really something that is obvious for all feature teams. You. And Microsoft or Google or Amazon will not do it for you.}
+{\pard  \line \par}
+{, that's where you have services like Azure container applications or Amazon e ecs, which are very interesting }
+{\cf2 [00:23:00]}
+{ for that. And that serverless or hidden Kubernetes has a lot of potential and more potential maybe than managed kubernetes as we have today, which is a bit, , awkward in, in terms of positioning in the plus ecosystem.}
+{\pard  \line \par}
+{What do you think? Yeah, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So as well. I, I kind of with you on this one as well, on the fact that not everyone in your organization would be a kubernetes expert for sure. And hopefully you're not bringing like a bare metal kubernetes as well. , we literally had this conversation this morning and people were just like, My normal advice to people these days especially fits an enterprise, is not to touch bare metal kubernetes as much as you love the idea and as much as your team members love the idea.}
+{\pard  \line \par}
+{It is a bad idea to begin with because if there's a managed version, just go for the managed version. A lot of the services are taken care of. And to your point about a lot of the services in bare metal would be custom code. Who's gonna support custom code in production? Like would your employee or team member wake up at 5:00 AM in the morning and to what you }
+{\cf2 [00:24:00]}
+{ said solve the problem?}
+{\pard  \line \par}
+{They're not gonna do that because they've already pushed it over to the other side, like, Oh, good luck hopefully support team. And they're like trying to do a level three or a P three, P four ticket, P one ticket. I'm with you on this one. , I definitely find the challenge of learning kubernetes was at least for me personally, was twice at least I felt, I learned cloud and then I, Oh, I need to learn cloud native.}
+{\pard  \line \par}
+{And then I learn kubernetes as well. What was that journey for you like in terms of becoming that, , kubernetes architect as well? Was that, Cause your point about knowing it from the background? Yeah. }
+{\pard  \line \par}
+{\b\cf3 Christophe Parisel:\b0}
+{ Well, I, I'm not an expert in Kubernetes, but my job, oh, know, we, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ we }
+{\pard  \line \par}
+{\b\cf3 Christophe Parisel:\b0}
+{ Yeah. I don't know if there is one expert.}
+{\pard  \line \par}
+{I'm not kidding. In terms of compute pass I started with by using ECS and and service fabric. Service fabric. For me, service fabric is very similar in terms of past management. It's, it's as difficult as kubernetes but at least I I started to have an idea of what was gonna.}
+{\pard  \line \par}
+{Very early lot of years ago. And so we immediately, what }
+{\cf2 [00:25:00]}
+{ struck me was the fact that the pass model was to be split in two. You have the half pass, half platform as a service and the full platform as a service. And for me, I makes clearly is a distinction between two, the two, And that you have AKAs, g and all the stuff to manage clusters.}
+{\pard  \line \par}
+{And then you have let's say maybe Far ES or aca, which is really a truly managed by the provider cluster. And then you don't manage the control plane. And that's what makes a difference. You don't have, you forget about the control plane and you focus on your data plane and your application deployments. And for me, kubernetes has a better role to play in the background if we all forget about it. Of course , it's a critical piece of the system, but it's hidden away from from us. Yeah. And so less I hear about kubernetes better I feel }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ make sense, man., to your point about abstraction, it definitely is required.}
+{\pard  \line \par}
+{ not because it's technology people should not learn. It just, it definitely works really well at scale and works really far. Yes, exactly. }
+{\cf2 [00:26:00]}
+{ We didn't need that. But to your point about the complexity of what he just called out the half platform as a service and full platform as service.}
+{\pard  \line \par}
+{I'm, So grateful you said that because there's another part to this as well, which you don't talk about is your kubernetes cluster is talking to potentially another managed service, like in case of AWS maybe talking to rds. Now they're completely different from a model perspective. You have to somehow define these two together and still be able to, from a security perspective to incident response.}
+{\pard  \line \par}
+{Still be able to do, business continuity planning exercises. What would identity look like across the board as well? What are you doing for storage encryption? Is that the same? Exactly. And the keys we exchanged like so much complexity there, right? }
+{\pard  \line \par}
+{\b\cf3 Christophe Parisel:\b0}
+{ Yes. And, and the security architect has a big role to play about what you just said.}
+{\pard  \line \par}
+{For example, encryption is a world in itself and there are so many ways to perform encryptions that will depend on the way you, you manage risk. How may, if you want to deal with encryption or if you want to the provider to manage encryption for you. So }
+{\cf2 [00:27:00]}
+{ there are many options, but the architects as always To define a posture, but is also you see.}
+{\pard  \line \par}
+{And there has to be some consistency within your enterprise as to how you manage because a secret is a secret or something confidential, personally, in identifiable information. If a feature team handled it in a way and as a feature team handle it differently sooner or later you will run into problems, ?}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ The secret, a standardized secret service is an interesting one because I was gonna talk about some of the components that you see that as an enterprise, people should, , like do a point centralize, like centralize, secret management, service centralize.}
+{\pard  \line \par}
+{Are there like common services that you. Like before people kind of go down the path of building a cloudnative application as a due diligence or as just general hygiene, Should there be certain services that people should centralize or take care of, have a common understanding across the organization so that these services can be reused in the Cloudnative architecture?}
+{\pard  \line \par}
+{So to your point, then there. , Oh, my kubernetes is }
+{\cf2 [00:28:00]}
+{ using a special secret manager. There's another secret manager there. A separate identity, like are there common services that you think of that people should standardize across the board? }
+{\pard  \line \par}
+{\b\cf3 Christophe Parisel:\b0}
+{ Secrets management of course, is something that springs to mind, but it's very difficult when you think about it to standard that secret management.}
+{\pard  \line \par}
+{At least because well we have an, a record, past record of how we use the cloud already. And so it's very difficult to to move everybody using a key vault, for example, or a hsm. We are never sure that everybody will follow you and we use a key vault. we have to, but it's very difficult to make sure that everybody is.}
+{\pard  \line \par}
+{Is using , this centralized common feature, this common policy. So, it's a long standing project and if you don't do it right from the beginning, then it's really painful. And but it is a duty of the architect to do so, right. , to make sure that security and at a hundred of secrets is properly managed and consistently managed.}
+{\pard  \line \par}
+{And I'm thinking about also, not of services, but of private endpoints and private links, , Oh yeah. This is something that is relatively new that we didn't have a few years ago, but }
+{\cf2 [00:29:00]}
+{ now we have to to manage them and to define a strategy about it. We have no excuse not for using them anymore, except that you have to pay for it.}
+{\pard  \line \par}
+{And this might be a problem, unfortunately, but it has a new layer of security and the way of you integrate services together that you couldn't even do before. And a security architect must revisit his risks analysis and make a recommendation related to the use of private endpoints.}
+{\pard  \line \par}
+{ For example and also we should have also some common services like internet access. Yeah, how you deal with internet exposure if you are an internet facing application, or how are you going to download stuff from the internet? Do you rely on this, your software factory and your to provide you the package that you need?}
+{\pard  \line \par}
+{Or are you going to go live on the internet and, and pick up any binary which isly a virus or somewhere you see? So there is a common service to define also for internet access. And for identities, of course, we we have this wonderful thing that is managed identities now and equivalent , in aws.}
+{\pard  \line \par}
+{And the }
+{\cf2 [00:30:00]}
+{ instance, which are the instance roles. That what is very nice about it is that you don't have to manage the hassle of secrets. We, all of our secrets , it's secrets propagation because sometimes you it's good to have a secret, okay, yeah, to generate one. But how are you going to distribute the secret}
+{\pard  \line \par}
+{Although all the consuming application is a nightmare, especially, it's a nightmare when you have to roll over the secret. So, Manage identities if you're native. For me it's just the best example of a security native service or feature manage identity. It's or service side encryption, or we would say that it's a wonderful native security service.}
+{\pard  \line \par}
+{And these are the common services that we have to, we have to promote and see how we can fit into the, the patterns we have. Ah, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I love it. And I love the fact that you covered all the CIA confidentiality, integrity and availability as well. Cause you got confidentiality with encryption and the networks stuff to talk about integrity with.}
+{\pard  \line \par}
+{Again you spoke about that as well, making sure you are aware of what }
+{\cf2 [00:31:00]}
+{ secrets are being shared and what the secrets has not been changed, and how do you modify that as well? Availability for designing for scale, we kind of touched on that earlier as well, so that was definitely there.}
+{\pard  \line \par}
+{So almost like if people wanna take a step back and talk about. Some of the common services that you think people normally use, Like if you were to build an application, which is a kubernetes application, for people who may not have designed a solution in that space, in the kubernetes space?}
+{\pard  \line \par}
+{But are curious as to what are some of the common components you see in a managed kubernetes application That could be whether aws, Azure, Google, Cloud, doesn't matter, but it's a, to what you said, node JS or whatever application hosted in a managed kubernetes service by a cloud service provider. Are there common services similar to the identity networking that you talk about where, Hey, I, I normally look at these services and or I normally look at, think about these things when I'm designing the.}
+{\pard  \line \par}
+{\b\cf3 Christophe Parisel:\b0}
+{ Not specifically. That I would rather work on the framework to secure the service itself. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. Okay. Cool. Although, what kind of framework, if you don't mind, expanding that }
+{\pard  \line \par}
+{\b\cf3 Christophe Parisel:\b0}
+{ meaning }
+{\cf2 [00:32:00]}
+{ the network layer, for example, where is your cluster gonna sit? In a vinet, in a vpc?}
+{\pard  \line \par}
+{How are you going to make sure that your vnet is properly configured so that it's private, that you have a control of the over the road tables and that the rock tables cannot be temped with mm-hmm. , for example. How are you going to deal with storage? It's always interesting to use native.}
+{\pard  \line \par}
+{Storage if you can for example, a azure blob storage or s3. Yeah. And how you're going to integrate those storage is into your clusters in a secure way. And well, things like that, I would rather work on the ecosystem first and leave it to the security engineer of the feature team to deal with the details of hardening the application itself.}
+{\pard  \line \par}
+{You see? Right. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Actually that's a good point because at an enterprise scale, it would not make sense to have decentralized, like, I mean, as much as kubernetes is trying to be cloud agnostic and, , transfer whatever you want as an enterprise to maintain a certain standard because there's }
+{\cf2 [00:33:00]}
+{ hundreds and thousands of applications and you're just not building one kubernetes application.}
+{\pard  \line \par}
+{You have all these other different kinds of application that may also exist. So if you're to what you called about, the framework is an interesting point where , the services, the common services you spoke about earlier, that needs to be a framework that A, what are you doing for storage? What are you doing for networking?}
+{\pard  \line \par}
+{What are you doing for secret management? What are you doing for, How would these communicate with each other? Would this be introducible integration, }
+{\pard  \line \par}
+{\b\cf3 Christophe Parisel:\b0}
+{ service integration as well as we said, Yeah, How's integration }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ or whatever, Any third party, What's the risk matrix? Like who's gonna make the risk call?}
+{\pard  \line \par}
+{Who's the owner? There's another component around operationalizing the entire application as well . And in general, the whole conversation usually with logging and monitoring with kubernetes seems to go into like a rabbit hole sometimes because people are like, Oh, kind of, you gotta get some logging. Not too much logging.}
+{\pard  \line \par}
+{Mm-hmm. and especially at scale. Have you got when your experience of working in that cloud native space with kubernetes hosted applications, was there ever a scale challenge with }
+{\cf2 [00:34:00]}
+{ logging? Or how were you guys dealing with like at scale, how was security working on an operationalized application in kubernetes}
+{\pard  \line \par}
+{\b\cf3 Christophe Parisel:\b0}
+{ The issue we have with logs is logs and events is that first events are not really necessarily easy to, right. Oh, oh, right. And, and to centralize. And we have many information from the events, which are not in the logs, which are very useful for security and, mm-hmm}
+{\pard  \line \par}
+{And that cloud providers have a lot of work to do on the way they delivers the logs and events to us. If it's a managed service, it should include the logs and the events. It's they should manage the way we could easily retrieve logs in the events at scale for us.}
+{\pard  \line \par}
+{Otherwise it's once again, it's not really a past service. It's a half pass , so they really need to make an effort on, on this on the log story and a event story, I }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ think. Yeah. And what a common here comment here, For some reason the name didn't come up, but sometimes cloud service in their early life cycle evolution are not compatible with other cloud native service.}
+{\pard  \line \par}
+{For example, using something other than native secret management service, for }
+{\cf2 [00:35:00]}
+{ example. Sometimes they are integrated initially, Firmly into a local ecosystem before we can bring them into an approved consumable list of service. That's great fun working. However, with the provider security stuff ensures we can start to evolve new products with them.}
+{\pard  \line \par}
+{Any any thoughts on that? Do, I mean, I definitely agree on the statement here that you can work with aws, Azure, Google Cloud, to, hey, we need this service. But kind of what I agree with whoever the person is that they called out, that, hey, sometimes integrating into the local ecosystem is really hard.}
+{\pard  \line \par}
+{And I mean, yeah. Sorry. I'll let you comment. . }
+{\pard  \line \par}
+{\b\cf3 Christophe Parisel:\b0}
+{ You're right. Sometimes it's, it's nearly impossible to integrate in the local ecosystem. So no, you're right. I don't have any specific example in mind that I'm ready to share. I, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ one thing that of sometimes is the backup services that people have.}
+{\pard  \line \par}
+{There's a very popular backup service used by Enterprise Concor, it's called com, . Well, it's very popular backup service, and . I mean a lot of backup services start saying, We, we back up your cloud, but they could never talk to the, Just send us a file, we'll back it up for you.}
+{\pard  \line \par}
+{We're like, Well, that's }
+{\cf2 [00:36:00]}
+{ not kind of what we were thinking of. This is not the cloud native way. I guess }
+{\pard  \line \par}
+{\b\cf3 Christophe Parisel:\b0}
+{ around we would say, I would say }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ yeahing to the cloud. Sorry. There was Steven McCall who basically said but now to your, what you said, I definitely agree with what Steven said as well, which is the fact that that's also a challenge, and again, kind of goes back to what you were saying in the beginning about finding, being that counterweight and finding a balance between all of this.}
+{\pard  \line \par}
+{I mean, maybe our job has become a lot more harder than it used to be. Now you kinda have no cloud, cloud native kubernetes and once you understand that, because you kind of wanna be able to give the right security recommendation on top of that, you have to understand the landscape of the ecosystem you work in.}
+{\pard  \line \par}
+{What can work and what cannot work as well. That, that's definitely is And }
+{\pard  \line \par}
+{\b\cf3 Christophe Parisel:\b0}
+{ the operating model. The operating model, because remember that kubernetes is a cluster. Sometimes the feature teams themselves are very good at coding, but not, not so good at administrating clusters because of course it's not their job.}
+{\pard  \line \par}
+{So }
+{\cf2 [00:37:00]}
+{ there's this dimension also to take it to account what is gonna be your operating model for, for the clusters. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh my God. Yes, you're right. Oh, oh, actually that's a good point because developers who may have been given a managed kubernetes service, Amazon or Azure or Google Cloud would say, Don't worry about the service in the background.}
+{\pard  \line \par}
+{We're taking care of this stuff for you. But as we all know, the defaults are not always secure in most, I mean, , I can't remember if, is still true, but the Amazon EKS service was by default public api. Long time. }
+{\pard  \line \par}
+{\b\cf3 Christophe Parisel:\b0}
+{ Yeah. Is the same. It was the same for azure. There }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ you go. Like , and which organization is okay with the public API service?}
+{\pard  \line \par}
+{Cause for people who remember the tesla breach that happened, that was their public facing kubernetes API service. Probably don't wanna give access to that to anyone as well. So I mean that's great. Pretty awesome. One of the questions that I wanted to ask before we kind of towards the tail end of the interview as well is from a challenge perspective, we spoke about culture, we spoke about just having a deeper understanding of the cloud native }
+{\cf2 [00:38:00]}
+{ service as well.}
+{\pard  \line \par}
+{ Was there a personal challenge for you to transition from where you as a technical architect from the on premise world, Cause people listening to this also maybe like what was that one thing that was the hardest for you to kind of unlearn maybe as well? Cause clearly there's a lot of unlearning as well.}
+{\pard  \line \par}
+{What was something that you kind of felt that, oh my God, this is a lot more challenging as you were transitioning once you're becoming a cloud security architect and then a cloud native security architect. }
+{\pard  \line \par}
+{\b\cf3 Christophe Parisel:\b0}
+{ Yeah, that's very good point. For me, I that it was very challenging actually seven years ago because we didn't have all the security features that we have now in the cloud.}
+{\pard  \line \par}
+{So it was really if you are control freak it was really a big challenge to to meet. and so I was in the old world, so I was my mindset was really looking backward. And, and cloud is something that is completely different. And it was very, it was very difficult.}
+{\pard  \line \par}
+{I won't deny. And what I had to unlearn is maybe the way I dealt with risks and how we handle risks because we , as opposed to what we do internally we don't have many leverage with the cloud providers in terms of risk. , they do what they want and }
+{\cf2 [00:39:00]}
+{ of course, because they cannot afford to descend to every single customer.}
+{\pard  \line \par}
+{So you have to do with what they propose, and you have , to be original, creative, inventive. And and, it's what saved me is the capability to. Because it's not only the cloud provider, but the customers have a huge capacity and capability and opportunity to innovate in the cloud. We always say, Okay, Microsoft invented this.}
+{\pard  \line \par}
+{Google invented that, but the customers also invent things. And for me it was difficult because it was a nascent, let's say technology, but it was also wonderful playground for innovation and creativity. And that it helped me a lot to overcome the difficulties I had in terms of securing stuff.}
+{\pard  \line \par}
+{So I had to find new ways to to secure what we took for granted before. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ It's safe enough for me to say this as well. Like if you would've spoken to Ashish eight, nine years ago, maybe 10 years ago, I did not believe in the cloud. I totally was one, but it was like, why would I trust this cloud?}
+{\pard  \line \par}
+{And then I became, I transitioned onto the person who was talking about, have you ever heard of a vulnerability, aws? }
+{\cf2 [00:40:00]}
+{ But now I'm kind of going back onto some of those, like maybe not fully, but still thinking because there have been so many vulnerable things that have been found for aws, Azure, Google Cloud.}
+{\pard  \line \par}
+{ You had like a blog post on this as well. Yeah. Where we are trying to measure our risk on the application, assuming that the shared responsibility means Amazon, Azure, Google Cloud is taking care of their part. Even the kubernetes people have taken their part. But our risks is basically should be a lot.}
+{\pard  \line \par}
+{I mean, we should put their risk at a higher thing as well now, because we don't know how many undiscovered services are there. Exactly. Mm-hmm. , some of the vulnerabilities I announced require the customer to restart the service or move to the new next version of the service as well. , do you feel like your trust level on the cloud, has that changed as well as you kind of like go in between and now about.}
+{\pard  \line \par}
+{Potential vulnerability both in the cloud service provider as well, }
+{\pard  \line \par}
+{\b\cf3 Christophe Parisel:\b0}
+{ to tell you the truth now, because when you do the risk analysis, even seven years ago, you have to take all the peculiarities of the cloud into account. Yeah. So you are already aware that you assume the }
+{\cf2 [00:41:00]}
+{ worst. Okay. So I was prepared for that.}
+{\pard  \line \par}
+{And actually since they are vulnerabilities, my trust in the cloud has increased, not decreased. Oh, right. Yes, it has increased because now we used to have no problems in the cloud. Everything was good. Perfect. Everything rosy. Yeah. And it was worrying when you said to a security guy, everything is okay.}
+{\pard  \line \par}
+{The guy starts to be worried, , . Now I, I know that the cloud , is just a technology that we another one and, and we have also. Fantastic opportunity to read the reports from the security researcher. We found our abilities, and it gives you very interesting insight on how it works in behind , the curtain.}
+{\pard  \line \par}
+{And so it gives you confidence or that what you thought would happen, and you tried always to imagine how it could happen , it gives you some confidence of, the app you made and also , a lot of trust because that the provider deal with the problem. , also that it is their business, a core business.}
+{\pard  \line \par}
+{So they make, sure that it won't happen again. }
+{\cf2 [00:42:00]}
+{ Mm-hmm. and uh, it's always better that a security researcher find nadt than maybe some, someone who is not best.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. If I don't want the attacker to find a vulnerable, you want the security researchers disclosing it properly, }
+{\pard  \line \par}
+{\b\cf3 Christophe Parisel:\b0}
+{ find one.}
+{\pard  \line \par}
+{But, but this being said, we still have those risks hanging of our, our head. Right. , someday day we could have a critical vulnerability, which will be absolutely. Catastrophic for the business. Yeah. And we have all to anticipate that. And what I like about the vulnerabilities is that there's a lot of advertisement about it.}
+{\pard  \line \par}
+{, now everybody is aware that the worst can happen, ? Yeah. It was not the case a lot of maybe two or three years ago. And so people have to anticipate for the next problem. And maybe they will get some funding in to, to help them put more mitigations or, or to change the way they end encryption or identity management due to the vulnerabilities of the cloud provider themselves and be more cautious about the way they put their chron jewels into the.}
+{\pard  \line \par}
+{Yeah, it's a lot of awareness. It's the best awareness. Having a vulnerability is the best }
+{\cf2 [00:43:00]}
+{ way to be aware about the risk, I }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ think. So as well. , well, I, I definitely don't not trust the cloud, but my to what you said, from a risk perspective as a CISO I definitely put them in a category where, hey, let's be careful about this one as well.}
+{\pard  \line \par}
+{And talking about at risk as well. And another one that came in. So Steven just mentioned yes, EKS is still the default public, but here had a question as well. What's your thought on using bottleneck, like anti malware, edr EPR protection in terms of images for kubernetes oh, yeah. Cuz kubernetes containers may not have any of this edr, EPR or EDP anti malware.}
+{\pard  \line \par}
+{And that's technically like a not anti cloud pattern as well. Some people may say, So what's your thoughts? }
+{\pard  \line \par}
+{\b\cf3 Christophe Parisel:\b0}
+{ I haven't actually, bottle rocket is, is a very nice idea. It's not maybe for everybody, but we have to change our culture and but the developers will have to change if we want to use stuff like this bottle rocket because immutable containers it's a, something that is maybe they're not used to you.}
+{\pard  \line \par}
+{It's not, it's not so comfortable to use as a, the, your, just your vanilla container. }
+{\cf2 [00:44:00]}
+{ Yeah. So , it's we need to go towards a direction. We need to be extra cautious about how we remote access to the containers. From the internal enterprise and these are the things that are going , to come in the next few years.}
+{\pard  \line \par}
+{ We are going to see a big strengthening of containers within the next few years. The way we deal with container security at the moment it's not enough. We're not doing enough. And bottle lot get is a first step forward. There are other options, other ways to to secure containers.}
+{\pard  \line \par}
+{So not always immutable containers. It's not the only solution, but we are going to see more and more of this stuff. As for EDRs, I, I don't know. Honestly, I haven't made up my own opinion about this kind of technology. We see a lot of contradictory messages being published on the social networks about experts using them and not so experts also unfortunately.}
+{\pard  \line \par}
+{So for me it's totally to tell it here in containers. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I'm kinda the same as well. Steven, , I'm assuming as Stevens answered the question as well, but can your own thoughts as well, Steven, if you wanna share that as well, because , I definitely find that , there is another conversation which is probably kind of }
+{\cf2 [00:45:00]}
+{ related to this as well, is the use of trusted container images in the first place, is your registry local or is it gonna be on the internet? There's a complexity from that perspective as well. And that kind of hangs on the }
+{\pard  \line \par}
+{\b\cf3 Christophe Parisel:\b0}
+{ balance. There is a trust of the container image itself, but there is also the temporal dimension, right? How is it going to evolve over time? So bottle rocket also addresses this and that we all focused on images, security, and we have ways to, to secure images, but we have less ways to secure life containers over time.}
+{\pard  \line \par}
+{And that's really the problem for me. The images, Yeah. It's under control for me. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah, I, and now this start supporting AWS inspector with aws bottle rocket as well. So that'll be interesting as well as to if how that becomes part of the whole workflow. There's a comment from Gabriel as well.}
+{\pard  \line \par}
+{vulnerabilities had just needed better marketing. Somehow Fancy names get more attention than cve }
+{\pard  \line \par}
+{\b\cf3 Christophe Parisel:\b0}
+{ 1,2,3,4. Yeah, that's right. That's right. True }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ well said grabriel well said this is the final question as well. We're towards the tail end of the interview. And I just kind of had a related question from what Batista }
+{\cf2 [00:46:00]}
+{ asked.}
+{\pard  \line \par}
+{Please suggest the best cloud security certification for beginners is, first of all probably should demystify is cloud security architect or cloud native security architect. what would you classify as a beginner level? I feel like , it's a field where you need to have some experience in it or building application before you get into the space.}
+{\pard  \line \par}
+{ For me, beginner is that , In the architect content. Is that what you agree? }
+{\pard  \line \par}
+{\b\cf3 Christophe Parisel:\b0}
+{ Yes. , I completely, You have to have a lot of experience, actually , not just experience, but a lot of experience to be not only an architect, but also you have to have an experience in the security field.}
+{\pard  \line \par}
+{And as I said, you risk analysis in particular. So I don't know if there is , such thing as a certification in my case I have always worked by experimenting working with production guys try to integrate into production teams , and tinkering with the stuff and tried to learn myself.}
+{\pard  \line \par}
+{I'm not too I don't like too much certifications because . There's a problem. It's because it are designed by the cloud providers themselves, , So it's you have to have your own critical thinking once again, when you're an architect. }
+{\cf2 [00:47:00]}
+{ So certifications are good because you need to, to know your bearings, to know where to go, what not to meet, what is absolutely, you have absolutely to know, but , it's just the beginning of the story is a certification to become an of Tex, it's not.}
+{\pard  \line \par}
+{Yeah, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That's a good point. And maybe for as well as you asked the question as well. Maybe another suggestion over here, but hopefully that this helps as well, is to what Christophe said, it's good to know the services in a cloud provider because that would help you build that beginner experience and what services are, and maybe that would help you with the interview.}
+{\pard  \line \par}
+{But building application, you can't advise on risk network if you don't know what network is . Or you got advice on what secret management is, if you don't know what secrets are used for and how does it apply to a large application scale, that's where it's worthwhile calling out. That I definitely feel there could be a transition from a technical architect to a cloud native architect.}
+{\pard  \line \par}
+{That could be a, like, is there a recommendation on that space? Cause there would be a lot of people who would be doing that as well. So maybe when Batista said at that point where if he or she's at that point where}
+{\cf2 [00:48:00]}
+{ they maybe already be a technical architect and that's what they're thinking from a big, their perspective, how, what.}
+{\pard  \line \par}
+{Is certification valuable or what }
+{\pard  \line \par}
+{\b\cf3 Christophe Parisel:\b0}
+{ should they learn to become? Yeah. Yes, yes. Certification of course is valuable because if you're already a technical architect, you've done a lot of hard stuff before, and what, you have the experience, you have the mindset. You think in patterns how to communicate, how to be a strategist.}
+{\pard  \line \par}
+{So you, , already a lot of stuff. Certification will be an accelerator to go to the cloud. Definitely. And you have the critical thinking. So maybe yes, for technical architects certification is probably something to Yes. To consider. Yes. Awesome. And on top of that priority, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I, I definitely agree.}
+{\pard  \line \par}
+{ Certification body helps you at least get an understanding of what services are there and to what you said. If you already have that critical thinking from your technical architecture experience or, or a security architect experience from before, from the. You can just, Oh, instead of now do using networking as my regular on-premise, this is how networking works in cloud, but I can apply the same }
+{\cf2 [00:49:00]}
+{ controls.}
+{\pard  \line \par}
+{Yeah, it's the same fundamentals. Fundamentals hasn't really changed. No. It's just that now we apply a new technology. Yeah, exactly. And last comment from Gabriel as well as it was really interesting for me to discover that security is included in aws solution architect track. This is really also the security is also the thing in Azure Solution Architect track and Steven has shared his opinion as well, is.}
+{\pard  \line \par}
+{I might just leave it outside, otherwise people can't see us. I'll just say Steven is saying thanks for asking my opinion, the cloud provider have not yet provisioned a an AquaSec type approach to, for securing entire kubernetes platform out there. There is a lot of work necessary in terms of reducing the overall attack surface and integrating with the wider operating model across an organization.}
+{\pard  \line \par}
+{As you mentioned, not everyone understands kubernetes. Nevermind being an expert at it. The cloud providers have more work to do here, education and awareness and a lot more. And I thank you for that Steven. I appreciate that as well. And that was kind of like the end of the technical questions but this was great session and so where other people who love you and maybe love you even more }
+{\cf2 [00:50:00]}
+{ after they hear the episode.}
+{\pard  \line \par}
+{Where can people find you on the. On }
+{\pard  \line \par}
+{\b\cf3 Christophe Parisel:\b0}
+{ LinkedIn only because I don't have enough time to be on Twitter or other social media. So I, I have contently focused on }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ LinkedIn. Oh, okay. Cool. And I'll leave the LinkedIn link for your account as well, so we wouldn't connect with you. But Christophe, this has been an absolute pleasure.}
+{\pard  \line \par}
+{Thank you so much for coming in. Thank sharing your time as well. A lot of people enjoyed the session. I enjoyed the session as well. And looking forward to having you again. It'll pretty awesome. }
+{\pard  \line \par}
+{\b\cf3 Christophe Parisel:\b0}
+{ Yeah. Yes, Yes. Why not with pleasure. Anyway, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ thanks and thanks everyone else. And that was the last episode for Kubernetes Security Month as well.}
+{\pard  \line \par}
+{We'll see you folks for an AWS security month starting next week, and talk to you then. Thanks everyone. See you. Good }
+{\pard  \line \par}
+{\b\cf3 Christophe Parisel:\b0}
+{ bye. Thanks.}
+}

@@ -1,0 +1,202 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2639
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 TimesNewRomanPS-BoldMT;\f1\froman\fcharset0 TimesNewRomanPSMT;}
+{\colortbl;\red255\green255\blue255;\red97\green167\blue95;\red0\green0\blue0;\red109\green109\blue109;
+\red81\green0\blue192;}
+{\*\expandedcolortbl;;\cssrgb\c44706\c70196\c44706;\cssrgb\c0\c0\c0;\cssrgb\c50196\c50196\c50196;
+\cssrgb\c40000\c0\c80000;}
+\paperw11900\paperh16840\margl1440\margr1440
+\pard\sa360\partightenfactor0
+
+\f0\b\fs28 \cf2 \up0 \nosupersub \ulnone Mackenzie Jackson:
+\f1\b0 \cf3  \cf4 [00:00:00]\cf3  track where things end up by using Honeytoken. I've done experiments with this. It takes a few seconds for malicious actors to find credentials on places like GitHub. I love it. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  I think we can use Honeytoken as an Apple watch to know that, Hey, you're about to have a heart attack. \
+You might as well prevent that by making sure the Honeytoken is the instant response for it.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Mackenzie Jackson:
+\f1\b0 \cf3  We talked about how we scanned all of GitHub, all public source code in GitHub. We do that constantly. If you commit something publicly on GitHub, we have a look at it. That's not because. We're doing anything bad. This information is out there, right? Anyone, bad guys do this too. But what's really cool is that let's say that you want to protect your source code, right?\
+You have some proprietary code that's really important. You want to make sure that this code never makes it out publicly. This is a scenario that happens a lot. Source code is very leaky. Yeah, yeah.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Have you considered Honeytokens as a way you can find out if someone's hacking into your AWS account or maybe another cloud account, or maybe a supply chain for that matter.\
+In this conversation with Mackenzie Jackson from GitGuardian, we spoke about how can Honeytokens be used as a way to have a preventative control in your organization's cloud environment, instead of \cf4 [00:01:00]\cf3  just waiting for a threat to happen or getting this wall of red when threats happen. By the way, don't get me wrong, right?\
+I totally believe there's a need for threat detection, but there are possibilities where you have free options to do Honeytokens anywhere. So people who may be thinking that Honeytokens is not for me, and I don't even know what Honeytokens is or honeypots is, this is the episode for you. We talk about what honeypots are, how they're different from Honeytokens, how can you use them in the cloud environment, and what are some of the ways that you could use that as a preventative tool, or at least almost like a tracker.\
+We laughed about it as an Apple Watch tracker, but the tracker that helps you identify something has gone wrong before you identify, or maybe sometimes you wait. Something that goes wrong before it becomes a big thing. So you have done some incident response for Honeytokens as well. I hope you enjoyed this episode with Mackenzie as always, if you're here for the second or third time, I would really appreciate if you give us a subscribe or follow on your favorite audio platform, podcasts, Spotify, Apple podcasts, or if you are watching this on YouTube, give subscribe and follow on LinkedIn pages as well, enjoy this episode with Mackenzie and I'll see you next episode.\
+Hi, everyone. Welcome to another episode of CloudStreetPodcast. Today we're talking about Honetokens, for this, we have Mackenzie. Welcome \cf4 [00:02:00]\cf3  again, Mackenzie. You've been... A regular show for a while for the two people on the internet who don't know who you are.\
+What about yourself? Can you share for people who don't know Mackenzie and where you are today?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Mackenzie Jackson:
+\f1\b0 \cf3  Yeah, sure. So I'm Mackenzie. And at the moment I work for a company called GitGuardian as a developer advocate, as a security advocate. So really my role is to work in security, work with research teams, find out what techniques attackers are using, how they're getting into system. And then I have the awesome opportunity to share it with folks like yourself and to present my findings on presentation. So that's really what I'm all about. Kind of working with research teams, understanding what's happening out there in the world, and then letting the good folks of the world know.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Interesting. And research is obviously where Honeytokens is spoken about quite a bit as well. How would you describe Honeytokens for people who don't know what that is and how do they work? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Mackenzie Jackson:
+\f1\b0 \cf3  Yeah, Great question to start with when we're talking about Honeytokens. So a Honeytoken it's under the umbrella of a honeypot, right?\
+So you can have lots of different types of honeypots. So we just start by explaining what is a honeypot. Most people probably know, but this is, it could be an application, a document that's designed \cf4 [00:03:00]\cf3  to attract an attacker and then trigger an event to basically alert you to the fact that an attacker is in your system.\
+So it might be an application that if an attacker tries to access then you know they're in there. It could be a word document if they open or it could be a Honeytoken and a Honeytoken is a credential. Typically, we use things like AWS credentials, cloud credentials because attackers really love them.\
+Yeah, yeah, and what happens is if an attacker tries to use these credentials, it's going to trigger an alert. It will let you know information about them. And then you know that an attacker is in your system. If you put this Honeytoken somewhere, then basically an attacker can trip over it and you know you've been breached.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  What is threat detection normally like? Because I feel like this is kind of like a threat detection kind of a thing where you have honeypots or Honeytokens laid out everywhere. What is typically threat detection like? They should consider going for a Honeytoken.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Mackenzie Jackson:
+\f1\b0 \cf3  Well, threat detection can be an incredibly difficult job.\
+Typically, you're kind of looking at lots of logs and you're trying to find abnormal behavior. But when you look at all the activity that happens... In the cloud, when you're in an application, normal activity, a lot of it is kind of \cf4 [00:04:00]\cf3  abnormal, right? Outliers happen all the time. So how do you distinguish that between abnormal activity that's not malicious and abnormal activity that's malicious?\
+And the answer is that it's through analysts that look at this through expensive tooling. So that's kind of how you can tell if you have been detected, if you've kind of got weird IPs. Or if you have an API key that's making a request that's really abnormal, but then someone has to look into it. So the threat detection is really hard.\
+And the honest answer is quite often attackers actually go unnoticed. You know, when you look at some of the big breaches, right? If you look at SolarWinds, massive one. CodeCov, another big supply chain attack. CircleCI that happened this year, supply chain attack. Attackers are actually able to remain in these systems for months without anyone knowing that they're there because they're not making too much noise. Yep. So how can you detect them before their attack? And this is where threat detection is hard. How a honeypot can kind of handle that is that when an attacker is just made their initial access, they're going to be doing a lot of research on your systems to try and figure out what's the next step.\
+So if an attacker breaches into your system, they're really \cf4 [00:05:00]\cf3  first worried about one thing persisting their access and elevating their privileges. Yep. So if I break in, let's say that I've phished a developer, or I have access to a VPN, and that's how I've made access to the network. If that window closes, then that's my access gone.\
+Once I've breached the network, I want to find more access. This is why a Honeytoken is so cool, it's because that's what that is. It's saying, hey, this is more access. This is more privilege. They don't know that it's a trap. So that's why it can be fantastic in that threat detection area. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  So that's how it kind of complements an existing threat detection capability because you have tokens everywhere.\
+How would you detect the fact that someone is using the token? Yeah, how does that happen? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Mackenzie Jackson:
+\f1\b0 \cf3  So there is a couple of ways, and again, this is why I love Honeytokens, is that if an attacker makes it onto their system, they're gonna try and find passwords, credentials, API keys. You know, particularly if they make it into like a code repository onto your network.\
+And we can actually use a real life breach example. It's happened with Uber. Developer was compromised. The attacker used their VPN access to make it onto Uber's network. The \cf4 [00:06:00]\cf3  first thing that they did is they scanned that network for credentials. Right. And they found credentials and that's how they launched their attack.\
+Right. Now with Honeytokens, when you actually scan for credentials, most tools will validate the credentials. So if you use a tool like GG Shield, or if you use something like TruffleHog, then you're going to scan a credential. If it finds an AWS credential, it's going to check that that's valid. Yeah, because that's going to save you a lot of time as you attack it.\
+That process of checking that it's valid triggers it. Ah, right. So immediately, you know, and the other area is an attacker will probably, even if they don't trigger it during the scanning phase, they're going to find this juicy AWS credential, happy days. This is exactly what I want. Now they're not, maybe they're probably not going to try and do something extraordinary malicious with that initially.\
+They just want to check that it's real. Yeah. Yeah. So they're going to make a very small non intrusive. call something that's very not suspicious. Yeah. And when they make that call, they've triggered it. It doesn't matter what they try and do. Yeah. They're going to trigger it. So that's how they get triggered.\
+And that's why they get triggered very early in the attack process, right? This isn't something that, you know, two months later they're going into use because they need \cf4 [00:07:00]\cf3  to know what resources they have access to. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  How will they deploy it? Cause I always wonder that, cause you know, a lot of people kind of think that, Oh, honeypot is going to be expensive exercise.\
+And I'm sure as a CISO myself, I've kind of gone down the path of. Is it worthwhile investing in a honeypot or should I just basically go I'm happy with the existing the detection thing that I have? What kind of deployments are we looking at for Honeytokens in a cloud environment? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Mackenzie Jackson:
+\f1\b0 \cf3  It's so great. I love that you phrased it this way because this is where they can really stand out.\
+Honeytokens compared to a honeypot is so cheap because they're just credentials and they're not doing anything. You don't have to actively maintain anything with Honeytokens. They're just credentials, right? And they're connected to it to a service, but that service isn't doing anything 99. Percent at a time because nothing's happening.\
+That's right. Yeah. In a large enterprise, if you're trying to deploy a honeypot, maybe you deploy one or two. Yeah. In a large enterprise, you can deploy thousands of these Honeytokens so that you really get coverage everywhere, and you'll get repositories on your networks in different areas, so that deployment can be automated.\
+It depends what you use. GitGuardian, we have tools that create Honeytokens. Oh, right. Okay. And they can be deployed \cf4 [00:08:00]\cf3  automatically, right? So if you want to deploy a thousand of these things, you can create them using, you know, our API and you can deploy them, you add tags. And so you know exactly where they are so that if one gets triggered, then, you know, I kind of go, Oh, where did I put that again?\
+I can't remember. Was that on the net? Know exactly where it is. Oh \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  yeah, because I was going to say that at scale that would be the next challenge where you know how it's like sometimes when you have email you put random password in because you just don't want to access it. But that one time you have to for some reason I have to access it and like what was that password again that I did not want to I have to remember somewhere.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Mackenzie Jackson:
+\f1\b0 \cf3  Yeah, yeah, yeah. I mean this can be the same but the Honeytokens that we deploy we have the ability to add as many tags as you want to them. Right, right. So basically it will get triggered. And it will say, okay, it's in GitHub. It's in this repository. Could be in source code that you really want to protect.\
+You want to make sure that no one has access to it. Yep. So, you know, you put it in there, you put it on your network, put it in third party tools, because this is the other great thing about Honeytokens is that, you know, with a normal honeypot, you're going to put it on your own infrastructure, your own cloud environment.\
+So that's where you put them. Right. That's right. Yeah. And Honeytokens, you put them there also, but you can also put them in third party. systems. Let \cf4 [00:09:00]\cf3  me give you the example of CircleCI because that was breached this year. So it's relevant. Yeah. So CircleCI was breached because a developer's machine was compromised and the attackers essentially got access to everyone's secrets encrypted secrets, but a lot of times that was decryptable.\
+So with insert in the CircleCI breach, what you could have done is put a honeypot In your CircleCI environment. Okay. And because the attackers breached CircleCI, they would have triggered your Honeytoken. If they had access to your environment, they would have triggered that Honeytoken, because that's exactly what they're looking for.\
+Yeah, yeah. So now you not only know if you're being breached, you actually can find out using these, if your tools has been breached. You know, this would have worked the same for CodeCov. You know, you can put them in different areas. That's why they're so light that you can spread them everywhere and you can even put them in different areas.\
+So it's a fantastic way of getting great coverage for threat detection. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Yeah. And I think to your point, the third party makes me think that is there a supply chain element in here as well? Like what kind of role would the Honeytoken play in supply chain?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Mackenzie Jackson:
+\f1\b0 \cf3  There's absolutely a supply chain play here because I always liken a supply chain attack to being a passenger in a car \cf4 [00:10:00]\cf3  crash.\
+You know, you have no control but to brace. Yeah. But the reality is that you can do some things. And one of the things is you can put these Honeytokens in your supply chain. So the software supply chain has many different components. You're using cloud infrastructure that you don't own. You're using tools in your CI CD pipelines.\
+But if you put Honeytokens in these environments, you know, you load them in as secrets, are they meant to be used? If they get triggered, then you can actually find out what parts of your supply chain is. We had a bit of fun at GitGuardian, we created this kind of free little fun project called SaaS Sentinel.\
+And what it is, is this down detective for supply chain attacks. We've put Honeytokens in all these different services, you know, like CircleCI, like LastPass. And if any of those get triggered, we will alert you on the website. So we're hoping that the next big supply chain attack, we're going to be the first ones to know.\
+And we'll be able to put that on SaaS Sentinel. So you can actually see what services are being compromised. And this exact thing you can do with your own suppliers, your own tools, so that you actually have visibility. You might still not be in the driver's seat of the car crash, \cf4 [00:11:00]\cf3  but at least you know what's coming so you can get out the car, you know?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Yeah, I think that's an interesting way to put it because one is the whole management thing of it as well. How do you manage Honeytokens across a large environment? And I'm also thinking from a perspective that, oh, okay, now I've deployed it, I have to manage it. What are some of the challenges as they kind of go through the process of deploying and managing Honeytokens. I'm sure there's like some kind of challenges there as well. It's not just simple as I have Honeytokens now. I just wait for a car crash.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Mackenzie Jackson:
+\f1\b0 \cf3  The great thing about them is there isn't really any management. It depends how you've set it up. Cause you can create your own Honeytokens or you can use a service like us.\
+Now, if you're using a service like us, there's literally no management of it, right? You deploy them in different areas. You make sure that you have good coverage over everything. And then if something happens, you get alert, it will be sent to your SIEM or you'll come up on your dashboard. You can see exactly what happens.\
+Now if you create them yourself, then you know, there's a little bit of management and managing. You're gonna have to have some kind of backend to see what's happening. Yeah. But generally there's not really any management. And that's the beauty of \cf4 [00:12:00]\cf3  Honeytokens is that nothing is happening 99% of the time.\
+Well, probably more than that, right? Yeah. It's just that 1% where something really bad's happening. That's when you get really wanted to work as well, really wanna get to lure. And then you, you know, a lot of people say, well, what about if like a legitimate use case of someone using these Honeytokens?\
+Like an employer finds them and goes, Hey, this is weird. Yeah. How do I use that? Well, what you can do is you can just blacklist the known IP addresses if you want to so that if an employee uses them, you don't get alerts. So literally this isn't something that's going to be noisy. Yeah. Right. Because threat detection is very noisy.\
+It is very noisy. You know, it requires a lot of people. So this is something that's designed that when these triggers something is happening. Yeah. Usually that something is malicious because they should never be used. Yeah. You can really put a lot of emphasis on these alerts and there's not much. Now, I think the challenge Because the other area is deployment.\
+So there's not really a challenge in managing them. Deploying them, I think, is probably, you know, a challenge in making sure that you get good coverage everywhere. Yeah, yeah. And these are critical applications that cover it. Private applications. And you probably want to, you know, the great thing about Honeytokens is you can put the, they're so light, you can put them everywhere.\cf4 [00:13:00]\cf3  \
+Yeah, yeah. That's the challenge. But I would solve that challenge by like, hey, we're in tech, let's automate what we can, right? And if you're using something like GitGuardian, you can automate the creation of those Honeytokens and then you can deploy them automatically in your different systems. So that \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  what about incident response?\
+Because I feel like there's needs to be when people go into cloud, one of the first things we talk about, and I'm sure people who are watching this or listening to this thing, think of the same two scenarios. One is that, Hey, if something happens. Should I be ready or how do I respond to this?\
+Because it could be to your point in the supply chain. It could be directly in my company. It could be anywhere. Like, is there like a advice on the whole incident response thing as well? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Mackenzie Jackson:
+\f1\b0 \cf3  Incident response is challenging because it differs between different companies, right? And I think it's going to really depend on what's being compromised here.\
+But I think if a Honeytoken gets triggered, then you can do some initial research just to make sure that it's not a use case of an employee using it, you know, it's coming from a weird IP address. You can see the type of calls that are being made on them. If it's a weird call, weird IP address, you know it's going to be pretty obvious when it's a bad guy. And basically, then you just adopt the approach of, okay, what would I do if an \cf4 [00:14:00]\cf3  attacker is in this system? Yeah. And so, you know, so let's say it's in a private code repository. All right, there's an attacker in this private code repository. Let's find out how they got access.\
+Yeah. So now you can actually look through those logs. This goes back to threat detection before we're trying to find abnormal activity everywhere. All right. Well, now our Honeytoken has been triggered in this specific service. Yeah. All right. So that means that we can try and find abnormal activity here.\
+And then once you find that abnormal activity, then you can go, Oh, let's see if that matches anywhere else in the system. Yeah. They shut down access. You can be proactive on it. And one of the sayings that I don't like is everyone says that attackers only need to be right once. Yeah. It's not true. They need to be right a lot of the times because they need to make initial access and then they need to be right in what they're going to do next. That takes time. Yeah. Yeah. So when they make access, Honeytokens triggered, then you can stop them from actually doing anything. You know, it's a big difference between a security incidents and a reportable breach. You can kind of stop that before it gets to the next point.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  I'm almost thinking that, I'm sure listeners are thinking about this as well.\
+One is the deployment of Honeytokens. Is that practical or is that something that makes \cf4 [00:15:00]\cf3  sense for companies at all levels?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Mackenzie Jackson:
+\f1\b0 \cf3  I would say absolutely, right? Even in a start up? I would say absolutely in a start up because start ups often may not have the best security practices because they don't have the intelligence or the personnel to be able to implement, you know.\
+Security is hard, you know. And so these Honeytokens, they require no management. You're not putting in an expensive security tool that needs an expensive security person to manage it. You're putting in some credentials. that aren't going to require any maintenance that will let you know when someone's in there.\
+And the same is in large organizations because there is so much avenue. If I'm trying to breach a big organization, okay, I have to do a lot of research up front, but I have a lot of paths to try and get in. So Honeytokens will really let you know what doors are unlocked for someone to walk in and when you have an intruder.\
+So I really think it's for all organization levels. And if you're a startup, you can get them for free from GitGuardian . They're not gonna cost you anything. Yeah, you can generate them on that dashboard for free. Deploy them, connect up alerting to your scene or use the dashboard. Right? So it's like a startup.\
+Definitely use them. You know, large \cf4 [00:16:00]\cf3  enterprise. Hey, we're going to have to kind of have a conversation with sales, but I \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  think one more scenario that comes to my mind is that say, for whatever reason, the person is trying to just say that ransomware like for S3 bucket, I've put access token in there.\
+As my Honeytoken, instead of using them to delete them, is that something which is a scenario that usually people should cater for when they look at Honeytokens? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Mackenzie Jackson:
+\f1\b0 \cf3  So you're saying that you've put a Honeytoken in the S3 bucket and the attacker has deleted it? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Yeah, so instead of saying, Hey, who am I?\
+They just go, you know what? I don't want them to have anything because I think this is production. So I'm going to delete the access key. So they don't get the ability to access anything. Would that be still a legit use of Honeytoken? Or would the way I'm thinking about this is like root access key.\
+People say, Hey, don't create root access. key. Bad idea. So people have alerts for if the root access key is created, hey, alert me. Yep. So the same way for the Honeytoken, is there a scenario like that as well? People should consider having where if someone deletes a key from there or someone does any kind of action that resource that should be triggered.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Mackenzie Jackson:
+\f1\b0 \cf3  Ah, it's really interesting. So the key is being deleted. There \cf4 [00:17:00]\cf3  is a use case similar to this. The one that you're talking about, like say, Hey, there's a key here. If this key is gone, alert me. That's what you're saying. Yeah. Yeah. Yeah. Yeah. Which is that which happens to be the Honeytoken as well, I guess.\
+Yeah. Yeah. Yeah. So the Honeytoken to be triggered, it needs to be used. So it wouldn't work for a deletion, but there is a use case that's similar to this that's quite cool for Honeytokens. Unfortunately, it only relates to GitGuardian, but from the last podcast, we talked about how we scanned all of GitHub.\
+Yeah, that's right. All public source code in GitHub. Yeah. We do that constantly. If you commit something publicly on GitHub, we, we have a look at it. That's not because we're doing anything bad. This information is out there, right? Yeah, yeah. Anyone, bad guys do this too. But what's really cool is that let's say that you want to protect your source code, right?\
+You have some proprietary code that's really important. You want to make sure that this code never makes it out publicly. This is a scenario that happens a lot. Source code is very leaky. Yeah, yeah. You know, it very often ends up on public code repositories. Employees accidentally push it to the wrong place.\
+What you can actually do is put a Honeytoken in the source code. Now, if this makes it onto GitHub, GitGuardian is going to find it immediately, within a couple of seconds of it being there. And we also know that it's a Honeytoken because we've created that Honeytoken. So now, \cf4 [00:18:00]\cf3  I can alert you that, hey, this Honeytoken has been alerted, but that means that your source code is public.\
+So this is like a tracker. You can use them as like a tracker for where your source code is, because if a Honeytoken goes off anywhere, you can find out where that source code has actually ended up to. So it's not the use case that you're talking about, but it is like a different use case of like, you can actually start to track where things end up by using Honeytoken.\
+I've done experiments with this. It takes a few seconds. for malicious actors to find credentials on places like GitHub.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  I love it. I think we can use Honeytoken as an Apple Watch to know that, Hey, you're about to have a heart \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Mackenzie Jackson:
+\f1\b0 \cf3  attack. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  You might as well prevent that by making sure the Honeytoken is the incident response for it.\
+Fair enough. That's most of the technical questions I had. Where can people find you on the internet? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Mackenzie Jackson:
+\f1\b0 \cf3  So I'm on the internet, you can find me personally anywhere under the handle advocatemac. If you want to learn more about HoneyToken specifically, GitGuardian. com has lots of resources about exactly what they are.\
+I've done some webinars about them and so you can find anything on GitGuardian about HoneyTokens and \cf4 [00:19:00]\cf3  how to deploy them and if you want to find out more. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Yeah. Thanks so much. I'll put that link in the shownotes as well. But thank you for coming on the show and I look forward to seeing you again and again.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Mackenzie Jackson:
+\f1\b0 \cf3  Awesome. Thanks so much.}

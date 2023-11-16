@@ -1,0 +1,755 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red128\green128\blue128;
+\red250\green138\blue59;
+\red216\green34\blue146;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\pard  \line \par}
+{\cf1 [00:00:00]}
+{ }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Will you stream, how are you going? Good. Very good. How are you? Good. I am super excited with this conversation. This is the first one in a series of cloud native conversation. You're going to have on the podcast. So I'm really looking forward to this , I guess to kick things off and we are talking all things services.}
+{\pard  \line \par}
+{So maybe before we kind of get into the whole service mesh thing a little bit about yourself I guess just a bit about your professional journey, where you are today and how you kind of, what was your path to that place? }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ Yeah. Yeah. So, , today I'm fully immersed in everything service mesh, but of course it didn't start out that way.}
+{\pard  \line \par}
+{So I kind of got into the cloud native world a little bit through acute. Honestly, I was an engineer at Twitter in the early days semi early days, , 2010, for a couple of years after that. And Twitter at that point was going through as big microservices, , transformation and a lot of what Twitter learned in the process, , ended up being useful.}
+{\pard  \line \par}
+{To other companies and, , Twitter was kind of early in the journey echoes of everything that was done, , in, in kind of the cloud native transformation at other }
+{\cf1 [00:01:00]}
+{ companies. So that was my introduction to it. Twitter at the time, of course didn't have Kubernetes containers in of any of that stuff, but the patterns were there.}
+{\pard  \line \par}
+{And so when we started, buoyant and, and started working on linker D, which is our service mesh, , we kind of, we were basing it on what we had seen be successful in that infrastructure transformation. So that's the short story. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Yeah. Also, so Twitter buoyant, and kind of so special because this is before pre service mesh kind of a thing was kind of hard.}
+{\pard  \line \par}
+{The idea came about, I guess. Yeah, that's right. }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ That's right. And , it was really interesting time and kind of a weird idea and people still struggle with it. But it's here to stay. There's no, }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Now Jeffrey, no escape. I mean, we have a whole month and a conference running on cloud native, so there definitely no escape or, and a service mesh potentially for people who are working in that space.}
+{\pard  \line \par}
+{ This is probably been one of the most requested topic for me around service mesh.}
+{\pard  \line \par}
+{In terms of what is service mesh for people who do not know, because maybe they are working in the cloud native space, but still may not have heard about service mesh. So how do you describe service mesh? }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ Yeah. So the way I describe it, there's kind of two ways there's first. What does it }
+{\cf1 [00:02:00]}
+{ do?}
+{\pard  \line \par}
+{And then there's how does it work and how does it work? It's kind of interesting, , and kind of unique, but I think before you can understand that you have to understand what does it do. So what the service mesh does is it gives you a bunch of. A set of features that traditionally you had to build into your application and it gives them to you at the platform level, which means you don't have to build them into your application anymore.}
+{\pard  \line \par}
+{And we usually bucket those features into three buckets. There's a set of features around the liability, et cetera, features around observability. And then there's a set of features around security and the security kind of where things I think that may be the most interesting, but all of those features, are delivered to you in a way that is kind of decoupled from the application.}
+{\pard  \line \par}
+{And it fits really nicely into the Kubernetes. World because Kubernetes, one of the beauties of its design was that it has a very well scoped design, right? So it says, this is what we're going to do. And beyond this, where Kubernetes is not going to do that, and that leaves space for other implementations.}
+{\pard  \line \par}
+{Right? So Kubernetes, Kelsey Hightower, Clint, it's a platform for building platforms. I think that's to its credit. That's part of why it was }
+{\cf1 [00:03:00]}
+{ so successful. So it stops at a certain layer on the service mesh can kind of take over from there. So that's what }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ it does. Oh, right. So it's kind of , you have the to what, to court Kelsey hideout and platform to build platform.}
+{\pard  \line \par}
+{And on top of that to manage that platform that you've built on top of Kubernetes, that's that mesh going to, yeah. }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ Yeah. I wouldn't say that it manages Kubernetes. So it's kind of , it fits in this intermediate space between what the application is doing and what Kubernetes are doing. So very good at, , Hey, I've got 50 machines and I've got a hundred applicator.}
+{\pard  \line \par}
+{Distribute those applications, tools, machines, and I don't really care about the details, just make it work. Right. Whereas the, and the application of course, is , here's a business logic that I need, , I need to move dollars from this user, to this user, through, , through this bank. And in between these things, , , how do I encrypt communication between the different components of my application, which are running, on the cluster, but talking to each other with the network, or what do I do when one, one part of my application, , starting to fail on, I need to retry requests, right?}
+{\pard  \line \par}
+{So it's not business logic, it's it's platform, but it's not the kind of thing that Kubernetes itself handles. So that's where }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ the service mesh, here at the more, it sounds }
+{\cf1 [00:04:00]}
+{ networking and I'm waiting in the mental. }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ Yeah. Yeah. I think, I think you can definitely consider it as a type of networking.}
+{\pard  \line \par}
+{It's just, , networking traditionally has been , , you establish a TCP connection, , and , we will get you data from a to B, , and that's kind of what networking gives you. Whereas this is more well, , it's not just about getting data from a to B, we, we need to do it in a way that's secure and we need to do it in a way that's reliable and we need to do it in a way where you can tell exactly what's going on.}
+{\pard  \line \par}
+{So it's kind of advanced, }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ advanced networking. Right? And to your point, I guess it probably is the advantage, the advantage of being the coupled also make Silicon it's , I guess imagine you can put it, put it where you want, you take it out when you don't need it kind of comes to the flexibility of it as well.}
+{\pard  \line \par}
+{Yeah, }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ that's right. And you can upgrade it kind of independently from the application and things that. And that's where kind of the magic comes in because all of these things you can do in the application itself, right. You can do retries, you can do TLS, you can do all that stuff in application code.}
+{\pard  \line \par}
+{It's just not. It's just not related to your business logic, right? So you kind of, it's nicer to pull it out. You can do it through libraries. So that's nice. Right? }
+{\cf1 [00:05:00]}
+{ You can have a library that does this stuff, and then you kind of just link it, but then, , if you want to change the way it works, you have to, you've got to rebuild the application, redeploy it and stuff that.}
+{\pard  \line \par}
+{Magic of the service meshes because it's at the platform layer, , you have this kind of barrier in between the two and it all works. Thanks to the magic of, of Kubernetes and containers and this idea of sidecar containers, which is the really transformative thing. , I think that's really, if Kubernetes has brought anything to the world, to this idea of sidebar containers, I don't think people really appreciate that.}
+{\pard  \line \par}
+{Just how }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ powerful that model is. Yeah. I think we're definitely gonna get into the sidecar model as well. I know I compared it to networking and to your point, reliability, observability security, and having that decoupled sidecar, there's a lot of moving parts there, but I'm also kind of wondering that people are the students who would have heard that word networking. When I said beginning and they're , well, how can we figure it out networking ages ago?}
+{\pard  \line \par}
+{Why do we need this new models? So what's your response to that? Yeah, }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ no, I think that's a great question. And I think that's exactly the question needed. Every time, some new piece of technology you kind of enters the world is what has }
+{\cf1 [00:06:00]}
+{ changed that suddenly makes us relevant. And for the service mesh, what changed is ultimately the move to cloud computing, right?}
+{\pard  \line \par}
+{ What cloud computing means is it means a couple of things. One, it often means not always, but it often means that you are running your code now on hardware that you don't own and on a network infrastructure that you don't own. Right? So suddenly you still have a lot of control, right? You still literally own the wires between, , the machines and you own the machines.}
+{\pard  \line \par}
+{And everything was in the data center and you had the key right now you have no guarantees, right? So this is all running and it's being shared with other people that you don't know about. Right. It's running, , so that's one thing. The other thing is just the, the model that we expect , from a software, the requirements we place on software is actually change, right?}
+{\pard  \line \par}
+{ 10 years ago, 20 years ago, maybe even less. Five years ago, you could have planned downtime. It was okay. You'd say, okay, website's going down from 9:00 AM to 6:00 PM on Sunday, ? And nowadays, , you can't really do that. Right? You expect something to be available all the time and , you used to be able to say, okay, well, , once something's in the data center, , we're going to trust.}
+{\pard  \line \par}
+{We're just }
+{\cf1 [00:07:00]}
+{ going to, we're not really going to do security within the, we're going to have a firewall. That's going to protect everything. Then once you're in the data center, , everything's kind of trusted. Right. And we can't really do that anymore. So things have changed. And that's why the requirements we place not only on software, but on the network have changed.}
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Right. So since you're appointed that in cloud computing, what are some of the use cases for this? And cause sounds more if I have Kubernetes this clearly a use case there, I guess is it only Kubernetes? So if I'm misusing containers, I've got a swarm of containers, maybe not Docker swarm, but just I've got plenty of Docker containers to work with.}
+{\pard  \line \par}
+{Would that be a use case? Because I'm just saying hadn't been. Okay. I understand the complexity is a lot more different in cloud. However, what's the use case here? I'm going back to what you were saying, questioning whether, the use case that I may think of is the right use case. What are some of the example use case that people can think of would be applicable for service mesh?}
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ Yeah. Yeah. So the way I would think about it, , kind of the broader, the broad change is , we're, , we're doing cloud computing. Right. And, and that doesn't just mean, , I kind of described as you're running on other people's applications, but, or on other people's hardware, but that's not }
+{\cf1 [00:08:00]}
+{ really the, the more fundamental thing is that you're treating compute and you're treating network as utilities.}
+{\pard  \line \par}
+{Right. That's the fun one. There's a whole show we could do about this right. Within cloud can be, but that's a big change. And it's here and there's no, , there's no going back within cloud computing, , Kubernetes is one implementation and containers is one implementation.}
+{\pard  \line \par}
+{Right. And , traditionally, it's been , how did you do cloud computing? Kubernetes and containers and microservices is kind of the basic recipe. That's an implementation detail, right? But, that's a very common cotton. Twitter did not do that. Twitter was earlier than that.}
+{\pard  \line \par}
+{ That's the model that many companies were adopting and, , within there, , then a service mesh becomes feasible for you. It's it doesn't, , philosophically a service mesh does not require Kubernetes linger. D does, , our, our servers, we tie it to that because a, it makes life easier for us and B , the service mesh.}
+{\pard  \line \par}
+{One of the things that does is it distributes, , lots of tiny proxies everywhere. So you end up with 10,000 little proxies, and then you can kind of do that effective. In other kind of paradigms there that's a big operational burden. And then the off, , it's not quite worth it. So it kind of writing, , linker D }
+{\cf1 [00:09:00]}
+{ came to fruition and, , in a world, in an environment Kubernetes, where we had containers.}
+{\pard  \line \par}
+{So we can isolate, the proxies and you didn't really care what language had written in. You didn't care what libraries, it was just a container. Right. And you had Kubernetes to do the orchestration where you could say, Hey, deploy 10,000 proxies stick one next to every application instance.}
+{\pard  \line \par}
+{And Kubernetes would do that without it being an insane thing to do. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Right. Because you could do that at scale, at that point in time. That's }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ right. You can write some Yammel. And it just does that as opposed to , when I was running, , the stuff that we ran in the early days of Twitter, , you got three machines and they, , you memorize their names.}
+{\pard  \line \par}
+{Cause they were afraid of me. If you want to deploy a hundred proxies, you were writing , , the chef or Ansible or Terraform or whatever it is to do that.}
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Yep. A hundred percent, I think unfortunately, or fortunately I think a lot of people still remember a lot of numbers, a lot of IPS that she was very common to remember IPS. Yeah, yeah, }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ yeah. That's right. That's right. So that's another thing that's changed, right? There's this idea of , treat your machines , as cattle, not }
+{\pard  \line \par}
+{as }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ pets, }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ gruesome with description, , but the idea is , you don't, you don't care about individual machines.}
+{\pard  \line \par}
+{If the machine dies, you move on, you, , Kubernetes just takes care of. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Yep. Okay, cool. So }
+{\cf1 [00:10:00]}
+{ maybe another way to cause another question that would come in and, okay, cool. I understand the use cases now, but what about deploying? Because this is a whole conversation. I mean, we kind of touched on the sidecar method as well.}
+{\pard  \line \par}
+{Where, what are the different kinds of deployments that people can think of? Cause I almost feel is because sounds it's meant for more cloud first. I don't know if an enterprise can actually. Going into a search master. Maybe that's a good question to ask. First is service mesh only for if it's only for cloud compute, as you may kind of mentioned if an enterprise is doing a lift and shift of just something, which is supermodel it no decoupling of any kind and then move that into cloud.}
+{\pard  \line \par}
+{Probably not the best use case for service mesh would that'd be right. }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ Yeah, that's right. I mean, the way that the service mesh works is it basically intercepts. So communication is happening between microservices, right? So if your application is a monolith service mesh, you can't do a whole lot. I can do something, but it can't do a whole lot for you.}
+{\pard  \line \par}
+{Right. That communication isn't there. Similarly, if your application is doing batch processing and it's all offline, well, we can do something there, but , a lot of the values is in the kind }
+{\cf1 [00:11:00]}
+{ of, , the real time aspect. So yeah, there's definitely cases where. It's not super useful. I'll say there are plenty of enterprises who are using linker D in production are talking about it.}
+{\pard  \line \par}
+{We've got an awesome talk. , it's one that I really liked from Microsoft that at this upcoming coop con for X-Box X-Box clouds, the cloud service is a huge enterprise parts of Microsoft that don't use Kubernetes totally use liquidity. Right. So but there's certainly plenty of enterprises that are using it.}
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Right. But they're obviously using it for use cases which have more cloud computing, cloud native kind of use cases. Yeah. Perfect. And so maybe let's go, that's a good segway into the whole different kinds of deploying more than so I understand my use case now, cloud cloud native, what are some of the deployment models for service mission?}
+{\pard  \line \par}
+{Where do you recommend? Because I think it's going to meet inching towards cause now we started the foundation for service mesh. Now meet that's meaning towards the things you mentioned about reliability, observability security. So taking that security pillar as well, where some of the deployment models and yeah, maybe let's start with that or some of the different deployment models for serviceman.}
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ Yeah. So this is a magic of Kubernetes, which is that }
+{\cf1 [00:12:00]}
+{ whatever, if you can make your application run on Kubernetes, we can deploy a service mesh and it'll work for it. Right? So it, it's not there's 20 different models. We just fit to the standard. And kubernetes provides this type of deployment, that type of demon sets and replica sets and, , deployments and Argo rollouts.}
+{\pard  \line \par}
+{And there's all sorts of options, but because becomes, we can, , take advantage of the sidecar. , and basically stick a container that has linker, DS data, plane, proxy next inside every pod. It doesn't matter what the model is. That pod will be there and we'll have the proxy and liquidy we'll start mediating that communication.}
+{\pard  \line \par}
+{So it's a really elegant, }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ it's a really elegant, so why not have it as part of the build versus a side container as it's , what garbage. }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ Yeah. So , if you, this is kind of the library versus sidecar, right? So you can have it as part of the bill, you could have it as a library.}
+{\pard  \line \par}
+{And in fact, that's the model that we were used to from, from Twitter. Yeah. Problem then is you have, you've coupled it with your application, right? So if you want to update the service mesh, you then have to re rebuild or re link and redeploy that, , if it's a }
+{\cf1 [00:13:00]}
+{ library, you typically has to be written in the same language, or it has to have some kind of binary compatibility, at least it gives you a lot of constraints to doing that.}
+{\pard  \line \par}
+{Right. Whereas in the sidecar model, it acts as a proxy and your application doesn't need to know anything about it. Right. And if you need to update it, you can update it without updating the application. Right. And, that ends up being really important because typically there's two different teams that do this with the platform team and that's application team and the application team.}
+{\pard  \line \par}
+{You don't really want them thinking about the stuff, right. They're supposed to be building business logic, , and the platform. They own that stuff. And you don't really want them having to worry about the details of the application. So the fact that there's this boundary between the application container and the sidecar container, and Kubernetes gives you this mechanism of sticking them together at runtime, it's runtime binding.}
+{\pard  \line \par}
+{We get this really nice division of responsibilities. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ So that's a good point because that kind of makes me understand a bit more of the reason why decoupling is preferred as well. Because I think because technically, if make it part of the library, you're tightly coupling it with the application that you're building.}
+{\pard  \line \par}
+{And }
+{\cf1 [00:14:00]}
+{ then, I mean, I, well, you would hope that are organized in the organization. That is a separate platform team managing say the key of your points. You've been in this deployment of the platform deployment itself. It's easy for them, to update policies for security, reliability, and observability as well without affecting the actual thing, I guess.}
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ Yeah. Yeah, no, that's absolutely right. In a lot of ways, the service mesh, , isn't about solving technical problems so much as it's about solving social problems, right. There are these two teams and they have different responsibilities. And to the extent that they're tied together and they have to interact, that's fine.}
+{\pard  \line \par}
+{But you're slowing them down. Right. And you want them, you want them to be decoupled because there's different things are aiming }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ for, right. And maybe this is a good one to follow up at this one then, because I hear so many service meshes and it's , and I know you and I have spoken about this offline, but it is , I think the number of questions I was getting a bird, why are there so many service mesh?}
+{\pard  \line \par}
+{ Why are there folks so many service meshes? , why can't it just be one, I guess with question. }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ Yeah, I dunno. That's annoying. Yeah. I mean, I think there's a couple things going on. I think , one thing is. They're }
+{\cf1 [00:15:00]}
+{ kind of cool. It's a cool piece of technology. So there's an attraction to building them, right?}
+{\pard  \line \par}
+{ it's a surface, there's a control plane, there's a data play. Right. And the control plane, , it's what you, as the operator interact with and the data plane is the proxies, right. And those proxies are actually not fun to build. Those are hard, really hard to build and, , but there are some generic pop proxies you can use Envoy is a good choice until , if you have solved that problem, it's just , oh, well just write a little control plane on top of bottom line.}
+{\pard  \line \par}
+{It's , it's one of those things where it's, it's nerd bait, , you're , ah, , and that'll be cool. I can orchestrate those things. And then, , once you're six months, months into it and you're , well, crap, what have I done? Okay. It's terrible. But it's just, , so I think that's one component.}
+{\pard  \line \par}
+{I think another component is, there was one service mesh that was very, very popular and had a whole lot of marketing, but it wasn't. Good. And so it kind of it made every, got everyone excited and then it kind of left this empty feeling. So people, }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ I think you referred to the Google one, but I'm with you on that one.}
+{\pard  \line \par}
+{Cause I've, I've definitely heard. Yeah. So I guess to your point then the service mesh as a principle it, the principle is the same across the board, whichever side, especially on abusing the, the }
+{\cf1 [00:16:00]}
+{ reason why you wanted, and maybe the underlying piece is different. Is that how we say it?}
+{\pard  \line \par}
+{, that's where it's different kinds of service }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ mesh. Yup. We have, the implementations are different. The components are different. The feature sets are different, but the broad ideas. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Right. So maybe let's talk about secure, securing them. Then I guess the security aspect of it. What are some of the security considerations people need to have when say, we might have I guess we actually do have a lot of cloud security, architects, security architects.}
+{\pard  \line \par}
+{We listen to the podcasts and from their perspective, they are reviewing an application. And to your point as a side cut approach, they have service meshes, they need is going to think where does one even start questioning? What should they be looking at? Because traditional networking would just mean that, Hey, there's an IP, then there's a few other things to consider.}
+{\pard  \line \par}
+{What do you kind of go down the path of, reviewing from a security perspective? What should they be looking for? }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ Yeah. So that's a great question. And the way I would think about this is there there's two aspects to it. There's , what is the security enhancements that a service mesh brings?}
+{\pard  \line \par}
+{And there's also. What are the, , what are the security vulnerabilities that the service mesh introduces, }
+{\cf1 [00:17:00]}
+{ right? Cause , , you can't have one without the other, , you can't introduce something in 10 and have all these fancy features and then find out that actually, , it's got this big, , vulnerability in it, right?}
+{\pard  \line \par}
+{ You have to look at both sides. I'll say, kind of just to go back for a moment to that point about the organizational dynamics, the first, , one of the very earliest experiences that we had, with linker D was we had a very large company say, Hey, guess what? And this was the project very young.}
+{\pard  \line \par}
+{, we didn't know if it was going to take off. We didn't know anything. We had a very large company saying, Hey, we're deploying linker D everywhere. And we're , really why? And they were , well, because we want mutual TLS. Right. We want them to tell us. And we're , really? And you want to use linker D why don't you just do it in that, in the application?}
+{\pard  \line \par}
+{They were , well, , there's 10,000 different teams of developers. And they all have their own product managers and they have their own agendas. And, , if we were to go to each of them and say, Hey, we need you to implement MTLS. , and we need you to make that one of your priorities, it would take us a decade to do this, or, or we can just install linker D right.}
+{\pard  \line \par}
+{And we get MTLS everywhere. Right. So that was the first time where I was , okay, I see it. It's really less about the technology. It's more about this kind of }
+{\cf1 [00:18:00]}
+{ organizational dynamic. So getting back to your question about, , security, , if we start with the feature set, , let's start with the fun stuff.}
+{\pard  \line \par}
+{Right. And then we'll talk about the pain, the fun stuff. I think, , the, the big driver for linker D is, is mutual TLS, right? That's the thing where it's , okay, if we want encryption in transit, that's a couple of ways of getting that, but this is one easy way. And it also gives us a lot of other nice features.}
+{\pard  \line \par}
+{It gives work load, I guess. Yeah, and it gives us , some, some primitives on top of which we can start building really rich policies around. Who's allowed to talk to whom it does it all in this really principled way. And it does it all in a way that is zero trust compatible. And that's really interesting, right?}
+{\pard  \line \par}
+{Because that's the model. If you are kind of advanced security professional, that's the model that you were kind of weighing in most of the time, that's the model you're kind of weighing yourself against it's , does this move me towards zero trust or not? So that's what linker D gives you.}
+{\pard  \line \par}
+{And that's, that's really }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ powerful. Right. Cause I mean, so to, to your point then, if mutual TLS is just probably the probably the first component people thinking of, kind of goes back to what you were saying, what networking fundamental, where this is that's been in the }
+{\cf1 [00:19:00]}
+{ networking fundamental for a long time, where if you have two people talking to each other, how do you encrypt that mutual TLS was one of the obvious ways you go to on the spot?}
+{\pard  \line \par}
+{Is that the only thing kind of that makes that people should be looking out for, in a service mesh from a security perspective? Actually, funny enough, there's a question as well from Roxanne, what security capabilities service can provide that without that we could not easily achieve , oh, so for mutual TLS for best skis, how best keys should be managed in an enterprise.}
+{\pard  \line \par}
+{Yeah. }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ Yeah. Great. Those are great questions. So yeah, the, the problem with TLS is that it's it's a huge ma , everything sounds great until you think about what the keys what's gonna happen with the keys. And then it becomes a huge maintenance, new. It becomes insane. And this is prevented people from adopting until us in the past, actually wrote a long article.}
+{\pard  \line \par}
+{If you search for Kubernetes engineer's guide to MTLS where I talk about this life for pages and pages, because I also had to, learn it myself. But I'll give you the short story here. And then if you want some bedtime reading, , just , Google search for kubernetes MTLS engineer guide or something.}
+{\pard  \line \par}
+{The one thing that linker D can do, which is really, really nice. And again, it's , because of the }
+{\cf1 [00:20:00]}
+{ magic of Kubernetes, we can handle the vast majority of the key management problems for you because we're doing it in this very consistent, very uniform domain, right. Because linker D is there and it's a pod, , it's a container in every pod that you have added to the mesh.}
+{\pard  \line \par}
+{And because we know exactly how those pods work, we wrote those proxies and we know exactly, , we can design exactly how they're going to issue CSRs and get the idea, , how identity is prevention, all of that. The vast majority, , 95% of the key management stuff is taken care of for you.}
+{\pard  \line \par}
+{So the moment you install linker to even turn it on by default, the moment you install the linkerati on your cluster and you, and you mesh an application, you have mutual TLS automatically for all meshed pod pod communication. Now the 5% that we can't do that you have to think about is, , TLS has this kind of hierarchical identity, right?}
+{\pard  \line \par}
+{And that at the root of the hierarchies, it's this trust anchor or this trust root, and you have to decide what you're going to do with that, right? We'll generate it for you if you want, or you can provide it, but , you need to have a strategy for that trust is that, , you make that. We live for 30 }
+{\cf1 [00:21:00]}
+{ years and you lock it in a safe somewhere or do you have it late?}
+{\pard  \line \par}
+{Short-lived and you rotate that thing. So at the pod level, we're rotating every, , every certificate, every 24 hours, that's configurable, , by default we rotate everything 24 hours and then at the cluster level, there's another layer and we rotate that at another interval, but then that trust anchor, , that's kind of up to you.}
+{\pard  \line \par}
+{So that's the, a bit slightly complicated answer. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ That's such a good point though, too, to your point about the hierarchy then. So to, I guess, your accent as well. Is it so in an enterprise they most likely have that trust certificate authority, they would have figured that part out. So the layer below that is basically having an liquidity and is liquid is open source as well.}
+{\pard  \line \par}
+{Yeah. So, so somebody, something to liquidity or whichever other open source you want to go for. But I think the idea would be, you should be able to manage. The relationship. So to your point, rotation of the keys should happen automatically. If it's possible across the board, across the airports, across your platform there as well.}
+{\pard  \line \par}
+{That's probably one feature they should look for. What else should they look for to kind of make a right decision for a mutual TLS kind of a conversation? Well, I }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ think that's the big one for }
+{\cf1 [00:22:00]}
+{ MTLS. Once we have that, then at least with Laker D you basically have MTLS, you have workload identity and you have stuff.}
+{\pard  \line \par}
+{ It becomes a little more complicated if you're in a multi cluster situation and you want those copters to talk to each other. So linker D we'll do cross cluster communication. You'll use the same MTLS stuff, it hardens it, ? And so those clusters could be running on different clouds and that connection could be over the open internet.}
+{\pard  \line \par}
+{, that's all fine. We don't make any assumptions about the underlying network topology, but in that case, both clusters have to have the same trust. Right. So the hierarchical model, , and there you have to worry about, okay, well, I have this intermediate issuer, , attached to the cluster.}
+{\pard  \line \par}
+{ How often am I rotating , that cluster, if I lose those credentials, someone steals them, , can someone impersonate anything on that cluster? Maybe, , how long, , what's the lifetime there? Is that a year? Is that a month? Is that a week? So there's nuances, there's portals }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ there.}
+{\pard  \line \par}
+{And she's got a followup question which is a good one as well. The service mesh help with east to west network security. Does it use EBF? ABP F }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ yeah. So , two different questions. So does it help with east west network security? So , that, th that is basically what we describe }
+{\cf1 [00:23:00]}
+{ the service mesh is doing just Eastern vest communication, right?}
+{\pard  \line \par}
+{North south is , we have ingress coming into the cluster and then , that's north, I guess. And then south was , oh, we talked to a database or something in east west is the communication with. The cluster. So that's the security that the service mesh is really good on, especially we'll integrate with any ingress.}
+{\pard  \line \par}
+{So Kubernetes has this notion of an ingress and we'll integrate and that's, what's doing that. So I was handling the north south stuff and we'll integrate with it. And, , we'll allow you to mesh it and apply MTLS within the cluster, as you can have this end to end encrypted communication.}
+{\pard  \line \par}
+{But we just integrate, }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ so it's your point is service mesh is actually providing the east to west.}
+{\pard  \line \par}
+{It can integrate with north to south where essentially at the essence of it if for anyone else listening as well, it is essentially used to best security. , }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ right now. So the second question is, , does the service mesh UC BPF and the answer there is complicated because there's a bunch of marketing that conflates EBP AF with service mesh.}
+{\pard  \line \par}
+{So. You have to , be able to step away from that. So what does he BPF? EVP F is basically the ability to run a very limited }
+{\cf1 [00:24:00]}
+{ virtual machine within the kernel specifically for network traffic. So it gives you a way of adding, doing some limited amount of network stuff directly in the kernel rather than in user space, which means it's much faster.}
+{\pard  \line \par}
+{Right? So the way that it works with a service mesh is at least, , is that ETF is going to handle the layer four stuff and then of a special handle layer five through seven or }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ whatever, you }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ know, it's that model and models have allowed data, frankly. But yes, so you can certainly use it with E BPF and we have a blog post about using linker D with psyllium, , and it all.}
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ But it doesn't sound you recommended because it sounds that's an outdated. }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ No, I mean, I think it's totally fine. Right? If it speeds up the layer four stuff and great by all means, do that, , EBVs is very limited and you can't run it on the Colonel, so they have to be very restrictive to what they allow you to do.}
+{\pard  \line \par}
+{So you can't really do string manipulation and stuff that. So doing you can't do TLS termination in UPPF so you have to rely on something in layer seven anyways. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Right. So, and those that's a good one to go. Cause I've got another question from Rama here as well. More facts to consider this the best service mesh to begin with, because }
+{\cf1 [00:25:00]}
+{ obviously there's, cause I think to your point, there are different kinds of service specialists as well, and clearly Lincoln diva.}
+{\pard  \line \par}
+{One of the open source one is doing a great job at it as well. But there are all these marketing allowance out of the best service mesh, a service best, best service mesh with, to your point node bake. How, what kinds of things do you look for or what do you recommend people should look for in a service mesh as they want to go for?}
+{\pard  \line \par}
+{Yeah, }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ I mean, I think one thing is being very clear what you're trying to accomplish, right? , why are you adopting a service mesh? Is it just so that you can say you have a service mesh? Well, okay. , that's not a great reason and , it's not going to give you a rubric by which you can make a good decision.}
+{\pard  \line \par}
+{If it's very clear to you, I need MTLS or, , I really need cross cluster communication, or I need the golden metrics for every application on my component, every component of my application in a uniform way. Right. If you have a really clear goal, then I think you have a rubric by which you can make a decision, , I'll say from the perspective of linker D Our focus has always been around simplicity.}
+{\pard  \line \par}
+{So we have prioritized operational simplicity over almost everything else }
+{\cf1 [00:26:00]}
+{ and, and performance. So if what's important to you, is it being really fast and really lightweight and being simple to operate. And I think while your D is a good choice, we're still catching up. Honestly, we're still catching up on some of the features, , but that race gets closer, , every, every release.}
+{\pard  \line \par}
+{So that's, that's been our }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ strategy. Alright, well, cool. Thank you. Thanks for the question as well, Rama. So maybe one of the things that people talk about, and maybe this could be a , straightforward answer in a cloud native context is the whole scaling part from a security perspective, we called out mutual TLS.}
+{\pard  \line \par}
+{And sounds , if you have a service, this service mesh, which does the rotation for you for Mitchell DLS, it makes it a lot more the job, a lot more easier, kind of what you were talking about with LinkedIn D yeah. So it's a scaling company and scaling and monitoring is kind of where I'm coming from because we so focused on the implementation part.}
+{\pard  \line \par}
+{Now it's all the runtime. What are we really looking for in the runtime context? Cause say we build an application, security architects are looking at it and then going all right, what am I really monitoring here? Just that the mutual TLS doesn't fail , or is there a behavior thing? What are some of the things people should consider monitoring?}
+{\pard  \line \par}
+{When they are working with a cyber }
+{\cf1 [00:27:00]}
+{ specialist security. Yes. }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ Yeah, that's right. And that's, that's a really good question because, , for many people, what we find is you've, you've just adopted Kubernetes, which is a lot, it's got a nice model. It's clear, it's composable.}
+{\pard  \line \par}
+{It's well designed, but it's a lot to learn. Right. And then if you then have to, and it's a lot to operationalize, you have to understand that model for it. And , what are the failure cases and what we do and what's our runbook. And then if you add the service mesh on top of it, it's just as complicated and you've taken a step backwards.}
+{\pard  \line \par}
+{Right. So, , we try and address this with liquidity in a couple of ways. One is, , we try and make it smell and look and feel Kubernetes as much as possible. So to the extent that you have developed patterns around, how do you operationalize Kubernetes? Those should apply just as much to.}
+{\pard  \line \par}
+{Right. We run these control plane workloads. They sit in your, in a namespace, they are their pods. You can run them in ha mode. So you can distribute three copies, three instances or five instances across different nodes. You can use all the components. It just, you use the standard Kubernetes things to monitor them.}
+{\pard  \line \par}
+{So we try not to do anything. Special there at all. The other thing we do is, , I said, there's a control plane and there's a }
+{\cf1 [00:28:00]}
+{ data plane and the control plane is some machinery that sits in a, in a namespace kind of off to the side. And the data plane is the proxies, right? Yeah. So the data plane is kind of constantly changing because whenever your application, , roles or, , this new version or whatever, new proxy spin up and the old ones die.}
+{\pard  \line \par}
+{And so on, we make it to the data. Plane can function, even if the control plane goes away. Right? So even if there's a network partition and something terrible happens, the data plane will still continue functioning. So monitoring the data plane is basically monitoring your application, right?}
+{\pard  \line \par}
+{Kubernetes gives you, , the health of your data plane is kind of the same as the health of your application. If a pod dies, , whether it's an application dying or the proxy dying, which rarely happens, , that's, that's tantamount to pod failure and Kubernetes has all these mechanisms for dealing with that.}
+{\pard  \line \par}
+{So. What I would say it is. Yes. There's stuff, , definitely , there's stuff you have to know about. You have to, , you gotta look at the resource consumption of the control plane. If that's growing suddenly, then you should send up a flare and go figure out what's going on.}
+{\pard  \line \par}
+{But there's nothing that is that dramatically special, , about operationalizing linker }
+{\cf1 [00:29:00]}
+{ D with one or two asterisks, , and I'll plug another thing that I wrote. We have a run book. So if you search for linker D production, runbook we actually have this runbook it's, it's one version old, so I'm sorry I have to, we have to update it, but it basically tells you here's what we recommend you monitoring and here's the threshold, and here's what we would do and, , good luck.}
+{\pard  \line \par}
+{So you try and document }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ that as possible. Actually, that's a good point because I think one thing that's not spoken about enough in the cloud native community is the amount of skill set you need in the team too. Cause , there's lot of open source options and. People underestimate the amount of effort that will be required if they go down that path as well, where, Hey, I'm going to go down open, open source, or because the steam needs to be technical.}
+{\pard  \line \par}
+{They need to be able to deploy it in a way that if that individual or if those two people who are working on our leave, can you still run it? Can you still manage it? So it there's a whole scaling question as well here. So maybe first one being, being skillset. Is there any thoughts on what kind of skills that people should have in their team if they caught on the open source journey?}
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ Yeah. I mean, you got to learn how to do all this stuff. It's yeah. Operating }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ high }
+{\cf1 [00:30:00]}
+{ level. The teams should be technical, I guess, where we're going with this right level that you understand this. }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ Yeah. Yeah. I mean, , there's no substitute. There's nothing really that we can do. , you have to own your own availability, right.}
+{\pard  \line \par}
+{And if you're deploying your application on Kubernetes, whether there's a service mesh or not, you need to understand how that works now, , typically what we'll see is there, , , and I kind of alluded to this before. There's the developer teams, , right in the application, there's a platform teams and some people think.}
+{\pard  \line \par}
+{Some people believe that developers should be exposed to Kubernetes, actually don't think they need to. I think if my model is the platform team needs to really understand Kubernetes and, and the service mesh and, , whatever else, a CGI system and whatever else, the developers don't necessarily need to be exposed to on it.}
+{\pard  \line \par}
+{And it's kind of orthogonal to what they're doing anyway. So it's. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Yeah, yeah. I mean, I'm kind of with you on this one as well, because I feel it's not their responsibility to manage a platform. Plus I think we, as people have spent learning, say Java node and all that, that's just adds complexity to that.}
+{\pard  \line \par}
+{, even though there's a whole roles for full stack engineer for you to do what you ask, I guess, for a developer, do I }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ }
+{\cf1 [00:31:00]}
+{ imagine, , I feel the point of a platform is it gives you the, , it gives you the stuff that you can run your coat on and , you should know how to interact with it, but you shouldn't have to be an expert at any of that }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ stuff.}
+{\pard  \line \par}
+{Yeah. Yeah. I mean, it's kind of the same as , if I were to use a word, a burning. You should be able to use it, but it doesn't really mean you kind of need to know how the inner workings of it that works. I know that's kind of where we're going with it. And it's kind of one of the reasons for me to ask that question is also because there are paid versions for this open source I was watching as well.}
+{\pard  \line \par}
+{Right. And actually, funny enough, I just realized Roxanne has a question on this as well. There are many open source service mesh and some commercial ones. What extra capabilities to commercial one can give apart from support. }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ Yeah. Yeah. This is, that's a great question. Roxanne. It's got all into good questions.}
+{\pard  \line \par}
+{All right. So here's something that I have a strong opinion on. I have a very strong opinion because, , I I've been thinking about this since the very beginning of point in the very beginning of linker D and , because I'm doing two things, right. I'm building a I'm building an open source project, but we're also building a company behind it.}
+{\pard  \line \par}
+{And I want that relationship to be really good. And one kind of historical way. You have that }
+{\cf1 [00:32:00]}
+{ you have a company and an open source that, , project that have a relationship is you kind of have this feature withholding thing where you're saying, okay, , open source has all these features, but , these two or three things or these 20 things or whatever that you actually, when you really get serious, when you really need to go to production, those aren't those aren't in the open source, we're going to withhold those, right.}
+{\pard  \line \par}
+{That's you have to buy the commercial version. Right. And engine X is, is a classic example of this engine X and then extension next plus, , an engine X works great. But if you need to monitor the request, queue length or something, that's only in engine X plus or something that. I don't know.}
+{\pard  \line \par}
+{And that's really difficult. Right? It's difficult because you're continually kind of changing those features. Right. Cause that's an ever-shifting thing. And, and also it kind of pits you as a company against. The open source community, right? They open source community wants this stuff, and you're saying, no, , I want you to be a community.}
+{\pard  \line \par}
+{I want you to be happy and I want you to propagate, , the project, but also I'm not going to give you this stuff. We kind of decided not to do that. Right. And we decided instead, , then, then the nature of software is changing the nature of open source and kind of people's expectations for open-source }
+{\cf1 [00:33:00]}
+{ change too.}
+{\pard  \line \par}
+{So what we do at boy in this, we say, Lindsey has all the features you need. Right? It's got everything you want, right? We're never going to withhold anything. And instead what we're going to do, and maybe there's one asterisk to that. There are things that, yeah, there's indifferent asterisks to that.}
+{\pard  \line \par}
+{Cause there are things that I think are bad that sometimes companies want. And I don't want them to go into the open source because they're bad, but companies sometimes really want them. And that, that stuff sometimes we'll just be, we'll only have a commercial solution, but by and large, , the stuff that's good has to be in the open source.}
+{\pard  \line \par}
+{Okay. And then what we said is what we're going to sell you is , we're going to make it really easy to run kubernetes. We're gonna make it a managed service space. Right. And so if you're running a linker D and you want all the features and you want to do it all yourself, then that's great.}
+{\pard  \line \par}
+{And if you want, but if you want the features, but you don't wanna, , have to think about operating it and worry about being on call, then you can pay us money. Right. And that division clarifies everything makes everything very easy and, and allows us to be very wholehearted in our development of liquidity.}
+{\pard  \line \par}
+{Right. We know we don't have to worry about doing stuff, , and , well, , should we keep this back for the }
+{\cf1 [00:34:00]}
+{ commercial, , version? Or should, , everything goes in open source. Right. And it's very clear and we have a very positive relationship with our community that yeah. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ She said w cause that's pretty interesting.}
+{\pard  \line \par}
+{I know why the feature feature with holding stuff as well. It's pretty interesting. So to your point then to summarize, if you're looking at a service. Policy where the line for support is drawn, whether it's feature limitation or whether it's to a point, Hey, you can use it. But from managed service perspective, when you kind of switch over to a paid version, which kind of makes sense, because I imagine at scale, this is even more complex between multiple clusters and as a platform, dream that if you have multiple platform teams and stuff growing as well, I imagine that is where the complexity comes in.}
+{\pard  \line \par}
+{So, but }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ the complex and some organizations are totally capable of managing it and it's important for them to manage it. And it's important for them, , they're customizing it, they have this very specific use case and that's totally fine. Right. That's great. And hopefully some of that stuff makes it back into the open source project and they contribute.}
+{\pard  \line \par}
+{And , we have this nice open source relationship. Other companies just don't care. Right. They're , I work, I want linker D and I want the value prop, but I don't want to spend any of my brain on that. Right. So here just make it work for }
+{\cf1 [00:35:00]}
+{ me. And that's all. Yeah. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Awesome. Thank you. And another question for Roxanne .}
+{\pard  \line \par}
+{She's on fire today with all these good questions.}
+{\pard  \line \par}
+{They're all good questions. I'll I'll tell Roxanne to keep coming. Operation wise, there's an app team. There was a platform team and then a security, which team should operate a service mesh. }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ Great question. Okay. So I have an opinion on this, which is, I think the platform team needs to own the service mesh.}
+{\pard  \line \par}
+{I think the app team maybe needs to know that it's there, but by and large, shouldn't have to really think about it. I think to the extent that they are forced to think about it. That's maybe a sign that something. And, but I think the security team needs to be heavily involved. So I think the platform team needs to own it and security thing needs to be involved because a lot of the value of the service mesh is in the security context, right?}
+{\pard  \line \par}
+{ It's a security team cares about zero trust. They need to understand, okay, where is that happening in the system in which communication is MTLS and which one is not. And , , how's the sidecar helping us and , that stuff can't just be hidden away from them.}
+{\pard  \line \par}
+{So to answer Roxanne platform team owns that security team is involved, , and, and understands that app team hopefully is decoupled. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Oh, I, so to your }
+{\cf1 [00:36:00]}
+{ point about doing the deployment phase is when, or maybe it turned on for not. So, cause it'd be a monitoring component that you spoke about earlier.}
+{\pard  \line \par}
+{That kind of is where security injection could be as well. And the other one being during the billing processes, As to what could be done on deploying this at scale across the board. That could be another place. }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ Yeah. So typically what will happen with the sidecar model though, is , , the app code will, right.}
+{\pard  \line \par}
+{, that team will write code, it'll get packaged up as containers, it'll be shipped to the cluster. And then once it's added, once it's actually deployed in the processing deployment, the cluster that's when the sidecar, the service or sidecar gets injected. So it's really not till the very last minute, , we have this nice late runtime.}
+{\pard  \line \par}
+{No, but well, the security and, , and if the service mesh goes down, the platform team who owns it, or is this the one who needs to wake up and fix it? Right. That's right. But the security team is going to care about things , okay, , we're relying on the fact that there's, MTLS everywhere.}
+{\pard  \line \par}
+{What, how do we guarantee you that a pod can never be created unless it has the sidecar proxy how do we prove that? Right. , and that's, that's kind of where the security team and platform teams are }
+{\cf1 [00:37:00]}
+{ intercepting is. Right. , it's security team wants to know about those guarantees platform teams, in service to them.}
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Yeah. Also, wait. So in Lincoln, would that be through the linker, the control plot control. }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ So how do you guarantee that the proxy is always part, , which is what does the MTLS is always quite pod. Yeah. So, , in, in linker, D we give you the ability to turn on, Kubernetes flag, basically we set up a pod can not be created unless the proxy is injected into it.}
+{\pard  \line \par}
+{And so you can basically enforce it's not on by default, but that's a very strict setting, but we give the ability to enforce that. So you're guaranteed if the pod is created than it is doing MTLS and if, if it can't, for some reason, that's not even allowed to be created, }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ she that's a good one to kind of add to what we were talking about earlier from a security feature perspective, and people are thinking about how they secure a service mesh or mutual data obviously is one of them, but also ensuring that.}
+{\pard  \line \par}
+{How do we limit any more Newport being created with our major dealers being there? If that's definitely, I mean, I imagine most }
+{\cf1 [00:38:00]}
+{ companies out there want to do encryption in transit. Yeah. So definitely makes sense. }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ Yeah. Yeah. So that's, , the platform team is in service to the security team, they're just as much as they are in service to the app team, their applications to be deploying and to run and be reliable.}
+{\pard  \line \par}
+{And if a machine dies they shouldn't care, right. And security team needs to ensure that there's MTLS, , here, or, , we haven't even talked about policy, , app security team needs to ensure that a PCI service or HIPAA service, , is not allowed to be called from a non HIPPA service or whatever.}
+{\pard  \line \par}
+{ There's other sorts of things that the security team really cares about. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ And what compliance play a role in a service mesh context? Cause I imagine Kubernetes obviously has this compliance umbrella. Sometimes that's put on it. What's the compliance umbrella for or complex. How would someone do compliance in service mesh.}
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ Yeah. I mean, compliance is a pretty broad topic with the areas that I'm familiar with are, okay, we've got a set of services that handle PCI data, and they have heard that the rules from the set of services that handle non PCI data. And I need to make sure that there's no communication that happens between those two groups of services, }
+{\cf1 [00:39:00]}
+{ except for, , these three things which I've allowed.}
+{\pard  \line \par}
+{Yeah. So , that's a compliance role. , MTLS often it's driven by a compliance or regulatory requirements. Know, sometimes it's driven by the security team being, , just saying, Hey, we need encryption everywhere, which is good. ? And well usually if the security, sorry, if it's driven by regulations and we're , oh, we just need encryption.}
+{\pard  \line \par}
+{Right. If it's driven by the security team, usually the security, team's a little smarter. Right. And they're , okay, we need workload identity. We need zero trust. And , we need all this. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Right. But those boards outside of the service mesh or can service mesh for wide, the workload identity can kind of do that.}
+{\pard  \line \par}
+{Yeah. }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ So that's what you get with MTLS, , so we in linker, D we take the service account, which is this Kubernetes concept that's associated with a workload. That's what we use as the identity in the MTLS certificates. And that way, , when you have service a talking to service B, ,, that it's B it's not tied to IP addresses.}
+{\pard  \line \par}
+{It's not tied to anything in the network because you can't trust the network anymore. Right. Tie it to the actual workload identity is given by, by Kubernetes. And you can get fancier, , there's fancier ways of doing that. You can get to hardware, attestation and stuff that, but MTLS is flexible enough that you can kind of provision identities }
+{\cf1 [00:40:00]}
+{ and, and the certificate then prove that you own that identity.}
+{\pard  \line \par}
+{But the semantics of that identity,, are up to you. Right. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Cool. Sweet. That reminds me of a question that I should've asked in the beginning, but Istio. It's Yukon name comes up quite often with service mesh. What is it? And how is it different to service measures? The same }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ thing? No, it's also a service mesh.}
+{\pard  \line \par}
+{So one that Google made early on and it had a lot of marketing and a lot of buzz and }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ it's fundamentally the same thing. }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ It's the same thing. Yeah. There's 12 of these things, , link are these. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Yeah, that's right. Funny enough. We, we have a lot of these, but trying to figure out which one is probably the best one is depending on, on a lot of things as well.}
+{\pard  \line \par}
+{So }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ strong opinion, but , it's a very self-serving opinion. Of course. I think liquidity is the best and that's the one you should use. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Yeah. And it's, and it's completely about it as well, because I think it shows a very balanced group think about, just because it's a lot of marketing dollars behind something doesn't really mean it's maybe the best solution out there.}
+{\pard  \line \par}
+{I guess}
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ there's a lot of. There's a lot of marketing and yeah, a lot of buzz, }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ ? Okay. Because I imagine the word marketing also does is she directs the conversation in a very different way as well, because instead of looking at, Hey, these are some of the gaps }
+{\cf1 [00:41:00]}
+{ was people just keep talking about , oh, look at how these solving as well.}
+{\pard  \line \par}
+{So I can appreciate where that comes from. So you've got a question for all as well. What are challenges or areas to keep an eye? Once we have successfully implemented a service mesh? Is it all green after that? What are we, I mean, it's the same as the monitoring one, but yeah. I'll let you answer. Yeah.}
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ Gosh, I dunno. Once you've got the service session, they're , you're done. You can just. Go home }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ job. Well done. }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ Yeah, no, I mean, there's cash, there's, there's so much, there's so much more, , service messages, just, it's just one component, right? If you are running an application, right. Or if you're building a platform, , for your app team and you need that application to be reliable and you need to be secure and you need to be performant and you need to be flexible enough that you can ship code 12 times a day or a hundred times a day.}
+{\pard  \line \par}
+{That's, there's a lot to that. And service mesh can solve one tiny piece of that and Kubernetes can solve, , maybe a slightly bigger piece, but there's a lot more. So, she }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ had your point, it was waiting on him. I know we've been talking about service mesh, but so it's actually just one component of an application that we'll be building.}
+{\pard  \line \par}
+{I do point it's }
+{\cf1 [00:42:00]}
+{ kind of maybe if I were to switch it back to the traditional connotation, which you were talking about earlier, where it's similar to net for secure. Network is just the underlying bed or platform where you can use that to communicate, but not the actual application. }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ Yeah. Yeah. I think that's, I think that's right.}
+{\pard  \line \par}
+{I mean, , you got to worry about CIC D you gotta worry about , what open source libraries are we using? And, , do they have any vulnerabilities? And , you have to worry about , , kind of dependency management. There's a lot, there's a lot going on in here, }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ but from a service metric perspective, at least the ones that he spoke about so far at least that component would be worked off from that.}
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ Yeah. I mean, once you deploy it, you gotta monitor it. You gotta operationalize it. All that good stuff. You've got to keep up to date with updates and stuff. Yeah. Any other software in the, , I think the one thing. Software is a process, right? , it's not a static thing anymore.}
+{\pard  \line \par}
+{We're long past the days of you ship a CD and then you, , you are a floppy and you put the floppy and now you've got soft when you're done right now, everything is a process. Now everything is keeping up to date and other dependencies are changing. And , that means we all get to keep our jobs, which is nice, but it also means that , life is complicated.}
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Yeah. Fair enough. Hopefully that answers your question. Well, thanks for that, }
+{\cf1 [00:43:00]}
+{ man. And got a few comments for him as well. Again, awesome. Discussion and insight. Thank you. One more comment from Roxanne. It's interesting. We have teams that are, that their environment only works with one type of service mesh that is console.}
+{\pard  \line \par}
+{Is that true? From security perspective? We love service rationalization and hated when we end up with multiple services. That does almost the same thing. }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ Yeah. It's.}
+{\pard  \line \par}
+{Yeah, it's complicated. Yeah. I mean, there's definitely situations where only one service mesh would work, , linker D for example, it's very Kubernetes specific. So if you're not running on Kubernetes, then we can't help you, ? And at least not yet, , on the roadmap is this other stuff to extend beyond Kubernetes, but today, that's kind of where you are.}
+{\pard  \line \par}
+{I think console is a little more generic than that, so that might be the situation they're in. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Ah, right. Okay. So, so that's also interesting to your point then when you picking up a service mesh, you could potentially be in an environment where there could be multiple types of service mesh joining as well.}
+{\pard  \line \par}
+{Yup, }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ yup, yup. Yeah. Yeah, that's right. And in fact, we, , we often, I wouldn't say often we regularly see this, so we'll regularly see, especially for larger organizations, they've }
+{\cf1 [00:44:00]}
+{ adopted, , one team adopted a service mesh and then another one adopted this one, then another one that adopted this one and maybe the first one doesn't theirs anymore.}
+{\pard  \line \par}
+{And they're thinking about switching to second one and , it's always a messy. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Okay, well, that's a good note to kind of kind of talk about what does maturity look for probably the last question for this as well. What does maturity looks for service mesh?}
+{\pard  \line \par}
+{ When people are thinking, all right, I've heard William seeker. great. I want to do something about this and they're looking from a scaling from a maturity perspective. What level one? And maybe what level five, I guess this }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ is what you mean, the maturity of the projects. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Yeah. Yeah. That's right. So when you have any deploying service mesh, I guess to your point, you could start with maybe just having a service mesh in the first call, I guess, but then you'll miss your DLS enforcing.}
+{\pard  \line \par}
+{I guess Cuban. Being the only source, , yeah, }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ I see. Okay. So there's kind of two axes to this. There's how mature are the projects themselves? And then there's , how mature is my adoption? Right. Yeah. I'm very happy to say that, , , the scene, so linker D is a CNCF project and the CNCF has these different levels of, of kind of maturity and linker D is at the top most level as of last summer and we're in the graduation tier.}
+{\pard  \line \par}
+{So we're right there with Kubernetes and Prometheus's, and, , kind of all these }
+{\cf1 [00:45:00]}
+{ big pillars of the, of the open source community so that, , liquidy itself is very mature right now. What about your adoption? , of a service mesh? Yeah. Level one is deploying it, right. Deploying it on dev cluster, , and then there's deploying it and staging.}
+{\pard  \line \par}
+{And then, , once you get to the point where you're in. Yeah, I'd say real maturity comes when you understand the failure models. So for linker D we've got the easy mode of deploying and we've got ha mode, right. And they change mode means you're going to run multiple replicas and we're going to spread them across different machines and you can withstand all sorts of failures.}
+{\pard  \line \par}
+{I think another, so that's one sign of maturity. I think another sign of maturity is the use of, of features, right? So you can install linker and you get a bunch of stuff out of the box without having to do anything. Right. You get metrics, amazing metrics. You don't have to do anything, you just get them.}
+{\pard  \line \par}
+{Right. And then, , there's some, , are you doing anything with those metrics? Are you consuming them? Are you alerting on service, health and things that? But then we also have some more advanced features that are kind of opt in, , things policy, right? So I only want service a to be able to talk to service B and service C is not allowed to talk to service B, or you can enforce that.}
+{\pard  \line \par}
+{But you have to build up those policies. Right? So }
+{\cf1 [00:46:00]}
+{ that's another song where maturity is , are you making use of that full feature? }
+{\pard  \line \par}
+{So, }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ interesting. Awesome. }
+{\pard  \line \par}
+{ That was really awesome to kind of have all the questions answered from team over here as well.}
+{\pard  \line \par}
+{I didn't thank you. Roxanne aroma and everyone else, Janet joined us live stream. And where can people find you William for, they want to connect and maybe have follow up questions and service mesh and maybe, yeah, }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ I'm on Twitter, , a WM. So just you look for at WM. That's me. Linker D is spelled L I N K E R D.}
+{\pard  \line \par}
+{So the D is spelled separately and you can find that on Twitter and linker d.io and then buoyant, of course, , you can find more on the web that I have is B U O Y N T. So make sure that you goes before. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ And I'll put those links on the show notes for the web on the website. Possibly we can get to that as well, but I really wanted to say, thank you for spending the time with us.}
+{\pard  \line \par}
+{ I learned so much, so thank you so much for doing this and I can't wait to have you again. So Monday and I think it would be pretty awesome to hopefully, maybe, I don't know if you're ending the coupon next month, but if you are, please say hello there }
+{\pard  \line \par}
+{\b\cf3 William Morgan:\b0}
+{ as well. I will be there.}
+{\pard  \line \par}
+{I'll be in Valencia. We'll have a booth and everything. So yeah, if you're there. Yeah. And thank you for having me. This has been a blast. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ }
+{\cf1 [00:47:00]}
+{ Oh, it's a pleasure myself as well. So thanks so much for you for your time and thank you for the audience for tuning in asking all this questions as well, especially Roxanne aroma as well.}
+{\pard  \line \par}
+{So thanks so much, everyone. We'll see you next week with another episode of cloud native security, but until then stay safe for peace in peace. }
+}

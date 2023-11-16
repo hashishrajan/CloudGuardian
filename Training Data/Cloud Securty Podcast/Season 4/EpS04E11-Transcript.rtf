@@ -1,0 +1,561 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red102\green0\blue204;
+\red128\green128\blue128;
+\red114\green179\blue114;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\b\fs48 GuyPo\b0}
+{\pard  \line \par}
+{\b\cf1 Guy Podjarny:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ G P T opened everybody's eyes exposing this technology of the best in history. At the end of the day. It'll come back to security hygiene, it'll come back to like locking your doors and and your windows , and sort of ensuring that these basics are well handled. Again, technology amplifies and so , whatever flaw here, the flaws wouldn't be very different.}
+{\pard  \line \par}
+{But the more auto generated, the more you amplify the generation, the more you multiply the security risk. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ DevSecOps in the cloud, is that really a possibility? So if you have been in the cloud security space for some time and you are a cybersecurity leader, you probably will understand the concept of security champions program DevSecOps, cloud security and all of that. But what you may or may not have noticed that Amazon, since this year has started talking about security champions program as well at reinforce at other places.}
+{\pard  \line \par}
+{And if you actually try searching for this, for some reason, Amazon is the only CSP, which is talking about security champions. Azure and Google Cloud have versions. What they're really talking about is champions of their }
+{\cf2 [00:01:00]}
+{ software rather than, Hey, we need people beyond the security team to help us solve these security challenges.}
+{\pard  \line \par}
+{So cloud security is becoming more aware and as leaders probably listening to this conversation as part of the cyber security leaders month. You probably would want to know what is upcoming in the cloud security space and not just from a perspective of, Hey, I've found a vulnerability. I've barricaded my crime scene as a police officer and now we are ready to solve the crime.}
+{\pard  \line \par}
+{This is more around the fact of security champions program, DevSecOps in cloud. Is that even possible for this? We had Guy Podjarny, he is the founder of Snyk and also the host of the Secure Developer Podcast, which talks about DevSecOps Security champions. That's basically AppSec space is entirely what they're covering, so it was really great to have Guypo come and talk about coming from founding multiple companies and working with large companies like Akamai and stuff, and now the founder of Snyk for the past little over seven years now. So it's also really interesting to hear what he was noticing as a pattern from the generative AI capability.}
+{\pard  \line \par}
+{How would that affect cloud security as well as app }
+{\cf2 [00:02:00]}
+{ security, whether AppSec and cloudsec can exist together, and what are some of the patterns that he's learned from other people who have come on the show? What are some of the cloud security trends he has seen in his show, where he has spoken to many cybersecurity leaders about this topic, if you know someone who is a cybersecurity leader or wanting to be a cybersecurity leader and wants to understand the space broadly as it stands in 2023, so you can plan your cloud security program or know what you should be upskilling or looking out for as you kind of grow a more holistic cybersecurity program for yourself in 2023.}
+{\pard  \line \par}
+{This episode is definitely for you. And by the way, if you're here for the second, third, or four time listening in or watching on your YouTube, LinkedIn or Apple and Spotify, definitely give us a follow, subscribe and leaves a review, a rating. It definitely helps us find more amazing guests like Guypo and others who come in, share the knowledge freely.}
+{\pard  \line \par}
+{I hope it really enjoys conversation between me and Guypo, where we. Peeled off the layers between the DevSecOps and the cloud and the product world, whether they combine together or are we just gonna be talking about }
+{\cf2 [00:03:00]}
+{ CSPMs or CPMs or whatever other C acronym the Gartner is gonna come and introduce to us as well.}
+{\pard  \line \par}
+{So that's where the conversation was. I hope you enjoyed this. And this is also the last episode for the Cybersecurity Leader Month. So just an fyi, next month is gonna be about Kubernetes security because we will be at Kubecon EU, which is Amsterdam. And also we would be at the RSA Conference, which is probably the biggest cybersecurity conference in. The world. It's gonna be in San Francisco, so we'll be in Amsterdam and San Francisco next month. Definitely say hello. If you're there in person, I would love to take a picture with you. By the way, I run something called the RSA Fashion Week, so if you are , dressed up and like me into men's fashion or ladies fashion or fashion in general, definitely come say hello.}
+{\pard  \line \par}
+{I'll love to take a picture and post on my social media as well because we love to show the other side of cybersecurity as well. Alright, I will let you enjoy this episode and I'll talk to you in the next episode. Peace. Hey guys. Thanks for coming on the show. }
+{\pard  \line \par}
+{\b\cf1 Guy Podjarny:\b0}
+{ Hey. Ashish. Happy to be here. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Appreciate that. So I doubt people don't know who Guypo is, but , for the one or two audience members who probably have never heard of Guypo, what was your journey into the current space you're in? }
+{\pard  \line \par}
+{\b\cf1 Guy Podjarny:\b0}
+{ Yeah, so I'm the I guess I'm kind of the }
+{\cf2 [00:04:00]}
+{ moment best known for being the founder of Snyk. For it. You know, my journey is kind of having gone through, got into security a little bit in the cyber parts of the Israeli army. Went into application security kind of back in 2002 in the sort of the first AppSec pioneers at Sanctum.}
+{\pard  \line \par}
+{They got a card by Watchfire, they got acquired by IBM, and then I left and I founded a web performance company. It was kind of part of the first wave of DevOps in the Velocity Conference. And that company got acquired by Akamai, where I was CTO for a bunch of years. And then after a few kind of great years at Akamai you know, learning how to sort of operate there at scale, I got the itch to do another startup and I left , to found Snyk, which, you know, to a large extent kind of merged my. Kind of AppSec and security journey with my DevOps journey to kind of build security for developers and can try to bring the DevOps ethos, you know, as a solution provider to the world of security. So in a very brief nutshell, that's my }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Pretty, pretty awesome brief history as well there.}
+{\pard  \line \par}
+{I was gonna ask, because you've been in leadership position yourself, you've been a CTO and you talk to other leaders as well, and this being the cybersecurity leader month and }
+{\cf2 [00:05:00]}
+{ Cloud Security Leader Month. So for the leaders listening and I, the moment I say the word DevSecOps, some of some of them were definitely rolled their eyes like, oh my God, hey, here we go again.}
+{\pard  \line \par}
+{But how would you describe DevSecOps and, cause I guess you were in that whole shift left movement when it was starting off as well. So probably one of the , few people talking about at that point in time, how do you describe. DevSecOps, you people who are leaders at this point in time? }
+{\pard  \line \par}
+{\b\cf1 Guy Podjarny:\b0}
+{ I think like fundamentally, DevSecOps is around bringing the security world into the world of DevOps.}
+{\pard  \line \par}
+{And you know, the kind of, the ethos of DevOps includes a bunch of things but probably like two core components of it are continuous deployment. By independent teams that own the applications end to end. And so DevOps, again, amidst many, and you kind of ask, you know, three people, you get five opinions about what DevOps is.}
+{\pard  \line \par}
+{ but fundamentally, you know, it focuses on. You know, instead of these sort of big long iterations of, you know, requirements and you know, delivery you go to something that is, that is much more agile, much more iterative. And to make that work at scale, you have to reduce dependencies. }
+{\cf2 [00:06:00]}
+{ You have to allow teams to operate independently, which in turn kind of got translated technically into things like microservices and such, like trying to create.}
+{\pard  \line \par}
+{Softer boundaries that also allow those teams to iterate. And so there's a lot of evolutions and security by and large doesn't tend to operate that way. You know, tends to operate in a more centralized fashion, tends to operate in a war. You know, sort of external entity that audits, you know, like it's core, it's roots is in auditing and finding problems, finding mistakes in it.}
+{\pard  \line \par}
+{And, and it just doesn't work for this fast base independent team model of DevOps. And so DevSecOps is around rethinking security. To say, how can you build secure software in a way that at the end of the day, predicates on on these teams operating and securing what they're doing? And you still need very much the security team, security leaders, but security teams need to change, from being, the people securing the system that people auditing and assessing it to being a platform team, to being an enabler that mm-hmm.}
+{\pard  \line \par}
+{makes }
+{\cf2 [00:07:00]}
+{ these independent teams successful. As they, you know, build it and own it and run it, you know, over time. So to me that's the sort of the core of DevSecOps. I think it gets translated. I have this sort of the long-winded answer here, but, you know, it gets translated into this sort of three aspects.}
+{\pard  \line \par}
+{And I had this talk three phases of DevSecOps, some people think of DevSecOps as like first and foremost DevSecOps technologies. So think, well, if you're doing container security, you're doing DevSecOps, and it's because it's associated, the container technologies is associated with this world of DevOps, and so it does introduce some new technologies you have to secure.}
+{\pard  \line \par}
+{There is the notion of DevOps methodologies and so like, you know, put a security control and continuous deployment pipeline, you know mm-hmm. , or cloud, you know, as the whole kind of world of cloud. . But for me, really it's around that sort of shared ownership. It's around that decentralization of security that is the core of it.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Oh, this is interesting because it is already happening in the cloud space where you know, you're finding that security people are being part of development teams as security architects or engineers, or how we gonna use it. Do you feel like devsecops from when you started talking about it, when }
+{\cf2 [00:08:00]}
+{ there's a shift left and everything?}
+{\pard  \line \par}
+{It's been a while, right? I think I've been talking about devsecops so I feel like for years, but you've been talking for much longer. So do you feel like since the time you started talking about it, because it was almost like an uphill battle, I imagine when, wait, what do you mean? We have a decentralized security?}
+{\pard  \line \par}
+{Because we've always operated this way to today. Do you feel there has been a level of maturity or do we feel the needle hasn't really moved much in the implementation of DevSecOps. , }
+{\pard  \line \par}
+{\b\cf1 Guy Podjarny:\b0}
+{ I think first of all, I wanna differentiate a little bit within DevSecOps and Shift left, and they're very related, but they're not the same.}
+{\pard  \line \par}
+{Like, to me, shift left predate DevSecOps because Shift left, you know, I was saying that back in 2002 before DevOps for Agile, really? And it was just about the premise that you want to find problems early. I think in the world of, mm-hmm. security and cloud security is no different than that.}
+{\pard  \line \par}
+{Tends to be very detect and respond, you know, very, like, I'll find the problem. when they operate as they get deployed, and I want to find them earlier, like, you know, it's just that much cheaper, that much more effective, you know, to to find the problems earlier. And the end result of that is that you fix more }
+{\cf2 [00:09:00]}
+{ issues.}
+{\pard  \line \par}
+{And even it was when it's a year long cycle , to release something and it's not at all in the cloud, you still need to shift left or still want to shift left. Yeah. I think the difference is that in the world , of cloud. And DevOps , the need for that is greater.}
+{\pard  \line \par}
+{But so it was just sort of like a little bit of a differentiation. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ No. That if you clarified that. So where do you feel the maturity is at this point in time? Yeah, }
+{\pard  \line \par}
+{\b\cf1 Guy Podjarny:\b0}
+{ I think the. Industry has matured here, but it is not evenly distributed. And so I think what has happened is that you have large enough companies that have grown in this context of DevOps, in this context of cloud, you know, they're cloud native, truly. And for those organizations, it's just not realistic. It's not practical to sort of apply security in that sort of central fashion. And, and so like it or not, they evolve and they they built a bunch of these practices.}
+{\pard  \line \par}
+{And you know, there's a bunch of things that you can see that demonstrate that there's. In the world of, of product security, for instance, and application security, you see so I host the security developer podcast, as you mentioned before, and I get to talk to these sort of smart }
+{\cf2 [00:10:00]}
+{ security leaders oftentimes with a dev and appsec bias}
+{\pard  \line \par}
+{ And you know, you ask consistently, you ask about like the traits, the sort of the properties and skills that they want in the people that they. And you know, now there's kind of much more acceptance that the key skill is almost like development skills, is the ability to build a platform and they feel like they can teach security.}
+{\pard  \line \par}
+{More easily than they can teach sort of the development. But even if they do teach, you know, the ones that are talking about, you know, broader skills and coming from security, they feel like they need to enable or like have someone with the aptitude to sort of learn coding. So, you know, and in general a lot more about like automate problems.}
+{\pard  \line \par}
+{So I think that appreciation of like you wanna automate is a big deal. I think the appreciation of the shift left of like the dev security, has also grown. And I think we're sort of at, at this inflection point now, which is so, you know, Snyk is almost 8 years old, you know, sort of seven and a half years old now.}
+{\pard  \line \par}
+{And and at the beginning I, let's say this, the reactions were much more split when I talked about developer first security. We talked about, you know, the need and the }
+{\cf2 [00:11:00]}
+{ criticality of developer security. II think everybody was like, yeah, it'll be better. But the skepticism around whether it can be done or not, you know, was was high.}
+{\pard  \line \par}
+{I think today I rarely encounter that. There's still criticism, there are still a lot of challenges. But I think much of the industry now is in a place, that doesn't doubt that you need to get to developer security. But now there's a need of like a new set of capabilities and tools for product security teams.}
+{\pard  \line \par}
+{ And cloud is like we can talk about that. You know, cloud is a little bit and sort of the, that there's overlaps there. Mm-hmm. in in saying, okay, I need to run a security program that is developer-centric. It doesn't mean it's sort of developer first. It's very far from developer only, but I need to run it.}
+{\pard  \line \par}
+{And so, so I think those demands for these tools, the sort of the frequency of skills, I do think there's been an evolution. . But I think the world of securities still has a ways to go, , in where it }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ stands}
+{\pard  \line \par}
+{and I think another word that I came across recently, I don't know if it Twitter or somewhere, but it was so someone said DevSecOps Shift left.}
+{\pard  \line \par}
+{And they }
+{\cf2 [00:12:00]}
+{ also had start left. And I'm like, cause the whole conversation was, oh, shift left, should marry, start left, and I'm gonna start left. That's an, that's an interesting, I don't know if, have you heard the term before start? }
+{\pard  \line \par}
+{\b\cf1 Guy Podjarny:\b0}
+{ I haven't heard the term, but you know, I think people sort of in, in practice shift left is you know, when you sort of look at the theology, like you think of the language it's actually it's, it's a false statement because now you know, it's all about that infinite loop, that continuity.}
+{\pard  \line \par}
+{And so where, like, where's left , where, where have you you know, it's, it's continuous. There is no shift left. And so really, , I think the sort of the true, the true change is, is the decentralization. So it's really about top to bottom. Yeah. It's more about saying, okay, how can a dev team that you know, now, unlike in 2002 when I'm sort of using that term you know, owns the pager, you know, if you will.}
+{\pard  \line \par}
+{Right. Like they, you know, they own quality. They own a lot more of the operation. How can they own security? And when you think about it, they own the pager and then oftentimes being the first ones to be paged on something that looks like an operational issue, but it might be.}
+{\cf2 [00:13:00]}
+{ }
+{\pard  \line \par}
+{You know, security issue, but then increasingly it's the soc. Like you still need security specialists to understand if someone's attacking. So it is in different states, but it's, yeah. So start left. I mean, you always , everything starts when your writing the code, right? }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Or you start, you always start on the left, right?}
+{\pard  \line \par}
+{Because someone is clearly typing the code somewhere. So you kind of are starting on the left technically. So maybe it doesn't make }
+{\pard  \line \par}
+{\b\cf1 Guy Podjarny:\b0}
+{ sense. Yeah, probably like a more a more broadly used term that is good is secure by design, secure by design. So those programs you do sort of see a lot. And to an extent it's probably the same sentiment, which is can you, can you design it to be secure before you've written the first line code?}
+{\pard  \line \par}
+{Yeah. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah. And I think I, I love the example that you gave about developers being the first with the pager, I guess pager duty or whatever they use at this point in time. Forgetting the notification because a lot of conversations around threat modeling used to be similar as well as a security person or as an AppSec person.}
+{\pard  \line \par}
+{I would have a team member go in and do threat modeling. , that was the first time they're looking at this application that they've never seen before. Whereas an application developer who }
+{\cf2 [00:14:00]}
+{ develops the application has been looking at it every day, probably for the last five, six years. They know every hole in it.}
+{\pard  \line \par}
+{They're probably best suited to do what threat modeling session than the security person walking into the room. But anyway, I'm gonna leave that for another conversation, but I definitely feel it's the developers definitely need to have more power, but then it comes with the flip side. , how do you balance this?}
+{\pard  \line \par}
+{And this is kind of where I would love to segway into the whole cloud conversation as well. , you mentioned because you're the host for the secure developer, where you speak to a lot of leaders, cybersecurity leaders about what they're seeing and what they're expecting as roles I, I guess skill set as well.}
+{\pard  \line \par}
+{ Is there a trend for cloud security that you're seeing there as well? Cause I'm sure it's like blending in everywhere. }
+{\pard  \line \par}
+{\b\cf1 Guy Podjarny:\b0}
+{ It is. And, you know, cloud is messy. It's very, very big. \\ and I think we've sort of spoken about this before, maybe in the past conversation.}
+{\pard  \line \par}
+{But I think we're, we're conflating too many things into the title of cloud. And then in turn, you know, creates confusion. You know, because you say cloud security and, you know, three people will have different interpretations, three different interpretations of what that means. To me, the, the first of all, the, the key }
+{\cf2 [00:15:00]}
+{ distinction that I, that I like to make is between the IT cloud and the app cloud.}
+{\pard  \line \par}
+{So I think one way to sort of, you know, divide the beast is to say for some applications. The cloud , is a sort of API enabled data center. , it's a place in which you host an application you bought or you outsourced, or you know, you kind of lifted and shifted. It doesn't have that complexity of the sort of the dev ownership, the, all of those.}
+{\pard  \line \par}
+{ It is an application that you're operating as a somewhat black box. And so as someone's securing it,, you have a lot more control. It's, you know, it's in your domain, but you don't really know what's inside and so you. all around it. You know, authorization network you know, sort of assets around segregation.}
+{\pard  \line \par}
+{And you know, I think a lot of the cloud use today, you can argue maybe the majority of the cloud use today is in that sort of IT cloud world. And to an extent it's easier. It's much more the evolution of IT security, it's much more the evolution of data center. And I think most of the people are talking about cloud security.}
+{\pard  \line \par}
+{They talk about that. And in that case, you don't need to worry about dev teams. You don't need to worry about shift left too much. You know, it's if you have a }
+{\cf2 [00:16:00]}
+{ problem, you don't go to your dev team, you go to a vendor that you purchased. Yeah, a contractor you used. The app Cloud is very, very different.}
+{\pard  \line \par}
+{It's the place in which you deploy your applications and that's the place in which the cloud is is just a continuation of software. It's just a. Of of the code, you know, you're using infrastructure as code and you're deploying it. You can't fix anything that's been deployed. You have to go back to the source code and modify the source code to , the Terraform file or the actual literal software or the Kubernetes configure.}
+{\pard  \line \par}
+{The saml look like more and more things that are, are earlier in the sort of closer to the application development. So, so definitely there's like a shared ownership of where you fixed it. Some things are in the dev and some in the IT applications changed a more often. So all of these like fancy kind of AI based modeling of how the application be, behave and all that, they're much harder to apply because the application change.}
+{\pard  \line \par}
+{You have multiple versions running at the same time. Cuz you'd have Yeah, like a canary release and a bluegreen train and a, you know, you, you, so it's a, it's a different world and I think it's one in which you have to get development participation. Like you can't be sucessful. in that world }
+{\cf2 [00:17:00]}
+{ without a dev ownership.}
+{\pard  \line \par}
+{And so I, I think that division, is important. And what I'm hearing in sort of talking to sort at security leaders, whether it's at the CISO level or, or sort of in product security world, is oftentimes there is cloud related responsibilities. And they talk about cloud configuration.}
+{\pard  \line \par}
+{But but really it depends on your lens. If you say cloud security and you mostly mean IT security, Then they see that primarily as an operations team, as a SecOps problem. Mm-hmm. That, you know, they need to collaborate a little bit. If you're primarily thinking about cloud in the context of your applications in the cloud and the SaaS application you're hosting they oftentimes see it and of, and sometimes even like, literally organizationally put it under a product security mantle that includes that responsibility.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Funny how it sounds exactly like what you just mentioned about dev before. The person who holds the pager, like the application developer, clearly that's scenario. They're not the ones looking after cloud security. There's the SOC operations kind of gets involved later on. And, and it's funny, I agree on the cloud security }
+{\cf2 [00:18:00]}
+{ space being a bit messy also because of the four Cs that Gartner came up with.}
+{\pard  \line \par}
+{Now, everywhere you kind of look the whole four Cs of CSPM CNAPP I mean, I can keep going. There's few more Cs coming up after that as well. Just to confuse people I guess what I find is a lot of people A either they don't know about these terms and they're always say, Hey, you should use, go for a CSPM.}
+{\pard  \line \par}
+{Then there's another category that have never heard of these . Right. I think I, I would love to kind of get your perspective and because this is targeted at a leadership level conversation as well, but I think should be valued for other people as well. Why is the Gartner narration of the whole four Cs and five Cs, or however Cs they want to add, why is that important for the cybersecurity space when they come out and just say, oh, there's a new category called CNAPP, or I guess ASPM or whatever.}
+{\pard  \line \par}
+{Why is that important? }
+{\pard  \line \par}
+{\b\cf1 Guy Podjarny:\b0}
+{ Well, I think it's a fast moving space. And, as we even just sort of discussed, , it's messy and yeah, people have different interpretations. And so people are confused and , I think existing security leaders, depending on kind of where they come from, either way they need to evolve their }
+{\cf2 [00:19:00]}
+{ practices.}
+{\pard  \line \par}
+{And the reality is that like legacy tech never dies. And so you can't. Just think about cloud, like , the few companies that, or the younger companies that are entirely cloud-based and they were sort of born in the cloud, they need it a little bit less because they just say security. Like, I don't need, I don't need the C , meaning}
+{\pard  \line \par}
+{I just say, how do I do sort of security operations? How do you do security development? You know, how do I they don't need the cloud. I think for most organizations, for most of the bigger organizations that were born before the cloud they have a mix and so they. Things , to equate.}
+{\pard  \line \par}
+{They need to understand the areas of difference between their sort of pre-cloud and post cloud surroundings. , and those changes across, you know, happen across the board. And they're very confusing and they tend to be you know, , by definition most people will not be experts in all of these different spaces.}
+{\pard  \line \par}
+{And so cloud needs, there's kind of, you know, different things that cloud offers you, right? Like one is the, is just sort of the elasticity and you know, the move to it. So you might need tools that just technically are able to operate in a cloud environment and run there. And then subsequently you need to sort of think about the }
+{\cf2 [00:20:00]}
+{ rethinking.}
+{\pard  \line \par}
+{Okay, how do I do, you know, XDR in the cloud? Mm-hmm. , you know, it's, it is it is necessary. off cloud and it is necessary in cloud. But it's a little bit different tools. You know, the elastic infrastructure means you need to have different approaches to how do you know, spin up or down a machine or the API maybe enables a few things.}
+{\pard  \line \par}
+{And then you have the actual true kind of cloud security capabilities of new things you can do in the cloud. Maybe it's, you know, you can now, if you're using whatever containers or like immutable images, then you can just shut down a compromised machine and you'll come back up versus. You know, worrying about not being able to reprovision it, you know, maybe the you know, the visibility that you have in the cloud.}
+{\pard  \line \par}
+{The cloud is much more sort of auditable than IT so maybe you can be smarter about identifying things. So all these are unique capabilities and, and, and they're all kind of interrelated. So the C S P M, like, you know, you need to know what is deployed. You need to know how it's operating. And so I think they.}
+{\pard  \line \par}
+{These is like Gartner categories and all those, they're never perfect. You know, sometimes they're amazing. But }
+{\cf2 [00:21:00]}
+{ I think what they do is they give you an anchor to say, okay, this is like the thing we relate to mm-hmm. . And it helps sort out some of this confusion.}
+{\pard  \line \par}
+{And in doing They help , the conversation, the challenge is that they also carry a lot of commercial. I think I, I think what is not a good practice is to start your RFPs from it. Like I don't think you need a CNAPP solution.}
+{\pard  \line \par}
+{You need to think about your security problems. You need to look at the CNAPP category. Which is by the way, massive and like practically, nobody sort of satisfies it to that extent. And you should look at that as like, these are all the needs. Now identify from those, what are the capabilities that are actually kind of important to you?}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ . To your point, if you just go back to the first principle of why do we do security in the first place? Like the CNAPP and CSPM and all of that just doesn't really matter at that point in time. What are you trying to protect and what do you require as a tool to protect that?}
+{\pard  \line \par}
+{It's kind of basically the bottom line of where people are trying to get to. It, it's also a, a good way for me to talk about something else which is been brewing in my mind about the whole cloud space as well. Where Amazon }
+{\cf2 [00:22:00]}
+{ recently in the AWS reinforce conference think the CISO of amazon.com.}
+{\pard  \line \par}
+{Steve Schmidt, he kind of came up and spoke about the whole security champions program and he, I, I think so far, funny enough, and this is what , was one of the reasons why it was an inspiration That was kind of like the inspiration for having this episode with you as well, where. Hey, wait, Amazon is talking about security champions program.}
+{\pard  \line \par}
+{They had someone from one of the companies, she spoke about how she's been running a security champions program for years and how it's been helpful. But Azure, Google Cloud, they're not running a security champions program or they're not even, sorry. I'm sure they're running internally, but they're not talking about it, that, hey, Customers, you need to start a security champions program.}
+{\pard  \line \par}
+{But Amazon is saying it. They have this version of, I think, Hey, you are and I, I guess for lack of a better word, they are called AWS Heroes. There's similar version in G C P as well as Azure as well. Considering Amazon is already starting the conversation about security champions program. And I, I was saying you've been in the whole shift left devsecops for a long time, and now we kind of starting to see, I guess the beginnings }
+{\cf2 [00:23:00]}
+{ of it from Amazon and as we've been leading the curve for a long time, in your mind my whole conversation started with, is devsecops possible in cloud? What would a security champion program usually look like? Cause a lot of the leaders who may be listening to this have never done this, and maybe us starting the journey as CISOs of a cloud world.}
+{\pard  \line \par}
+{what does the Security Champion program look like? Why is it important? }
+{\pard  \line \par}
+{\b\cf1 Guy Podjarny:\b0}
+{ Yeah, I think so, so it's fine. Security champions is nothing new in the sort of the AppSec space. It is a great thing and you're seeing a greater adoption of it right now. And really boils down to like how much have you gotten to a place in which you're dependent on developers building something secure in the first place.}
+{\pard  \line \par}
+{And so I think the cloud world, Has a lot of its roots in that sort of IT cloud world. And to be frank in IT cloud, you don't need a security champions program like you are in control. You're deploying a thing. You need to buy secure software. You need your contractors to produce secure software.}
+{\pard  \line \par}
+{But if you're running a black box and you know that's what you're doing. , you're not, you don't need a security champions program, you just need a security infrastructure, not a thing to run. }
+{\cf2 [00:24:00]}
+{ You need kind of good monitoring. And so, so I'd sort of say like, the first thing is to sort of acknowledge a vision that is along the line.}
+{\pard  \line \par}
+{You don't have to use these terms right. But of the IT cloud versus the app cloud. Mm-hmm. , I think within the app cloud, you know, in, in AppSec world security champions have been there for a long while and it comes for two reasons. You know, one is, so, you know, maybe let's first define what a security champions program is, right?}
+{\pard  \line \par}
+{So security champion. Has a bunch of different nations, but really they're security champion security community. Mostly, they both orient at getting the people, building the software to have better security competency around them. Security champions is typically something around saying, Hey, one developer per team, or one developer per sort of multiple teams who has more interest and more aptitude around security.}
+{\pard  \line \par}
+{Let's sort of. Find those people, create a community around them, have them be a bit of a bridge to the security team to, you know, historically to the AppSec team mostly. Yep. And kind of equip them with tools. And then you'd find sometimes, Very very loosely defined, you know, maybe all the way to a security community, which }
+{\cf2 [00:25:00]}
+{ is just like create a slack group for these people or a Slack channel, you know, to sort of share practices and and you know post messages all the way to things like, you know, Medallia and Twilio or running like certifications in their security champions program.}
+{\pard  \line \par}
+{You'd sort of have, you know, Yahoo Sean Poris is there, sort of building a program that really connects, like back bounties and security champions talking about all the communities, all the sort of augmentations. . And so, you know, you can get very fancy mm-hmm. and typically it is there to, to sort of achieve these sort of two things.}
+{\pard  \line \par}
+{One is an augmentation of your security team. So it's just the fact that there aren't enough security people to kind of keep up with all of those. And so, you want to crowdsource some sort of security help. So how do you sort of, you know get some osmosis going. Yeah. And then the second is within development is to build something secure in the first place.}
+{\pard  \line \par}
+{So it's to, you mentioned before the sort of , the gap in knowledge of the application between the security person being paged and and an application developer and knowing the application. And so, Say, well, if we planted security expertise within the sort of the app teams, }
+{\cf2 [00:26:00]}
+{ then you would have people that have both, you know, to a sufficient degree and they can make good decisions or they can at least act as a mediator because they would speak both language and they can translate.}
+{\pard  \line \par}
+{ And so security champion programs , are super important because you have to get that last thing done. When you look at Google, like you mentioned Google and. Microsoft kind of post transformation. Microsoft historically hasn't been very good at security. And, and then at some point kind of, you know, turn the dial and, you know, Azure is is great at it, as is the aws.}
+{\pard  \line \par}
+{The reason they do that is not because they have a great response system. Like yes, they also respond well, but it's because they have good infrastructure that addresses a bunch of things and they have good security awareness ahead of time. And so the running, whether they call it a security champions program or not, the security awareness and security activity and security engagement of their developers , is much higher than in most companies.}
+{\pard  \line \par}
+{And as a result of that, they have security system that prevents, that doesn't have a lot of the security flaws in the first place. And then let me just sort of wrap up like it's a big topic, security champions. We could have spoken for, you know, at length about that alone, but }
+{\cf2 [00:27:00]}
+{ sort of wrap up with like, why cloud with your initial question of like, you know, what, why are we hearing now?}
+{\pard  \line \par}
+{And I think what's happening is like the more over time the boundaries between software and the app cloud , are blurring, you know, the cloud eventually its promise is to, is to make kind of infrastructure disappear. You know, is to just sort of say, like, run this for me. Yeah. You know, like, make this run.}
+{\pard  \line \par}
+{Here's like my parameters of what matters to me. And then make it run, make it run well. And, and the best applications are ones that leverage this, right? They sort of, they leverage the elasticity of the cloud they leverage, you know, sort of service mesh authorization to do things, but they intertwine the sort of the application capabilities with the cloud capabilities.}
+{\pard  \line \par}
+{They codify the cloud infrastructure as code capabilities. And so all of those make the cloud increasingly dependent. The app Cloud make it increasingly dependent on developers to be successful. And so I think that's the reason you're. Starting to hear more and more of the term security champions in the cloud security world while it }
+{\cf2 [00:28:00]}
+{ was already alive and well and growing in the application security space.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ I think there are also roles appearing, which are blending into the two pieces as well. , some of our previous guests CISOs as well, I think Stu Hirst CISO of Trustpilot, he is openly came up with the role for product security people where it's a combination of cloud security and appsec. It's basically like in his mind those teams would blend in and I kind of agree with that as well, where eventually that would happen.}
+{\pard  \line \par}
+{You can either start today and make them work together where it's to what you said earlier, if the application or the app cloud as you called out. Is being deployed or developed , by your entire organization, is going in the cloud, has a developer needs threat modeling, needs the whole security champions program, and at the same time needs to have the abstracted infrastructure, but still secure.}
+{\pard  \line \par}
+{It kind of made sense at that point in time. But it also opens another door where, well, clearly we're not there yet. We probably a long time ago. But I also feel , the IT cloud piece, which you kind of mentioned }
+{\cf2 [00:29:00]}
+{ where there might not be a need for a security champion program. May wanna challenge you a bit on this just because I feel like you know how it cloud the whole SaaS world is.}
+{\pard  \line \par}
+{For make a simple example, like people who use office 65 HR departments or marketing teams might use Facebook and all of that, those services, they upload data there. So there is probably a security awareness thing there more than, but I feel like the more PaaS services come in with platform as service and so admins turn into more your cloud admins.}
+{\pard  \line \par}
+{IT admins. Do you reckon that would shift as well when that kind of starts going on from a SaaS is not good enough because I want really customize whatever this SAP application that I've been using for a long time for my hr, suddenly I'm looking at a PaaS platform from sap. Do you feel like that would change as well, or at the moment, do you decide where you see it would stand?}
+{\pard  \line \par}
+{\b\cf1 Guy Podjarny:\b0}
+{ No, I think I, I think it's a very good point that you that you raise and it just goes to show how ambiguous the term cloud is. Because, you know, the, the definition I talked about was really mostly in IaaS world. Like in infrastructure as a }
+{\cf2 [00:30:00]}
+{ service.}
+{\pard  \line \par}
+{You have the IT cloud and the sort of The app cloud. It's true that it, it moves a little bit into PaaS and then on the, in the other lens, you have the SaaS that moves into sort of PaaS and and, SaaS is its own cloud sort of space. And you can kind of say that if the App Cloud's future is obstructing infrastructure and becoming part of the code, the IT cloud's future is SaaS is, you know, , there's generally very few people that want to host software.}
+{\pard  \line \par}
+{Yeah. You know, most of the time, like you, you might be forced to host software by doing it, but most of the time you would rather use a SaaS or like something that's sort of, you know, in the infrastructure to do that for you. Yeah. And then within that, , those become, applications and you're absolutely correct that all the sort of the no code or like the more customizable the system is the more you know rope, you sort of get, you know, to, to hang yourself with and order the more people will absolutely do so.}
+{\pard  \line \par}
+{And so you do you do need to do those. So, I mean, you're right. You know, it is important to do that as well. I think it's just sort of not a, those are, there's smaller worlds, so there's a numbers element. So the }
+{\cf2 [00:31:00]}
+{ number of typically like Sys admins dealing with a Salesforce or an SAP or a you know, whatever platform and developing.}
+{\pard  \line \par}
+{They just tend to be in an organization substantially smaller than the number of developers. And so things like security champions programs, they tend to be required when there's just like a larger community. And so you need these champions kind of floating around in it. But the concept of it is true, you know, in.}
+{\pard  \line \par}
+{Really, I think in everything in security you want the security knowledge and awareness to be as close as possible to the decision. That's really what we want is we want the person making the decision. Yeah. To make a secure decision to doing it. Whether it's a, , so if it's phishing and you know, the person making the decision on clicking a link or not, is the individual, is the user, you know, sort of getting the email.}
+{\pard  \line \par}
+{Yeah. Yeah. And so at the end of the day, you want them to make a secure decision at that time. If it's. . If it's like an application that's being developed, then you want the application developer making the decision to do it. If it is a you know, a, a }
+{\cf2 [00:32:00]}
+{ Salesforce configuration or sort of, or sometimes almost code, you know, yeah.}
+{\pard  \line \par}
+{They get sort of written that, you know, gives access to do it. You want that. And so I think you always, that's the, the essence of shift left, you know, in, concept is the move, the security. Responsibility, awareness, visibility to be as close as it can be to the decision. Yep. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ I think it's a good point.}
+{\pard  \line \par}
+{You call out about the custom code as well, that remind me that I think one of my CISOs wrote before I was a SaaS service, our tech company running on SaaS and our end users would sometimes put Javascript code in it because there was an option to put something and they're just like, oh. . I don't like the way this is rendering this way.}
+{\pard  \line \par}
+{I just wanna change it. And without letting us know, sometimes you find pentest. Hey, why is there a Java script running on the front end? . And turns out they've been storing JavaScript on the other side. Anyway, it's like to that probably opens another can of worm, which requires another whole long conversation.}
+{\pard  \line \par}
+{I also wanted to ask, maybe this is kind of where security champions program we }
+{\cf2 [00:33:00]}
+{ defined. , what are some of the harder parts? Because I imagine like most of the conversations that I end up having with people around the DevSecOps and the whole DevSecOps in cloud as well, is more around the fact that, hey, developers don't want another thing to look after.}
+{\pard  \line \par}
+{like, it just, oh, well I look after performance, I, now I look after QA as well. Like I, the Jesus, like there is that whole thing about we don't need QA anymore. , the test coverage needs to be quite high, and now I have to do security as well and I will talk to my product owner or whatever. Like, I think, do you see that?}
+{\pard  \line \par}
+{And have you ever, you know, figured out a solution for that as well? Or maybe tricks to work around it? }
+{\pard  \line \par}
+{We hope you're enjoying the episode so far. A quick word from our sponsors Snyk who are having a special event Snyk launch on April 4th, 2023. They're gonna be talking about how to deploy and develop securely in the cloud, and you can register for this free on their website snyk.io/events/snyklaunch}
+{\pard  \line \par}
+{now let's get back to episode.}
+{\pard  \line \par}
+{\b\cf1 Guy Podjarny:\b0}
+{ I think it's real, you know, it's the challenge of, you know, needing to doing it. And , }
+{\cf2 [00:34:00]}
+{ it's really about that complete ownership, right? So if in the world of DevOps, you have a team, the team, you know, owns the application they're building and they own it end to end.}
+{\pard  \line \par}
+{That includes a lot of things. It includes, , you know, , the applications functionality, it includes you know, its quality and elements. It includes its opera ability, which is a, a newer, relatively speaking responsibility. It includes costs and it includes, of course, you know, many accessibility and performance.}
+{\pard  \line \par}
+{And, and of course it also includes security. And so the responsibility isn't new. It's the acceptance of the responsibility that we're trying to evolve. But I think the key to focus on, like the responsibilities are already there, and generally speaking, developers want to build an application that is amazing on all of those fronts.}
+{\pard  \line \par}
+{And and there is a certain amount of zero sum game because, you know, they only have so much effort doing it. So really , the name of the game is to make it easier. For them , to do so and to not give up on it. And so I think for the developer side, we're trying to provide visibility and ease visibility because security it's naturally invisible, }
+{\cf2 [00:35:00]}
+{ right?}
+{\pard  \line \par}
+{Like you don't know that you've made a security mistake. Functionality is visible. Bugs, sometimes not. But there's a finite set of questions of like, how would it behave in this scenario? And so it's much more mentally possible even perform. And, you know, operations like you, you notice that the system keeps getting going down.}
+{\pard  \line \par}
+{Hopefully your system doesn't keep getting hacked. You know, like, that's awful. That's not a great feedback loop. And, so you have to create visibility and that's a tricky balance because you know, visibility can quickly become noise. And so that's where sort of, you know, good prioritization and good accuracy.}
+{\pard  \line \par}
+{It needs to, it needs to come into play and so visibility is the first thing you have to provide. And you need tolerance from the development. , to accept this responsibility. And then the other is ease of use. I think the, the problem in the industry has been when visibility came in the form of like, you know, a, a 300 page PDF of all the vulnerabilities was found in your, so the system.}
+{\pard  \line \par}
+{And that's just not helpful. And so you have to think about the whole journey of what the developer needs to do with this now and say, well, the developer, first of all, they need to fix, they don't need to do it. So how do you make it easier to fix? You }
+{\cf2 [00:36:00]}
+{ need to prioritize, you need to contextualize. To their application.}
+{\pard  \line \par}
+{Don't start with a risk context. Start with an application context, you know, and yeah you need to. To, to match it into their, their methodologies. You know, like you're like one of the, sort of the the hidden features that I love most in, in Snyk, you know, but, it's sort of just often emitted cuz it gets a bit complex is the notion that like a pull request is where code review happens.}
+{\pard  \line \par}
+{It's not a pipeline, it's a code review action. And so yes, you can plant a full on test, you know, in that thing because that's easier to. because you can just run that in build as well. But really what you want, what the developer is doing at that point in time, is they're doing code review. So they only want to know what problems introduced and the changes that they've made.}
+{\pard  \line \par}
+{They don't want to know about all the other problems. They just wanna know about those problems. So those, and like many others, to be frank, was kind of the secret of success for Snyk. It's around starting from the lens of usability for the developer. . And so I think really, like I get a lot of pushback to it, but from developers, you need those.}
+{\pard  \line \par}
+{And from security teams, which are probably more of the listeners of this podcast , you have to }
+{\cf2 [00:37:00]}
+{ persevere. You know, like at the end of the day, if you keep finding the problems after they're deploying and put all of your energy and all of your cycles, and how do you detect and respond a vulnerability after the fact.}
+{\pard  \line \par}
+{You're never gonna win. Like, you're never gonna get to a good place. It's just never ever gonna work. You know, if you keep this dissing kind of developers and sort of saying they don't care about security versus embracing a kind of an empathetic, like, how can I help you type approach, then you're never gonna be embraced.}
+{\pard  \line \par}
+{Like, it's, it's gonna be a war. And I think if you take anything from the sort of the DevOps playbook, , which has taken like it's worth remembering, you know, that operations were in the same boat actually in many places, still haven't fully matured either, of saying, throw it over the wall. Someone else would run it, someone else would operate it, they would find problems, go back to so, and if it was more IT cloud operations.}
+{\pard  \line \par}
+{ Then the controls were in their space. If it was more sort of, you know, dynamic , and today I think there's a lot more }
+{\cf2 [00:38:00]}
+{ acceptance, there's a lot more sort of pride in dev teams when they can, you know, build operable software. And so it took a long time and it's still undergoing, but , we need to sort of embrace it and.}
+{\pard  \line \par}
+{empathy is super at the core of it. I love, I'm gonna give him a plug here. Dev Akhawe I think I'm butchering his last name here right now. Whose the CISO at figma. And he's got like a great background, you know, Dropbox. Oh yeah. Devi's pretty awesome. Yeah. . Yeah. And Dev's just like brilliant in so many ways.}
+{\pard  \line \par}
+{And when he was on my podcast, he had this sort of quote, he says, like, when he comes to a developer and tells them, you know, they need to do something for them, he's almost apologetic about it. He says like, Hey, I haven't figured out a way yet to make this problem go away from you.}
+{\pard  \line \par}
+{I haven't figured out some sort of, you know, magic fix or some platform thing that does it. And Im sorry . But in the meantime, I'm gonna need you to do this until I, you know, as I keep working, I'm trying to kind of make this problem not be in your, sort of in your sphere. And I just, you know, I love the humility of it.}
+{\pard  \line \par}
+{Humility is not massively prevalent in security. You know, and I think it is the, sort of the secret of success for sort of DevOps and for DevSecOps, you know, , in the best teams. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:39:00]}
+{ Actually one of our previous guests mentioned that I thought it's very relevant for this conversation as well.}
+{\pard  \line \par}
+{They mentioned that and I truly believe this as well, modern security is about giving up control, whereas the traditional security was about holding onto control. Like how many more things can I control was like the motto previously, but the modern security teams with the DevOps and automation and having the knowledge to be able to code work with api.}
+{\pard  \line \par}
+{it's a lot more about what you called our working with the developers and sometimes showing humility and apologizing. Cause there's no better way to make this easier for them because technically yeah, you just want 'em to work so, Hundred }
+{\pard  \line \par}
+{\b\cf1 Guy Podjarny:\b0}
+{ percent. It is tough in security. So like, you know, again, not to, you know, we're, we're all on the hook and we still need to kinda work it done.}
+{\pard  \line \par}
+{, a lot of DevOps was around embracing failure, right? Like, you know, the early DevOps talks, you know, many of them at Velocity conference, which was kind of my home ground. They revolved around you know, like the first talks that came up on stage and said, I had an outage.}
+{\pard  \line \par}
+{We messed up. These are the things we did wrong. We did the analysis. Instead of sharing those, those }
+{\cf2 [00:40:00]}
+{ were like, you know, heresy at the time. Right. They were sort of so hard. The idea of doing that Was really kind of poorly received. , and a lot of the learning, a lot of the current ethos in DevOps and in continuous deployments is to embrace the fact that failures will happen.}
+{\pard  \line \par}
+{And it's about how do you, you know, you wanna prevent them, you want to learn them, but you also want to sort of iteratively get better at them. That's a much harder concept to embrace in security. It's harder to sort of imagine and it happens, you know. People coming up on stage and saying, I messed up insecurity and I was hacked.}
+{\pard  \line \par}
+{Here's what happened. You know, here's what we learned from it. Like it, you know, those legal ramifications I had. I'm plugging my podcast here from time to time, , but yeah. You know, like, but it's just like, it's interesting story. So I had the folks from my code Cov come along and, and talk about the breach that they had.}
+{\pard  \line \par}
+{Yeah. And I was so appreciative of it, you know, because they came along and we talked about, you know, the breach itself. But we also talked about, you know, how they, how did they find out and how did they respond in the emotional journey of, of having that happen and sort of the approach, the great approach they took, which was very }
+{\cf2 [00:41:00]}
+{ customer first.}
+{\pard  \line \par}
+{And and so I, you know, very much applaud them. And I think it's just, we don't have enough of it. It's hard to see it really become as common as as it has been. in in, in DevOps, you know? , but it's hard. And, and I guess the key distinction is that in security there is a villain, you know?}
+{\pard  \line \par}
+{And so in DevOps, in all these other disciplines that we talked about, it's all around building kind of a good software, but nobody's really out to get you, nobody's out to try and sort of, you know, actually compete on the other side. Yeah. And in security there is a villain. And so I don't think it's ever gonna get to the same place.}
+{\pard  \line \par}
+{But at the same time it needs to continue being the north star, right? Yeah. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah. I think it's funny how you mentioned villains as well, cuz this is why Shilpi and I came up with the whole cloud security villains as well. It was the same concept essentially. Cause everyone else doesn't really have an enemy and outage.}
+{\pard  \line \par}
+{And I think maybe to your point, it's harder to talk about an incident on stage also because, , there's a potential loss of customer as well for people who are representing another }
+{\cf2 [00:42:00]}
+{ company and come and talk about, Hey, we had a data breach and this is the fault, third party supply chain or whatever. I mean, I don't, I'm not, I'm not gonna go into supply chain again, , but the whole conversation just becomes like, oh, I'm gonna lose customers, people would.}
+{\pard  \line \par}
+{you know, just stopped working with us and they would have this massive impact on financial impact as well. So it's definitely hard. I don't imagine it's easy and it's not easy, especially when you have things like chat g pt and like the whole AI generative thing going on with GitHub co-pilot and stuff coming in as well.}
+{\pard  \line \par}
+{People trying to use it. Cuz I think I had this conversation with CISO. So where was talking about the problem with gitHub co-pilot is if I wanted to block my developers to upload code to github co-pilot, I can't because the code already in GitHub. Either I block completely GitHub or I don't do anything. So do you feel like the impacts of, and this is more, I'm sure leaders are already thinking about this from a data privacy perspective, but where do you see the impact of the whole generative AI space, like ChatGPT and stuff in the whole cloud security DevSecOps kind of space }
+{\cf2 [00:43:00]}
+{ as well?}
+{\pard  \line \par}
+{Will they enable it? Or are they just basically like, you know, I guess gonna fade away. }
+{\pard  \line \par}
+{\b\cf1 Guy Podjarny:\b0}
+{ I think so I think generative AI , is amazing and super powerful, and I have no doubt it will, you know, greatly impact all worlds, including software, including security. , and it's sort of starting to show that.}
+{\pard  \line \par}
+{So I think we're talking about how not if you know, there's no doubt, I don't think it's a fad it's tough. I think technology amplifies things. It amplifies the good and it amplifies the bad. And so when you look at open source, for instance, today using an open source component, like open source software is not inherently more or less secure than than a closed source software.}
+{\pard  \line \par}
+{But the difference is that when when a single open source component is being used by whatever, a million different organizations, then when there's a vulnerability in it, it is amplified. Because suddenly like a million targets are vulnerable. Yeah. And so that's the real challenge with open source security.}
+{\pard  \line \par}
+{It's about that generated code. It has the same thing, you know, it's not about that code. There's a lot of problems at the moment. It oftentimes generates in secure code. Yeah. There's a fundamental. }
+{\cf2 [00:44:00]}
+{ Discomfort there, or like, you know, challenge with saying that a textual text-based kind of code generation will generate good code because it doesn't understand what it's saying.}
+{\pard  \line \par}
+{You know, sort of , it's like learning from sort of a text. You know, , there's a lot to sort of say about that. Yeah. , but what is definite is that when it generates code it, if it has a problem, that problem will now permeate, you know, a lot of people. Mm-hmm. , there's privacy elements around the code and all that.}
+{\pard  \line \par}
+{We have to deal with those. You know, there's copyright issues of like, you know, when you. Know, create an image that looks like a Van Gough image right now, you know, your whatever that, you know, sounds like, you know, right. Next story. That's like a Stephen King story. Yeah. You know, that's, those are like there, there's like IP questions, you know, around it.}
+{\pard  \line \par}
+{I think in security land I guess I like to think of myself as someone who anchors in the future. You know, I like to sort of, you know, think about where we're going. And kind of trace a path back to today, in my opinion. Co-pilot. You know, while super helpful today at the end of the day, code generation is a, that is a fad that would go away because.}
+{\cf2 [00:45:00]}
+{ }
+{\pard  \line \par}
+{ What's the journey here? Right? It auto completes the code. Yeah. At the moment it auto complete the code because it gets it. Auto completion is the only place in which a tool can get it wrong, nine times outta 10 and still be very useful to you because you type a letter, you type a letter, type a letter, you know, after 20 letters it got something, you know, another completion thing and then you say, oh, great, you know, I hit.}
+{\pard  \line \par}
+{tab not awesome for security assessments. That would not be an acceptable bar. And , so you need , more accuracy. At the end of the day when it gets better at generating, it doesn't generate code, it generates functionality. Yep. And so what I envision the future of sort of automated code generation is in components.}
+{\pard  \line \par}
+{We already have a methodology today around composability of software of reuse of software. And I think like debugging someone else's code, including auto-generated code is gonna be very, very hard. So really I think the destination of this is more around is sort more of a defining functionalities, which to an extent will come back to the audit.}
+{\pard  \line \par}
+{It's interesting because it. It sort of comes back to the bugs will be }
+{\cf2 [00:46:00]}
+{ in poorly defined functionality in sort of poor testing. You know, those would be the gaps that prevent you from building something secure. So, and it's a super interesting world as I think we said at some point during this, like, legacy technology never dies, so I don't think anybody would be able to like, Wholesale shift, and I think the code completion is a good bridge to, it'll sort of say, you know, just like, as a commenting, NickSnyk you know, like how we are sort of putting , the money to it is that we have this sort of two-prong approach.}
+{\pard  \line \par}
+{So we have generative ai or sort of code generation that we're doing. That's very slowly being rolled out, right. We had a, I wouldn't call it ai, the automated code open source fixes that we've done. I wouldn't call that ai, but what we have in code itself is, and it combines the more aesthetic G P T based generate pretty code.}
+{\pard  \line \par}
+{For me, that looks like the code, the program that I'm in, , and that sooner is about right. with, you know, r we call it T5 engine that is accurate. That sort of says, and I can give you a very high level of assurance that it is indeed secure has indeed fixed the vulnerability in question.}
+{\pard  \line \par}
+{And I think there's gonna be }
+{\cf2 [00:47:00]}
+{ combos like that. You know, G P T opened everybody's eyes. Yeah. I was in this world and it still opened my eyes further. You know, like, , I think it's amazing. . So ChatGPT was the marketing kind of play of the world in sort of exposing this technology of the history, you know, best in history.}
+{\pard  \line \par}
+{Yeah. But yeah, it'll be a brave new world at the end of the day. You know, it'll come back to security hygiene, it'll come back to like locking your doors and and your windows , and sort of ensuring that these basics are well handled. Again, technology amplifies and so , whatever flaw here, the flaws wouldn't be very different.}
+{\pard  \line \par}
+{But the more auto generated, the more you amplify the generation, the more you multiply the security risk. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Sweet. And that was kinda like the great answer by the way. I love how you kind of anchor yourself in the future. I love that way of thinking about this as well. In the last couple of minutes that I have with you, I just wanted to quickly ask you three personal questions, not too personal, just to so we will get an idea about who you are , and what you kind of spend most of your time with.}
+{\pard  \line \par}
+{Which brings me to my first rapid fire question, which is what do you spend most }
+{\cf2 [00:48:00]}
+{ time on when you're not working on solving DevSecOps and cloud and all of these things you spoke about? What do you normally focus on at that point? }
+{\pard  \line \par}
+{\b\cf1 Guy Podjarny:\b0}
+{ Yeah, it's kind of ends up dividing between three things. I do a bunch of angel investment which I love, sort of learning from other companies journeys, ensuring my learning.}
+{\pard  \line \par}
+{I we have a family foundation focusing on sort of social inequality. And so I, I kind of spend an increasing amount of my time , trying to kind of help there and understand, you know, areas, whether it's immigration or sort of homelessness and, topics of that nature.}
+{\pard  \line \par}
+{Light with stuff. And and much more sort of on the family side is, you know, my kids are, are both in sort of early secondary school years. So I've got maybe about five or six more years until they, you know, probably don't really want to at best, you know, of they don't wanna spend time with me.}
+{\pard  \line \par}
+{So I try to spend think of creative ideas and trips and activities to do together. And so those. I do some jigsaw puzzles. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Oh, there you go. Yeah. Well, I mean, figuring out how to spend more time with kids could be hard. It's a, it's a job in itself. Some might say it. Indeed it is, }
+{\pard  \line \par}
+{\b\cf1 Guy Podjarny:\b0}
+{ but it's super rewarding, challenging,}
+{\pard  \line \par}
+{Talking about reward. Rewarding. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah. }
+{\cf2 [00:49:00]}
+{ Talking about rewards. What is something that you're proud of but is not on your social media? Proud }
+{\pard  \line \par}
+{\b\cf1 Guy Podjarny:\b0}
+{ of and not on the social media. Well, I guess we were just on kids, you know, so like, my kids kids are such they're such an ego trip. You know, you sort of you see they go off, they succeed whether it's, you know, whatever, my daughter dancing or my son playing the piano or beating me in chess or my so, you know, you basically take pride in it.}
+{\pard  \line \par}
+{It's the only case in which you can kind of go in, do your best, lose and feel like you've won . So it's really great. Yeah. Otherwise, I'm a fairly open person, so I, I talk about most of the stuff I do. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Awesome. Final question. What's your favorite cuisine or restaurant that you can share with us?}
+{\pard  \line \par}
+{\b\cf1 Guy Podjarny:\b0}
+{ Ooh, I like a lot of good food on it. Bit, you know, so I like a lot of it. Maybe if you're ever in Israel, you know, I love a good Sabich Sabich is like a fried eggplant Aubergine right. Basically a Pita. , the initials are for sort of salad. Egg and more eggplant. It's like , the two letters.}
+{\pard  \line \par}
+{So say more eggplant and it's delicious and it's sort of sits like a rock in your stomach after. And they humidify the Pita so it can }
+{\cf2 [00:50:00]}
+{ stretch and hold more in it, which you enjoy in the moment and regret after. But that's great, great street food that I love, but I love all of those two, three michelin stars.}
+{\pard  \line \par}
+{You know, like I love lot food. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah. Wow. That's pretty awesome. I've been asking everyone this question about a book of fair restaurants and cuisines of all these cyber security people that I've collected.}
+{\pard  \line \par}
+{So one day we release a book on the podcast, but, but whenever they come in where can people find you when you're not enjoying food, I guess where can people find you more to talk more about the whole devsecops and cloud security? }
+{\pard  \line \par}
+{\b\cf1 Guy Podjarny:\b0}
+{ Yeah, I mean, I'm on the socials, you know, I'm less active on the Twitter sphere now, but I'm @Guypod there.}
+{\pard  \line \par}
+{I'm on LinkedIn, you know, it's , easy to find me there and post, and I also share, you know, my podcast episodes and you know, kind of occasional thoughts over there. , those are probably the primary ones. And yeah, look, a lot of the fruits of the labor and the mind are are coming out on Snyk.}
+{\pard  \line \par}
+{And so that's another one to. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ I will definitely something over there. Thank you so much for your time and I'm definitely looking forward to having more conversation with you in the future as well. Guypo, thank you for coming on the show. }
+{\pard  \line \par}
+{\b\cf1 Guy Podjarny:\b0}
+{ Yeah, thanks for having me on. Thank you.}
+}

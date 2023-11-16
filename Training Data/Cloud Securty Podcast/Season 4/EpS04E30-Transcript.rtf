@@ -1,0 +1,481 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red114\green179\blue114;
+\red128\green128\blue128;
+\red102\green0\blue204;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\b\fs48 V1_Ashish and Shannon McHale\b0}
+{\pard  \line \par}
+{\b\cf1 Shannon McHale:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ The default service account in GCP is created every single time you make a compute instance by default in a project, in a new project, and that account has editor permissions. It has the editor role and the amount of permissions that it has is currently over 6, 000 and counting. And so that means that You just say over 6, 000 and }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ counting.}
+{\pard  \line \par}
+{\b\cf1 Shannon McHale:\b0}
+{ I did indeed. Wow. Okay. It's a lot of permissions. It is. Yeah. And they are within the project itself. And so you can have a lot of segmentation throughout your projects to make sure that even if you're an editor in this project, it doesn't matter for the project where all my secrets are or whatever. But it doesn't mean that the attacker is after your secrets over there.}
+{\pard  \line \par}
+{They could be using that editor permission to create new compute instances at scale so that they can do some crypto mining or they can open up a bucket so that they can, I don't know, store their memes Because they would rather use your resources than theirs. There's }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ certain services in Google Cloud IAM role that gives you 6, 000 permissions to review just so that you know you are doing the right thing by limiting the }
+{\cf2 [00:01:00]}
+{ number of services.}
+{\pard  \line \par}
+{If that 6, 000 number sounds a lot, that is a reality for a lot of people who are trying to work with Google Cloud. So as someone who's trying to pentest or red team into a Google Cloud environment, so this probably works for your advantage. So for this episode, we had Sharon McHale, who is a red team consultant at Mandiant, now Google cloud.}
+{\pard  \line \par}
+{And we spoke about what her methodology is when she's trying to do red teaming in a Google cloud environment. And what can people like yourself who are listening to this conversation can also use to learn more about doing GCP security, the purple team way, which is basically know how to break it. So you know how to fix it and detect it.}
+{\pard  \line \par}
+{She also spoke about the difference between using a red teaming in an environment versus. pen testing, how different they are. Also talking about the fact that, Hey, it's possible that you may missing some of the low hanging fruits when you do an assessment. We spoke about some of the low hanging fruits.}
+{\pard  \line \par}
+{You could look at some of the services that you could use for privilege escalation that she is using. The thinking methodology is when she's trying to do red teaming in a Google Cloud environment and. a lot more. So if you know someone who's trying to learn about Google cloud security from a red team or a purple team }
+{\cf2 [00:02:00]}
+{ perspective, or just want to understand that so they can protect it better.}
+{\pard  \line \par}
+{This is the episode for them. If you are that person, definitely listen to the whole thing. But if you know someone else who's probably trying to understand Google cloud security from a red team perspective, definitely share the episode with them. Or if you're listening and watching to cloud security podcasts for the second or third time, thank you so much for supporting us.}
+{\pard  \line \par}
+{Feel free to drop us a review or rating on your favorite social media platform. We are on YouTube, LinkedIn, Apple podcast, spotify, Google podcast. So any review or any kind of follow definitely sends the right signal to the social media world. for the audio and video platform that, Hey, more people should listen to the podcast or more people should watch the videos of this channel.}
+{\pard  \line \par}
+{It helps us spread the word between more cloud security professionals out there who probably have not discovered it. Yes. And also helps the future guests come on and understand that, Hey, they're coming to a place that this is going to be really valuable for them. So thank you so much for all the support you've shown so far, and also for all the reviews that came in on the iTunes Apple podcast yesterday, if you have left one, thank you.}
+{\pard  \line \par}
+{If you haven't left one, please consider leaving a review for us on Apple podcast or subscribe to our YouTube and Spotify as }
+{\cf2 [00:03:00]}
+{ well. I hope you enjoyed this episode of our Google cloud security month, and I'll talk to you in the next episode. Peace }
+{\pard  \line \par}
+{\b\cf1 Shannon McHale:\b0}
+{ by bringing developers and security together, you don't have to choose between speed and security develop fast, stay secure.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Hello, welcome to another episode of Cloud Security Podcast. Today we're talking about red teaming Google cloud. And fortunately, I don't have to explain to you what a teaming is because I've got someone who's an expert who can talk, talk about this more than I can. Hi Sharon, welcome to the show. Hey, }
+{\pard  \line \par}
+{\b\cf1 Shannon McHale:\b0}
+{ how's it going?}
+{\pard  \line \par}
+{Happy to be here. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Well, I'm happy that you're here because we can finally talk about Red Team in Google Cloud. Actually, for people who may not even know who Shannon is, could you tell us a bit about how you got to your current }
+{\pard  \line \par}
+{\b\cf1 Shannon McHale:\b0}
+{ role? Sure. First and foremost, my name is Shannon McHale. I am currently a Red Team Consultant at Mandiant, which is now Google Cloud.}
+{\pard  \line \par}
+{You may know me from my ShmooCon talks, my Women in Cybersecurity conference talks, or most recently, My DEF CON talk on GCP red teaming, which is probably what brought me here }
+{\cf2 [00:04:00]}
+{ today. For your question, what got me to my current role? Well, it's kind of a long story if you're willing to hear it. Are you sure?}
+{\pard  \line \par}
+{Okay, cool. So I was an intern back in the day. At the MITRE corporation, working in Virginia, doing some government stuff. The Mitre Attack? Yes the Mitre Attack. If you know Caldera, I used to work on Caldera in its infancies. I wrote a work for that. It was pretty cool. It was a lot of PS exec, which is some very loud red teaming.}
+{\pard  \line \par}
+{But as an intern, a college student, it was a big deal for me. And so when I was there, I followed a mentor there. And another mentor picked me up and said, I hear you're super into social engineering. Guess where we do that all the time, breaking into buildings, vishing, fishing, all the cool stuff. The reason a lot of people get into red teaming in the first place is social engineering, and so that tickled my pickle, and I ended up going to Mandiant the following summer to work on stuff like that.}
+{\pard  \line \par}
+{It was the pandemic, so I didn't really get to break into buildings, but I did }
+{\cf2 [00:05:00]}
+{ have a lot of fun. And while I was there, I saw a big talent gap within the cloud security, cloud red teaming area, so I picked up a lot of that. Specifically GCP, which I was doing, don't tell my bosses, so that I could one day work for Google.}
+{\pard  \line \par}
+{And then thankfully Google came to us and picked up Mandiant and we got acquired just this past year. So that was good for me. Made me pretty happy. Great journey }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ as well, coming from MITRE frameworks people who made the Attack MITRE framework as well, it's pretty awesome. But there's something which is to be called out that red teaming is a very.}
+{\pard  \line \par}
+{Confusing term for a lot of people, actually, how do you define red teaming in a GCP scenario.. How do you define it? }
+{\pard  \line \par}
+{\b\cf1 Shannon McHale:\b0}
+{ Okay. So there's a couple of different ways to do offensive security within the industry. You can be an offensive security engineer. You can be a red teamer, or you can be someone who does more like pen testing and that sort of thing.}
+{\pard  \line \par}
+{And there's different tiers on just different areas of it. So when I define red teaming, which is a common interview question, when you are looking }
+{\cf2 [00:06:00]}
+{ for sort of a pen tester role, I define it as doing a security assessment, testing attack paths, really impact focused way in a way that most importantly focuses on stealth, on not getting caught.}
+{\pard  \line \par}
+{So if you're considering yourself a red teamer, you're someone that not only looks for different vulnerabilities within an environment, you're someone who looks to see how well the exploitation of vulnerabilities exploitation of misconfigurations. to see how long an adversary could actually be in the environment before they get caught, which is a really big deal. And it , lets the blue team focus on their response time when it comes to you, how they quarantine you, how they respond to an event like that. Is there }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ any nuance to being a red teamer in the cloud context versus a regular red teamer, I guess, in an on premise world? }
+{\pard  \line \par}
+{\b\cf1 Shannon McHale:\b0}
+{ Yeah, so it all kind of builds on top of each other and that's one of the fun things about being a consultant is you get to look at a lot of different areas within security and a lot of different technologies.}
+{\pard  \line \par}
+{I see a different one every week when I'm doing a test. So social engineering }
+{\cf2 [00:07:00]}
+{ is the way that 95% of attacks start. They get through some person or some physical barrier, and then from there, you do a lot of testing. The difference between on prem testing, which is the traditional sort of red teaming that you see, all those Windows things that are happening, and cloud, it's not that different because cloud is really just someone else's computer, right?}
+{\pard  \line \par}
+{So, when you are attacking cloud, there's just an extra element within it. And that extra element is usually IAM, but you're still going to see all of the same issues that you see within another environment. So if they're hosting a windows environment in the cloud, you're still going to see all of the windows issues.}
+{\pard  \line \par}
+{If they're hosting Linux, you're going to see all the Linux issues. There just happens to be a bunch more issues. that you may come across because cloud brings in all those technologies. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ And talking about red teaming and Google cloud, let's also clarify, what would be your recommendation for someone? I mean, I guess, are there methodologies for it?}
+{\pard  \line \par}
+{I did the whole OSCP, I mean, that was }
+{\cf2 [00:08:00]}
+{ like an offensive security back in the day. And usually the whole discovery, recon, all of that, does that have a similar presence in the red teaming in a Google cloud context, or maybe in general cloud context? Is there a methodology to all this? There }
+{\pard  \line \par}
+{\b\cf1 Shannon McHale:\b0}
+{ are methodologies out there, but there's a lot less than you would see for traditional.}
+{\pard  \line \par}
+{So, you know, OSCP has that whole following and community behind it. And cloud doesn't really have that as much for pen testing. It's starting to get it more for security in general, which is great. There's conferences like fwd:cloud sec and other ones. or the Cloud Defcon Village, which was awesome.}
+{\pard  \line \par}
+{But in terms of the actual attacking from it, it seems like there's a lot of one offs here and there. There are a lot of trainings out there, and there are blogs that are really good. I would recommend looking at HackTricks for GCP specifically. Because Hacktricks tends to look at other blogs and take from them almost a copy and paste and then reference them at the bottom.}
+{\pard  \line \par}
+{And so that means that it does have the most information possible. But this was a huge issue that I ran into when I was }
+{\cf2 [00:09:00]}
+{ doing my GCP research was I could not find just something I could copy and paste and like make my day fabulous. The Hacktricks came out about halfway through my research when I had deadlines to meet.}
+{\pard  \line \par}
+{So I had to do a lot of research on my own when it came to that. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Okay, I will take that link from you after this one as well then. So, how would you differentiate, because you kind of spoke about the fact that red teaming is more about checking the response time for blue team, also when you're trying to infect or you're trying to take over a system, how quickly can they identify who you are?}
+{\pard  \line \par}
+{What is, pentesting then in Google Cloud. }
+{\pard  \line \par}
+{\b\cf1 Shannon McHale:\b0}
+{ Yeah. So pen testing is making sure that you understand everything that could go wrong within the cloud. So instead of focusing on a specific objective and saying, what is step one, two, three, to get to that objective by any means necessary without getting caught, you are looking at the entire configuration that they've put forward with scans.}
+{\pard  \line \par}
+{It's using different tools like Scout Suite or Prowler, and then you're taking all of that information, and you're assessing it, seeing if }
+{\cf2 [00:10:00]}
+{ it's correct or not, and then you're letting the client know, hey, this is here, and this is how an attacker could abuse it. I'm probably gonna validate it, so make sure that it's there and that I can abuse it, just to show you.}
+{\pard  \line \par}
+{But it takes out that stealth, especially because you're running these larger scans, usually with read only accounts that have, you know, those viewer permissions and GCP, and then you're able to give them a lot of things to fix at the end that will make them a lot more }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ secure. Okay. That's a good answer as well, because then it's a more holistic approach.}
+{\pard  \line \par}
+{So for people who may be approaching pen testing and teaming, at least they would get a sense of whether. They want to get a red teaming exercise done or a pen testing exercise done for people who may be doing this themselves or maybe pen testers who are listening to this conversation and maybe traditional, not traditional, traditional, but more pen testers of web apps or network security, whatever.}
+{\pard  \line \par}
+{What would you say are some of the low hanging fruits that people can go for in a Google cloud account? }
+{\pard  \line \par}
+{\b\cf1 Shannon McHale:\b0}
+{ Yeah, so in a Google Cloud account, there's a couple of things that you're going to want to look for. Let's assume that you're starting within a compute instance. Maybe }
+{\cf2 [00:11:00]}
+{ you've breached a developer, gotten some keys off of GitHub, etc.}
+{\pard  \line \par}
+{And now you're in a cloud instance. And so the first thing you're going to do is the classic cloud hack and move, which is going for the metadata. And so when you pull down the metadata, which that's not really a low hanging fruit, you're able to do that either way, you're going to get an access key. Now, what comes in play here in terms of your question is the default service account.}
+{\pard  \line \par}
+{There's been a couple of talks on this, mostly in 2018, 2019. The default service account in GCP is created every single time you make a compute instance by default in a project, in a new project, and that account has editor permissions. It has the editor role and the amount of permissions that it has is currently over 6, 000 and counting.}
+{\pard  \line \par}
+{And so that means that You just say over 6, 000 and counting. I did indeed. Wow. Okay. Just thinking. It's a lot of permissions. It is. And they are within the project itself. And so you can have a lot of segmentation throughout your projects to make sure that even if you're an }
+{\cf2 [00:12:00]}
+{ editor in this project, it doesn't matter for the project where all my secrets are or whatever, but it doesn't mean that the attacker is after your secrets over there.}
+{\pard  \line \par}
+{They could be using that editor permission to create new compute instance at scale so that they can do some crypto mining. Or they can open up a bucket so that they can, I don't know, store their memes because they would rather use your resources than theirs. So that's a good low hanging fruit. Pretty well known one.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Just for the context of people, what are they starting off with? Would they have an access key or would they have a Gmail account? What are they getting access to? So when you }
+{\pard  \line \par}
+{\b\cf1 Shannon McHale:\b0}
+{ get access to a compute engine, there's a couple of different ways that you can do it. In this case, I would say that they have an SSH key.}
+{\pard  \line \par}
+{So there's two ways to access a compute engine. It's either through SSH. Yeah. Or through OSLogin. OSLogin, instead of using SSH, does your login through attaching OSLogin to the user identity. So instead of it just being a key, we know exactly who's logging in. So at that point, you would have had to }
+{\cf2 [00:13:00]}
+{ breach a user account and get in that way.}
+{\pard  \line \par}
+{Oh, right. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ So would you say, because I'm trying to compare it to other, like, so having had done some assessments and some of them in AWS, some of them in Azure, some of the ones for AWS primarily rely on the fact that I have had access keys for AWS IAM user, the Azure one relies on the fact that I actually have Windows credentials for someone's account or like some kind of Office 365 account.}
+{\pard  \line \par}
+{Then I do a crossover and do an azure thing. In the GCP world, what would be the equivalent of that? Like, so obviously you mentioned SSH keys, so compute instances. Would a Google mail compromise be kind of in the same category as well? If someone loses access to their Google mail account, would that be classified as something that can be used into, used to get into Google cloud?}
+{\pard  \line \par}
+{So }
+{\pard  \line \par}
+{\b\cf1 Shannon McHale:\b0}
+{ yes, if you mean a Google workspace account, and if. That's how they are distributing their identity across their cloud. You do have to use Workspace in some capacity to do it. So that would be this equivalent there instead of like an IAM account in AWS, I think is what you would call it. You would just call it your Workspace account.}
+{\pard  \line \par}
+{But you would have IAM }
+{\cf2 [00:14:00]}
+{ permissions attached to that, that you're managing either there, or you could also manage them through Workspace. So per project IAM, Workspace has its own enterprise grouping and permissions over there. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ That is really fascinating because we were having a conversation a couple of episodes ago, and we were talking about the very fact that how Google Workspace as well as Google Cloud accounts are very much attached sometimes depending on how much.}
+{\pard  \line \par}
+{Control each has been passing on, but the fact that people are using Google services in the organization could also mean that that's shared across to a Google cloud account, which obviously to your point, it could lead to someone actually taking over a Google cloud account. Now from a resource that is running in GCP.}
+{\pard  \line \par}
+{Is there things like S3 bucket open to the internet kind of scenarios in GCP as well? Or is there, I know I'm thinking of things like people talk about data breaches in other cloud providers as, Oh my S3 bucket is all left open on the internet and whatever. So we spoke about the compute. Is there something with storage as well that is easy to find on the internet?}
+{\pard  \line \par}
+{\b\cf1 Shannon McHale:\b0}
+{ Of course. }
+{\cf2 [00:15:00]}
+{ Yeah. There is Google Cloud Storage within GCP and you can find it on the internet at storage. googleapis. com slash and then your bucket name. Oh, }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ and is that similar to one of those, well, you know how people use S3 bucket? S3, }
+{\pard  \line \par}
+{\b\cf1 Shannon McHale:\b0}
+{ Amazon, AWS. com. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah, yeah. And, but they also use, they find out on shoden.Com and just look for what S3 bucket is on the internet. It does the same thing over here as well. Can people do that with Google buckets as well? Yeah, so }
+{\pard  \line \par}
+{\b\cf1 Shannon McHale:\b0}
+{ you can use any sort of enumeration tool to look for subdomains within that domain that I listed. And you should be able to see a couple of buckets out there.}
+{\pard  \line \par}
+{And then that can help you win a bug bounty or two if anyone wants to buy me coffee or whatever the streamers do. Does it give you that hot tip? }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Well, people, if you want to buy me coffee, my Bitcoin cryptocurrency number is 1234. But no, I think this is good because I was kind of trying to play the role of what you're thinking when you're looking at us doing an assessment of a Google cloud account.}
+{\pard  \line \par}
+{That's kind of where I think my line of questioning }
+{\cf2 [00:16:00]}
+{ is coming from, which I think is pretty interesting. So I spoke about low hanging fruit. We also spoke about the fact that if people have access to SSH keys or they have IAM access, or if they're going down the path of finding an S3 bucket local, maybe the obvious question here is what's your thought process when you start an assessment or start doing red teaming in a Google Cloud context?}
+{\pard  \line \par}
+{Where do you start and how you kind of progress from one stage to the other? Mine }
+{\pard  \line \par}
+{\b\cf1 Shannon McHale:\b0}
+{ is always going to be what matters to my client the most, what really matters to the organization that I'm impacting. Because even if I can display that I can be an editor in a project, they may come back to me and say that project means nothing to us, please try again.}
+{\pard  \line \par}
+{So I need to be able to really understand the context of my testing to add value to my client. So I need to know if they care about PII or if they care about ransomware. And those are different ways that I'm going to be approaching my test. My first objective usually is to get higher privileges. It makes me feel a lot better.}
+{\pard  \line \par}
+{And then after that, I'll be looking through Google Drive or the storage buckets that I have access to }
+{\cf2 [00:17:00]}
+{ or the functions that I have access to for more credentials. So that I can move deeper within the environment and find bigger and better things. Yeah. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ And you kind of mentioned metadata as well. I think at least for people who may not even be aware, and they saw red team in Google cloud and like, Oh my God, I want to do this.}
+{\pard  \line \par}
+{You kind of mentioned the metadata loosely just before. What is that? And what's the importance of that in case of a pentest or a red team? }
+{\pard  \line \par}
+{\b\cf1 Shannon McHale:\b0}
+{ True. So metadata is used by Google cloud and other cloud services. on their compute instances, EC2 instances to run the machines themselves. So it collects a couple of data and I think it interacts with the API on the backend.}
+{\pard  \line \par}
+{But in that information, there's tends to be a couple of things that we care about. The biggest one being the limited credentials for the service accounts that are attached to the machines themselves. Those service accounts are used as machine identities. to run the account to do things with permissions that are higher in theory than the user that's on it.}
+{\pard  \line \par}
+{When you're on the host }
+{\cf2 [00:18:00]}
+{ itself, or if you find a vulnerability in like a web app that's running, that tends to be a common finding and you can curl the metadata, you can get a lot of that information, like the project name, the access keys, the network, the name of the network that's on there that could be valuable to you, like different information to give you context.}
+{\pard  \line \par}
+{That }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ makes me think about the other use case you mentioned, which was the response time of people being picked up. Are there things that you recommend people have in the Google cloud account that they can use to pick up on these things that, Hey, Shannon is in the building, but she's just basically going through all the IAM metadata thing.}
+{\pard  \line \par}
+{Cause it sounds like metadata service, like in any other service could be a dangerous service. What do you recommend people normally go down the path of? Like, I guess, is there some recommendation for Blue Team here? Yeah, }
+{\pard  \line \par}
+{\b\cf1 Shannon McHale:\b0}
+{ so before we even get to the detecting side of it, let's talk about how to harden it in the first place.}
+{\pard  \line \par}
+{So those service accounts, first of all, by no means have to have those editor permissions. You can bring it down quite a bit. In fact, within IAM, on the right side of your screen, you'll see IAM Recommender. Which }
+{\cf2 [00:19:00]}
+{ will go through and tell you you are using 4 out of 6, 000 permissions over a 90 day period.}
+{\pard  \line \par}
+{Maybe you should bring that down is what this tells you. Every time you open IAM you should see that. So that's the first thing to do is just to really take a minute to audit that. Do it like every six months or so off the top of my head. Not a real recommendation. Not legally obliged. Do that first. And then second to that, even if you don't want to do that, when you're creating compute instances, when we talked about the metadata, what we're looking for is that access token.}
+{\pard  \line \par}
+{The token does not have to have all of the permissions of the service account. There's something attached to access tokens called scopes. And so you can scope down the access token very low, very granular. }
+{\pard  \line \par}
+{So by default, there are permissions that are there, but oftentimes a lot of people give it all the permissions on purpose and so you can have all of the permissions. So when you're setting stuff up, the first line of defense is to make sure your permissions are low and that your access scope is also low.}
+{\pard  \line \par}
+{In terms of }
+{\cf2 [00:20:00]}
+{ detection, you have to think about what is an attacker actually going to do. With the access key because I don't think you can detect them Just curling that down unless you're looking at the terminal like what they're typing in every five. Oh, right. Yeah Okay, }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ you need access to the terminal to do something with the access key }
+{\pard  \line \par}
+{\b\cf1 Shannon McHale:\b0}
+{ Yeah, it would be like a very low level, like you would have to be like, no one's allowed to curl or like look, you could even open up a browser and just look at it.}
+{\pard  \line \par}
+{So if you're kind of, you shouldn't really be detecting like if people are looking at the metadata or not, you want to look more if people are using the access tokens and they're using the access tokens usually to authenticate in the CLI, which you can see what IP address they're coming from. Who's accessing the CLI, who's accessing the host itself?}
+{\pard  \line \par}
+{Like what IP addresses are they coming from? Is that something I know? That sort of thing. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Is there like a native service in Google Cloud that kind of tells them that? Like, Hey, she just logged in with this access token from this IP address. Would that be like a native tool within Google Cloud? Or is that something that's }
+{\cf2 [00:21:00]}
+{ outside of the Google Cloud product that they have to look }
+{\pard  \line \par}
+{\b\cf1 Shannon McHale:\b0}
+{ for?}
+{\pard  \line \par}
+{I'm not absolutely positive. I know that there's logging within Google Cloud by default that you can query for and see everything. And then there is the Google Cloud Security Command Center. I think that's an extra service, if I'm not wrong. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ For people who may be listening in with a Purple Team kind of mindset, where I'm listening to this episode because I want to know how Shannon is going to break into my Google Cloud.}
+{\pard  \line \par}
+{I know what defenses to build. If they had options that were natively available. from Google cloud. So it sounds like as long as you have an idea for what access tokens are being used for, as in the purpose of it, and you've limited the scope of the user and the role that's possible, you've kind of limited their attack surface by quite a bit.}
+{\pard  \line \par}
+{Cool. That answers my question as well. And I think maybe another way to look at this, and you kind of mentioned this earlier. With the assessment side of things, we kind of spoke about, Hey, check out the keys metadata. If you have SSH keys of your Google cloud, you can go into the Google cloud environment, see what privileges you have.}
+{\pard  \line \par}
+{Hopefully you have a }
+{\cf2 [00:22:00]}
+{ privileged user. If you don't find other accounts that can help you get to a privilege account. This methodology how did you learn about all of this? Because clearly a lot of people to what you said, they don't have many resources on the internet. You mentioned one earlier.}
+{\pard  \line \par}
+{Where do you recommend for people who are absolute beginners trying to get into the space of red teaming? A, would you say it's easier to get into red teaming kind of roles in a Google cloud context versus a traditional context? Would you say it's easier or is it equally harder? You kind of need to have the one to get to the other.}
+{\pard  \line \par}
+{I wouldn't }
+{\pard  \line \par}
+{\b\cf1 Shannon McHale:\b0}
+{ definitively Say that it's easier or harder to get to the other. I think that's like a philosophical question that you could go deep down cloud red teaming. }
+{\pard  \line \par}
+{So if you do learn OSCP and you go get a traditional. Red team job, then that's going to make sense. If you want to do GCP, you want to do only GCP testing, that's absolutely fine too. There's companies that do that quite a bit, but I think that there's less companies that do that specific testing. In general, I think you do need the traditional knowledge to }
+{\cf2 [00:23:00]}
+{ perform well within GCP.}
+{\pard  \line \par}
+{I think that eventually, once you exhaust all of your IAM permissions. And different resources that you can play with. You're going to have to sit down and say, okay, can I go on prem? How do I actually test the host that I'm on? Like, is this compute instance secure? Like what's the network like here? What are the firewall rules?}
+{\pard  \line \par}
+{Can I go through this port or that port? Like you do need to have the foundation that we talk about a lot within the Red teaming space. And I think that that's something that will carry you a lot further. And }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ would you say if someone had the foundation and they're trying to do red teaming in the Google Cloud context, should they approach it per service or should they approach it because you know how we kind of started with the broad context of Google Cloud account and SSH keys and.}
+{\pard  \line \par}
+{I'm going to walk in that another path. Big query is a very popular Google cloud service. I'm sure there are the popular ones out there as well. Would you suggest someone who's trying to learn about pen testing in the Google cloud context, focus on one service and kind of see what are some of the known }
+{\cf2 [00:24:00]}
+{ misconfigurations or known problems in it and kind of go down that path or is that usually not recommended for people who are trying to learn about Google cloud and pentesting or red teaming}
+{\pard  \line \par}
+{I don't think }
+{\pard  \line \par}
+{\b\cf1 Shannon McHale:\b0}
+{ that's a bad way to learn it by any method. I think that it's really up to the individual to create their own learning path and to do what motivates them the most, the way that they learn the most. So you could start with one service, or you could start with all the low hanging fruit, or you could start like the way that I did with the Google security cert, which really didn't go into hacking it at all.}
+{\pard  \line \par}
+{It went into just the overall, what is each service? What is it used for? What encryption does it use on a low level? Which I certainly don't use the encryption part within my GCP red teaming, but I do know it, so just a good way to get familiar with the space. Also, }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ would you recommend the security certification }
+{\pard  \line \par}
+{\b\cf1 Shannon McHale:\b0}
+{ from Google?}
+{\pard  \line \par}
+{I think if it's your day one, I think that that's a really good way to get started, especially with GCP. And }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ anything in }
+{\cf2 [00:25:00]}
+{ particular as a resource you would recommend people can coach you to learn that? I use Coursera. }
+{\pard  \line \par}
+{\b\cf1 Shannon McHale:\b0}
+{ There's also Cloud Guru. If you can't afford that, if you can't afford to spend five months Paying that time if your company won't pay for it, then there are just external resources.}
+{\pard  \line \par}
+{Google has a phenomenal amount of security documentation and talks on their product. And so if you go through all of those, there's a couple of learning paths that people have published. You just go through that learning path. You probably could pass it. It just is a much more disciplined route. Ah, }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ okay.}
+{\pard  \line \par}
+{And that was a good introduction into the whole Google cloud security services, what they are. It doesn't talk about pen testing, but it talks about what services are available. }
+{\pard  \line \par}
+{\b\cf1 Shannon McHale:\b0}
+{ Yeah, what services are available? What are the things that a security engineer worries about? What are things that security engineers need to know?}
+{\pard  \line \par}
+{Talks about linking to on prem a lot. Talks about different types of keys and encryption. Talks about the way to use DLP, data loss prevention, within }
+{\cf2 [00:26:00]}
+{ your storage. So it talks a lot about security engineers, as the cert says, things that they care about. Interesting. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Okay. In terms of like research that you've seen so far, cause I think talking about the services made me think of, have you come across any vulnerability or any research in the Google Cloud security space that you found like, Oh, that's fascinating. that was interesting. Anything that stood out for you that you have been either, I mean, I guess was not resolved by Google Cloud. You ended up using it. Maybe you did not, but you thought that was interesting. }
+{\pard  \line \par}
+{\b\cf1 Shannon McHale:\b0}
+{ Yeah, one of the cool tools that I came across was a tool called Patchy, and what that tool does is it takes one of the IAM permissions, one of the higher privileged ones, called OS patching, and so that deploys something on a schedule or one at a time.}
+{\pard  \line \par}
+{And you can use it, abuse it for, is you can set up a bucket in another organization and you can every hour, every day, whatever you need, pull from that bucket into the target organization and run a payload on every single one of their computers. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Oh, wow. And is }
+{\cf2 [00:27:00]}
+{ that still possible }
+{\pard  \line \par}
+{\b\cf1 Shannon McHale:\b0}
+{ or is that It was not patched.}
+{\pard  \line \par}
+{You know, most of the stuff that we're looking at here is things that are supposed to be there. They're things that have legitimate use. For engineers and people who are doing DevOps and this and that it's just stuff that my mind takes and goes, how can I, can I abuse this? And so when you think about like buckets, that's always the thing we talk about is the buckets.}
+{\pard  \line \par}
+{They were breached in the buckets. They were ransomware in the buckets. Yeah. Buckets have a real use case. We didn't blow up buckets because they're having issues. They're used for hosting websites. They're used to do actual business work. So we just need to make sure that we're using everything safely and that we're giving out permissions with a lot of caution.}
+{\pard  \line \par}
+{Interesting. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ When we were talking about this earlier, you kind of mentioned 13 types of GCP resources that could be exposed. What are these 13 types that you kind of had me go through earlier? Yeah, }
+{\pard  \line \par}
+{\b\cf1 Shannon McHale:\b0}
+{ so all of the resources, I can't name all 13 off the top of my head, I'm so sorry, hi. I was expecting more from all of you 13.}
+{\pard  \line \par}
+{\cf2 [00:28:00]}
+{ Security is life, but it is not the whole life, but there are 13 services that can be exposed. to the internet within GCP. As far as I know, there could be more, there could be less. I could be wrong, but those are all the services that I'm going to query for when I'm in there doing more of a pen test style with a read only account.}
+{\pard  \line \par}
+{I'm going to look to see what is publicly facing, because that's really the most important things when it comes to your first line of defense. You don't want anything out there exposed. So I'm going to collect all of it. And then I'm going to do some vulnerability scanning and make sure that everything's A OK.}
+{\pard  \line \par}
+{Some of the resources. that I can name are Buckets, Functions, App Engines. We got three, Kubernetes, DNS. All right, there you go. Halfway. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Good top five to start with that. I will take that.: But to your point, I also wonder from a perspective of that, okay, now we understand how does one approach red teaming. We also know some of the low hanging fruits as well, some of the resources they should look at and how there is a broader }
+{\cf2 [00:29:00]}
+{ context of Redteaming required before we kind of jump straight ahead into Redteaming in Google Cloud.}
+{\pard  \line \par}
+{And definitely don't get into the Redteaming of Google Cloud without context of what's the network, because there is this whole concept of region, availability zone, and read types of resources. There's a whole nother learning on that side. So is there a resource that you recommend people to when you can't teach them?}
+{\pard  \line \par}
+{Hey, take my path or Google certification, or is there a path that you say, GitHub repository as well called Little Hacker. }
+{\pard  \line \par}
+{\b\cf1 Shannon McHale:\b0}
+{ I do. I do. I'm a very tall person. I'm five three. So I do have that repo. And so I've put together a list. of all of the blogs that I've read and all of the tools that I've played around with, both good and bad, although I haven't put reviews on there.}
+{\pard  \line \par}
+{Let other people do it, just so that people can look and see the different training resources, GitHub, like public CTFs that they can use, blog posts, YouTube, videos on GCP hacking, because there's not a lot out }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ there. Fair enough. Well, you can definitely include this video in there as well when it gets published.}
+{\pard  \line \par}
+{Yeah, }
+{\pard  \line \par}
+{\b\cf1 Shannon McHale:\b0}
+{ I will say if you }
+{\cf2 [00:30:00]}
+{ don't know a thing about security and you are thinking of getting into Google Cloud First for red teaming because you're just really inspired by it for some reason, if that's you, yeah, from this talk, this exact screen, that's why, yes. If that's why you want to see Start red teaming because it seems like fun.}
+{\pard  \line \par}
+{And that's the way that you learn the language of the red teaming space as a whole. That's perfectly fine. You are still going to learn a lot of the fundamentals of what a secure network looks like. If you start within cloud versus starting on prem, it's just important to learn all of the attack life cycle and how it can be abused in each section.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ And thank you for sharing the attack life cycle earlier. That was most of the technical questions I had. I have three fun questions for you. Not too technical, just fun questions. First one being, what do you spend most time on when you're not working on red teaming or pentesting? I'm a }
+{\pard  \line \par}
+{\b\cf1 Shannon McHale:\b0}
+{ big hiker. I like to move.}
+{\pard  \line \par}
+{I think health is wealth. My early retirement plan is to just do my first foremost job in early retirement will be to my health, to stay healthy. So, just trying to move }
+{\cf2 [00:31:00]}
+{ a lot. Yoga, that type of thing. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Wow. Yoga, hiking, pretty well. Okay, fair enough. I'll take that. What is something that you're proud of, but that is not on your social media?}
+{\pard  \line \par}
+{Oh }
+{\pard  \line \par}
+{\b\cf1 Shannon McHale:\b0}
+{ man, my relationships with my friends and my family. I'm not really on social media, so you won't see any of that. But I do put actual effort into those }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ things. Well, you can definitely clip this part and share it with them as well. }
+{\pard  \line \par}
+{\b\cf1 Shannon McHale:\b0}
+{ Yeah. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Last question, what's your favorite cuisine or restaurant that you can share?}
+{\pard  \line \par}
+{I }
+{\pard  \line \par}
+{\b\cf1 Shannon McHale:\b0}
+{ really like Cooper's Hawk, the winery. It's been pretty good. I have a severe gluten allergy. I'm thinking of. starting a real security community called Cyber Celiac because there's quite a bit of us out here with celiac disease. So I like anywhere that won't kill me. Fair enough. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Actually, that would be funny enough.}
+{\pard  \line \par}
+{I think everything, most things have gluten these days. I don't know what doesn't. Isn't }
+{\pard  \line \par}
+{\b\cf1 Shannon McHale:\b0}
+{ that great? Isn't that fantastic? }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah, it's really interesting because I know actually, I do know a few people in the security community do }
+{\cf2 [00:32:00]}
+{ have gluten intolerance. So Yeah, we'll vote for more gluten free options for you as well.}
+{\pard  \line \par}
+{But that was most of the questions I had. Thank you so much for coming on the show. Where can people find you on the internet if they have more questions about the whole Red Team in cloud, in Google Cloud specifically? }
+{\pard  \line \par}
+{\b\cf1 Shannon McHale:\b0}
+{ I do check my LinkedIn occasionally. You can find me there with my name, Shannon McHale.}
+{\pard  \line \par}
+{I look like this in it. And then if you want to see me on Twitter, I'm underscore Shannon underscore McHale over there for as long as Twitter is still going. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ All right. I'll leave the link for that in the show notes as well. But thank you so much for coming on the show. And I really appreciate this for everyone who's listening or watching.}
+{\pard  \line \par}
+{Definitely. Thank you for tuning into our Google Cloud Security Month. I'll see you in the next episode and hopefully we get to have Shannon once again on the show. Thank you so much, Shannon. And thank you everyone else. See you. Thanks.}
+}

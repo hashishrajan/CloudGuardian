@@ -1,0 +1,679 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red216\green34\blue146;
+\red128\green128\blue128;
+\red145\green102\blue255;
+\red250\green138\blue59;
+\red0\green209\blue178;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\b\fs48 Rodrigo Montoro\b0}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ Did you know that it takes about 28 days for someone to detect there is a intruder or a hacker inside the network in AWS, Azure, Google Cloud. Take whichever public cloud you want. That's what as per research, and there are services in AWS that don't get logged at all. Unless you know about these services, you have a blind spot that you have not been working on.}
+{\pard  \line \par}
+{Welcome to another episode of Cloud Security Podcast this week we are talking with Rodrigo Montoro. He is a researcher based out of Brazil and he has been researching the not so common AWS services. So people like you and I can understand. What are some of the blind spots that we may have never realized? Like for example, did you know that if you don't enable a few settings, the pre-signed URL and S3 bucket is not logged?}
+{\pard  \line \par}
+{The fact that you can download it, the S3 content is not logged as well. Certain scenarios a lot more that we discussed in the interview, we also spoke about how do you even start working with services that are not so common? How do you build threat detection for it? The story of Rodrigo is interesting because he came across something called AWS AppStream, which he had never heard of before, but he was brought into }
+{\cf2 [00:01:00]}
+{ the incident response room with a service that he has never worked with. So it was his journey about how he understood the service, what he worked on it, and how he kind of approached it. So overall, a great episode. This guy has two patent against his name, so he's really smart and knows what he is talking about.}
+{\pard  \line \par}
+{So I would let you enjoy the episode of Rodrigo Montoro just to talk about how he thinks about doing threat detection for not so common. AWS services. If you know someone who's working on threat detection and wants to understand just the foundational pieces, this is a good episode for them as well. So feel free to just share this with them.}
+{\pard  \line \par}
+{If you're here for the third or fourth time, please consider subscribing and following or leave us the review or rating because it helps us help more people and helps more people find us as well. Thank you so much for people who left the review over the last week on iTunes. I was really awesome. If you're watching this or listening to this on Spotify, because Spotify allows video now.}
+{\pard  \line \par}
+{So if you're watching this on Spotify, please give us a review over there as well. Thank you so much for this and I will see you on the next episode continuing our AWS security month over this weekend. And before I let you go, we would be at }
+{\cf2 [00:02:00]}
+{ AWS. re:invent 2022 in Vegas, so if you're there, definitely hit us up and would love to meet up and say take pictures and say hello.}
+{\pard  \line \par}
+{Until then, enjoy this episode and I'll talk to you the next episode. }
+{\pard  \line \par}
+{\b\cf3 Snyk:\b0}
+{ When you're developing an app, security might be treated as an afterthought with functionality, requirements and tight deadlines. It's easy to accidentally write vulnerable code or use a vulnerable dependency, but Snyk can help you secure your code in real time so you don't need to slow down to build securely.}
+{\pard  \line \par}
+{Develop fast, stay secure. Good developer sneak.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Hey, how's it going, }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ man? Hey. Hey, Ashish. How's it going? Thanks for having }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ me here. Good. Thanks for coming in. And for people who don't know you're in Brazil at the moment in a hotel room, so people can totally appreciate the late night you're doing for us. But I thank you for coming in, man.}
+{\pard  \line \par}
+{I'm looking forward this, this conversation. And, }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ and, and the funny part I didn't mention for you, like, I'm in Quba now and Quba is }
+{\cf2 [00:03:00]}
+{ in a different time zone for my city, . Oh really? Yeah. Wait, so like when I schedule, I say, okay, it'll be at six. And so I was, I forgot now it'll be five today. So }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Cause you, well our, if it's DM for you, Yeah.}
+{\pard  \line \par}
+{Five. Yeah. Oh, okay. Cool. I don't feel that bad then. Oh, actually, maybe a good point to start as well. Cause I mean, you and I have known each other for some time now, but for people who may not know about you can you give us a bit brief intro into your profile and professional life as to}
+{\pard  \line \par}
+{how'd you got to where you are today? Oh, sure, }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ sure. Okay. My name is Rodrigo. I'm in the technology and security field for about like 20 to 25 years. I start with like the basics, infrastructure, Linux, all that, stuff. And so move it to secure it. And after moving to secure it they, since I, I, I love to.}
+{\pard  \line \par}
+{This stuff in deep, try to understand everything, how stuff works. They moving me to research and they start to do research and this kind of things. }
+{\cf2 [00:04:00]}
+{ And so after like a long journey, like with the regular on premise research, they invite me like to move to the cloud space. And like in the last three to four years, like I'm most of the time looking for our AWS.}
+{\pard  \line \par}
+{And these kind of things and try to push like my background in different technologies and way of try to see things, create detections because I, I'm always work on the blue team side, on the defence side and try to use that in the cloud. Like it's a, different place . }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. And I think the detection part is also interesting cause you've done on premise detection as well as you're doing in aws.}
+{\pard  \line \par}
+{How different, like, I mean, in my mind, on premise is not that API friendly. So detection. What did detection look like over there? }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ , it's similar, but it's different. Like, how can I say that? Because like most of the time most of my work was on network }
+{\cf2 [00:05:00]}
+{ detection like I }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ used. Right, right, right.}
+{\pard  \line \par}
+{Also, normally behavior in like a, Oh, ashish suddenly logged in. I don't know. Russia, for lack of a better word, I guess. }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ Yeah, I, I used to, to use Snor, protection system a lot in the past, like I used to work for companies that has snor embedded on their UTM or their solution. I used to create detection and this kind of things, and, , the point is like there is no.}
+{\pard  \line \par}
+{Common behavior, like, because the network is true, different, different ways of sense of thing, communications and blah, blah, blah. And the good, like I, I'm here in a conference and we talk like a bit about on a panel about cloud. Yeah. And I used to say that cloud is. Probably , the first time that you have opportunities to create detections and monitoring.}
+{\pard  \line \par}
+{Know everything that you have, like are going to be like a hundred percent a good, secure No, sure not, but you have APIs for }
+{\cf2 [00:06:00]}
+{ everything. So you could see like if you have some instance running, if you have some service running, you know, if you have a new user, you know, if you have. Policy, you know, if you have like that event for some service or not.}
+{\pard  \line \par}
+{So you could have control of that. You could deny service. You don't want, you have that power in your hands, like, and when you are on premise, like if you ask like how many device you have, nobody knows, right? So yeah. Fair's, let's. And so that's different the bad side for cloud life.}
+{\pard  \line \par}
+{ something new. And so there is a lot of, as we were talking here on uncommon service that nobody's looking }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ for. Yeah, so talking about technical things then, so you mentioned the AWS services side is obviously AWS and Cloud in general has allowed for things to become a lot more API friendly.}
+{\pard  \line \par}
+{You can do threat detection. Because a lot of people would hear this and go like, Oh, I guess how different is this to the no example that you gave earlier? What does the API }
+{\cf2 [00:07:00]}
+{ enable people to do in the cloud landscape, which was not possible in, say, in the on premise world. }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ Well a simple sample, like if you want to know, like, I have one account or I have a hundred accounts, like I just connect to API.}
+{\pard  \line \par}
+{I want to to know like how many instances I have, how many instances with Linux, how many instances with Windows, how many instances with notepad, Like just connect on the API at. If we're using cloud and you ask you just if you have the permissions , for that service, you just ask. Yeah. And you have the answer and there is no shadow IT because if you have something thing running there, it's there like there's is no shadow IT.}
+{\pard  \line \par}
+{And, but for example, the same for a company, like how many devices I have, If you probably need to have agents and everything, but if you install, you never know. You don't have the visibility about everything. Like if the user style something like, and they didn't tell you, like know, if you run some scan or something like that and you cover some open parts or some }
+{\cf2 [00:08:00]}
+{ new ip, some new Macs, but it's not that easy as like when you, are using the cloud?}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. And talking about also using the cloud. The other thing, because the topic is not so common services, what are common services to begin with first? and what are some of the common services that has a lot of threat detection already? }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ I probably show you like some my motivation or like from my.}
+{\pard  \line \par}
+{New talks like I, I used to have your, your kind of picture there, and I appreciate that. Thank you . Because like, well before we talk, like , I was doing a lot of things, but I didn't have a name in my mind. Like, I know I'm doing this. I know this is cool. I know there is nothing related to that. and I, I start to figure out like, but I have no names for that}
+{\pard  \line \par}
+{And in a way we talk like after the no, before the, the re:inforce. Yeah. And you told, Oh, You are looking for uncommon service you are doing then response and research for }
+{\cf2 [00:09:00]}
+{ uncommon service. And so that opened my mind, boom. And it was pretty cool. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah, I mean, cause when you first mentioned it, it was exactly the same thing for like, Wait, I'll let you answer the question about common services as well, but before I jump into it, Sorry.}
+{\pard  \line \par}
+{Let you continue. }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ Yeah. And, and so I started to, like, I used to, use , the metaphor like , I used to see. The glass is, is half full because like we have some detections with a lot of detect. For example, I did some research, like look at the, the open source tools because it's easier for it to do this kind of things.}
+{\pard  \line \par}
+{And so I choose cloud spoilt and I was running cloud sploit in some accounts and I was really excited, like, oh, you, they have like almost 500, 500 detections. We detecting like thousands of vulnerabilities, like from low informative to high critical stuff and this pretty cool. After we talking, I started to figure.}
+{\pard  \line \par}
+{Okay. We are looking for those detections, but how many services? Were not looking for }
+{\cf2 [00:10:00]}
+{ and so I just do the basic, I count the number of service that tool was looking for, and like it's around like eight, nine service, something like that. Pretty much. And this is around like only 30% of the service.}
+{\pard  \line \par}
+{And so like, we have like more than 200 service that we are not looking , for configuration. And so like, since I'm a a blue team guy, I start to figure out, okay, like if they're not looking for misconfigurations, that's some markets. It is much more mature than detection side. Like, I think we're not looking for the uncommon service.}
+{\pard  \line \par}
+{And when we're talking about, like, that's a kind of trick for me because like, what is common service and what is uncommon service? And I start to figure out like how You divide that split That's in my mind. Yeah. And it starts Okay. Like common. It's something that a lot of companies use, and so I start to think about that.}
+{\pard  \line \par}
+{I'll say, }
+{\cf2 [00:11:00]}
+{ Okay, like. And, and you have research and detections and so like EC2, you have a bunch of stuffs. I am, You have a bunch of research how to boost, how to, do stuff and how to detect. There is a bunch of detection like for actions that are related to if IAM like, yeah, for S3, for lambda, be the, this kind of thing.}
+{\pard  \line \par}
+{, we used to have like , more research, more stuff going on. Yeah. And, so I started to figure out like, and so service that only a few companies use. And so I figure out like, why does this consider a few? Because everything is too big in AWS. Yeah, yeah. That's right.}
+{\pard  \line \par}
+{ and so I, I kind of created I don't know how to call that, but could be a threat score, a threat model. I don't know. I have no name for that, but what I create a kind of matrix and so. Because common I and uncommon, it's something I think is so specific. It's depend and like I, I start to put like the company perspective.}
+{\pard  \line \par}
+{Like do I have something }
+{\cf2 [00:12:00]}
+{ company runs a lot of this service and has a lot of important service here. So I add some score and how much I know about that. Mm. And how much about it? I know it seems like from the, how it works, how it's used and like if you have some detections read internally for some reason.}
+{\pard  \line \par}
+{ And so it's another point of my matrix, and so the last question is how the world know about that service? And so I start to look like for public research, like public blog posts or something relates to that service. Yeah. And so with that, something. If you have a service that I have no knowledge, the world has no knowledge.}
+{\pard  \line \par}
+{When I was, I was traveling through Canada like a month ago for, called Summit and Sector. Yeah. And I was in the airport like since I live in Florianópolis right. And the south of Brazil and or usually any flights to anywhere, like including internal in Brazil. I need to do some connections because Right, right.}
+{\pard  \line \par}
+{Enough direct flight to, And so }
+{\cf2 [00:13:00]}
+{ I need to stay like six hours in Sao Paulo airport. So what are you going to do? Okay, I'm going to play with AWS. Right? Could do. Right. And so I start to look. SSO in that center now. Right. And, and it start to look like, Okay, it's do the same, like if you look like Exactly.}
+{\pard  \line \par}
+{It's do the same work as the IAM. Right? It does, yeah. User, you give a permission and your watches and you do, while you. Permissions to do, right? Yeah. And I started to figure out, okay, we have a lot of detects for IAM . And so I started to looking, but you don't have detections for SSO and so I started to figure out, okay, everybody uses SSO mostly, so, but you don't have }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ whole wait.}
+{\pard  \line \par}
+{Is the service different? Like is the, I thought identity services to rename it reaming of SSO. Does it have }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ more? No. Identity center is the same of SSO, Just different name. Just Oh, right. Okay. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ They }
+{\cf2 [00:14:00]}
+{ protection exists for that other detections }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ and so I, I start to take a look on , some place and i didnt find anything.}
+{\pard  \line \par}
+{And if you look like the logging is different action. The, to create a user is a different action to set the permissions, the different actions. And when you log it is different and, If you don't have nothing, monitor those SSO actions. I just go to your account. If I have the permission, I just start SSO, create a user, Attach your permission.}
+{\pard  \line \par}
+{Yeah. And log with as an administrator. And then so I could use it. You not, you don't have detection. And so I sort, but SSO is not uncommon. , but sounds like uncommon for the detection side. And so yeah, what is common, what is uncommon is something that blew my mind. I don't know exactly what to say.}
+{\pard  \line \par}
+{Like Yeah, I }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ think that kinda answers the question as well because, to what you said, unless a company's actually using a service, we don't really think about. And does this probably extend to the whole the vendor }
+{\cf2 [00:15:00]}
+{ space of CSPM and cloud security posture manager as well? . If there is a service, which is not, like, for example, I'll probably think of the most obscure or most uncommon services like AWS, 5g, I have no idea who uses it, but I'm pretty sure there's someone out there.}
+{\pard  \line \par}
+{That's why they made it, made that service. They don't make those service because no one uses it. And I, I guess you did research on AppStream as well, }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ What is the problem? The main problem. Like, I don't use the service, so I will not care about the service.}
+{\pard  \line \par}
+{Mm. But if you don't deny the service, if someone has permissions to restart the service, you still have the problem because it doesn't matter. Yeah. Because you don't need to start and offend it. The service is there. Yeah. And so like, doesn't matter if you use it or not using it's a attack surface, if you're not like you are using, for example, organizations and deny the service that you dont use.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I was gonna say, how many people actually do that where they use organization SCP to even block uncommon services? Like, I mean}
+{\cf2 [00:16:00]}
+{ , in the conversation that you've been having at conferences and the talks you've been giving, have you found people actually have a known list of, Hey, we only use EC2, we only use s3, we only use RDS}
+{\pard  \line \par}
+{anything else outside of it? We do not use. does anyone even come and talk to you about that? Like, you know, they say that we, }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ Well, I don't know how easy to do that because I'm not a DevOps. And so , some things that I think, right, I have some difficult to figure out, like how easy to apply or not. And }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ so sometimes I need to talk almost like an inventory, like how would you get an inventory of what you use?}
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ But for example, . Maybe it's not easy to drop service. You don't, don't, you're not ready. Right. Yeah. That's okay. But there is another way. Like, and so that's the point, like we're talking about detections, like you could have like the preventive part, Right?}
+{\pard  \line \par}
+{Okay. I would deny and so I, I fix the problem because if they could not use the service I. Like deny. Okay. I could not deny. So let's kind of try to do some }
+{\cf2 [00:17:00]}
+{ guard rail or some monitoring and what is guard rails or some monitoring is something like, okay, I have this list of service running and so like if some service that's not in the list mm-hmm.}
+{\pard  \line \par}
+{oh just trigger me alert. And so I know that something you know, is coming like, and so you, you could try to figure out that's another possibility }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ about that. Actually. That's a good point. Would that be cloud trail log or how would you do it? }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ Yeah, yeah, Because the cloud trail logs, You have the event service field.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ You know, and maybe we're going too deep into it. We probably should explain what we are trying, like you and I have been talking about for so long. So we should probably take a step back, explain what we are trying to do as well.}
+{\pard  \line \par}
+{So let's just take an example where, you know you and I have spoken about the AppStream service before AWS AppStream. Okay? Which is, I don't know how many people who are listening to this episode would have known about this service, What. First of all the AWS AppStream service, and then we can probably take a step towards how would you do some threat detection against that service so people can use that framework }
+{\cf2 [00:18:00]}
+{ for any other uncommon service they might be using as well.}
+{\pard  \line \par}
+{So let's start with , what's an AWS AppStream? }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ the AppStream, like everything started because they, I was on a incident response call and say, Oh, we did some problem with the Appstream part. I say, What is Appstream? So I started to figure out, okay, I need to study that. And so I start to study.}
+{\pard  \line \par}
+{Yeah, , it's like it's provider application. Like as a service. Most like the Citrix meta frame. Like you want to provide a, just a, a single application. Like I just log it and the open application, only the application from here I could use it. Right. And that's the main goal.}
+{\pard  \line \par}
+{And the main point here is like, since it's internally in account. Yeah. You have access to your data that's in the cloud. You have extra research. That's the cloud. You're inside the VPC that you could have something running in the cloud. So you could have application, like application that's using like some cloud parts that you connect to }
+{\cf2 [00:19:00]}
+{ database that remove to cloud and this kind of thing.}
+{\pard  \line \par}
+{And, the point with AppStream, it's pretty cool. Like it's pretty useful. And after that, I, I start to do some research. I say what I could do with that because I, I tried to find some Brazilian companies that have used that and I didn't find and it's okay.}
+{\pard  \line \par}
+{Okay. I would try to use, and so what, what I did, like, first I start to read the documentation as mm-hmm. when I start to, to try to do something right. And after that I start to, Okay. How I could do, okay, let's, let's start to create something and start to , click, right? Yeah. And see what's happen.}
+{\pard  \line \par}
+{And mostly like when I click, I go to cloudtrail and see what's going to be generated. Because that's my main point, like what I could have from here. And when they start clicking, like you have like a lot of phase on the process. Like you have the. Image builder part. Mm-hmm. , you have the, the snapshot part, You have the fleet, you have the stack part.}
+{\pard  \line \par}
+{And so I, I }
+{\cf2 [00:20:00]}
+{ mostly research the snapshot part. Yeah. And, then I found like, Five actions mostly that I could do a lot of things. And why I start to do the things, like I could do some exfiltration . I come do some lateral movement, I could do some escalations.}
+{\pard  \line \par}
+{ Because one of the points, like appstream is one of the service that you can attach a role, right? And so when you attach a role, you give permissions, right? . And so that's the point about the privileged coalition part because dependent of the role, it, you could move through to some different level you could share something that's running because they have like some that, that's something really I never figure about that.}
+{\pard  \line \par}
+{But you, you could create a string url. Yeah. And it is generate like a kind of pre-signed url. You just put your browser and open like the, the show of the service. Alrighty. And so if you have a roll, attach it. You could just grab, the keys and use anywhere you want. Wow. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Wait, so I think, so just to unpack that a bit, }
+{\cf2 [00:21:00]}
+{ so when you kind of came across an incident response for Appstream}
+{\pard  \line \par}
+{because you didn't know much about the service, you decided to use Cloud Trail as a way to, Hey, what kind of things can I detect? Is the reason you went for Cloud Trail, Obviously it's the auditing service, but it was there like a, I don't know, like a security practice guide or something for AppStream that is normally available.}
+{\pard  \line \par}
+{Like, Cause I'm thinking the, the framework or the thinking that you use to do threat detection, AppStream. But if, I don't know, it's tomorrow someone makes an AWS satellite service or 5g. The minimum thing people should look for is an integration with Cloud Trail as that's the foundational piece. Is that right?}
+{\pard  \line \par}
+{Like, }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ Yes. There, , two main parts, right? I like to say like, first about everything, like you need to do some threat modeling. Understand like what, , the attacker is here in the point A and my stuff are on the point B. And how the attacker will arrive on the point B.}
+{\pard  \line \par}
+{And if he arrives on the point B. What kind of information I }
+{\cf2 [00:22:00]}
+{ need to do the incident response, like, because, to have something inside and access to a data is a nightmare. But if you don't have the data to do, the incident response is a nightmare. a double nightmare, right? ? It'll be terrible because , you have no answer. That's Right. And so like we splits the information like , the cloud, the control plane part, it's cloud trail. So the actions that you create, something remove. something you change something in the service and so on. That's the cloud trail parts, and you have the that event parts.}
+{\pard  \line \par}
+{And the that event part is really, really important to understand because when you have incident response, like most of the that events are disabled by default and, and not for just some common service like the S3 is disabled, right? And so like if you make some. Public by some reason, by some mistake, and somebody access your sensitive data.}
+{\pard  \line \par}
+{If you didn't enable , the data events, you never know who accessed the data. And so the }
+{\cf2 [00:23:00]}
+{ RDS like the database is the same, like it's disabled by default, . The AKS is the same. It's disabled by default. So you need to know, like for using the service and to do the incident response, you need to have that.}
+{\pard  \line \par}
+{But cloud trail by default is enabled , Yeah, and you have like three months data to access. Like if you're not sending to somewhere else, that's a nightmare to use the console. But you have the data, you have the data list. Yeah. And, so like, but most of these things, like we are talking about actions are going to be log it at the cloud trail and some cloud trail is the very first point to watch that.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. And to your point then using Cloud Trail to. What are some of the known patterns of threat? I guess, for example, , what we call out earlier to what you were saying as well, you tried, maybe it could be something as simple as I come up to you and, Hey Rodrigo, what do you use this for? How do you create a service here?}
+{\pard  \line \par}
+{What do you normally do? What are the five things that you normally do here? And }
+{\cf2 [00:24:00]}
+{ then mapping that to an action and cloud trail. Anything else outside of it is basically like, Oh, I don't know what it's gonna be like. Like is that the kind of thinking you have as well at that point? }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ Well it, it depends like what they are doing.}
+{\pard  \line \par}
+{Here, for example, we are mapping the service that our customer are running, and so we're going to be like proactive and create some detections, and so we try to do something like, and so, But you have time. Yeah, because nothing happen, like we're just trying to create some protections and detection for some. }
+{\pard  \line \par}
+{In some case, like they just call you. Oh, like who you gonna call? That ghost buster . }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh,}
+{\pard  \line \par}
+{incident. }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ You need to solve the problem you. You don't need to solve the problem and just need to solve the puzzle because to see like how they have access. And so what I suggest is for two Opportunities. The first one is if I create detection, but you don't want to do that because you spend a lot of time clicking, clicking, clicking, clicking.}
+{\pard  \line \par}
+{Yeah. and analyzing this kind of thing , and there is }
+{\cf2 [00:25:00]}
+{ a risk, like I spent a lot of bucks like leaving some service enable and this kind thing , but okay. That's part of, of the job. But there is another point, like if you go to Ian McKay the premissions.cloud yeah. And so you could just pick the service you want.}
+{\pard  \line \par}
+{and like what's the most important part there? Like the right and because, Okay, let me come back a bit. The permissions, like the actions , the AWS, like they spliting in five different access level. And so is the read parts, the listing part, the tagging. The write part and the permission management part.}
+{\pard  \line \par}
+{Usually what is more the structural part is the write and permission management. Okay. And the read part is how he can read the information that's inside , And so what he could do like, Okay, I want to see if somebody tried to abuse and create some. over permissive stuff, , understand what's going on.}
+{\pard  \line \par}
+{You could just go to documentation, look }
+{\cf2 [00:26:00]}
+{ on those actions. Yeah. And maybe try to monitor something, relate to that's happened and see what's going on, and have some idea looking like for some log samples and, and see what's going on. That's, mm-hmm. , that's an opportunity. Yeah, it is. If, if somebody just call me now, Wow, I'm using something like, I dunno, comprehend.}
+{\pard  \line \par}
+{I have no idea what does. And so I just go to that documentation and try to figure out like the, what I will consider the most danger actions and try to figure out what's going on. , but I think that that's the true way. Like, but the best way is the first way, like you try to click understand, you put some offensive mindset to see like, okay, from here I could go to here, and this }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ kind of thing.}
+{\pard  \line \par}
+{I'm taking a few points as you kind of mentioned all of that. Definitely make sure the cloud trail thing is known and what kind of actions will taken . What you also called out, which I take away for people to hear, is the IAM role. If there's a potential, IAM role attached , then there's a possible privilege escalation possible as well.}
+{\pard  \line \par}
+{It's not just the }
+{\cf2 [00:27:00]}
+{ fact that you found, hey, for whatever reason, you don't secure the service correctly, but you potentially have like a follow up, like an IAM star permission or whatever. If you're gonna use that extreme example, they could be that kind of thing as well. Like some of That's some of the points are taken away from what you just said.}
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ Oh there is another vector that , I have some priorities like the pass roll stuff, like service that has pass role because pass roll is kind of, you are giving extra permissions}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Is that the IAM pass? Is that the role which allows us to do cross account?}
+{\pard  \line \par}
+{Is that the same role like IAM Pass role? }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ No, no, no. The pass role is the action, like a service needs some extra permissions and so like you pass the role and it's good. Execute some actions like based on that }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ also I can pass my role as in, So what would be an example of it? }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ , That's, is really like a black hole. Like }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh, right, right. Okay. So not much information, but people would see it in Cloud Trail. No, }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ that's the point. There is some good like Noam }
+{\cf2 [00:28:00]}
+{ Dahan from Ermetic he has some great research about pass role, right? And in he map it like I think something around, 300 plus something actions that you you can pass role and for example, , run instance, you can pass role as you run an instance and attach role.}
+{\pard  \line \par}
+{So the instance could connect to the service. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh, right. Oh, , it's the role. , It's a permission that allows and EC2 do something, basically. Yeah. }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ You need to give the IAM pass permissions to the user that is giving that pass role permission. But the pass role permission, the pass action, pass role action is not logged.}
+{\pard  \line \par}
+{That's }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ the point. Oh, right. It's not logged. It's }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ not. Officially log it. You could figure out that the pass rule is use it like if you look for some certain parameters in the requested parameters, but, there is nothing that is right. , this is a pass roll. That's something, That's why implicit is not }
+{\cf2 [00:29:00]}
+{ there is, there is no action related to pass roll.}
+{\pard  \line \par}
+{, that's a problem. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Why it's not. Would it still come under your name or who's like, as in, Cause I look at cloud trail and I think, okay, if Ashish logged in and did something, it's logged in as Ashish logged in and did something. What's happening in that? }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ You're going to log like the user that run something like I don't remember I had, but appstream is one of the actions that has pass role.}
+{\pard  \line \par}
+{And when you , attach a role to the image, right? You, you pass the role to the image. It's who you be. Log it like IAM role. I think that's the field request parameter. IAM. And so you see. The role is attach it. There is a way to see that, but it's not that easy. All right. And you need to know, you need to know the actions in the fields.}
+{\pard  \line \par}
+{Like some fields are, IAM are enrolled. Some fields are different.. And there is services that I have no idea what's, what's happening. And you have that. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Wait, so that's another thing, right? Because we are talking about uncommon services.}
+{\pard  \line \par}
+{There might be like, for lack of a better }
+{\cf2 [00:30:00]}
+{ word, gaps that no one probably would not would ever discover because our CSPM tool has not told us that, Hey, you should look at that. Or our, and this is probably the reason I bring this up, is because a lot of people would just trust what CSPM is giving as gospel, for lack of a better word.}
+{\pard  \line \par}
+{It's like, Oh, they have done the work for me. They have everything that I need to think. But to what the questions you're asking right now about the pass role, about hey, some actions are not even logged. Then CSPM doesn't talk about that. }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ Yeah. I don't know all the CSPM, but problem CSPM is not validation the IAM permissions, right?}
+{\pard  \line \par}
+{Mostly. . Yeah. And so like some two as cloud planning, Can is probably, you show you like this, this role, this policy, this user, this, this roll or something. It has the past role permission, and so those principles could use that permission to do something that's supposed to be part of the job. }
+{\cf2 [00:31:00]}
+{ Or maybe if the Tucker, it could do something that's not part of.}
+{\pard  \line \par}
+{Right. Interesting. And so }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ how do you even start this conversation? Cause I mean , to your point, cause I think you were lucky in a way. Well lucky is probably strong word I guess, but because there was an incident in appstream and you were called in, so you kind of went down the rabbit hole of, Hey, what is this service?}
+{\pard  \line \par}
+{What do you use it for? What is cloud trail and all that? Are you doing other research as well and other services and building a repository of this? }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ Yeah, I plan to do some incident response from Common service. I think it would be pretty cool. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah, I think so as well. }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ No, but the appsec role is not, my research is, is Noam Dahan }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ research. Oh, yeah. Sorry. I mean, that's definitely important, but I think where I'm coming from is to the incident response cheat sheet that you're working on for uncommon services, like the, some of the basic questions that we just spoke about.}
+{\pard  \line \par}
+{Hey, make sure there's Cloud Trail. Cause tomorrow at, not even tomorrow, end of this month at reinvent. If Amazon releases a new service and there is no cloud trail link for it, for whatever reason, }
+{\cf2 [00:32:00]}
+{ or maybe, I don't know, something else, encryption is not there, IAM, is not there, but your CSPM doesn't tell you about it.}
+{\pard  \line \par}
+{Some team goes and starts using the service. How are you gonna do incident response for that? , I don't know. Like I think maybe this is kind of where food for thought for people listening in }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ I I think the most important part, like coming back , to that way of think like map the service you have.}
+{\pard  \line \par}
+{Yeah. And so put on that threat model like, Okay, those service, I have 10 service running for example. And so like for five service, Oh, you have a lot of detections because IAM EC2 blah, blah, blah. And I have five service that I have no idea what's going on and I have to create detections. And so like put some efforts on that so you could have something more related and contest all with your, your work because there is no match.}
+{\pard  \line \par}
+{You're not going to have protection through 300 service and counting because probably they release more. Like at reinvent and so more service is are coming and so like more, more unknown things are coming.}
+{\cf2 [00:33:00]}
+{ }
+{\pard  \line \par}
+{But there is a bunch of things, like I'm talking you a lot about the faults, right?}
+{\pard  \line \par}
+{Yeah, yeah. The, because like people think like, Oh, I'm going to move to the cloud cause it's more. , it could be more secure if you know what you're doing, but if you don't know, it's, it's more insecure and there is more attack surface there is a bunch of new things that should, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ It is on the internet.}
+{\pard  \line \par}
+{It is literally on the internet }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ and for example, like a very criminal service. We have a kind of problem, like just figure out a scenario like Yeah. You have the s3. Yeah. When you create a S3., by default the block public flag is disabled. If you don't able, it's disabled.}
+{\pard  \line \par}
+{And so I could make a package public, right? Yeah. that's not good. But it's disabled by default. I don't know why. And so the, that events are disabled by default and so I could make that package public and I have no data to see if something is going }
+{\cf2 [00:34:00]}
+{ on. And there is. Piece on this puzzle.}
+{\pard  \line \par}
+{That's the The pre-sign URL? Yeah. And the pre-sign url. Let's figure out, I have a bucket. I create a bucket. The flag is enable, I could not make it public. Yeah. But if I can't access the file, I could create a pre-sign URL. And if I curate a pre-sign Royal, I could send that URL to anyone else and I just click and download the file.}
+{\pard  \line \par}
+{Yep, Yep. What's the problem? You have a, a private bucket, the bucket is not public. you're not looking for something bad happen to that, but the pre-sign is not logged, and so I don't know that someone create a pre-sign url and, I could just see somebody download the file. But if I have that events enable, that's not enabled.}
+{\pard  \line \par}
+{And so like, you know, like that's true. That's a very common service. There is this kind of problem. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Wait, so pre-sign URL is also not like, someone creating it is not logged, but someone }
+{\cf2 [00:35:00]}
+{ downloading the file is logged, but downloading the file is an event anyways. }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ No, no, but download this file, Log it.}
+{\pard  \line \par}
+{If you have the, that events. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right. Even that doesn't get enabled otherwise. No. }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ No. If it is not enable, it is not going to show at the cloud trail because it's not an action. come for plenty. Action. Yeah, that's, that's, that's part is pretty trick. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ What, Okay. Well, I guess we should probably mention it, like things you should look out for in each service as well.}
+{\pard  \line \par}
+{ that is really interesting for me. I did not realize. S3 pre-sign, URLs are also not logged unless you actually have that enabled for, And the downloads are not being enabled as well. the downloads are not logged as well in cloud trail if you have got the data part enabled. }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ Yeah, in my opinion, like talking about like detection engineer guy.}
+{\pard  \line \par}
+{Yeah. I must want to detect like as soon as possible. And so like if I created precise, I could already try to revoke the key or try to do something like that. }
+{\cf2 [00:36:00]}
+{ Yeah. Okay. It is not possible and so my only possibility, like I have that events enable and so I will detect when somebody download, but when somebody download, The incidents already happen because somebody download.}
+{\pard  \line \par}
+{That's it. I just so you know that somebody downloads like, but the problem is there already. I I somebody have had access to my data already. So that's a big, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. I'm glad we're talking about this as well, because I think I definitely want more people to have awareness of these things as well in terms of, hey, you know, just because you have a CSPM tool actually talking about a CSPM How would you even like start building this?}
+{\pard  \line \par}
+{Cause to your point, either you have a CSPM tool that you have paid money for, you have an open source one, but can you extend a CSPM tool to include like, I don't know, like AppStream as a, as the detection that you want. How do you go about doing that? }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ Yeah, like if you use cloud sploit or prowler, }
+{\cf2 [00:37:00]}
+{ those, you can like easily create some detections.}
+{\pard  \line \par}
+{Yeah. Oh, you can add your }
+{\pard  \line \par}
+{\b\cf5 Rodrigo Montoro - FIRST-RAW:\b0}
+{ own, }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ Yeah. Uh, It's like prowler is pretty simple because open source and it's, it use like Python, the new version that I use in Python, but the previous version is a mesh, so that's not difficult. Yeah. Cloud sploit is more difficult because they use node. Java script. I don't know exactly the language, but , it's something that I }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ script from.}
+{\pard  \line \par}
+{Yeah. }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ And so its more difficult to create something because you need to move, change the collector. And so the collector, you change the credit detection. It's not that they, it's pretty fast, but like if you're not developer as me, like, it's not that preview to create some detection, but yeah, you could extend, you could try to figure out, you could ask the vendor.}
+{\pard  \line \par}
+{Because as, as we mentioned, like I'm talking about cloud sploit , I don't know about the other CSPM tools, but I don't think that they're much better than that. Yeah. Because it is too much service, but, and I'm not saying }
+{\cf2 [00:38:00]}
+{ that the other service has misconfiguration, but I'm, I could not say that there is no misconfiguration because nobody's looking for it mostly.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. And people don't even realize it, most likely that there is, They're going through this as well, isn't it? They will not even realize it. }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ Yeah. I don't, Yeah, because I think that's, , the bad about the, the cloud is, is, is some, it's a market pretty new for security parts. Like we have a bunch of new service, new companies doing some cool, products.}
+{\pard  \line \par}
+{Yeah. But like, there is just a few cloud security guys like, compared, like with the on premise security people like, and so it, it's hard to figure out. How people are handled, this kind of thing, because that's what I were talking before I used to run the cloud, the, the CSPM and the CSPM, like only looking for.}
+{\pard  \line \par}
+{Never third percent of the survey is a red find, like thousand of misconfigurations. And so like they, red has a }
+{\cf2 [00:39:00]}
+{ lot of work to do because the faults like we have a lot of misconfiguration. Like you just start an account and create some thing and they have a bunch of the faults that are }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah.}
+{\pard  \line \par}
+{Yeah. And , I think where can people, Cause I know I'm kind of towards the tail of the episode as well, but I'm curious. You know, we are talking about these things and you've clearly put a lot of research into this as well. And other people who might be thinking about going, Hey, I need to figure out this out as well, because I don't know, I use AWS.}
+{\pard  \line \par}
+{5G or satellite service or whatever. So where do you normally send people to kind of start learning about this? Like what do you tell them when they come and ask you, Hey, I wanna do this for a new. What do you normally tell them? }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ Well , I'm a guy that I like to play with the service to, to feel the service.}
+{\pard  \line \par}
+{Right, right, right, right. My, my main suggestion is read the documentation, understand the actions, because there is a bunch of documentation related to the actions only. Yeah. Play of the service because I think like the most you know, and you learn with cloud is playing. Like you could read }
+{\cf2 [00:40:00]}
+{ a lot of things, but when you start to click is where you are going to really learn about that.}
+{\pard  \line \par}
+{Yeah. And, and there is a lot of service that like the, the list, like for example, pass role that we're talking there, there is like service that I have no idea. I think like I could barely say like the name of Fifth Service of AWS , but, and, and I don't know Fifth Service. I know the names, right? }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah.}
+{\pard  \line \par}
+{Yeah. Same. I mean, I don't know. 50 services in AWS as well. I would probably go. I know the common ones. I know the EC2 like AppStream. The first time I heard about AppStream was from you. Actually, I didn't even know there was a service called AppStream, like you meant. I'm like, Oh, what's this service called AppStream?}
+{\pard  \line \par}
+{Cause you know how you had the talk about abuse of AWS AppStream 2.0? I'm like, Oh, I've never heard of AppStream. I wonder know what it does. So I, I mean, but to what you said, there are 200 plus services in Amazon. And not that you and I would be experts in all of them, but atleast. If we can }
+{\cf2 [00:41:00]}
+{ give people a framework to work towards, I think that would definitely be beneficial.}
+{\pard  \line \par}
+{So maybe when that cheat sheet comes out, I'll probably put that link as well somewhere. }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ Yeah. And the cool like creates a cheat sheet like. It's the, if you create a detection based on actions, it's going to work in any account because any account has the same actions, the same name, the same fields.}
+{\pard  \line \par}
+{Yeah. And so if you start like from the basics, like from five service and so someone else like, Oh, I did for this, for the this service. And so like, in a few months, maybe in a year, you have like third fourth service already. And it works for , anyone that want to create some good detection.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ and how would you scale this? Cause I think one of the questions that I probably would, I'm sure a lot of people would think about this, is like, well, I don't have one AWS account. I've got hundreds of AWS accounts because they're all free. How does one extend detection across multiple accounts? And like, I mean, what we have sort said and spoken about, so.}
+{\pard  \line \par}
+{Perfectly works for one account, but the moment you start going, I've got }
+{\cf2 [00:42:00]}
+{ dev test prod, pre-prod, but then I've got all these other services as well. How do you kind of like do this at scale? }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ Well, the, detection part is, is if you're using the organizations, like you create the organization trail for cloud trail.}
+{\pard  \line \par}
+{Yeah. And so any account that is part of the organization, will you save the logs in your organization trail? And so , the account just started, You're just creating new account organization is logging already and so like, I think it's the, is this way like to, to, because if you need to go to some accounts, discover the accounts created and so it starts logging.}
+{\pard  \line \par}
+{It's a nightmare and probably that they could disable that. Right. Okay. disable cloud trail is a detection that you must. Yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. But actually that's a good one as well. Not let anyone disable cloud trail as a threat detection. It's a good one to have as well. }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ Yeah. And the funny part is, is not just one action.}
+{\pard  \line \par}
+{Like you could just stop, stop logging. You could }
+{\cf2 [00:43:00]}
+{ delete trail. I don't, I don't remember how Oh, yeah. You, you could like put event selector and so like, you're not disabling, but you're just saying, , but just look on this small piece, , I think there is four ways to, evade the the cloud trail.}
+{\pard  \line \par}
+{Yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Cause as you mentioned it, cause the most of the example that I hear is, Oh, maybe make sure there's a detection for when cloud has turned off, but no one's doing it. When you stop logging. It's enabled, but it's not logging. No, I don't think anyone does detection of that. That sort. It's a good example.}
+{\pard  \line \par}
+{There you go. That's another one for cheat sheet as well. That was my final question as well, but I've got a fun section as well, man. In the last five minutes that we have for the interview, it's basically non-technical just to get to know you a bit more and people get to know Rodrigo a bit more.}
+{\pard  \line \par}
+{The first fun question is what do you spend most time on when you're not working on doing threat detection cloud or technology? }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ Well, I I, I spent like, most of my free time, like with my son, I have a eight years old kid. Oh, nice. Yeah. I used to play football, play stations kind of things. I, I like to go to }
+{\cf2 [00:44:00]}
+{ the gym.}
+{\pard  \line \par}
+{That's, that's something I, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh yeah, fair enough. People should definitely see you and like they'll know Exactly. You definitely go to the gym, man. . }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ and, And I used to do, I used to do triathlon }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ there. Oh yeah. You triathlon as well. Like have your triathlon. Yeah. For people who watch the video, they probably would see the tattoo that you have on yourself for the Ironman as well.}
+{\pard  \line \par}
+{The triathlon. But yeah. But that's pretty awesome. }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ My size now is, is too big to do triathlon . . }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Well, yeah, you might have to cut down quite a bit then. The second question that I have for you is, what is something that you're proud of? Part which is not only your social media, }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ something that I I, I have on my linkedin profile, but I'm not used to say a lot like I'm author of two patents. In US Patent Office in usa you have two patents against. Yeah. I'm out. Like when I used to work at Spider Labs. Yeah. I did two research, like one to detect malicious, malicious files, mostly PDFs in 2010 }
+{\cf2 [00:45:00]}
+{ and 2011, a new research that I was looking on, the HCP headers and so this kind of thing, I usually don't talk a lot about that, but }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ doesn't feel, Yeah, I did not know that you had two patent.}
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ As a researcher, that's something like, I think like I think it's the top of something you could }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ achieve. Thanks for sharing that man. And I got a final question as well for you. What's your favorite cuisine or restaurant that you can share? }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ Oh, I like sushi. The Japanese foods nice. Yeah. Sashimi kind food and barbecue, like a lot of meat.}
+{\pard  \line \par}
+{I'm Oh, Brazilian }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ barbecue. Not, not, I guess you just call it barbecue. You don't call it Brazilian, but we call it Brazilian barbecue because you're not in Brazil, but you just call it barbecue. Yeah. When, }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ when I, I, I arrive on, I, I, I forgot the date. I arrived on Saturday, I think. Yeah. In Boston. Oh, yeah.}
+{\pard  \line \par}
+{And it was like Chris Ferris. Ian McKay. Oh, Drew. Yeah. And I start to talk to them like }
+{\cf2 [00:46:00]}
+{ on the lo of the hotel. Okay, let's go to the Brazilian barbecue. Come on. I just arrive and went and we went to the Brazilian barbecue.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah, I can. Cause I'm like, Yeah, but we call it Brazilian barbecue. But you wouldn't for you. That is barbecue . }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ No. Yeah. Yeah. It it's pretty famous. Like, and, and, and we went there like to the, the first I just arrived and I didn't have time to miss my food. Like just go to the }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Fair enough man. Cool. Well that was pretty much time was that we had, man.}
+{\pard  \line \par}
+{Where can people find you if they have more questions about the space and wanna maybe do some research with you about threat detection for uncommon services? Where can people. }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ Oh I'm used to do a lot of post linkedin Rodrigo at linkedin and is spooker Labs at Twitter. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I'll put the link for your LinkedIn as well as Twitter as well, man.}
+{\pard  \line \par}
+{But dude, thank you so much for coming in. This is really awesome. I'm so glad I, I got to have this conversation with you and looking forward to having more of }
+{\cf2 [00:47:00]}
+{ these conversations, man. As you kind of tour Brazil you talk as well and hopefully get to see you in person again. But thanks so much for coming.}
+{\pard  \line \par}
+{Right. Thank you }
+{\pard  \line \par}
+{\b\cf4 Rodrigo Montoro:\b0}
+{ very much for the opportunities. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ No problem. All right, everyone, thank you so much for your time and we'll see you in the next episode of AWS Cloud Security. Over the weekend we have Kat Traxler coming in, so we'll talk to you then. See you right.}
+}

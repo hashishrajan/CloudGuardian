@@ -1,0 +1,463 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red114\green179\blue114;
+\red128\green128\blue128;
+\red222\green74\blue29;
+\red102\green0\blue204;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\b\fs48 Bianca Lankford with captions\b0}
+{\pard  \line \par}
+{\b\cf1 Bianca Lankford:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ So I think the key for security team, we have to be flexible. We cannot go throw things over the fence, right? So understanding how our business works, the challenge is having the team be available to both build the security posture that we have to adhere to, and then also to have the ability and the time and the understanding.}
+{\pard  \line \par}
+{To be much more engaged in the development teams. That's a work in progress. I don't think that ever gets to be perfect, but even getting it at 50% is way better than not doing that at all. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ If you're a cybersecurity leader or someone who's thinking about starting a cloud security program in a cloud world where nowadays we deal with containers, virtual machines, we do a lot of things, but the biggest problem we deal with is we don't have a starting point for how do we run a program or create a program.}
+{\pard  \line \par}
+{That can scale at the same speed as AWS or Azure or Google Cloud. In this episode, we had Bianca Langford, who's the vice President for Global Cloud Security at Warner Thoses Discovery. }
+{\cf2 [00:01:00]}
+{ Talk about how she thinks about the cloud security program and what are some of the pillars and stages you can include in your cloud security program to be successful.}
+{\pard  \line \par}
+{The conversation was really valuable from a perspective of how leaders think about cloud and how. Convince their own leadership, which is the board and people above them on why cloud security is important and how you can also navigate the, the challenges that come with working in a large enterprise, especially in an industry like media, where if you are people who are following their popular TV show, imagine when that goes down and the amount of phone calls or the Twitter messages or the reaction community.}
+{\pard  \line \par}
+{I feel like it's a really interesting problem if you have a cloud security program that scales in a media industry, other industries where you might not hear the feedback that quickly because your event is not streaming, or I would not compare it to a medical or the other field. But in general, if you look at most other industries,}
+{\pard  \line \par}
+{I definitely feel media industry has a scale as the biggest challenge, and we spoke about that as well as Bianca. So what are some of the scale that }
+{\cf2 [00:02:00]}
+{ you can think about in a media industry, which I would definitely ask you to consider and look at that because I've had companies where 10,000 requests per second is a DDoS attack versus here we are talking billions and millions of requests coming in.}
+{\pard  \line \par}
+{It's an amazing conversation to have with Bianca, and I hope you enjoy this episode. If you know someone who's thinking of building a cloud security program that can scale. Or if you're thinking of having a, just a wonder in the idea of I want to improve my cloud scale program, what does that would look like?}
+{\pard  \line \par}
+{This is the episode for you. As always. If you're here for the second or third time, I would really appreciate if you could give us a follow on your favorite video and audio platform like YouTube or Apple Podcast or Spotify. If you're listening to this in the audio, definitely feel us to give us a. Re review our rating.}
+{\pard  \line \par}
+{It definitely helps us find more guests and helps them understand that, hey, this is something just valuable. So I really appreciated support with this, and thank you to everyone who's been dropping us a comment of support on the LinkedIns and the social medias of the world. I really appreciate it. Thank you so much.}
+{\pard  \line \par}
+{All right. I'll let you enjoy this episode. We will be back with another }
+{\cf2 [00:03:00]}
+{ episode on our leadership month in March of 2023. I'll see you the next episode. When you're developing }
+{\pard  \line \par}
+{\b\cf1 Bianca Lankford:\b0}
+{ an app, security might be treated as an afterthought with functionality, requirements and tight deadlines. It's easy to accidentally write vulnerable code or use a vulnerable dependency, but sneak can help you secure your code in real time so you don't need to slow down to build securely.}
+{\pard  \line \par}
+{Develop fast, stay secure. Good developer sneak.}
+{\pard  \line \par}
+{\b\cf4 Ashish Rjaan:\b0}
+{ Hi Bianca, welcome to the show. Hi. }
+{\pard  \line \par}
+{\b\cf1 Bianca Lankford:\b0}
+{ Hi. Thank }
+{\pard  \line \par}
+{\b\cf4 Ashish Rjaan:\b0}
+{ you. And well thank you for coming in for the two or three people on the internet. Do not know, Bianca, what was your path into the whole smart security space? }
+{\pard  \line \par}
+{\b\cf1 Bianca Lankford:\b0}
+{ Yeah. Well, so I'm Bianca Langford. I, I work at Warner Brothers Discovery. This is where I lead up a cloud security program.}
+{\pard  \line \par}
+{My history has kind of really been through the media space where I grew from being an application engineer where I did a lot }
+{\cf2 [00:04:00]}
+{ of. Just backend development. And as we were a company that was kind of a cloud first company was my first foray into it, and I really was able to see the beauty of being a developer and starting to work in the cloud versus depending on an.}
+{\pard  \line \par}
+{Traditional IT team to rack our infrastructure for us where we would be able to test our code or move to staging or any of that path. Being in the cloud just removed that and it really made me fall in love with it. That's pretty awesome, }
+{\pard  \line \par}
+{\b\cf4 Ashish Rjaan:\b0}
+{ and I think because you came from a traditional background of developers, Then kind of moving into security space, which is pretty awesome because I'm running a cloud security program now.}
+{\pard  \line \par}
+{Working in a media company, as you mentioned, comes obviously with the challenge of working at a large scale, and I sometimes find it, well when I talk to people, they talk about scale and it's varies for different people to people. I guess from startups where it's like 10,000 could be a DDoS attack versus I guess something really large.}
+{\pard  \line \par}
+{How would you describe like the challenge of scale in a media? Yeah, }
+{\pard  \line \par}
+{\b\cf1 Bianca Lankford:\b0}
+{ way to put that because scale means different things to different }
+{\cf2 [00:05:00]}
+{ people and, and to working in a media space, whether it's this company or any other company, depends on what you might be handling. It's live, it's live sporting events, which are its own beast of scale or delivering high value content, which could be millions and millions of requests and millions and, and then the audience is so huge, so, , when we prepare for scale, we have to think about all the scenarios that we are working with and what we're trying to deliver.}
+{\pard  \line \par}
+{And so that goes into all of our preparation from how we set up our infrastructure to how we govern that and how do we secure it. And }
+{\pard  \line \par}
+{\b\cf4 Ashish Rjaan:\b0}
+{ to your point then, like what would be an example of our traffic based on the events that you would kind of experience on a day-to-day basis on a media company? I mean like a livestream versus like a, I dunno, like a prepared show.}
+{\pard  \line \par}
+{\b\cf1 Bianca Lankford:\b0}
+{ I mean, it's millions of streams being delivered. The scale is massive and it, you know, it's something that we prepare for ahead of time when we think about our low testing and when we think about what do we need to deliver? And we obviously, you know, it's not }
+{\cf2 [00:06:00]}
+{ just live streams. It's where's your content stored, how are you protecting it, and what all goes into something that is so massive.}
+{\pard  \line \par}
+{But again, I think it's, it's important not to exclude a smaller. Space. Like I want people who are working in a smaller space in cloud to also think about you're still working at scale. Your scale is just different. The principles of scale apply. You know, whether, you never know if you're gonna be working at a bigger scale in, in a month or in a year.}
+{\pard  \line \par}
+{Yeah, }
+{\pard  \line \par}
+{\b\cf4 Ashish Rjaan:\b0}
+{ I think that's a good point. Good way to put it as well. Cause I agree in terms of, people might imagine that, hey, I mean I don't have to deal with scale or you know, auto scaling group or whatever. It's not really that important. I've got another question in terms of the. . So because you're running a cloud security program and you've kind of seen the on-premise world as well, what makes a cloud-based security program different to a on-premise }
+{\pard  \line \par}
+{\b\cf1 Bianca Lankford:\b0}
+{ one?}
+{\pard  \line \par}
+{Yeah. When I first got into just the cloud space and, and at that time it was very natural that you're really dealing with, from going from on-prem to cloud. So }
+{\cf2 [00:07:00]}
+{ the way you think about cloud at that time where people thought about was, well, if it works for on-prem, it should work for cloud of. It's infrastructure.}
+{\pard  \line \par}
+{But if we think about difference between on-prem and cloud, one is very controlled, one is very managed, one is very easy to say What is going to happen and how is this going to get there? And you know who did it and why? Cloud while you can do that. , the nature of it is to take advantage of managed services, to take advantage of what our providers give you, and it to give our technical teams freedom to develop and, and scale it up themselves.}
+{\pard  \line \par}
+{Mm-hmm. . So the way we think about security for cloud is how do we get into it at the beginning? Where do we work with the team so we know the architecture? Ahead of time because we're not gonna go get something to be approved. We say you can build it out and then here you go. At that point, we're too late.}
+{\pard  \line \par}
+{So like to work in a model where we're embedded, where we're building together, where we're including security to be }
+{\cf2 [00:08:00]}
+{ part of the really a development process. }
+{\pard  \line \par}
+{\b\cf4 Ashish Rjaan:\b0}
+{ and I think I, it kind of goes in the whole operating in Aw, at scale as well. So running a cloud security program or just a program in a cloud is quite challenging to begin with, especially if you kind of put the complexity of large use footprint and kind of with multi-cloud coming in as well.}
+{\pard  \line \par}
+{Where do you see, I, I guess what's your perspective on how security can play a role in enabling businesses when working and operating? As to what you said, millions of views versus like thousand. and then at the same time scaling AWS multi-cloud maybe as well. Yeah, }
+{\pard  \line \par}
+{\b\cf1 Bianca Lankford:\b0}
+{ so I think to me the key is seeing security as an ally and not the scary entity, which it has to be the scary entity a little bit, but security plays that role by giving the business really that risk profile.}
+{\pard  \line \par}
+{So operating at scale in the cloud, you have to understand your posture and having that, the security team has to be the one that. Stands, what is out there? }
+{\cf2 [00:09:00]}
+{ What is the risk and, and how are we delivering and securing what's in the cloud space? We're not gonna ask the development team to audit themselves to be able to be responsible for any compliance requirements.}
+{\pard  \line \par}
+{That has to be security's job, but they can't do that. Unless they're engaged. So the talent pool there and the security team is much more about people engagement and having that process kind of built with the development team to be able to deliver on that high speed needed in the cloud. }
+{\pard  \line \par}
+{\b\cf4 Ashish Rjaan:\b0}
+{ I think that's pretty interesting because a lot of people, And I, I find this as a pet peeve because when we talk to, a lot of people talk about cybersecurity, yes, we are almost like a police officer where we've, we identify crime scene and suddenly it's like barica everything and just like, let's solve the crime and find who the culprit is.}
+{\pard  \line \par}
+{Yeah, I feel like that's changing from the on-premise world as well in the cloud and kind of you hit it in the nail by talking about involving ourselves and being more embedded in the developer flow is }
+{\cf2 [00:10:00]}
+{ definitely quite crucial. And do you feel like as an industry, are we doing a, I guess, an a good enough job and you can share your experience in terms of how you've been able to embed it, if it's okay?}
+{\pard  \line \par}
+{Cause I'm curious. A lot of the industry focuses on. Hey, I'm just gonna find the problem and my operations team is just gonna raise an alarm. And that would be the end of it. But the, and then here we go. Yeah, that's right. The reality is gonna have to go the other way as well, and someone has to fix it.}
+{\pard  \line \par}
+{What, what's your thought on that? }
+{\pard  \line \par}
+{\b\cf1 Bianca Lankford:\b0}
+{ Oh, yeah. That is probably one of the most challenging ways to. Operate and actually keep that up. And the more you grow, the harder it is to embed. So I think the key for security team, we have to be flexible. We cannot go throw things over the fence, right? So understanding how our business works.}
+{\pard  \line \par}
+{The challenge is having the team be available to both build the security posture that we have to adhere to, and then also to have the ability and the time and the understanding to }
+{\cf2 [00:11:00]}
+{ be much more engaged in the development teams. That's a work in progress. I don't think that ever gets to be perfect, but even getting it at 50% is way better than, than not doing that }
+{\pard  \line \par}
+{\b\cf4 Ashish Rjaan:\b0}
+{ at all.}
+{\pard  \line \par}
+{A hundred percent. And do you find that maybe in the media industry are. Specific challenges in running such a program? Cause I mean, a lot of people talk about the whole uh, I guess the enterprise side of things where there's a structure, there's compliance, there's a lot of that. I feel like media industry is very fast paced and you almost like, yeah, like people want a game of so show tomorrow they, or maybe even yesterday.}
+{\pard  \line \par}
+{In fact, it was possible. It's not just like the security team has to keep up with the development, but you're gonna have to keep up with all the demands of product that is being produced by the company. If you want to take the angle of people, process, technology. what makes the program work effectively in a media industry?}
+{\pard  \line \par}
+{It's }
+{\pard  \line \par}
+{\b\cf1 Bianca Lankford:\b0}
+{ effective by being, again, going back to flexibility, so, mm-hmm. let you know, we as a security program come up with what we have to have. We work with the team, we learn from the team that, you know, they, they went }
+{\cf2 [00:12:00]}
+{ in a completely different direction and this is not something we even knew about. We still work with them.}
+{\pard  \line \par}
+{To drive them into this is how we're helping you, this is how we're preventing issues. My big motto is preventing problems before they happen. That's probably everybody in security and it's the hardest thing to do cuz you always have prevent and then you have to remediate after. But the challenges.}
+{\pard  \line \par}
+{getting the talent pool available to be free of kind of the corporate demands that we have to have for the enterprise side of the house to be able to work with the development teams. Cuz you're right, they do move faster. There's not really like a perfect answer there. It's just a having the patience.}
+{\pard  \line \par}
+{And, and kind of the hustle really to work with them and to be on their level. And I've also always found maybe being from the development space, hearing out the development teams, like what they're going through really helps when you're talking to them about what you're wanting them to remediate, because they're usually because of that fast paced, you know, they're under a lot of pressure to deliver }
+{\pard  \line \par}
+{\b\cf4 Ashish Rjaan:\b0}
+{ something.}
+{\pard  \line \par}
+{\cf2 [00:13:00]}
+{ Yeah. Yeah. And what do you find out? Specific challenges in, in this space? Cause you've been in the media industry for a long time. What do you find, uh, the challenge of running a program like a cloud degree program? In, in, in general? Like, I think in terms of feel like of you kind touching on that same point as well.}
+{\pard  \line \par}
+{So I'm curious as to, from your point, what do you see as challenges of. Implementing a program. }
+{\pard  \line \par}
+{\b\cf1 Bianca Lankford:\b0}
+{ Inventory. Yeah, inventory. Inventory. So something that constantly changes, and I don't mean like cloud changes, I mean the organizational changes. If something's fast paced, new divisions get added, or there are changes, there are mergers, people groups change.}
+{\pard  \line \par}
+{So continually keeping that cloud posture accurate is extremely challenging, and it's always a work in progress. It's never static. }
+{\pard  \line \par}
+{\b\cf4 Ashish Rjaan:\b0}
+{ Right. And do you find that, I think another question that I come across quite often, so when I, before I left my sister job, I think a lot of the conversation that I would have with peers was around the whole leadership buy-in as well.}
+{\pard  \line \par}
+{Like there was a whole conversation around getting a leadership buy-in on the idea of }
+{\cf2 [00:14:00]}
+{ cloud for people who were trying to be, I guess, first on the ground. Yeah. Seemed like we folks were first on the ground for cloud. So I imagine, what was the role that security played in kind of having that up and going?}
+{\pard  \line \par}
+{Cause I imagine. , it's one side is, Hey, cloud is amazing, but hey, we should do security as well. And just like, it's almost like a, but we should do security as well. So I'm curious how you navigate through that. Yeah, }
+{\pard  \line \par}
+{\b\cf1 Bianca Lankford:\b0}
+{ so I can't complain too much because in my experience, I've been extremely lucky to be in groups that not only were they tech first, but they were security first with that as well.}
+{\pard  \line \par}
+{So that removes that obstacle right away of getting funded, of getting. The right tools in place. As the posture would grow, we would have the funds to put in what we needed to scan our environments. What we needed to put that was latest and greatest. So challenge industry-wide is that buy-in. So how do we, let's remove that.}
+{\pard  \line \par}
+{We were happy that we had that already, that buy-in and this }
+{\cf2 [00:15:00]}
+{ expertise at the top level that was able to help with that. Articulating risk-based approaches and articulating like what the organization needs to reduce this risk and what are the most critical areas to that? Leadership usually helps get the buy-in that's needed to help make security be more forward.}
+{\pard  \line \par}
+{\b\cf4 Ashish Rjaan:\b0}
+{ And what would you say for folks in Omni Gordon on the path of compliance And just talk about, you know, the, the compliance tech as it's. A lot of people use that as a way to educate leaders. But, um, to your point about using risk as a way to describe in the right context why it is something that people should address and probably keep an eye on, what, what has your learning been in the, in the context of educating leadership about the, I mean, I guess.}
+{\pard  \line \par}
+{They already were aware of the importance, but in terms of working across the board, like a broader context? Yeah. Cause I think there's a, there's a whole coming down, but there's also working with the peers. We spoke about developers earlier. How do, like what's your tips around }
+{\pard  \line \par}
+{\b\cf1 Bianca Lankford:\b0}
+{ that? Yeah. Articulating risk is complicated }
+{\cf2 [00:16:00]}
+{ because you can't just take whatever some tool told you and said, this is risk.}
+{\pard  \line \par}
+{You have to be able to understand what the risk is to them. And then compliance comes into that. Depending on what your line of business is and what that risk was, you will. Answer to different regulatory measures as well, but being able to say, here are its main areas or infrastructure that's behind it, if this was to be down or the attack were to go through, the risk to the business is the financial loss, reputational loss.}
+{\pard  \line \par}
+{There are critical areas that you must address and navigating it that way versus saying, Hey, by the way, , you have like 50 issues. You need to go fix them because this tool said they're critical. And people are like, no, you know, I'm not doing that. So, and that same conversation really happens probably at a different level, in a different way.}
+{\pard  \line \par}
+{The information is presented, whether we're talking to a C level, we're talking to peers or developers, but the risk is really key. That is what we should be doing. We }
+{\cf2 [00:17:00]}
+{ shouldn't be reducing. , right? At the end of the day, what are we doing? But reducing risk, how do }
+{\pard  \line \par}
+{\b\cf4 Ashish Rjaan:\b0}
+{ you define security? Cause I think I, I love that you mentioned that reducing, risking as well.}
+{\pard  \line \par}
+{Cause a lot of people who are in the industry would imagine, and maybe I had a bias of this as well as a technical CSO where, hey, I, I identify issues and I use that as a way to kind of like talk about why, how this can be vulnerable or how this can be attacked. and it was a bit of a learning for me to kind of take that path of, okay, I need to understand what's Bianca's motivation, how do I work this risk in a way that it works for her?}
+{\pard  \line \par}
+{Like, was there a learning for for you as well, and is there any learning that you can share from there that people can maybe take up and go, okay, what's a good way to explain a complex cybersecurity challenge or maybe cloud security challenge into a risk? }
+{\pard  \line \par}
+{\b\cf1 Bianca Lankford:\b0}
+{ Yeah, that's a hard question to answer because the learning is, Constant.}
+{\pard  \line \par}
+{One of the, the ways I've found lately is whatever we can do to graph what an attack path looks like. So let's say I tell you }
+{\cf2 [00:18:00]}
+{ that this is a risk score of a 10 and it's out there, but actually showing visually where that one little area can make you vulnerable and show that, uh, that the spread has really helped.}
+{\pard  \line \par}
+{Navigate that conversation to a place where people truly understand, because I do want everyone who's developing, everyone who's working in their space to really understand how they're a bigger part of that pie and how that one little thing can really spread out. So it is that. You know, buzzword of shared responsibility, }
+{\pard  \line \par}
+{\b\cf4 Ashish Rjaan:\b0}
+{ but it is because we're talking about a, I guess, operating at scale as well and a cloud security program.}
+{\pard  \line \par}
+{A lot of people may look at you for inspiration on, Hey, I'm thinking of building a cloud security program. What are some of the, I guess you mentioned the whole embedding yourself into the development flow. That was probably one of the key principles you worked with. Are there any other pillars that you felt were important in your, I guess, in your thinking about what a successful program should look like at.}
+{\pard  \line \par}
+{Yeah, }
+{\pard  \line \par}
+{\b\cf1 Bianca Lankford:\b0}
+{ for sure. So I talked a lot }
+{\cf2 [00:19:00]}
+{ about cloud governance and having a centralized cloud team that helps navigate how cloud accounts or cloud projects or subscriptions are rolled out. Having a security baseline is key and one that grows with the organization. So starting with something so you can measure yourself against something, so you can say no, you cannot create a cloud account on your own PCard.}
+{\pard  \line \par}
+{You have to go through and we have organizational. Settings. Mm-hmm. . But that has to be defined. So taking the time to define what that baseline is and then executing against it is a starting model. Grading ourselves on how we're doing against that, and then, More and more what we can do to configure in our cloud environment as it gets created.}
+{\pard  \line \par}
+{Because one thing, when you're operating at scale, you're growing constantly. So people are creating new projects. They're not just creating assets, they're creating bigger blocks in the cloud. Having that preconfigured and having a team, that is very cloud savvy that can own that platform }
+{\cf2 [00:20:00]}
+{ and actually develop it out and keep that framework going.}
+{\pard  \line \par}
+{\b\cf4 Ashish Rjaan:\b0}
+{ And to your point, the whole having a central cloud team is again like great idea from a, I guess not just from a governance, but a standardization perspective as well. Does that scale to like a multi-cloud space as well? And it does. Okay. It does. Right. Okay. That's }
+{\pard  \line \par}
+{\b\cf1 Bianca Lankford:\b0}
+{ be awesome. I ran a team, uh, for cloud governance that it did exactly that.}
+{\pard  \line \par}
+{And while we got together to figure out what that governance needs to look like in each provider, and in some cases you can use native tooling in other ways, you would do something custom by the principle of it having like a. Streamlined process to get people going in the cloud, having that entire lifecycle, closing accounts when things are done, all of that works for multi-cloud and that one team, which doesn't have to be huge, can do a lot.}
+{\pard  \line \par}
+{I call that kind of team of force multiplier For an organization }
+{\pard  \line \par}
+{\b\cf4 Ashish Rjaan:\b0}
+{ that's definitely sounds like a force player. What are some of the challenges that would come across from a, I think from a team perspective as well, }
+{\cf2 [00:21:00]}
+{ like one of, one of the challenges we had was, We were primarily AWS shop ages ago, and the company went with a couple of acquisitions.}
+{\pard  \line \par}
+{We kind of got Azure, GCP and kind of just kept growing, but the team was still AWS specialists and it's like, and it, it wasn't that hard. Team kind of grew. I feel like the team part is always a challenge in terms of skills like do, is there some thinking around the whole multi-cloud, if organizations are going multi-cloud, you're building a program in a multi-cloud, what are some of the, I guess, more people perspective, what are some of the thought processes there as you in your mind when you're going through that program?}
+{\pard  \line \par}
+{Ideally, }
+{\pard  \line \par}
+{\b\cf1 Bianca Lankford:\b0}
+{ if I'm doing multi-cloud, I want to make sure I have team members that have the skillset for Azure, that have it for gcp, because there are nuances that are. Azure that are not necessarily in aws. Mm-hmm. . And a lot of times organizations will say, well, just like we used to say, it works for on-prem, it works for cloud.}
+{\pard  \line \par}
+{Cloud is cloud. So you just need to, you know, }
+{\cf2 [00:22:00]}
+{ recycle your resources. The way that can work is if you are taking like a developer based approach to your cloud posture so that you kind of do some agnostic aspect to it. But I do think it's important to invest in resources, not necessarily replicating. 30 people here and 30 people here know a handful of highly skilled individuals dedicated to each cloud does work and scale in the organization.}
+{\pard  \line \par}
+{\b\cf4 Ashish Rjaan:\b0}
+{ Do you feel, and I don't know how much if it makes sense as well, like a lot of people still would have like a separate AppSec team and a separate cloud security team, even though they're all trying to protect the same application. Thinking around the whole thing was. Product security team where they do both or do you feel like seeing examples where I, I guess what's the model that's worked in that context where to your point, we have a centralized cloud team.}
+{\pard  \line \par}
+{Which is basically making sure that provisioning of cloud accounts is in a standardized manner. Everyone's finding the standard, but then as the organization changes and grows, there is this whole challenge of people who are I, I }
+{\cf2 [00:23:00]}
+{ guess there's the skillset evolving as well. What's the best way you've found with AppSec teams and cloud six teams?}
+{\pard  \line \par}
+{Do you, are they gonna merge or do you feel like they have their own in individual places? Where do you see sit on that? I mean, I }
+{\pard  \line \par}
+{\b\cf1 Bianca Lankford:\b0}
+{ think, well, so again, it depends on the organization, but it makes sense for them to be part of the same pillar and have their area. Focus. I'm also a fan of having, depending on your scale and size.}
+{\pard  \line \par}
+{Mm. Having some development and application teams, hiring their own security specialists that belong to them. Mm-hmm. , that doesn't mean they're still not working with some central entity that is the security team. Mm-hmm. , but that, that also works on the sense that they are already hired to secure that application.}
+{\pard  \line \par}
+{So you're not having to embed people into there, you're working directly with them. I like that a. . }
+{\pard  \line \par}
+{\b\cf4 Ashish Rjaan:\b0}
+{ That's awesome. And I think to your point, then we are, we're scaling from that perspective as well, I guess because the folks who are in that embedded in that development team are probably a lot more invested in the whole security of it as well.}
+{\pard  \line \par}
+{Can work with the wider }
+{\cf2 [00:24:00]}
+{ team. Yeah. Okay. What are some of the metrics then, I guess because we're talking about a program running at scale, what are some of the metrics you think about for a, I guess something operationalizing at scale? }
+{\pard  \line \par}
+{\b\cf1 Bianca Lankford:\b0}
+{ Yeah. So first of all, do you know your. , do you know what is running? Do you know what to scan?}
+{\pard  \line \par}
+{And that seems like a easy question to answer, but if you're going through a lot of change and a lot of entities coming together, that breaks very quickly. So to me, that's always the first thing in the maturity step is first you've gotta know what you don't know. So you have to make sure that the unknown is.}
+{\pard  \line \par}
+{How quickly do you react to your findings and the SLAs that are set against them? Are those SLAs reasonable? And again, are they based on industry standard or compliance standard? Something specific to this organization or any type of industry that that is in, maybe different in government than it is in media and, and, and those variations, but, and then acting upon those metrics you.}
+{\pard  \line \par}
+{\cf2 [00:25:00]}
+{ Of the coverage, how quickly are you gonna get the coverage? You know, who goes after the people that go open up their own rogue stuff and, and how quickly can you act on that, remediate it and put it back into the central space that needs to be monitored and incidents response. Teams, right? Like, what does that look like?}
+{\pard  \line \par}
+{You have to have that. I mean, that's not really my area that I own, but it is a program to say that. That also goes to your maturity. If something is unknown and nobody has to respond to it, it shouldn't be your engineering team responding to it. That operational layer has to be there. }
+{\pard  \line \par}
+{\b\cf4 Ashish Rjaan:\b0}
+{ And to your point then, cause you mentioned the detection piece quite like a couple of times.}
+{\pard  \line \par}
+{I'm curious cuz I think in the on-premise world time detection used to be almost like there was a lot of signals, agents and stuff that were used for it. A lot of, and most cloud environments users wouldn't have agents in. What's your thinking around the whole time per detection in an organization? How do you see it now?}
+{\pard  \line \par}
+{Playing art and cloud. }
+{\pard  \line \par}
+{\b\cf1 Bianca Lankford:\b0}
+{ I mean, that time to detection does, there are not a lot of time that needs to be almost instant. Right? }
+{\cf2 [00:26:00]}
+{ So there's enough tooling built in with our, what AWS provides us with guard duty. Mm-hmm. with, uh, various other ways we can detect. It's about how, what we alert on and how we monitor and that that gives us that time to detection.}
+{\pard  \line \par}
+{So it goes back to. Sure that your posture is covered. Mm-hmm. , and then you determine as a business what is acceptable you for time to detection. So I mean like there's some minor things that you don't have to react, but understanding the criticality of what is being monitored and how quickly those operations teams react to it and how quickly they escalate the escalation paths are critical.}
+{\pard  \line \par}
+{\b\cf4 Ashish Rjaan:\b0}
+{ So, and that's escalation path is a good one because that kind of leads me to the whole complexity of the different kind of compute that. Today, before we started the interview, we were talking about the whole serverless concept. There's a whole container thing as well, and I remember in the on-premise time it just used to be a server or a virtual server, but it was still the same thing.}
+{\pard  \line \par}
+{It wasn't like, like revolutionary, but now we are in the world of containers, humanity, serverless, and no code for people who believe in }
+{\cf2 [00:27:00]}
+{ that. And like I think to your point about building a cloud security program that scales, what kind of approach do you feel? In that or navigating through that as well.}
+{\pard  \line \par}
+{We, we are dealing with just different kinds of compute and possibly another one coming tomorrow. }
+{\pard  \line \par}
+{\b\cf1 Bianca Lankford:\b0}
+{ Yeah. And, and that is that constant change. So I would hope that if anybody running anything at scale is investing money, In some of the cutting edge tools and leveraging that are at least powered by some AI in the backend to be able to have algorithms and contextualization of your environment to be able to take that risk into account because you're not gonna have an individual on the cloud security team trying to figure out what is this new thing that popped up, right?}
+{\pard  \line \par}
+{That needs to be part of the native tooling and part of the entire set. So that maturity model goes into what is your tooling that you. In your space, whether you wrote it, it doesn't matter, but it has to be invested in cuz the change is too much. That goes back to that on-prem model, right? The static. I know what you're building, }
+{\cf2 [00:28:00]}
+{ I know what you're requested, so I'm gonna make sure I scan it and then it's like, oh, I'm a w s and here's this new thing you can use starting today.}
+{\pard  \line \par}
+{We're turning it on, right? Yeah. }
+{\pard  \line \par}
+{\b\cf4 Ashish Rjaan:\b0}
+{ Oh. Cause that's another challenge that people talk about it quite often as well, where after AWS rain event happened a couple months ago, bunch of new cells get announced, now suddenly starts using it. Not everyone, like, I mean, even the developers themselves don't know how to use that service and everyone's experimenting.}
+{\pard  \line \par}
+{I, I think that definitely brings me to another question, which is the whole approach of guardrails versus security game uhhuh. Where do you stand on that? }
+{\pard  \line \par}
+{\b\cf1 Bianca Lankford:\b0}
+{ Yeah, so I, I've been in both places and, and it really, again, it's not gonna be a great answer because it depends on what you're in. So. We got to a place at one point that we were growing so quickly and so many services were coming out, and like this team is like, I want you to enable this AI tool, but this other team is using this previous version.}
+{\pard  \line \par}
+{And so it wasn't so much from a securities perspective, it's more from an operational perspective like, do you need to use all of these? Like how do we get to that consensus? And for a while the }
+{\cf2 [00:29:00]}
+{ idea was why don't we go through together as an organization and approve. , like these are the services like we want you to use for your databases.}
+{\pard  \line \par}
+{We want you to do that. Yeah. And that worked for some aspects, but then you suddenly become the on-prem world because now it has to go through somebody else to approve. So I'm more of the. , try to be as intelligent as you can with your tooling and in tune with your account teams as to what they're releasing and what they're turning so that you have complete visibility, you know what's happening.}
+{\pard  \line \par}
+{Mm-hmm. rather than preventing, and then trying to approve it and trying to go through that entire process. But again, it does depend on. . There are certain areas of the world in certain businesses that you may wanna restrict certain things more, but I do like a more flexible approach personally. Oh, }
+{\pard  \line \par}
+{\b\cf4 Ashish Rjaan:\b0}
+{ would you say culture would play a role in this as well?}
+{\pard  \line \par}
+{Like how }
+{\pard  \line \par}
+{\b\cf1 Bianca Lankford:\b0}
+{ well do you trust your development teams? Like how well and and what kind of tech culture do you have built in? For sure. Yes. }
+{\pard  \line \par}
+{\b\cf4 Ashish Rjaan:\b0}
+{ Yeah. Cause }
+{\cf2 [00:30:00]}
+{ I think whether they would even call security and say, Hey, security teams, we have something we want to help with this charge. Just become, ah, they're gonna start a bashing me.}
+{\pard  \line \par}
+{Not physically, but I mean just entry. Yeah. }
+{\pard  \line \par}
+{\b\cf1 Bianca Lankford:\b0}
+{ And then again, it does come to that, right? Are you the scary entity or are you the entity seen as you're helping together build the product and secure it together? And I, you know, there is always a fine line that sometimes you do have to like be really scary.}
+{\pard  \line \par}
+{because at the end of the day, security is what's responsible for that or whose neck is on the line. But it does work better in practice when we work }
+{\pard  \line \par}
+{\b\cf4 Ashish Rjaan:\b0}
+{ together. I think one more question that makes me think about this, and I love the approach that you have with the developer for sculpture as well. I definitely believe that like.}
+{\pard  \line \par}
+{Even though we have been taught to be police officers, we kind of have to be almost like community workers working with everyone. Yes. So we prevent the crime from the first place instead of Let's do what you said earlier, just basically reacting to a crime has happened so far. What are some of the, cause a lot of people like to have milestones as they go through a program, and it may be different for different companies, but is there like }
+{\cf2 [00:31:00]}
+{ a general framework that you normally think about for people thinking about starting a program today that can scale?}
+{\pard  \line \par}
+{Is there like a general stages that you think of in your mind for what they can use for program? }
+{\pard  \line \par}
+{\b\cf1 Bianca Lankford:\b0}
+{ Yeah, again. So first I'd like to look at who's managing the cloud posture. So first thing is, who is creating that lifecycle? How is anything in the cloud happening? Is there a responsible entity? Making sure and working with the organization to create that responsible entity.}
+{\pard  \line \par}
+{Could be security, like security could do, take that function. So that would be the milestone is how are you operating account creation, project creation. Network configurations, is all that baked into what you're delivering to the teams and how does that process look like? Enabling top level obvious orgs or that level scanning of everything that happens that needs to exist.}
+{\pard  \line \par}
+{Like you don't go much further if you don't know what you're doing in the cloud. Like you have to have that posture dashboard. To report }
+{\cf2 [00:32:00]}
+{ on that so you're not running a bunch of heavy queries. You have real time dashboards to know what's happening. And then of course, for a cloud security program. , we want to know our vulnerabilities and, and cloud security, posture management, those are the other milestones.}
+{\pard  \line \par}
+{And then incidents response kind of part of that and that operational model. I do think a lot of places, people and organizations forget about operating well, like having that operational tier available, ready to go and trained up to understand what their need to do to respond a hundred }
+{\pard  \line \par}
+{\b\cf4 Ashish Rjaan:\b0}
+{ percent. And I think the great answers as well, so I'm sure.}
+{\pard  \line \par}
+{Use that as a milestone for themselves. That was most of the, I guess, the leadership kind of questions that I had from a charter perspective. I do have three, I guess, for lack of a better word, fun questions for you to just kinda ask people get to know you a bit more. The first question being, what do you spend most time already not working on building cloud security programs and }
+{\pard  \line \par}
+{\b\cf1 Bianca Lankford:\b0}
+{ running them?}
+{\pard  \line \par}
+{Yeah, I would like to say a lot of exciting things, but I have very small children, so it is really tied to what we do together as a family. I have a passion }
+{\cf2 [00:33:00]}
+{ for travel. I've traveled, I've lived in different countries, I've traveled in different places, many different places, and I'm very passionate about.}
+{\pard  \line \par}
+{Making sure my children grow up in a space where they understand the world around them and, and they're part of it. That's pretty }
+{\pard  \line \par}
+{\b\cf4 Ashish Rjaan:\b0}
+{ awesome. I wish my parents had experience an interview, but what is something that you're proud of that is not on your social media? }
+{\pard  \line \par}
+{\b\cf1 Bianca Lankford:\b0}
+{ Am I proud of? It's not my social media, my baking bread, baking.}
+{\pard  \line \par}
+{I }
+{\pard  \line \par}
+{\b\cf4 Ashish Rjaan:\b0}
+{ like overkill that you picked up or basic. I mean, you know how through the covid period people were baking bread? Is }
+{\pard  \line \par}
+{\b\cf1 Bianca Lankford:\b0}
+{ that what was No. Was way before then. So it was way before then. I probably started baking. You were doing it before }
+{\pard  \line \par}
+{\b\cf4 Ashish Rjaan:\b0}
+{ It was cool. Like you wanted was }
+{\pard  \line \par}
+{\b\cf1 Bianca Lankford:\b0}
+{ cool. Of course, I, I knew how to do sourdough before it was, it was the thing.}
+{\pard  \line \par}
+{Oh, wow. Yeah. . Yeah. My mother and I used to like, I probably started bread baking. Part of it was necessity, but it was probably when I was around 13. So I do, I do a lot of dinner parties and baking. That's something that I'm. }
+{\pard  \line \par}
+{\b\cf4 Ashish Rjaan:\b0}
+{ Wow. There you go. I, well, it's a good thing that it's, it's a secret skill as well as well.}
+{\pard  \line \par}
+{People get surprised when they come, come over to your place. They're like, }
+{\cf2 [00:34:00]}
+{ oh my god, so much. Bake beds are fresh bread }
+{\pard  \line \par}
+{\b\cf1 Bianca Lankford:\b0}
+{ last, and then bring a crowd together. For sure. If you have fresh bread, it's sort of like, makes everybody come around the table. It's, it's }
+{\pard  \line \par}
+{\b\cf4 Ashish Rjaan:\b0}
+{ a thing. Definitely I think, uh, some fresh bread, some butter, maybe some kind of garlic butter.}
+{\pard  \line \par}
+{If this thing, uh, I can keep going about it. I suppose the final question, what is your favorite cuisine or restaurant that you can share? }
+{\pard  \line \par}
+{\b\cf1 Bianca Lankford:\b0}
+{ My favorite cuisine is general Mediterranean cuisine. I'm actually vegetarian, so mm-hmm. , definitely just really fresh flavors and I love Mediterranean cuisine. Awesome.}
+{\pard  \line \par}
+{Thank you }
+{\pard  \line \par}
+{\b\cf4 Ashish Rjaan:\b0}
+{ for sharing that. And well, I guess for people who may be listening to the interview, And one reach out to you as well. Where can they find you on? The best place }
+{\pard  \line \par}
+{\b\cf1 Bianca Lankford:\b0}
+{ to find me is on my LinkedIn. That is the easiest place. So }
+{\pard  \line \par}
+{\b\cf4 Ashish Rjaan:\b0}
+{ yeah. Awesome. I will leave a link for that as well. Well thank you so much for your time and I will thank you for having me again.}
+{\pard  \line \par}
+{It was my pleasure to kind of get here, uh, I guess your experience shade on the Porthouse as well, so I'm looking forward to having you again, Bianca. But thank you so much for your time and thank you everyone else who's watching. We'll see you next episode. See ya. Thank you. Bye.}
+}

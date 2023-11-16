@@ -1,0 +1,340 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red250\green138\blue59;
+\red128\green128\blue128;
+\red216\green34\blue146;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ Can you just a bit about yourself and your journey to where you are today? }
+{\pard  \line \par}
+{\b\cf3 Or Azarzar:\b0}
+{ Yeah, sure. So my name is Or. I'm 55 years old, currently the CTO and the co-founder applied spun, a cloud security startup from Israel. And I think a bit differently from a lot of other is the cybersecurity entrepreneurs. I wasn't you knowing the intelligence or a 200 word?}
+{\pard  \line \par}
+{My military service was a bit different. That was in the Navy, was a submariner, nothing close to the technology. So that's where I started. And after four and a half years, I think sort of lifting, then I started my journey inside and all the cyber security technology starting from the early days in knock engineering and it quickly.}
+{\pard  \line \par}
+{Transitioned into security field really by accident. Just, you know, someone just picked me, my manager said like, you know, you should start handling all firewalls. And from there }
+{\cf2 [00:01:00]}
+{ quickly did lots of walls. Yeah. In the Israeli security agency for for cybersecurity sort of eight years lead food, few teams from developing internal security solution, then developing more of embedded security stuff.}
+{\pard  \line \par}
+{Then after I left and joined an Israeli automotive cyber security company, that's where I made a bloody. My partner is the CEO. Doing lots of projects, mainly for connected car platforms. So it's like the cloud side of vehicles. And after a year, both left and started next year now. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And out of curiosity considering this is cloud native month and we kind of have funny, we were just all find document humanities and the popular the humanities has just to level the playing field for people.}
+{\pard  \line \par}
+{What is Kubernetes for you and why do you see us getting so popular? What are people using it for? }
+{\pard  \line \par}
+{\b\cf3 Or Azarzar:\b0}
+{ Yes. So I think maybe for me too, that's like the. Stand out for running, maybe workloads in the cloud today. I would be curious questions }
+{\cf2 [00:02:00]}
+{ about this because you know, adults are maybe on serverless environments or steal on old legacy workloads.}
+{\pard  \line \par}
+{But I think today that's most common standard to run workloads in the cloud. I would say generally for everyone starting today. So Kubernetes. Container orchestration platform. I would say you can think of it as a set of controllers and services that orchestrate and sort of automates the entire operation and of the platform and the infrastructural tasks that we will use to do by ourselves in the past or running strips that does this.}
+{\pard  \line \par}
+{So for example, auto scaling and auto healing things that we will use to take care of. It was taken care of automatically dramatically today in communities where we have seamless deployments of our applications automatic load balancing and discovery for all services. I think also in terms of configuration, so a really easy way to manage our config and secrets for applications everything's sort of }
+{\cf2 [00:03:00]}
+{ built in right there in Kubernetes.}
+{\pard  \line \par}
+{Everything could also be sort of declared white from the beginning as part of the infrastructure. So not just declaring how our application is running, but we'll restore our configurations and how it's scaled and how it's replicated. And what storage does it use or everything's sort of occurred in one is fine.}
+{\pard  \line \par}
+{Everything I think in Kubernetes is sort of managed by an API that is running in the control plant. So we have the controlling Kubernetes and we have the, the wool kills, which are running the workloads. And the control plan is, well, all the controllers and the services are running to manage the workloads and our applications and those workloads that are running on Walker nodes, which is, those are actually the virtual machines or the servers.}
+{\pard  \line \par}
+{That are hosting all our applications. Every application is called the pod which can hold one or more containers. So for example, if my web application can include like a WordPress contrasting container and the, my sequel container, then }
+{\cf2 [00:04:00]}
+{ combining the, to get out to an application would be called the pod and that can be deployed in each walkie or can be deployed on one of them.}
+{\pard  \line \par}
+{It depends on the right. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So it's almost like a orchestration of a predefined application is another way to define it. But using containers in pods and stuff. }
+{\pard  \line \par}
+{\b\cf3 Or Azarzar:\b0}
+{ Yeah, definitely. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And what's the difference between the whole cloud managed Kubernetes and a lot of people seem to have gone down the traditional path.}
+{\pard  \line \par}
+{We're going to do a self-managed one. Why did we were going on self managed path in the first place? Why not just go for cloud managed? So what's the difference, first of all. }
+{\pard  \line \par}
+{\b\cf3 Or Azarzar:\b0}
+{ Yeah, so, so the difference first is on a managed scuba and it is basically the cloud service provider has another layer of obstruction.}
+{\pard  \line \par}
+{Well, the, the entire control plan is managed by the cloud service providers. So we don't really have access to the control plan. We can communicate with it. We can configure that, but basically running by, but the cloud service provider and it }
+{\cf2 [00:05:00]}
+{ saves us a lot of time for deploying the cloud, the control plane, and configure it from this first place.}
+{\pard  \line \par}
+{Yep. I think today within a few clicks, you can get a Kubernetes cluster running on every cloud service provider set with, you know, predefined rules and versions and security patches, and walling updates, whatever we need. While on, on our self manage, you have to do everything well. So}
+{\pard  \line \par}
+{and that's tough. I mean, that's tough for people that started with Kubernetes years ago, they will doing this by themselves. Became as mature as it is today on cloud service providers. And it's stuff. I mean, it's, it takes a lot of DevOps effort and a lot of work to build this and maintain this efficiently.}
+{\pard  \line \par}
+{So I'd say those are the main differences. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Sounds like cloud management should have been the first preference for a lot of people or should be the first preference where a lot of people at moment does the a shared responsibility kind of change in what used to be the traditional Kubernetes versus what the cloud manage, what version is.}
+{\pard  \line \par}
+{\b\cf3 Or Azarzar:\b0}
+{ Yeah. Yeah. It definitely changed. I would say that I think today for }
+{\cf2 [00:06:00]}
+{ most consumers, Kubernetes has way more advantages. Then, you know, managing it a cluster wiser by ourselves. As, as the cloud service providers are more mature in this set of features, they provide them the stability. The shared responsibility in this case is sort of giving them another piece of the infrastructure to manage.}
+{\pard  \line \par}
+{So it's not just the underlying infrastructure, but also part of the Kubernetes infrastructure, which is the control plan. So depends on the different vendors. Some of them are already updating, you know, part of the nodes and doing some security patches for us. And they are managing the entire control plan.}
+{\pard  \line \par}
+{So, you know, if your control plan is now crashing all the API they have this automated ways of, you know, we starting it and making sure it's more resilient which takes more responsibility to them. And. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So if the managed services makes sense, then why is that a gap here?}
+{\pard  \line \par}
+{ Is there much difference between EKS and AKS and GKE and stuff? }
+{\cf2 [00:07:00]}
+{ What's the obvious, one or two differences that you see straight away between , the Kubernetes offering .}
+{\pard  \line \par}
+{\b\cf3 Or Azarzar:\b0}
+{ So I will tell you that, I mean, it's hard to really pinpoint the specific ones, but I think, you know, since humanity started from, from Google their, their offering is more mature today. Like JK is I think more mature than the others. And I don't see a big gaps between, I mean, them 80% itself, the requirements today would probably be the same.}
+{\pard  \line \par}
+{GK is super easy to deploy, very friendly to managed. It has automatic adequate for both the component control pin and the Walker notes rather than on EKS. You are the take it's the AWS version of it. You still have to. Do the walking notes, updates by yourself. Doesn't done automatically.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So, and between AKS Azure version ? }
+{\pard  \line \par}
+{\b\cf3 Or Azarzar:\b0}
+{ So AKS, I have, I think today has more native integrations with Azure policies or active }
+{\cf2 [00:08:00]}
+{ directory. So if you're coming from sort of an agile shop and more ideal, Where, you know, you came from the on-prem with everything based on active directory, that's more seamless.}
+{\pard  \line \par}
+{It's like out of the box, you get everything based on active directory, super easy. If, if that's, you know, where you started your journey to Kubernetes, like going from on-prem workloads into the cloud and agile, that's your shop and everything is based on Azure policies or active directory. That's, that's definitely.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ It sounds like obviously people may still have to make a choice between whether I do want to go for the most updated GKE version or manage my updates on Amazon to what you were saying, or maybe come from it push. How does that scale in terms of say, if I start today on EKS, And I'm assuming, I don't think you would notice a pattern between this model of GKE versus more of a AKS or more EKS, but is there , a pattern of adoption that you've noticed so far }
+{\cf2 [00:09:00]}
+{ in terms of one over the other?}
+{\pard  \line \par}
+{\b\cf3 Or Azarzar:\b0}
+{ So at least I see a lot of, you know, movements towards GKE. He cares today. That's what this I seen the market And I think specifically some reasons are because, you know, security is taken clown by the CS counselors, service providers in this case. That's, that's part of the, part of the emotional stuff that we're seeing.}
+{\pard  \line \par}
+{I think developers more oriented. Like, I mean, if you're in AWS then EKS, of course that's the easy and if you need more, I think integrations to other services in the clouds. So AWS. It's more Richdale but if most of your let's say ecosystem for your applications, is everything run in group when it is then I guess GK would be also an amazing choice there.}
+{\pard  \line \par}
+{We don't need lots of external stuff in the cloud service. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ All right. So I guess, cause I'm imagining a typical build, you know when people apply to be ready to talk about, Hey, I need to do STD. I need to configure my }
+{\cf2 [00:10:00]}
+{ API server. I didn't do, I don't know, 10 different things before your, what you were saying.}
+{\pard  \line \par}
+{The state is predefined for exactly what you want. And the Kubernetes cluster is managed by the. In terms of applications that are being built well, Debbie, like I think from a security perspective, we've got a lot of security architects who may be listening to this as well from, from their perspective, what are they looking for in those kinds of builds for, from a security perspective?}
+{\pard  \line \par}
+{What do you think is already covered by what is not covered specifically that they should be looking at for? }
+{\pard  \line \par}
+{\b\cf3 Or Azarzar:\b0}
+{ So I don't think a lot is covered. I'd be, you know, honestly here. There was another predefined, configurations and rules where you can set. But I would say no for startups or, you know, anyone that secures, you know Kubernetes clusters from the beginning, taking the time for playing, planning it you know, test the different tools you want to use.}
+{\pard  \line \par}
+{And in this case, there was a. Open source and }
+{\cf2 [00:11:00]}
+{ checklists that Jonathan Rawa CSO did for deploying the security keys. This is the one we're using and other companies are using, which just turns on by default, you know encryption at rest and logging for all the API in Kubernetes and also installed by default, you know, Falcon, which is a great runtime protection and other other rules you don't have to use this also.}
+{\pard  \line \par}
+{To deploy your radius clusters or just for EKS, but you can use this checklist also when you are deploying Kubernetes, even on Google cloud or Azure, to just see, like, that's the basic stuff that I need, you know, my Kubernetes cluster to have when I'm deploying it in terms of security So I think that's a great reference to use when doing this great resource, even just as a checklist.}
+{\pard  \line \par}
+{So it's like, I think, yeah. Yeah, it's an on, I'll give them, you can see this it's Polisi good project. That will be the basic, I would start off.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ With the chlorinated one cloud, I mean, cloud managed Kubernetes. }
+{\cf2 [00:12:00]}
+{ Yeah. Yeah. }
+{\pard  \line \par}
+{\b\cf3 Or Azarzar:\b0}
+{ It's, it's, it's gone be freaky as we plan to do, you know, support for algebra and GS in GCP in the future. But the checklist there are, is valid for all of them. Yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So maybe another way to put this is what a question here from David as well.}
+{\pard  \line \par}
+{When securing Kubernetes clusters, what are the pros and cons of choosing the cloud platform, native security policy management versus the third party CSBM choke. }
+{\pard  \line \par}
+{\b\cf3 Or Azarzar:\b0}
+{ Okay. So I think there's in terms of, you know, the security polling policy management I haven't, I haven't seen many. Great security tools.}
+{\pard  \line \par}
+{Usually it's just, you know, a checklist, whether it's, you know, CA Spanish, local running basic posture stuff, which is okay, but it doesn't cover a lot of stuff. It doesn't cover the connectivity between the Kubernetes cluster to the infrastructural side. Like for example, though, I have an over promise.}
+{\pard  \line \par}
+{If I am, was that attached to my posts? I'll my host running in a secure way. A lot of CSDs today are able to step most in }
+{\cf2 [00:13:00]}
+{ next generation CPMs, but are able to correlate issues that are between those two layers. And it's super important. Because just looking on Kubernetes, it's not enough today.}
+{\pard  \line \par}
+{This is one thing the second is I would say the ability to continuously write your own policies And sort of taking them into the workflow for organizations. So from the platform, the third party CCPM right into a JIRA ticket or service now, or any, whatever the workflow is and, you know, integrating with different API and also with different I would say security officials in the product.}
+{\pard  \line \par}
+{So the ability to correlate post your management issues within communities with the vulnerabilities of one's running applications, that's super important. Otherwise you can get tons of alerts without context. You mentioned that context a bit earlier, but that's, that's part of it. And the ability for third party security to.}
+{\pard  \line \par}
+{Correlating vulnerabilities with the postal management and security policies and the exposure of the entire infrastructure is }
+{\cf2 [00:14:00]}
+{ super critical for at least in my opinion, in this case. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yup. W I think probably one more thing to add there is also a scale of it as well. Right? Because I think a lot of examples that I hear quite often is the fact that if you have one Cuban at like, I don't know, Cuba, one Cuban in this cluster that you're managing the policies and the policy management within a.}
+{\pard  \line \par}
+{Within a cloud provider is, is fully enough, but the moment you started having multiple Kubernetes clusters and he started scaling that. And I think nowadays the challenge of Kubernetes clusters and not enough to say I only have one Kubernetes cluster. I may have 20 humanities clusters running in my AWS account, another five and GPL from Google cloud hardware manage all of them together.}
+{\pard  \line \par}
+{I think that's kind of where at least I have been able to personally find value in the whole third party CSPs. 'cause they it's like Amazon is never, never gonna, at least at the moment. I don't know if they might announce it reinforce or reinvent. They don't have like a, a single layer to manage all of it, at least at their end.}
+{\pard  \line \par}
+{But I think or maybe, I don't know if GKE does that. I }
+{\cf2 [00:15:00]}
+{ haven't done much work in GKE, but I think that's kind of where I definitely find that shines has got a follow as well. What are your thoughts on policy as code? }
+{\pard  \line \par}
+{\b\cf3 Or Azarzar:\b0}
+{ So I think it's, it's a great addition to it. I think that, you know, we're also using a OPA the open policy agent by ourselves.}
+{\pard  \line \par}
+{That's awesome. Whether if you're using it as a sort of a passive, like detection detecting issues before they being deployed, or your, although your infrastructure's code, or you're using this as a as an admission controller in Kubernetes to To block certain things from happening before they're running in Kubernetes.}
+{\pard  \line \par}
+{So we'll definitely embracing this and you mentioned, you know, the scale. So today in our company we have I think five or six different Kubernetes clusters, and it's easier for us. And, you know, we're using OPA constantly as a policy of code to first different stuff. We're allowing others to write their own policies and it's super helpful.}
+{\pard  \line \par}
+{And I think also polices code is really scalable }
+{\cf2 [00:16:00]}
+{ because you can route your policy once and apply this to clusters running, whether it's AWS, Google cloud, or Azure and it should be the same while treating Kubernetes assets the same. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Ah, sweet. Thanks for sharing that. Hopefully that answers your question, David, but feel free to ask a follow up, man.}
+{\pard  \line \par}
+{Thanks for that. Great. So kind of thing with this, then I think maybe it's a good segue into the next question that I wanted to ask as well. We spoke about the difference between the different cloud provided Cuban, these clusters and how our responsibility kind of changes between them for a startup that may be listening to this as well.}
+{\pard  \line \par}
+{I think we spoke about it from a security perspective. They need to think about some of the basic foundational pieces. So like you mentioned overly permissive, I am wrong. In an atheist context, as long as similar in GKE from a application that may just be one cluster and maybe another startup, like just, I guess I'd like to spin.}
+{\pard  \line \par}
+{Was there trying to just build this what do you see as some of the security components for Cuban cities that they should }
+{\cf2 [00:17:00]}
+{ looking at closely to manage them? Is, is any talks on that so they can kind of learn from what you guys have may have learned as well? }
+{\pard  \line \par}
+{\b\cf3 Or Azarzar:\b0}
+{ Yeah, definitely. So. I think in this case I would go and not just, you know, click the next, next, next when deploying a new communities class, but just looking on the documentation really and see what are all those boxes when you usually don't tick or the cloud service provider doesn't take for you?}
+{\pard  \line \par}
+{We make sure at this, when we started our journey to make sure. On day one, all the secrets that our application uses is in a vault is stored somewhere else. And everything is declared from the beginning. We defined everything as an infrastructure scored, you know, it's, it's like, Hey, we have him files the, deploy, the applications, and we have telephones that deploys the cluster itself.}
+{\pard  \line \par}
+{And it's very helpful because whether you're going to touch your security, you know, next phase, You can audit everything in one place. And if you have, you know, a drift with, }
+{\cf2 [00:18:00]}
+{ between what you have an infrastructure scone and the manual stuff that you did, then putting security together is gonna be much more harder.}
+{\pard  \line \par}
+{Although it seems odd to enable all the logging in the first place, I would recommend doing this because you never know when there's going to be an incident or you have to investigate something and then you need the logs and. Then he would say, oh, why didn't enable this? So there was a cost to this, of course, but I would enable this in the first place and, and even choose the, the way the nodes are running.}
+{\pard  \line \par}
+{Like in this case to make it the most secure way and also did everything that's related to identity. The easiest part. And I guess you notice also is giving an admin for everyone now. Yeah. You need this to just be an admin and, and that's hard. I know managing also a role-based access control in communities is a bit tough, but those are the stuff that I would invest in first place that would save a lot of time when doing auditing or }
+{\cf2 [00:19:00]}
+{ security or pen testing or.}
+{\pard  \line \par}
+{Or even when collecting your first CSBM PMO, KSP on whether it's coming at this too, and then get tons of findings. So those are the standard. I would start in the beginning. It's not enough going into random protection at the beginning, or, you know, CVS gang, forever paying and stuff like this, but should be, should make things more easier in the future.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And to your point then as you're going to, as they may be starting to scale and they would have heard what you said, some people may have already followed the path as well, and they've gone. Okay. I've made sure not everyone is a root user or whatever. Everyone has an admin. I have been done, done the basic sanity pieces of right.}
+{\pard  \line \par}
+{At least if I'm managing one cluster of my Kubernetes, What happens when you start scaling to 2, 3, 4? Like how, how does security scale? Cause as you, you kind of mentioned something really interesting about Dunning on logging as well. And that's, that's probably, I imagine the scale of it changes as you kind of grow.}
+{\cf2 [00:20:00]}
+{ }
+{\pard  \line \par}
+{So w what, what do you see would that would change from a security perspective when you scale from multiple clusters? I guess what was the challenges that you come up with? Came up. }
+{\pard  \line \par}
+{\b\cf3 Or Azarzar:\b0}
+{ So centralized as logging, as you mentioned. So in the beginning, of course you use the native cloud service. If you use the cloud service provider management and then everything is like on its own logging place, whether it's, you know, CloudWatch, CloudWatch or, you know, application insights in agile.}
+{\pard  \line \par}
+{So then putting everything on a centralized place is something important. I think Second place is exactly. I think what they've asked you about is, is about, you know, policies code. So great. We have all the clusters, but if we want to prevent more advanced things from happening in our production, or at least getting insights about what's currently running in production.}
+{\pard  \line \par}
+{So having a mission controls that. So it would allow us to see what's going inside, you know, runtime what issues do we have or. }
+{\cf2 [00:21:00]}
+{ What sort of authorization workflows we have that might, you know, affect our clusters. That's I guess the interesting part, and also going inside network policies. So we haven't touched network policies before because I think that's, it's, it's still.}
+{\pard  \line \par}
+{Not very mature in Kubernetes to manage despite your own, if you're not running any service special or any kind of higher obstruction level for networking. But then this would be the place to stop, you know, hardening your network policies and make sure not every port can communicate with everyone.}
+{\pard  \line \par}
+{It's like sudden making things more strict. This would probably be the next things that would tack it on. When starting scanning Kubernetes. So like one place to store my policies and code and make sure that I'm frost on the different clusters and make sure I have a centralized logging and then making sure whether I choose the proper networking solution or service mesh that I have policies also as part }
+{\cf2 [00:22:00]}
+{ of my policy Scott, for networking for the different environments, I guess, you know, dev and test out different sometimes from.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yep. And to your point then, as you kind of scale from being a one class, a company to maybe three and four cluster, or maybe even larger you maybe, okay. Logging has been done by CloudWatch or whatever the EquiLend is in the cloud managed provider. Do you see, I guess from a challenge perspective, would they be.}
+{\pard  \line \par}
+{Like I've done the right things are deployed it centralized putting it in a central base. I'm assuming you meant some kind of a seam or is there a better way? Like a, I feel like there's a lot of data these days. It's like a security data lake or w what's your thoughts there on the whole scene piece as well?}
+{\pard  \line \par}
+{Where are you centralizing this? }
+{\pard  \line \par}
+{\b\cf3 Or Azarzar:\b0}
+{ So in the beginning, I guess, you know wheels also, you know, our, we use December observability platform. We use for the developers with a little in the moment, but we are looking on jumping straight from our current monitoring }
+{\cf2 [00:23:00]}
+{ application, wondering and observability directly to security data.}
+{\pard  \line \par}
+{And that's where Jonathan Altis is pushing. Taking all the data into there and from there working on, on the data. So it's a different, you know, aspect, a different angle to it. It requires more data engineering skills, but I think there's enough tools today and solutions to support this. But this is where we are.}
+{\pard  \line \par}
+{This is where we are targeting or aiming our efforts to. So just directly from using the building observability and application monitoring tools for logging directly into security data, I think. No, I wouldn't say it's like the next generation seem for it, but it's definitely a place where we think security engineers should be in.}
+{\pard  \line \par}
+{That's the place where you can really benefit from security. So, so that's, that's my take on this. That's still early for us, even on this kind of you know, where we're thinking of this, but}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah, well, I think it's very funny cause we, we had }
+{\cf2 [00:24:00]}
+{ someone from snowflake Omar sports agents and go talk about security at the lake and how a lot of the big people I guess the Netflix of the world, they all have data engineers in the security team as well because they all realize ultimately it comes down to the data.}
+{\pard  \line \par}
+{Doesn't really matter because, and talking about data from a monitoring perspective as. What are some of the scenarios that people really looking for in benchmark or what are they trying to monitor? Cause I think you kind of mentioned the beginning about the context for why is it relevant or why a CV relevant and all of this.}
+{\pard  \line \par}
+{Does the CV has context and humanities, I guess it's still a container running, so you probably still have a CVA required. }
+{\pard  \line \par}
+{\b\cf3 Or Azarzar:\b0}
+{ Yeah. So, so first, I mean the, the monitoring. So yeah, a lot of people are looking for, you know, the basics, CIS benchmark. Where's my issue. Who's privileged who is accessing our rule.}
+{\pard  \line \par}
+{That means which containers are running with over permissive access or networking access. And }
+{\cf2 [00:25:00]}
+{ on top of the, the idea of context is that, you know, it's easy today. Like if you connect any. When it will be the management or scanning tool to most of the running containers today, you would get thousands of cities and you can't really track by your own, which of my containers?}
+{\pard  \line \par}
+{One on each port on which board is public to the internet. It's hard. I mean, like you would get thousands of alerts or, you know, those tons of Yammers to declare and go through. And when asking the question of that, Do I have an exploitable CV or a CV, which is exposed on a pool, which is also part of my English controller.}
+{\pard  \line \par}
+{I mean, the load balancer in Kubernetes, and this is also exposed my buy by my cloud service provider to the internet on an external load balancer. Then this is where the most interesting part is happening. And this really is where. You would }
+{\cf2 [00:26:00]}
+{ need your first monitoring in terms of, you know, how do I reduce the attack surface of my Kubernetes cluster?}
+{\pard  \line \par}
+{Just running vulnerability scan would trigger tons of alerts, just running benchmarks. And, you know the default policies would probably get a lot of alerts even by default. I mean, even by the default pods running by the cloud service providers. So every minute Kubernetes has its own. Pausing containers that the cloud service providers is pushing agents we're doing is internal stuff.}
+{\pard  \line \par}
+{And those sometimes create elsewhere itself. Yeah. I considered it when we were running, you know, Falco by default on all hotel service providers, you would see Falco trigger, tons of alerts on all. The default once. And this is the stuff that when we are starting to monitor and looking on clusters are things that we should exclude things with.}
+{\pard  \line \par}
+{Maybe we shouldn't be aware of their risk because sometimes we think that the cloud service provider is no second. We don't. We know it's not. So those are the stuff we're also looking to monitor besides this. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right? So to your point then I agree with you on the. }
+{\cf2 [00:27:00]}
+{ Over the past few months of people discovering.}
+{\pard  \line \par}
+{I think you light-skinned also had a few discoveries as well within the AWS space as well. So I think I definitely agree in the fact that there's definitely. Holes left unpatched on cloud service providers that people are assigned recognize more often. Now, some of the things like the last few months, everyone's kind of find at least one in each one of those.}
+{\pard  \line \par}
+{So maybe another way to ask this question is also the fact that, okay, I've done a cloud managed Kubernetes cluster to what you said. I have one I'm making sure that at least logging is there so I can make sure that I see what needs to be. If I'm scaling out, I started being policy scored where, whether it's OPA or some of the way you meant mentioned service mesh as well.}
+{\pard  \line \par}
+{Do you recognize for network policy, is, is service some kind of a service mesh, actually a requirement, or does the basic network policy provided by the cloud managed providers enough in a Kubernetes cluster or it would }
+{\cf2 [00:28:00]}
+{ not have. }
+{\pard  \line \par}
+{\b\cf3 Or Azarzar:\b0}
+{ So it should be enough for the beginning, the basic network policies, like it's sort of configuring a network firewalls.}
+{\pard  \line \par}
+{We did, the Sam has some limitations there for the ninth, certain rules, but should it be enough for the basics, but on skill clusters with lots of applications where you, I'm not sure which communicating with each then service mesh is really helpful in this case. And then you can just know enforce your network policies right there.}
+{\pard  \line \par}
+{Much easier in this case. Yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And to your point, the, how, what about the team skill set at this point in time as well? It already sounds like the team is to know cloud. They need to know humanities. They also need to know OPA policy cord. Like what, what kind of skill sets are people looking for in their teams just to manage cupidity security.}
+{\pard  \line \par}
+{\b\cf3 Or Azarzar:\b0}
+{ Wow. Yeah, that's tough. So I would say that, you know, Looking on Kubernetes, it's like an entire cloud within your cloud. Okay. It's sort of where it goes. Huge ecosystem, lots of }
+{\cf2 [00:29:00]}
+{ startups doing all different types, where you can see on the cloud in same as Kubernetes, like storage solutions and encryption solutions and service mission, not security, everything.}
+{\pard  \line \par}
+{So I think I would start by, you know, first the Kubernetes documentation is really awesome. There's lots of snippets and examples of how to run stuff. And I would recommend also people starting by building and breaking their own Kubernetes clusters. That's great. I mean, I've been few Breakfield.}
+{\pard  \line \par}
+{I mean, that's, that's where you really learn and studying also with the, with the self-managed. All right, because like, otherwise you won't have the understanding of how the control runs. What's run the, how the API is managed, how it's configured on most. I think measurement is, or maybe everyone today, you can't really get the, let's say the, the, the properties of the commander running the API server.}
+{\pard  \line \par}
+{That's, that's an issue because. }
+{\cf2 [00:30:00]}
+{ You can really understand all the parameters and what's possible and whatnot. And we will, you'll, you're doing this person. You'll get lots of information about how it really runs on the cloud service provider side. So I would say the documentation and starting with, you know, your own Kubernetes cluster cups as a really great way to start with.}
+{\pard  \line \par}
+{And then I would go, you know, with the. I think the most common patterns for, for using Kubernetes today. Once you get this in place, then learning, you know, Terraform and helm for infrastructure's code OPA for, for policy squad are awesome. There's some also great open source projects. I get keeper for OPA, which allows us to, you know, force And first part of the policies that we want.}
+{\pard  \line \par}
+{So it's great to do this lots of demos and walkthroughs of, of those kinds of stuff. There was lots of open sources where you can learn about, you know, different types of patterns, rural communities.}
+{\cf2 [00:31:00]}
+{ }
+{\pard  \line \par}
+{I guess. Yeah, that's, that's how we, you know, started out journey though. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh, perfect. Thanks for sharing that, man. I appreciate that. }
+}

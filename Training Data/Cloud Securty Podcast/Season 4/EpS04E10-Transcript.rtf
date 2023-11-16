@@ -1,0 +1,675 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red102\green0\blue204;
+\red128\green128\blue128;
+\red114\green179\blue114;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\b\fs48 Larry Whiteside Jr\b0}
+{\pard  \line \par}
+{\b\cf1 Larry Whiteside Jr:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ There was no NIST CSF. There was a NIST as so NIST existed. Right? So some older people are gonna remember this. We had the orange book and we had the blue book. Like they were dictionary size things that you used as this sort of governing mechanism to sort of.}
+{\pard  \line \par}
+{Help you understand, but you didn't really have, you used ISO, ISO was around, right? Oh, right. ISO costs, yes. But ISO costs money, right? Yes. You, you had to pay to get access to the ISO controls to be able to, you know, utilize them. And a lot of organizations weren't, didn't wanna pay, they didn't understand, we didn't understand the value of having a control set to use as your baseline marker to build, you know, your cyber program.}
+{\pard  \line \par}
+{So yeah, it was a very different world. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ if you wanna be a CISO today, you probably wanna know what used to be a CISO's job 30 years ago. Let me explain. A lot of things that used to be a, I guess a norm for us today }
+{\cf2 [00:01:00]}
+{ are not something that used to be a norm 20, 30 years ago. The jobs of CISOs, or head of security back then have not really changed much, but the complexity and the challenges have For this episode, we had Larry Whiteside Jr.}
+{\pard  \line \par}
+{Who has been in the CISO space and cybersecurity space for a little over 30 years. He was kind of to come in and talk about how to run a modern cloud security program in today's 2023 and maybe beyond world of Cloud API compute different services and a lot of more complexity. We spoke about when he started being a CISO what it used to be like and what were some of the challenges that they used to face and how NIST CSF was not even a thing and maybe governance compliance was not a thing either. So that was really fascinating for me. There was a lot of other things that he kind of called out were taken as a norm or the wild, wild west back in the day.}
+{\pard  \line \par}
+{If you were to just think about what happens now, vs then and. We kind of went into the 2023 model, like how would you design a cloud security program or specifically a cybersecurity program? What }
+{\cf2 [00:02:00]}
+{ would be some of the bigger pillars around it? And what role would cloud security play in that? And how you can have an effective cloud security program, or at least work towards a path of an cloud security program, which is ready for 2023 and beyond as well.}
+{\pard  \line \par}
+{A little hint being brave is the key is what I would say for leaders who are listening or probably who are trying to be the next CISOs. This is definitely a great episode for you. I hope you enjoy the conversation that we had with Larry Whiteside Jr. If you're watching or listening to this for the second or third time, I would really appreciate if you subscribe, if you're watching on the video channels like LinkedIn or YouTube, or if you are, listening in on Apple or Spotify, definitely with a review rating as it helps the new guests who are coming in to know that you are finding this valuable and they should definitely come on the podcast.}
+{\pard  \line \par}
+{So thank you so much for your time. I hope you enjoy this conversation and I'll see you on the next episode. }
+{\pard  \line \par}
+{When you're developing an app, security might be treated as an afterthought with functionality, requirements and tight deadlines. It's easy to accidentally write vulnerable code }
+{\cf2 [00:03:00]}
+{ or use a vulnerable dependency, but Snyk can help you secure your code in real time, so you don't need to slow down to build securely, develop fast, stay secure.}
+{\pard  \line \par}
+{Good. Developer, Snyk}
+{\pard  \line \par}
+{today's episode. I've got Larry Whiteside, who's equally stylish as I am, if I must say. And I'm gonna bring him on here so I can, I, I can have him sit blush at these. I'm talking about he is very well stylized if he ever see you in person. Welcome Larry to the show. Hey, thank you for having me. All right.}
+{\pard  \line \par}
+{I'm, it's a pleasure, man. I think I, it's always great to meet other people who are in men's fashion as well, and there's not that many in cybersecurity, so I'm glad I'm, I'm in good company. }
+{\pard  \line \par}
+{\b\cf1 Larry Whiteside Jr:\b0}
+{ Yeah, it's been an interesting journey as I've, you know, transitioned over the years, but yeah, there's not as many as you would think, you know, should be or would be, or could be into men's fashion and cyber.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah. Yeah. Well, hopefully people like you and I continue to inspire them as you're inspiring them with your CISO work as well, it sounds }
+{\cf2 [00:04:00]}
+{ like. }
+{\pard  \line \par}
+{\b\cf1 Larry Whiteside Jr:\b0}
+{ Yeah. It's been a fun journey. I happen to love what I do, so }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ it makes it easy. And maybe just in the same vein for people, I, I guess I find it fascinating because you're currently a CISO.}
+{\pard  \line \par}
+{You've been a CISO in multiple companies before as well. What was kind of like your first CISO role? I'm always curious about the first one cause I, I mean, over the years you obviously experienced a lot of things, but the first one I imagine is always very special. What was the, well, I guess, pathway to that?}
+{\pard  \line \par}
+{\b\cf1 Larry Whiteside Jr:\b0}
+{ Well, so, you know, it's interesting, I've had this conversation a number of times and one of the things I have to remind people is the term CISO was relatively new. You know, I've been in this industry for 30 years and so by title, the first CISO role right happened in the mid two thousands. But when you really look at the function of the CISO being the corporate cybersecurity leader, my first CISO role actually happened when I got out of the military.}
+{\pard  \line \par}
+{right. And so I wasn't named the CISO, it was named, you know, head of information security, right? But it was in fact the CISO role. And so I did it for a nuclear }
+{\cf2 [00:05:00]}
+{ naval agency. When I had gotten outta the military and I resigned my commission. I'm a former Air Force officer, and so that was the first one.}
+{\pard  \line \par}
+{And it was interesting because it was a global role. I had, you know, people in London, and so forth. , and it was, different because this is me, that was my transition sort of out of the, you know, department of Defense into what was kind of private sector. But it wasn't because I was doing it for you know, a nuclear naval agency, which was still part of the Department of Defense.}
+{\pard  \line \par}
+{So it was a very interesting role, but it allowed me to sort of easily transition into true private sector. . }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Interesting. And by the way, thank you for your service as well, and it's always awesome to meet other people who have been in the military. And so it seems like cybersecurity definitely attracts a lot of people from the military as well.}
+{\pard  \line \par}
+{So, so many of you folks are there, so it's pretty awesome. }
+{\pard  \line \par}
+{\b\cf1 Larry Whiteside Jr:\b0}
+{ Yeah, yeah. Well, it's a mindset, right? So, you know, when you're in the military, they teach you integrity, they teach you leadership, they teach you a number of things that transition well into the field of }
+{\cf2 [00:06:00]}
+{ cybersecurity in the private sector }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ And talking about, I guess you did a program for as a head of security for a nuclear program company, which is very interesting. I imagine just by itself, a challenges that an accident could basically mean a nuclear bomb going off. Maybe some extreme example, but cloud was not like a thing back then.}
+{\pard  \line \par}
+{Cybersecurity programs. However, I don't know what, like, I mean, maybe to shed some light on this, what was cybersecurity programs like in that kind of era when pre-cloud was a thing? I guess when, if, if that's the word, pre-cloud, }
+{\pard  \line \par}
+{\b\cf1 Larry Whiteside Jr:\b0}
+{ Yeah, . So, you know, back in the day, right cybersecurity programs back then, it was really about infrastructure based things, right?}
+{\pard  \line \par}
+{You had networks, you had a perimeter and you had an interior, and you had all of the infrastructure that made those things up. And so a lot of it was about VPNs, right? How do you get connectivity from a remote place to another remote place? And it was putting two physical devices in place, right? To create a VPN tunnel, right?}
+{\pard  \line \par}
+{So a lot of things were about VPNs and, and about, you know }
+{\cf2 [00:07:00]}
+{ access, right? Making sure that you had, and everybody was using active directory primarily as a authentication source, but we didn't have a lot of multi-factor and all the, like, that wasn't a thing, right? And so you, you had administrative privileges, but you, you know, sometimes back then you were still using a single account that had, you know, domain privileges that then you use as your everyday user account.}
+{\pard  \line \par}
+{If, thinking about it in context to today's environment, , it was considered the wild, wild west back then. Like today, somebody coming into to security today thinking about the controls and everything of how we do security today and put them in a time machine and let them go back to what we were doing then, yeah, I mean I had a single account where I was both an admin that , you know, do stuff in the firewall and do stuff here that I would also check my email with like, and today, that's absolutely no way.}
+{\pard  \line \par}
+{Would you ever think about letting somebody do that? }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah, apparently. I was told that even turning on MFA for a lot of people was a struggle. Like I think it wasn't like you walk up to someone, Larry, I think you need mfa and you just }
+{\cf2 [00:08:00]}
+{ basically say, yeah, I need MFA }
+{\pard  \line \par}
+{\b\cf1 Larry Whiteside Jr:\b0}
+{ no, no. You had multifactor back then was a. right? It was, it was a physical token, right? Oh, the R was, yeah, you had the RSA token. It was that little token that had numbers on it, and there were only a few people. Everybody didn't have it. You know, MFA wasn't ubiquitous across every person. It was a few people had RSA tokens that they utilized for certain access to certain things.}
+{\pard  \line \par}
+{But it wasn't something that this, oh yeah, I'm gonna have admin access to this, or where's my MFA token? No, it wasn't how it was. It was, you had that purposefully like, okay, how? How many people, are we gonna do MFA and have mfa? Yeah. It was very, very different. And now, mind you, and I'm talking about late nineties, early two thousands, right?}
+{\pard  \line \par}
+{As we got into the mid 2000, MFA picked up, right? RSA token , became a widespread thing. But you know, with tokens being lost and all this thing, people started realizing, okay, these physical tokens need to go away. }
+{\cf2 [00:09:00]}
+{ And, you know, that's when you started getting the software tokens and things of that nature.}
+{\pard  \line \par}
+{So it was, it was a very, very interesting transition over }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ time. Wait, , I'm curious as well, what were some of the common challenges? Cause you kind of have done 30 years in cybersecurity just to paint a picture for people. Some of us have not done as much of CISO work, so just paint a picture.}
+{\pard  \line \par}
+{What were some of the challenges for CISOs back }
+{\pard  \line \par}
+{\b\cf1 Larry Whiteside Jr:\b0}
+{ then? Yeah, so when you were running a cyber program back then, number one, most of what you dealt with was infrastructure based things, right? You were running penetration tests, right? You still did that., you did vulnerability management, right? You were still running vulnerability.}
+{\pard  \line \par}
+{You still had patching issues. That was still the same. Yeah. But the bigger thing was as a cyber executive, back then, there was no visibility to the board. None. Period. Like at all. You were part of IT that's where you lived, that's where you sat. And your biggest challenge was getting outside of that bubble, right?}
+{\pard  \line \par}
+{ As a leader to get visibility into other areas of the business to help them understand, right. }
+{\cf2 [00:10:00]}
+{ So you wanna talk about user security, right? There was no such thing, right? We didn't have all the things that . We hadhad AV right. We had antivirus, right? We had that, but we didn't have, you know, all the U E B A and all the things that dictated, you know, how users behave.}
+{\pard  \line \par}
+{We didn't have as many education. Right. The cyber awareness and all the, that wasn't as large a thing. You did some things, we had slides, you know, that we would push out and, you know, we would, we would put posters around offices. Mm-hmm. , but it wasn't mm-hmm. nearly what cyber education and cyber awareness is today.}
+{\pard  \line \par}
+{And so from a challenge standpoint, it just, you know, again, it went back to infrastructure because you had all of these, all of this stuff that you didn't have the resources. We were still dealing with resources and people issues back then. Cause we didn't have enough staff. IT was constantly growing and building more.}
+{\pard  \line \par}
+{And you know, back then we had data centers everywhere, right? Mm-hmm. . And so you're, you're building data centers and you're putting }
+{\cf2 [00:11:00]}
+{ servers and all, like, it was just big, but it all dealt around. Infrastructure. Infrastructure was everything. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ And, and maybe that's how, that's how the cloud was so disruptive in this space as well, 30 years later.}
+{\pard  \line \par}
+{As we talk about cloud, how would you define how would you define like a cybersecurity program now in 2023 when like cloud and or serverless and all these compute services are so prolific? What's your thinking when you think about a cybersecurity program that should exist in 2023? }
+{\pard  \line \par}
+{\b\cf1 Larry Whiteside Jr:\b0}
+{ Yeah, so in 2023, one of the first and foremost things that you have to think about in 2023 is visibility. From a security standpoint, you can't protect what you can't see, right? So every single cyber executive is trying to ensure that they've got visibility across. all of their infrastructure. And that includes data, right?}
+{\pard  \line \par}
+{That includes, you know, servers, whe whether they're in the cloud or whether they're on premise. That includes, you know, end user devices, right? Because in end user devices went from, you know, just }
+{\cf2 [00:12:00]}
+{ a laptop to a laptop and a tablet into a laptop, a tablet on a phone, right? And so it's getting visibility to where everything is, both from a data perspective, from a device perspective, and from a human perspective, right?}
+{\pard  \line \par}
+{Mm-hmm. , where are people accessing from? Because now we've got, you know, access rules where like, you know, if such and such access this data and they're in Russia, well, we've gotta add more controls and more authentication, right? That's the whole zero trust model is. Trust, but verify or now don't trust, right?}
+{\pard  \line \par}
+{We started with trust but verify, but now it's don't trust at all. And then add these, what I call the defense and depth layers of authentication to verify where they are based on where they're at, based on, you know what they want to access, all these different rules. So it's just gotten very, very complicated.}
+{\pard  \line \par}
+{But number one for every security executive is visibility . , they need to see everything. Hence APIs, right? Remember when we first moved to the cloud, we started interconnecting things. Nobody was talking about APIs. }
+{\cf2 [00:13:00]}
+{ Nobody was talking about APIs. From a security standpoint. We all talked about APIs from an interoperability standpoint.}
+{\pard  \line \par}
+{Hey, do you have an api? Do you have an open api? Oh, I have an open api. Can I connect your api? Right? That happened a lot. Yeah. But security professionals, were not looking at what's in the API and well, how's the API built? What's happening in that communication? We weren't even, it wasn't even a discussion.}
+{\pard  \line \par}
+{Now there's how many dozens of a API security companies, because we realize that's another threat vector. So now with all the APIs that exist out there in these cloud environments and how quick they are to connect, and everybody's got a marketplace, I need to underatand. What's inside those APIs, how the data's being transmitted, what data's being transmitted.}
+{\pard  \line \par}
+{Because if you add to that, now we've also got all of these governing rules, right? All of these regulations that are driving us to manage things differently, right? GDPR was a game changer, right? So, and that's just the precipice for many, many others }
+{\cf2 [00:14:00]}
+{ that are going to start happening more. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ I'm actually curious, just to kind of replay back what we were talking about earlier with MFA was not a thing.}
+{\pard  \line \par}
+{Was NIST CSF like a thing back then? }
+{\pard  \line \par}
+{\b\cf1 Larry Whiteside Jr:\b0}
+{ There was no NIST CSF There was a NIST as so NIST existed. Right? So some older people are gonna remember this. We had the orange book and we had the blue book. Like they were, they were dictionary size things that you used as this sort of governing mechanism to sort of.}
+{\pard  \line \par}
+{Help you understand, but you didn't really have, you used iso, ISO was around, right? Oh, right. ISO costs, yes. But ISO costs money, right? Yes. You, you had to pay to get access to the ISO controls to be able to, you know, utilize them. And a lot of organizations weren't, didn't wanna pay, they didn't understand, we didn't understand the value of having a control set to use as your baseline marker to build, you know, your cyber program.}
+{\pard  \line \par}
+{So yeah, it was a very different world. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Wow. }
+{\cf2 [00:15:00]}
+{ I'm, I'm just trying to think that, cause you know how nowadays everyone pretty much tries in maps their I guess their roadmap in, for lack of better word for cybersecurity. In fact, my roadmap was map to the CSF as well. Cause every, everyone in the board understood it.}
+{\pard  \line \par}
+{Everyone knew it. So this was not a thing back then for you guys, but now in the current world, in the cloud space, using think these are still relevant and, and do they still make sense? . }
+{\pard  \line \par}
+{\b\cf1 Larry Whiteside Jr:\b0}
+{ They do. They do because they, they're adding and updating on a regular basis and everybody's got some framework now.}
+{\pard  \line \par}
+{Right. Cloud Security Alliance has a framework. Right? NIST has frameworks high trusts has frameworks. Everybody has got some form of a framework because they recognize that it's important. Right? }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ . We were talking about the NIST CSF in today's }
+{\pard  \line \par}
+{day }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ and age. Yeah. }
+{\pard  \line \par}
+{\b\cf1 Larry Whiteside Jr:\b0}
+{ So, so everybody's got frameworks, every, everybody's got frameworks. And when you talk to cyber executives, Everybody builds off a framework and because yeah, a framework is understandable, a framework is reportable upon, right?}
+{\pard  \line \par}
+{It's things that you know, and you can map it to regulatory things that you need to do. You can }
+{\cf2 [00:16:00]}
+{ map it to policies you, everything starts with a framework. So when we talk today, even as it relates to the cloud, everything has to start with a framework to give you a frame of reference of what to do and why to do it, right?}
+{\pard  \line \par}
+{And if you look at CIS if you think back, right when CIS first started, it was, you know, the CIS top 20 controls. Right? Now, if you look at it data, the CIS top 20 has now this layered thing that's got multiple levels and, and it's, it's. Because they realized, yes, we were trying to give a basic starting point by saying, you know, just these top 20 controls.}
+{\pard  \line \par}
+{Now they've gone and said, okay, we need to break this down a little bit more. But what they've done well is they've written it in plain English so the everyday human can understand and not have to decipher some of the wording that they use. Cause that's one of the things that people run into challenges with, with some of the NIST things.}
+{\pard  \line \par}
+{And some of the, the ISO things is, is the language is a little }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ nebulous . Oh, }
+{\cf2 [00:17:00]}
+{ right. Fair. So, wait to, to your point then, cuz I imagine a lot of our listeners, and maybe people are as well, they're probably thinking that, oh, when we talk about cloud security programs or cybersecurity programs, cloud security is just a small component of it.}
+{\pard  \line \par}
+{It is not the program itself. Right. On a how would you define, for people who probably have hearing the word cybersecurity program for the first time, how would you define a cybersecurity program? }
+{\pard  \line \par}
+{\b\cf1 Larry Whiteside Jr:\b0}
+{ Yeah, so for me, a cybersecurity program is basically about. Putting a program in place that is going to protect the business and what's important to the business.}
+{\pard  \line \par}
+{Right? And that is data. Mm-hmm. . That could be assets. There could be people, right? Depending on what the business is. And then building the components that align to the protection models that you need to put in place, right? So if you are a software company, well, your code is important to you, .}
+{\pard  \line \par}
+{Whatever it is that you are writing for whatever application or business, that's what's important. So you need to have an application }
+{\cf2 [00:18:00]}
+{ security team as part of your program, right? Application security is gonna be part code. Security is gonna be important. So you're going to have to. as a mechanism, as part of your program, you're still gonna have to, based on the infrastructure that if you utilize to run your company, if you're utilizing cloud, you're gonna have to have a cloud security program, right?}
+{\pard  \line \par}
+{You're gonna have to have an identity and assets management function, right? That's managing authentication and things. So there's some staples, but then there's some nuances based on your business that you have, that you're gonna have to have. And then every company, from my perspective, It's going to have to have a governance risk and compliance function, right?}
+{\pard  \line \par}
+{Where they are doing a combination of vulnerability management, understanding what vulnerabilities look like in your organization and how you are mitigating them, right? They're looking at threat management, but they're also looking at what are the regulatory things that your organization must meet, right?}
+{\pard  \line \par}
+{Do you process credit cards? Then you've got pci, you right? Do you have GDPR from a privacy standpoint? Do you Right. There's, there's tons and }
+{\cf2 [00:19:00]}
+{ tons of regulations. So I think GRC is also one of those staple functions that a lot of organizations need to have, and that's new. Like, I wasn't doing grc, you know, 25 years ago.}
+{\pard  \line \par}
+{All right, }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ There's no GRC?}
+{\pard  \line \par}
+{Cause the government also didn't realize we need like something like a regulatory body for this. }
+{\pard  \line \par}
+{\b\cf1 Larry Whiteside Jr:\b0}
+{ We weren't addressing it. Right. There were regulations. Right. So SOX has been around for a, a little bit now. Yeah. But Sox wasn't around in 2000. Right. 2000. Like it, we, we weren't doing Sarbanes–Oxley at that time.}
+{\pard  \line \par}
+{So as regulations have begun to be built and increased, right. HIPAA didn't exist then. Right. Right. So as these regulations started coming about, you started having to build a function to ensure that you were putting in controls to mitigate risk to the data that aligned to what these regulations were }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ asking you to do.}
+{\pard  \line \par}
+{That, that is interesting cuz I mean, you know how a lot of people complain about GRC at the moment is, GRC is too hard and blah, blah, blah. , this didn't even }
+{\cf2 [00:20:00]}
+{ exist to year. I mean, I guess in a lot of ways, It's also a great framework for someone who does not know much about cybersecurity, to kind of, get a kickstart, look at them and read them and all that.}
+{\pard  \line \par}
+{But on the flip side, it the fact that it didn't even exist, I can't even imagine a world where it did not exist. Like today, I can't imagine any organization in any industry that is not governed by at least one regulation. Right. I just can't imagine like even data privacy is like by default, everyone in every country would have that.}
+{\pard  \line \par}
+{\b\cf1 Larry Whiteside Jr:\b0}
+{ Yep. And that didn't exist. We weren't worried about data privacy. It was not a thing. Right. . But, but what's happened is, a storage got cheap, right? Yeah. Because remember we went from spinning disks to solid state drives, right? So when we went from spinning disk where, you know, you had a server that had all these discs moving from spinning disc, right?}
+{\pard  \line \par}
+{Basically exploded the entire IT infrastructure world. Yeah. Because now you can have these large, large, you know, databases, right? Because }
+{\cf2 [00:21:00]}
+{ if you think about old school databases, you, how many disks set in those damn things? , , the database teams, right? When they are going in and they're having to swap out the, like, there was a lot, it was a lot of work in mainframes.}
+{\pard  \line \par}
+{The, oh man, there was a lot of work. There was a lot of work. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ And it's funny, I think I, I, I don't think people appreciate who are like, probably working directly in cloud at the moment, don't even appreciate the, I guess, the level of complexity that would've gone with that as well because it, I mean, nowadays also software defined, cuz I think.}
+{\pard  \line \par}
+{Good. Almost like double tapping into the whole cloud security program that you were mentioning as. I feel like, you know, how you call the components like identity and access management, GRC and threat management, vulnerable team management, a lot of that somehow, I feel like cloud security programs kind of to have all of that as well within it, or do you feel, feel like it's, it can exist of its own without all of }
+{\pard  \line \par}
+{\b\cf1 Larry Whiteside Jr:\b0}
+{ that?}
+{\pard  \line \par}
+{No, no. , . So cloud security is one component, right? You've got cloud security, you've got application security, you've got infrastructure security. }
+{\cf2 [00:22:00]}
+{ All of these things exist, but all of the things that you talked about. So threat management, identity and access management, all of these things are bigger bucket items that exist across all of those.}
+{\pard  \line \par}
+{So you've got cloud, if you've got infrastructure, right? If you've got applications right at application development, all three of those, you're gonna have to do threat management because you need to understand the threat landscape as it relates to all of it. for all those, you gonna have to do I doing access management, right?}
+{\pard  \line \par}
+{So for all of these things, right. , they are just different components of a security program, right? As part of this. }
+{\pard  \line \par}
+{And }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ GSE would be the same as well, it would be across the }
+{\pard  \line \par}
+{\b\cf1 Larry Whiteside Jr:\b0}
+{ board as well, across all of it. Because you're gonna have different regulatory things that you have to do for stuff that you're doing in the cloud based on the data and based on the country.}
+{\pard  \line \par}
+{You're gonna have to do different things based on your infrastructure, right? Yeah. Based on the data, based on the country, based on the users, right? So e each one of them is gonna have }
+{\cf2 [00:23:00]}
+{ the same overarching pieces that you're having to do. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Interesting. And are they changing, you know how I guess the whole world of cloud, when it opened up, the whole change management system was questioned because it came from that era where change management was a thing.}
+{\pard  \line \par}
+{Waterfall. Like I think I, I get laughed at when people, when I say waterfall methodology, cuz like, what the hell is waterfall? Waterfall methodology and, cause I, I gave a talk once and I was asking who in the room has heard of waterfall methodology? No one raised their hands. and I was like, oh my God, I feel so old right now that no one even knows what that is.}
+{\pard  \line \par}
+{Right. I feel like Cloud has kind of done the same to all these identity access management, GRC vulnerability management as well. And I think how do you feel cloud has affected this in changing what the norm was, and then maybe if you can double tap into the whole automation side of it as well, that would be awesome.}
+{\pard  \line \par}
+{\b\cf1 Larry Whiteside Jr:\b0}
+{ Yeah. So, so Cloud has done a couple of things because before cloud there was process mm-hmm. , right? You had to do certain things before you could build }
+{\cf2 [00:24:00]}
+{ something, right? Yeah. Because, you know an IT person couldn't just go rack a server themselves. They had to get someone to rack a server.}
+{\pard  \line \par}
+{Yeah. They couldn't pull power, they couldn't do all. So, okay, now a server is rack. Well, they couldn't just go build an operating system do. Right. Somebody had to give them a build. Here's the build for what you need. Right. So there was this step, and that's where change management came in. It was almost forced upon you because you didn't have the ability to just do everything.}
+{\pard  \line \par}
+{Yeah. In comes the cloud, poof, right? Oh, I wanna build a server, I want kill a server. I wanna, you know, I wanna stand this up. I wanna kill, like, I want like, it, it's, yeah. Yeah. Right. So, so basically the cloud enabled it at the speed of business, right? Yeah. Enabled it to move at a rate that the business move.}
+{\pard  \line \par}
+{If the business said, Hey, we got a new program that we want to implement, you know, and we need to have this up in a month, like, boom. They are, they, it's got this up and duh, and it's one }
+{\cf2 [00:25:00]}
+{ person, right? This one person can go in and basically build an entire server infrastructure, stand it up, get all the stuff, put all the packages, just with a few clicks Yeah.}
+{\pard  \line \par}
+{On their device that killed change management. Killed it. Yeah. Right. Tony, and, and, and think about the, the component of cost management associated with that as well, right? Yeah. Where before in a data center you can manage, well, we don't have any more physical servers. We need to buy some more to you servers and Right.}
+{\pard  \line \par}
+{But oh, we, oh, the, our hvac, right? So we're getting closer. We're gonna have to, you know, do this. Yeah. You don't do that in the cloud. You're not worried about hvac, you're not worried about power consumption yet. Those are not things you even factor in. It's like, I need a server poop. There's your server.}
+{\pard  \line \par}
+{What, what? Yeah. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Even cost center. Well, like, I think cost center used to be a thing for a while, but I don't get that any much about call }
+{\pard  \line \par}
+{\b\cf1 Larry Whiteside Jr:\b0}
+{ center. No, cuz you know what, some, some companies actually struggle that there, there's a whole market of companies that have been built }
+{\cf2 [00:26:00]}
+{ around managing costs in the cloud.}
+{\pard  \line \par}
+{Basically they're saying, listen, I, I can come into your company and I can cut your cloud spend by X percentage because I guarantee you're not managing it appropriately. There's an entire Yes. Yes. Right. , like they literally are saying we will come in and what they do is they say, if we cut your cost Yeah.}
+{\pard  \line \par}
+{Then you pay us a percentage of that, whatever that percentage is, we cut. Right. If we cut it 50%, you pay us 10% of that 50%. Ah, }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ okay. Fair enough. And that's a good deal as well because you're saving 50%. }
+{\pard  \line \par}
+{\b\cf1 Larry Whiteside Jr:\b0}
+{ Yeah. Right. You're saving 50%. So to give them 10% of that 50% of. Yeah. Right. Yeah. So there's, the cloud , has built a whole new world of things and possibilities and everything else, but that's where automation comes in, right?}
+{\pard  \line \par}
+{So now what's starting to happen, right? Is, okay, now this stuff can be built very easily. Well, what do we need to do to ensure that }
+{\cf2 [00:27:00]}
+{ certain things happen when certain things get built in these environments, right? And that's where we've gotta start focusing on and leaning on automation to ensure that we are governing these environments properly, right?}
+{\pard  \line \par}
+{So if something gets stood up that, yeah, there are automated checks and controls that begin to add, oh, you stood up , this type of server got set up. Oh, it needs to ba, ba ba ba, ba Because again, the stuff happens behind the scenes and it's not somebody having to physically go do something.}
+{\pard  \line \par}
+{Cloud automation is, is like, it is all it, it, it's really, really great capability. And when you think about. , how fast the threats are growing, how fast it and business are moving. We've got to begin to like accept automation more as a mechanism to help us versus the fear where like when, when we first started introducing automation into security, we were scared because Right.}
+{\pard  \line \par}
+{It's that whole, you know, }
+{\cf2 [00:28:00]}
+{ I had some conversations with CISOs about this, you know, the theory of computers taking over, right? If I allow this to automate and it does something and it breaks everything else, and it, it's like, wait, okay, so one automation is not a computer just thinking for itself.}
+{\pard  \line \par}
+{Right. It's you finding it, right? It's someone setting up a control that when this happens, this happens, right? Yeah. It's, it's if then else statements, right? Yeah. Yeah. Going back to development, which is where you think about technology. , it started code right back in the seventies, 80. Everything was code and we didn't have this big infrastructure component.}
+{\pard  \line \par}
+{And then we moved into this big physical infrastructure piece, and now we're moving back. Mm-hmm. right away from the big infrastructure back to code. Yeah. Right. Because now coding language has changed and evolved so much. Right. What you can turn code into now, and because data is so cheap and you've got these data lakes in it, right.}
+{\pard  \line \par}
+{It like, it's the circle. Yeah. }
+{\cf2 [00:29:00]}
+{ Right. And so I'm wondering, you know, with quantum computing, are we going to, is the circle going to come back around? Like it's, it's gonna be very interesting. But automation is the only way for security teams today to stay ahead just a little. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ and maybe the team skill set also need to be updated with that mentality.}
+{\pard  \line \par}
+{Cause your point for someone who was just doing infrastructure back in the day where you just need to remember the server name or the URL on how you get to the server name, like the Sys admin role, traditional Sys admin role has transformed into DevOps and platform engineers and stuff as well.}
+{\pard  \line \par}
+{Right? Yeah. Right. We have to change it along with }
+{\pard  \line \par}
+{\b\cf1 Larry Whiteside Jr:\b0}
+{ it as well. Right. Listen, I'm, I'm gonna tell you, there was not a Sys admin that I've ever had security or IT, that knew code back in the nineties and back in two thousands they didn't coding. They, they had no idea of what coding was today. Right. Good sys admins, no code.}
+{\pard  \line \par}
+{They can script, they can do a lot of things. That was not something you even }
+{\cf2 [00:30:00]}
+{ thought about doing back in. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah. Yeah. I mean, I remember the whole even MC used to be like a certificate, Microsoft certified. I like, oh my God, can, I mean, that used to be a thing if you had that a job was guaranteed , }
+{\pard  \line \par}
+{\b\cf1 Larry Whiteside Jr:\b0}
+{ listen, I've got a story.}
+{\pard  \line \par}
+{I tell people this story and this is, and, and this story is, is weird. It's the story that caused me to be anti certification. So my garbage man. , right? This is, you know, probably 2004. Yeah. My garbage man, right? I was throwing out all of these servers. I had a bunch of servers at home.}
+{\pard  \line \par}
+{I had like sun Microsystem servers. Like I had all sorts of crap. I, at one point, I had 26 servers in my home, right? Oh my God. Yeah. It was crazy. Wow. Right? And you wouldn't even think about that today, right? You like, you couldn't, you can't fathom that today. But I had 26 servers in my basement, right? So I'm throwing all this stuff out.}
+{\pard  \line \par}
+{He's like, oh, you in computers? I'm like, yeah, yeah, yeah, right. He's like, yeah, man. , I'm about to do that too. I, I just got my MCSC , right? He, he, and so }
+{\cf2 [00:31:00]}
+{ for him, right? And it's nothing against him, but back then, if you got that certification now you were, you were it, yeah. Just by getting the certification, you had no background in it.}
+{\pard  \line \par}
+{You had no nothing. You just go get that certification. It was like bing, right? And, and I was like, wait, what? . And, and so everybody started doing it. And that happened in cyber, right? Everybody started saying, oh, let me just go get this certification and then I'll be, and I'm like, wait, like certifications are not, certifications are supposed to be about aptitude.}
+{\pard  \line \par}
+{Yeah. They're supposed to be a mechanism to measure aptitude and that's it. But we started making them a job requirement. We started making them a precursor. Right. To employment. Yeah. So then people felt, okay, I get this now the world is my oyster and we've made people feel that way. Yeah. So I basically said, yeah, I'm out on certification.}
+{\pard  \line \par}
+{I will never do, never get, I will not gonna get a certification. And 30 years later, still not a single one. Yeah. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ I think I, it is funny, I found that the thing hasn't changed with certification. Even }
+{\cf2 [00:32:00]}
+{ today. Like I think there's a lot of cloud certification that goes around and people are told you get the certificate.}
+{\pard  \line \par}
+{Cause you, to your point, they're told, Hey, you should look at a job that's available. They look at a jobs, jobs, has the certification written on it. . Oh, okay. To qualify for this job, I need to have the certificate, which is, to your point, it's a false information because I think some of the conversations, so I'm, we are running like a cloud bootcamp at the moment, which is a free one on YouTube.}
+{\pard  \line \par}
+{Yeah. And a lot of questions around fundamentals of IT like what is the server? How do two servers connect on a network? Why were two things talk on a network. They, they're not taught any of that, but they have an AWS certification. }
+{\pard  \line \par}
+{\b\cf1 Larry Whiteside Jr:\b0}
+{ Right. It's, it's alphabet soup, right? Yeah. So if you see people, and, and here's the reality.}
+{\pard  \line \par}
+{I know people who went and got their C I S S P and just because they're good test takers, . Like they know nothing about security, right. They've never done it. They've been salespeople their whole life, but because they wouldn't have got their C I S S P now, they seem credible}
+{\pard  \line \par}
+{no, no, not like now. }
+{\cf2 [00:33:00]}
+{ And I, and to be clear, I love ISC squared. Their partner, their CEO Claire, thei past CEO David , good friend of mine. But it's the premise that someone who gets a certification now knows everything. No, yeah, }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ no, it, it's definitely marketed incorrectly as well. And I think maybe to bring it back to the CISOs as well, is there like a, oh, I was gonna say a playbook, but more like, you know how GRC as well, Which is not spoken about enough.}
+{\pard  \line \par}
+{Like last month we had an episode on FedRAMP, like Alexis from AWS this came in. She spoke about the whole importance of automation in FedRAMP and why people have this false assumption that if you have a government client as a customer two days later or two months later, you can get a certification FedRAMP.}
+{\pard  \line \par}
+{That's not as easy. And I think, no, a lot of it was a automation shifting left. And I wonder, can get your perspective on the whole GRC automation in space. Where do you see that kind of play out? And does shift left play a role in this as well? }
+{\pard  \line \par}
+{\b\cf1 Larry Whiteside Jr:\b0}
+{ Yeah, so, so shifting left, it's, we've tied shifting left to automation }
+{\cf2 [00:34:00]}
+{ because that's sort of, where we had to go, right?}
+{\pard  \line \par}
+{So if you think about the security paradigm as a whole, we've been a manually driven entity, right? From a security standpoint, everything was penetration. Test manual. Yeah. Right? Risk assessments. I'm coming to walk, I've got this sheet of paper. We're gonna walk around, we're gonna, it's manual meeting government and whatever regulatory requirements, manual.}
+{\pard  \line \par}
+{It's paper, right? It's okay. Hey, I need these attestations. Go take this screenshot, go do this, store it in this folder. Oh, we're gonna create this Excel spreadsheet. Everything is absolutely manual. And the reality is, in order to stay manual, if your requirement to grow right, and you're doing them manually, that means the amount of tasks that you are gonna have to do to complete them is gonna grow well, if you aren't getting more people.}
+{\pard  \line \par}
+{in, and we know that the industry is having an issue getting people right. We aren't training enough people, we aren't educating enough people to }
+{\cf2 [00:35:00]}
+{ come into the industry. The only thing we can do is move towards automation. Right? Yeah. And so that is where the shift left culture and the shift left, you know, mantra has sort of come from is like, let's shift left.}
+{\pard  \line \par}
+{And it, and it had to start somewhere. It started in security operations because the, if you, if you go back to how security operations started and how it's been, how it was in its infancy, it was, you had people who were monitoring and looking at logs. And I will never forget, I had a team, I had a stop back when I was at the Pentagon that looked at logs.}
+{\pard  \line \par}
+{And what they did was they went and pulled logs from system and they manually looked at logs and then they started writing scripts Yeah. To try and pull out certain things from log. Right. It was the most tedious, insane thing in the world. Yeah. But that's what we did. That's how you had to do it.}
+{\pard  \line \par}
+{Then the siem came along and the siem you could write rules. Yeah. That would then correlate activities. This }
+{\cf2 [00:36:00]}
+{ happened and this happened. Oh, we might need to look deeper into that. Yeah, so there was some little automation just based on creating correlation rules. All right, great. The industry is starting to }
+{\pard  \line \par}
+{accept it a little bit. All right, great. We're moving. So fast forward, and I will never forget this moment, so everybody was getting into the siem space. Cisco had gotten into the siem space, and they built automation into their sim. And so I'm at One Pin Plaza in New York City with a room full of CISOs and Cisco talking about their siem and this automation and the room exploded.}
+{\pard  \line \par}
+{We're not gonna let that make an ACL change in our router. What? No way. We'll let that, right. We're not gonna allow that to put, make a, a firewall rule change. No way. Like, because everybody was in this mindset that, you know, oh, I Right. If that does that and it breaks the business. Right. And, and the organization I was CISO at, we had 345 firewalls globally.}
+{\pard  \line \par}
+{Oh my God. Yeah. Right. So }
+{\cf2 [00:37:00]}
+{ when you think about automation in that and implementing a firewall rule in one of those firewalls, then. You know, impacts our countries being able to talk to each other from a business stand. Like, whoa. Right, right, right. Yeah. So we were very fearful of that, but at that time we had people and we had, you know, it had a SOC that had access to these 345 firewalls that could go in and, you know, remote into it and make the change, or go into the semantic console and make the Right.}
+{\pard  \line \par}
+{So we were still in this manual mindset, but sim Right, because data was starting to get bigger. Yeah. Attacks were starting to get broader. Okay. We were, we were allowing it there, and the sim began to bring some automation in. So then SOAR happened because again, on the operation side, right? Data flow, data, data, data, data, data day, and we can't hire enough people and we need to have them, instead of focusing on all of these millions and millions of alerts, allow them to narrow in.}
+{\pard  \line \par}
+{So we started }
+{\cf2 [00:38:00]}
+{ saying, okay, right. Security orchestration. Wow, this is cool. , this is, this is a good idea, right? We can actually automate some things and let some, some simple things just happen, and then let our analysts dig in and spend time on things that matter. And so, as we did that, it was like, okay, we, we started getting the automation piece and it was like, okay, let's shift left to automate more.}
+{\pard  \line \par}
+{Let's shift left. And so now we have gotten to the point where automation, we recognize the value of it, we recognize it. So now it is okay, right? A lot of people are starting to say, so let's look at other areas where we are manual, right? Let's, let's look at some other areas where we spend a lot of time and resource doing things manually that we may be able to also automate and shift left a little bit, right?}
+{\pard  \line \par}
+{And that's right now where we're at with G R C, we're starting to say, Hey, Right. You're trying to, how do you meet your regulatory requirements today? Paper, E. }
+{\cf2 [00:39:00]}
+{ Everybody. Everybody. I don't care who they are. Start taking the thing it it is. Right? Yeah. And And there's some com in the financial services space.}
+{\pard  \line \par}
+{Yeah. Even in the late two thousands, they had teams of people, dozens upon dozens of people just to meet the regulatory. just to deal with audits, just to deal with the information gathering to meet the regulatory requirements. Right? So when you think about that, and it's just growing, we know GDPR again blew the walls off, and now there are multiple entities, multiple countries and multiple states in the US that are coming up with their own flavor of a GDPR type thing, right?}
+{\pard  \line \par}
+{That's right. Because they wanna protect their particular citizens because of the data sprawl and, and how much companies are now grabbing data about users via everything from, right, from when you're on your computer and your browser with Google to, you know, your phone, you get on your phone. and you say something and the next thing you know, you got all these ads }
+{\cf2 [00:40:00]}
+{ popping up for this thing that you mentioned to your wife two days ago.}
+{\pard  \line \par}
+{You're like, how is ? Right? So yeah, with all this data that's being grabbed, people are starting to say like, there are more entities coming up with, well, okay, we need a law, we need a some sort of rule. We need some sort of regulation, right? To force companies and push and move. And so that's gonna continue.}
+{\pard  \line \par}
+{That's not gonna change. . So if that's not gonna change, there's gonna be more of those coming. That's a manual process. Why? Like it's just time to start saying, you know what, we've got all these data points. Right. If we're trying to meet a regulation, regulations are based on what controls and standards. Yeah.}
+{\pard  \line \par}
+{Right. If we can measure those controls and standards, why don't we just utilize the tool sets that we already have in. Yeah, right? Where we're manually grabbing screenshots, we're manually grabbing data to just automate, let's grab that data, right? Like utilizing APIs and other connectors that are built into these technologies }
+{\cf2 [00:41:00]}
+{ already.}
+{\pard  \line \par}
+{Let's start grabbing them. Let's start pulling that in an automated fashion, and let's work towards real, real-time compliance. Because if you think about it, just like penetration tests, penetration tests have evolved. Penetration tests used to be like, okay, I gotta get a penetration test. So I get it in, you know, November of this year.}
+{\pard  \line \par}
+{Okay, we get our report and we know we're gonna have it again in November of next year. You know what happens? , every single organization, they will deal with one or two major findings in that pen test report. And then the other ones, it's not till October of the next year that they're like, oh shit, we gotta have the pen test again next month.}
+{\pard  \line \par}
+{And we didn't finish all these other things. Let's go through, we gotta try, we gotta try, right? Because you don't want the board and you don't want leadership to see that, you know, 80% of the findings from last year are still there this year, right? Yep. But you, you never got to 'em, right? So now penetration testing is becoming automated.}
+{\pard  \line \par}
+{It, they are automating and routine and continuous, right? So like, it is just time for us to look at this very manual thing. And I think }
+{\cf2 [00:42:00]}
+{ the industry as a whole has just said, okay, let's get visibility into all these manual processes and things that we're doing right? What can we do better? And regulations and meeting our regulatory mandates is the next phase.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ I think that, you know, one thing that keep coming up, and I think when we were talking about this in one, one of the companies that I was working with earlier, we had this challenge. I think we were trying to do ISR 27,001, and we were trying to do the automation part. One of the challenges we had was the auditor, which is, would not accept that as a, as an evidence.}
+{\pard  \line \par}
+{And do you find that the industry itself has not evolved as well? Like I think there's one side to people like you, me, other CISOs and practitioners who are trying to bring the new world in. But then on the other side, the auditors themselves and, and I don't know if it was like they're not being told or they're just unaware, oblivious to the fact that, hey, the world is changing.}
+{\pard  \line \par}
+{Like, do you find there's a challenge from that perspective aswell. }
+{\pard  \line \par}
+{\b\cf1 Larry Whiteside Jr:\b0}
+{ Yeah. So , that is a challenge and that's a challenge that organizations are facing, but they have to bring the auditors forward, right? }
+{\cf2 [00:43:00]}
+{ Like it's, that's an upfront conversation, right? As, as you're building out your automation as you're building out.}
+{\pard  \line \par}
+{Cause so one of the things is auditors, again, they operate in the way they know. So when you introduce something that they don't know with automat, It's not necessarily about changing the data because you still, you can still give them printed reports. Yeah. Right? Yeah. You can still give them things that they're looking for, right?}
+{\pard  \line \par}
+{It's, it's that they don't know for those auditors who want to see, right? Oh, well, what's your attestation? And they want to see this physical thing. Yeah. That's where sometimes it's like, Hey, so listen, right? Yes. Here's the report. Here's the thing. Right? And you have to help them move forward. You have to help them understand right, where the industry is going, and you have to help them because for auditors, there's value in them accepting this as well.}
+{\pard  \line \par}
+{Because for them it's this, there's time associated with it, right? They're not, when they come in to do an audit, they're not billing }
+{\cf2 [00:44:00]}
+{ a per hour. Right? So they don't want to extend the time. They'd like to get through the audits. quickly as possible. As well, right? Yeah. Because it allows them to do more the quicker they can go through an audit.}
+{\pard  \line \par}
+{Right. But what happens is because they don't understand it, and most of the time organizations who are moving towards being automated in this area, they aren't communicating that before with the auditor. So when the auditors come in, they've got an expectation in their mind of what they expect to see.}
+{\pard  \line \par}
+{Yeah. And when you give them something that's outside of that, they're like, wait, wait, what is this? No, no, no. That's not what I need. I need this. Right. So you gotta make sure as an organization that when you are moving towards automation in this space that you're communicating with your auditing, it's auditing entity, right?}
+{\pard  \line \par}
+{Yeah. Upfront. So you can level set their expectations so when they arrive, they know what they're gonna be looking for. Mm-hmm. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah. I think, and I was told by a fellow CISO colleague as well, choose what we up doing. Is that because we are the ones paying money for the audit, we can pick and choose the auditor coming in as well.}
+{\cf2 [00:45:00]}
+{ }
+{\pard  \line \par}
+{If you find that it's gonna be a challenge, you might, you can ask for another one. because , to your point, last thing you want is after putting so much effort of automation and doing, you're still taking screenshots. You're like, that's just, that's silly. Yeah. It doesn't make sense. Right. To your point then, so we kind of spoke about both sides.}
+{\pard  \line \par}
+{The auditor themselves, who again, I feel like there's definitely a battle, but I'm sure you get there eventually. Then there is a side of the CISOs themselves trying to kind of implement this and trying to work with it. Are we saying the, our side, I guess the consumer side of this problem, the GRC teams who are listening to this, they have to learn some kind of coding as well, because sounds like automation is like, you know, GRCs traditionally has been known as, A checklist.}
+{\pard  \line \par}
+{A more thought provoking like, and I don't mean it in a derogatory way, but it's more like, you know, oh, what's the checklist? Just gimme a checklist and that'll be, that'll be the end of it. Right. And I'll just match it. Right. I feel like what you're trying to say and what a lot of people are trying to say, and I'm I'll, we also, if you kind of say it in your own words as well, instead of me just repeating it to the, the }
+{\cf2 [00:46:00]}
+{ world, but they can lead to some kind of, know some kind of coding as well.}
+{\pard  \line \par}
+{Cause they have app APis access to what you said. Is there a change coming from that perspective as well? }
+{\pard  \line \par}
+{\b\cf1 Larry Whiteside Jr:\b0}
+{ Yeah, so, so the entire industry of cyber is gonna have to understand some aspects of coding methodology. They don't need to understand code per se. They need to understand the code methodology. Right.}
+{\pard  \line \par}
+{They grc people aren't gonna be coders. Putting an API or connecting something via API is, is not really coding per se because the applications they're gonna have Right. You're, you're basically picking something from a market. Yeah, but they need to understand the logic, right? Yeah.}
+{\pard  \line \par}
+{They're gonna have to understand the logic of code, right? Both the auditors and the GRC professionals are gonna have to understand, okay, well what is this grabbing? How is it grabbing it? Right? So that they can understand, right? This data set is what's being used to meet this control of this particular regulation?}
+{\pard  \line \par}
+{Yeah. Is this data from this system and this environment is, this }
+{\cf2 [00:47:00]}
+{ component is being grabbed to say, yes, we are meeting this. Right. So they'll have to understand the logic of it, but they won't have to understand it per se, as it relates to being able to build it. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ And maybe to the CISOs who were, you know, in the Pentagon office that you were there and they were just basically shouting about automation.}
+{\pard  \line \par}
+{How can you do, this will fail, whatever. What would your, I guess, statement to be would be for them specifically listening about after listening to all of this. Yep. I hear you Larry, but I still feel uncomfortable . Talking about automation from GRC perspective. Like what, what do you feel, you know how you mentioned the whole computers taking of the world.}
+{\pard  \line \par}
+{Is this one of those scenarios and they just basically need to understand that, hey, someone is writing it, we just need to work with them. Or is it, is it like, how are you gonna bring them onto this type of fence they're }
+{\pard  \line \par}
+{\b\cf1 Larry Whiteside Jr:\b0}
+{ coming from? Right. Here's the reality. Everything transitions and you either get on board or you fall behind.}
+{\pard  \line \par}
+{Mm. Right. So everybody who didn't }
+{\cf2 [00:48:00]}
+{ take advantage of SOAR and, and wasn't using soar, I guarantee it's trying everything they can to use SOAR today, because nothing has changed as it relates to bringing more people into the industry. We're never going to catch up there, right? So we've gotta find ways to be more efficient.}
+{\pard  \line \par}
+{right. Than we are. Period. And every single cybersecurity executive is looking for ways to be more efficient in how they do their work. And you've gotta take advantages of the opportunities that get brought to you to do it. In this world of governance, risk and compliance, that is highly paper driven, right?}
+{\pard  \line \par}
+{It's an opportunity, right? Because if you think about it, there's less risk in automating this than there was in the security operations space, right? Because in the security operations space, the automation there could break business, right? Yeah, yeah. You could implement a control, you could do something, you could miss something.}
+{\pard  \line \par}
+{But we've been successful at it. So in, in a space }
+{\cf2 [00:49:00]}
+{ that is paper driven, that doesn't necessarily directly impact the business's ability to operate, why would you not? }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah. Yeah. Makes sense. I think, yeah. I, I feel like it's a, it's almost like a playbook here. If you were to kind of. . Think about from a perspective of the, I guess the people in between as well.}
+{\pard  \line \par}
+{There's the CISOs and there's the VPs of, or directors as well. There we have them as listeners under the conversation as well. From their perspective, is there like a, I mean, I guess top three things they should have in their cloud security playbook, I guess in your mind, where grc I feel like they would definitely be including that into the automation playbook or, I mean, I'm not gonna answer, but do, are there things that come to your mind where people should think of at least these three things or as principles or as topics they should cover when they build a, like a playbook for the, cloud security program?}
+{\pard  \line \par}
+{\b\cf1 Larry Whiteside Jr:\b0}
+{ Yeah, so when it comes to cloud security specifically, right,, so number one is focus on visibility. . Making sure that you can see everything. Number two, focus on }
+{\cf2 [00:50:00]}
+{ authentication. Right. Layers of authentication based on what people are gonna do. And then last is automate, automate, automate the cloud.}
+{\pard  \line \par}
+{Is is the precipice for the enablement of automation? It just is. Yeah. Right. And so because of the interconnectivity between everything that can happen, automate everything that you can, if you've got visibility, . Yeah. You've got proper authentication set up across all of these different things. You automating it will save you money because you won't have to hire as many people, right?}
+{\pard  \line \par}
+{\\ it'll actually be more secure because you won't have carbon-based life forms than they're making mistakes, right? And yeah. And I, I love people cause I am one right? . But, but at the end of the day, carbon-based lives forms us. Clicking buttons are the things that basically enable mistakes to happen.}
+{\pard  \line \par}
+{Right. Yeah. Whether because I'm tired, I didn't sleep well last night, I didn't, I got into an argument with my wife, my kids pissed me off, the dogs were barking, whatever. Right? }
+{\cf2 [00:51:00]}
+{ I am more prone to mistakes than some automation script right now. Yeah. You've got, again, you've gotta have visibility and visibility dives into, as you automate seeing it and being able to measure and track that the automation is happening the way you expect.}
+{\pard  \line \par}
+{Don't just automate and turn your head, turn your back and walk away thinking that now, because I've gotta set to automate that, it's always gonna happen. And so you still need to monitor and manage it and make sure that it's operating the way you expect it to. Yeah. But now you're not performing the task.}
+{\pard  \line \par}
+{And if you think about, you know Man hours, right? Once you automate the amount of time , that you put into just managing the automation versus the time you were put in, in actually doing the function that the automation is doing, it's not even, it's not even close. So those are the three things in the cloud that I think every organization should be focused on.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Awesome. Thank you so much for that. That's pretty awesome. I think the that was kinda like the end of the technical questions that I had as well. Cause I think that covers hopefully my hope is towards the end of this, when they've }
+{\cf2 [00:52:00]}
+{ heard all of this, they understand like a how privileged we are to be able to be live in a world where, We are complaining about frameworks instead of not having frameworks in general, right?}
+{\pard  \line \par}
+{Like, you know, , the fact that people can still use compliance as a stick to get their work done in security, versus a time when this was not even a thing. I'm definitely better at being in this time rather than that time, although I'm sure that challenges would've been much different and maybe even more challenging.}
+{\pard  \line \par}
+{Yeah, I'm hoping that you gonna be able to get away with it, but I think get away with the understanding that okay, this is what automation is gonna be the key going forward, whether it's grc, whether it is anything else. And hopefully some of resources who are listening to this as well are able to kind of, you know take, be brave and walk forward with that step as well, }
+{\pard  \line \par}
+{\b\cf1 Larry Whiteside Jr:\b0}
+{ Yep. That's being brave. I, I, I actually like that. That's, that's a great statement. Be brave, be bold. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah. That's pretty much it. I think a lot of us have done it, and I think it is definitely possible. It just basically just, you know, reach out to Larry or reach out to me as well. I've got three questions that are non-technical as well, so people can get to know you more as well.}
+{\pard  \line \par}
+{Well, first, from being, ,. What do you spend most time on when you're not }
+{\cf2 [00:53:00]}
+{ working on technology like cloud or governance, compliance and CISO work? }
+{\pard  \line \par}
+{\b\cf1 Larry Whiteside Jr:\b0}
+{ Yeah, so for, for me, there's a couple things. One I've got, well, I've got.}
+{\pard  \line \par}
+{Eight children, but there are, there are basically two left in the house. And so a lot of time , with my wife, my two dogs and the kids. Right. But my other thing is, is motorcycles. I love riding motorcycles, so I've got a, a nice big Harley vet. I love to just go out and get a get on and just ride.}
+{\pard  \line \par}
+{And then outside of that, it's really just exercise. I like being outdoors. And so we walk a lot, we hike, we, you know, we, we love to travel, so we we're constantly trying to find new adventures and things that we can do, either as a family or Shannon and I as a couple where we're going, we're just outside.}
+{\pard  \line \par}
+{We like engaging with people and, and just being outside in the world. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ That's pretty awesome. It was very good. Good thing to have as well. I need to, I'm, I'm a bit envious of your Harley Davidson though. But I think definitely it would be one day. Cause my wife is definitely not interested in me.}
+{\pard  \line \par}
+{. Motorcycle riding. She's like, yeah.}
+{\cf2 [00:54:00]}
+{ }
+{\pard  \line \par}
+{\b\cf1 Larry Whiteside Jr:\b0}
+{ Mine's not either. , because it makes me happy. It makes her happy. Right. Oh, I like that idea. Fair enough. Yeah. So , she literally has said she will never get on it. Right. She says, but if it makes me happy, it makes her happy.}
+{\pard  \line \par}
+{So she's supportive of it. Yeah. Yep. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Same same question. What is something that you are proud of, but that is not only social media, }
+{\pard  \line \par}
+{\b\cf1 Larry Whiteside Jr:\b0}
+{ that's not on my social media that I'm proud of. So, okay. You know what, so it's interesting question. So for me, that's not on my social media. Cause my kids and , my wife and dogs are in all of my social media.}
+{\pard  \line \par}
+{I'll say my mother. So, so, and I say that because without my mother, I'm not here. And , let me explain that, right? Yeah. Our mother birthed us, right? And so, yeah, that's obvious. But for me it goes to my mom, despite how I grew up. The situations that I was involved in with my dad, with my family and my father, and the, the craziness that was life then she was always providing affirmation to my sister and I }
+{\cf2 [00:55:00]}
+{ that you could be anything.}
+{\pard  \line \par}
+{You can do anything. You are great. You are smart. You Right. She always gave affirmation despite living in utter turmoil around our life, in our neighborhoods and everything else. She Right. And she still, to this day Right. Gives that affirmation. And despite, you know, she doesn't, she doesn't make any money.}
+{\pard  \line \par}
+{She still, you know, lives, you know, serve an underserved community, that type of thing. But she still provides affirmation and she set the example. Right. And even with my father and everything my dad did, and the, the good to bad to ugly to this day. Yeah. Right. And got, and God rest his soul. He got murdered when he was 40.}
+{\pard  \line \par}
+{When he was 41. I was 20. Right. , she's never said a bad word about him. No, never. Not once in my entire life. Not one time has she ever spoken a bad word about him. So she, for me, set an example for me of who I want to be and what I want to be. Right. }
+{\cf2 [00:56:00]}
+{ And that's allowed me to achieve. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ That's awesome. And I'm so, and I hope she's watching this interview and she does, I think definitely shout out to her as well for doing the right thing by our kids as well, no matter what the circumstances.}
+{\pard  \line \par}
+{Yep. }
+{\pard  \line \par}
+{\b\cf1 Larry Whiteside Jr:\b0}
+{ She's amazing. Yeah. Cause a lot of times it, as parents, , the situation dictates a lot of things and our kids become you know, a part of that. Right. And so, yeah, how she was able to keep me and my sister above the fray and continue to affirm. And so my sister's successful as well. And we look back and my mother is, you know, the precipice for that.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Oh, that's definitely an amazing lady though. Yeah. I, I should probably do an episode on her, but specifically after that, on your , new podcast with your wife with the last question that I have, what's your favorite cuisine or restaurant that you can share? }
+{\pard  \line \par}
+{\b\cf1 Larry Whiteside Jr:\b0}
+{ Ooh, I don't know if I have one.}
+{\pard  \line \par}
+{Like you know, so, so my wife and I, Shannon and I literally eat a lot at a lot of different places, and we go and we get tapas. Like we will order three or four }
+{\cf2 [00:57:00]}
+{ different appetizers and then we'll, and one, and one meal that we, we just share everything. And so I don't know if I have a single place. And I'll and I'll say this, maybe one of the most amazing meals I ever had was actually in Santa Fe, New Mexico at this apothecary restaurant.}
+{\pard  \line \par}
+{I think it was called The Apothecary or something like that. It was literally mind blowing. , right. So it was like the overall experience was good, but the cocktail that they made, like everything was just so utterly unique. So that one, and then there's a a restaurant in Livingston, Montana that we went to downtown that is also an experience type restaurant.}
+{\pard  \line \par}
+{And they come in and it's a, pre determined menu. Right. And they come in and it's like six courses and with each course they pair a wine with the meal. So you get a glass of wine that goes with Right. And they give you like a three ounce pour for each course of the meal. }
+{\cf2 [00:58:00]}
+{ Oh, absolutely. Like, those are probably my top two meals of all time that I've ever.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Wow. That's it. Alright. I'm definitely feeling hungry now, even it's like the odd time at my end. But , that was kinda like the question that I had. Thank you so much for answering this as well. Where can people find you on the internet if they have more questions around the whole GRC automation or how can they do the whole CISO playbook or CISO }
+{\pard  \line \par}
+{\b\cf1 Larry Whiteside Jr:\b0}
+{ cybersecurity programs?}
+{\pard  \line \par}
+{Yeah, so for me it's easy. Larry Whiteside Jr. I'm on LinkedIn, I'm on Instagram, I'm on Twitter, right? And I try to keep it easy, right? Everything is Larry Whiteside Jr. So I don't try and get all crazy and get, you know, create these unique, weird names. No, Larry Whiteside Jr. You look, you Google it, look it up on any of the social platforms and that's me.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Awesome. I, and I'll include that in the shownotes as well bar. Thank you so much for your time and I really appreciate this. I can have, see a few more conversations over here as I to bring you back onto the show as well. but, thank you so much for your time and for everyone else who's listening, watching.}
+{\pard  \line \par}
+{We will see you soon, the next episode. Thank you Larry. Thanks later. }
+{\cf2 [00:59:00]}
+{ Thanks.}
+}

@@ -1,0 +1,363 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2639
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 TimesNewRomanPS-BoldMT;\f1\froman\fcharset0 TimesNewRomanPSMT;}
+{\colortbl;\red255\green255\blue255;\red97\green167\blue95;\red0\green0\blue0;\red109\green109\blue109;
+\red81\green0\blue192;}
+{\*\expandedcolortbl;;\cssrgb\c44706\c70196\c44706;\cssrgb\c0\c0\c0;\cssrgb\c50196\c50196\c50196;
+\cssrgb\c40000\c0\c80000;}
+\paperw11900\paperh16840\margl1440\margr1440
+\pard\sa360\partightenfactor0
+
+\f0\b\fs28 \cf2 \up0 \nosupersub \ulnone Anjali Shukla:
+\f1\b0 \cf3  \cf4 [00:00:00]\cf3  If I want to know like in ABC organization, how the format of your email looks like, or is it abc. com or something like, I can figure out like, okay, this is the format this organization is using because I mean on that Google page and error page, it is leaking that information. So that is from the Google side and we cannot do anything.\
+Okay, so \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  just on that one, when you say Google, so they have this as a default. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Anjali Shukla:
+\f1\b0 \cf3  Yeah, it's a default page. You can't change it? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  No, you I mean, so no one has complained to Google \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Anjali Shukla:
+\f1\b0 \cf3  about this. So I came across one blog in which I think the researchers reported that, and the researchers tried the multiple payloads and I'm not sure whether the researchers reported the same or actually if you look at the Google's perspective, I think they will probably say that this is a functionality because we are telling you the point of contact because they are looking for the authorized persons perspective probably.\
+Wait, so \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  it would not be like a, for example, you know how some people may, instead of saying, say for example, his first name, alice at example. com or \cf4 [00:01:00]\cf3  whatever is in the name, because Alice was the owner of the application. Can I have it as a group email or it would always be an individual email? So \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Anjali Shukla:
+\f1\b0 \cf3  it depends it's just Google is asking you for the developers or the owner of that application.\
+ I think in my perspective, 99% of their admins email, because admin is the one who's going to manage all that app. It's like, if you have trouble connecting with the application, contact and then email of the owner. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  If you are a Google cloud user. , and I don't know if you've used this, there's a service called Google IAP or Identity Aware Proxy.\
+In this episode, we spoke with Anjali Shukla from NotSoSecure, and she is a cloud security assessment person. She's training people in cloud security in AWS Azure as Google Cloud. So in this episode we spoke about why is Google Cloud's IAP a service people in security should know about also, what are some of the common misconfigurations, by the way, one that surprised me the most was the one where by default Google would show the email address associated as an owner of the application that is linked to Google IAP, like feature request or whatever you're going to \cf4 [00:02:00]\cf3  call it. That was the most surprising one for me. And there were many more that we spoke about, especially if you're trying to do an assessment of whether a Google cloud presence is something that you want to manage yourself because your CSPM doesn't do a good coverage of Google cloud.\
+Then this is the episode for you and how you can start doing cloud assessments of your Google cloud environment. Also, if you know someone who's probably trying to understand. How they can do SSH to application Oauth connection to an application without the hassle of building a jump box, whether you even need a jump box anymore or a VPN, then this is the episode for them as well, especially if they're working in Google Cloud\
+so this is a continuation of our Google Cloud security month. And Anjali Shukla was kind enough to share all these things about Google IAP. And what are some of the common low hanging fruits that you can look at if you're trying to do a Google Cloud security assessment. of your organization's Google cloud presence, no matter how large or small.\
+I hope you enjoyed this episode. And as always, I appreciate you sharing this episode with a colleague who may be working on a similar problem, Google cloud, or just trying to learn about Google cloud security. So thank you so much for that. And if you're here for the second, third time feel free to drop us a follow, subscribe to your \cf4 [00:03:00]\cf3  favorite audio or video platform, like YouTube, Spotify, Apple, we're basically everywhere. So if you're following us on social media, I am super grateful. Thank you so much. Recently we ranked top 50 in the UK chart, which has been amazing. Thank you so much for all the support.\
+To be listed in the top 50 on an Apple podcast rating for technology podcast above an Apple MacBook podcast has been an amazing feeling. And thank you so much for making this happen. Thank you so much for everyone who's dropped us a review last week. And thank you for people who. Spread the positive word of what we're creating over here.\
+I hope you enjoyed this episode and get value from this on this Google Cloud security month. I will talk to you in the next episode of our Google Cloud security month, because we have a few more to go before we end this month and I will talk to you in the next episode. See ya. Peace. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Anjali Shukla:
+\f1\b0 \cf3  When you're developing an app.\
+Security might be treated as an afterthought. With functionality requirements and tight deadlines, it's easy to accidentally write vulnerable code or use a vulnerable dependency. But Snyk can help you secure your code in real time, so you don't need to slow down to build securely. Develop fast, \cf4 [00:04:00]\cf3  stay secure.\
+Good developer.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Welcome to another episode of Cloud Security Podcast. Today's topic is about continuing the Google Cloud Security Month, and we're talking about Google Cloud IAP. If you're wondering what IAP is, I have no idea. I'm trying to figure out this myself, and hopefully the person who we have with us will be able to help us out a little bit.\
+So let me welcome the guests on. Hi, Anjali. Welcome to the \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Anjali Shukla:
+\f1\b0 \cf3  show. Hi, Ashish. Thank you so much. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  No problem. And for people who don't know who you are, could you just share a bit more about yourself and what do you do and where you are at the moment in terms of how you got into your career? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Anjali Shukla:
+\f1\b0 \cf3  Okay. So first of all, thank you so much for having me here to like, I really like this amazing cloud security podcast and I've been following many Google, especially the Google cloud podcast and I really liked it about me.\
+So first of all, hello everyone. I am Anjali Shukla and I'm senior security consultant, and I'm more into the cloud security and \cf4 [00:05:00]\cf3  the DevSecOps. I started with the DevOps though, and then later switched to the DevSecOps and the cloud security because I like the security sides of it more, and finding it to the misconfiguration and then securing it and looking from the side of an attacker, like what are the misconfigurations possible and how we can create a secure infrastructure.\
+So this is my little introduction and that's it. Thank you. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Awesome. \
+So the first one, what is IAP? What is GCP IAP? Okay, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Anjali Shukla:
+\f1\b0 \cf3  so IAP is like, so the full form is the Identity Aware Proxy and IAP is a Google managed service. So let me give you an example. Suppose you have a web application and it is currently into the testing mode. Now you want your QA team to access that web application, not other of the teams.\
+So what you can do, you can use this service for authentication and authorization and your IAP will take care of both of these process. And you don't have to provide any VPN or you do not have to put that app behind the \cf4 [00:06:00]\cf3  V P N or any firewall, or you do not have to white list any IAP. You can just simply use that service.\
+What IAP will do, it'll do the authentication first and then the authorization. So now your app is secure. You don't have to take care of. Any other complexities and you can just focus on your app. So it's a simple like in a layman or in a common terms is just a Google managed service. And it is allowing you to do the authentication and authorization both so that you can at least a focus on your application.\
+You do not have to worry about anything else, like the VPNs or any other complexes, like how to give access to other users or even how to give access to the external users, even if it is not UA of your team or the employees that belongs to your organization, how to provide them. So for that, you just.\
+Need a simple setup, maybe you just need your application and an IAM role or a group. If you have a multiple user, it just click enable and disable mode. You can just click to enable it \cf4 [00:07:00]\cf3  and we will be enabled. And that's \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  it. I remember the first time we spoke about this as well. And you mentioned that, Oh, actually just to enable IAP.\
+It's just a toggle that you turn on, turn off, and you kind of have that. But for a service that is that powerful, which is basically it gives you authentication authorization capability for applications, or actually, before I go on to my next question, some of our audience is probably aware of other cloud providers like AWS and Azure and other ones for someone coming from another cloud provider or maybe coming from on premise as well. How was this normally done in a traditional environment? And why is IAP so important? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Anjali Shukla:
+\f1\b0 \cf3  Traditionally, if I remember, like the organization used to focus upon the parameter security. They used to put a firewall, like The big organization is there, the bigger firewall and the complex rule, or they're using a VPNs.\
+So main focus was on the parameter security. So it was like everything that is, like all the traffic that is coming from outside is a untrusted, and within that \cf4 [00:08:00]\cf3  parameter, within the VPN or within that firewall, everything is secured. So traditionally this was a concept. That I've come across, but now this has shifted towards the zero trust architecture.\
+So everyone in every organization is adopting the zero trust architecture. And IAP is based on that. So let me first tell you what zero trust model or the architecture tells you. So it says that every. traffic, whether it is internal or coming from the external, is untrusted. So all the things like user's identity, session token, everything will be checked then and there and only then that user will be allowed to access the application.\
+So this is the main idea behind the zero trust model is that don't trust any traffic, whether it is an internal or whether it is an external. IAP is a one good option for that because I P works on the same model. First of all, it does the authentication. So if you are signed in or you're not signed, it'll ask in the authentication, it uses the Oauth 2.0 and then in the authorization state, it'll check that whether you have \cf4 [00:09:00]\cf3  permission to access their application , so IAP is giving an helping hand in such scenario.\
+Also, if you have specifically mentioned the traditionally, what we use to follow. So also if I take an example of other services like Jenkins, So Jenkins is like generally we give access to the developers just to run some pipeline because or if it isn't triggered one they can go to the console and check that whether their pipeline is triggered or not.\
+Generally we don't give much permission. Jenkins is set up by the DevSecOps team. So generally it's put behind the VPN. Jenkins is put generally behind the VPN. Now in that case you can use a IAP, web based service. You can create a Jenkins service. You can keep that behind the IAP because IAP is serving your purpose.\
+And you do not require an extra structure for that. Also, it gives you the facility for the SSH also. Like IAP improved many complexity, both in terms of the web as well as in the SSH. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Oh, okay. And I think maybe one more element, which I would like to cover. And I think that's a great question from Jared \cf4 [00:10:00]\cf3  here, which is does IAP support identity federation with something like Azure AD?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Anjali Shukla:
+\f1\b0 \cf3  Yeah. So IAP is not linked to that is just like, it is a service that act between your user and your application. Now, identity federation is like, it comes under your IAM group, how you're managing access management. How you're managing that. If, for example, you have a group of user, so for example, IAM group, let me take us small example, to generally an organization, we do have an IAM group because we have many users.\
+So instead of giving them individual access or separate access, we create a group and then we put, if you want to give any permission, we attach that permission to that group. It is the case IAP also. So there are two different permission for the web. There is a permission called the IAP web app service. I don't know the role name correctly, but it starts with the web.\
+And for the SSH, they have a SSH permission. So you can attach that permission to any identity. It can be your IAM group. It can be your IAM user or any \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  workload. Oh, I guess a federation question might be also, \cf4 [00:11:00]\cf3  what Jared is trying to ask is, would it have to be still a username password? Or can it use my existing username password as an employee?\
+I think that's where it's coming from. It \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Anjali Shukla:
+\f1\b0 \cf3  depends on the OAuth you have \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  configured. Right. Okay. Oh, because you can use OAuth. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Anjali Shukla:
+\f1\b0 \cf3  So you can club the IAP. Plus there is another service called Identity, a platform in the GCP. So in that you have multiple options. So it can be a Google. It can be a GitHub. So it is just based on your OAuth, like. In what way you have configured that? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Right. Okay, cool. So the answer to Jared's question is yes, but it depends on how the application has been configured. Awesome. So we spoke about how it was done traditionally, and we also spoke about the fact that traditionally Jenkins, for example, had a VPN in front of it, but now you can actually have something like a.\
+IAP, especially if Jenkins is hosted on Google cloud. In terms of implementation, you said it's just toggle on and off. And the first time I heard about this, where I got confused was, you know how you said web and then you have the SSH option in my mind, I'm going, Oh, that's jump box, like, you know, traditionally people would have a lot of jump boxes as well.\
+So are we \cf4 [00:12:00]\cf3  saying if we were to use a service and for people who are in the Google cloud environment, probably already using jump box, you don't need a jump box if you're using IAP. No, you don't need it. So the SSH option is the jump box option, which is basically web is for someone to OAuth directly to an application.\
+And the SSH box is your replacement for a jump box. Just basically turn that on and you'll be able to \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Anjali Shukla:
+\f1\b0 \cf3  log into it. Jump box is like, what is the main purpose of jump box? We create a jump box so that all the users can land up onto that server and can connect to the internal virtual machine or internal server or if it is a database service or a virtual machine.\
+So what IAP, like IAP gives you this facility that you can directly connect to the private network from your local system or from like wherever you have configured your GCloud or from the cloud share. So there is a range cider block for the IAP that is controlled by the Google. So the flow is like I wanna access a VM that is in my internal network.\
+Yeah, so what I'll try to \cf4 [00:13:00]\cf3  access, I'll do the S SSH from my open where I have configured the GCloud. Like we run the AWS configurer. Similarly, we configured the GCloud CLI in our local. So my traffic will go from there. My traffic will go to the IAP server. And because in the firewall, so firewall is similar to the security group in the aws.\
+So in that virtual machines that is into the private network, I'll configure a rule. That the traffic should be come from the internal ranges of the IAP. So now firewall is protected because it is internal and the traffic is coming from the IAP's range. So for example, my user, I'll use, so there is a flag like hyphen F and IAP SSH.\
+I'll run the SSH, the traffic will go to the IAP servers. Authentication server. And from there it will go to the, my private VM. So it removes the need of the bastion server. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  This is interesting because I think the perspective that you're trying to cover in this episode is to bring the, I guess, one, the Pentester view of looking at something like a service, because if you know how to break it, you probably also would realize how to kind of protect it as well.\
+But before we go into it, I've got another question from \cf4 [00:14:00]\cf3  Divyanshu around how IAP is different from AWS Cognito. It was going to be one of my questions but great question Divyanshu \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Anjali Shukla:
+\f1\b0 \cf3  generally people have like find similarities between the IAPs and AWS Cognito. So for those who are not aware of AWS Cognito is AWS Cognito is a service you generally use for the sign in or sign up functionality.\
+So then you have option, either you want to give either users can register on your application or you only give them the credentials and you only as an admin, I'm going to register those users and they can just. Simply log into the application and access the AWS services. So in Cognito also there are two, I'm going to focus on the one in which users can access the AWS services.\
+Users have logged into the application and then you're accessing the services. Now it is looking similar because in IAP also we are doing the almost. Same. We are logging via domain. We are following the process of OAuth means we are signing in and then we're accessing the application.\
+But we don't have this feature like whether users can register or not, how many users can register or whether they should register \cf4 [00:15:00]\cf3  with the email or the phone number, this kind of functionality AWS provides an identity platform. In GCP, it also serves the same purpose. So if you want to compare, identity platform is exactly same as AWS Cognito because there we have so many functionalities.\
+IAP is almost similar, but we don't have such functionality because it's more like access management. How we are controlling the traffic that is coming to our private application or the internal application that we want to expose, but via some OAuth or some authentication process. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Okay. I think that's an interesting differentiation also, because if there's already a comparative service between Cognito and the Identity Platform on GCP side, one difference with all that you said was an obvious one for me where the whole SSH access is not a thing in Cognito.\
+So just. But you don't use Cognitive for SSH access, which is really interesting. So that the GCP has decided to create a whole new service as an attachment to their identity platform. And maybe another service to \cf4 [00:16:00]\cf3  compare this to, actually, I don't know if you can compare this to SSM. I was thinking of system manager, but maybe you can't.\
+That's pretty different. from \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Anjali Shukla:
+\f1\b0 \cf3  the AWS. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Yeah they have mentioned it but IAP is different from SSM\
+Yeah, I think so as well. probably unique service from that perspective. I don't think Azure has something like this, but the point being, now that we've kind of at least explained to the folks over here listening and watching that what IAP is, let's talk about how does one break? What misconfiguration that you've seen that people often make mistakes of in IAP?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Anjali Shukla:
+\f1\b0 \cf3  First of all, not the misconfiguration I'll talk about. Misconfigurations are. Generally, we are configuring a service or an application. And that, that time we made that misconfiguration, but there is some misconfiguration or it is from the Google side. I have an application. If you don't map it with some other domains, generally it's by default URL is. What your load balancers or your app engines is depends on your application. So for example, my domain name is abc. example. com. And as soon as I \cf4 [00:17:00]\cf3  click that, it will look for the authentication.\
+You're already logged in with the Gmail or the account. It will redirect. You for the authorization process next. Okay. Yeah. If not, so I'll take an example of an un authorization user. Being an unauthorized user, let's say Ellis is an unauthorized user and she tried to access the abc.example.com as soon as she logged in with the her Gmail account and she's an unauthorized user error page, welcome.\
+It'll reveal or it'll leak the email ID of the owner of that application. So whenever you configure an I A P, you have to configure an consent screen that is for OAuth you generally, if the specification, like what would be the name of that application or who will be the support user or the admin user?\
+Basically the point of contact if the application doesn't work and if the application like users are facing some access issues. So that error page leaks, that whatever email id, the admins email ID will give you while configure it. It'll \cf4 [00:18:00]\cf3  leak that onto the error page. So if I want to know, in ABC organization, how the format of your email looks like, or is it abc.\
+com or something like, I can figure out like, okay, this is the format this organization is using because it is leaking that, on that Google page and error page, it is leaking that information. So that is from the Google side and we cannot do anything, but yeah, on the user side, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  so just on that one.\
+When you say Google, so they have, this is the default. Yeah, it's a \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Anjali Shukla:
+\f1\b0 \cf3  default page. No, you can't change it. What? \
+I \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  mean, so no one has complained to Google about this. I \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Anjali Shukla:
+\f1\b0 \cf3  think one, I came across one blog in which I think the researchers reported that but i'm not sure Like this is the one because the researchers tried the multiple payloads And I'm not sure whether the researchers reported the same . Actually, if you look at the Google's perspective, I think they will probably say that this is a functionality because we are telling you the point of contact because they are looking for the authorized \cf4 [00:19:00]\cf3  person's perspective, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  probably.\
+Wait, so it would not be like a, for example, you know how some people may, instead of saying, say for example, his first name, Alice at example. com or whatever is the name, because Alice was the owner of the application. Can I have it as a group email or It would always be an individual email. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Anjali Shukla:
+\f1\b0 \cf3  So it depends.\
+Whatever email you'll, it's just Google is asking you for the developers or the owner of that application. In my perspective, 99% their admins email because admin is the one who's going to manage Yeah. All that application. Yeah. And yeah, it's like if you have trouble connecting with the application contact and then email of the owner, oh wow.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Please send your phishing email to this email address. Wow, that's convenient. Well, so, okay. I mean, I imagine it allows you to put whatever email. So I would hope people listening or watching this would actually put like a group email or like a spam email because they would know there are other ways to go around this as well.\
+But that's a good one. And sorry, I didn't want to stop you with your misconfiguration, but I just want to make sure people kind of understand that. Wait, there's something that probably is a functionality from Google, and yeah, I don't \cf4 [00:20:00]\cf3  even know how people would check it apart from going to every application, trying to hit an error page and see if it's.\
+Revealing or leaking an information, which is probably not required. Cool. All right. Over the misconfiguration, what are some of the misconfiguration people should look out for? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Anjali Shukla:
+\f1\b0 \cf3  So when we deploy our application on App Engine, so App Engine is a platform as a service.\
+It's like a elastic beanstalk in AWS So whenever you create or deploy your application onto that, it creates a domain name for you and it's a predefined syntax. You can say, okay, it starts with the project id. Dot the region name dot rappspot. com. It's kind of an pen tester's point of view if I'm attacking and somehow I've got the project ID.\
+And I also like while doing enumeration, if I got to know the project ID and the region name, I can create that domain name and I can try to hit it. That domain, just for validation. If App Engine or if any service or if any app is configured onto that or not. If it is behind the IAP again, then it is good.\
+And if it is not, then you can, I mean, the attacker can easily access the application because it's a predefined \cf4 [00:21:00]\cf3  format of that domain name. Also the other misconfigurations have earlier in Google, it says that, for example, I have deployed an application on the compute engine and I have to create a load balancer for that.\
+Because IAP works on the load balances and the app engine's domain. Okay. It, it requires that, so I deployed an application on the compute engine. I created load balancer for that and I enabled I a P onto that load balance. Okay? My, everything is working fine because I deployed my application, attached a load balancer and put my application behind the IAP\
+but if your compute engine's, firewall rules are misconfigured, or if that VM is publicly accessible, wherever your application is running, then it will bypass the IAP because IAP is looking on the domain site. It is not checking the public IP.\
+It is only taking care of the domain. Oh. It's like two linked service. One is the domain name and one is the IP. Both are attached to it. Okay. But I think two days back only when I was trying to replicate the scenario, IAP was not allowing me to do the same. It was \cf4 [00:22:00]\cf3  saying that first configure your firewall rules, disable a CDN.\
+And then enable the IAP. So I think from the Google side, they have put some restrictions on it, and they are taking care of this misconfiguration. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  That's good to know. Oh, so, but otherwise, before, like, before two days ago, this was actually a thing. Yeah, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Anjali Shukla:
+\f1\b0 \cf3  it was a thing. Even they have mentioned in the document also. But when I was trying to... Do the same. I got this error. I thought of better sharing it, that Google is also \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  taking care of it. Google is always listening. Anjali, have you been talking on Google chat about this? They are always listening. So, okay, cool. But that's a good one though, because I would have thought it's funny on one end, we started off by talking about something, which is a default by Google cloud, which exposes an email, but on the flip side, they're also doing the right thing by making sure the virtual machines are protected by default \
+okay, that definitely gives me a better angle. Now, from a, application perspective as well, the application itself would still require some kind of a security protection kind of a thing, right? Like, so just because you have IAP does not mean your security vulnerabilities on \cf4 [00:23:00]\cf3  the application are covered.\
+Is that right? Because if you still allow for, I don't know, an XSS or, SQL injection or anything like that. Those are still out in the open on the internet. It's not like that you're protected from that as well. So it's not a WAF to be precise. Is there anything which is maintained from a traffic perspective?\
+Because You know how people have API gateways and all of the other things as well. And this is an application, but that only works with load balancers or you say it works for the application. What's another scenario which we would consider as a potential scenario for someone to take over or have a hacker misuse the scenario where I'm coming from is, you know, how there's obviously.\
+the one scenario that I can think of, obviously, is that if I take over your credentials, then I can directly use IAP to kind of log in. That's probably one obvious one. The other one was the firewall one that you called out, which now Google has blocked out. They'll spoke what the email was. We've already called out three, which are potential places that a pen tester could use.\
+Any other scenarios? I mean, I guess fourth one was the application itself, having vulnerability. Any other that come to mind, we just call out \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Anjali Shukla:
+\f1\b0 \cf3  four. Yeah, one \cf4 [00:24:00]\cf3  more is there that I have seen it was so client's initial intention was so they have deployed an application and as it was in testing mode, they have put a wrong rule onto the IAM configuration and instead of giving individual access, like instead of giving access to the particular IAM group or a user, they have just to the authenticated user because they were like, Application is in the testing mode, we're testing it.\
+So it's like so many people are performing some tests and they're looking for the bug, like how the application is behaving. So by default, they have put it on the authentication mode later they forgot to disable it. And it's like all authenticated user means any Google account user can any Google account user not.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  It's the company one. No. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Anjali Shukla:
+\f1\b0 \cf3  So there are two different, two keywords, like all users and all authenticated user. All user is publicly accessible. Okay. You can, it's like no IP, you can say, because you can directly access. All authenticated user, it means you are doing some kind of an authentication. \cf4 [00:25:00]\cf3  It's like anonymous authentication is okay.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Oh, like how people share Google Docs on the internet for public, but anyone can access it. For that as well. You still need to be authenticated, the Google user to add any comments or do anything the same way over here. As long as you have a Google account, you can do whatever you want \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Anjali Shukla:
+\f1\b0 \cf3  with this.\
+Yeah, so it's the same case in the A W S as well. A WS also says authenticated user. If it is your organization and I have configured my AWS credentials, I can access your data because the policy is all authenticated. Authentication should be there. It is not necessary saying that they should belong to my organization.\
+There should be an authentication. Better to, like, make sure that you are attaching policies correctly and you are taking care of it. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Good point to note as well. Actually, talking about this as well, because when we were talking about this last, you spoke about doing cloud security assessments as well. And for people who are probably coming from a background where they want to do a lot more assessments on their site to identify any more scenarios like these \cf4 [00:26:00]\cf3  that they would have at their end, , what's your thought process usually when you go and try and do like a cloud security assessment of GCP?\
+Are there any low hanging fruits that you normally go for? Or what's your thinking process there? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Anjali Shukla:
+\f1\b0 \cf3  So before doing any assessment, first of all, I look like I run a basic scan and generally I use an open source tool for that. So it can be a prowler. It can be on cloud query. It can be a steam pipe or any open source tool.\
+After that, you have to verify or validate that whether the tool is giving you the valid output or not. After doing the basic scan, you can always look for the low hanging fruit. By saying low hanging fruit, that if I know the project ID and I know the region, so by doing an assessment, generally I do have a permission to scan the infrastructure or to do look into the service.\
+Definitely. I'll have a project ID and I'll have your region. So I look for The app engine service is running and whether I can be able to access it with or without the Gmail ID or not. And then I look for the storage bucket also, because similar to the App Engine's domain name, we have formatted \cf4 [00:27:00]\cf3  syntax for the cloud storage bucket.\
+So I look into that also. Right. And if the application is deployed on the compute engine, then there's another perspective, like if it is having XSS vulnerability or vulnerability or it's kind of an application related check that generally , we. Do take care of that whether we are able to perform a normal SSRF checks.\
+So earlier, I think before 2018 or so, I think I'm not sure about the year wasn't metadata like SSRF vulnerability in the GCP, but they have removed it. Using this vulnerability, we can access the data of the metadata API. So we just have to request for the metadata API we can get access to all the data, but they have upgraded this.\
+So like this, the vulnerability is the result from the Google site itself. you can take care of it after performing the basic scan, because there's some additional checks or there was one more in the Firebase also, like with the help of Google Docs, you can just. Take care of you can look into the firebase \cf4 [00:28:00]\cf3  if it is misconfigured or not.\
+It's like service related vulnerabilities. They are pretty much common and then that also you can look into that basically keep a note of it Like, okay. These are the information I get and what I can do further with that information Right. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  I guess for people, is there a general length in your mind for if I just have one GCP account with not too many projects, I just say for the case of simplicity, one project, one folder, one Google account.\
+Well, maybe the question is more to the context of like, how do you even start learning about this? Cause I think that's kind of where I'm coming from. Because the initial thinking was, Oh, what's the length of time required? I don't know. Like, it's like asking for the, how long is it? see the piece of string, better question to ask over here is that how does one start learning about assessing Google cloud?\
+Cause I feel like there's not much information about GCP in general, but then GCP security even more or less, because there's not any people talking about how do you deploy something in Google cloud? So what was your learning process for that? And how can people who are listening in do some kind of a cloud security assessment of their GCP accounts if they wanted it towards the end of \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Anjali Shukla:
+\f1\b0 \cf3  this call?\
+So \cf4 [00:29:00]\cf3  before doing any assessment, first of all, you have to understand the service, like how the service behaves, because it's completely my opinion. I know people can say that we have very good knowledge on the pentesting and we can just refer a few blogs and we can directly pentest the GCP service. If they are like, they are able to do that, that's really a great stuff that they are doing.\
+But like what generally I follow, I first of all understand the service. That how the services behave. And then I look into the security sides of it, look more into the misconfigurations of it. And while, if you want to learn about the assessment, you can, like, I always look for the open source tools or the resources, blogs, videos on YouTubes, whatever open source available, like whatever, all the resources that are freely available.\
+because I generally follow the same. If you want to learn GCP, you can go into the YouTube or you refer to videos for the basic understanding. You can opt for any certification course like the security one if you want to go for that or the architect one. So in the architect, it's more like the hands on, you'll be able to get familiar with the services.\cf4 [00:30:00]\cf3  \
+How the services behaving. Yeah. And then you can go to the security one also, if you wanna understand each and every service of the GCP site, like what all security services GCP offers. I think that after having so much of understanding from the gcp, you can take any tool like as I mentioned, prowler or the cloud query, where there are multiple tools you can just attach, you can create a user for yourself and you can attach a reviewer role.\
+So GCP offers the review role if you want to perform a security assessment for the environment\
+if you can just try to run that role and just go through the misconfigurations or rules or whatever output you're getting. Just try to understand, okay. This rule is saying that your IAM role ABC is misconfigured and then just go back and look into that rule. At what misconfiguration that role is having cause that would be easy for the assesment \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  interesting.\
+And thank you for sharing that, by the way, but from a technical perspective, that's most of the questions that I had, but I also have three fun questions for you towards the end.\
+ The three questions, super simple. The first one being, \cf4 [00:31:00]\cf3  what do you spend most time on when you're not working on doing cloud security on Google cloud? So it's \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Anjali Shukla:
+\f1\b0 \cf3  like \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  apart from work. Yeah, it can be about work or apart from work as well. Yes So you're actually always working \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Anjali Shukla:
+\f1\b0 \cf3  No, no, no. I don't.\
+So I like to read books and I generally go out for a walk or I like to travel and read books. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Travel and read books. That's a good habit to have. What is something that you're proud of but that is not on your social media? Okay. People always say family, friends and whatever but like what is something that you're proud of that is not on social media?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Anjali Shukla:
+\f1\b0 \cf3  I like to read Hindi books more and that's not, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  oh, right, so you actually read, you're reading more Hindi books and that's something, 'cause obviously you're not, I'm assuming you did not used to read Hindi books and now you do. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Anjali Shukla:
+\f1\b0 \cf3  Yeah. Earlier I prefer English one more, but recently I started interest in the Hindi writers basically \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Hindi Literature\
+pretty awesome. Cool. Definitely something to be proud of. Third question and the final one. What is your favorite cuisine or restaurant that you can \cf4 [00:32:00]\cf3  share? Okay, I \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Anjali Shukla:
+\f1\b0 \cf3  don't have one because you have a lot of cuisines you love. I have a lot of cuisines. I like to try new foods. So I like Chinese, I like South Indian, and I like normal North Indian food also.\
+It's like multiple things \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  I like. That's pretty awesome. I love how you said normal North Indian food as well. But that was kind of most of the questions that I had. Thank you so much for sharing those. And where can people find you on the internet if they have more questions about Google IAP and how to do purple team pen testing or just doing security assessments of Google Cloud.\
+Where can they find you on the internet? Sure. I'll \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Anjali Shukla:
+\f1\b0 \cf3  be happy to answer. And I'll even, I'll get to know more about the IAP if they are using it to their organizations. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  And so what would be a good platform for people should reach out to you on LinkedIn, Twitter, where should they reach out to you? I \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Anjali Shukla:
+\f1\b0 \cf3  am available on LinkedIn and Twitter.\
+So any platform will \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  work. I will drop a link for that and I'll let you continue the conversation, but thank you so much for coming on the show and thank you for everyone else who tuned in and Jared and Divyanshu asked a question as well and others who asked a question. \cf4 [00:33:00]\cf3  Thank you so much for your time and we will see you in the next episode of Google Cloud Security.\
+But for now, thank you, Anjali and thank you everyone else. We'll see you in the next }

@@ -1,0 +1,295 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2639
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 TimesNewRomanPS-BoldMT;\f1\froman\fcharset0 TimesNewRomanPSMT;}
+{\colortbl;\red255\green255\blue255;\red81\green0\blue192;\red0\green0\blue0;\red109\green109\blue109;
+\red97\green167\blue95;}
+{\*\expandedcolortbl;;\cssrgb\c40000\c0\c80000;\cssrgb\c0\c0\c0;\cssrgb\c50196\c50196\c50196;
+\cssrgb\c44706\c70196\c44706;}
+\paperw11900\paperh16840\margl1440\margr1440
+\pard\sa360\partightenfactor0
+
+\f0\b\fs28 \cf2 \up0 \nosupersub \ulnone Jimmy Barber:
+\f1\b0 \cf3  \cf4 [00:00:00]\cf3  Fundamentally understanding or people understanding how you interacted the cloud, understanding that and what's normal and what's abnormal. Like we go back to, I mentioned at the start, three ways you interact and change the cloud console API or pipeline at the API. And fundamentally understanding how those attacks manifest and what they look like at that level is important.\
+You get that right. You're going in the right direction and you just expand and grow. Services are brought in, threat modeling those services and understanding, well, what does bad look like? How could we detect that? And kind of going into that detection sprint cycle to move along with the rest of that agile approach to cloud as well.\
+Landing zones and having guardrails is not something people talk about enough in the Google cloud space. In this interview, I had Jimmy Barber and he spoke about how he started off when on premise moved on to Azure, AWS, Google cloud. And now how he's been spending time working with this team to build landing zones, as well as your guardrails for GCP.\
+What are some of the examples for it? How can you start on building \cf4 [00:01:00]\cf3  guardrails and landing zone in your GCP environment today, even if you come from an on premise world, what are some of the gaps that exist in the services available from Google cloud? Where are the gaps in your on premise world that can't be filled in the Google cloud world?\
+So all that a lot more in this month, which is the Google cloud security month with July, 2023. We spoke with Jimmy Barber, who is the VP of Cloud Security . And we spoke a lot about Google Cloud and building security architecture, security in Google Cloud. How do you do that at scale? What fails at scale?\
+So if you are someone who's working on Google Cloud now, Or transitioning over to Google Cloud, or if you know someone who's transitioning over to Google Cloud from an on premise world or from an AWS world or Azure world, you'll find this interview really valuable and please do share it with other colleagues of yours who probably know or want to know about Google Cloud Security and what the gaps are that they need to work on.\
+If you're here for the second or third time, I would really appreciate if you can drop us a review or rating because it helps people on future guests like Jimmy and others know that they're coming to a platform where it's going to be valuable for them because it's an engaged \cf4 [00:02:00]\cf3  community. So if you leave a review and give us a five star rating, it will really mean a lot and more for the future listeners who are going to find us and get to know more knowledge about how to do Google cloud or just cloud security in general.\
+I hope you enjoyed this episode and I look forward to talking to you in the next episode as well. Enjoy. When you're \
+developing an app, security might be treated as an afterthought. With functionality requirements and tight deadlines, it's easy to accidentally write vulnerable code or use a vulnerable dependency.\
+But Snyk can help you secure your code in real time, so you don't need to slow down to build security. secure. Good developer. Snyk.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Hello, and welcome to another episode of Cloud Security Podcast. Today, we're talking about building cloud security architecture in GCP. Yeah, this is the Google cloud month of July, 2023. And I'm not going to butcher the security architecture and all of that introduction. I've got someone special in for this.\
+So let me just bring him online. Hey, \cf4 [00:03:00]\cf3  Jimmy, welcome to the show. How are you? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Jimmy Barber:
+\f1\b0 \cf3  Hey Ashish, thanks for taking me on. I've been listening to the show for a long time and I'm really happy to finally make it on for a chat. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  I'm equally excited as well, man. But well, so for the few in the crowd who do not know who Jimmy is, could you just share a bit about yourself and what was your part of your control?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Jimmy Barber:
+\f1\b0 \cf3  Yeah, I'm Jimmy Barber. I'm vice president of cloud security for a financial services company or FinTech company. I cover security for all three clouds. That's AWS, GCP and Azure. And yeah, that's it. building security, building cloud security and, and leading teams in that space.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Awesome. And I think your experience was actually something that started on premise as well, right? You didn't really start directly in cloud. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Jimmy Barber:
+\f1\b0 \cf3  Yeah. So way back, I started out in the military, in the Irish army. I spent 14 and a half years from there. And I left, thank you. And I exited into civilian world and I started out as a security architect for a small payments company called Cayenne in \cf4 [00:04:00]\cf3  Belfast.\
+And I learned a lot about the application security, DevOps approaches to security as well. That kind of set me up as my path for transition to cloud. Cause a lot of the fundamentals that I learned and put in place there were applicable in cloud security. Oh, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  and what was the first cloud you started working with after on premise?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Jimmy Barber:
+\f1\b0 \cf3  So the first cloud I started with was with Azure and it was through an M and A within that company I was working in and we were handed azure subscription one day and told secure this now and I had to learn at quite a fast pace to understand how Azure works, how it works. Functions, how the team had built their platform and how to enhance and bring forward the security of that.\
+So it was a very steep learning curve and that deployment was a very pass based deployment as well. So it wasn't an easy transition, like a VMs were \cf4 [00:05:00]\cf3  migrated and deployed in the cloud. It was full on pass from the start. So it was good learning experience. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Interesting. And then to AWS Yes, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Jimmy Barber:
+\f1\b0 \cf3  so as, as I progressed through my career, I was tasked with bringing on and building security teams from an AWS perspective, which was the core focus in the company where I was at that time, and kind of moved on to learn another cloud, learn how that works. Cloud framework was built and how to secure it. And then eventually into the position where I am now as the, over all cloud security, and we have , a large footprint in Google today. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Awesome. So this is really interesting for me, right? Because I really get to talk to a lot of people who are working in multiple clouds as well.\
+So coming from an on premise world, because I think my understanding is that a lot of cloud security architects who are going to be working in cloud in some way, shape, or form have come from an on premise world, which is so many of us that it's not possible that they're not transitioning over.\
+What was the biggest change to make \cf4 [00:06:00]\cf3  people who are here just feel comfortable? What was the biggest change you felt coming from a on premise world in the cloud world from an architecture perspective or building application \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Jimmy Barber:
+\f1\b0 \cf3  perspective? I think the biggest change you have to get your head around is the balance of control and power, where on prem, you have your wall, your firewalls, and your security appliances, and you have a very, very defined perimeter.\
+And you'll often hear in the cloud, the concept of perimeters everywhere, lots of layers, IAM is your perimeter. So you have to comprehend with all of those avenues and from a team that's deploying or developing applications and moving into the cloud, suddenly there's a lot more expected on them and there's a lot more avenues and approaches for them to explore and try out different services, even down to the fundamentals of how you can interact with the cloud.\
+You've got a console. You've got an A. P. I. And you have pipelines as well that interact with the A. P. I. So you've \cf4 [00:07:00]\cf3  suddenly opened a door for people to interact with the cloud. And that's an important part from a security perspective is to understand the in and out of how those interactions can happen and what are the services those people are interacting with and the boundaries and security controls that you have to with.\
+know about, so there's a lot more that you need to be aware of the environment fully and how it can change and how it has to be secured. That's probably one of the biggest learning curves. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Oh, was there something specifically in GCP? Cause I imagine a lot of the security architects would just straight away jump into GCP as well, like specifically with GCP, I mean.\
+There was a whole transition of on premise security architectural world to Azure world. But instead of Azure, if you were going in GCP, was there something even more dramatic? Because I imagine the transition from a on premise to Azure is still a bit more reasonable because if you are coming from a Windows background.\
+A lot of stuff actually is relatable. Would that be the same case in GCP as well? Or GCP is like a completely different \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Jimmy Barber:
+\f1\b0 \cf3  kettle of fish. It depends on \cf4 [00:08:00]\cf3  your, every organization is different and it depends on how your applications architected. So you may be lifting and shifting VMs into the cloud and just running your applications in there.\
+And that's one approach that should be very familiar and transferable for, for most people. And then you'll have microservice based applications. So that's into GKE. And you've got that aspect of it and, you know, very pioneering in the Google space there. And then you also have, from an architecture perspective, the sprawl of then, okay, you've migrated to the cloud.\
+Now you need to optimize and reduce your costs. So you start to interact and use different services. So you've streaming and all of the awesome GCP data services that you've got to work with big query, the data lake stuff, data flow and, and, and data streaming technologies. So that's when. You certainly have this change at an architecture level that, you know, from a security perspective, you really need to be ahead of the game on that and understanding how that works and how you're going to secure it as \cf4 [00:09:00]\cf3  well.\
+Yeah. Okay, cool. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  And maybe that's a good point for me to transition into the whole GCP conversation as well then. What are some of the. building blocks in, I guess, you know, how when people talk about cloud, usually they start with the saying that, okay, if day one in a Google cloud environment, you should have these things turned on, like from an identity perspective, from a, I don't know, identity, let's just say your audit trail, networking.\
+Are there any like obvious building blocks that people should think about when, so that they don't make rookie mistakes when they start working in GCP? Yeah, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Jimmy Barber:
+\f1\b0 \cf3  what I would call is, you know, your set of guardrails and that's what you need to define as early as possible and understand those guardrails. And depending on if you're doing a landing zone, if you're doing distributed deployment topology, or if you're just a single organization, a couple of projects, the same fundamental concepts.\
+Exists. You need to define your guardrails that you want to keep and wrap your development teams in, in this \cf4 [00:10:00]\cf3  safe, repeatable bubble that is always there for them and understanding those layers. They're really kind of the fundamentals, like consisting of, like you said, IAM. So you need to have robust guardrails around one, understanding GCP, IAM, the concepts of your roles, your bindings to identities, your interaction with Google workspaces and how you secure that.\
+And then understanding IAM from a GCP perspective, there are some roles there that you need to be aware of that you have to have a good plan for how you cater for them and how you handle them, such as editor role. Which is a very, very overprivileged role, which Google refers to as a primitive role. And Google, the best practice advises you should not use this role.\
+However, you need to be aware that some services from Google actually deploy with that role embedded in them. And then also. If you have teams that are new to the cloud and understanding IAM and getting, getting moving there, that they do not use that role. Like for \cf4 [00:11:00]\cf3  example, that role has nearly 7, 000 permissions assigned to it.\
+Wow. About a year and a half ago, it had about 5, 000. Wow. It's getting bigger and bigger. However, You just should avoid it. It is a very, very privileged administered role. So having a framework, having a process around monitoring, detecting and approving changes at an IAM level, and making sure that those roles at an IAM level that are being used are not bringing forward click ops if you're going for an infrastructure as code deployment only.\
+Process that's great, but make sure that your guardrails are there in layers that they're not circumvented. Having some form of threat detection is another important guardrail. And you can avail of security command center, or you can go your own and build your own either using, again, there's Google tools there that you can do that from a threat hunt perspective, you can aggregate your logs in with Stackdriver and BigQuery and search those.\
+Or you can offload to a SIEM as well. \cf4 [00:12:00]\cf3  Having some posture management is a really important guardrail as well. You know, you need to understand what's the security posture of all of the resources that you're deploying and making sure that you're tackling those. If you're doing the infrastructure as code deployment method, having a good, robust policies code approach.\
+So policies code being you're declaring your security standards as code and applying them as developers are deploying that infrastructure out there. And then I'd say probably one of the most important and fundamental guardrails that I would recommend is organization constraints. So these are organizational policies that you can define that prohibit or limit or restrict the use of certain services and controls.\
+There are about 80 organization constraints out at the moment. Wow. They actually have a customized. Version of that for GKE as well. So you can write your own, but they are probably the one guardrail that I would focus time on to get the best value back out. And for example, there's a guardrail that you can \cf4 [00:13:00]\cf3  prohibit the use of public IP assignment to a VM, which will get a lot of people in trouble in the cloud.\
+And that's a really, really robust guardrail to put in there. If you have that in there. And you have that ability to maintain that control of public presence. You're going to go far with your security program. On the other side, you have to have a process in place to handle those exceptions because you need to be frictionless, you need to support cloud deployment, you need to make sure that your developers are moving at speed.\
+So it's bringing together that process of the guardrails and your guardrails need to be layered as well. So for example, if we think about it, let's go, you know, a developer tries to deploy a VM with a public IP on it. Your policies code should block that or stop it or prevent it at that pipeline stage.\
+Say they have editor role or something else. They're going to sidetrack that and try and deploy that VM. That's where your organization constraint is going to say, Hey, sorry, you're not allowed to do that. You need to go and seek an exception or. Do whatever your process is. Yeah. And then \cf4 [00:14:00]\cf3  your third layer is for whatever crazy reason they get by that middle organization constraint, you've got your posture management, which is going to alert you and say, Hey, this VM is popped up with a public IP.\
+That's not your exception list. That's your guardrails working in those three layers as well. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  I love this. Also maybe worthwhile expanding on the whole landing zone as well, because a lot of people would not even know you and I, and others who probably are working in the space will probably know a lot about this, but people who may be coming from an on premise world into the cloud world, especially in GCP, how would you describe landing zone in GCP?\
+Like what's your definition of it? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Jimmy Barber:
+\f1\b0 \cf3  A landing zone is a framework. It's a collection of services that are repeatable pattern that are applied. So a landing zone is useful when you have an organization that has some size and you want to offer cloud services to different business units, departments, and you can do that already within Google using folder structure.\
+But a landing zone is a level of abstraction even further, where usually you have \cf4 [00:15:00]\cf3  networking across everywhere. It's just another layer of abstraction that you can group services together. And it's about vending. And for example, let's say the finance department wants to do a project and they want to have their own Google environment.\
+That's fine. You could give them a landing zone and the way you would have set up your landing zone is you vend a set of services and structures, network, architectural patterns, whatever you define as your landing zone. And that's that repeatable stamp pattern that is given over to that team to manage and deploy, depending on how your organization structures and has that shared responsibility model within the shared responsibility model.\
+So you're providing them with a set of services and that's. Largely how you would run a landing zone. Another way to think of it is, is you define a set of shared services that a landing zone inherits from your framework or your cloud. So they could be shared ingress, egress, logging and monitoring, threat detection, SOC integration, patching, \cf4 [00:16:00]\cf3  vulnerability management, connectivity back to on prem.\
+There's an endless amount of services that you could offer as a catalog and. Effectively, that landing zone, then you front that out as those set of services and any application team that comes in there, depending on that shared responsibility model that you provide them, they're going to inherit all of those controls and services that you've just done.\
+So you're removing that effort and work. For them to do it. Landing zone , it's not a GCP specific term. It can be Azure, Sometimes they're called cloud baselines and cloud frameworks. It's just a method of grouping shared services that you offer it and manage for your teams. That point to say that it's, you know, you've got a shared responsibility model.\
+On top of your shared responsibility model. So you're offering that platform as a service. You know, there's many ways to dress it up and name it, but effectively from an organization perspective, it's ultimately how you want to offer cloud services out to your cloud consumers in your company and being aware that different cloud consumers in your company may have \cf4 [00:17:00]\cf3  different competencies. different levels, or you may have just some teams that just want to deploy applications and they don't care for the inner workings below. You may have some full teams that have full, you know, sec dev ops teams that want to take on more responsibility. So the landing zone concept lets you bring those modules in and out as you need them, but fundamentally having your guardrails set all the time, like we talked at the start, that's your core baseline \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  there.\
+Okay. So we have the landing zone defined. We have guardrails set as well. Most people would also think that, Oh, actually, you know what? This is too hard for me because we have had cloud for some time. We have never had a landing zone. We have never had guardrails. Do you have some thoughts on this as well for people starting off today in a existing GCP environment?\
+What do you normally recommend people to go with? Hey, I understand you already have a few projects in Google cloud and you never had landing zone, you never had guardrails, now you're starting to build one, is there a recommendation in your experience that you can share with other people who may be thinking actually, yeah, Jimmy, it'd be great \cf4 [00:18:00]\cf3  if I was starting today, but I'm actually in this for a while I'm curious if you have some thoughts on this.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Jimmy Barber:
+\f1\b0 \cf3  There's probably two approaches to that and I'll answer in the scenario of we as an organization have decided to build a landing zone and effectively that will be that the new safe place to go and you'll have to migrate people to that over time or applications will have to migrate. And it's G C P to GCP migration.\
+Now, I know that's not an easy task. You still have applications to migrate databases, balancing traffic over and, but that is ultimately, if you need absorb applications into landing zone, is that path that you would have to take. The alternative is if you are not. There with your landing zone yet, and you wanted to bring the concepts of guardrails in, you know, retrofitting security into existing cloud is difficult.\
+And the key to it is homework and understanding how your guardrails apply and what does it look like to the team? So they need to understand fully what is this guardrail going to do? How is it going to protect \cf4 [00:19:00]\cf3  me? How does it change my tasks and my processes today? What do I need to do different? How do I seek exceptions?\
+Because there's always exceptions. Always, it doesn't matter what you're doing. You're always going to have, I use this service in this way. So, you know, I need to have this, that's fine. We want to make sure that people are able to do their job and deliver their services in a secure way. And the guardrails are there for that reason.\
+So the homework and understanding, okay, when we enable this. Within these scope of projects, who's going to be impacted and how do we get ahead of the game and help them there and making sure that everybody's fully aware. So that in future deployments, they understand that, Hey, if I respend this box here that I haven't really touched before, it's now going to inherit that.\
+Guardrail, and that's especially true in organization constraints. Some are applied retrospectively and some are applied for only net new resources that you create. So you need to be fully aware of that. I believe Google may have brought out as well, a kind of dry run for policy organization, \cf4 [00:20:00]\cf3  policy constraints.\
+So you can see what would be the impact or the effect \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  of that. And this is also a point where a lot of people talk about going full cloud native as in new services from Google. versus using existing security products. Is there a strong opinion that you have on this at this point in time, or like what's your thought on using one over the other?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Jimmy Barber:
+\f1\b0 \cf3  I think I would loosely call that the anti pattern of the cloud provider. What I mean by that is that. Each cloud provider has great best practices, security guidance. However, sometimes that security practice will lead towards their product suite, which is fine. It's okay. And that works well for some companies.\
+It works well for some projects and it works well for some people. You got to do what's best for your environment and your organization so that you meet your standards. However, where that approach doesn't always work is when you start to get to scale and you start to get to multi cloud and that's where you need to \cf4 [00:21:00]\cf3  make those decisions around, I'm Google, I'm AWS, I'm GCP, I'm whatever's coming next.\
+How at scale do I do that? If I have to run three services from each of those cloud providers and aggregate that data back and build custom solutions to visualize that data, that doesn't scale very well, and that's where you move towards the enterprise level tools. Now, some of the cloud providers support integration of other services as well.\
+They may be moving to address that. You also need to understand the cost model of each of those services. Some are billed at a. Project or subscription levels. Some are billed on an account level, some are billed by resource. So understanding does that model work for me? Does that work for my scale? And over time, as I grow out, is that going to help me?\
+So there's lots of considerations for that. And that's that anti pattern statement is the cloud providers pattern is use these best practices. Use these services that we provide you, which is great. Brilliant. Really appreciate them, but sometimes depending on \cf4 [00:22:00]\cf3  your situation and scenario, you may need to aggregate into a more multi cloud centralized model as well.\
+Yeah. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Awesome. I love that because I think this tends to happen quite often where it fails at scale. And also because sometimes the services that are offered also not like a full on enterprise service, right? You could basically compromising in some form. If you go cloud native service as well, depending on what you're trying to achieve from it.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Jimmy Barber:
+\f1\b0 \cf3  Yeah, there's definitely, there can be some gaps and limitations and true full understanding of costs associated with them as well. For example, pocket mirroring costs, that's a cost that you need to be aware of if you're taking an approach of threat detection at a network level, you're going to mirror.\
+All of your traffic costs, that's something you need to be aware of and bake that into your cost model, bake that into your threat value assessment to understand, is this what we need? Should we do something else there in that context? And that's where you fully understanding the ins and outs of those cloud native services is really important.\
+Yep. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Were \cf4 [00:23:00]\cf3  there obvious security gaps that you identified in Google Cloud? Like one common example that a lot of people talk about in the AWS land is that, hey, there is no proper data leakage prevention. I mean, there are specific for services, I'm sure there's security services that are available from Google.\
+But are there any that you all found that actually Google doesn't have an offering for security in this particular space? Was there any that comes to mind when I say that? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Jimmy Barber:
+\f1\b0 \cf3  When I first started out interacting with Google, the concept of IDS was very new and coming through, and that was the concept of packet mirroring and.\
+Open source intrusion detection. And that was what was available. So that was definitely a gap and something similar in AWS as well. They were coming on board with their packet mirroring and their threat detection services. And the gaps are there. And I often find that each of those cloud providers, they're in a race and some will get to the line first with one product. I think Azure had their firewall first, then AWS, and then Google has \cf4 [00:24:00]\cf3  released. An unreal amount of firewall updates in the last six months. It's hard to keep up with that pace of change, but to go back to your original point about data loss prevention, yes, the cloud providers from a data loss prevention perspective have focused on their services, buckets or big query. That's where they see where the data resides, where from a on prem perspective, you're more familiar with network egress DLP on agent DLP, and they're not there yet, and that's probably where that, from a architecture perspective or your security standards perspective, you need to review and assess each of those services as what are the gaps, what are the capabilities that they give me?\
+Cause on the flip side is when you think about it. I moved to the cloud, I have these on prem DLP tools, they don't work for mass data stores where we're storing all the data and think about the API, the interaction of the API with those data services. Like you've had all of this attack surface and \cf4 [00:25:00]\cf3  data loss service.\
+That's just, you're relying solely on the cloud provider to pick up the coverage there. So the gaps are maybe more on your traditional IaaS type setting and they're doing very well in the platform level. Yeah. Which is the part that you should be worried about. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  I think to your point then if there are gaps as well, it's just kind of like all across the board anyway.\
+So I don't think any cloud service provider shines more than the other from an operational perspective as well, like an ongoing perspective. One of the things that people don't talk about enough is the whole incident response side in cloud as well. Do you find there's enough, like we spoke about threat detection and the packet metering and stuff as well.\
+Do you find that in terms of how people process work on on premise, is that quite a bit different in terms of culturally quite different in the cloud context, or can the same be transitioned over? Because in my mind, when we were building security architecture, or even now, when we do consulting and building cloud security architecture, one of the challenges we speak about is the fact \cf4 [00:26:00]\cf3  that, well, things that we did in on premise, I mean, we were using waterfall methodology.\
+There was no agile. There was no sprint. There was none of that. And now suddenly we're like every two weeks, there's a release coming out to the showcase and everything. So do you find there were non technical challenges as well that you had to face coming from a security architecture in an on premise world to a cloud world?\
+And were there any unique challenges specific to GCP? Yeah, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Jimmy Barber:
+\f1\b0 \cf3  I think when you're taking that on prem approach to threat detection and incident response, there's very set in stone methodologies and scope of understanding of how an attack manifests and what it looks like. And largely around. Virtual machines, Windows operating systems, and Active Directory, and some other applications side of it too as well.\
+The cloud, you still have those, they're still very important. However, you also have the platform, and threat detection at the platform level is the learning curve that people have to get over and understand. So from a threat detection perspective, we're \cf4 [00:27:00]\cf3  looking at application, what's behind that application, and that's.\
+Normal enough in people that's the same as on prem, but then it's what happens when that attack manifests in the cloud. You've got metadata service that can be attacked and you've got credentials that can be exposed. Credentials and IAM are so important in the cloud. So understanding what is an attack or what the threats look like from an IAM perspective and at a Google or any cloud.\
+Level, you've data overload. We have so much logs, so much telemetry. I think of the thousands of services that we have in the cloud and your identity and tracking of all the audit logs for all of that it's needle in a haystack is really the way to look at it. However, there's ways around it. Google has stack driver.\
+You can aggregate your logs to centralized service. There's threat hunting queries that are publicly available. There's tools from Google to do this. They have community level tools. They also have their premium services as well. \cf4 [00:28:00]\cf3  So there are ways around it. There are ways to tackle it and do it. And there's a lot of great resources out there, but it is.\
+Fundamentally understanding or people understanding how you interact with the cloud, understanding that and what's normal and what's abnormal. Like we go back to, I mentioned at the start, three ways you interact and change the cloud, console, API, or pipeline at the API. And fundamentally understanding how those attacks manifest and what they look like at that level is important.\
+You get that right, you're going in the right direction and you just expand and grow as services are brought in, modeling those services and understanding well. What does bad look like? How could we detect that? And I'm kind of going into that detection sprint cycle to move along with the rest of the agile approach to cloud as \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  well.\
+Yeah, that's very well said, man. Were you coming across any frameworks or maybe good resources that you can, cause I mean, I imagine at some point you could have decided this is not a one person thing and it's going to, this needs to be scaled up at scale, \cf4 [00:29:00]\cf3  working in securing Google Cloud. Were there any specific challenges that you can think of when scaling from, say, I only have one Google account with multiple projects or one multiple folders to, Hey, I have multiple Google account.\
+Cause I mean, my understanding of Google cloud, it's not just Google cloud, but you have Google workspace. You have all these other services that people would not even think are creating Google cloud resources at scale. Did you find that it was easy to do security in Google cloud? I guess, was it more of the same, just basically scaling it out?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Jimmy Barber:
+\f1\b0 \cf3  It's challenging, I'll say that, because the rate of change and the speed of development to get there drives that desire and need to have your guardrails in place, your security structures in place, and all of the supporting aspects of that, so you're moving up. Speed and you're moving along with guys who are aiming to deploy and deliver their applications as well.\
+And depending on how your \cf4 [00:30:00]\cf3  organization works, you may have a good lead time to build out your castle, or you may not have, and they introduce challenges. You also have the rate of change. Like I said, Google has released so many amazing updates to firewall and lots of other. Improvements on their services that you're constantly analyzing those.\
+So on a weekly basis, you're kind of going right. What's new. Can I use that guardrail? Can we change that? Okay. Get that on our roadmap on our backlog and we'll see where we fit it in. So you have that aspect of it as well. And then it's around. building a team and people around to support that and understanding within your organization.\
+Do you have a platform team approach to your structure? Do you have dedicated security teams that are building that? So you need to then understand what's there. And then you also have a great resources. You're developing teams that are consuming and building in the cloud as well. They're amazing.\
+They're the guys that are really know the services. So you've got to have a good balance and relationship with them. And they'll bring tools and guardrails out to you \cf4 [00:31:00]\cf3  as well, because they'll solve problems for you. They'll solve problems themselves. And that's an amazing resource as well, because you've got some really, really smart people across the board there.\
+So you have that while you're moving at speed, you have challenges, but you've also got change and you've got people around you to help as well, or there should be. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Awesome. And where do you reckon people can start? Cause this is kind of like the first final technical question from my side, where do people reckon should start doing or learning about Google cloud security?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Jimmy Barber:
+\f1\b0 \cf3  There's lots of free courses. There's, you know, starting with Google is. It's definitely not, I would say, well served on the kind of public forums from comparison to AWS. So, you know, finding good people from Twitter to follow relating to Google is, it's hard. There are some out there, there's some great resources out there.\
+Marco from CloudSec. Docs, he's got a, a newsletter every Sunday, which has an amazing amount of information in there. That's a good place just to keep learning and reading what's happening. \cf4 [00:32:00]\cf3  There's plenty of online training that's available there. Google has released, they have their Coursera and Qwiklabs integrations, and they've also released a, an academy program recently as well.\
+There's lots of approaches. You can also spin up your own Google projects. There are some free credits there and you just need to be aware, understand your guardrails before you do that and what you can apply as well. So yeah, there's that. And then there's some conferences out there with some great videos that are shared out as well.\
+There's lots of resources out there. It's just finding that set and sticking at it and learning it. And there's a lot to learn. So, you know, you got to pick it up topic by \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  topic. That's a good point and good part for me to transition into my non technical questions, some fun questions on that. Only three.\
+What do you spend most time on when you're not working on cloud or technology? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Jimmy Barber:
+\f1\b0 \cf3  Keeping my children alive. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  I love it. Yeah. I think a lot of people are still trying to do that every single day after work. That's their second job. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Jimmy Barber:
+\f1\b0 \cf3  Yeah. I've got four kids. I've got a four year \cf4 [00:33:00]\cf3  old, six year old, 11 year old and soon to be 13.\
+So, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  oh, right. There you go. Oh, you got the full gamut. So yeah, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Jimmy Barber:
+\f1\b0 \cf3  including a teenager as well. Yeah, full time taxi in \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  our house. Oh my God. Okay, fair enough. And what is something that you're proud of but is not on your social media anywhere? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Jimmy Barber:
+\f1\b0 \cf3  I don't really do big social media, but I'm proud of my family, I'm proud of my children, I'm proud of my wife and everything that we do.\
+And like I said, keeping them alive, moulding and shaping them into the people that they are. , that's my world. Oh \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  my God, that's really nice. Thank you for sharing that. Also, final question. What's your favorite cuisine or restaurant that you can \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Jimmy Barber:
+\f1\b0 \cf3  share? Well, with four children, we don't really get to restaurants that often, but my favorite cuisine is Italian.\
+When I was like 15, I worked for an Italian pizzeria pasta place. And ever since then, I've had a love of Italian food. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Wait, anything in particular about Italian food? Like any pizza, pasta, or? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Jimmy Barber:
+\f1\b0 \cf3  Probably more pasta. Yeah. I just. Like \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  a, like a \cf4 [00:34:00]\cf3  plain, simple pasta with butter. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Jimmy Barber:
+\f1\b0 \cf3  No, probably more tomato sauce. Oh, nice, nice.\
+Yeah. Not very adventurous, but yeah, it's just all the \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Italian cuisine. That's pretty awesome, man. Thank you for sharing that as well. That's kind of most of the questions we had. Where can people find you on the internet if they have more questions about the whole Google cloud world or even multi cloud \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Jimmy Barber:
+\f1\b0 \cf3  world, right?\
+I'm on LinkedIn, so feel free to catch me there and send any questions or connections there. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Yeah, I will put that in the show notes as well, but thank you so much for joining for this Google Cloud Security Month, but I can definitely see, you can have another conversation in the whole multi cloud world as well later on.\
+So thank you so much for your time, Jimmy. And thank you everyone who's watching this as well. We'll see you on the next episode. See ya.}

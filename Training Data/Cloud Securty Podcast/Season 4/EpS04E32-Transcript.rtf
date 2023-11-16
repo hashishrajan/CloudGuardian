@@ -1,0 +1,374 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2639
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 TimesNewRomanPS-BoldMT;\f1\froman\fcharset0 TimesNewRomanPSMT;}
+{\colortbl;\red255\green255\blue255;\red97\green167\blue95;\red0\green0\blue0;\red109\green109\blue109;
+\red81\green0\blue192;}
+{\*\expandedcolortbl;;\cssrgb\c44706\c70196\c44706;\cssrgb\c0\c0\c0;\cssrgb\c50196\c50196\c50196;
+\cssrgb\c40000\c0\c80000;}
+\paperw11900\paperh16840\margl1440\margr1440
+\pard\sa360\partightenfactor0
+
+\f0\b\fs28 \cf2 \up0 \nosupersub \ulnone Kat Traxler:
+\f1\b0 \cf3  \cf4 [00:00:00]\cf3  Just because you're an expert in AWS doesn't mean that you're going to be an expert in GCP really because the model is flipped on its head. And once you kind of get a sense of GCP, you might end up loving it. It's really hard to run into any friction when you're first creating them, great for uptick.\
+If you really want people to use your services right away and not have any issues, horrible for security. It just seems like there's no way to undo that crime against service account. I'm just assuming countless customers that are relying on this functionality just to keep the engines of their Google projects going.\
+I can only imagine that there is a lot of hand wringing internally about this awful design decision that was made. Well, I love that you mentioned shared responsibility model. Google, they don't have the shared responsibility model or they think of it more as shared fate, which is this concept of they have skin in the game as well as far as how secure their customers are. If a customer is failing, they are failing as \cf4 [00:01:00]\cf3  well. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Google Workspace. Google BigQuery, Google Analytics, you know what all of them have in common? Google cloud, you may not know this, but you may already be using Google cloud, either through companies that you may have acquired that are using Google workspaces with additional access to Google workspace and Google cloud.\
+Or you may already be working in the Google cloud space where you're trying to find a great harmony of security between multiple versions of Google Cloud that you may maintain your organization. Now, this episode we had Kat Traxler, who is from Vector.Ai. She's a researcher there, and we spoke about first, how do you even get into a Google Cloud account?\
+What are some of the low hanging fruits? What are some of the default that you can explore if you're trying to pentest a Google Cloud account? What is the methodology for approaching a Google Cloud account? What are some of the nuances? of say, maybe if you're coming from an AWS or an Azure background, are there comparisons that you can do for similar attack patterns from there that can be applied over here?\
+We also spoke about the methodology from a perspective of the complex structures that can exist. Like you may be really mature in AWS, but not as mature in GCP. \cf4 [00:02:00]\cf3  So you might go down the path of, I'm just going to run some kind of configure view or talking about configure view. Another thing we talk about is the fact that it is actually way more than a configure view when you're trying to do a pentest, especially a cloud.\
+Security Pinchest, whether it's AWS, Azure, Google cloud, or whatever the cloud you put in, the information that you collect is you're collecting evidence, which would inform your Pinchest. It's not that, Oh, configure view is the only thing that cloud security Pinchest is. So I appreciate Kat sharing a lot about how you could do this in Google cloud and how it's more than a config review and some of the tooling and structure.\
+She also spoke about her open source tool called DERF and other tools that are useful. And other tools that can be used to have, Hey, if you have an existing infrastructure, this is how I would run an attack on it. But if you don't have an infrastructure, but you want to still form some form of infrastructure that can learn from it, then Cat's DERF open source tool would be amazing for it.\
+And the one that we called out from Christoph as well, which, and the example that was called out by Cat for Christoph's open source as well called Stratus. And also the example of another open \cf4 [00:03:00]\cf3  source repository called Stratus Red Team that was called out by Kat as well by Christophe from Datadog.\
+So all that and a lot more in this episode. If you know someone who's trying to do penchats in Google cloud, definitely share the episode with them so they can learn from this as well. And if you are someone who probably is watching it or listening to this for the second or third time, I would really appreciate if you can give us a follow, subscribe if you're watching this on LinkedIn or YouTube.\
+But if you're listening to this on Apple or Spotify, definitely give us a follow and leave us a review or rating over there. It definitely helps more people like Kat and others who are amazing at what they do. To come on the show and talk about what they love best. It is sharing knowledge on how you could be a better cloud security pentester out there tomorrow.\
+I hope you enjoyed this episode with Kat. This was continuation of our offensive security month, and I would see you in the next episode. Peace. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Kat Traxler:
+\f1\b0 \cf3  By bringing developers and security together, you don't have to choose between speed and security. Develop fast, stay secure. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Hello and welcome to another episode of Cloud Security Podcast.\
+We are continuing with our Offensive Security Month and today's topic is Google Cloud pentesting? Research? We'll find out. So let me bring on my friend \cf4 [00:04:00]\cf3  over here. So she's going to be a better person to talk about this than me. So hi Kat, welcome to \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Kat Traxler:
+\f1\b0 \cf3  the show. Hi, thanks for having me again, Ashish. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Thank you for coming over.\
+It doesn't feel like that long that I saw you last week, a couple of weeks ago at Blackhat. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Kat Traxler:
+\f1\b0 \cf3  It was such a pleasure seeing you and Shilpi. It was just like magical, really.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  I appreciate that. But I know a lot about you, but for people on the internet , some of them at least may not know who Kat is, could you give us a bit more about yourself and where you are today these days?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Kat Traxler:
+\f1\b0 \cf3  Yeah, so I find myself with my feet in lots of different spaces in cloud security right now. So my day job, I work in security research, both in AWS and GCP. Okay. So I'm researching attacker techniques trying to figure out how the bad guys are getting into cloud deployments. And so that's going to inform some detection engineering work that I'm doing, then writing detections and writing the logic, which will then prevent my actions to get into an environment.\
+So that's hashtag day job, right? Then I'm \cf4 [00:05:00]\cf3  also the author of the SANS Sec 549 Enterprise Cloud Security Architecture course. So I have my life kind of squarely in that architecture realm, sitting on top of all of the latest and greatest patterns of like the most secure deployments for identity architecture or network architecture.\
+What's the most secure patterns for doing say data lake and AWS and GCP. And then of course I have kind of a background in web app pentesting. That's kind of where I came up is doing web app pentesting. That's how I got into cloud security. So my feet are in a couple of different streams. I think you've had me on the security architecture of month as well.\
+It keeps me busy and I don't think I'd want it any other way. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  That's pretty awesome. And I think I'll definitely recommend checking out the. course that you've written as well. And the previous episode we've done, because you've had architecture, pentesting, and now research as well. You have an open source tool that was released which we will talk about later on as well.\
+ So talking about pentesting and tapping into your web app, pentesting, and \cf4 [00:06:00]\cf3  now the cloud security testing experience, how different would you say is pentesting in AWS versus say Google cloud?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Kat Traxler:
+\f1\b0 \cf3  You know, obviously your goals are going to be the same, right? You interact with the client. You understand what they're concerned about. You understand where their crown jewels are and you attempt to test their controls. But any differences between the AWS pentesting and pentesting and GCP is going to come down to the difference in how those two clouds are constructed, right?\
+So, you know, in AWS, you're going to be testing a lot of like role assumptions, using role assumption to have lateral movement. In GCP, you're going to attempt to act as service accounts for lateral. And that's going to be a little bit of a difference. So the difference is going to be around Construction of the clouds and then potentially and I hate to even say this, but you know, potentially there might be a maturity difference.\
+Really more people have been in AWS longer and more people have had time \cf4 [00:07:00]\cf3  to have more mature, secure deployments. You know, you might have a client who's had 10 years in an AWS environment, have been able to iterate and have automated security control. So you can really push those boundaries and try to edge cases in GCP you know, you might have a client who's maybe just a couple of years. into their deployment or they have an acquisition. So that kind of pentest is going to look very different. You're going to actually find a lot of low hanging fruit and you can't say pull out every trick in your bag, right? You have to meet the client where they are.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  I think I appreciate the nuance of people may be more mature on AWS because it's been longer, blah, blah. And do you feel like Azure would be similar as well? Like, I think there would be the same similar spectrum of, because GCP kind of came almost like the third person in the already busy cloud market with AWS and Azure to your point.\
+And I guess I was a CISO for a company, which all for the example that you \cf4 [00:08:00]\cf3  gave acquired a company that had GCP exactly. You kind of go down that path. Now, I'm sure people start off with GCP as well. There are ones out there. Would you say the pentest for a Google cloud? And as I say this, I'm going to rub a few people off is not a config review.\
+Or maybe even what is the config review for people who probably hearing it for the first time, because a lot of people say cloud pentesting is just a config review and they just run a, I don't know, some kind of a scanner. And that's the end of the story. What's your opinion on pentesting cloud security, but it doesn't matter if it's Google cloud otherwise.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Kat Traxler:
+\f1\b0 \cf3  Well, I mean, comparing it to like a config review and pentesting, your goals are the same, right? You're trying to determine are your client's controls sufficient and where there are gaps, but the mechanisms that you use to answer those questions are totally different. In a config review, you're pulling evidence, right?\
+You're asking the system, what are all the bits and bobs, the configurations, what are all the ones and zeros, how are all the switches flipped, right? And then you're presenting that in the report form and comparing it against, say, a \cf4 [00:09:00]\cf3  framework. Where a pentest is actually going to be attempting to exercise those controls and trying to circumvent those controls to achieve an attacker goal.\
+So again, you're trying to say, are these controls sufficient? Are these configurations sufficient? But you're going about them in two different ways. Pentest is trying to exercise them, push them to circumvent them. And a config review is pulling evidence.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Oh, I love how you explain this because. A lot of times I imagine when I talk about pentesting, or at least a traditional pentest, people just assume that I'm just going to go into an environment, run an Nmap and, you know, Bob's your uncle after that.\
+How would you differentiate between like the cloud pentest and a traditional pentest? I guess? Right.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Kat Traxler:
+\f1\b0 \cf3  So in a cloud pentest, and we're just talking about like the scope of the cloud, right? Like what is the cloud? You know, what is the cloud? These layer seven protocols is HTTP. It's these published APIs.\
+So what are you doing with these APIs? You're attempting to use, abuse \cf4 [00:10:00]\cf3  them for a particular goal. And your goals are like exfiltration of data, the corruption of data, DDoS. There's a handful of attacker goals. So you're trying to use the abuse, those HTTP requests. That's within the cloud domain. But the cloud domain is, you know, has these edges where they butt up against other domains.\
+So if you're a cloud pentest only stays within those CSP provided HTTP API APIs, you're probably missing something. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Interesting. And to your point, most applications these days that are hosted in Google cloud go beyond that, obviously it's not just the services that they're using in Google Cloud, whether it's a IaaS PaaS or a SaaS service to run the application that could require pentest, but there could be a broader context of APIs that are probably required a bit more.\
+Like there could be elements of application, the network security that would be required that people would have to consider in this. What's your thought process when you would explain, how would you go about PenTesting Google Cloud accounts or what's a good I guess, step forward, or , how would you begin? \cf4 [00:11:00]\cf3  Yeah. How would you go kind of start? Like, I imagine a lot of people who've come to this conversation, they don't want to understand the methodology, what's your thought process. If they were to start doing pentesting of Google cloud or even an assessment of Google cloud as to what does that look like, what would be your thought process on that?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Kat Traxler:
+\f1\b0 \cf3  Well, I always recommend people read the docs, right? Understand what you're testing. understand that Google Cloud is a resource based IAM CSP. I mean that every resource can have a policy attached to it. Right? So understand the CSP that you're attacking just because you're an expert in AWS.\
+Does it mean that you're going to be an expert in GCP really? Cause the model is flipped on its head. And once you kind of get a sense of GCP, you might end up loving it. That's the sad fact. You might end up really loving how it works. So step one, RTFM, read the docs, understand what you're testing. You're going to save yourself.\
+So much time instead of just chasing ghosts. The next one probably is understand the \cf4 [00:12:00]\cf3  confluence between your web app, your application security and your cloud security. That's going to be a lot of your points of initial access is your web apps. You know, you're going to have your public access is going to be your web apps hosted on GCP compute on cloud run.\
+So understanding the confluence between maybe a web app vulnerability, like. remote code execution, like SSRF, understanding how those can then translate into a foothold in the cloud. That's going to be your first step in understanding initial access in any of the clouds. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  I love the example you had with unlike AWS, jumping into GCP probably would not understand what's going on.\
+And especially if there's policy attached to every resource and stuff. Are there any common GCP services that people use? Cause I imagine people who listen to this may have no context to Google cloud, but some may do. What are some of the common services that you hear people use in GCP? I'm assuming I am is definitely one of them because everyone needs identity.\
+Outside of that, do you hear a lot more people \cf4 [00:13:00]\cf3  using heavy compute or heavy data? Like, I know I'm throwing off a question, but what do you see normally people use GCP for? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Kat Traxler:
+\f1\b0 \cf3  Cloud runs a really distinctive service within GCP. So understanding cloud run, it's a great mechanism for deploying and hosting containers.\
+I forget the project that it's built on, but I would really understand what that service model looks like. It's also primarily used for big data, right? If an organization has Google cloud, it's not likely that they're using it for their web apps. I mean, they might have a handful of web apps. It's not likely that they're using it for workloads like they are in AWS.\
+It's more likely that they're using it for big data. So understanding big query is understanding the access model around big query, which is massively complicated. Understanding the mechanisms for exfiltrating data with big query, which again, is I cannot count them on my fingers, massively complicated.\
+Understanding the mechanisms for data access. At the table level, at the \cf4 [00:14:00]\cf3  row level, at the column level, at the authorize you level, cross project, all of that is going to be key for achieving your goals of pentesting which is demonstrating impact your client. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Interesting. And are there any low hanging fruits that people can look out for in Google cloud?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Kat Traxler:
+\f1\b0 \cf3  Yeah. I mean, that kind of goes back to, you know, the maturity of your customer, of your client, how long have they been in Google cloud? Where are they benchmarked? There's a really great paper that Google has out. It's called the cloud adoption framework. And it benchmarks like there's all these descriptions about where an organization might be on these different pillars along their kind of cloud adoption and understanding where they are in that journey.\
+If they're relatively early on, you're going to see these markers of low hanging fruit. You're going to see. be a lot of use of default service accounts, particularly. And so that's as a pentester, that's what you really want to focus on. You want to focus on the use and abuse of default service accounts and the excessive permissions that come with them, that they're automatically assigned the editor role, \cf4 [00:15:00]\cf3  which I forgot last time I checked had over 5, 000 permissions.\
+It might be six. It's hard to keep track. Like I said, meet your client where they're at. If that's what you're seeing in an environment, focus on the use and abuse of the default service accounts and the permissions associated with them, and then focus on trying to get them on a pathway to not use default service accounts, to use custom service accounts with more finely sculpted roles.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  And what are default service accounts for people who do not know what that is? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Kat Traxler:
+\f1\b0 \cf3  Yeah. You know, I'd love to know who made this decision, but at some point there's a room of very smart people at Google who decided that whenever you enable certain APIs within a Google project, automatically a service account is created.\
+There's two default service accounts, a default compute and a default App Engine. So whenever you enable the App Engine service account or the compute service account, whenever you enable the App Engine API and the compute API, these two service accounts are just all automatically created within your project and \cf4 [00:16:00]\cf3  they're assigned the editor roles so that it makes uptick of Google compute and Google app engine really easy.\
+You don't have to worry about the permissions associated with those pieces of infrastructure. They're sort of automatically created for you and really excessive permissions are created that it's really hard to run into any friction when you're first creating them. Great for uptick, right?\
+If you really want people to use your services right away and not have any issues, horrible for security. And it just seems like there's no way to undo that crime against you know, service account humanity. It's just baked into the platform right now. And there are, I'm just assuming countless customers that are relying on this functionality just to keep the engines of their Google projects going.\
+I can only imagine that there is a lot of hand wringing internally about this awful design decision that was made that is causing so much consternation but seems really impossible to backtrack from \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  You said like the people who may \cf4 [00:17:00]\cf3  not be as mature would have the default service account.\
+I'm assuming the experienced ones are deleting them and then that's why you kind of go into a bit more kind of form of pentesting at that point in time. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Kat Traxler:
+\f1\b0 \cf3  Yeah. So the more mature organizations are going to enable an org policy constraint, that's going to prevent the creation of these. so that when you enable the APIs, they're not created at all, and then it's going to force whoever is creating the compute in the app engine to create their own service account and then assign a more restrictive role.\
+You could also say another level of maturity scale would be to have all of your service accounts to be relatively scoped. So you can say all of your service accounts must only have this very tightly scoped role attached to it. You know, it can only have this one, maybe custom role that we assigned to you.\
+So there's a few different levels of maturity roadmap that you can do with service accounts. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Interesting. And I think I find it fascinating to the point that I unlike AWS and I love the example of Google Cloud also \cf4 [00:18:00]\cf3  because it kind of helps explain the complexity of just generally how much Google is used by a lot of companies.\
+And I think we've got we have a mutual friend, Karl coming in, in a couple of days as well. Hopefully. So we'll talk about the whole idea behind the Azure side of things as well. The uniqueness about the cloud usage for Google is the fact that people have Google Workspace, Google Analytics. Like there's a lot of these Google other products that are almost like an octopus inside your organization already before you even know it.\
+Is there already direct relationship between if I have a Google analytics account or a Google workspace, I already have Google cloud or do I have to still enable it? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Kat Traxler:
+\f1\b0 \cf3  Likely you do have Google cloud if you have Google Workspace. By default Google Workspace is considered like an app. Google Cloud is considered like another app within Workspace.\
+So you have Workspace that's sort of like an orchestrator. And then there's all of these apps within the ecosystem. There's mail, there's calendar, there's analytics. And some of these are kind of automatically turned on for all of your users. And some of them you have to manually enable. And Google Cloud is \cf4 [00:19:00]\cf3  one of those apps that's automatically turned on for all of your users.\
+So automatically, if you have a Google workspace present, all of your users can already create Google cloud projects. And that's another one of those design decisions that I'm sure was created to enhance uptick and to reduce friction. It's also created a lot of headaches for organizations when they realized that they have Google cloud presence that they didn't know about.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Yeah, I would imagine it would be even hard to identify how much of the current staff population in your organization has access to both Google Workspace and Google Cloud. I imagine that would be a challenge as well from an architecture perspective. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Kat Traxler:
+\f1\b0 \cf3  Well, if you have control of your Google Workspace.\
+If you've wrangled control of it, that means you registered your domain with Google Workspace and you've gained control from there. You can understand who has the ability to create Google Cloud Projects and then you can wrangle it in under your domain. Right, right. But until you do that And it's sort of invisible to \cf4 [00:20:00]\cf3  you.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Interesting. And what about things like, so another few terminologies for people who may be new, but the whole Google project and Google organization folders and all of that, the way I'm thinking about this is like, how do you persist your access in Google cloud? Cause I think I'm thinking, Oh, wait, so if I get access to a Google workspace for someone, a Gmail account, I should try and see if I can go into a subsequent Google cloud account from theirs.\
+Same as analytics or whatever, for whatever reason, my phishing attempts succeeded. And then the other way I was thinking is, Oh, maybe, is there like a concept of, you know, how temporary credentials can be created and how do I persist my access? Like, is this kind of where I'm coming from? So one way I thought about this was, Oh, okay Google workspace, jump onto it or create myself a Google workspace account. No one finds out until six months later that I have an account which has access to Google cloud. Or what are some of the other ways that people can persist access to Google cloud? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Kat Traxler:
+\f1\b0 \cf3  Well, let's talk about how you mean you persist access within AWS, like a common mechanism for persisting access and AWS is say, like, I will use air quotes, but like backdooring and IAM role, saying \cf4 [00:21:00]\cf3  like updating the trust policy that says like an external entity can assume this role that would be an AWS access persistence mechanism. So the equivalent in GCP would be to say to take a service account and then to say an external entity can act as that service account would be the equivalent, right?\
+And so you could also assign an external entity permissions at any level within, say, the folder, the project or within the resources. Yep. Your eyebrow raise. And this, you know, like, Oh, this is very concerning. You can sign external entities access, but there are mechanisms to prevent that within org policies.\
+So this is probably another teaching moment for clients that if you're able to persist access with an external principle, that this is another teaching moment where you can highlight some of the controls available to them, like restricting external domains. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  That's a great reminder that shared responsibility as \cf4 [00:22:00]\cf3  when it started as a conversation between just your CSP and the customer, I almost feel like it's like a sandwich now where you have the CSP, the cloud service provider who has their own sets of shared responsibility. Then there's you in the middle, sorry, right next to it where you're consuming the services from the cloud provider. And then there is another, I guess, to finish the sandwich, you have your attachment to third party software that help you with performance, monitoring it and all the things with it.\
+So it's almost like great sandwich that we live in and shared responsibility for me, it's like a great combination of, as a customer, I have to be responsible for my side of security and hopefully understand that this differentiation between myself and the cloud service provider, but at the same time do the same for the third parties as well and constantly monitor and all of that.\
+So I love that external identity example. Any other examples that come to mind with. If you have an example of a security bug you found, or maybe just to help people, like what would be an example of a result someone would expect from a Google cloud pentest kind of thing, which is \cf4 [00:23:00]\cf3  not just a config review.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Kat Traxler:
+\f1\b0 \cf3  Well, I love your mention of shared responsibility model, because it allows me to talk about Google talks about, you know, they don't have the shared responsibility model or they've kind of iterated beyond that. Yeah. They think of it more as shared fate, which is this concept of they have skin in the game as well.\
+As far as how secure their customers are, they should think of it as if a customer is failing, they are failing as well, which I think has led them to create their whole suite of org policy constraints. Shout out to Jason Dyke, he maintains the org policy bot, which publishes changes to, and updates to the org policies within GCP.\
+And those are those constraints that you can apply at multiple levels of your organization to guardrail and restrict your environment \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  and by the way, Jason Dyke was on the show a couple of years ago, I think, but it's super, super nice to hear about Google cloud as well. So yeah, I think I'll definitely put a link \cf4 [00:24:00]\cf3  to that bot as well, if I can, because do you find that any common TTPs that comes to mind when that you hear from Google cloud quite often?\
+Like, I think we kind of spoke about the external party and I guess having access. We also spoke about the service account. Anything else that pops your mind? I mean, I guess TTP is tools, techniques and procedures. Yeah, that's pretty good. Yeah. Cause people would be like, what is TTP?\
+Like, it sounds like a disease. Yeah, it does sound like, so what would be some of the common TTPs where you can think of for Google Cloud?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Kat Traxler:
+\f1\b0 \cf3  So Google has as a team called the GCAT team, they put out, every couple times a year, they put out this Threat Horizons report, and there's a really good graph in there just highlighting what they called risky actions.\
+Okay. Google Cloud, a risky action isn't necessarily a TTP, right? So this isn't quite apples to apples with your question, but it's a good conversation point. What they highlight within a graph is what are the risky actions that they're seeing within \cf4 [00:25:00]\cf3  Google projects, things that they know that might be indicative of a threat actor and how often they're seeing it and by far the biggest thing that they're seeing is cross project service account access. So a service account that lives in one project and is accessing resources in another. They're defining that as a potential risky action, right?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  And would you say, is it just a project or can it be?\
+Cause I imagine at scale where people have been using it for a long time, I mean, they have been mature in their Google cloud, they started in it and now they spend three, four years in it. Would there be like multiple organisations, like how some people have, they started with one AWS structure and then suddenly they acquired another company, then there's another AWS structure.\
+No one combines it ever. Now it becomes your security team and you're managing two different structures of it. Maybe it would be common in the Google cloud space as well. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Kat Traxler:
+\f1\b0 \cf3  Absolutely. Yeah. It all gets kind of like hodgepodge together, right? I just realized that I misspoke the most like most common risky action.\cf4 [00:26:00]\cf3  \
+Isn't a service account with permissions in another, it's a service account impersonating another service account, right? So it's this cross project impersonation is what they're highlighting the risky action is, and as you mentioned, if there's, you know, kind of like what we call organic growth, if there's organic growth within an organization or an acquisition that gets tacked on, you might see some of these risky actions.\
+Are they TTPs? Are they a threat actor? Probably not. Could be, but at a minimum, there are things that highlight, maybe not the best practices. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Yeah. And would you say the quote unquote risky actions as we're calling it, by the way, I did not know about the reports that's pretty awesome that they actually publish because they have a big cyber security action team as well. So that's pretty awesome. The team too. Yeah. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Kat Traxler:
+\f1\b0 \cf3  I've heard that there's rumors that they have a track suits as well. So I want them into their track suits. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  I might have to look that up one day. Just make sure people \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Kat Traxler:
+\f1\b0 \cf3  are listening. I need the \cf4 [00:27:00]\cf3  GCAT team in track suits. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Yeah. Well, if if there's one, I would definitely find out for you as well, because I would love to have one of those track suits as well.\
+We're trying to get one for Cloud Security Podcast, but haven't been able to get that yet. Havent got a good supplier. But maybe someone in the comments can help me out with this. The next question that I had was more around the enumeration part for, so we kind of spoke about the organic growth that people may have.\
+And I imagine that would add more complexity. And so when someone's trying to pentest. Would that be right? If I was looking at two organically grown Google structures, they have to talk to each other. They have to come by the internet. They would not be within the group. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Kat Traxler:
+\f1\b0 \cf3  Yeah. I mean, there's a couple of different ways to connect them by identity, right? You can establish OIDC connection.\
+Right. So there might be a workload identity pool connecting maybe two different organizations, two different projects. And then it's just, you know, it's just another random third party. There's nothing special about it. Or you can grant permissions from one entity into the other. And then, and they just use OAuth, right?\
+So it's all just coming over the internet by either via trust via OIDC or just \cf4 [00:28:00]\cf3  directly granting permissions into the project, that would be how you'd connect them from an identity perspective. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  And I think from that point onwards is basically the application itself. And again, calling out the fact that it's not like all this while we've collected evidence about using config review, collected evidence about the fact that, Hey, is anything misconfigured in terms of service account and third party access? Anything else that looks suspicious, or probably is not a, is a risky action, then use that as a way to kind of go, okay, what's the next thing I can do to gain access to the application. We kind of touched on SSRF just before, and I think a lot of people when they hear SSRF, they hear the old AWS CLI version of SSRF where they think, Oh, it's this profile I get access to. server and look at that, Capital One happened after that or whatever. My understanding was that kind of SSRF does not exist in Google server because the way their access token keys works. Is there an SSRF like that in GCP now? Or would SSRF be the traditional SSRF, not the one that people talk about from AWS perspective?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Kat Traxler:
+\f1\b0 \cf3  Yeah, there absolutely could be. It's more \cf4 [00:29:00]\cf3  difficult. Right? And it's more difficult to perform SSRF within Google Cloud because they use tokens just like you could with IMDs v2 and AWS. I would say you could, it's very difficult organizationally to move thousands and thousands of workloads to v2.\
+So you don't see a big uptick. That's one of the places where Google Cloud made a good design decision up front. So certainly SSRF is very much still in play but more difficult. More likely we're looking at remote code execution. So when you're looking at those edges where cloud security and application security meet, how can application security inform cloud security?\
+It's likely with remote code execution. So anybody who's looking for like more information on that, I love reading bug reports. Those are often published. Some of the coolest bug reports from like HackerOne are published. Just look for SSRF or RCE and look for their impact on the cloud. You can really find some very creative folks in trying to increase the impact of their bugs.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  \cf4 [00:30:00]\cf3  Wow. Oh, actually that's a good word. Cause we've been talking about the fact that the security review or doing a proper cloud pentest is a way to increase the impact of an existing bug you may find, which might be traditionally a low risk or a medium risk. You at least increase the risk level of the bug that you identified by making sure that you're just including something that's from the cloud security perspective.\
+I guess one more question then we kind of spoke about. I guess, how can people like the thought process and what people can find as low hanging fruit. We also spoke about the complexity of architecture. I'm also curious if there are any open source tools that you, I know you have one, but I think a lot of people think about when they think about tools for pentesting, they almost think like straight away and Nmap.\
+And I think before the call, you kind of. spoke about the fact that are there tools like that in the cloud space and obviously love for you to share your open source tool as well just in what that does and everything. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Kat Traxler:
+\f1\b0 \cf3  Yeah, there are a couple of tools specifically that are really good for pentesting.\
+Pacu from Rhino Security came out five years ago, still very tried and true as far as targeting infrastructure that \cf4 [00:31:00]\cf3  already exists and performing, I think, you know, maybe 30 different attacks you can choose from. That's AWS only. I think Karl has one out that's for Azure. Yep. Microburst.\
+Microburst. And these tools have a couple of things in common is that they're going to be targeting infrastructure that already exists. So imagine you're a pentester, you get dropped into an environment, you need to target what's there. That's what these tools are doing. I have a tool that was just released that has a little bit of a different methodology.\
+It spins up and creates infrastructure for you. So it doesn't rely on infrastructure that's there. It'll perform actions, you know, attack techniques. On infrastructure that I create, manage, destroy with Terraform. So in that sense, it's not a great pentesting tool, right? Mm-hmm. , if you're gonna be dropped in an environment, you need to target what's there.\
+Yeah. You don't need to target what you're gonna create, but it's a really good tool for understanding how attack techniques work. It's a really great tool for creating detection \cf4 [00:32:00]\cf3  samples. If you wanna understand how a particular attack technique generates logs, this is what you want to use. Right? It's a really great tool for validating your controls.\
+So if you have a control that should prevent an action, you can spin up my project called the DeRF and attempt to test that control over and over again by say, creating an access key against a user or let's say assigning an external user to a GCP IAM policy. Things that you have controls against that should be prevented.\
+You can attempt to test those controls kind of in a continuous manner. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Okay. So the infrastructure already existing infrastructure being created. We kind of spoke about Strata as well. What was that about? Stratas. Yeah. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Kat Traxler:
+\f1\b0 \cf3  Well, Stratas is a great project from Christophe at datadog. His project has a very similar goal.\
+So it spins up infrastructure for the end user, and it targets \cf4 [00:33:00]\cf3  more clouds than mine does actually targets AWS, GCP, Azure, Kubernetes, and it performs attack techniques against them. But the difference between my tool, DeRF and Stratus is his is operated kind of at the CLI by the end user. You download Stratus and it's a single go binary and you perform those actions from your end point. What the DeRF does is it deploys the attack techniques as Google workflows in Google cloud. So it's a cloud hosted project. So I can deploy attack techniques and I can then automate them in the cloud, or I can have other folks come by and perform attack techniques.\
+It kind of separates me, the attacker from the attack. execution, which might be like an automated process, or it might be some other end user. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Maybe this is a good time to talk about the fact that I would love to kind of have you and I were talking about this, I think it'd be good to kind of have a walkthrough of the open source so that people can actually see what that looks like and in action and everything. \cf4 [00:34:00]\cf3  But if anyone has any questions, feel free to drop them in as well, while we go through the non technical. Questions because that's the technical questions I had. But if anyone has any technical questions for Kat be here, feel free to drop that in while I go through the non-technical one.\
+It's been some time since you've answered these, so I wonder if the answers are any different. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Kat Traxler:
+\f1\b0 \cf3  I'm not prepared for this. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Oh, well, you'll be fine. What do you spend most time on when not working on Cloud pentesting? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Kat Traxler:
+\f1\b0 \cf3  Oh, I'm in my garden, Ashish. Like if you follow my LinkedIn, it's all just tomatoes right now.\
+I I was sick this weekend, but I still managed to make like a bunch of tomato paste. All right. I had probably a bushel of tomatoes that I picked, and then I cooked down all of those tomatoes down to several quarts of tomato paste over like six hours, just like stirring and stirring and stirring. It's like in Minnesota right now, it's like prime harvest season. So I'm in my garden constantly. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Oh, wow. Well, harvest season sounds like a great idea as well. I was going to drop a link for the DERF cloud, cause it's a good comparison of the entire process as well in terms \cf4 [00:35:00]\cf3  of how it would look like for which of the tools you use. I'll leave that in there for people to kind of copy and see what that looks like.\
+The other question that I had for you, which is non technical one, but it's something that you're proud of that is not on your social media. Tomatoes? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Kat Traxler:
+\f1\b0 \cf3  Yeah, probably. Oh, let me get this for you. This is my favorite tomato. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Oh my God. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Kat Traxler:
+\f1\b0 \cf3  Every year I give a ribbon award to my favorite tomato. This is my favorite tomato this year. Everybody. I've not put this on social media, so this counts. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  This is exclusive. How massive is that? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Kat Traxler:
+\f1\b0 \cf3  It's not that big. It's maybe a pound, pound and a half. I definitely grow larger tomatoes, but this is winning the award for the best tomato this year for its color, its consistency. Look very little blossom and rot. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Yeah. Wow. I did not realise there was so much details to tomatoes\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Kat Traxler:
+\f1\b0 \cf3  So this is a pink jazz tomato and this one, the blue ribbon award this year. All right. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Okay. Well thank you for sharing the exclusive. Last one. What's your favorite cuisine or restaurant that you can share? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Kat Traxler:
+\f1\b0 \cf3  I love Indian food, Ashish. Like I, we have a dosa restaurant less than a mile from my house.\
+If you \cf4 [00:36:00]\cf3  come by, I'll just. Like feed you doses, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  I would definitely try that as well. So I, I appreciate the exclusive of the tomato as well, so thank you for sharing that. For people who wanna know more about DeRF Cloud, I'll put the link on the show notes and when this goes on YouTube as well.\
+Where can people find the otherwise on the internet? LinkedIn, I guess. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Kat Traxler:
+\f1\b0 \cf3  LinkedIn nightmare Js on, on Twitter, X. Mm-hmm. . Also I'm on the InfoSec exchange. I'm pretty active on the InfoSec exchange. Mastodon, I really like it. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Are there people there? I feel like there's no, yeah, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Kat Traxler:
+\f1\b0 \cf3  there's people there.\
+Me, ? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  No, not, I mean, more than you. 'cause I feel like there's, I, I don't hear much about it, so I just wasn't sure if people actually still hanging on this. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Kat Traxler:
+\f1\b0 \cf3  I think so. You know, it comes in waves whenever there's like some controversy on Twitter, like more people show up. I'm hanging on, I'm hanging on to Mastodon.\
+Fair. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ashish Rajan:
+\f1\b0 \cf3  Fair enough. But Mastodon, I imagine the company is basically going. We want more controversy with Twitter because we keep getting the people maintaining this. But I'll put that in the show notes as well so people can find you over there as well. But thank you so much for coming on the show, and I will make \cf4 [00:37:00]\cf3  sure that we have another session to walk through on the whole DeRF cloud as well.\
+So Thanks everyone else who was watching and look out for the episode when it comes out on YouTube as well. But otherwise, we'll see you next every episode. Thanks, Kat. Thanks everyone else. See you. Peace.}

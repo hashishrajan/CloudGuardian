@@ -1,0 +1,630 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red250\green138\blue59;
+\red128\green128\blue128;
+\red216\green34\blue146;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ Hey, how's it going, Jason ? Welcome! }
+{\pard  \line \par}
+{\b\cf3 Jason Dyke:\b0}
+{ Hey, thanks. Happy to be here. Thanks for having me. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh, not a problem, man. I definitely lots of looking forward to this because I've been trying to talk about Google cloud security for so long and being, looking for people. So I'm excited about this particular month and I'm glad I have you to kick it off for me,}
+{\pard  \line \par}
+{so maybe a good place to start. Could be men. If you can tell us a bit about yourself, how you got into the whole cloud security space then. }
+{\pard  \line \par}
+{\b\cf3 Jason Dyke:\b0}
+{ Absolutely. Yeah, I mean, I think I had probably a non-traditional route to getting into cloud security. I actually went to college for marketing, so I'm a business student traditionally, so I have a bachelor's in marketing and that might actually be a, probably a little bit more common than people realize that, , you don't have to have a specific degree to get into cloud security and I definitely never.}
+{\pard  \line \par}
+{This is what I would be doing as a career. But so yeah, I originally started in business and , it was really into marketing. And once I graduated,, I really started to get more involved in just computers, doing things on computers and my first kind of real gig in the tech industry, it was }
+{\cf2 [00:01:00]}
+{ being a QA analyst.}
+{\pard  \line \par}
+{So doing a lot of quality assurance work. So that's where I started was during QA and then migrated over to kind of the it world during a lot of data center, work systems administration. And then from there started to get into this new thing called the cloud. So I started to learn about, I started on the AWS learning, just pretty much everything I could just trying to soak it all in and doing a lot of like solutions architect type work.}
+{\pard  \line \par}
+{And from that. Started to migrate over to cloud and got into doing consulting security consulting. And that's where I picked up a GCP. And that's kind of where I've been ever since during like Google cloud security. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Interesting. And definitely fascinating that you've gotten from marketing because I would always think people have some kind of a unique background. Like I've actually maybe I should not be surprised. I've got people who have actually come from a legal career onto cloud security as well. So like that, I mean, yeah, but it's definitely really interesting and probably an inspiration for a lot of people who might be thinking I need a technical degree to get into cloud or anything.}
+{\pard  \line \par}
+{So that's definitely }
+{\cf2 [00:02:00]}
+{ possible. So I guess probably the first question and. Pathway and just as well, because you've done. It seems like you've done a few consulting gigs as well. So you can talk about from that perspective as well.}
+{\pard  \line \par}
+{It's kind of is my first question, because a lot of people don't even know what kind of projects people run on Google cloud. Like I think the one that people keep hearing is like, oh, we use big query because Google cloud is great for data analysis. No. Do people use it for anything else? Like, I'm just curious what kind of projects people run on it.}
+{\pard  \line \par}
+{\b\cf3 Jason Dyke:\b0}
+{ Yeah. So if you're at an organization, sometimes you don't have a choice. If you work at a company and they have contracts with AWS or GCP, you don't really have a choice where you can build on you're pretty much, , if you're doing work for your job, you have to work with whatever platform is really available to you.}
+{\pard  \line \par}
+{But if you could have a choice GCP is typically commonly used for what you mentioned, big query. So lots of. Data analytics. They do that particularly well. They'd also do a lot of machine learning. So in particularly around the managed machine learning offerings, right? So those are one of the huge strong suits.}
+{\pard  \line \par}
+{So you see a lot of personal projects or }
+{\cf2 [00:03:00]}
+{ organizations, if they're on GCP, it's usually based around machine learning. They also of course, GKE, which is Google Kubernetes engine. , Kubernetes is one of their strong suits as well. So you see a lot of container based workloads on GCP, but they also have cloud run.}
+{\pard  \line \par}
+{So if you need to, maybe you don't want to run our Kubernetes clusters, but you have a containerized workload. You can run an on-call run, which is like a serverless a way to use container. So honestly, there's not like one type of workload you'll see on GCP, they have offerings for pretty much everything.}
+{\pard  \line \par}
+{Yeah. It's really, it comes down to sometimes, what does your company use if you're working on an organization where they only allow you to use one platform, you don't really get trucks. But , all the cloud providers pretty much provide no pun intended, similar offerings and it's whatever you're familiar with.}
+{\pard  \line \par}
+{That's usually the one that people gravitate towards. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Sweet. And maybe so let's start with build foundations and I guess, so to your point about I have, I guess, most people over here listening, and definitely have a choice of Google cloud. And from that }
+{\cf2 [00:04:00]}
+{ perspective, what are some of building blocks for people trying to get started with Google cloud security automation, what are some of the things they're looking at that, Hey, what is available in Google cloud?}
+{\pard  \line \par}
+{For me to kind of use as building foundations, to do some kind of work. }
+{\pard  \line \par}
+{\b\cf3 Jason Dyke:\b0}
+{ Yeah, that's a good question. If you're kind of just starting on the platform and looking to get involved animation, reallyIAM identity and access management is the foundation for pretty much every cloud, whether it's AWS or GCP or Azure Oracle cloud, who knows.}
+{\pard  \line \par}
+{So you really want to have a really strong understanding of howIAM works and the right ways to do it. So you don't want to use like long-lived static credentials. So GCP offers this feature slash service called workload identity Federation, which pretty much allows you to use a femoral short-lived credentials, no matter where you are.}
+{\pard  \line \par}
+{So if you want to do automation and let's say, GitHub actions, you can connect your GitHub action to your GCP environment without using a long lived credential. Right? Create a short lift connatural whether }
+{\cf2 [00:05:00]}
+{ it's open ID connect, or just depends upon what you're familiar with. So really having a strong base with IAM , I think is, is huge to get started with automation.}
+{\pard  \line \par}
+{It might not seem like that, but knowing the best ways to interact with your environment is a good step to do it safely. Outside of IAM, I'd say you want to do things that revolve around serverless workloads, because if you're doing security automation, for example, you typically wouldn't want to have your infrastructure continuously running.}
+{\pard  \line \par}
+{Cause that's going to cost you a lot of money if it's not doing anything. And that's one of the main benefits of serverless is that you really only pay for what you're using when it's running. Of course there's other small charges, but specifically around networking, but really the huge benefit of serverless when it comes to security automation is that you only pay.}
+{\pard  \line \par}
+{when it's executed, when it's running and, , hopefully it's not running all the time. Otherwise you might have a lot of things that need investigated going on in your environment. But if I had to pick two things, I would say, you'd want to look into, I am, make sure you have a good grasp on that.}
+{\pard  \line \par}
+{And then also look at the different types of serverless offerings on GCP, whether it's cloud functions }
+{\cf2 [00:06:00]}
+{ or cloud run, and really kind of understand what you're trying to accomplish and which one fits your use case the }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ best. Yeah. And that those are definitely great foundation to start off with as well.}
+{\pard  \line \par}
+{So, and I imagine as you kind of like build on top of this I think I remember from one of your talk, you kind of spoke aboutpolicy as code and CSPM on that as well. So how does that, all of that fit into like the whole, I guess building blocks of security automation. }
+{\pard  \line \par}
+{\b\cf3 Jason Dyke:\b0}
+{ Yeah. That, that's also a really good question too, because I think.}
+{\pard  \line \par}
+{Before you can start thinking about automating security. You want to really lay out what are you trying to accomplish? Are you trying to prevent things from happening or are you okay with reacting to them happening? And then doing automation off of that. So a policy is code or embedding security in like your CICD pipelines can be looked at as a type of preventative security because you're trying to catch things before they're deployed.}
+{\pard  \line \par}
+{So you, and that's the area you'd probably want to look at first because really why react to something, if you can prevent it from happening? It might seem common sense, but you can only work with the tools that are out }
+{\cf2 [00:07:00]}
+{ there unless you want to build something yourself.}
+{\pard  \line \par}
+{So you can't prevent really every scenario, as much as you'd like to a hundred percent coverage is very difficult to. So there is a place for reactive automation especially when it comes to security, because somebody might not be using the, , deployment pipelines where you have your security embedded.}
+{\pard  \line \par}
+{Maybe they do something through the console for some reason. , so that's where the reactive security comes in reactive automation because you can't have every solution embedded in a CICD pipeline, continuous integration and continuous deployed. So reactive security has its uses.}
+{\pard  \line \par}
+{And it definitely has its benefits. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And does the GCP have like native controls to kind of support these things as well? And I think, cause you did an open source project around the space as well, where plus your 2.0 a hundred percent prevention is better than cure with the GCP native controls, kind of like all their RMS.}
+{\pard  \line \par}
+{How, I mean, how much of that is part of this, I'm assuming they have native controls for these kinds of things as well. }
+{\pard  \line \par}
+{\b\cf3 Jason Dyke:\b0}
+{ They absolutely do. Yeah. So for preventative, we could talk }
+{\cf2 [00:08:00]}
+{ about that for a little bit. They have this offering called organization policy constraints, and those are really strong preventative controls in GCP.}
+{\pard  \line \par}
+{ They're kind of stronger if you will, thenIAM meaning regardless of a person has a permission to do something. If there is an organization or policy constraint in place that will prevent it from happening, regardless of the permissions they have. So that's a really powerful tool that you have , available to you for preventative control, because you can kind of set things like, no public buckets, for example, and you can apply that to all of your projects.}
+{\pard  \line \par}
+{And even if somebody has the permissions, the ability to make a bucket public, they wouldn't be able to because that'll work policy is in place preventing that. So, or policy constraints, those are really big when it comes to preventative. And as far as reactive GCP has a free tier and a premium tier for something called the security command center and the security command center, you can think of it kind of like it encompasses a bunch of other security services }
+{\cf2 [00:09:00]}
+{ underneath it.}
+{\pard  \line \par}
+{One of those is called security, health analytics, and that is all based around kind of security. Misconfigurations if you want to look at it like that. So the security command center. It will surface a bunch of monitors and alerts for you about the state of your resources. So and they're typically benched off CIS.}
+{\pard  \line \par}
+{So if you're familiar with kind of that those security benchmarks best practices so they'll follow the CIS recommendations of the best way to configure your resources and both surface and alert to you, which then , you can act on that. However you really want to, you could forward it to pops up topic.}
+{\pard  \line \par}
+{And then from there, send it to our cloud function to go out and maybe reverse that configuration that was put in place. So , that's an example of a reactive kind of cloud native control that you have available to you. And there is a free terror as well. There's a premium tier, which has obviously a bunch more checks because, , they have to provide value for charging for that, but there is a free tier.}
+{\pard  \line \par}
+{So anyone that's interested in checking it out, you can actually kind of boot that up and take that. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right. And how does it, all of that fit into the automation side of things? }
+{\cf2 [00:10:00]}
+{ I guess it's almost, I imagine you can turn them on without say for example, you just sign up with the new organization. Every time a new project gets added, the organization rules for policies would obviously get automatically applied and similar to that would be the command center as well , or, I mean, I'm assuming there's more as well in this.}
+{\pard  \line \par}
+{Those are just the foundational ones. }
+{\pard  \line \par}
+{\b\cf3 Jason Dyke:\b0}
+{ Yeah. So , there is a concept of resource hierarchy and GCP, and you can think of it like a folder or a directory structure in windows or Mac where you have folders inside of folders. And inside of those folders is where you have, what's called a project in GCP, which is synonymous with your account.}
+{\pard  \line \par}
+{That's where your resources run. And one of the really neat things that GCP does is it, it has. That hierarchy. And if you apply an org policy, for example, on the folder, all of the projects that are currently in the folder and all future projects that might get created, inherit that or policy in those restrictions.}
+{\pard  \line \par}
+{So the }
+{\cf2 [00:11:00]}
+{ higher up in the org structure or the tree, if you will, that you apply an organization policy, the more, , projects and folders that it will affect currently and anything in the future. So it's a unique scenario where you can have more restrictive folders that have more restrictive or policies that let you do less.}
+{\pard  \line \par}
+{Maybe it's a production environment. You want to have more restrictive security controls in place. Versus like a development or a sandbox environment where you want your programmers or developers or whoever, maybe your data, data analytics folks, to be able to have more control and to be able to do more things.}
+{\pard  \line \par}
+{So you can do that on a folder level. So that's a really cool thing that that GCP does is this thing called a resource hierarchy. So that kind of answers the question about like, how does it get applied really depends upon where you want to apply it. If you want to apply it higher up, it's going to affect more resources, how it works with automation.}
+{\pard  \line \par}
+{We could talk about the security command center. There's this concept called a filter. And that's pretty much synonymous with any cloud platform and it allows you to specify }
+{\cf2 [00:12:00]}
+{ the different types of log events that you want to look for. And when a finding is generated in the security command center, it's a specific type of, of audit log.}
+{\pard  \line \par}
+{A specific type of log is generated, and you can set your filter to look for those specific log events and then forward them along to a, what's called a pubs on topic, which is really it's kind of like a queuing service. So it's a way to decouple your services so that if you had a huge influx of alerts, it wouldn't overwhelm your serverless functions because it sits in a queue waiting to get picked up.}
+{\pard  \line \par}
+{So that's kinda how it all fits together from an automation standpoint. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That's pretty cool. It's funny as you were saying this, and because I started my career in AWS, first, everything you're saying is like, Hmm. Yeah, I'm actually policy. There's an organization. There's an SAP. The log filter is something called event bridge in AWS, which is very similar.}
+{\pard  \line \par}
+{Then there is the the pub sub has, is an equivalent of SQS. I think they call it LC peers, very quaint queuing service. Yeah, it's almost like to your point . Same, }
+{\cf2 [00:13:00]}
+{ same, but different, I guess, like, , it's almost like, oh yeah, I could do that. I could, yeah, I can, we can definitely look at that as well.}
+{\pard  \line \par}
+{And to your point about applying it at a folder level there's an , organization, unit concept, and the organization in AWS as well. So for people who may be coming in from that, I mean I believe it's a similar concept in Azure with subscriptions, but I don't think they have like the policy model, but it's really interesting then I think I mean, I guess people thought coming from another cloud provider, they will hear this and go, oh yeah, I can relate.}
+{\pard  \line \par}
+{Very similar. So if I were to kind of look at Google cloud tomorrow, maybe I can, , just get some hacker, got a hang of it. What about people coming from on-premise world? If Google cloud was the first cloud, they were moving into how different Google cloud would be. How would you explain it to someone who's probably coming from one premise rather than from one of the cloud provider?}
+{\pard  \line \par}
+{\b\cf3 Jason Dyke:\b0}
+{ Yeah. That's something that , I've had a lot of experience with doing consulting work. We worked with a lot of companies that are interested in migrating their workloads from like an on-prem quote, unquote, that word typically means like a data center, not necessarily in their office where you think like on-prem, oh, that's their office.}
+{\pard  \line \par}
+{No, it's usually a data center, but when you're kind of }
+{\cf2 [00:14:00]}
+{ transitioning to thinking about security in the cloud, There is a concept of like the shared responsibility model and really what it comes down to is, , I would recommend anyone listening. That's starting to think about cloud security is thinking about how you can offload the responsibility of security as much as possible to the CSP, the cloud service provider.}
+{\pard  \line \par}
+{So in this case, Google, and what that means in practice is that you want Google to run as much as the infrastructure as possible versus you being responsible for everything that runs in the cloud. So a good example is that as if , it's easier said than done, you'd want to say, make everything serverless that way you don't have to be the only responsible for the code, your code quality makes sure there's no bugs in your code.}
+{\pard  \line \par}
+{Make sure your packages are up to date, but in reality, coming from, , an on-premise world, that's much more difficult to transition from. Virtual machines to workloads running and serverless. So you really do start usually with VMs compute instances, running in GCP services called }
+{\cf2 [00:15:00]}
+{ GCE. Everything pretty much starts with a G has Google.}
+{\pard  \line \par}
+{So Google compute engine. Yeah. And really you're responsible for your application security. You're responsible for the operating system. But what you're not responsible for is the security of the hypervisor, , the server that actually runs all of your virtual machines that like on top of it.}
+{\pard  \line \par}
+{So if you're running in a data center you might be responsible for the hypervisors security as well, but in, in GCP and all of the clouds, really the CSP, the service provider is the one that's responsible for the hypervisor. So depending upon which type of service you're using your. Your area of responsibility when it comes to security varies.}
+{\pard  \line \par}
+{If you're running VMs, you have the most responsibility when it comes to security, because you're responsible for the operating systems, all of the workloads running inside the VM. If you're running in something that's like serverless, you're really only responsible for the code itself. You're not responsible for the hypervisor.}
+{\pard  \line \par}
+{You're not responsible for the VMs that are }
+{\cf2 [00:16:00]}
+{ really running your workloads. So depending upon what service you're using, your level of responsibility, when it comes to security varies, and it's really all, it comes down to like the word responsibility, what you're responsible for a second. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. Yeah. And I think I'd be curious for people who are listening in as well, the a hundred or people who are listening in right now, if anyone has an opinion on the migration challenges.}
+{\pard  \line \par}
+{But I always find the point about the shared responsibility, even though it's such a very, like, , we all talk about. I still find a lot of people still don't know how much responsibility do they have and why maybe something I saw with maybe the, a great option. But to your point may not be the first option you should go for.}
+{\pard  \line \par}
+{Cause you just would better understand it and you go, ah, like blowing my mind too much. But yeah, if anyone has an opinion on how their I guess first experiences with GCP would have been, I love to hear that it's on the comments section. I've got a comment here from Tom thats I will address here love to see a good automation take care of mundane tasks that were analysts our so they can focus on an incident and that the information they need automatically pulled into the investigation.}
+{\pard  \line \par}
+{Any examples that you may have }
+{\cf2 [00:17:00]}
+{ seen of this in the wild JSON, that you can share it for Tom, }
+{\pard  \line \par}
+{\b\cf3 Jason Dyke:\b0}
+{ it's a great point in, like we mentioned previously, you want to prevent the mundane, like reactive tasks from even having. But that's in a perfect world. That would be, you have every scenario coverage, but , , we're in reality here and you do have to react to a lot of events because you just can't prevent them from happening with the tools that are available to you.}
+{\pard  \line \par}
+{Or maybe , you don't want to prevent it from happening every single time, but you want to look into why it's happening and maybe there's, , an exception process in place. So a really good kind of example of, , mundane tasks is I've seen really nice setups and I've set some, a lot myself is actually automating, like tickets creation when something happens in the cloud and in the ticket, like we'll just use Jira for example, cause that's a really popular like ticketing solution.}
+{\pard  \line \par}
+{So normally when, if you don't have something. You, your analysts would have to dig into the logs, look for the specific log event. Like if somebody we'll just use the bucket example, cause that's really easy for a lot of people to conceptualize and }
+{\cf2 [00:18:00]}
+{ visualize if somebody makes a bucket public , maybe you have some type of alert that goes off.}
+{\pard  \line \par}
+{And it, all it says is, , a bucket was made public here that the analysts would have to, or whoever's responding to, that would have to like, , open up the console type in a log filter or scan for that specific log event. They would need to get, , the project ID, the resource name the person that made it public so that they can, , reach out and talk to them.}
+{\pard  \line \par}
+{You can automate that with a lot of open source tools where that log event gets captured with a log filter. It could send to your pumps on topic. It gets sent to like a cloud function and that cloud function can create a JIRA ticket automatically. And in like the description of the JIRA ticket, it can put all of that valuable information, , for an analyst that's it's right there.}
+{\pard  \line \par}
+{They don't have to log in to look at it. They can reach out to an individual and, , talk to them about it. Or you can even go a step further and have it actually like slack or teams or message that individual that made a public and say, Hey, , did you mean to make this public , yes, no this wasn't me.}
+{\pard  \line \par}
+{You can do like slack }
+{\cf2 [00:19:00]}
+{ bot commands and you can automate it through there. You can do like automation through chat ops is like one of the hot topics right now. So that's just an example that I've seen of how like security automation can kind of make analyst life's a little bit easier. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ It's pretty awesome.}
+{\pard  \line \par}
+{And it's a good example. Darpan has a comment as well. Even if even it being shared responsibility, it's important to learn, get visibility.}
+{\pard  \line \par}
+{How is it managed by the CSP on their end? I think that's actually true as well, cause I think to your point about what we spoke, what the visibility and the shared responsibility part, there is a management part as well. Like how much of it is managed by the cloud provider versus how much is not like the patching port piece is covered by the what's it called the Google cloud as a world of, and they're looking at functions, but not necessarily, not me.}
+{\pard  \line \par}
+{Cause there's a virtual machine component and Google cloud. Right. Well, that's really how oblivious I am about is there a word? }
+{\pard  \line \par}
+{\b\cf3 Jason Dyke:\b0}
+{ Yeah. It's a GCE . So yeah. Google compute engine. , it kind of brings me back to when I was studying for some of my Google cloud certs. Shared responsibility is really kind of a a key component of, of some of their like certifications and studying for it is knowing which }
+{\cf2 [00:20:00]}
+{ type of service your they give you example , like which type of service if you're using a cloud function, what are you responsible for?}
+{\pard  \line \par}
+{Like, that's just a generic question that they ask, and it really goes back to, , if you're using like infrastructure as a service you'll see that abbreviation it's really common. It's I a S whether you're using like functions as there's like everything as a service now, but in GCP, it's like infrastructure as a service platform, as a service functions, as a service.}
+{\pard  \line \par}
+{So they have all of these different as a service office. Right. And for each one, they, if there's a breakdown, you can find in their documentation that says, if you're using infrastructure as a service, here are the customer's responsibilities. And they'd like list out like, , patching dos the, the applications code.}
+{\pard  \line \par}
+{And this is what we, Google are responsible for it. So it's public knowledge. It's in the documentation. We should be able to just search like GCP shared responsibility. It'll look like a line. It'll be at like a line graph where it says, , I S FAS pass and it'll say, here's }
+{\cf2 [00:21:00]}
+{ the }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ responsibilities.}
+{\pard  \line \par}
+{Yeah, I think, well, it's funny. Cause I think I've been recently exposed to all three clouds through, through my actual work. So it's definitely something, a bit of, a bit of a learning curve for me there as well. Actually I've worked someone else's. Yeah. So I believe that Kat Traxler a cat. She's x guest guest.}
+{\pard  \line \par}
+{She had no question. Just hello and a big, thank you to JSON and the other open source project creators in parts. The people like you guys sacrificing evening and weekends, our community would be on stone-age. So big thanks . That's a Kat for you, man. That's for real some that I'm sure JSON appreciate that as well.}
+{\pard  \line \par}
+{\b\cf3 Jason Dyke:\b0}
+{ Yep, absolutely. Yeah. Kat is she's big in the open source space as well. We've, , kind of bounce ideas off of each other. So it's a, it's a tight knit community and open source and really anyone , can get involved. That's kind of the beauty of it. One of the first, like open-source quote unquote projects that I worked on was really something that I leveraged to learn how to code in Python.}
+{\pard  \line \par}
+{So probably maybe three years ago is when I three or two years ago, two and a half. So when I started like really thinking about, I should really start learning how to code if I want. You don't be as fast as I can in the security }
+{\cf2 [00:22:00]}
+{ space. It's not a requirement by any means. But it's always been something that I've wanted to try and have just kept putting it off because , maybe fear of the unknown.}
+{\pard  \line \par}
+{And I don't, I didn't like feeling like I didn't know anything. And that's really what happens when you start learning how to code. You're like, I have no idea what I'm doing. And so one of the first open source projects I did was really something that I just love is to learn how to code in Python.}
+{\pard  \line \par}
+{And it's really that easy to get involved. It's, , if you have an idea you can kind of check and see if anyone else has done it. If they have, before you can, if it's open source, you can, , do a pull request or try to, do any types of new features that nobody in the open source community is going to turn you down for additional test cases.}
+{\pard  \line \par}
+{So there's always more room for, for tests. So if you're looking to get started and open source, maybe running some test cases, , open source apps, it's, it's definitely appreciated. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And I mean, we definitely need to talk about the open source projects as well. So we'll definitely go to that. So I can thank you for that Kat Ive got Kapil here as well.}
+{\pard  \line \par}
+{Building a culture is also an important factor in trying to automate security. Would you agree or any comments on that? }
+{\pard  \line \par}
+{\b\cf3 Jason Dyke:\b0}
+{ Yeah, I mean if you're, if you're in an organization, like if }
+{\cf2 [00:23:00]}
+{ you're, , some, are they in they're maybe not as open to their employees working in open source, maybe restricted from doing it.}
+{\pard  \line \par}
+{That's just an unfortunate nature of some, some companies, they don't want their employees working on open source because maybe they want all of their efforts work on their products. So you will find that. But more likely than not a lot of companies really do support people working in an open source and whether you're making it open source under your organization's kind of domain, are you doing it?}
+{\pard  \line \par}
+{, on your spare time you there's the company that you work for really has to have like a positive culture towards source. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yep. Right. I mean, even from an organization, I imagined traditional security would just be like, why are you automating a click ops? It's always better to look at me clicking through this.}
+{\pard  \line \par}
+{\b\cf3 Jason Dyke:\b0}
+{ It's a constant battle is, why automation and especially in the security space because some people rightfully so are, are maybe a little bit concerned about automating security when it comes to automating like remediation, it's like automatically changing how your resources are configured.}
+{\pard  \line \par}
+{ That it can be risky because it's tough to, to }
+{\cf2 [00:24:00]}
+{ think of all the different use cases for why somebody might configure something a specific way, for example. And if you're saying that if you build your automation to be, anytime you see this event happen, revert. You could actually be breaking people's workloads.}
+{\pard  \line \par}
+{You could be causing downtime by doing that. So, , automated remediation might not always be the first thing you should try doing. I always recommend running things kind of in like dry mode, if you will, where it doesn't actually act it, it will just surface alerts and say, Hey, we found this thing happened.}
+{\pard  \line \par}
+{We would have taken this action. And then you could have a human say, yes, go ahead and do that. Or you could just say, thanks all, all kinds of resolve it myself. So it, , getting people to do like automated security is, is definitely a cultural thing, because like you said, some folks are, , some people are more comfortable doing things in the console and that's okay.}
+{\pard  \line \par}
+{If it works for, for your company or for your team, and you're making sure that you're not burning out your analysts or your security people, but I would recommend looking into. Automating as much security as you can so that you can spend more time doing other }
+{\cf2 [00:25:00]}
+{ things }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ automate all the Monday into us.}
+{\pard  \line \par}
+{Yeah, it's almost like it's an, almost like a no-brainer sometimes, but it's not common enough knowledge. I would have thought wouldn't use Ive got a question from Phani Phani is asking on premise versus cloud, which one do you reckon is a better place in terms of security automation and security in general? }
+{\pard  \line \par}
+{\b\cf3 Jason Dyke:\b0}
+{ Well, I mean, I'm a little biased since I work in the cloud. So I like the flexibility that that cloud provides. I have done a work, on VMs and in physical servers, running into data center.}
+{\pard  \line \par}
+{And automating tasks , is absolutely doable. You are just responsible for a lot more when it comes to like the upkeep and the ongoing maintenance. It's a lot of like bash scripts and , Cron jobs and kind of you, you don't really, you're not able to leverage like the serverless technologies that the cloud offers, which really shine when it comes to automating security.}
+{\pard  \line \par}
+{So I would say doing security automation is easier in the cloud better as a subjective term because it's, you can make either work for all of your workloads. It really depends upon what you're trying to }
+{\cf2 [00:26:00]}
+{ accomplish. So I would say doing automation in the cloud is generally just easier than on-prem.}
+{\pard  \line \par}
+{You have way more services and features that are offered to you. And some are geared towards automation versus on-prem where it's a lot of physical servers. And , you're kind of stitching together, different bash scripts or different types of, , Python, scripts, whatever coding language you work in.}
+{\pard  \line \par}
+{There's nothing wrong with that. It's just a little bit more work over time, kind of in my opinion. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh, actually that's an interesting segway into the next one then. So cause I guess a question that keeps popping up at this point in time, if there are so many automation capabilities in that Google Cloud kind of service, similar to AWS and , other folks as well, at what point would people kind of switch to like, oh, I need more than a Googling native security too.}
+{\pard  \line \par}
+{Like if we've worked scoreboard command center, we spoke about it has observed it has all these log filter as well. And sometimes the skillset may not exist in the team, but you almost have to wonder that. Okay. So should I just stick to the services that are from my cloud provider? Oh, at what point am I flicking off to like, }
+{\cf2 [00:27:00]}
+{ oh, I need like an opensource tool for this, or whether it's finding set.}
+{\pard  \line \par}
+{Thank you as well. It takes planning. I've got to run to a special what's the what's that empire that will be like, oh, I think this is not good enough for me. I need to go into the open source space. }
+{\pard  \line \par}
+{\b\cf3 Jason Dyke:\b0}
+{ Well , open source is, by no means and expert at opensource, but I found myself using it to kind of fill the gaps of what the cloud provider like doesn't provide.}
+{\pard  \line \par}
+{Every cloud provider, especially GCP is , very receptive to feedback and ways that they can improve their offerings and their services. It just might take a little bit longer for them to implement what you're asking for. And I think that's where open-source shines is that you're able to go from like idea to , kind of deployment in a very rapid time and you can kind of outsource quote on quote, a lot of that work, you open source it.}
+{\pard  \line \par}
+{A lot of other people from all over the world can help build it. And you're able to, get, like I said, get that idea and get it actually implemented a little bit quicker than a Google or Amazon, or really any of the cloud providers can. So, , I use it kind of as like a }
+{\cf2 [00:28:00]}
+{ way to fill the gaps and until the cloud provider provides it for you.}
+{\pard  \line \par}
+{That's really where I've seen it really shine and where I've kind of leveraged at the most, but there's also a room , for SAS providers, software as a service security providers as well, where, they are really useful if maybe you don't have a large security team, it's a way for you to have a security footprint in the.}
+{\pard  \line \par}
+{With a smaller team, because you're, you're kind of offloading that to some software provider where they will run your security kind of quote unquote for you, or at least find the things that you need to look into and expose them to you in an easier way versus you having to build it. So I think there's a use case for all three, whether it's cloud native open source or like an enterprise SAS product they all have different PR purposes and they all kind of feel gaps in different spaces.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right. And so other common examples of gaps that you kind of see that where you had to go down the open source spot and obviously hinting do it a couple of open, close projects that you started. What were the gaps that you noticed and what made you go down the open, source spot? }
+{\pard  \line \par}
+{\b\cf3 Jason Dyke:\b0}
+{ there was an open-source project }
+{\cf2 [00:29:00]}
+{ that I had created called project lockdown.}
+{\pard  \line \par}
+{And I actually credit that before we went into a lockdown for COVID. So it just happened. The name lined up like that. That was not done on purpose, but the reason I called it locked down is because it, it was security and it was automated remediations. So it was a way to kind of lock down your project or it's just like a cool, , I think pun that I built into the name, but GCP at, at the time didn't have an easy way to automate like remediation to quote unquote mediations.}
+{\pard  \line \par}
+{And what I mean by that is GCP as a way to, to surface when things happen, , who did it, , when, where, how but they, at the time didn't have a way for you to immediately reverse that action. So if somebody, , created something in an insecure way, there was no way for you to code in and say, well, delete it if you see this happening.}
+{\pard  \line \par}
+{So that was why I had created project. When I was doing consulting work for this company called scale sack, and it was a way for me to build in this missing feature from GCP where the cloud native platform, it }
+{\cf2 [00:30:00]}
+{ didn't provide a way for you to automate a security things. And so I said, well, I'll just kind of build it myself and also learn Python in the meantime.}
+{\pard  \line \par}
+{So it was, , a selfish way for me to, to train myself, to learn. I thought, but also in a way for me to kind of give back to the community, cause I use open-source tools all the time and might not necessarily have the time or even the knowledge to be able to provide and do add new features to the products that I use.}
+{\pard  \line \par}
+{So it was, it was just a cool all around cool opportunity for me to kind of give back. And even if one person found it useful, like it was worth it for me. So that project right on open source was a way for me to, to again, fill the gap. GCP didn't provide automating remediations and from a security standpoint.}
+{\pard  \line \par}
+{So I'll just build it myself. , that's easier said than done and maybe not everybody has the time to be able to do that. I fully recognize that. So I'm definitely not going out and saying, well, everyone can do automation because it's a lot of time and effort especially when you try to do open source.}
+{\pard  \line \par}
+{So yeah, that, that was where project lockdown kind of came out. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Okay. Yep. And there was another one IAM, I think you've created a recently. }
+{\pard  \line \par}
+{\b\cf3 Jason Dyke:\b0}
+{ Yeah. }
+{\cf2 [00:31:00]}
+{ Yeah. That was something that I actually released this week. So that was, it's something that I've been wanting to do for a long time. And it is a way to monitor when IAM roles are being changed.}
+{\pard  \line \par}
+{And you have to think of the way that the cloud providers do IAM is they provide. Like job function type roles. So if you're thinking of it, if you're at a company and you are like a network administrator, GCP will provide you with a role that has permissions that are all about managing a network, being an administrator of a network.}
+{\pard  \line \par}
+{So it's an easy way for you to kind of assign as close to least privilege as they, as they can in it, you can never really get to least privilege. It's always like a goal. It's a destination. So, but these roles are really meant to be like job function type roles for if you're a network admin, there's a network admin role.}
+{\pard  \line \par}
+{But that role is the permissions inside that role are managed by Google so they can add permissions to it, but they can also remove permissions. And they do have a release notes page that tells you, }
+{\cf2 [00:32:00]}
+{ Hey, These are the roles that have changed. These are the permissions that have been added or moved or deprecated because that does happen.}
+{\pard  \line \par}
+{But that doesn't get exposed to you in real time or close to real time. Maybe it's once a week, I release something that says, Hey, in the past week or the past two weeks, here are all the changes that have happened in my room. But this week I had open-source something that really tweets whenever it finds updates to these, IAM roles.}
+{\pard  \line \par}
+{Because I think it's important to know that if you're using one of those, what's, it's called a predefined role. If you're using like network admin and you assign it to a user, those permissions could change. They could have new permission to add it to it. And you might not know. So they're kind of permission.}
+{\pard  \line \par}
+{It gets larger over time as that role is adjusted by Google because they're the ones that manage it. So the whole idea was like, , let's shed line and let's expose. And, , not necessarily the exposed as if that's a bad thing, but put a spotlight on when these roles are being updated.}
+{\pard  \line \par}
+{There's a similar tool out there for AWS. It's all on Twitter. There is just really cool stuff. So that's really where the idea came from is, Hey, }
+{\cf2 [00:33:00]}
+{ I've used this in AWS. A bunch of times let's create one for GCP. I had like forked an open source repository and really leveraged their scripts.}
+{\pard  \line \par}
+{That's this company called dark bet got purchased by Aqua. So really everybody's here kind of connected. We all know each other in a small way. So yeah, I really leveraged their automation that they had already built and. I did some things through GitHub actions and now like tweets every time that there was a role update, but I had to scale it back a little bit.}
+{\pard  \line \par}
+{Cause there was tweeting too often. And , my API key got suspended because it like, it was a new account and I was tweeting all the time. So I had to scale it back a little bit after talking to the support folks over at Twitter. So it's not real time, but it's like every four or six hours and I might even change it to 12 hours cause it's still like going crazy.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh, fair enough. Oh, so, okay. So now, because we kind of have laid out some of those things where, okay, so there might be gaps that people may identify as they kind of go through that journey of automating security in cloud. And there are some open source tools available for this as well. I'm wondering from a monitoring perspective, like people who may be listening to this and going okay.}
+{\pard  \line \par}
+{If I have a }
+{\cf2 [00:34:00]}
+{ mix of which is I imagine the case in the AWS space. Like, what are some of the monitoring challenges that you see from a security perspective in Google cloud? And is that also automated? I feel like the auto remediation part kind of comes in there where you can take that path auto remediate you detect something.}
+{\pard  \line \par}
+{Oh,IAM role changed. Suddenly she's an admin. Then I shut that down. What's the other alternative monitoring in a Google Cloud kind of space? }
+{\pard  \line \par}
+{\b\cf3 Jason Dyke:\b0}
+{ Well when it comes to monitoring, I think you should really think about what are you trying to monitor for, what are your risks? And what are your threats whenever you're running workloads and based off that you create monitors for it.}
+{\pard  \line \par}
+{So, I mean, of course, if you monitor for every single thing that happened in your account, that's a lot of noise. Like the data is available to you. Google has a really strong logging offering and. The logs , are enriched with a lot of details inside of it. So the data is there for you. It's really about figuring out what do I care enough about to monitor for and in alert based off of that.}
+{\pard  \line \par}
+{So what are the challenges that I've seen is }
+{\cf2 [00:35:00]}
+{ knowing even what to look for? And that's where a lot of these like open source things like CIS , you start with like CIS, which , are like best practice recommendations. Then you start monitoring just for those. And then maybe you build additional like custom monitors based on maybe how, what your organization cares about the most.}
+{\pard  \line \par}
+{Then you like, add those on top. Maybe you remove some of this like CIS recommendations that you don't care about. So really it's about figuring out, like, what do I care about enough to monitor for? Because the data is there for you. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. And to your point, this is kind of like the same. And we kind of come back to the same quantitation with CSPm as well.}
+{\pard  \line \par}
+{It's that point of. How much do you want to actively monitor yourself, but just use a tool. If you have the budget for it, use a CSPM to at least get that initial understanding of what else should I be looking for and who has the CSBM space award enough to like, keep seeing them talk about Google cloud, but in a limited capacity always.}
+{\pard  \line \par}
+{Is that still the case or has that changed? }
+{\pard  \line \par}
+{\b\cf3 Jason Dyke:\b0}
+{ Yeah, I'm smiling. Because it it's absolutely the experience that I've had is that it, AWS, , rightfully so is }
+{\cf2 [00:36:00]}
+{ kind of customer number one when you're building. Cloud security, posture management tool, like a CSPs naturally that's where , that's where I started.}
+{\pard  \line \par}
+{That's where a lot of people start. That's where a lot of companies start. Yeah. And a majority of people that are listening, I've probably started in AWS. I'm making a generalization assumption, but the CSPM space is, rightfully so kind of geared towards the AWS first and foremost, because that's normally where they make the most of their money, GCP and Azure kind of in a, in a second.}
+{\pard  \line \par}
+{But from my experience, lots of these like enterprise security tools are very receptive. Again, to, if you run on GCP there, you can submit feature requests and , they'll jump right on it because they're providing a service to you. But yeah, from my experience, AWS is definitely the one that gets kind of the most love when it comes to the CFM tools.}
+{\pard  \line \par}
+{But there are a lot out there that are focused on, , they do offer all three, the big three really well. It's, it's evolved with that. GCP has pretty decent coverage now. So if you're looking for like a posture management tool out there }
+{\cf2 [00:37:00]}
+{ that works with GCP, there are some there's the space has gotten a lot better in the past couple of years to answer the question.}
+{\pard  \line \par}
+{Yep. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Perfect. , I'll be curious to see and hear from other people in the, in the remaining a hundred people watching if they haven't experienced theCSPM in Google Cloud as well. }
+{\pard  \line \par}
+{Tom has another question. What excites you about the future Google Cloud ? Are there any innovation in the pipeline to separate GCP from the crowd }
+{\pard  \line \par}
+{\b\cf3 Jason Dyke:\b0}
+{ who are the future of Google cloud? Well cloud run is a service that I'm really hot. It's a way for you to run like containerized workloads, but you don't have to manage any of the underlying, like compute that runs your containers.}
+{\pard  \line \par}
+{So, , in containers you can run on lots of different services. You can run containers on bare metal servers. You can run them on virtual machines, you can run them, , in serverless functions even. But cloud run is a service that I think has a really bright future. It's definitely it doesn't get talked about it, I think enough, but I think that that's something that really excites me about Google cloud.}
+{\pard  \line \par}
+{And I'm really into all of their like data analytics tools that they have. I think big query is just an amazing service at the scale that it operates at. Kind of on the database }
+{\cf2 [00:38:00]}
+{ side, , that's not necessarily security focused, but big query , you have some really cool security features like column and row level security.}
+{\pard  \line \par}
+{So you can really kind of lock down and control what type of data is displayed to the people that are running queries against your database. So kind of cloud run and big query cloud spanners are really like mind boggling global scale database, which conceptually thinking about how that operates is, is just, I don't even understand how it works behind the scenes.}
+{\pard  \line \par}
+{So, but it's really cool that they can operate that and they can, it's so easy to onboard and leverage that. And I don't work for Google. I think those are just the things that I'm really excited about for the future. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yep. Yeah. Cool. Hopefully that answers your question as about Tom.}
+{\pard  \line \par}
+{I think I've got a question from Phani about API security, best practices, but I've got a whole month coming up with it, but if you have some thoughts on API security, feel free to have that. }
+{\pard  \line \par}
+{\b\cf3 Jason Dyke:\b0}
+{ Yeah, this is actually a pretty tough topic for me because I don't have kind of a traditional like developer program or backgrounds.}
+{\pard  \line \par}
+{So API is, to me were pretty new whenever I started thinking about how that getting into the }
+{\cf2 [00:39:00]}
+{ cloud, the concept of an API was completely foreign to me because I I've traditional it background. So my exposure to API started when I started with cloud and I'm absolutely not an kind of an API security expert.}
+{\pard  \line \par}
+{So I kind of leave that to your entire month. I'm sure you've got great }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ times for it. Yeah. It's amazing how API security itself was. It's kind of like Google cloud is something that's not spoken about now, but we use it every day. And so yeah, we haven't got a month coming in. So funny to just see the, for that man.}
+{\pard  \line \par}
+{Tom's got a comment auto read, miss out reminded me of on Silicon valley. Yeah, I remember }
+{\pard  \line \par}
+{\b\cf3 Jason Dyke:\b0}
+{ that. Yeah, they the, the account was going crazy and I had to scale it back, but unfortunately I didn't catch it soon enough and it got auto auto band, but what that happens. Yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Have the best of us have the question, Google acquires simplify recently, what benefits does this acquisition build on the soar capability?}
+{\pard  \line \par}
+{Do I have you guys, I mean, I guess soar itself is really interesting, but have you seen much come through from a SOAR perspective for Google cloud? }
+{\pard  \line \par}
+{\b\cf3 Jason Dyke:\b0}
+{ So when it comes to Google cloud and like Sims and, , centralized logging the practical, the way I've }
+{\cf2 [00:40:00]}
+{ seen it leveraged a lot is that some companies will try to use big query as a SIM.}
+{\pard  \line \par}
+{But in reality, it's kind of a place to store your data at a large scale. And they typically will leverage things like enterprise tools that do SIM work really well. Whether, , Or any of the other types of enterprise tools, but this is Google's way of trying to offer like a SA a SIM like experience inside of their cloud native platform.}
+{\pard  \line \par}
+{A lot of people try to use big query. But you have to know like a SQL based language to to kind of traverse your logs, which, , a traditional people that leverage sames maybe don't have that type of SQL background. So it makes it difficult, which is why you'll use like an enterprise SIM tool.}
+{\pard  \line \par}
+{But yeah, no, I haven't looked into this acquisition personally too much, but it, my understanding is that it's a way for them to, to have a presence in the same space and to offer like a cloud native way to do it. So you don't have to use an enterprise tool, try to keep the money inside the platform. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah, of course.}
+{\pard  \line \par}
+{cause I think that the way this question was more cause I had a question around monitoring as well. So I think I was looking at this blood pressure. So. }
+{\cf2 [00:41:00]}
+{ People use big query to store security logs. So, and I guess putting the soar function on it, like, how would they react? I guess, what kind of orchestration or response we would see from big queries, you link it to a Google function, or how would you kind of respond to something that you may have run as a query in the query?}
+{\pard  \line \par}
+{I guess? }
+{\pard  \line \par}
+{\b\cf3 Jason Dyke:\b0}
+{ Well, they have export features from big query, so you can export it in a number of a number of different ways. It also supports a native JSON now as well, which a lot of logs in the cloud are JSON formatted. And previously you used to have to, if you wanted to store like JSON logs and big query, you'd have to like create this schema yourself whenever you're creating your table or your database.}
+{\pard  \line \par}
+{But now they actually natively support JSON and it. It all started and kind of JSON format. So you, but you can export a lot of things from bit query and a lot of different formats. If you needed to and JSON, you needed in CSV you have a lot of options available to you. So really you would, , you would create these like SQL queries that would pull out data that }
+{\cf2 [00:42:00]}
+{ matches, like you can think of it like a filter, a SQL query as a filter.}
+{\pard  \line \par}
+{And if anything returns you like to export that resource name, to like a puffs topic, cloud function really depends on how you, you set up your automation. So there's a lot of tools available to you. It really depends upon what you're familiar with and really what what you want to get out of it.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah, I think so maybe to your point, we really haven't seen the, I guess the way a simplified started being used for good with audio, but it's Metro, but it's really interesting. Like from a monitoring perspective, there's a lot more custom automation that was going on in GCP space. Like people would have taken that for granted in the AWS space and other places, but probably required a lot more automate oh, customization in the Google Cloud space}
+{\pard  \line \par}
+{so not a great answer, man. Hopefully the answer to your question.}
+{\pard  \line \par}
+{Confidential computing Rama has a question. Can you share some views with respect to Google cloud platform and what comparison with other computing performance computing. }
+{\pard  \line \par}
+{\b\cf3 Jason Dyke:\b0}
+{ Confidential computing , is a really interesting feature or offering that Google released probably within the past year, I would say.}
+{\pard  \line \par}
+{Yeah. And it's for a very }
+{\cf2 [00:43:00]}
+{ specific type of workload. You might be running in the cloud where you are running in like a regulated industry is probably the most common use case for it where you don't want to share any of your hardware with other, because in the cloud really you're sharing. Unless you specify, you're sharing that hardware with other customers and usually that's okay, but there are some regulated industries where you need everything to yourself.}
+{\pard  \line \par}
+{Everything needs to be encrypted. Your memory needs to be encrypted. , and that's like in runtime, which is pretty difficult to. But then you also can't share your hardware with other customers, either. Like everything has to belong to you. And so Google releases concept of confidential computing, which as the name suggests, it's like pretty much everything is your own , it's locked down, everything encrypted.}
+{\pard  \line \par}
+{So really I see that as a good fit for regulated industries where the requirements that they have don't really translate with how the Cloud operates normally, because everything is kind of shared. So they needed to come out with something which is called confidential computing. That kind of fills that gap again, it's for very specific workloads.}
+{\pard  \line \par}
+{So not a lot of people leverage it. Day-to-day }
+{\cf2 [00:44:00]}
+{ you'll pretty much know if you need it because you'll be required to do certain things. And that's what confidential computing is for. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right. Okay. There you go. Hopefully that answers your question as well. Rama.that was a good one because I wasn't aware of confidential computing, so that's a good one for one for me to learn }
+{\pard  \line \par}
+{Ive got a question from Will it seems that GCP is going in the direction of Apigee for API security. I'll take a look at the API proxies, which is pre GA at the moment. Pretty cool stuff. Also that's in a Pontiac. If you were looking for APS security thing, we'll just give you some suggestion over there.}
+{\pard  \line \par}
+{Please check that out. }
+{\pard  \line \par}
+{\b\cf3 Jason Dyke:\b0}
+{ Apogee. Is there API offering? Yeah, so it's yeah. It's like their API gateway. Yeah. If you, if you need to put something like a serverless function, you need to expose it from an API. You'd use Apigee. Yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. It's a way it's like API is its own kind of like a beast.}
+{\pard  \line \par}
+{I would say it is a compute. Then there is a whole serverless containers and all that. And then there like API. Yeah. It's just like, we can go into another hour just talking about that as well. But , I guess something that I might, I'm mindful of your time as well here, because I'd love Jeff any like a Google cloud.}
+{\pard  \line \par}
+{Something that team for the months I'll left, we encourage people to kind of }
+{\cf2 [00:45:00]}
+{ follow along for the rest of the month and maybe onwards as well. Cause I definitely feel as we're going and talking about this, the two questions that come to mind, one is more on the maturity side of things, which you kind of have touched on throughout the episode as well, where the initial based on what you're trying to protect, you could just start with a basic of CIS benchmarks CSPs and kind of take it to the next level.}
+{\pard  \line \par}
+{Like what's that next Netflix level of AWS automation that people talk about what's that equal and GCP space for all, for security automation so that you would've seen two people can like, oh, I need to aim for that. }
+{\pard  \line \par}
+{\b\cf3 Jason Dyke:\b0}
+{ Well, I mean, again, it kind of a reoccurring theme is, , automate as much as you can, but do it in a safe way where you're confident that it's not going to interrupt workloads.}
+{\pard  \line \par}
+{Because that's a quick way to. For people to think negatively about like security automation, if it starts breaking things. So , obviously of course kind of run it in dry mode, , for a little bit before it actually starts taking actions and your environments. But as far as kind of the, , what I would like to see GCP offer when it comes to like security automation I would like to see kind of like blueprints or templates that Google has }
+{\cf2 [00:46:00]}
+{ created.}
+{\pard  \line \par}
+{And they do have a lot of open source stuff open source projects and scrapes and actual remediations. They do offer that, but it's open source. It's not exposed in like the console for example. Right? So your company or your organization would have to trust open source for one, which is not necessarily something you would see everywhere.}
+{\pard  \line \par}
+{Because it's like, how do I know that it's the code is secure. If anyone can work on it as like an argument, I've heard a lot. So Google. Automated security like scripts and remediations out there. They're just open source. So what I'd like to see is have, have that actually exposed via like the console to make it easier for people to string together automation, whether it's through the console or you can interact with it via like an API, that's kind of what I would like to see.}
+{\pard  \line \par}
+{The next step that they take and, , who knows they might expose that soon. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And where can people learn about Google cloud security? Cause I think I clearly find myself struggling sometimes trying to understand and find some good resources for it. So where do people start even learning about Google cloud security?}
+{\pard  \line \par}
+{\b\cf3 Jason Dyke:\b0}
+{ Well, for me, security is just}
+{\cf2 [00:47:00]}
+{ it's something that is built in it. If you're looking to build anything on the cloud, security is a core component of that building things securely should be just the way that it is. So if you're looking to learn more about pure security on GCP, they do have like a certain.}
+{\pard  \line \par}
+{Where you could study for it. They mean you don't even have to take the exam, but there's a lot of like online learnings that offer like Google cloud security classes that are geared towards passing assert we, you can just take , those classes and kind of learn about the security offerings that Google has, whether it's through like a cloud guru.}
+{\pard  \line \par}
+{I think, , everyone has heard of that. So they offer like a Google cloud security cert. And so you can study for it, , quote unquote study. And if you don't want to take the exam, you can learn about security that way. Google also has a ton of really awesome security documentation. They have great white papers about encryption , architecting securely.}
+{\pard  \line \par}
+{So really I would just recommend, , doing a quick, like Google Yahoo, Bing search for GCP like security, white papers, and that'll really kind of provide a lot of super useful }
+{\cf2 [00:48:00]}
+{ information about how they think of. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. So I'm assuming, because , how Google cloud made that big announcement that we have the whole cyber security team or something that there were like, I don't know what there's a word for it that they use, like cybersecurity ATM or whatever they were calling it, that they're going to help out build all these blueprints and stuff.}
+{\pard  \line \par}
+{So I imagine that's on their way somewhere, but I don't imagine you've seen anything from them yet because AWS has that whole best practice security, white paper that people normally kind of send them to. Is there like an equal and for GCP kind of thing as well? }
+{\pard  \line \par}
+{\b\cf3 Jason Dyke:\b0}
+{ Absolutely. Yeah. Google exposes a ton of best practices when it comes to security, whether it's a full blown white paper or, , it's an individual section on some of their docs.}
+{\pard  \line \par}
+{So if you're interested about security for Cloud functions, for example, you can pull up the Cloud functions documentation. And on the left side, there's a dedicated security, a whole entire dedicated security section for that server. Yeah. So whether it's about access control, whether it's about like general best practices, they do a really good job of exposing that and, , releasing it for free per service or just generally.}
+{\pard  \line \par}
+{So, yeah, there's absolutely security. Best }
+{\cf2 [00:49:00]}
+{ practices. Oh, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I'm spiking because it, it took Amazon at least five years before they even added that security section in the documentation. It's clearly security level one priority, but was not the priority for documentation. }
+{\pard  \line \par}
+{\b\cf3 Jason Dyke:\b0}
+{ Yeah. And you'll find that for pretty much every service though.}
+{\pard  \line \par}
+{There's a security function. It's the way their documentation is just a. Awesome. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Awesome. Thanks so much for coming in, man. That's pretty much the question that I had. So people get to know on, I guess, the other side of Jason as well, but for people who may have more questions about Google cloud Cloud security, I guess, and they will reach out to you, where can they find you?}
+{\pard  \line \par}
+{\b\cf3 Jason Dyke:\b0}
+{ So I have a LinkedIn, but I'm not super active on there, but I would say the best place to reach out to me is on Twitter. My username is at Jason , a Dyke, which is my name. So pretty easy to remember, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ The show notes as well. So people as well. }
+{\pard  \line \par}
+{\b\cf3 Jason Dyke:\b0}
+{ I am. Yeah. And that's recent too. I'm not a big, huge social media person, but Twitter for me was just an awesome way to.}
+{\pard  \line \par}
+{Get direct access , to companies and to individuals. There's no barrier there. You can just follow them and tweet them if you want to reach out. And my, yeah, my direct messages are open. So I definitely }
+{\cf2 [00:50:00]}
+{ recommend anyone. That's curious about Google cloud security in general to just reach out and I'm a fairly reasonable, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And I'll add that to the show notes.}
+{\pard  \line \par}
+{And I'll also add the open source projects that you have running in the show notes as well, so people can check them out as well. But thank you so much for your time, man. And I just want to thank you from Bonnie as well. Thanks so much. So I'm looking forward to the next episode as well, but I'm looking forward to bringing you back again.}
+{\pard  \line \par}
+{Cause I think there's so many questions that I had, I just could not go through, but they're clearly fairly popular topic and fairly popular person as well. For everyone else. I'll see you next weekend and yeah, thanks so much for your time. Thanks for hanging out with us. Yeah. }
+{\pard  \line \par}
+{\b\cf3 Jason Dyke:\b0}
+{ Thanks for having }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ me.}
+{\pard  \line \par}
+{No problem. }
+}

@@ -1,0 +1,492 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red250\green138\blue59;
+\red128\green128\blue128;
+\red216\green34\blue146;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ To start off with, for people who may not know Jimmy how'd you get to where you are today and what's your story, man.}
+{\pard  \line \par}
+{\b\cf3 Jimmy Mesta:\b0}
+{ Yeah. , I've. I actually have a degree in cyber security and I can't remember the exact title. So this was I graduated from a school called Penn state and I was meandering through college. I knew I was into computer science and all things, computers, but this new degree sponsored by the national security agency in the U S the NSA came out and I thought it sounded really cool.}
+{\pard  \line \par}
+{PAC computers, , and it was really early days. This is 15 years ago. And I just got super into it through school, which is kind of not the traditional path. And I did some international trips working on , kind of systems in Africa and Grenada. And I eventually landed at a company called Agilent technologies, which was a big off of HP doing application security.}
+{\pard  \line \par}
+{And I. }
+{\cf2 [00:01:00]}
+{ Took an abandoned AppSec program. I was given the keys to the data center and, and, and basically brought my crash card over and plugged in a laugh and figured out how to do AppSec. Took down prod a bunch of times in the process and, and that's kinda where it all went and went on to some consulting engagements and ultimately , I.}
+{\pard  \line \par}
+{Went into Kubernetes, specifically the company I was at and VOCA out of Santa Barbara, we decided to adopt it at about zero dot eight in production, which was still like a side project at the time. And I was responsible for compliance, like literally PCI and HIPAA and SOC two and like all these other things.}
+{\pard  \line \par}
+{And it was very eye-opening to introduce Kubernetes at that time, pre our back pre. Anything and I just loved it. Yeah. So that was, that was like five and a half years ago or something. And I'm still just deeper than ever }
+{\cf2 [00:02:00]}
+{ into Kubernetes. And here we are today. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Wow. People who are probably tuning in listening to Azure or thinking of Azure Kubernetes security, just to level the playing field for everyone.}
+{\pard  \line \par}
+{What is Kubernetes? }
+{\pard  \line \par}
+{\b\cf3 Jimmy Mesta:\b0}
+{ There's like the philosophical answer. And then the like technology, and it's it covered Kubernetes, by definition came from Google out of their board project and that's less exciting than what it kind of has evolved to be. And really. It's a community first on those,}
+{\pard  \line \par}
+{we, it's very rare to have infrastructure tools, have such a following and such a passionate community around the developer ergonomics and all of these different things that make up this way. We deploy software. And I kind of look at Kubernetes as, as that, like more than just a series of pods and, sitting on nodes with a control plane, like we can talk about that, but Kubernetes is this special thing that happened.}
+{\pard  \line \par}
+{It has its own, like to two part like }
+{\cf2 [00:03:00]}
+{ documentary, which no infrastructure in the world will have different. So I see Kubernetes as like this culmination of like the technology side of DevOps almost, and giving you ways to run applications and ship code faster, more reliably and , with better tooling.}
+{\pard  \line \par}
+{So that's what I think it is. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I did not realize it was a two-part documentary on Kubernetes as well. }
+{\pard  \line \par}
+{\b\cf3 Jimmy Mesta:\b0}
+{ Yeah. It was released a couple months ago. It's interviews with all the originals from Google, Joe beta and like, , Chris, Anna checks and they're from the CNCF.}
+{\pard  \line \par}
+{It's a really well done documentary on the Kubernetes project, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I'm going to check that out as well, and probably find the link and put it in the show notes. So coming from 0.8 K8s, all the way to Azure AKS, for people who are listening into Azure AKS now, how different was 0.8 and what's Azure AKS, do how different is that to the original Kubernetes?}
+{\pard  \line \par}
+{\b\cf3 Jimmy Mesta:\b0}
+{ Manage Kubernetes was like a natural progression }
+{\cf2 [00:04:00]}
+{ and land grab by the different cloud providers. , GCP, AWS and Azure. I forget the exact I feel like Azure was last. I'm not don't quote me on that, but like, they were kind of close within the same year where everybody's like, we need to manage version.}
+{\pard  \line \par}
+{ Azure as a public cloud has really taken off. I see a lot of Azure implementations just due to places being historically Microsoft shops. And like Azure is a natural fit for a lot of their workloads and active directory and, and things that have powered enterprise for a long time.}
+{\pard  \line \par}
+{So it was only a matter of time before Azure, had a mature. Offering for Kubernetes. And the evolution really was, roll your own cluster, DIY or Kubernetes, the hard way, whatever you want to call it is, is hard. You're using tools that help you. Bootstrap virtual machines, there's passing of certificates.}
+{\pard  \line \par}
+{There's installing different components. There's maintaining those components, upgrade paths, }
+{\cf2 [00:05:00]}
+{ security issues, like the control plane for Kubernetes. It's complicated and it has a lot of levers and knobs that if you don't get it , you're either going to get hacked or have downtime or both. And I think Azure saw this opportunity to have a managed service for people who want to run containers and it abstracts away the control plane.}
+{\pard  \line \par}
+{So all of the things that are, A pain or a headache, or really don't add value to your company. They tried to abstract the way and give you a configuration through their cloud APIs, similar to EKS and, and GKE to basically run Kubernetes as simplistically as possible and AKS does a fine job at that.}
+{\pard  \line \par}
+{ There's opinions that are very strong between different providers, but they're all very GA simply out full featured solutions to abstract away the Kubernetes control plane. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ It's funny because maybe this could be one of the reasons why Azure AKS may have been the last, if it was the last one.}
+{\pard  \line \par}
+{Cause I }
+{\cf2 [00:06:00]}
+{ think when I think we're containers, I'm not really thinking windows containers, even though they do exist. And we would talk about this offline. That I am having conversations with people where they using windows containers. Like that's become a thing because in my mind, like Kubernetes container orchestration and then that's Linux.}
+{\pard  \line \par}
+{That's not, windows, you're also starting to see windows containers appear more often. }
+{\pard  \line \par}
+{\b\cf3 Jimmy Mesta:\b0}
+{ I don't think it's at like any sort of critical mass for, us personally, what we do at K SOC. But the, the offering is there}
+{\pard  \line \par}
+{ It's really around like windows server, GKE, Clearly supports windows containers. And we're not, discounting that, but like GKE does too. And , you have to run special nodes , you necessarily just throw this windows server kind of windows container inside of Kubernetes.}
+{\pard  \line \par}
+{And it knows exactly what to do. There's a support story there. . And then like the security story is, I have. GKE's Windows offering . And they're like, if you're running this in a multitenant }
+{\cf2 [00:07:00]}
+{ sort of hostile environment beware of container breakout because there's certainly, you should be spinning up another cluster if you have this sort of true multitenant need.}
+{\pard  \line \par}
+{There's definitely process isolation and all the things you would expect out of containers, but , I think there are some unknowns and , some boundaries that windows containers may not have. And to be honest I will not claim to be the bonafide windows container expert.}
+{\pard  \line \par}
+{Maybe that's the next podcast. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I definitely have someone in mind for that kind of episode as well. I definitely find that fascinating as to how people would do windows container and then do that in Kubernetes, but then at the same time, scale it up as well. So I'm not saying there's windows operating cannot be scaled they can be. Clearly Azure is in the space being the second largest cloud provider I hear a lot of examples about GKE production deployments, AWS Kubernetes deployments, having a lot of production deployments as well.}
+{\pard  \line \par}
+{I'm sure people use AKS in production. Are there any well-known examples maybe that you can share?}
+{\cf2 [00:08:00]}
+{ }
+{\pard  \line \par}
+{\b\cf3 Jimmy Mesta:\b0}
+{ Without naming names, but there's actually two very large kind of healthcare providers in sort of a Azure and healthcare and Azure and name your three-letter agency, like a government agency.}
+{\pard  \line \par}
+{They tend to lean towards Azure for some pieces of their cloud stories. So, , we see. , this, these healthcare kind of huge multi chain, sort of it's hospitals, it's everything highly regulated. They tend to lean towards Azure , and they're modernizing the stack.}
+{\pard  \line \par}
+{I love the phrase digital transformation, but that's what they're doing. , they're taking pen and paper type things and moving it into the cloud and their systems are becoming. More modern and they're using AKS to do that in a big way and in production. Absolutely. Wow. So yeah, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ healthcare and compliance.}
+{\pard  \line \par}
+{I think that those two things I didn't and going that with Kubernetes is not something that I taught. But then again, you started your career in compliance driving, driving, compliance in the }
+{\cf2 [00:09:00]}
+{ Kubernetes environment as well. So that's a Testament to that as well. So maybe another thing to unpack would just be the, we spoke about self hosted versus managed.}
+{\pard  \line \par}
+{In an Azure AKS environment, what are we really like? , there's the whole shared responsibility. That's really slapped on people where anyone who's listening in and they have been basically given, Hey, we are deploying an application and an EKS. What are some of the things that are taken care of by Azure?}
+{\pard  \line \par}
+{And what are some of the diff there's a line drawn where someone who's listening in each week taking care and taking responsibility for securing that. Well, it says something that would be taken care of by Azure. }
+{\pard  \line \par}
+{\b\cf3 Jimmy Mesta:\b0}
+{ Shared responsibility. That's always a fun topic. So Azure is going, just like AWS is going to take care of the underlying kind of compute infrastructure.}
+{\pard  \line \par}
+{ Anything that they have control of? Backbone, routings stuff like key material storage in there, , kind of KMS offerings things of that nature where you really don't have a choice to configure they're going to be }
+{\cf2 [00:10:00]}
+{ responsible for, and have compliance and, check boxes around know attestations that other people looked at that system and they made sure it's secure.}
+{\pard  \line \par}
+{So the, the, the thing with AKS specifically is. Once you get a Node pool going and you set up your AKS environment. You're kind of on your own. Every workload you spin up is yours, even the maintenance of the nodes, like making sure that they're locked down appropriately and not open to the internet and all the kind of hygiene stuff we've seen with just regular old virtual machines networking.}
+{\pard  \line \par}
+{It's up to you. Like you can use AKS in a very hardened almost air gapped sort of way. Or you could. Leave it open and you could get hacked sideways within five minutes and it's everywhere in between. So the, some of the things that Microsoft Azure does offer, I think that, , other clouds have some flavor of, but I really liked }
+{\cf2 [00:11:00]}
+{ their kind of security baseline.}
+{\pard  \line \par}
+{Like they have these like security benchmarks that they publish. And they're pretty clear about the shared responsibility model for. Azure and AKS. And you can read through this list it's funny. Cause they, they call out things very specifically , is this my responsibility or yours?}
+{\pard  \line \par}
+{And if you scroll down there's a big block that says responsibility customer, . Responsibility customer. And you go down the list and most of it is your responsibility still. And I think that's where the complication with Kubernetes security comes in, whether AKS or doing it yourself.}
+{\pard  \line \par}
+{So it's just interesting, like shared responsibility is well-documented, but I think people still tend to lean on like, doesn't Azure do this for me. And then. Probably No still }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So there's definitely some lack of understanding for what Azure is actually doing versus what would be done for you.}
+{\pard  \line \par}
+{So maybe another segue for anyone who is probably deploying or securing an application at }
+{\cf2 [00:12:00]}
+{ AKS, what are some of the components that they would have access to that they can maybe put a security baseline for? }
+{\pard  \line \par}
+{\b\cf3 Jimmy Mesta:\b0}
+{ the control plane, or what was historically kind of called the master node? It highly configurable, }
+{\pard  \line \par}
+{It's got tons of different things , a very important component of your cluster insecure or secure things like anonymous. Authorization things like, , I mean, leaving an open to the internet just in general or just RBAC, like etcd is stored there with all of your key value sort of pairs and your configuration data.}
+{\pard  \line \par}
+{So Azure is going to. Hosts that for you, they're going to take your control, plane and surface some of that configuration for you to turn off her on some of it's security related, other things are not. And they are on the hook for your control plane, same with EKS AKS etc. What that means is you, you are off the hook for a lot of the security kind of things that they don't surface.}
+{\pard  \line \par}
+{They're going to try to pick the }
+{\cf2 [00:13:00]}
+{ most secure. Path, which is, I think, why I've listened to episodes in the past about managed Kubernetes with guests you've had on it's like, yeah, if you can, you should use Managed Kubernetes. Like, why would you not want that? But where things get a little more interesting are the workloads themselves, ?}
+{\pard  \line \par}
+{And I think IAM is tied into our back in general, like access control and Kubernetes is not Azure AKS concern. You're kind of given the standard APIs available for RBAC. Your authentication is what you make of it. So it's not like you have one on path and you're pushed into use in AKS. So that's an area where people have ultimate flexibility, but also is highly insecure and a lot of implementations and networking is the same}
+{\pard  \line \par}
+{It's like Kubernetes by default kind of open it's a flat network within the same cluster. So are you going to bring your own }
+{\cf2 [00:14:00]}
+{ service mesh? Are you going to use the built-in? AKS has open service mesh the project. Baked in , if you so choose to turn it on. . So that's kind of cool.}
+{\pard  \line \par}
+{Like if you want a service mesh and Istio in GKE or the same sort of combo here, but open service mesh is a kind of click button, sort of a configuration you can turn on inside of your AKS environment. Same with Calico. If you want to use pure Kubernetes network policies, Calico is. , a first-class citizen, if you will, inside of AKS and you can turn it on and you can have the ability to create a network policies.}
+{\pard  \line \par}
+{And that's all great. I think using AKS. That's a huge benefit, like, cause most people don't need to go through a bake-off of their service mesh. . They usually need like MTLS or some other thing or tracing and they just want to pick a service }
+{\cf2 [00:15:00]}
+{ mesh that works and isn't a headache.}
+{\pard  \line \par}
+{And I liked that AKS offers one and it's an open standard. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ It's actually pretty awesome that this is a lot of things being given almost to your point as first-class citizens in the Azure environment itself. So make sense to go out on the manage Azure Kubernetes path if they can in, in terms of the monitoring side of things as well then, because I'm assuming yep.}
+{\pard  \line \par}
+{You did the, RBAC . How would you scale this? Okay. That seems to be a lot of things that are covered by them, but that's a great for one cluster, but when I have multiple clusters of Azure AKS, does that same apply? Or at that point, can just rely on the Azure tooling by itself just to manage security across it?}
+{\pard  \line \par}
+{\b\cf3 Jimmy Mesta:\b0}
+{ Yeah. So there's a cool project in Azure it's just called Azure policy. So Azure policies, there's a plugin for AKS that will let you run Azure policy. I'm putting this in quotes on video, but it's, it's really open policy agent with gatekeeper .}
+{\pard  \line \par}
+{It's OPA, }
+{\cf2 [00:16:00]}
+{ which is a great kind of rules engine, if you will. And Rego policies are all over the place and it's a good DSL to be writing these sort of policies in. So Azure policy, the plugin for AKS is like, again, the first class citizen, you can just kind of toggle the switch, you get policies and, and Azure.}
+{\pard  \line \par}
+{Gives you a big, old list, that the top 20 things, here's some stuff you could turn on. Insecure images like disallowed workload configurations. There's all sorts of things that you would imagine because it's gatekeeper under the hood, which is a very popular project that, , kind of maintains a great list of these, these configuration checks.}
+{\pard  \line \par}
+{And Azure is going to give you that. So like a lot of our customers don't want to see. Open policy, agent and gatekeeper per cluster, and kind of manage their rules. And it's just this big mess of open source for big, , we're talking 50 plus clusters. This is kind of a nice way if you're just using Azure.}
+{\pard  \line \par}
+{\cf2 [00:17:00]}
+{ Like that's the caveat, like if you were using multi-cloud this breaks down, but for just using Azure AKS, that's a great start. And you can write your own policies. So like that's a pretty cool Edition. And to your point with multi cluster, like service mesh has a story here. It's kind of weak, still like workload identity, workload identities, hard.}
+{\pard  \line \par}
+{I think the promise of service mesh was always like, everything's part of it. It's all one unified control plane. Like you can have a pod over here, a virtual machine over here. It all will kind of be under the same umbrella in this service mesh. We have yet to see that I don't see a lot of that happening, like to be honest.}
+{\pard  \line \par}
+{So I think for multi cluster in Azure, you would have to rely on. Cloud network security fundamentals, like, are you in the VPC? Are these network policies saying, do you have like peer to peer, like a site-to-site VPN style things that allow clusters to talk to one another? }
+{\cf2 [00:18:00]}
+{ Do you have public clusters and private clusters?}
+{\pard  \line \par}
+{And you're more in the traditional network, like cloud security realm there than just pure Kubernetes. So. But yeah, I think there's some cool stuff that Azure offers that people maybe don't take as much advantage of as they should. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So, and if you kind of go to the networking parts as well, then things like if your application requires a mutual TLS may not be a requirement at that point, because using you're using the Azure fabric, would that be ?}
+{\pard  \line \par}
+{\b\cf3 Jimmy Mesta:\b0}
+{ It depends. Who's requiring MTLS . If it could be application-based yeah, we oftentimes the MTLS requirement comes from people or auditors specifically who don't necessarily have all the context of where this will live. So we see Istio used a lot for its MTLS capabilities because you have the Envoy sidecar sitting inside of the pod and it's doing all this.}
+{\pard  \line \par}
+{The MTLS work, the heavy lifting there and open service }
+{\cf2 [00:19:00]}
+{ mesh. Does that for you inside of AKS as well? I don't know if like what Azure offers out of the box with like, , their Azure service fabric, as you mentioned has enough to say it's MTLS I can't speak to that specifically. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ One of the things that I get always amazed by the amount of adoption Kubernetes has had. Cause I think we're talking about securing Kubernetes as well, but a lot of people may also want. That's great, but I'm not going to put myself in acute stage that I'm a AKS. I wonder if he had some information on why Kubernetes became that, , that two-part documentary kind of a thing.}
+{\pard  \line \par}
+{Why do you, why do you feel it stands out? Because I mean, a lot of people may be listening to this and going, well, I've got containers. I've got I'm good. I don't need to go my application, move to this. Azure Kubernetes service or whatever. And not that we were trying to sell the idea that, Hey, you should use Azure Kubernetes service Kubernetes by itself is a good, good thing in my opinion.}
+{\pard  \line \par}
+{But I'm curious to know what your opinion or why Kubernetes projects seem }
+{\cf2 [00:20:00]}
+{ to get popular. }
+{\pard  \line \par}
+{\b\cf3 Jimmy Mesta:\b0}
+{ I think that managed Kubernetes is there was like the first wave, ? Like early adopters who are just like. I find this to be really interesting and cool. And I think there's a future here and early, }
+{\pard  \line \par}
+{like that was a thing. And we didn't really have managed Kubernetes. So you were building your own clusters and, , COBs and, even Terraform and there's like other like recipes that would help you. But at the end of the day, like you're doing it yourself. Like, , Kelsey Hightower style the hard way.}
+{\pard  \line \par}
+{And I think that was like the first wave, but then. In conjunction, the Kubernetes project was like very popular. Like people wanted to work on it. It was like a textbook open source project. I think I had its ups and downs and I'm sure, but like, it was a popular high impact project to be working on an open source land and companies started sponsoring it.}
+{\pard  \line \par}
+{And then I think the second way of the real, like, the secondary rocket booster for Kubernetes. The introduction }
+{\cf2 [00:21:00]}
+{ of EKS, GKE and AKS. Well, cause once you make it easy and you tightly couple things with other cloud components like, oh, I can talk to KMS or this RDS database, or I can plug in these other systems.}
+{\pard  \line \par}
+{I have already running in Azure, but now I just have this Kubernetes piece and containers clearly. Useful like developers, like, well, maybe they don't like them, but they're a good way to deploy software. They, they have their pros and cons, but I think the developer tooling for containers got better over time.}
+{\pard  \line \par}
+{And then you introduce managed Kubernetes and then all of a sudden, all the recipe for like destroying any other competition in the container orchestration space. Nothing came close. Really like ECS even is in AWS is a lot of people we talked to anecdotally, like they're trying to get off of ECS and move to EKS because there's just not the ecosystem around ECS.}
+{\pard  \line \par}
+{It's very proprietary. }
+{\cf2 [00:22:00]}
+{ It's very Amazon, it's not a open project really. So all that stuff. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And Kubernetes is basically irrespective whichever Cloud you end up going, I mean, we're talking about AKS, but if it's GKE or you're EKS or whatever, they would all kind of have a very similar way of, your Kubernetes components would automatically change. Nobody was starting to go for the a hundred. We changed like, oh, you're talking about Azure versus AWS commands. But the Kubernetes fabric itself doesn't really change it literally to what they said, cloud agnostic. }
+{\pard  \line \par}
+{\b\cf3 Jimmy Mesta:\b0}
+{ That's the hope, ? I mean, yeah.}
+{\pard  \line \par}
+{ I think it's hard to be completely cloud agnostic. Even if you're using Kubernetes, if you're using managed Kubernetes, you're not really using the pure, you're not like forking or cloning the project and running Kubernetes, like you're using Azure's implementation of Kubernetes. In a KSOC, our company we use Kubernetes and our whole goal is to }
+{\cf2 [00:23:00]}
+{ keep it as agnostic as possible. So we can run on prem or run in other places like inside of a Kubernetes. And it's not easy. You have to make very specific decisions that keep you in Kubernetes and not take advantage of what Azure has to offer or AWS.}
+{\pard  \line \par}
+{That's pretty cool. Oh, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ and also because that you've made an active choice for being purely Kubernetes as well, because I imagine in an enterprise where you're not the only person making a decision, that seems to be a lot more people or too many chefs in the same in the kitchen.}
+{\pard  \line \par}
+{ It would be hard to kind of continue making decisions for we're going to be purely Kubernetes to make it purely cut agnostic because there will be compromises made here. }
+{\pard  \line \par}
+{\b\cf3 Jimmy Mesta:\b0}
+{ It's tough. Cause it's way easier to be tied to your cloud. The security examples, ? It's like, I need a service mesh.}
+{\pard  \line \par}
+{I can either click a button in AKS and have it, or I can like roll my own and run Istio }
+{\cf2 [00:24:00]}
+{ or Linkerd . And that's a journey that I'm going to have to take and not sure. Like you have to weigh those pros and cons secrets management, like to have secrets management, be tied to like KMS or something your cloud provides and they just plug into it, , your Kubernetes, that's pretty slick.}
+{\pard  \line \par}
+{I like that. And the other option is like, don't use that. . I have to use vault or something in the cluster or some generic thing. And it's always easier to choose what your cloud provides }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ or even identity for that matter as well. Like you have your enterprise identity, your cloud identity and whatever identity you want as well.}
+{\pard  \line \par}
+{\b\cf3 Jimmy Mesta:\b0}
+{ identity . It can be so tied to your cloud. IAM is like everything inside of AWS and like you Azure active directory and AKS like tightly coupled. And that's generally a good thing, but until you need to be kind of more agnostic, , and RBAC is a whole another topic inside of Kubernetes.}
+{\pard  \line \par}
+{I'm }
+{\cf2 [00:25:00]}
+{ really interested in it's a mess and we have a lot of work to do there. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Cupidity is popular because of the opportunity. People have to kind of the whole orchestration scale, kind of a thing, the containers, and has a huge community backing behind it.}
+{\pard  \line \par}
+{We've also learned from you as to how, what are some of the components probably to look hard for it to secure it. And what are some of the components that are shared by Azure as well? When it comes to monitoring, what are we really looking out for then? What does the cloud provider take care of?}
+{\pard  \line \par}
+{I'm assuming some kind of a Azure Sentinel integration somewhere or some kind of }
+{\pard  \line \par}
+{\b\cf3 Jimmy Mesta:\b0}
+{ that's it? Well, I mean, yeah, as your Sentinel and Azure dev ops is going to provide a lot of the CII CD pieces. Like we have a customer that uses Azure. Get or Azure code. I forget what it's called, but there get out hosting or anything.}
+{\pard  \line \par}
+{We just get hub it's it's, it's like all Azure all the time. And from like the code through the dev ops pipeline, through the, the many, }
+{\cf2 [00:26:00]}
+{ many acks clusters and, , off the backend, all the logging monitoring, alerting, like all that stuff is native to Azure. So I mean, , the, the product decide Kubernetes.}
+{\pard  \line \par}
+{Generates a variety of logs, like, and , this, like they're, they're not, they're not just O S system level logs that we're, we're caring about. There's, there's actually built in AKA S like, it is part of, I think it's part of the Sentinel suite and some like filters and things like a thing you can buy additionally, to look for, And they're AKS specific security events. So they look for things . You're taking in the Kubernetes API audit log, under the hood. And you're looking for anomalies or events that may be, , they make you scratch your head and want to look in more. So things like Jimmy's logging into this AKS cluster at midnight, trying to list secrets in the Kube system, namespace, and he's failing, but he's keeps }
+{\cf2 [00:27:00]}
+{ trying it like.}
+{\pard  \line \par}
+{The natural language of saying it, but like, you can find that through Kubernetes logs. Is it easy to find? No, but it's they're there. And those audit logs are really powerful. They all often times go to like devil and they aren't really looked at, but they they're telling a story.}
+{\pard  \line \par}
+{Like the service account token is. Accessing some sort of workload over here. It's never done that before. We don't even use service accounts in that way. A that's another story that's good to tell as well. And I think we're going to see a lot of innovation in the anomaly detector. Of those Kubernetes specific logs in the next, , year or two, it's just natural.}
+{\pard  \line \par}
+{So and Azure has all that stuff. Like you can, you can go through it. Another reason to use managed Kubernetes is like, if you choose not to, again, you have to send a configuration to the Kubernetes API, pick the audit logs. You want give them a place to go store them, }
+{\cf2 [00:28:00]}
+{ like all the things. And you're just like, I'm just gonna use my cloud.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I think the team's skill set required for this as well. How many people out there would have learned? I mean, I'm sure there's a lot of people, Kubernetes is a big community, but how many are in your state are probably are working in your team who can probably have that skillset to do Kubernetes from scratch, like not manage one and then they leave after one day.}
+{\pard  \line \par}
+{Like, well, what do I do now? . }
+{\pard  \line \par}
+{\b\cf3 Jimmy Mesta:\b0}
+{ Yeah. I don't know. I think unless you are, unless you need it and in some implementations do, , like we're hearing about Kubernetes running in fighter jets, . Or you're hearing about Kubernetes powering, like cruise liners. There's a guy I was talking to who worked for the government for a long time and they have.}
+{\pard  \line \par}
+{Kubernetes nodes that were fake rocks that they would plant in the deserts in like kind of high conflict areas in each Kubernetes node was a rock and it like had temperature, }
+{\cf2 [00:29:00]}
+{ sensors, and cameras and, and like that, you're going to roll your own Kubernetes if you're doing that, . Like there's not really a, appropriate use of AKS if you're doing like a CRUD SaaS application like you absolutely should consider managed communities. There's really no reason unless.}
+{\pard  \line \par}
+{I don't know, like there's no reason to be doing Kubernetes he's in that sort of capacity. In my opinion, others would disagree. I'm sure. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I'm with you on that one. Why not take the easy it out, not recreate the wheel.}
+{\pard  \line \par}
+{So one of the major reasonable , for people to go down the managed part was just the whole team skill set as well. Like once you lose that one person who was basically devoted their four or five years into learning Kubernetes from scratch, they build the whole self hosted one, and then they got a better offer from Google or wherever they live.}
+{\pard  \line \par}
+{And you're like, ah, who's going to look after this. There is not amount. There is no amount of knowledge sharing you can do. To transfer all that knowledge on to another person that is, it just is not practical. Whereas if you kind of go down the managed part, but at least you have some hope that, oh, there'll be }
+{\cf2 [00:30:00]}
+{ documentation or there's documentation, otherwise as well.}
+{\pard  \line \par}
+{At least there would be things that you can get help with and that'd be a lot more known sequences to that as well. I think that's my thing. }
+{\pard  \line \par}
+{\b\cf3 Jimmy Mesta:\b0}
+{ I think you can reverse engineer, a managed Kubernetes environment and figure out how you got from point a to point B probably . If you're doing your own stuff and like you have.}
+{\pard  \line \par}
+{Very special snowflake nodes over here that are GPU intensive. And like these other nodes aren't like tolerated for this thing. And our API has like some botique set up that isn't checked in as code, like. You're just dealing with like an old crusty VM that needs, that can go down and that's not a point of Kubernetes.}
+{\pard  \line \par}
+{So I think if you're really big, like some, Fang style size companies will like run their own PaaS. . And like probably in their own data center for money and like saving opportunities. And at that point, You might have a team of 50 who are responsible for }
+{\cf2 [00:31:00]}
+{ Kubernetes.}
+{\pard  \line \par}
+{Like that's a different story than the average software company. That's like, I just need to ship product. And I don't care about any of this stuff you're talking about. . It's like Heroku versus, , AWS. It's like people like Heroku still. and they should.. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah, yeah. A hundred percent.}
+{\pard  \line \par}
+{And I maybe that's a good segue into the whole thing about securing it as well. Maybe what's the maturity scale. I kind of always come back to this where people are going to just maybe going, okay, cool. So, I am sold on the idea of going AKS. What's maturity scale that I'm going building up with.}
+{\pard  \line \par}
+{So if I'm a startup today, these are at least a minimum things I should think about from securing AKS. And then you kind of go on from becoming, I don't know, the next Facebook or whatever. What do you see as the next sequence of security, best practices they could apply starting from today on their startup and then growing all the way to your Facebook.}
+{\pard  \line \par}
+{\b\cf3 Jimmy Mesta:\b0}
+{ So Kubernetes as a project is mature. I mean, I don't think that's a }
+{\cf2 [00:32:00]}
+{ hot take. If you read the release notes that we're getting fancy security features still kind of baked in, but like the core is, is mature. Azure as a public cloud. Yes. There are very high profile breaches that are happening. There's no denying that, like the research that's going after Azure specifically, like there's problems under the hood of Azure. That's fine. But I would still rank managed Kubernetes across all three clouds as more mature than not. And then it's like, where things get very fuzzy is like, what's your maturity of how you use Kubernetes , in AKS, specifically.}
+{\pard  \line \par}
+{And that can range from. 1 to a 10 It's like you could use everything that's possible to make that cluster like battle-hardened . Or you could do nothing and, or actually detract from your security. So the things that I think enterprises }
+{\cf2 [00:33:00]}
+{ face as they scale, number one is simple. It's I just call it cluster sprawl.}
+{\pard  \line \par}
+{Like there's this whole problem that we see very frequently. Where you asked the chief security architect at major company XYZ, that's been there a year and you're like, where are your clusters? And the answer is like, I don't know. And it's like, we don't even know what cloud they're in sometimes yet alone, if they're all AKS clusters.}
+{\pard  \line \par}
+{So like number one is maintaining consistency across clusters, because 1 AKS profile is a , different than another case profile. There's different versions and configurations and logs could be turned off for one and turned on for another. So there's consistency issue. That are just hard to deal with at scale.}
+{\pard  \line \par}
+{So reigning that in is really important asset inventory stuff. And then, number two is like you should be using a distributed policy mechanism, , whether it's the Azure. Policies }
+{\cf2 [00:34:00]}
+{ that you could turn on that are backed by OPA and kind of gatekeeper. Or you're doing something more multi-cloud friendly, , hybrid cloud friendly.}
+{\pard  \line \par}
+{You need to build a baseline of policies for workloads and clusters that is repeatable. Like you just have to, because closed, workloads are going to vary. They're going to come from different teams, different places, and everybody needs to follow some conformance. This is for CIS. Benchmarks and the NSA hardening guidelines and the newer kind of , publications around like this is bad and this is good.}
+{\pard  \line \par}
+{And I think you have to get a grip on that pretty early, cause going backwards after you already have 50 clusters, is it is hard. And then secrets management like a hot topic. And I think Kubernetes doesn't make it easier. So whatever you choose again, consistency is key. Like you have a policy, you don't throw secrets into the Kubernetes secrets object that our base 64 encoded.}
+{\pard  \line \par}
+{\cf2 [00:35:00]}
+{ And you don't like, , maybe you have to use KMS or vault or some sort of thing. That's your, company's agreed to. And I'll take this moment to plug some lesser known Kubernetes security resources. I enjoy. I mean, I may or may not have helped write some of them, but still , there's OWASP Kubernetes Security Cheat Sheet.}
+{\pard  \line \par}
+{It's really good. And I worked on it with some awesome, smart people. It it's used by OWASP folks, but not other people. . }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I wasn't even aware OWASP has a project in Kubernetes.}
+{\pard  \line \par}
+{\b\cf3 Jimmy Mesta:\b0}
+{ And it is, and on that note I'm working with a group of people on OWASP TOP 10 for Kubernetes. So if you've ever done AppSec, , that there's like the OWASP top 10, the big kind of top 10 project, and we're doing one for Kubernetes specifically, and it's kind of the stuff we talked about.}
+{\pard  \line \par}
+{And we're definitely looking for people to help. With that effort, it's a huge effort. And in like a month, we'll have kind of the draft out there for people to, }
+{\cf2 [00:36:00]}
+{ to put comments on and help make better. So those are the two cool things and I maintain a Kubernetes security, awesome list on GitHub that the community has a lot of people that are contributing to. They're important because you like, those are the challenges that we see people facing as they go from. Like, we're trying Kubernetes out in the skunkworks project. Oh, no, like we have seven clusters.}
+{\pard  \line \par}
+{Oh, we've decided to use it in this machine learning thing over here. Now we have 13 clusters and a year later you're not really sure what's happening. You're kind of just like the classic, like dog in the flames with a coffee cup of coffee meme. Like I have no idea. Everything's fine, . And you have to go back and figure.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ What are some of the challenges at scale that you see people do that because clearly asset management is one where they don't have an idea about the cluster where the cluster is and what they might be up to. And the other one being having just a distributed }
+{\cf2 [00:37:00]}
+{ policy sounds like those are two big themes that I took away from that conversation that we just had.}
+{\pard  \line \par}
+{Yeah. }
+{\pard  \line \par}
+{\b\cf3 Jimmy Mesta:\b0}
+{ And RBAC, you should be thinking deeply about who is accessing a cluster like Kubectl is like the new SSH. And is it appropriate for everybody to be SSH into every box in your entire public cloud? Probably not. There's just a lot of attack surface there, to be honest, like with giving humans and service accounts.}
+{\pard  \line \par}
+{Access to Kubernetes, the control plane is very granular and if you get your group wrong or you over, you give somebody too, too many permissions the ramifications can be like huge. So I think that's another. Big picture thing as you grow is like, what's our story around RBAC? How are we segmenting and slicing up this kind of multi-tenant environment?}
+{\pard  \line \par}
+{Is it through namespaces? Is it clusters? Like you have to have design decisions and discussions that are with access control in mind and identity and monitoring of that }
+{\cf2 [00:38:00]}
+{ identity. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And I trusted you with this one, learn about all this man. Cause I feel like It needs to be. I obviously we had the resources for Kubernetes security, cheat sheet, the Azure specific ones as well.}
+{\pard  \line \par}
+{Is there a resource that you recommend for people to learn Kubernetes AKS and maybe even the whole managed humanity space at how to secure them? }
+{\pard  \line \par}
+{\b\cf3 Jimmy Mesta:\b0}
+{ Yeah, I think the CIS benchmarks as not as imperfect as the, any benchmark may be is going to give you the rundown of what's going on, the NSA hardening guidelines, really good.}
+{\pard  \line \par}
+{It's less prescriptive. It's more of like categories of things with fixes. Other than that, it's like KubeCon talks. Like, I don't know, like it's, it's really interesting. There's not like there's a lot of different places to go to get bits and pieces, but it is pretty tough to have a comprehensive view into like general kuberentes that he's security. Cause AKS security could be its own two day course. ? Like that's just, it's a }
+{\cf2 [00:39:00]}
+{ data center inside of your data center. So like it's a lot of things to tackle. I have given lots of trainings through the past four years I've been doing like tons of like trainings in the open.}
+{\pard  \line \par}
+{We built a really cool kind of CTF for KubeCon 2019 that is published. It's at secure kubernetes.com. It's maintained , myself, Brad KeySpan, Tabby Sable and Peter Benjamin. And that was super fun. But , that's what you gotta do. You have to like crack this thing open.}
+{\pard  \line \par}
+{Take one concept at a time, like network policies, start there, maybe like, what is networking in Kubernetes? Like how does it work? Why do I need to network policy? What's like a networking plugin even do. And why? Like, how do you route traffic from point a to point B and then how do you like scope it down?}
+{\pard  \line \par}
+{Like that's you have to pick big kind of these topics and dive in. Sweet or you just hit me up, like hit me up on Twitter or wherever, and I'll hopefully point you in directions and }
+{\cf2 [00:40:00]}
+{ share cool stuff. Sure. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ And all of that definitely will link there as well. So that's kind of like the technical section of the podcast.}
+{\pard  \line \par}
+{And thank you for kind of answering those questions as well. We're on the tail end, which is a fun question. So I've got three questions for you. So just to get to know you a bit. The first one being, where do you spend most time on many north working on Kubernetes or technology? }
+{\pard  \line \par}
+{\b\cf3 Jimmy Mesta:\b0}
+{ Yeah, I have, I have two boys the two and four.}
+{\pard  \line \par}
+{So one can imagine that's, that's, that's, they're my, or my life with, , with my family and my wife and we , for fun, we, we live up in the mountains of Flagstaff, Arizona, and I, I mountain bike. Bye. , like my whole family mountain bikes I've grew up on, I'm probably better on a bike than my feet, to be honest.}
+{\pard  \line \par}
+{So I spent a lot of time in the saddle throw myself down, steep, steep, chutes, and cliffs and things. So I really liked that. And yeah, other than that, hanging with the family getting outside. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Awesome. And where does something that you're proud of, but is not on your }
+{\cf2 [00:41:00]}
+{ social media? }
+{\pard  \line \par}
+{\b\cf3 Jimmy Mesta:\b0}
+{ Oh, man. I don't share too much on social media about my private life.}
+{\pard  \line \par}
+{So there's probably a lot, but I I, when I was, when I was 12, I was ranked number one in the U S for my age and category and BMX racing. So that's a little lesser known fact. I, then I broke my back. I still, I still got like 13. And I Yeah, I, I had a little, a little kid career in, in BMX racing, nothing serious.}
+{\pard  \line \par}
+{I'm going to }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ be like one of those that red bull sponsored at least stuff as }
+{\pard  \line \par}
+{\b\cf3 Jimmy Mesta:\b0}
+{ well. , that, that I was very far from that, but I I've always aspired to that and, , There's a lot of trophies from back in the day. So now it's just about getting outside and, yeah, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ that's awesome. Last question.}
+{\pard  \line \par}
+{What's your favorite cuisine or restaurant that you can share? }
+{\pard  \line \par}
+{\b\cf3 Jimmy Mesta:\b0}
+{ Yeah. I mean, I, I mentioned you before this, like I'm down at my }
+{\cf2 [00:42:00]}
+{ mother-in-law's place and she's a great cook. Like I can't deny everything she makes is mind boggling. I love it. , if I'm going to go out somewhere, I think there's, I, I tend, I don't know.}
+{\pard  \line \par}
+{I tend to gravitate towards hipster, hipster. Seening restaurants like fusions of certain things , small, small portions, but really. Unique food. It doesn't really matter the region, but I, I like that. And then I love international travel. Like we talked about this too. Like we're not somewhere on what I want to like totally immerse myself in E everything I can, like I've been to Taiwan a few times and done all the food stalls and all the create anything crazy.}
+{\pard  \line \par}
+{I could get my hands on. Yeah, I've had, I had a yeah, like. Yeah. It was like a jelly lollipop thing from a stand that had some sort of bugs in it. I don't remember what bugs they were for sure. Come }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ alive. So , }
+{\pard  \line \par}
+{\b\cf3 Jimmy Mesta:\b0}
+{ yeah. Yeah, they are. I have }
+{\cf2 [00:43:00]}
+{ regretted those decisions before, but I'll still do them. So yeah.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Fair enough. No, say that that's pretty much what we had time for, but where can people find you if they have more questions about the space and one learn about securing humanities in a cloud managed humanities as well? }
+{\pard  \line \par}
+{\b\cf3 Jimmy Mesta:\b0}
+{ Yeah. So I'm Jim Mesta on Twitter. It's fine. Like I, , we're, we're building tools around it at, at K SOC case doc.com.}
+{\pard  \line \par}
+{We have a blog and some things there. YouTube, I don't know, pretty easy to find it's a, it shouldn't have been }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ so people can easily find yourself, but thanks so much for doing this, man. I really appreciate this. And thank you for everyone who came online. But this is, this was really good. Cause I think I haven't covered Azure Cuban, any security and it was good to kind of dive in.}
+{\pard  \line \par}
+{A bit more new ones for what's covered. What's not covered. So thank you so much for doing this and hopefully I can have you again for more cupidity self man. Maybe next time we can do AWS capabilities. There we go. }
+{\pard  \line \par}
+{\b\cf3 Jimmy Mesta:\b0}
+{ We'll we'll do all three. Yeah. }
+{\cf2 [00:44:00]}
+{ Oh yeah. And anytime it's been awesome. Longtime longtime listener and , honored to be here.}
+{\pard  \line \par}
+{So thanks for. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ No problem with Timmy. Thanks so much. And thank you everyone else as well. We'll see you in the next episode and all that. Hopefully you have Jimmy back soon as well. All . Thanks everyone. Talk to you soon.}
+}

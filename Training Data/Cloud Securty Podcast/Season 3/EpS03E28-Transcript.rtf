@@ -1,0 +1,410 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red250\green138\blue59;
+\red128\green128\blue128;
+\red216\green34\blue146;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\b\fs48 CAASM\b0}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ Hello, Welcome to another episode of Virtual Coffee with Ashish for Cloud Security Podcast. This is not the LIVE edition.}
+{\pard  \line \par}
+{This is a recorded version , so you would see this while we are in the U S so, Hey, we're at RSA. If you are at RSA definitely come in and another person who's going to be at RSA is my friend here. I'm going to bring him on here. Hey Akash! Welcome to the Show!. }
+{\pard  \line \par}
+{\b\cf3 Akash Mahajan:\b0}
+{ Hey, what's going on, man? Yeah, actually, I won't be at RSA, but you're going to want, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ it would be that I'm like, I'm just like, no, we're going to be honest saying like, okay, where }
+{\pard  \line \par}
+{\b\cf3 Akash Mahajan:\b0}
+{ you going?}
+{\pard  \line \par}
+{ I'll be a Gartner Risk actually, which is the same week. So you'll have to catch me there. That's in DC, but the whole Jupiter one team, we're gonna have a lot of folks at RSA. I've got. That east coast duty because I'm in North Carolina. Fair enough. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ You're holding, you're holding the Fort there.}
+{\pard  \line \par}
+{Fair enough, man. Can you tell us a bit about yourself and your path to your current role as well then? }
+{\pard  \line \par}
+{\b\cf3 Akash Mahajan:\b0}
+{ I am the head of solutions architecture at Jupiter one. So basically anything security, architecture, security engineering related that is customer facing.}
+{\pard  \line \par}
+{Roles to me. So that could }
+{\cf2 [00:01:00]}
+{ be technical support. It could be anything right. Like pro services, consulting, whatever. And the path is interesting. I used to own a business actually. So I ran a business for about seven years in the machine learning space. So I came from like a cloud architecture and data modeling background.}
+{\pard  \line \par}
+{And so now I find myself kind of focused on data-driven security solutions in particular. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ We're talking about asset management as well, and I always get curious about, well, this is a problem that I solved ages ago, but we're talking about assets in the modern security stack.}
+{\pard  \line \par}
+{What is Asset and how do you define it? I'm glad you prefer data and what is asset in a modern security stack? . }
+{\pard  \line \par}
+{\b\cf3 Akash Mahajan:\b0}
+{ I think we're all very familiar with the definition of an Asset . When you think about it from the perspective of what about my code repositories, my code modules, even the commits and pull requests to those repositories, for example, think about your access, roles, policies, access, keys code deploys builds all of these different software defined assets.}
+{\pard  \line \par}
+{In addition to devices, users, }
+{\cf2 [00:02:00]}
+{ data applications, et cetera. All those software defined assets are just a massively growing bucket that I think people have a very tough time keeping track of. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ If they have a tough time I would thought, asset management would have been a thing ages ago, right.}
+{\pard  \line \par}
+{It's clearly not the first time we're talking about it. So what was done at the moment? That's not working in the modern security stack. }
+{\pard  \line \par}
+{\b\cf3 Akash Mahajan:\b0}
+{ Asset management. 20 year old plus problem, right. With solutions for awhile. But the problem has changed, So now that there's this very granular definition of an asset, any of which could expose a vulnerability. So it's not like we're being unnecessarily granular. All of those things are very valuable and could be exploited if configured incorrectly or, if there's a vulnerability in the code module and so on. To date, you know, there's been a lot of reliance on, at the worst case, Excel sheets, }
+{\pard  \line \par}
+{just Excel spreadsheets of here, all my assets that we have and you know, who owns it, how's it, what's the }
+{\cf2 [00:03:00]}
+{ configuration, where's it registered so on and so forth. But you know, in the best case there are of course databases, Data Lakes, different types of ways of doing this. But the CMDB being the most traditional problem.}
+{\pard  \line \par}
+{But not traditional, so to speak still very, very useful, but you know, not necessarily evolving with the amount of assets when you keep track of today. . }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That's an interesting point. Cause I used to tell people funny when you say CMDB is not traditional, because I used to be like, oh, this is such a cool thing.}
+{\pard  \line \par}
+{We'll talk about CMDB. So CMDB is not cool anymore. Is that }
+{\pard  \line \par}
+{\b\cf3 Akash Mahajan:\b0}
+{ CMDB is, are necessary. They they're lucky. They're no longer just cool they're necessary. But but yeah, we I'm just kidding obviously, but I think that CMDB is, are focused on a certain type of. Asset registration, very premise focused.}
+{\pard  \line \par}
+{And when you look at kind of these cloud-based assets, right, you start developing an application in AWS or Azure, and you can unwittingly spin up thousands , of assets, related to policies related to roles related to API end points and }
+{\cf2 [00:04:00]}
+{ all these things that actually you wouldn't have realized were part of.}
+{\pard  \line \par}
+{Turning on a host and connecting it to a database and making a internet facing application. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So CMDB is a necessity as well, but at the moment, do you find that more people are still that split between Excel sheet and CMDB, even though we are, I guess, all moving towards the modern security stack?}
+{\pard  \line \par}
+{\b\cf3 Akash Mahajan:\b0}
+{ Yeah. That's a good question. Hard to answer, I'd say most of the large enterprises, they have a CMDB solution in place, whether it's service now or and from our perspective, we don't compete with that. There's a lot that goes on in a CMDB around registration, et cetera. So, you know, we could talk all day about that.}
+{\pard  \line \par}
+{Not very exciting, , on the kind of small business side, . When you're looking at a compliance team, there's definitely still Excel sheets for assets. They can't afford a full CMDB solution. So a hundred percent. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Offline, we were talking about the whole graph database thing that you guys are talking about as well.}
+{\pard  \line \par}
+{How does CMDB asset management and graph database? What's the link here. }
+{\cf2 [00:05:00]}
+{ Like you guys even have an open source graph database as well. So what's the link here. }
+{\pard  \line \par}
+{\b\cf3 Akash Mahajan:\b0}
+{ Let's talk about graph databases first, and then we can talk about how we go beyond what CMDB is do or how we are different, honestly, we've never competed for a CMDB, but you know, it's very confusing, cause it's all related to asset management. So a graph database , everyone's probably heard of SQL or relational database before.}
+{\pard  \line \par}
+{I presume that's just kind of part of the audience's repertoire. They're very familiar with tables and joins and you know, how they're, how they're related. So graph database is really focused on the connections between different nodes as they're called or entities or in our case assets, you have these different assets.}
+{\pard  \line \par}
+{What is it? What are they connected to? So let's imagine you have a repository or a database of all your cyber assets, perfect. Including code repos modules, including access, keys, roles, policies, all these ephemeral and software driven assets. Great. You have that database, but when you think about it from like, something like LinkedIn, the social media }
+{\cf2 [00:06:00]}
+{ companies, really popularized graph databases LinkedIn tells you is this a first degree connection? Is a second degree connection? Is this a third degree connection? And I know for example, that we're first degree connections. And I know also that someone else has a third degree connections, a secondary connection degree connection through Ashish and that information.}
+{\pard  \line \par}
+{Do we have that same knowledge of our cyber assets? Do we know what is this instance connected? Is it connected to a network interface? Is it connected to a sub-net? What else is on that? Sub-net so on and so forth. All these connections, how many degrees of separation, how are they connected? This data's really valuable and brings us to kind of what we do, which is modeling that attack surface in a graph database and graph databases are just really valuable at modeling those connections between data.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh and to your point, then the degree of connection, an example use case for this could be, I have a server that is, I don't know, hosting some kind of website or }
+{\cf2 [00:07:00]}
+{ whatever. And so the degree of connection is all I have a network as well. And so that network is first degree and then there's one other server which happens to be another network.}
+{\pard  \line \par}
+{That's the second, I'm assuming I'm making up an example here, but I'm sure you have a better example. Is that kind of how you are thinking about graph database.. }
+{\pard  \line \par}
+{\b\cf3 Akash Mahajan:\b0}
+{ That's pretty much exactly how it is. And you gave her like a great network example, but it could be like logical access to like in IAM.}
+{\pard  \line \par}
+{ What if there was some Lambda function and it has access to it's using a particular, I am role that gives them access to eye on policy to various data. You know what I mean? Like dynamo, DB tables, that's three buckets or whatever. This Lambda function essentially is three degrees away from that.}
+{\pard  \line \par}
+{Yeah, you look at it from an asset perspective, you have a Lambda function asset, a I am roll asset and I am policy asset. And then finally those dynamo DB table assets or S3 assets or whatever they are. And , just knowing that connection. is very challenging. And what we focus on is kind of discovering those connections.}
+{\pard  \line \par}
+{You don't even have to register them. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I can }
+{\cf2 [00:08:00]}
+{ understand now why maybe Excel sheet may not be the best solution for this as well. And I understand that if there are degrees of connection as well, and I'm sure there's special use cases for this .}
+{\pard  \line \par}
+{ To your point about IAM role. I can see all my IAM Roles, but I can't see my, I am role between one account and another account. So this helps unify as that asset management from that perspective to go, okay, we are looking at this from a perspective of this is your entire environment.}
+{\pard  \line \par}
+{Everything is connected via graph database, and I'm thinking more from a perspective that people who are trying to build this as well on their end, if they want. Go for it! That's the kind of thinking you're bringing over here is, is it something that you've noticed that people have not normalized in a way of thinking that you kind of have to educate people on this?}
+{\pard  \line \par}
+{Cause I feel like the whole Excel sheet is pretty straightforward that, oh, of course this asset here, which is so we're number 1, 2, 3, 4, that Ashish owns it and said, which is part of business unit, blah. This sounds like a very different kind of. }
+{\pard  \line \par}
+{\b\cf3 Akash Mahajan:\b0}
+{ All the kinds of properties that you would manage, an Xcel will still be }
+{\cf2 [00:09:00]}
+{ on an asset in a graph database. You know, you have an entity. A server, you still know the owner and the IP and when was it created and so on and so forth, all this information will still be there.}
+{\pard  \line \par}
+{The, kind of, heart of the graph database, and honestly, we should talk about what is a CAASM to some degree as well. And what is that all about, you know, whole, whole acronym, but, you know, we have the new acronym. You have to deal with a little bit, but the point of the graph database, Well, we'll discover relationships to other assets, }
+{\pard  \line \par}
+{imagine if you knew in your Excel spreadsheet, like imagine that you could click on that, that first row, that server of yours, and it automatically took you to your user profile Ashish, and you could see all of your user identities and across the various systems that you have access to. . Or you could then click on, is there a host agent installed on your end point from there?}
+{\pard  \line \par}
+{Something like that. So it goes beyond like IAM roles or access or servers. It's really, we're pulling in the data across the whole security program and mapping all of the }
+{\cf2 [00:10:00]}
+{ relationships between them. and that ends up being very powerful data layer. Various teams, you know what I mean? }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yup. And while you're on this, what is CAASM?}
+{\pard  \line \par}
+{Another acronym from Gardner it's like, it's hard. I was done with CSPM CNAPP , for some reason, C, is very popular with them. instead of G but what is }
+{\pard  \line \par}
+{\b\cf3 Akash Mahajan:\b0}
+{ CAASM? Good question. So it's a cyber asset attack, surface management that CAASM. And it's kind of a mouthful. Don't get me wrong.}
+{\pard  \line \par}
+{I wish we got a three letter acronym instead of a five letter, but it's breaking it down into some key points. The there's the cyber asset and there's the attack surface and then management. So cyber assets, we kind of just already, you already asked the questions actually like, you know, what is an asset nowadays?}
+{\pard  \line \par}
+{So we have this idea of a cyber asset. It's it's not just your physical devices and end points. It's it's this granular software defined. And then for the attack surface, that's what we were just talking about does now, well, how do you actually }
+{\cf2 [00:11:00]}
+{ determine what the attack surface is? There's been a business of external attack, surface management, you know, understanding the perimeter, you know, can we get a tool to kind of bombard our public IPS and DNS and public facing sites and understand if they're.}
+{\pard  \line \par}
+{But what about the internal attack surface? What about, you know, what, if someone's inside the network, what could they access through lateral movement? What's the transient risks and so on and so forth. So the understand the attack surface from the inside out including the perimeter of course is kind of the idea of CAASM.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ How do you see that play a role? In, what you're talking about from an asset management perspective as well, where there's world of Excel sheets, World of CMDB and there's the world for likes of the Jupiter one as well. It's almost sounds like, they're trying to cover the entire space with the CAASM word.}
+{\pard  \line \par}
+{Like how do you see that impacting the space, in a lot of ways. }
+{\pard  \line \par}
+{\b\cf3 Akash Mahajan:\b0}
+{ I think the easiest way to think of CAASM. It's a data layer, it's kind of like having a data lake }
+{\cf2 [00:12:00]}
+{ where all your various tools in the security program, all your various end points, your cloud infrastructure, your scanners, Vuln scanners, code scanners.}
+{\pard  \line \par}
+{They're all talking now. through the chasm, through Jupiter one we collect the data via API. So there's no agents to install. Basically. We can just collect this configuration data and discover the relationships between. And that gives you this ability to search it. That's really the key component of a CAASM is, well, you collected all this data, but you don't just want to collect data for collection sake.}
+{\pard  \line \par}
+{ And unfortunately, that's what ends up happening is we have this really rich, valuable data sitting on these various tools that we don't actually use until there's an incident. And then we're scrambling in the consoles to find out, you know, what's the problem with the server. What's wrong.}
+{\pard  \line \par}
+{What's a connected. You know, what's a problem with this user and this access they tried to do and so on and so forth. And we're just scrambling this particular vulnerability, whereas it, what reposes it on and, you know, find out what the }
+{\cf2 [00:13:00]}
+{ dependencies are. And that scramble is what we're trying to eliminate.}
+{\pard  \line \par}
+{ If all that data was talking and connected, then you have a question about your environment and then you can just answer it, so we want to kind of be like a search engine for the security program. You just searched for an IP. And here's all the related assets, for example. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Just on that as well, from a realization perspective that whether there is an incident and suddenly people are going to identify who owns us as well as a big question, }
+{\pard  \line \par}
+{where suddenly there's an incident , use the AWS example? We have an EC2 instance that you find is compromised. Everyone's trying to figure out who the hell owns us. Usually there are no tags in there. I all great. Is there some kind of web server, I don't know, cloudsecuritypodcast.tv is running on that easy to do server or that it does, but if it was but that ownership .}
+{\pard  \line \par}
+{Bring in some current challenges as well. }
+{\pard  \line \par}
+{\b\cf3 Akash Mahajan:\b0}
+{ Yeah. There's a number of challenges you just brought up ownership, configuration, hygiene, incident, response time. So I'll talk about all of them }
+{\cf2 [00:14:00]}
+{ kind of as quickly as possible, but when it comes to ownership, Often things aren't tagged with the owner, we're able to make some inferences.}
+{\pard  \line \par}
+{Who has access and whoever has access, could theoretically be the owner. So there's an ability to say, well, these are the users that have access. These are the functions or workloads that I've access. Or these are the users that have access to a workload that has access. }
+{\pard  \line \par}
+{They get, can really be multiple degrees of separation to answer that. Here are the theoretical owners, right. And that's something that we can do quite well when you don't have an explicit. owner defined if you do have owner tags, let's say that's part of your configuration hygiene. Let's say, you know, between in our security program, me and Ashish has a security program, you know, we're all supposed to tag our resources.}
+{\pard  \line \par}
+{And of course Ashish you wouldn't do that, right. Because }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ you do like my two seconds wasted, man. Like I could've done so much more of a two seconds. }
+{\pard  \line \par}
+{\b\cf3 Akash Mahajan:\b0}
+{ Exactly. You're, you're busy doing something much more important for too, but you know so let's say you didn't tag it, you can actually, we }
+{\cf2 [00:15:00]}
+{ can find. We'll ingest your tags, first of all, and you can find any resources that are missing tags that you're supposed to have.}
+{\pard  \line \par}
+{So that ends up being pretty useful from a configuration hygiene perspective. It's a different kind of use case, less it's more proactive. It's less you know, reactive to an problem or misconfiguration, but it's. It's very forward-thinking it's useful. Can we manage this configuration hygiene through automation and alert on at a low level, medium level when these tags are missing?}
+{\pard  \line \par}
+{Maybe it's infrastructure as code tags, maybe it's you know, owner tags and so on, but then you almost, you talked about an incident too right here, and you have an incident around some server the response time, when you think of. Digging into the AWS console and you have to find out what's the IP for this, for this instance, that's the easy part.}
+{\pard  \line \par}
+{What's the sub-net that it's on. What's the security group protecting it. Is there a sub-net, you know level Akhil that's granting access to the internet or not running access that their VPC level }
+{\cf2 [00:16:00]}
+{ configurations, the internet gateway, configurations, any, I am access to data and you'd start thinking about all this stuff that could be in the blast radius of.}
+{\pard  \line \par}
+{Incident, . What did, can this hosts do shared SSH keys, you know, all this stuff. It turns into hours of investigation, . Especially for something critical. And cause you have to double check everything too. You know what I mean? So triple check, even. So that's where, you know, just having all of it discovered you just see literally just visually see what's connected to this asset, all the other assets and they're configuring.}
+{\pard  \line \par}
+{I mean, it becomes pretty invaluable in that incident response in our house. , }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ pretty good use case for a CAASM for being used for an incident responding. Wait. So would I be right in saying, sounds like CAASM as a space is cyber security asset management. You can use it for incident response as well.}
+{\pard  \line \par}
+{Asset management, it would not replace your CMDB, but it definitely would help you at least manage the attacks. I'm going to court, }
+{\cf2 [00:17:00]}
+{ the Caz AA and the tax office, I guess. So it will help you manage your tax surface in that in your modern technology stack, }
+{\pard  \line \par}
+{\b\cf3 Akash Mahajan:\b0}
+{ I'd say that's accurate, }
+{\pard  \line \par}
+{We're doing discovery of these relationships, everyone has this data already, this data is in your console. This data's in your scanners. This data exists in your environment. But is it actually actionable? Can you do anything with it? And do you know the relationships, those are typically unknown?}
+{\pard  \line \par}
+{Like what is the correlation between all of this data? So we're really discovering those relationships and we are discovering assets that people don't know about in the cloud, for example you know, CMDB focused on premise device registration. Yeah. We don't do that. But when you're talking about discovering all your assets, when you're a completely cloud native org, you don't even need a CMDB. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ You find that there are non-cloud assets as well. I feel like nowadays , I don't know, 5g is the new rave, but it's also becoming a lot more driven by, Hey, your server may not only be in cloud, they might be an IOT device. It might be other }
+{\cf2 [00:18:00]}
+{ to what you were saying, what the stack does the CAASM space kind of covered that as well?}
+{\pard  \line \par}
+{\b\cf3 Akash Mahajan:\b0}
+{ If you're talking about IOT, like network, asset discovery, let's say, right. That's definitely another place where, you know, we're not trying to be a scanner of any kind, so we wouldn't be a network scanner code scanner, end point scanner. And so network, asset discovery fits in that.}
+{\pard  \line \par}
+{ We actually would have integrations to a network asset discovery tool, pull those assets into our tool, into our CAASM JupiterOne. And then have those assets there, from that point on can make the connections to other resources and so on. But we wouldn't do the network crawling ourselves. Analyzing the impact. That's all. Yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Sorry. I was asking more in your mind does a CAASM space covered that as well, because it }
+{\pard  \line \par}
+{\b\cf3 Akash Mahajan:\b0}
+{ sounds like yeah, a hundred, a hundred percent, the actual assets , have to be part of the CAASM, literally anything that could be an asset, actually, if you look.}
+{\pard  \line \par}
+{So we have a lot of open source code, our data models, open source. You mentioned art. Our graph is also open source, we, in your open source, 70 plus integrations, someone can }
+{\cf2 [00:19:00]}
+{ literally spin up Neo four J and have like a graph database chasm of their own with our, our exact integration code tonight, }
+{\pard  \line \par}
+{and that, could be just something they experiment with and completely for free. The reason why I'm mentioning all that is the data model is completely flexible. We're not set on any particular schema, there's many, many dozens of asset classes and you could theoretically add whatever asset class and type of data that you want.}
+{\pard  \line \par}
+{If it's not something that we're already categorizing as an asset class. So you know, if we haven't thought of something, it's pretty comprehensive, to be honest, I have a tough time thinking of assets. We haven't. But, but if you're on there and you're like, Hm, here's an asset they haven't thought of you can literally contribute to the data.}
+{\pard  \line \par}
+{Mine PR is welcome. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. Well actually, and it's open source as well as, and I think that's what I love about the the space that you guys are in a way. Well, maybe Tesla, the great extreme example of like, you know, I kind of feel like it's one of those ones where you understand the graph database can provide this opportunity to the wider community.}
+{\pard  \line \par}
+{And that's what. }
+{\cf2 [00:20:00]}
+{ Using a graph database with the data models available with the integration available. I think it's a great way to at least dab into it. Especially people who are probably in the asset management space and a technical as well. And talking about technical. Do you find that asset management space is becoming a lot more technical with all the modern stack in terms of like the people who have worked in the space?}
+{\pard  \line \par}
+{They have to be a lot more say if they don't have something like a CMDB or. Or Excel sheet or they have the drive to be the next asset management person. They can literally just use that repo that you guys are open-sourced and the graph database integration, and just basically make, make their own view for the company, like my own platform for the company they want you.}
+{\pard  \line \par}
+{\b\cf3 Akash Mahajan:\b0}
+{ Yeah, absolutely good. So it's it's called star base by the way, the open source open source repo. And the, yeah, absolutely. If someone is a security engineer and we actually have. That do this at very large companies and they, they just reach out and say, Hey, I'm using your tool. It's amazing. I can't believe you guys just open source all of this }
+{\cf2 [00:21:00]}
+{ amazing code.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That's definitely fascinating. }
+{\pard  \line \par}
+{\b\cf3 Akash Mahajan:\b0}
+{ And from our perspective, this is just, this is foundational to the philosophy to the company is security as a basic, right. You know, our founder Erkang says graph based security included, }
+{\pard  \line \par}
+{there's no part of security that is, should be gated. And obviously we can provide value as a business and our user experience, our applications, our query language, all this stuff. That's very valuable for our enterprise clients. But if someone is willing to just spin it up and get going.}
+{\pard  \line \par}
+{Absolutely power more power to you. It's it's documented it's there. You know what I mean? And we hope people will contribute back, you know, just some PRS and build on it. Right. That would benefit us in the long run. So }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ that's pretty awesome, man. And actually we're talking about a skillset as well.}
+{\pard  \line \par}
+{Where do you think is a good resource for people to find out more about the CAASM? And because I imagine a lot of people were listening to this and going, well, I'm a classic engineer. I'll put the star base link in the show notes. The whole CAASM space itself. }
+{\cf2 [00:22:00]}
+{ I can people, cause I imagine this is people's that people with full-time jobs for this as well.}
+{\pard  \line \par}
+{So what kind of resources can you recommend for people look at more information about CAASM and the asset management space? }
+{\pard  \line \par}
+{\b\cf3 Akash Mahajan:\b0}
+{ Yeah, that's a great question. So I want to go back to another question you asked, which was, is the space getting more technical, a hundred percent, I think every job is getting more technical regardless of what space you're in.}
+{\pard  \line \par}
+{Right. If you're in pure marketing or sales development or something like that, there's a lot of tools and technology you got to know now, to be successful. That's right. A lot }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ of SaaS applications that quote unquote stats, but they're trained to be technical. }
+{\pard  \line \par}
+{\b\cf3 Akash Mahajan:\b0}
+{ Exactly. Right. And so security is absolutely not an exception.}
+{\pard  \line \par}
+{Then I think the job of an analyst is quickly turning into a job of an engineer, right. Where you're expected to know. Much more than just, Hey, this is a vulnerability. This is the CVE related to it. Let me go collect the data around it. That. Extremely }
+{\cf2 [00:23:00]}
+{ important work that now has to be supplemented by.}
+{\pard  \line \par}
+{Oh, but do you know how to remediate it in the, in the command line? Do you know how to actually go like fix AWS and are you a cloud architect and all this other information that it is going beyond the original scope of an analyst, yeah. And I think anyway, when that a hundred percent, a hundred percent and we do see that the. The most organizations that are, have successful security programs, this modern securities program invest heavily in security engineers. And that benefits them, cause they can automate stuff. They can do things at scale, much more easily. Anyway with that could be a whole nother conversation, but}
+{\pard  \line \par}
+{yeah. Yeah. So sorry to learn more about chasm, it's a new space. I do recommend the Gartner cycles on it. They have good information. We obviously on our website have a lot of information about chasm in the similar spaces. So you can go to askj1.Com and that's actually our documentation as well.}
+{\pard  \line \par}
+{So you can }
+{\cf2 [00:24:00]}
+{ read about all of our documentations there. If you want to know more about the actual engineering side of it, all the repositories are public on get hub. STARBASE is the public repo for, the open source graph database which includes visuals, on the integrations. So yeah, it's all out there.}
+{\pard  \line \par}
+{We're probably one of the sources of education right now, for sure. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That's pretty awesome and good, but you know that as well, put those links in the show notes as well. So people are aware of it. So that's pretty much what I had time for, but I do have three fun questions for you, man. Think this is kind of like thing that we do.}
+{\pard  \line \par}
+{So people get to know Akash beyond the technology side as well of how super smart he is. So there's three questions, not too many. So first one being, what do you spend most time on when you're not working on a technology? Like your chasms of the world. }
+{\pard  \line \par}
+{\b\cf3 Akash Mahajan:\b0}
+{ Okay. So I play some tennis should play more.}
+{\pard  \line \par}
+{But recently I've been playing Elden ring, which is a video game not going to lie. That's just the true answer. It's this video game buy from software just really, really enjoy }
+{\cf2 [00:25:00]}
+{ it. For anyone who knows what it is. Yeah. You know, DMEM LinkedIn and we can nerd out a little bit, but just beat it last weekend, so }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ right.}
+{\pard  \line \par}
+{Wow. Okay. There you go. But I feel like I'm not going to make a great, can I go gave me the, okay. This morning, I feel like I haven't played games for so long. Next question. What is something that you're proud of, but it's not only a social media. }
+{\pard  \line \par}
+{\b\cf3 Akash Mahajan:\b0}
+{ Ooh, that is a tricky one. So hi. Pretty good. At dancing Bhangra.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Really? Yeah. Wait, it's not on social media. I would have taught people. What are the according to you doing a somewhere? }
+{\pard  \line \par}
+{\b\cf3 Akash Mahajan:\b0}
+{ I mean, it's, it's, I don't use Facebook and stuff anymore, but it must be out there somewhere, but. I don't think a lot of people know that from a professional perspective. Well, Y }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ that's pretty cool.}
+{\pard  \line \par}
+{I'm. I'm like, I'm definitely feeling like it should be challenged on that claim though. Pretty good at it. Well, }
+{\pard  \line \par}
+{\b\cf3 Akash Mahajan:\b0}
+{ if you meet me at garner risk, maybe you can persuade me to share, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ but for sure, I've got now we could totally do }
+{\cf2 [00:26:00]}
+{ that, man. All right. Cool. That's a great answer by the way, a third last question.}
+{\pard  \line \par}
+{What's your favorite cuisine or restful that you can share? }
+{\pard  \line \par}
+{\b\cf3 Akash Mahajan:\b0}
+{ Good question. Let's see cuisine. I saw I'm hesitating. I don't want to give two answers, but cause obviously I'm Indian, so I have to resist because I just love my mother's food. Right. You can't, you can't ignore that. But but I will say maybe like authentic sesh, one Chinese food or like sushi, like kind of.}
+{\pard  \line \par}
+{More authentic sushi as well. I do }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ like both of those lines, but my mother's cooking is still the best man. I'll take. It's definitely the best, especially as she is listening to this liked, like, you definitely have the brownie points man, for the next meal as well. }
+{\pard  \line \par}
+{\b\cf3 Akash Mahajan:\b0}
+{ Yeah, I forgot. Yeah, she's probably not listening, but if she had.}
+{\pard  \line \par}
+{Yeah, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ that's pretty much it. I'm sure she had one basically like, oh gosh, it was an interview on YouTube. So I'm sure definitely make it, but there are, where can people find you men are for, for, to connect with you and get to know a bit more }
+{\cf2 [00:27:00]}
+{ about the chasm space and everything else you're doing. Where can people find you on the }
+{\pard  \line \par}
+{\b\cf3 Akash Mahajan:\b0}
+{ socials?}
+{\pard  \line \par}
+{Yeah, a hundred percent. LinkedIn is the best place. I will definitely accept your connection and, and chat with you. Nowhere else really? I'm not a big Twitter or anything like that. I'm more of a little. But LinkedIn is the spot. That's definitely }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ sweet. I'll put that link in the description as well for everyone.}
+{\pard  \line \par}
+{All right. Sweet. Well, hopefully thanks so much for coming in, man. I know. Hopefully everyone has enjoyed the episode as well, and well, Akash is going to be in Gardner. I'm going to be RSA. So if you want to see us in person as well as an opportunity in the coming week, I don't know when Gawker is. What, what day is Gartner?}
+{\pard  \line \par}
+{\b\cf3 Akash Mahajan:\b0}
+{ The seventh to the ninth? I think June. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So it just night and also similar, like almost like a three-day conference then as well, a }
+{\pard  \line \par}
+{\b\cf3 Akash Mahajan:\b0}
+{ few days, the big day is the ninth, I think }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ so. Right. Okay. There you go. So if people want to meet a caution person, he was signing autographs at Gardner when people want to see it and I'll be doing the same at the RSA conference, but hopefully I will see you }
+{\cf2 [00:28:00]}
+{ all in the next episode.}
+{\pard  \line \par}
+{Part of the RSA month as well. So you'll probably notice that there are no live episodes. There's a lot more different format, this one. So we'll see you all in the next episode, but for now take care and, and hopefully you had a great long weekend and I'll talk to you soon. Peace. Thanks for }
+{\pard  \line \par}
+{\b\cf3 Akash Mahajan:\b0}
+{ gosh. Yeah.}
+}

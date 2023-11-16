@@ -1,0 +1,392 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2708
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica-Bold;\f1\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red102\green0\blue204;\red128\green128\blue128;\red114\green179\blue114;
+\red222\green74\blue29;}
+{\*\expandedcolortbl;;\csgenericrgb\c40000\c0\c80000;\csgenericrgb\c50196\c50196\c50196;\csgenericrgb\c44706\c70196\c44706;
+\csgenericrgb\c87059\c29020\c11373;}
+\paperw11900\paperh16840\vieww16920\viewh14600\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\b\fs48 \cf0  Shane & Dani
+\f1\b0\fs24  \uc0\u8232 \
+
+\f0\b \cf2 Shane Lawrence:
+\f1\b0 \cf0  \cf3 [00:00:00]\cf0  Well, I think we're gonna teach you how to solve all of your security problems with one simple trick. So if you want to come by our snake oil, then we'd love to take your, no, we don't have anything to sell.  \uc0\u8232 \
+
+\f0\b \cf4 Ashish Rajan:
+\f1\b0 \cf0  So you're saying there's no one single silver bullet?  \uc0\u8232 \
+
+\f0\b \cf2 Shane Lawrence:
+\f1\b0 \cf0  Unfortunately, no. I don't think that exists yet.  \uc0\u8232 \
+
+\f0\b \cf4 Ashish Rajan:
+\f1\b0 \cf0  Cut the interview. Cut the interview.  \uc0\u8232 \
+I just wanna say thank you for all the love you showed, Shelby and I at Kubecon, EU in Amsterdam, as well as RSA in San Francisco over the past couple of weeks. I cannot be grateful enough that you are showing so much love to us. You've supported us to grow on social media and on Spotify and all these podcast platforms, so thank you so much for all the love and support you showed us. \uc0\u8232 \
+Thank you so much for coming and saying hello and taking selfies with us, and some of you are grateful enough to come on my daily vlog, which I post on LinkedIn and Twitter. Thank you so much for being part of our life and making it what it is today. Alright, let's get to the episode before I get emotional. \uc0\u8232 \
+Hello. Welcome to, another episode of Cloud Security podcast. In today's episode, we are talking about kubeaudit this is the \cf3 [00:01:00]\cf0  continuation of our kubernetes security episodes. Yes, I know we are way beyond that month, but we had so many interesting conversations from kubecon that we wanted to bring some of them over here. \uc0\u8232 \
+So in the next three episodes would also include three conversations we had at kubecon. The first one, which is this episode over here. Which is with Shane and Daniele from Shopify where they gave a talk about how they have been improving kubeaudit over the next two years, which is an open source tool that was released by Shopify. \uc0\u8232 \
+They used it internally and how they got developers to adopt that tool. And also there is no silver bullet all that, and a lot more in this episode with Shane and Daniele. This is a conversation that we had kubecon EU just before their talk, so if you get the chance to have a listen to their talk as well, which would be on YouTube soon. \uc0\u8232 \
+Definitely let us know if you feel there was something that we could add on to this conversation, or if you just feel you have your own opinion to share, feel free to share that on our YouTube or our LinkedIn channel as a comment or feel free to mail us as well. As always, if you know someone who's trying to learn about kubernetes security or how even. \uc0\u8232 \
+Developer First Security can \cf3 [00:02:00]\cf0  happen in Kubernetes world. Definitely share this episode with them. If you're here for the second or third time, I would really appreciate if you can give us a follow or subscribe to our iTunes or Spotify or maybe even Google Podcast, wherever you are listening on audio or video on YouTube and LinkedIn. \uc0\u8232 \
+We are about to hit 10 K soon on our YouTube channel. That's all thanks to you, and we recently started a free cloud security bootcamp, which is on our YouTube channel for people who are starting from scratch but may have an associate certificate. Do not know where to start with a cloud security bootcamp. \uc0\u8232 \
+This is a free one. On our YouTube channel. Just look for the playlist called Cloud Security Bootcamp. This all I wanted to say for the episode. I hope you enjoy this conversation with Shane and Daniele. I will see you on the next episode. Peace  \uc0\u8232 \
+hi everyone. Welcome to Kubecon EU 2023 in Amsterdam, and today we've got two special guests, Shane and Daniele. Oh, why am I introducing them? Would you lovely people, introduce yourself to the audience and tell us a bit about yourself as well. \uc0\u8232 \
+Yeah, of course.  \uc0\u8232 \
+
+\f0\b \cf2 Shane Lawrence:
+\f1\b0 \cf0  My name's Shane. I've been working at Shopify since 2017, working with Kubernetes pretty much the whole time. Before that I did a couple \cf3 [00:03:00]\cf0  different jobs. I was in the military for a while and worked mostly on intrusion detection systems there. And then I worked as a consultant for an mssp and I worked with a lot of like big financial organizations, government sector Very, very risk averse organizations and certainly not early adopters. \uc0\u8232 \
+So it was really exciting when I got to go to Shopify and work on this cool new Kubernetes thing that most of the people I'd been representing or working with before that were just either very afraid of or had never even heard of. And so being that kind of early adopter mindset was really exciting. \uc0\u8232 \
+Over the years since then, we've really matured our security posture. We've done a lot of work to kind of tighten that down, but still trying to keep the focus on the same thing. And, and I still really enjoy that kind of work. And Dani's here too. We're gonna be speaking on Friday, so, yeah. \uc0\u8232 \
+
+\f0\b \cf5 Daniele Santos:
+\f1\b0 \cf0  Awesome. Thank you for having us. My name is Dani. I joined Shane in team at Shopify in 2020. Before Shopify I was mostly focusing on backend development. So this is like when I was invited to join the team, they said, \cf3 [00:04:00]\cf0  are you interested in security? Yes. Why not? I wanna learn. And then I've learned so much. \uc0\u8232 \
+When I joined Kubernetes was at a more mature stage, not when Shane started dealing with Kubernetes back in 2017. So we already had RBAC in place and other mechanisms for security. So yeah, I've learned so much and I hope I can share a couple of things with you, but that's awesome.  \uc0\u8232 \
+
+\f0\b \cf4 Ashish Rajan:
+\f1\b0 \cf0  Wait, is this your first kubecon? \uc0\u8232 \
+
+\f0\b \cf5 Daniele Santos:
+\f1\b0 \cf0  No, no, it's not my first kubecon, no. Kubecon,  \uc0\u8232 \
+
+\f0\b \cf4 Ashish Rajan:
+\f1\b0 \cf0  EU or Kubecon. Cuz there's so many now. Yeah. Yeah. I  \uc0\u8232 \
+
+\f0\b \cf5 Daniele Santos:
+\f1\b0 \cf0  attended the one in Valencia last Oh, nice. Last year. Yeah. And I, my very first kubecon was virtual con in Amsterdam. It was supposed to be in Amsterdam. Oh, you  \uc0\u8232 \
+
+\f0\b \cf4 Ashish Rajan:
+\f1\b0 \cf0  were virtually in Amsterdam at that point. Yeah. Now you're really in Amsterdam. \uc0\u8232 \
+Yes, yes. Oh, nice. This is the actual thing. What about you, Shane? Is this your first one or?  \uc0\u8232 \
+
+\f0\b \cf2 Shane Lawrence:
+\f1\b0 \cf0  Oh, no. So I've, I've been to a whole bunch of them. I. Austin was my first one. I think that was 2017. Oh, wow. Yeah. Yeah. Every year since except 2021, I think I missed out on all of them that \cf3 [00:05:00]\cf0  year, but yeah, a lot of people missed out a lot of things. \uc0\u8232 \
+I guess that,  \uc0\u8232 \
+
+\f0\b \cf4 Ashish Rajan:
+\f1\b0 \cf0  but I guess which is also really a good segway into both of you have a talk we do, the topic of the talk will be amazing. And what can people expect when they hear the recording of it as well? I hope they catch it live, but if they don't catch it live when they watch the recording, what can they expect from the talk?  \uc0\u8232 \
+
+\f0\b \cf2 Shane Lawrence:
+\f1\b0 \cf0  Well, I think we're gonna teach you how to solve all of your security problems with one simple trick. So if you want to come by our snake oil, then we'd love to take your, no, we don't have anything to sell. We have an open source tool that we've used at Shopify. Yeah. And I, I think we've learned a whole bunch of lessons trying to find what this tool should be doing and what we should be doing to kinda lock down our clusters. \uc0\u8232 \
+I don't think that there is anything in existence that will really solve all of your security problems with one trick or, even a. Hat full of tricks. So what we're really gonna focus on is the principles that this tool applies, right? And how you can use those principles to figure out what you need to secure in your cluster and which tools can do the job. \uc0\u8232 \
+If it's kubeaudit, that's awesome. Yeah. If kubeaudit \cf3 [00:06:00]\cf0  can almost do it and you wanna open a PR and make it. Even better than that would be about the best thing that I could think of. Otherwise, I just hope we can share some of that experience with the community at large and get their opinions on what we've been working  \uc0\u8232 \
+
+\f0\b \cf4 Ashish Rajan:
+\f1\b0 \cf0  on. \uc0\u8232 \
+So you're saying there's no one single silver bullet?  \uc0\u8232 \
+
+\f0\b \cf2 Shane Lawrence:
+\f1\b0 \cf0  Unfortunately, no. I don't think that exists yet.  \uc0\u8232 \
+
+\f0\b \cf4 Ashish Rajan:
+\f1\b0 \cf0  Cut the interview. Cut the interview. Yeah. No, I, I definitely  \uc0\u8232 \
+
+\f0\b \cf2 Shane Lawrence:
+\f1\b0 \cf0  sorry you to disappoint  \uc0\u8232 \
+
+\f0\b \cf4 Ashish Rajan:
+\f1\b0 \cf0  you. Did you wanna add anything as well, Dani?  \uc0\u8232 \
+
+\f0\b \cf5 Daniele Santos:
+\f1\b0 \cf0  No, that's pretty much it. Yeah, and no, this is an opportunity for us to talk about kubeaudit as well. \uc0\u8232 \
+And then maybe somebody's looking for the first opportunity to contribute to open source. It's not very difficult to onboard on this code base. Yeah. So it's pretty straightforward. So if anybody's looking for the first contribution feel free to open a PR and we're gonna address it. Yep. \uc0\u8232 \
+
+\f0\b \cf4 Ashish Rajan:
+\f1\b0 \cf0  Awesome. Wait, so you guys had like something, the Red Hat report in there as well. You kind of spoke about misconfiguration. Mm-hmm. One with the thought. Kubernetes has been there for a while. I mean, you've been talking about for clearly since 2017 as well. One, so why is misconfiguration still a thing? \uc0\u8232 \
+So coming from a cloud, \cf3 [00:07:00]\cf0  like a public cloud kind, AWS, Azure, Google Cloud, we are still talking about misconfiguration as well. Like that's like, that's the only thing we speak about from a security perspective. I didn't realize this was a thing in kubernetes as well. So why Misconfiguration is still like a big topic, you reckon? \uc0\u8232 \
+Oh  \uc0\u8232 \
+
+\f0\b \cf2 Shane Lawrence:
+\f1\b0 \cf0  yeah. I mean Dani can probably talk more about the report, but I think misconfiguration in general is still a problem because Yaml is hard. I how many things do you do perfectly every time? I, I can't speak perfectly. I, I can't, sometimes I trip when I walk. , there are so many things in life Yeah. \uc0\u8232 \
+That we do every single day and we still make mistakes. Yaml is a lot easier to mess up than walking is. I thought JSON was much  \uc0\u8232 \
+
+\f0\b \cf4 Ashish Rajan:
+\f1\b0 \cf0  more harder, but yeah. Yaml.  \uc0\u8232 \
+
+\f0\b \cf2 Shane Lawrence:
+\f1\b0 \cf0  Yeah. And so you have a small, relatively group of people who know where a whole bunch of the foot guns are, know where the problems are that you might run into. \uc0\u8232 \
+Yeah. And they are imperfect in trying to apply that knowledge. And then there's a much larger group of people who are trying to come up with all these manifests and just like produce the code, make the tools that provide the \cf3 [00:08:00]\cf0  business value, that provide value to the community that do the things that we're trying to build here. \uc0\u8232 \
+And they're going to make, I'm sure, as many mistakes as we are, and if they don't even know where the problems are, we need to find a way to share that information with them and then help each other out so that we don't make the mistakes when there are things we already knew about but might have. Sort of a mishap, a misclick or what I see a lot in particular is you might have 300 different services running at your organization. \uc0\u8232 \
+You probably don't have 300 individually crafted manifests for how all of those are going to work. Yeah. Built from the ground up with every single security practice that you could possibly imagine. Yeah. Where you're. Probably gonna have is a lot of people copying and pasting things and so , what works? \uc0\u8232 \
+No., why wouldn't you do that? Well, I certainly do that. Stack overflow for the win. Yeah. Yeah, exactly. Or if you're, you know, more mature than that, hopefully, instead of just copying and randomly pasting things from stack overflow. You're going to take things that your organization is already doing, and it works perfectly for a hundred of \cf3 [00:09:00]\cf0  those services. \uc0\u8232 \
+But maybe some of those require elevated permissions. Maybe they, they have some other mitigation in place to Yeah, yeah. Address some certain security vulnerabilities, some threat that exists there. And what you have is people taking those, not realizing the full context of them. Or not realizing that, you know, that wasn't open to the internet, so it was okay to have these elevated privileges. \uc0\u8232 \
+This is a shop that's selling t-shirts. This is the front end of your website. This is something that is publicly accessible on the internet and it's not okay to have all of the same privileges for that. So you need a way to identify first that this is a thing that's more dangerous than others. Yeah. \uc0\u8232 \
+And then that, you know, this is a permission that maybe that shouldn't have. So There's a lot of ways you can make mistakes in that. And so that's what we're kind of trying to address here. I can sense your a passion for the  \uc0\u8232 \
+
+\f0\b \cf4 Ashish Rajan:
+\f1\b0 \cf0  product as well. And Dani, you wanna talk about the report as well?  \uc0\u8232 \
+
+\f0\b \cf5 Daniele Santos:
+\f1\b0 \cf0  Yeah. \uc0\u8232 \
+Basically the report reviews that like the majority of the respondents have seen problems with Kubernetes misconfiguration. Yeah. Like it is a top \cf3 [00:10:00]\cf0  concern and they have witness production going down and things like that. So that's pretty much so what's an  \uc0\u8232 \
+
+\f0\b \cf4 Ashish Rajan:
+\f1\b0 \cf0  example of a worst case scenario you would say for a misconfiguration? \uc0\u8232 \
+Like, I think just to give. The audience. A sense of, yeah, misconfiguration sounds great. I mean, its on the internet, not that I'm not trying to put people into a fear, uncertainty, doubt kind of mentality, but just for a realistic use case perspective. Like you mentioned production going down kind of a thing. \uc0\u8232 \
+But any other example I can think of maybe people should look out for a misconfiguration. Yeah.  \uc0\u8232 \
+
+\f0\b \cf5 Daniele Santos:
+\f1\b0 \cf0  I mean, not necessarily Kubernetes, but talking about Yaml. Yeah. I've seen one that was like, production was down for like, One hour. Oh, wow. Because of yaml indentation. Really? Yes, yes. Yaml indentation. Yes. It brings up, oh my God. \uc0\u8232 \
+Yeah. But in terms of Kubernetes well, it is, the default configuration is not super secure. So if you don't turn on a specific configuration, like, for example, you can craft your security contacts to disable some permissions and stuff like that. And that can be really scary if you leave them on or if you don't change the configuration, you feel like your containers run \cf3 [00:11:00]\cf0  is privileged, or if you have like if you don't set the specific user to, to be run or if you have like, host network enabled or things like that. \uc0\u8232 \
+Yeah. That can be can allow an attacker to actually traverse and do a lateral movement. So this kind of things they can be, I don't have a An exact example or No, but it's relevant. Exploited in Yeah, like an actual example, but maybe Shane.  \uc0\u8232 \
+
+\f0\b \cf4 Ashish Rajan:
+\f1\b0 \cf0  Does. But I guess I too, I also think that maybe if there is an example people would not wanna share publicly as well. \uc0\u8232 \
+So maybe there is an example maybe audience can share with us and later on. Cause that kind of is also the point that I wanted to segment into the Azure escape. Cause I, I saw the report it had 53% detected a misconfiguration last 12 months, which is insane. Yes. And like more than half the people are saying that they saw misconfiguration in kubernetes and you guys had something called Azure Escape. \uc0\u8232 \
+Yes. What is  \uc0\u8232 \
+
+\f0\b \cf5 Daniele Santos:
+\f1\b0 \cf0  that? Oh yes. That was an attack that , the researchers from Palo Alto Networks Yep. They identified vulnerability in Azure containers. And \cf3 [00:12:00]\cf0  they were running a node version of an unpatched version of runC, which is the low level container management solution. Yeah. And It was a non c v e. \uc0\u8232 \
+It was two years old, but it hadn't been patched. And with that cve, they were able to use container scape as a technique to escape the container. And then they were able to do a cross account takeover and escape the container from one machine and go to the other and actually take over other tenants in the cluster in the multi-cloud context in Azure. So that's really scary. Yeah. Because you can break other people's environments, you know? Wait,  \uc0\u8232 \
+
+\f0\b \cf4 Ashish Rajan:
+\f1\b0 \cf0  For lack of a better example, if I was Netflix and you were Disney Plus, yes. And I was using Azure, so someone from Netflix could come on to Disney plus, see, I dunno, steal shows or something, I guess. \uc0\u8232 \
+Mm-hmm. Wow. That's a real, like, very concerning thing I guess. Well, and you kind mentioned this is probably a good example to talk about container escape you called out as well. What is it? Cause I think sometimes as we all \cf3 [00:13:00]\cf0  security people love abbreviations and acronyms and stuff. I find that sometimes when you say container escape, I don't know, I dunno what that is. \uc0\u8232 \
+Like, people just like go lost with it. How would you describe Container Escape to say the cloud native audience who probably uses containers on a day-to-day basis, but why is that like a thing?  \uc0\u8232 \
+
+\f0\b \cf5 Daniele Santos:
+\f1\b0 \cf0  Yeah, it's when you leave your container and you manage to escape to the host machine, the node itself. \uc0\u8232 \
+Yeah. But maybe Shane can, what is your definition of a, he's gonna demonstrate how to, to escape a container.  \uc0\u8232 \
+
+\f0\b \cf4 Ashish Rajan:
+\f1\b0 \cf0  So you should definitely watch the demo point. Not a demo.  \uc0\u8232 \
+
+\f0\b \cf5 Daniele Santos:
+\f1\b0 \cf0  Yes. He's the hacker.  \uc0\u8232 \
+
+\f0\b \cf2 Shane Lawrence:
+\f1\b0 \cf0  Yes. I'm not a real hacker. I'm just gonna play one on our talk. But yeah. So I think a container escape addresses a kind of misunderstanding that a lot of people have that containers actually contain things and they're not great at that , cause that's  \uc0\u8232 \
+
+\f0\b \cf4 Ashish Rajan:
+\f1\b0 \cf0  what I told the first time people said, like, container escape, like you're taking out shit. \uc0\u8232 \
+Like what are you, what are you doing from it? But  \uc0\u8232 \
+
+\f0\b \cf2 Shane Lawrence:
+\f1\b0 \cf0  yeah, you're right. And, and I mean, it can be running in its own name, space, and you have this sort of illusion of security. Mm-hmm. And I think a lot of people see a container as a \cf3 [00:14:00]\cf0  rigid security boundary. Mm-hmm. But if you're not applying specific configurations to make that happen, and you're not looking for. \uc0\u8232 \
+Potential ways to bypass those, then you're probably not actually going to contain things. And, and I think one really good example is if you, if you have a Docker file for a container and you're building this container and you haven't specified a user for it to run as, it's going to run as root. Yep. \uc0\u8232 \
+And so if you can find any way of getting outta that container, you're now root on the. The host that it's running on. And so that's a big problem. And so any container escape is where you're breaking that illusion that the container is actually containing things. And that could be through like the CVE that Danny pointed out. \uc0\u8232 \
+Yeah. Or it could just be a misconfiguration maybe somebody accidentally granted the host PID security privilege. Mm-hmm. And so now you're actually running as. The same process ID as you would be on the host. And you can do a simple name space change to get outta that because of course somebody forgot to change the user that you're running as and now you're root on the host itself. \uc0\u8232 \
+And that's where if \cf3 [00:15:00]\cf0  you have a multi-tenancy model, so your example was Disney Plus and Netflix running on the same computer you can just walk out of your little netflix container and go interfere with Disney plus or vice versa. And so that's really concerning. Yeah, disrupt  \uc0\u8232 \
+
+\f0\b \cf4 Ashish Rajan:
+\f1\b0 \cf0  their stream, I guess. \uc0\u8232 \
+Like imagine like a big show, game of Thrones or something going live and just basically cut the feed right there. Imagine that. I mean, not that people should do that if they ever could, but I think it'd be a really interesting scenario if people use that container escape for that kind of thing. It's also a good point to probably bring in kubeaudit as well. \uc0\u8232 \
+Yeah. What is it? It's a Shopify tool, but I'll let you both describe it. \uc0\u8232 \
+
+\f0\b \cf5 Daniele Santos:
+\f1\b0 \cf0  Well, kubeaudit it is a Kubernetes manifest scanner, and it watches for vulnerable configuration that you have pretty much, and then it will flag them. You have several auditors. Yeah. And you can turn them on and off. \uc0\u8232 \
+There's, you can have a custom configuration if you wish. Yep. And then, yeah. That's pretty much it.  \uc0\u8232 \
+
+\f0\b \cf4 Ashish Rajan:
+\f1\b0 \cf0  That's the summary. Cause you were mentioning it's an open source tool that people can contribute into as well. Source. Yeah. And, and for people who probably don't understand the landscape a bit more like the cloud native landscape contributing for the first time. \uc0\u8232 \
+Mm-hmm. \cf3 [00:16:00]\cf0  Can I, as a firsthand cybersecurity person, I guess what can I expect from kubeaudit? Like what would you relate it to it? Am I going through a checklist what am I seeing in kubeaudit it, I guess,  \uc0\u8232 \
+
+\f0\b \cf5 Daniele Santos:
+\f1\b0 \cf0  right. So you we have different auditors. Yeah. Okay. Or, or checks. Yeah. And for example, we have a check for capabilities to check what Linux capabilities you have on and off. \uc0\u8232 \
+And if you have them, you're not dropping all your capabilities. It's gonna flag, right? So if you wanna contribute, maybe you can think of an auditor. An extra auditor is something that you believe. Oh. kubeaudit is not flagging this, but it should. I think it's a good idea. Then you can actually contribute , with one audit. \uc0\u8232 \
+
+\f0\b \cf4 Ashish Rajan:
+\f1\b0 \cf0  That's a great example. Yeah, and I guess. :Because it's been there for a while. Maybe it's a question for you, Shane. How has it changed? Cause like 2017 is kind of when Shopify announced that they're gonna do kubeaudit now we are 2023 , post Covid, pandemic, whatever. And we are talking about misconfiguration. \uc0\u8232 \
+How much has kubeaudit changed? I mean, we don't have a silver bullet, but I'm assuming it has \cf3 [00:17:00]\cf0  matured as it's grown as well. How do you feel it has changed since its inception?  \uc0\u8232 \
+
+\f0\b \cf2 Shane Lawrence:
+\f1\b0 \cf0  Yeah, I think it's changed a bit less than the landscape has shifted around it. Right. And so in that sense, we were very early to the party. \uc0\u8232 \
+We didn't find anything that was doing what kubeaudit did when we wrote it. There was just nothing out there. Right. We couldn't pay someone to solve the problem. There was no open source tool that we could contribute to. Later on, actually, when we were preparing for this talk, I was. Trying to identify if there was anything that we missed. \uc0\u8232 \
+And it turns out there were a couple of people that were working on the same thing at the same time, but it wasn't really out there in the public yet. So we did come up with this. We identified a small set of checks that we thought were the most important. And I mean, there could be a thousand or even many thousands of things that could potentially be bad, but we really wanted to focus on the ones that. \uc0\u8232 \
+We had a high level of confidence about Yep. And flagged those. And so from the beginning ours was to address with a small team the things that we were seeing the \cf3 [00:18:00]\cf0  most often that were the most important to us. Yep. And I think more importantly than what's changed is actually what hasn't. And that is, we've kept it a small set of checks and we've really focused on the developer experience. \uc0\u8232 \
+And that's because I think if we had just started flagging. For instance, I don't know if there were CIS benchmarks for Kubernetes at the time. I don't think there were. No, no, they were not. Yeah. But if we had tried to address every single one of those and flag each of those to the developers who, you know, at the time were in this really rapid scale up phase, if we had tried to flag every single one of those, they would've just. \uc0\u8232 \
+Started ignoring all of them. Yeah. So there's always this kind of balancing act between what we're going to surface and what we're going to ignore. Mm-hmm. And so kubeaudit, it's mostly been kind of maintaining that balance over the years and trying to find its niche, just alerting them on the right number of things so that we get the most impact out of the tool and identify like the most flagrant vulnerabilities or , the most concerning risks out of  \uc0\u8232 \
+
+\f0\b \cf4 Ashish Rajan:
+\f1\b0 \cf0  those. \uc0\u8232 \
+I love it, and I definitely would love to get into that as well, but maybe just to close the loop on the whole Azure Escape thing as \cf3 [00:19:00]\cf0  well. Yeah. Cause you mentioned it's like a list of checks or more important vulnerabilities. How would it have helped in the Azure escape concept context? \uc0\u8232 \
+
+\f0\b \cf5 Daniele Santos:
+\f1\b0 \cf0  Yeah. In order for you to exploit the vulnerability, the container would have to run its root and so kubeaudit would've flagged  \uc0\u8232 \
+
+\f0\b \cf4 Ashish Rajan:
+\f1\b0 \cf0  that. Cuz there is this whole concept of real time and versus like on a lot of the auditing tool that are there. \uc0\u8232 \
+You kind have to have some kind of a bash script running ongoingly for it to keep looking for it. Would it be possible for people who are listening in and think, oh actually kubeaudit sounds good, so I can actually do this misconfiguration check beforehand. What would it require for me to do this ongoingly? \uc0\u8232 \
+Or am I supposed to just run it like a bash script every hour, every day, or  \uc0\u8232 \
+
+\f0\b \cf5 Daniele Santos:
+\f1\b0 \cf0  yeah, you can also run it in the cluster. Okay. In cluster mode as a job, as a crown job,  \uc0\u8232 \
+
+\f0\b \cf4 Ashish Rajan:
+\f1\b0 \cf0  if you would. Oh, just consistently keep running in the background then? Yeah, if you want to. Oh, you can run. Does that piss off people? I feel like they would just piss off people. \uc0\u8232 \
+ Would it just upset people who are Oh yeah. So word pissed off. Like, I think would it, would it upset people when they find out that, Hey, I'm being flagged for not turning it as \cf3 [00:20:00]\cf0  root. Cause I really wanted to run it as root.  \uc0\u8232 \
+
+\f0\b \cf2 Shane Lawrence:
+\f1\b0 \cf0  Yeah, I suppose I'm an expert on that now, so yes, it probably would if we were constantly flagging the same thing over and over and over again and, you know, paging someone in the middle of the night tell them that, the container that was running as root yesterday is still running as root. Oh, , that would really upset. \uc0\u8232 \
+People. And I imagine you have  \uc0\u8232 \
+
+\f0\b \cf4 Ashish Rajan:
+\f1\b0 \cf0  a global team as well, so there's someone awake at every hour who's gonna get the Oh yeah. Fair enough.  \uc0\u8232 \
+
+\f0\b \cf2 Shane Lawrence:
+\f1\b0 \cf0  We wouldn't do that though. So one thing that we built in , and it specifically addresses this for the developer experience, is they can add a comment in their yaml that will tell kubeaudit to override this check for this yaml. \uc0\u8232 \
+And we debated this a little bit because it. Could be a bit concerning. But here's the thing, it's all going to be in the same code repository. Yeah. So we can always scan that as a security team. We can look for those things and we can set code owners, for instance, in GitHub to approve or deny those changes. \uc0\u8232 \
+But then once we've done a security review and said, Yes, this does need to run as route. Maybe this is, for instance, optimizing a node \cf3 [00:21:00]\cf0  to run a database workload. It's going to need some extra privileges. It's not going to be listening on the internet. This one's safe. Yeah, slap that comment on there. \uc0\u8232 \
+Don't alert someone every single day when this runs because yes, it's still running as route just like it was yesterday. And you can do that for all of the checks. But even more importantly than that instead of running it in. Cluster mode and identifying that over and over and over again. You can just flag it the one time in GitHub when they push the code. \uc0\u8232 \
+Yeah, and then they can provide a reason for it that we could review if we choose to. And as long as we approve that, then they merge their PR and they never need to worry about it again. Interesting. Wait, so  \uc0\u8232 \
+
+\f0\b \cf4 Ashish Rajan:
+\f1\b0 \cf0  to your point then another thing that comes to mind at this point is like, you guys are obviously using Shopify uses kubeaudit. \uc0\u8232 \
+You guys created it. What was the adoption like? Cause what you said earlier, you just had a handful of tests, wasn't the entire cis benchmark. And a lot of people listening to this may implement that today, and everyone understands that, hey, developers are the key to solving a lot of these problems. \uc0\u8232 \
+People like all three of us and others who are listening in. We can all develop a tool and put it in \cf3 [00:22:00]\cf0  front of the developer, but the adoption is probably the million dollar question for if you can solve that. How do you use it at the moment in Shopify, kubeaudit and how does it function in a way that it does not upset people, I guess? \uc0\u8232 \
+
+\f0\b \cf2 Shane Lawrence:
+\f1\b0 \cf0  Yeah, so we run it when you upload any change to, we use GitHub. Yeah. And I'm sure if you were using GitLab or something else, you could develop an integration for this. But we're using GitHub, so that's where we meet the developers because that's where they're pushing their code. Yep. And we wanna detect this as early as possible. \uc0\u8232 \
+Of course, it's going to be a really poor experience for them if it's been running for a month and they find out that they're in trouble because they've gotten a hundred alerts in that time. Yep. So instead, as soon as they push it, It runs the scan on the code as part of CI and it says, Hey, you know, maybe don't do this. \uc0\u8232 \
+And if they have a good reason for doing it, then they put that reason in and they carry on. If they don't know what it means, they come to our help channel , and we explain, you know, why this is important. Ask them a few questions to figure out if they really need this permission. If they don't, we'll help them turn it off if they \cf3 [00:23:00]\cf0  do need it. \uc0\u8232 \
+Then we document that reason and just move on. So we're using it mostly as GitHub integration. Yeah. So at the time of the commit is pushed. Yeah. That's when we tell them, Hey, this could be a problem. Right. Rather than in that cluster mode to tell them, you know, this has been running for a while. We do have that scanning, but that's more for generating information to go back on later. \uc0\u8232 \
+We don't surface that to every developer when it's running in cluster mode already. That's  \uc0\u8232 \
+
+\f0\b \cf4 Ashish Rajan:
+\f1\b0 \cf0  actually very interesting approach. Cause most people just think, and kind of where I went in the beginning was like, well, I'm just trying it as a bash script. Ongoingly. Yeah, yeah. But technically that's still doing what traditional security has been. \uc0\u8232 \
+Instead of just working with them, Hey, you're about to submit something, which is probably bad. Yeah. Hey, let me help you solve this. Instead of us trying to have the same conversation six months later when you are really upset, I'm really upset and like, okay, this is not gonna go anywhere. In your talk, you're also talking about the whole build, deploy and how developers are gonna use it. \uc0\u8232 \
+Yeah. Could you share that as well, a bit more in terms of maybe people listening to this or watching this, how \cf3 [00:24:00]\cf0  can they also use that as a way to start today? Maybe you kubeaudit in their own little. pod that they have, no pun intended.  \uc0\u8232 \
+
+\f0\b \cf2 Shane Lawrence:
+\f1\b0 \cf0  Yeah, I mean, if you were just starting with it today, I would recommend having that integration for GitHub would be great, but you probably don't know what's already running there. \uc0\u8232 \
+So you would want to run it at least once on the things that are already running in your clusters. Yep. And identify those and then kind of work backwards from there. Mm-hmm. And. Develop a list of where your problems are, try to prioritize that list. And a way that I really like to address these kinds of problems in general, even outside of security, is to prioritize that list and then block all the new problems. \uc0\u8232 \
+So you come up with some kind of a gate where you have a mandatory security review or a strongly recommended security review or some kind of a check that they have to pass. And that way you prevent new things from going on the list. Of problems. Oh yeah. And then work your way down from the highest priority to the long tail. \uc0\u8232 \
+Using that cluster mode is really, really good for identifying that list of problems. Yeah. And then \cf3 [00:25:00]\cf0  running it in the file mode where it's just going to scan the manifest. Yeah. And in our case, you know, put that on GitHub. Yeah. That is how you gate it. And stop adding new problems to your list.  \uc0\u8232 \
+
+\f0\b \cf4 Ashish Rajan:
+\f1\b0 \cf0  All right. \uc0\u8232 \
+So I guess to your point then if it's already in cluster mode, running on file mode, but it's not already alerting the developer saying, Hey, you have all these 20,000 things that are wrong. Yeah. Which us security people can take over and go, okay, so out of all these 20,000 alerts that are there, I don't know, five are important, which we should raise a flag for and tell people about, which may solve 90% of those things anyways. \uc0\u8232 \
+Exactly. And let's focus on those and then find out what should be an next priority rather than, Hey developer, go solve all these 20,000 alerts. Figure it out. Yes. I don't know what it is. Yeah. Okay. So that's very worthwhile calling out as well, because I feel a lot of times we just. Fall into the trap of we have a tool, we deploy it, and 20,000 alerts. \uc0\u8232 \
+Like, like. That's pretty much it, like, but what are some of the learnings that have come through as in terms of challenges you may have faced \cf3 [00:26:00]\cf0  and now maybe you have overcomed them. We'd love to know about that as well, if you guys have , had any initial challenges  \uc0\u8232 \
+
+\f0\b \cf2 Shane Lawrence:
+\f1\b0 \cf0  with it. Oh, yeah. I think the. \uc0\u8232 \
+Biggest one is useful adoption. So there are a lot of different ways that you can do that. Maybe you're in a position where you can just say it's mandatory. The CISO says nobody's allowed to deploy anything unless they go through this tool. You're gonna have an enormous support burden if you're the security team that owns this tool. \uc0\u8232 \
+Yeah. And now your whole company is forced to use it, but they don't know why and they don't know how. So you can also do the approach, like you said, with 20,000 alerts just going to the developers. But the useful knowledge that security professionals probably can add to that is they can assess the risk. \uc0\u8232 \
+They have more information about which of these is more of a problem and which ones we can just ignore. Yeah. And if the developers who are trying to deploy this don't know why this is a problem for this workload and not for this other workload, mm, then they're just going to get frustrated and they're. \uc0\u8232 \
+Probably going to find ways to work around what you are putting in place, which is bad for everyone. So we don't wanna do that. No. And to your  \uc0\u8232 \
+
+\f0\b \cf4 Ashish Rajan:
+\f1\b0 \cf0  point \cf3 [00:27:00]\cf0  then, if finding those one or two vulnerabilities that are maybe spread across multiple projects or multiple clusters, that's a good place to start. \uc0\u8232 \
+Because then to what you said, when you do talk about it, either at a leadership level or to the developers directly or look at these other projects have the same thing. Yeah. So we are all collectively trying to resolve this rather than you are at fault., you did something wrong. Yeah. Okay. And. How would you I think like from a maturity perspective as well. \uc0\u8232 \
+How would you describe the maturity of kubernetes security in general? I mean, obviously both of you are working in an organization which is clearly sounds like it's ahead of its time as well to some extent, where a lot of people are starting on kubernetes today, and maybe it sounds like this conference as well as an example of it as well, where then we met people who are. \uc0\u8232 \
+Oh, I heard Kubernetes is great. I should come and talk to yeah, you should come and listen to Kubernetes. I guess what are some of the changes you've seen compared to the kubecons that you've seen in the past and today? Anything that you're taking away saying, oh, this is different. \uc0\u8232 \
+This is interesting this time. I know it's only for day one, but curious to know what both of you think so far about \cf3 [00:28:00]\cf0  kubecon. Oh  \uc0\u8232 \
+
+\f0\b \cf2 Shane Lawrence:
+\f1\b0 \cf0  yeah. So I think there's kinda like two questions there. The first is how has Kubernetes matured? Yes. And then the second was, you know, how has kubecon kubecon matured? \uc0\u8232 \
+That's right. Idea or how, what's different this year? And I mean, it's day one. So from the opening keynotes I see. Maybe not compared to last year, but compared to the early years of kubecon just the examples of how far Kubernetes has matured the different audience. And so I guess the answer to both questions is the same. \uc0\u8232 \
+Like when I started working with Kubernetes, it was just a bunch of us nerds trying to figure out how this thing works. And now like there's. Grown up professionals doing this everywhere, and there are processes, companies have an understanding to some extent of what Kubernetes is, or at least how it can solve problems, and especially what they need to do to mitigate some of the rumors and concerns that they've heard about Kubernetes. \uc0\u8232 \
+Yeah. And so there are specialties within Kubernetes, and there's an understanding of what it can do and where it should go. And so I've seen\cf3 [00:29:00]\cf0  , the change was, All early adopters in the beginning, and now it's people who are like, this is enterprise software that I can use for a specific application. \uc0\u8232 \
+And people expect that there's going to be a fair amount of complexity, I think with Kubernetes. Yep. I would say probably even more than there actually is and. On the other hand though, , they accept that it's probably going to work. They probably won't need to completely rewrite the entire stack from scratch. \uc0\u8232 \
+And the industry seems to have shifted. When I started, people were still using lamp stacks for a lot of things that like you know, just a web server running on bare metal, and , they would probably rent that server from a. A provider somewhere, but there wasn't a lot of understanding of how they were going to shift workloads around. \uc0\u8232 \
+And bin packing was an enormous problem. Kubernetes mostly solves that for us. Yeah. And so people focus on very different problems. Now. I see people coming here and they just want Kubernetes to solve a business problem for them. They didn't hear like, oh, there's this cool new technology and they wanna embrace it. \uc0\u8232 \
+It's. \cf3 [00:30:00]\cf0  You know, it's a practical solution to their problems. Interesting.  \uc0\u8232 \
+
+\f0\b \cf4 Ashish Rajan:
+\f1\b0 \cf0  And Dani, for someone who's basically come into this field, fairly recently as well, how have you found kubernetes as a space? You obviously came from a different background, was knowing about kubernetes, picking it up and started working on it and a mature organization. \uc0\u8232 \
+How is that all that for you?  \uc0\u8232 \
+
+\f0\b \cf5 Daniele Santos:
+\f1\b0 \cf0  Well, it's been a fascinating journey. I think there are so many resources if you wanna learn Yeah. Kubernetes and kubecon is one of them. And yeah. I think , this is pretty straightforward if you wanna get started. There are so many tools. I think it was really nice today in the keynote they mentioned you can just start a cluster with kind and then within minutes you use kubecuddle and then just you deploy your resources. \uc0\u8232 \
+So I think it's very approachable. Mm-hmm. The community is great too. Yeah, I think these are my  \uc0\u8232 \
+
+\f0\b \cf4 Ashish Rajan:
+\f1\b0 \cf0  impressions. I'm curious, what was the first thing you learned in kubernetes when you walked in? Apart from, I guess, what was your first thing you learned in kubernetes? Apart from it kubernetes itself, I guess. I think,  \uc0\u8232 \
+
+\f0\b \cf5 Daniele Santos:
+\f1\b0 \cf0  I can't really remember, but I remember a drawing where there was Phippy. \uc0\u8232 \
+And some characters \cf3 [00:31:00]\cf0  and like learning about Kubernetes. And it was a little cartoon. I'm like, oh, this is cool. It was by my entry level. But then I followed several tutorials with minikube. I guess the Kubernetes documentation, the official one is really, really great. \uc0\u8232 \
+Alright.  \uc0\u8232 \
+
+\f0\b \cf4 Ashish Rajan:
+\f1\b0 \cf0  And for people who are trying to learn today, I guess starting off and I'll hear from Shane as well, later, but do you find learning today? You have. The right kind of resources freely available. Like, I mean, we are talking open source as well. Yeah. Like kubernetes documentation you mentioned. \uc0\u8232 \
+Yes. Anything else? You called out , you would call out as things to learn for specific for security people as well. Cause I know like I think a lot of the documentation could be more general enough and it is required, it is general enough for everyone to become involved in kubernetes and mm-hmm. I feel like security kind of comes a layer after where like, oh, now I know this is how this works, but how do I secure it? \uc0\u8232 \
+Is there anything in that regard that you found, which has been interesting?  \uc0\u8232 \
+
+\f0\b \cf5 Daniele Santos:
+\f1\b0 \cf0  Yeah, I mean Kubernetes goat Oh yeah. An interactive environment. Yeah. So basically you have a set of vulnerable workloads and then you \cf3 [00:32:00]\cf0  have some labs and scenarios that you can work through. So then that gives you an idea of , what are the things that really matter and that you need to secure. \uc0\u8232 \
+And they do have a scenario where they use kubeaudit to fix the problems, right? Yeah. We just found, , and we found out the creator of Kubernetes goat is gonna talk tomorrow.  \uc0\u8232 \
+
+\f0\b \cf4 Ashish Rajan:
+\f1\b0 \cf0  Yeah. Yeah. Madhu. Yeah. He's been a guest in the podcast as well. I think it's pretty good. Oh cool. \uc0\u8232 \
+It'd be really good to hear how, I guess how he feels cuz similar to kubeaudit kubenetes goat also has to go through maturity for there. I would imagine there would be problems that are no longer a thing anymore after multiple updates from Kubernetes. There's still default misconfigurations, I guess. \uc0\u8232 \
+Yeah. If I want to use that word.  \uc0\u8232 \
+
+\f0\b \cf5 Daniele Santos:
+\f1\b0 \cf0  So there is something now is, which is like I learned about it in the last kubecon, which is pod security standards. \uc0\u8232 \
+Yeah. With different profiles you have like a restricted profile, basic profile or something along these lines. Yeah, and it's the, these policies are read by a admission controller. Out of the box, like you can turn it on. Yeah. So , that wasn't such a thing. No, we had kubeaudit, you know. Yeah. This is a new thing that I think sig Security is very \cf3 [00:33:00]\cf0  actively working to improve. \uc0\u8232 \
+And just today we learned that , they're sharing with us , the audits of Kubernetes, right? Like Yeah. In the keynote, they mentioned that like  \uc0\u8232 \
+
+\f0\b \cf4 Ashish Rajan:
+\f1\b0 \cf0  . Oh, right. So that's doing an edit. Mm-hmm. Really? Oh, wow.  \uc0\u8232 \
+
+\f0\b \cf5 Daniele Santos:
+\f1\b0 \cf0  They run audits of Kubernetes To find out if it, what are the vulnerabilities and,  \uc0\u8232 \
+
+\f0\b \cf4 Ashish Rajan:
+\f1\b0 \cf0  oh. \uc0\u8232 \
+ Is that because of the whole and I joke about this, you know how people talk about software supply chain that, oh, open source is the reason for software supply chain. A lot of the times that's kind of what people call out and as a conference in the community that is running on open source, it's almost like you're, the foundation is built on the fact that we are run by contributors who may choose tomorrow not to contribute anymore or may not have the time to contribute anymore. \uc0\u8232 \
+I wonder if that was one of the reasons why did they call that out as well? Cuz we totally missed out on the keynote. But was, did, was there anything else that stood offer in the keynote? From that perspective, from a security perspective,  \uc0\u8232 \
+
+\f0\b \cf5 Daniele Santos:
+\f1\b0 \cf0  that was the only thing I, I remember from the keynote. They just mentioned that they were like saying kudos to the sig security folks \cf3 [00:34:00]\cf0  really working to make kubernetes is more secure. \uc0\u8232 \
+
+\f0\b \cf4 Ashish Rajan:
+\f1\b0 \cf0  That's pretty awesome. Well, sig security team definitely requires attention as well, so I'm glad they got attention as well. , what is the areas of security do you both feel are not being spoken about enough? \uc0\u8232 \
+
+\f0\b \cf5 Daniele Santos:
+\f1\b0 \cf0  Not sure. Maybe Shane has a better idea. But I've heard people talk a lot about SBOMs and how we need to secure our artifacts and issues at view time supply stack. \uc0\u8232 \
+Pretty much. What were your thoughts?  \uc0\u8232 \
+
+\f0\b \cf2 Shane Lawrence:
+\f1\b0 \cf0  If you'd asked me this a year or a year and a half ago, I probably would've said software supply chain. I think that is getting a ton of attention now. Yeah. And rightly so. It needs it. Yes. Not because I think open source is inherently more vulnerable, but just because with open source there's a better solution and the problems with it are more visible. \uc0\u8232 \
+So I'm glad to see that. It is. The thing that I think is still missing is a lot of the focus that I see in security is on addressing things that are. Unlikely to be exploited in the wild or very, very hard to fix. Or they're fixing them in a way that is going \cf3 [00:35:00]\cf0  to cut off the nose despite the face. \uc0\u8232 \
+They're saying, we're going to disable this completely because it could be insecure. And ultimately you need to be able to assess and balance those risks. So the only secure way, the only way to make your server completely to secure. Is, unplug it from the internet and, and never put a usb, like, don't run anything. \uc0\u8232 \
+Just completely disconnect it from everything. And, and that's just not practical because what good is it then? So I think the thing that is missing the most is being pragmatic about security, identifying. What risks you are most susceptible to in your organization and finding the low hanging fruit, first of all, so that you can address the easiest things that have the greatest impact. \uc0\u8232 \
+ And I find a lot of times those are the same things. Yeah. Where there's some misconfiguration that you could have run kubeaudit once. Yeah. And just followed the recommendations and it would've solved. 90% of the misconfigurations that you have. Yeah. Or identifying, you know, if you keep your software up to date, you are unlikely to be attacked. \uc0\u8232 \
+\cf3 [00:36:00]\cf0  Because most of the attacks going on are just people scanning the whole internet as much as they can. Yeah. For unpatched vulnerabilities. That's pretty much it. If you can update your software, you're not going to be affected by any of those, so, do the easy things first and yeah. And try to identify those risks and assess them. \uc0\u8232 \
+
+\f0\b \cf4 Ashish Rajan:
+\f1\b0 \cf0  I think and this is gonna be my final question as well, cause I'm curious to know how, you said that open source has kind of matured in that supply chain software problem. How do you feel it's been addressed? Cause a lot of people would not even know about hey or doesn't open source obviously mean you have a software supply chain problem? \uc0\u8232 \
+ I guess where I'm coming from is a lot of people hear open source instantly that a software supply chain that's definitely gonna be a problem. \uc0\u8232 \
+But you're saying it's actually being addressed well in the open source space because of transparency and all of that. So could you explain that a bit more?  \uc0\u8232 \
+
+\f0\b \cf2 Shane Lawrence:
+\f1\b0 \cf0  Yeah. Just to be clear, I think it's being addressed well, I wouldn't say that it's this solved problem. Right. But it's a big problem and it's getting a lot of attention. \uc0\u8232 \
+Yeah. And that's a very good thing. The, one of the early things \cf3 [00:37:00]\cf0  that I saw that kind of, I, I think. Was a catalyst for all of the attention we're seeing on supply chain now was an executive order. Oh, yeah. After Biden Fairly, yeah. Yeah. After a fairly prominent ransomware yeah security incident. Yeah. And so we saw things like solar Winds. \uc0\u8232 \
+That was a very big one. And I mean, you could name any number of similar attacks. Mm-hmm. I don't think that using proprietary software instead of open source solves that Would you say that there are more vulnerabilities in Kubernetes or Windows? I, I don't know the answer, but unless you have the answer on the top of your head, like I, I think that Windows being closed, probably Windows nt has a lot of vulnerabilities, and so just saying that it's open source causes that, and I think. \uc0\u8232 \
+I think that's incorrect. On the other hand, open source, it's very visible. Yeah, you can go look at GitHub and if you can look for certain patterns or people doing things insecurely you can probably write an exploit for that pretty quickly. And on the other hand that makes the job of somebody who's doing scans a lot easier because they \cf3 [00:38:00]\cf0  can look for that and prepare a defense for it. \uc0\u8232 \
+Yeah. So the way to solve this, in my opinion, is identify that it is a problem, and we're there. I think we've done that. As an open source community, we can't stop talking about SBOMs. We can't stop talking about supply chain. That's great. What do we do about it? So the second step is to take inventory. \uc0\u8232 \
+ we've started with the SBOM. The paradigm, I guess. Yeah. Whether we say, okay, what's in my software, I have no idea. Is is left pad in there? Is some crypto miner now part of my supply chain? I hope not. Yeah. We, we identify what's running in the software and then. This is the part where we still need work. \uc0\u8232 \
+What do we do with that? If you have a thousand SBOMs and nobody's ever looked at them and you're not doing anything with them, then you haven't really improved your security. You might have a better package of files to hand over to Mandiant when you hire them to do, solve your security problem after you've been attacked. \uc0\u8232 \
+Yeah, but it's not really going to mitigate anything if you just have the inventory without using it. So what do we do then? We identify the things that are vulnerable. Static analysis, things like \cf3 [00:39:00]\cf0  kubeaudit have been around for years. Start using those. And then I'm especially excited to see fuzzing on open source repos. \uc0\u8232 \
+Oh, wow. Yeah. What we can do to identify problems there. Yeah. And this is, you know, I, I think a space that's not being, Explored as much as it should be. Yeah. And so then we can identify the problems upstream, and then everybody can say, oh, you know, like, I, I just got a notification that this is vulnerable to this thing that they found by either static analysis or fuzzing. \uc0\u8232 \
+Yeah. You can look at your SBO M and say like, oh yes we're using this everywhere. This is log4j and, you can identify that. But maybe it's more obscure than that. Maybe you don't even realize you're using it until you go back and look at the SBOMs. So I think we'll start to see more people using those as an incident response measure. \uc0\u8232 \
+We're going to start to see more people looking at those as a preventative measure. Yeah. And then hopefully we'll start seeing more tools, just like kubeaudit, it was in 2017, where they're popping up and saying, Hey, we'll scan your SBOMs and tell you what's wrong. And I can almost guarantee that a \cf3 [00:40:00]\cf0  whole bunch of them are gonna flag a hundred thousand false positives or. \uc0\u8232 \
+True positives that couldn't be exploited anyway. Yes. On the first attempt, but hopefully through a balancing act, we'll be able to come to a place where those are actionable alerts. Yeah. And we can say, oh yes, this is a problem. Here's the patch. Let's go update our software and then we're done. I, I thought  \uc0\u8232 \
+
+\f0\b \cf4 Ashish Rajan:
+\f1\b0 \cf0  ChatGPT was a solution to all problems. \uc0\u8232 \
+Well, if you  \uc0\u8232 \
+
+\f0\b \cf2 Shane Lawrence:
+\f1\b0 \cf0  ask chat g p t, it might say it is. Yeah.  \uc0\u8232 \
+
+\f0\b \cf4 Ashish Rajan:
+\f1\b0 \cf0  Like are you the problem chat g pt. I don't know. I am just a robot. I just tell you answers. Yeah. But thank you so much for spending time. Where can people find you on socials if they have more questions about kubeaudit and the talk that you have? \uc0\u8232 \
+Maybe even watch a demo after they watch the demo on the YouTube later on. Where can people find you on  \uc0\u8232 \
+
+\f0\b \cf2 Shane Lawrence:
+\f1\b0 \cf0  social media? Yeah, I'm at lawrence.dev. All of my links are there.  \uc0\u8232 \
+
+\f0\b \cf5 Daniele Santos:
+\f1\b0 \cf0  Mine is danisantoscode.com all my links are on the webpage as well.  \uc0\u8232 \
+Yeah.  \uc0\u8232 \
+
+\f0\b \cf4 Ashish Rajan:
+\f1\b0 \cf0  Awesome. All right, I'll make sure I put them in the shownotes as well. \uc0\u8232 \
+Thank you so much for coming on the show. Thank you for being honest about, I guess, the realities of open source and kubeaudit as well. Thank you so much for coming on the show. Thank you. Appreciate it. \cf3 [00:41:00]\cf0  Thank you for having us. Thank you. When you're developing an  \uc0\u8232 \
+
+\f0\b \cf2 Shane Lawrence:
+\f1\b0 \cf0  app, security might be treated as an afterthought with functionality, requirements and tight deadlines. \uc0\u8232 \
+It's easy to accidentally write vulnerable code or use a vulnerable dependency, but sneak can help you secure your code in real time so you don't need to slow down to build securely. Develop fast, stay secure. Good developer sneak.}

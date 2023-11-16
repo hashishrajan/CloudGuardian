@@ -1,0 +1,643 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red102\green0\blue204;
+\red128\green128\blue128;
+\red114\green179\blue114;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\b\fs48 Seth Art\b0}
+{\pard  \line \par}
+{\b\cf1 Seth Art:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ There's the shared responsibility model, right? AWS has some responsibility and the client has some responsibility. The research that Nick did and the research that Gafnit did, like that is on.}
+{\pard  \line \par}
+{the AWS side of the shared security model. Yeah. They're finding the ways that AWS made mistakes that they didn't realize they make. Mm-hmm. . And the cool thing about that is that they tell that to AWS AWS fixes it, it's fixed for everyone. Game over. You know, like, we don't, we don't have to worry about that anymore.}
+{\pard  \line \par}
+{Yeah. Like that's the beauty of that research. Yeah. What penetration testing focuses on almost entirely is the client aspect of the shared security model. Right. There are common ways. , lots of companies misconfigure their cloud environments, either the stuff in the cloud environment or the cloud itself.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ . If you're thinking about getting a pentest done on your AWS account, or you want to learn how to do pentest in aws, then you probably want to listen to this episode. There's certain ground rules you follow when talking about pentesting in AWS, like earlier, there used to be }
+{\cf2 [00:01:00]}
+{ a form that you had to fill out as a pentesting person to let AWS know that you are about to pentest}
+{\pard  \line \par}
+{but nowadays that's not needed. And as long as you don't go into the territory of scanning the endpoint, it's kind of a gray area. You should normally be fine to run your traditional security tools on AWS but then again, don't take my word for it. You probably wanna refer to AWS documentation, but to make it easier for us to understand what pentesting is all about in the cloud and how it's different to web app pentesting, networking, pentesting}
+{\pard  \line \par}
+{we had Seth Art from Bishop Fox talking about. How he approaches cloud pentesting, how it is different. What are some of the low hanging fruits that you can use to identify and quickly find your way across into an AWS account, whether is it misconfiguration really, that you're looking for when you do a cloud pentest, because aren't there tools for it?}
+{\pard  \line \par}
+{And some of them are open source, which we spoke about on the episode as well. If you are someone who's probably looking at learning about pentest, this is the episode for you. Whether it's an internal pentest or your assuming breach internal pentest approach. This is the episode where you get to demystify all of }
+{\cf2 [00:02:00]}
+{ that as well.}
+{\pard  \line \par}
+{And we spoke about differences on pesting. Your IaaS services like your EC2 instances, your PaaS services like your ECS container or your Lambda, and the complexity that comes with the kind of cloud you may be operating with. How do you scope that? How do you get value from, as a customer or a CISO who's trying to get a pentest on AWS, how do you even define what should be pentested and what should not be pentested?}
+{\pard  \line \par}
+{So a lot of those conversations as well. As always, if you know someone who's learning about pentesting in AWS or is in your team and wants to learn pentesting in cloud, this is the episode for them. Definitely share this with them, and if you're listening to the episode for the second or third time, definitely appreciate you subscribing and following us on our social media.}
+{\pard  \line \par}
+{If you're watching this on YouTube, Subscribe on YouTube, or if you're watching LinkedIn, follow on LinkedIn. If you're listening to this audio onto our Apple, Spotify, Google podcast, or any of your other popular podcast platform, definitely give us a rating and review. It really helps us get more guests like Seth and others who are super }
+{\cf2 [00:03:00]}
+{ awesome and we love to bring them over because then they see those ratings and reviews.}
+{\pard  \line \par}
+{They know they're coming to a show, which is gonna be providing value to people, and it really means a lot to us that you are able to. A few more every time to give us a rating and review on your popular platform, putting the notification bell on and doing all of that required so people get to know whenever the new episode comes out.}
+{\pard  \line \par}
+{Now this is also the last episode for the January month, which is the breaking the AWS month. Next week we are gonna talk about building the AWS. We've been breaking a lot. Let's try and build AW S, which is gonna be the next month episode. And I'm super excited about the first guest who's gonna come in as well.}
+{\pard  \line \par}
+{So, See you on that episode. But for now, enjoy this episode and have a good weekend. And that's it. You would see or hear from me in the next episode. Now take care. }
+{\pard  \line \par}
+{When you're developing an app, security might be treated as an afterthought with functionality, requirements and tight deadlines. It's easy to accidentally write vulnerable code or use a vulnerable dependency, but Snyk can help you }
+{\cf2 [00:04:00]}
+{ secure your code in real time so you don't need to slow down to build securely.}
+{\pard  \line \par}
+{Develop fast, stay secure. Good developer Snyk .}
+{\pard  \line \par}
+{Hey Seth, welcome to the show. }
+{\pard  \line \par}
+{\b\cf1 Seth Art:\b0}
+{ Hey, Ashish, how's it going? }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Good. And thank you for coming in, man. I really appreciate you kind of coming in, spending time with us. }
+{\pard  \line \par}
+{\b\cf1 Seth Art:\b0}
+{ Oh, it's my pleasure. I'm honored to be here. I'm a, a listener of your show. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ I appreciate that, man. Thank you. Well, for the few people on the internet who don't know who Seth is, cause they're clearly watching, reading your blogs as well how do you kind of like, what was your path into cloud security?}
+{\pard  \line \par}
+{\b\cf1 Seth Art:\b0}
+{ Sure. Yeah. So I have been an offensive security penetration tester for 13 years now. My start was in web application pentesting. So before that I was on defensive security and I just really wanted to be a hacker, right? An ethical hacker. So I studied the OWASP top 10 and that kind of stuff, and, and got my first job as a web application pentester.}
+{\pard  \line \par}
+{I loved that. It was really fun. , but I kept on hearing about this thing, internal penetration testing. Right. Stories about how }
+{\cf2 [00:05:00]}
+{ you would simulate, you know, somebody who had access to a building, you know, to a company. And you're answering the question, what's the worst that can happen? Right? And I was like, I have to do that for sure.}
+{\pard  \line \par}
+{So I did that. I got a job where I could do web app testing, mobile testing, but also this internal penetration testing. And it was just so fun like, As much as I love the web stuff, there was nothing more exhilarating. Like I would go to a client site, I would, they would say, okay, plug into our network, and we want to know like how bad is it, what could happen?}
+{\pard  \line \par}
+{And within a day, two days, maybe a week, I'd have administrative access to every computer, every server, every piece of data in the organization. And so that was. , I love this. And then finally I had been doing that, but then I started getting internal penetration tests at Bishop Fox that were entirely cloud environments, right?}
+{\pard  \line \par}
+{And I was like, well, this is cool. Some of this is familiar. Some of this is very, very unfamiliar. And over the course of, you know, a couple of months, I realized that. We need to }
+{\cf2 [00:06:00]}
+{ build a whole cloud methodology. And so that's what we did and that's how I got into cloud penetration testing. It's basically a clone of that internal penetration testing, but like tailored for the cloud.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Oh, right. Okay. That's a good way to explain cloud pentesting as well. To your point then if, if it's a different kind, like for, for people who probably are more aware of the whole web app, pentesting, how do you kind of differentiate between like a cloud pentest?}
+{\pard  \line \par}
+{It's kind of like, you know, it muddies the water a bit, so how do you differentiate that? . }
+{\pard  \line \par}
+{\b\cf1 Seth Art:\b0}
+{ Yeah. Yeah. So, so before I get into difference between web and cloud, let me even talk about, there's different types of cloud penetration testing you can do, right? You can think of cloud penetration testing as just the external, how do I get into a cloud environment, right?}
+{\pard  \line \par}
+{But that's only scratching the surface. You might only test the internal. Environment., the kind of the defense in depth controls. Yeah. If you get in. Right. So that's why this assumed breach style of testing. Let's just assume that one day one of your applications is }
+{\cf2 [00:07:00]}
+{ gonna be compromised. Let's assume that one day a user will be phished or worse, you know,, they're acting maliciously and you know, a bad actor, right?. Yeah. Let's make that assumption and let's start from the internal perspective. And that's, the cloud penetration testing that I like to do where we kind of look at the whole cloud infrastructure from that perspective. So now going back to the web application testing, the way I like to explain it is if you worried about code that you've.}
+{\pard  \line \par}
+{Right. Your web application is in the cloud. Yeah. And you're worried about the code that you've written. Then what you want is a web , application pentest. You're looking for cross-site scripting, SQL injection, right? S S R F, which is very, you know, cloud, you know, really helpful in the cloud.}
+{\pard  \line \par}
+{. But if you're looking for the way that you've configured that application in your overall cloud environment and you're, you know, and like what happens if that application gets compromised? That's the kind of the frame of cloud penetration testing, if that makes sense. Oh, }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ right. Okay. So you almost like, I was gonna use the word shared responsibility and as I'm, as I }
+{\cf2 [00:08:00]}
+{ say that, like, oh, maybe it's kind of like that as well, so I think you've kind of explained it really well and I love the example that you used where, or Cause the web app itself could be on I guess the AWS cloud as well. I'm thinking from a scale perspective as well. I feel like there's.}
+{\pard  \line \par}
+{almost like the way people talk about cloud is earlier, like say five, six years ago people only had one AWS account, and now it seems like people are talking multi-cloud, like hundreds of AWS account. I think the, some of the examples people use nowadays out there, thousands of AWS accounts.}
+{\pard  \line \par}
+{How do you like, I mean, just to kind of give some example of that, A web app when you talk about webware, could be a big, thick ass Java app, like installed on it and yeah. Like I need like a week or one week to kind of just do this. Like , how would you describe the scale of something like an AWS footprint?}
+{\pard  \line \par}
+{Like when people say a AWS footprint, what does that mean for you? . }
+{\pard  \line \par}
+{\b\cf1 Seth Art:\b0}
+{ Yeah. So that's one of my favorite parts about working at a company like Bishop Fox. Right. Our clients are, you know, large enterprises, so we get to see some of the biggest AWS environments that are around. }
+{\cf2 [00:09:00]}
+{ Yeah. And so yes, the old model was you had everything in one AWS account.}
+{\pard  \line \par}
+{And then that just expands, expands, expands. And then I think for a while there was like, maybe I'll put production in one region and then staging in another region or two different VPCs or something like that. Right. The newer model as you kind of mentioned, , and this is recommended to segment your workloads based on what they're supposed to be doing into different AWS accounts.}
+{\pard  \line \par}
+{And that applies to Azure and, and Google as well. But so we. organizations that have tens, hundreds, thousands of AWS accounts. And so when you talk about pentesting, those, if you're still in the tens range, you might be able to scope a penetration test for, that includes all 10 or 20 of those accounts.}
+{\pard  \line \par}
+{But once you get larger, unless they are kind of like. , you know, terraform like cookie cutter, like duplicates of themselves, right? Then you really should start thinking about testing your cloud penetration testing as like, almost like application testing in that, let's take these five AWS }
+{\cf2 [00:10:00]}
+{ accounts that are all related and let's do a penetration test on those, right?}
+{\pard  \line \par}
+{Yeah. Let's take these 20 that are related and let's do a penetration test on those. And so that's what we find a lot of these days. And well, yeah, this takes time, right? It takes a lot of time for a penetration tester who's unfamiliar with these environments to wrap their head around these new environments.}
+{\pard  \line \par}
+{And so, yeah, so }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ I think it, I definitely wanna get into like, I think that understanding of a person who's an experienced pentester while listening in how they would look at it. I think the blog that I was referring to as well, that I, how I found you. was that internal pentest and the difference between that and cloud.}
+{\pard  \line \par}
+{And I think you kind of use an example over there where it's just more than EC2 as well. So I'm also curious, what are some of the examples, findings that you can probably share? Like I know you can mentioned SQL injection, SS R F, and all of those things for web app. But from a cloud perspective, is that primarily misconfiguration or is there a complicated vulnerabilities piece there as well?}
+{\pard  \line \par}
+{How do you kind of see all , the, space. }
+{\pard  \line \par}
+{\b\cf1 Seth Art:\b0}
+{ . Yeah, I love that }
+{\cf2 [00:11:00]}
+{ question. Because, it's made up of a couple of, different components, right? So, what you always wanna do, is run a configuration check against your cloud environment. Right? And the CIS benchmark has this, you know, standard.}
+{\pard  \line \par}
+{And there are a lot of tools like Prowler, like scout Suite and then some of the newer players like Steam Pipe has compliance modules, right? There's a lot of ways to get. The predefined ways that you've misconfigured your cloud. But that's to me, not penetration testing. That helps you find a lot of low hanging fruit, for sure.}
+{\pard  \line \par}
+{Yeah. Like if my bucket is publicly exposed you know, things like that. But what we're doing is trying to find the ways that you've misconfigured not just the cloud, but your stuff in the cloud, right? Like you might put an application, maybe you put it on an EC2 instance, but maybe it's a docker container.}
+{\pard  \line \par}
+{it has no authentication. Right? So that means, and let's say it has no authentication, but it allows you to access like the most sensitive secret in the company. Yeah. So what that means to a penetration tester is if I can get into this internal environment, , all }
+{\cf2 [00:12:00]}
+{ I need to do is just browse through this application, and I get to all the sensitive data.}
+{\pard  \line \par}
+{Yeah. And that's not something that would be picked up in a kind of configuration review. And so I think that's one of the, like the value points of this kind of, you know, offensive security, penetration tester approach. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ It's funny cuz I think when I was trying to learn, so offsec OSCP course from defense security people, like, I remember when I was studying for a and practicing for the only thing people cared about was getting domain admin.}
+{\pard  \line \par}
+{That was the only thing people could talk about. And it is hilarious. I mean, , I'm curious to know, your opinion on this as well. The whole concept of the domain admin doesn't really exist as well sometimes depending on which cloud you go. Like cuz I almost feel like there's a shift in the way.}
+{\pard  \line \par}
+{You kind of have to think of your adversary in cloud. Do you feel there's a difference here? Because I think the traditional pentesting that we've done for years and been been trained in and all of us gone through web app and everything, ultimate goal used to be kind of domain admin, active directory.}
+{\pard  \line \par}
+{I mean, people still use active directory, don't get me wrong. But is there like a shift in that as well that you find people have to make when }
+{\cf2 [00:13:00]}
+{ kind of thinking about cloud pentesting? Cause what you said is actually perfect. Hey, it's not just misconfiguration. Your application itself could be without an authentication or doesn't matter, misconfiguration or not.}
+{\pard  \line \par}
+{It's already out on the internet. So similar to that, is there some more foundational pieces that you had to question? About how you approach pentesting in cloud. }
+{\pard  \line \par}
+{\b\cf1 Seth Art:\b0}
+{ Yeah. So, okay. I'm gonna do a sidetrack story, but let me know if I kind of forget to go into the, your actual question. Right. So with internal penetration testing, you're absolutely right, right.}
+{\pard  \line \par}
+{For a long time, you know, every new pentester kind of says I have to get domain admin, right? Yep. And then, you know, I eventually learned like everybody else, Getting domain admin is just probably the easiest way to get to what your goal should be, which is get to the sensitive data, demonstrate impact, business impact for your client, right?}
+{\pard  \line \par}
+{Yeah. Yeah. So it's maybe the easiest way to get to the objective, but it isn't the objective. And that story I just told is actually the example I used about, you might have an application that's missing }
+{\cf2 [00:14:00]}
+{ authentication. That's from an internal pentest I did years ago. It was a very small company.}
+{\pard  \line \par}
+{It was I think the smallest active directory pentest I've ever done because it was like 30 people company, right? So a lot of my kind of tricks and didn't. that rely on like a user to, you know, misconfigure something. Yeah. And I couldn't get domain admin. I only had three days for it too, and I was really stressing.}
+{\pard  \line \par}
+{And then that's when I realized there was just an application that was just sitting there with like, all the data. And I asked my contact, I was like, is this bad? And he said, holy cow. Like nobody should have access to that. Like I can't believe it was just sitting there. No real, not even really hacking.}
+{\pard  \line \par}
+{Right. Just kind of like browsing to it. And that same thing applies in the cloud today, right? Yeah, it, the goal is not to get to administrative access like IAM administrative access in the cloud. Yeah. The goal is to ask.. . if you're a kind of a, a consultant like I am, the goal is to ask your client, you know, where's the most sensitive data?}
+{\pard  \line \par}
+{Yeah. And if you're an in-house red team or in in-house penetration tester, it's work with that business }
+{\cf2 [00:15:00]}
+{ unit. What's the most sensitive thing in this environment? And then that's where you spend your time trying to get to that through any means necessary outside of like social engineering, you know, but it's like, is.}
+{\pard  \line \par}
+{Misconfiguration, is there a way that I can use this permission to then escalate to this permission, to escalate to this permission? And that's what gets me to the goal. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Wow. And maybe it's worthwhile then maybe just talking about what are some of the common ways you find. When it comes to pentesting in the cloud, what's going through your mind to kind of kick it off from a kicking it off perspective, like , what are some of the first few things you would do?}
+{\pard  \line \par}
+{Because I guess the whole initial, the recon and everything people can kind of talk about in the traditional world, does that apply and like, what's your thought process when you start cloud pentest? }
+{\pard  \line \par}
+{\b\cf1 Seth Art:\b0}
+{ Yeah. That, that's, that's essential to answer that question, that's essentially why my colleague Carlos Vedramini and I created Cloud Fox, right?}
+{\pard  \line \par}
+{So the cool thing about the cloud that we didn't have in traditional pentesting is that the cloud is all API based. you, you don't have to scan, you know, a slash }
+{\cf2 [00:16:00]}
+{ 16 and wait for like three days to figure out what IP addresses are live. Yeah. You can just ask the EC2 API, you know, what are the IP addresses of the EC2 instances?}
+{\pard  \line \par}
+{Right. What are the IP addresses of the, you know, the ECS containers? Right. What are the, and we have an endpoints module in Cloud Fox that'll look at like 12 different service and give you the end points, and whether they're public or internal. Right. So we're constantly enumerating, you know, where are the attack points and you know, what are the commands necessary.}
+{\pard  \line \par}
+{So cuz that's what, then we'll kick off our traditional network scanning on just the EC2's, just the, you know, API gateway endpoints, just the ELB, you know, ports that are open and save ourselves a lot of time. In the meantime, we're doing a lot of enumeration with, IAM . , everybody knows, right? The cloud is is centrally focused around IAM mm-hmm.}
+{\pard  \line \par}
+{And actually, I'm not sure if I said this this explicitly yet, but I think it's a good point to }
+{\cf2 [00:17:00]}
+{ stop and say, when we're doing cloud penetration testing, the two things that we're generally doing are saying, If an application were compromised, what's the worst that can happen? And if an user is compromised, what's the worst that can happen?}
+{\pard  \line \par}
+{Now, both of those situations, an application often, not always, but often has IAM permissions associated with it, right? Mm-hmm. . Yeah. You can assign an A role to a Lambda. You can assign a role to an EC2 you can assign a role to a Kubernetes cluster, right? And. The impact of what you can do depends on the permissions that thing has access to.}
+{\pard  \line \par}
+{So sometimes we work backwards. Sometimes we say, okay, there's 50 applications in here, but this application has an administrative, IAM role attached to it. Mm-hmm. . So let's kind of focus our effort and try to target that one or another way. Is this permission, this person's a developer, right? And they, it looks like they don't have any IAM permissions}
+{\pard  \line \par}
+{this is a common scenario. We're not gonna give the developer IAM permissions because we don't want them to be }
+{\cf2 [00:18:00]}
+{ admin. Yeah. But here's the secret. If the developer has access to maybe, you know, S S M or S SSH into all of the EC2 instances, if any one of those EC2 instances has admin, then the developer also has admin and every developer.}
+{\pard  \line \par}
+{Right? So that's the really fun part of this type of work. Testing those assumptions and making sure. You know, did you think about the, you know, the three hop scenario? }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah. And I think, I'm glad you mentioned the SSM service as well as the SSH service. Because just even, even if you were to spend an entire episode, just an IAM in AWS then in itself is like a whole concept you're explaining with the whole machine user, regular user.}
+{\pard  \line \par}
+{It's not the same as your system user from active directory days. It's very different. This can be like admin or whatever. , I'm glad you explained the example because actually to add another layer of complexity or at least to help people understand the layer of complexity, why is say the IAM and things like SSM as well as your and, and like, I guess these service.}
+{\cf2 [00:19:00]}
+{ }
+{\pard  \line \par}
+{they're, even though they sound like two different things, why should people be concerned about the fact that, hey, but Ashish, to your point, doesn't have an IAM role. He should be fine. How are these things still accessible to Ashish because he seems to have an identity key or what's the thing here?}
+{\pard  \line \par}
+{Can you explain that a bit more }
+{\pard  \line \par}
+{\b\cf1 Seth Art:\b0}
+{ as well? Yeah, sure. Right, so most of the time, . We are kind of, when we're simulating a compromised user, we're simulating somebody who has some level of IAM permissions. Maybe it says they can list buckets or they can, create EC2 instances, but usually it's restricted.}
+{\pard  \line \par}
+{And a lot of times a client will say, you know, is there a way that they can get around that restriction? Right. We don't want every developer to have administrator access. Yeah. Right. And so the process of a penetration tester is to look at what permissions anytime you land with a new IAM, you know, Right.}
+{\pard  \line \par}
+{Or user. Yeah. Look what permissions they have and see if any of those permissions lead to a priviledge escalation path. So a good one. Like you, like, yeah. You called out SSM, right? Yeah. So SSM is a }
+{\cf2 [00:20:00]}
+{ way that it allows you to connect to specifically SSM send command or s s m was it start session, right?}
+{\pard  \line \par}
+{These are this cool new way that you can connect to an EC2 instance without an SSH key just. If you have that, IAM permission. Right. Here's another example. We did a, a penetration test where the developers had some IAM permissions. And they used teleport to guard their access to, you know, the EC2 instances.}
+{\pard  \line \par}
+{And we did that attack that I just mentioned, right, where we just used that teleport access to iterate through all of the EC2 instances and find the one that had administrative. , and that's how you know. We got administrative access cuz we just connected to, with teleport to that instance. Yeah. You know, spit out those credentials and then use that to, you know, complete the objective.}
+{\pard  \line \par}
+{Here, here's another one that's kind of interesting. You talked in your last episode about like ways to attack Lambda. Yeah. Right. You can attack Lambda from the front door, which is like }
+{\cf2 [00:21:00]}
+{ the code running in the Lambda function. Yeah. But let's say you give somebody access to create a Lambda. and attach an IAM role to it.}
+{\pard  \line \par}
+{IAM pass role, right? Yeah. If there is an IAM role that trusts the Lambda service that has administrative access, you can just kind of write code in that Lambda that says, you know, the only thing I want you to do is print out the credentials. You attach the administrative, you know, role to it, and then now you're the administrator.}
+{\pard  \line \par}
+{So you have to be careful in the way you design these patterns as well. That's awesome. I think this, this is a good point to start and say if you are a five person company, this is probably not where you need to spend your time worrying about. Right. , when you're a five person company, you wanna move fast, you know?}
+{\pard  \line \par}
+{Yeah. And, and your risk is not that high. Yeah. But once you grow to have thousands of employees, , you have to think about, you know, the principle of least privileged seriously and differently. Yeah. You know, the earlier the better, but I just wanna be clear that like, you know, you don't }
+{\cf2 [00:22:00]}
+{ have to think about this stuff.}
+{\pard  \line \par}
+{Not everybody is at the maturity level that they need to kind of worry about this on day one. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah. And I'm glad you kind of mentioned that part because to what you said as well, I guess from a pentesting perspective, initially they may not even have the complexity. Like if you're a small organization or startup, you would may not have the complexity of having. Multiple IAM roles. You might just be, Hey, it just set an Ashish company and we just have, I have an admin. Or you have an admin. I have read only. You have like the life is quite simple. I think to what you're referring to more are enterprise examples where multiple IAM roles multiple teams. Multiple teams with sub roles.}
+{\pard  \line \par}
+{Like it just gets really complex. So to add a few more layers to it. Then the low hanging fruit to what you mentioned could not just may start from a misconfiguration, may start from an IAM . Cause I think the concept for people, I guess probably should explain in case people who are listening to this for the first time and wanna start a AWS cloud pentesting.}
+{\pard  \line \par}
+{But , what is these low hanging fruits, essentially the easy wins that we can find on a cloud penetration testing, testing }
+{\cf2 [00:23:00]}
+{ with what we're talking about. So IAM role you called out the misconfiguration, I imagine, like, is that cloud Fox you mentioned is, which is an open source tool that you guys have worked on.}
+{\pard  \line \par}
+{think you guys have mentioned to Prowler and other ones in there as much are pretty amazing tools to kind of look into as well. So once you kind of have done that step. Oh, okay. So now I have a mapping of what is there. I have, I was given an IAM role by my client or I was given, IAM user by my client and I'm kind of gone ahead, Cloudfox, Prowler all of that . Now I have a mapping of what I've created. What, what happens after that? Like , what's the Now obviously without going into the complexity of an application, if you just kind of assume we have a simple enough application that's, I don't know, pentesting on a web app in aws, which is using one AWS account.}
+{\pard  \line \par}
+{I'm just making an example here, but what I'm trying to get to you is your thought process once you've enumerated your IAM role low hanging. What, is there anything obvious such as you, like more common to what you said about Lambda? If I'm pentesting a Lambda, maybe I wanna see the IM role. Are there }
+{\cf2 [00:24:00]}
+{ common services in AWS that you look out for?}
+{\pard  \line \par}
+{That are usually misconfigured by people? }
+{\pard  \line \par}
+{\b\cf1 Seth Art:\b0}
+{ Yeah, so, so let me just do a rehash. So your prowler,, your steam pipe compliance module, your scout suite, those help you get low-hanging fruit findings. Right. Those are tools that create findings, right? The difference is that tools like Cloud, Fox and Paku, they are not really giving you a finding.}
+{\pard  \line \par}
+{It's giving you leads, it's giving you attack, surface, internal attack, surface area. And then the next step is to do your network scanning, your application enumeration. And that's where no matter where the service is, whether. App Runner or EKS or ECS or you know, anywhere or Lambda or API Gateway, those tools, you know, cloud Fox has helped to design you to like, this is what to focus on next.}
+{\pard  \line \par}
+{And then you do your, , network penetration testing enumeration. Ah, and that's where it's kind of different than a web app test, right? A web app }
+{\cf2 [00:25:00]}
+{ test is looking for, or an, an application test or an API test is looking at one specific component. Yeah. And you're saying, I'm gonna spend my time on this component.}
+{\pard  \line \par}
+{Yeah. But , in a cloud pentest, cloud Fox is giving us all of the end points and we're kind of just, it's called the path of least resistance. Right. Whichever one's looks like it's the best lead for us. That's what I'm gonna spend some time on. Maybe that works out to be I, you know, my next step.}
+{\pard  \line \par}
+{Yeah. Or maybe I give up after a little bit of time and then I focus on the next one. And you mentioned the O S C P, that's a big part of that process. Yeah. What every. Network penetration tester has to learn is you can't just like dig, dig, dig, dig the hole indefinitely. At some point you have to come up for air and like try another hole, right?}
+{\pard  \line \par}
+{Yeah. And so based on where you land and what you find, , you kind of keep on trying to find the path of least resistance to that objective, which is that company's secret recipe. You know, the Coca-Cola recipe, the, you know, the secret sauce of that company. Yeah. I hope that }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ answers your question.}
+{\pard  \line \par}
+{It does. It does. I think it's actually perfect. It does. Cause I think now I wanna flip the }
+{\cf2 [00:26:00]}
+{ table and talk from a customer perspective as well. So people listen to this. They either are preparing for an internal pentest or they potentially are, looking at, say they came out to me, Hey, ciso, I want I, I think I want to get a pentest done for my cloud.}
+{\pard  \line \par}
+{What is usually recommended to, I guess, give up? I mean, it's like the traditional approach to pentest has been, Hey, I, I just got a webapp like, no. Or cause people who don't know about cloud. What I've also seen is people just say, oh, can you just scan our AWS accounts? And you're like, sure. What do you have there?}
+{\pard  \line \par}
+{I don't know. Like just the entire organization and like what, what, so the size of PepsiCo is on one AWS account. What, what's the ask here that you kind of tell people or customers who, how they should think about pentesting in cloud, which is, I feel there's a bit of a difference between when people give you scope as a Hey Mr.}
+{\pard  \line \par}
+{pentester or Miss pentester that I would like you to pentest my cloud. What's a mistake people do from a scoping }
+{\cf2 [00:27:00]}
+{ perspective? I guess both sides. One is a pentester who's probably doing it for the first time, and the other one where the customer basically said Yes. scan everything}
+{\pard  \line \par}
+{\b\cf1 Seth Art:\b0}
+{ Yeah. Penetration testers, right? Because it is, is an art and a science, right? It's balances between that. Like sometimes you spend four hours looking at something. Doesn't come to fruition. Right? You were so close, but you didn't get there, right? Yeah. So if anybody tells you , to pentest a complex AWS environment in a day, you know, that is not, that's a conversation that you probably wanna point them.}
+{\pard  \line \par}
+{To like configuration review, get that lowest hanging fruit. That's just automated tooling, right? Yeah, yeah. But if you want to, you know, penetration test a cloud environment, you have to look at, the way that I do it is I look at roughly how many accounts are we talking about? Yeah. And roughly how many different services are being used, and roughly how many resources are there.}
+{\pard  \line \par}
+{Right. These are kind of like the big ways to kind of just get an idea of. , are you talking about tens of thousands of resources, right? Yeah. Or 10 resources. And that's, we use those criteria to kind of scope it. }
+{\cf2 [00:28:00]}
+{ And I mean, to be frank, we don't really do cloud penetration tests for under a week. Yeah.}
+{\pard  \line \par}
+{You know, cuz it's really that you spend , and this is kind of based on that internal , and it goes way up from there. Right. But it's, , you, it's based on the internal pentesting methodology. Yeah. You're in an unfamiliar environment. . So you have to spend at least some time getting familiar. Then you have to spend some time kind of trying and failing.}
+{\pard  \line \par}
+{Yeah. And then even when you succeed, that's where it gets complicated in terms of cloud is like, let's say my attack path is through, you know, EC S. Mm-hmm. , but I've never exploited ECS specifically. Right Now. I have to learn how to, you know, pull that attack off. Right. And so it's a process, but , I think it's valuable because we get to show our clients.}
+{\pard  \line \par}
+{I went from this point A to point B. , you know, , and again, what we're doing for our clients is usually testing whether their preventative controls are working, if that makes sense. Right. We're not really testing their detection or their response. Like for me, I view that as more like red team activities.}
+{\pard  \line \par}
+{Right. When you're testing the blue team. Yeah. Yeah. But }
+{\cf2 [00:29:00]}
+{ clients spend, or companies spend a lot of, lot of money putting up prevention in place, principle least privilege and things like that. Yeah. And we're just testing to see if that is working as designed. Yeah. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ And I, I love that example from a perspective of a customer of who's looking for a pentesting, whether it's an internal, external, whatever.}
+{\pard  \line \par}
+{Now probably they have an idea for, okay, so I'm thinking more from a resources perspective. I'm thinking more from how many AWS accounts for them to feel they're getting the most bang for the buck. I think the traditional approach of scan every AWS account clearly would not work. So they would've to do some work.}
+{\pard  \line \par}
+{Is there, like, what's a benchmark here from a shared responsibility perspective where. There is a shared responsibility between AWS and the customer, or, hey, CISO, whoever came out, reached out, Hey Mr. Or miss uh, pentested, do a pentest. Then there is a conversation that the pentester would've had with the customer.}
+{\pard  \line \par}
+{Like, where does, where does the shared responsibility sit in all this like space, because. , it's being thrown at , everyone. But I kind of }
+{\cf2 [00:30:00]}
+{ feel like, is there a bit of a gray area here where you're almost an extension of the customer or where is the shared responsibility? }
+{\pard  \line \par}
+{\b\cf1 Seth Art:\b0}
+{ Yeah, no, I, I love this question. Yeah. So to me it's, it, I like to explain it this way. There's the shared responsibility model, right? AWS has some responsibility and the client has some responsibility. The research that Nick did and the research that Gafnit did, like that is on.}
+{\pard  \line \par}
+{the AWS side of the shared security model. Yeah. They're finding the ways that AWS made mistakes that they didn't realize they make. Mm-hmm. . And the cool thing about that is that they tell that to AWS AWS fixes it, it's fixed for everyone. Game over. You know, like, we don't, we don't have to worry about that anymore.}
+{\pard  \line \par}
+{Yeah. Like that's the beauty of that research. Yeah. What penetration testing focuses on almost entirely is the client aspect of the shared security model. Right. There are common ways. , lots of companies misconfigure their cloud environments, either the stuff in the cloud environment or the cloud itself.}
+{\pard  \line \par}
+{Mm-hmm. A good example of this is we talked about }
+{\cf2 [00:31:00]}
+{ different accounts, right? So one company might have tens of accounts. Well, you think those accounts by default, if you didn't do anything else, are very. isolated from each other. Yeah. But there are ways that you can break that isolation.}
+{\pard  \line \par}
+{Let's say in your production account, you have a role that trusts a principle in your development account. Yeah. That means you just broke that isolation. Because if I can get to be an admin in development, , I can just assume that role in production and now have access to the production environment. Right?}
+{\pard  \line \par}
+{So that's not on the AWS side of the model . That's, you know, and that's a very common misconfiguration. Yeah. It's just an example of it. there's just one gray area. And this is the same as it always was with Microsoft.}
+{\pard  \line \par}
+{Sometimes a researcher will go to AWS and say, I think this is a problem with your side. Yeah. And AWS will say, no, we disagree. We think this is a problem with the client side. Yeah. And then you get those things that's like, you know, won't fix vulnerabilities, . And that's the kind of stuff that }
+{\cf2 [00:32:00]}
+{ penetration testers have been exploiting with Microsoft for decades and.}
+{\pard  \line \par}
+{Yeah. You know, things like in Microsoft, if one computer wants to talk to another computer, it sends in a hashed version of its password. Yeah. And, and so what happens is an attacker can just crack that hash eventually. , right. And so, but Microsoft a long time ago said, we're not gonna fix this. This is just how it is.}
+{\pard  \line \par}
+{And so that's kind of, there's gonna be opportunities like that where it's a little more blurry in the cloud. Yeah, yeah. But for the most part, it's pretty simple. If Amazon fixes it, or, you know, if it's like research like Nick is doing, you know, then it's the client AWS side. And if it's a way that you've misconfigured your stuff and that's the client side }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ I think the research is pretty interesting as well.}
+{\pard  \line \par}
+{And shared responsibility is worthwhile calling out from a AWS perspective cause there's another layer to this with the whole AWS can block you apparently as well if you're found pentesting, cuz I'm thinking about people who are listening to this conversation, get really excited Seth said that you can do pentesting and we, everyone starts pentesting, running N Maps on aws.}
+{\pard  \line \par}
+{What's the boundary there as well? Cause there's a gray area for that as well, where AWS }
+{\cf2 [00:33:00]}
+{ allows for certain services to be pentested, but not all of them. And then there is a whole, can I just simply start running, backtrack or whatever that was called, and backtrack and nmap, like what's the angle there?}
+{\pard  \line \par}
+{\b\cf1 Seth Art:\b0}
+{ Yeah. , I can answer this in a couple different ways. So, so first of all, AWS used to make penetration testers alert them. If we were doing the type of penetration testing I've been talking about all night in a client environment, they don't require that anymore. You don't have to notify AWS if you're doing penetration testing, right?}
+{\pard  \line \par}
+{Right. You're allowed to penetration test your own stuff. . And this kind of brings me to like , a comment you and your last guest talked about with like an S3 bucket, right? I'm not sure it is a kind of more gray area or maybe not allowed for you to like, nmap, not everybody's doing it, but like to nmap the end point of an S3 bucket.}
+{\pard  \line \par}
+{Mm-hmm. , like , as a professional pentester, I would never do that because that's like AWS's stuff, right? Yeah, yeah, yeah. When I look at s3, I'm not looking at like the ports that are on that endpoint. I'm looking at the way the client has misconfigured it, right? Yeah. Yeah. Are they, are they putting like plain }
+{\cf2 [00:34:00]}
+{ text, you know, Clear text secrets in their buckets and then allowing that bucket to be accessible to all of their employees? , }
+{\pard  \line \par}
+{we find that finding. All the time . Mm. You know, so, so hopefully that makes sense. I'm not pentesting on a client pentest. We're not pentesting like AWS's infrastructure, we. , right? Like builders are building AWS components. Yeah. And, and like using them and we're just misusing them, right? We're looking for ways to like, essentially use the same API, the same, you know, SDKs, but just do it in a way that wasn't intended.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah. And I think that pretty much sums it up as well because I, I definitely find. People almost get lost in that translation for , I'm doing an end map on . Oh yes. Someone just mentioned backtrack. I'm doing . So the few couple of comments came in. Nick Ramirez great talk so far. Ashish said Thank you man.}
+{\pard  \line \par}
+{And someone backtrack. I'm dating myself. I don't know. It's not called backtrack anymore. I think I. Kali, how }
+{\pard  \line \par}
+{\b\cf1 Seth Art:\b0}
+{ was }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Oh my God. , clearly. I'm definitely thank you for whoever that person was. I have definitely, }
+{\cf2 [00:35:00]}
+{ actually, you know what, we're }
+{\pard  \line \par}
+{\b\cf1 Seth Art:\b0}
+{ both dating ourselves cause I think the new player is like Arch Linux or something, but I've never even that, but yeah.}
+{\pard  \line \par}
+{So I'm dating myself now. . Oh, there, }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ yeah, there's more coming out as well. And Nick is enjoying the conversation as well. Thanks Nick for joining tuning in. So the nmap example is a pretty good one as well because what you. A lot of people take the knowledge from OSCP and everywhere , they come into this and go, oh, I can just nmap shit that I want to.}
+{\pard  \line \par}
+{And, and I'm like, okay. But to your point, you technically, so I can't do it as an endpoint for AWS S3 but if I have one AWS EC2 instance that I'm on and I've got another AWS EC2 instance, can I, nmap between them? }
+{\pard  \line \par}
+{\b\cf1 Seth Art:\b0}
+{ Yeah, you can just nmap. I mean, really you can nmap the AWS stuff too. , as far as I know, like I've never gotten an alert.}
+{\pard  \line \par}
+{We accidentally touched, you know, AWS stuff, like I think they do a lot of testing, right? They're, yeah. And yeah, but, but yes, they're, we've never since they removed that restriction where you have to notify them. Yeah. I've never run into a situation where you do doing }
+{\cf2 [00:36:00]}
+{ traditional network penetration testing, testing all the services in the EC2}
+{\pard  \line \par}
+{because think about it, like, if I have a service that's only exposed via API gateway, yeah. I am then testing. And AWS endpoint. Right. You know, but like I'm really hacking on the code behind that API gateway. . You know, so that's, that is fair game. That is totally fair game. Yeah. You should feel comfortable in that if the client's can configure in a API gateway or an E L B or Yeah.}
+{\pard  \line \par}
+{You know, a, a light spin, you know, container or instance. Yeah, yeah. Even if it has like an on aws, you know, domain name, like that's fair game. You're allowed to test that look for vulnerabilities. Oh, }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ interesting. Cause I think a great example, the API gateway is a good example because we haven't even spoken on the different categories of The application that is exist, like the whole IaaS PaaS SaaS.}
+{\pard  \line \par}
+{There's almost like so many of them as well, which one's being used, which was not being used. Just wanna quickly address some of the comments that came in as well. Thomas found it hilarious. What we joking about and a there are way too many more. I, I did not even know there more versions of this now.}
+{\pard  \line \par}
+{So }
+{\cf2 [00:37:00]}
+{ to quickly with the whole , IaaS, PaaS, SaaS thing saying, cuz when you're pentesting anyone who's probably looking at this and going, okay, we can probably take this next level. I also feel like S3 is a good example , for a PaaS service. A platform is a service where it's a service. There's potentially a server in the background somewhere that you and I would not have access to or most people would not have access to.}
+{\pard  \line \par}
+{But how do you , I guess explain it to people who are pentesting or the customer like CISO comes over to you and talks about pentesting, but you find that is primarily driven by PaaS services. Is the approach any different? Like if you're just R D S E C S? Serverless, I dunno, just throw any more managed service out there.}
+{\pard  \line \par}
+{\b\cf1 Seth Art:\b0}
+{ Yeah. I'm, I'm gonna qualify this and say that I, I am not a hundred percent sure you know where those lines are, but the way I view it is that s3, rds, those are all still infrastructure as a service to me. When I think of platform as a service, I think of something like Salesforce where you can build your own applications }
+{\cf2 [00:38:00]}
+{ on their platform.}
+{\pard  \line \par}
+{Yeah. And then I think of application as a service as something like, you know, the tool we're using to stream this podcast, right? Or you know, LinkedIn. Right. That's a application specific. And so that, that's a good question. We do not have a penetration testing methodology to test, say Salesforce. There might be somebody who does.}
+{\pard  \line \par}
+{Right? We don't test platform as a service. yet, right? Yeah. We can test, you know, the custom things that you do in that if, if you want. But, so when I say cloud penetration testing, I'm, you know, what we're talking about is the infrastructures of service. AWS you know, Google, Azure, things like that, right?}
+{\pard  \line \par}
+{And we include RDS, S3, all of that stuff. If you have your data and rds, we're gonna try to do whatever we can to get to that data. And r d s Perfect. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ So to your point that, yeah, I could be }
+{\pard  \line \par}
+{\b\cf1 Seth Art:\b0}
+{ completely wrong, so please if somebody }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ No, no, no. You the comments, I, I put them as a PaaS as well. And yeah, a hundred percent For people who are listening and feel like they wanna add some more into the whole is pass for Pentest definitely feel free to do that as well.}
+{\pard  \line \par}
+{ So to your point, }
+{\cf2 [00:39:00]}
+{ We have ECS we have serverless, we have all these, furthermore, complicated, more abstracted services.}
+{\pard  \line \par}
+{How is the approach to them different to say, approaching an EC2 instance with a role? }
+{\pard  \line \par}
+{\b\cf1 Seth Art:\b0}
+{ Yeah. So. in a way as a cloud penetration tester, and with tools like Cloud Fox, it's easier to test something like on ECS or something that's on a managed AWS service because you get the endpoint sometimes, you know, you even get the port that it's listening on, right?}
+{\pard  \line \par}
+{Yeah. When you're testing EC2, you have to do that NMAP because there's no API that's gonna tell you this. EC2 is listening on, on these four services. You have to nmap it to figure it out where. , you know, if I have API access, like it'll tell me exactly what services are running on EC S, you know?}
+{\pard  \line \par}
+{Yeah. So, but otherwise, other than that enumeration part, it's really the same. At that point, you're just testing all of these internal or maybe external services and }
+{\cf2 [00:40:00]}
+{ applications and just trying to find if any of them are misconfigured. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Interesting. Cause , you actually maybe you did answer it before with the API gateway example that you called out earlier where it's kind of the same thing as well.}
+{\pard  \line \par}
+{It's an AWS service. I, as a customer of AWS, have basically just configured it for my own purpose. You just try to think it around it for. Purposes of, Hey, can I misuse this and is it valuable or is there something behind that? Can I, I can probably take out, so Okay. That's answer that question. I think maybe the, the whole conversation that we've been having so far with the cloud pentesting, talking about ECS containers and I guess.}
+{\pard  \line \par}
+{Yeah, I haven't said kubernetes yet, but I'm gonna throw that in there as well. Yeah. It almost feels like it's a lot more complex than what it, like a traditional pentest used to be. It's I feel like when I would have to pentest a Java, I could be a really good Java developer and try and break it, but in the contest of AWS or in any cloud for that matter, if I kind of extend it, The specialization required.}
+{\pard  \line \par}
+{These days is a lot more complex. Like I kind of need to know containers, i need to know }
+{\cf2 [00:41:00]}
+{ kubernetes, I need to know AWS as well. And then to, you throw SSM in there, so, or internal specific services, which can be exploited as well. Like what are some of the skillset set that you feel people should be specializing in?}
+{\pard  \line \par}
+{Like, I think I'm specifically. thinking for people who are probably listening in and are experienced pentesters in the web app or networking space as well. Like what's that transition like for them? What's the uphill battle that they have to walk, I guess? }
+{\pard  \line \par}
+{\b\cf1 Seth Art:\b0}
+{ Yeah. That, that you, you, you hit it.}
+{\pard  \line \par}
+{I mean, so active directory pentesting is definitely not, you know, is it can be very complex in its own right. But. The thing with the cloud, you're right. That's kind of that on that blog post you mentioned. Right. That's the last progression. You realize that you're never gonna know everything.}
+{\pard  \line \par}
+{Mm-hmm. Every pentest is gonna be different because it depends on what AWS services that client is using. Yeah. Right? Yeah. And so the client might be using you know, just a service that you've never heard before. And so part of that is kind of just ramping up on that service. So every network pentester, like an internal pentester already had to know about web }
+{\cf2 [00:42:00]}
+{ application pentesting, right?}
+{\pard  \line \par}
+{Because it's a really important component. It's probably your most likely weigh in on an internal pentest is to hack an application. So now you take those two internal and traditional network pentesting. and web app testing. And then for cloud, you have to have cloud competency, right? You have to know that you can't just do the same thing that you were doing in the cloud.}
+{\pard  \line \par}
+{Yeah. And so, yeah, it's more complicated than that. You have three separate areas, so for people starting out, right, they might be coming from one of two. people that want to be a a cloud penetration tester. What I've seen is that there are traditional pentesters that wanna learn more about the cloud, and then what I do is I have them like for me, I did a lot of like a cloud guru, a cloud academy, like build stuff in my own lab environments Right.}
+{\pard  \line \par}
+{That I could kind of hack on. Yeah. And. and I built this tool called I Am Vulnerable. So it's an intentionally vulnerable like Terraform code that you can deploy to your environment and then you can kind of test like 30 something. IAM privileged }
+{\cf2 [00:43:00]}
+{ escalation paths in that like there's 30 users and 30 roles, and you can start from, you know, either user.}
+{\pard  \line \par}
+{And do these 30 common attacks. And so that's what I would recommend for a traditional pentester. Now, for a cloud security architect or a cloud person who wants to get into offensive security, I would talk about like what you mentioned, like offensive security, the O S C P hack the box, try hack me.}
+{\pard  \line \par}
+{You know, you're trying to get that you already have. Amazing cloud skills, but now you're trying to learn about the offensive security mindset that like everybody has to learn. Like I said, like you can't just drill down on one thing for 12 hours. You have to kind of like prioritize your time and that takes practice.}
+{\pard  \line \par}
+{Yeah. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Or the comment that came in. Or you could just use ChatGPT for it. . Yeah, that would actually, funny enough as someone was sharing the new offensive security course for O S C P, it actually specifically calls out, you can't use ChatGPT for the exam. }
+{\cf2 [00:44:00]}
+{ So even they are, oh, I saw that.}
+{\pard  \line \par}
+{Trying to get worried about it. I, I've got a comment from Carlos as well. Fantastic tool. He shared a link for IAM Vulnerable. Thanks for that, Carlos. So definitely your tool's worth looking into for at least I guess getting a, an understanding of what are other open source tools you can use.}
+{\pard  \line \par}
+{So we spoke about the skillset as well. Then we kind of are expanding. I feel like the, the role of a pentester is becoming a lot more complicated. Now you need to know network. know web app, know kubernetes as well, for lack of a better word. I think Nick who came in a couple of weeks ago, he is also already up upping his game on kubernetes as well.}
+{\pard  \line \par}
+{Is it easy to transition from web apps? I mean, cuz you came from a traditional pentest kind space as well and transition onto cloud. What, how would you rate it, I guess, was it even like, clearly it's possible cuz you're here. How, how hard was it for yourself and was there any specific thing that you did to, you know, be successful?}
+{\pard  \line \par}
+{\b\cf1 Seth Art:\b0}
+{ Yeah. Yeah. It would, it's, it's harder for sure to go from web to cloud pentesting directly. Because some of it, so much of it is similar in my view, right? Like I said, there's different versions of cloud pentesting, but when I'm talking about }
+{\cf2 [00:45:00]}
+{ assumed breach internal cloud pentesting, yeah, you have to have that experience.}
+{\pard  \line \par}
+{The OSCP style, offensive security, you know mindset. So,, it is absolutely possible. You just have to get familiar with the cloud and kind of map the things that some things are gonna feel really familiar, like your port scanning your application enumeration . Yeah. But, you know, your post exploitation is gonna be very cloud focused and it's taken me years to, you know, get comfortable with, in fact, my journey was the opposite of Nick, so I learned.}
+{\pard  \line \par}
+{Kubernetes first and spent a year doing Kubernetes pentesting. And then I got more exposed to kind of, you know, Kubernetes is more and more in the cloud, and so I got more cloud and AWS experience. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Ah, right. Did it make it any easier to come from Kubernetes to cloud? Because I thought Kubernetes itself was like a a mammoth of a thing }
+{\pard  \line \par}
+{\b\cf1 Seth Art:\b0}
+{ yeah. Oh, no, , it made it easier. I think it's like learning a language. I think whichever one you do first, the second one's gonna be easier. Right. Yeah, because it's still, you're starting from, like with Kubernetes, everything I said tonight applies to Kubernetes. You wanna start with either }
+{\cf2 [00:46:00]}
+{ a user with access to the Kubernetes cluster.}
+{\pard  \line \par}
+{Yeah. Or you wanna start with simulating a compromised pod scenario and you're still just answering that question. , what can happen next, right? Like what's the worst that can happen? And to, to be able to do that. In Kubernetes, I did a lot of podcasts and YouTube videos on understanding the different Kubernetes components, right?}
+{\pard  \line \par}
+{So for cloud, it's all the different AWS services. For Kubernetes, it was, you know, what is their RBAC model, right? What's a cluster role? What's a cluster role binding? What is a Kubernetes service? You know, things like that. Yeah. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah. Did you get some open source tools for communities as well?}
+{\pard  \line \par}
+{Yeah, }
+{\pard  \line \par}
+{\b\cf1 Seth Art:\b0}
+{ I did write a tool at Bishop Fox called Bad Pods, and that's just one specific part of Kubernetes pentesting. So in the, if you have the ability to create pods, and you talked about this with your, you were asking about on your last podcast asking about like docker privilege escalation. Yeah, yeah.}
+{\pard  \line \par}
+{Right. So Kubernetes privilege escalation is very similar cuz they're just containers and so . , there's eight ways, eight combinations that I highlighted that }
+{\cf2 [00:47:00]}
+{ you could give a pod too many permissions. And so if you have the ability to create these pods, you might be able to create a pod that the only purpose of that pod is to give you, like, like you said, access to the volume of the host.}
+{\pard  \line \par}
+{Yeah. Right. Or like route access on the host. And so that attack only applies. . If you're simulating somebody who has access to create pods in a cluster mm-hmm. , and you think that you've locked that down, yes. You might be able to use bad pods to basically get full access to }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ the cluster. That is really Cause I was gonna throw in the whole container and Kubernete space as well. That in itself is a learning. I think it is some kinda get comfortable with containers what the whole concept is. Cause the traditional networking and the traditional way applications develop is not the same way you would find, I mean, maybe it, if it literally just lifted and shifted into cloud, maybe then it's the same.}
+{\pard  \line \par}
+{But people who are doing the whole spa and as well as microservices, very different. You almost have to be good in authentication as well. Cause there's a whole gamut of what kind of AU authentication and what kind of like, it, just like the list goes on. }
+{\pard  \line \par}
+{\cf2 [00:48:00]}
+{ }
+{\pard  \line \par}
+{\b\cf1 Seth Art:\b0}
+{ Yeah. You know, you, it's, it's great that you brought up like, OAuth, and O I D C, right?}
+{\pard  \line \par}
+{Because here's one thing I haven't talked about. If you're worried about a user, maybe you're an employee of yours and, and can they, what? Can they do malicious things in the cloud? Yeah. You really can't just look at their cloud access. Like what if they have access to a C I C D tool that can deploy into the cloud?}
+{\pard  \line \par}
+{Or what if they have access to GitHub and then another team member? Accidentally saved their credential, their AWS credentials in a GitHub repo, like a private company, GitHub repo. That means that everybody in the company that has access to that repo has access to the cloud. , right? Yeah. So it's not just about the way you've , misconfigured the cloud.}
+{\pard  \line \par}
+{You have to think about, are there unintended paths that lead into my cloud? So , it's complicated. There's a lot, but it's, it's really fun. This is for, I bet all the listeners of your podcast, early adopters of the cloud are the people who want to just continuously learn new stuff, right?}
+{\pard  \line \par}
+{That's right. So we're here cause that's what we like. Yeah, }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ I think any a good note to kind of like put that on I guess put that question }
+{\cf2 [00:49:00]}
+{ rest as well. What are some of the resources you recommend, man, for kind of walking this path? Is there a pentesting resource thing that people can dive into for learning more about the whole space?}
+{\pard  \line \par}
+{\b\cf1 Seth Art:\b0}
+{ Yeah, I mean there's, there's, there's a lot of resources. So you want to focus on learning the cloud, so you know, like your last guest, AWS Goat, right? Any terraform examples? I agree with your last guest completely. Like there's nothing that beats deploying an environment or trying to build an environment.}
+{\pard  \line \par}
+{You learn so much. , but when you're trying to learn the offensive stuff, there's some really great collections out there, like Nick has hacking in the cloud and there's other like, really great, you know, resources there. But yeah, I think you just want to take that offensive mindset and just, keep learning}
+{\pard  \line \par}
+{Yeah, I think I, }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ the journey never ends, man. I think but this is, this is pretty awesome, man, that, that's kind of like the last technical question that I had. I've got three fun questions for you, man. I think for people get to know you a bit more as. Sure wondering, what do you spend most time on when you're not working on pentesting Cloud?}
+{\pard  \line \par}
+{\b\cf1 Seth Art:\b0}
+{ Oh, man. So I have three kids, so a lot of my time is spent being }
+{\cf2 [00:50:00]}
+{ a family man after work. But my oldest or is, is 11 and my second is nine. So they're just getting into that really fun stage that like, Arno Projects and Raspberry Pie projects are starting to interest them, so, all right. So that's been really fun.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Oh, wow. That's, that's pretty cool, man. I think, and getting exposed to all of that at such a young age is so even more cooler as well. That's pretty awesome, man. Yeah, that's a good part. Good, good way to spend your time. Next question. What is something that you're proud of but is not on your social media?}
+{\pard  \line \par}
+{\b\cf1 Seth Art:\b0}
+{ All right. Well, this one is also related to my kids. This year I learned how to solve Rubik's cube. , my kids I never knew, I never even, you know, }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ thought I could wait. How, how quickly can you solve it? Because, you know, there's like a record for it }
+{\pard  \line \par}
+{as }
+{\pard  \line \par}
+{\b\cf1 Seth Art:\b0}
+{ well. Yeah, right. So that's, they're into the speed cubing.}
+{\pard  \line \par}
+{So I can do it at about a minute and 40 seconds. And which, you know, I started at like five minutes. But my kids, my, my 11 year old's down to 17 seconds already, like he's really into it. And my nine year, year old, 35 seconds. What's the world record? Three . Holy shit. Three seconds. Yes. Yeah. If you haven't seen it, there's a documentary on Netflix called like Speed Cubers or Cubers or something.}
+{\pard  \line \par}
+{It's }
+{\cf2 [00:51:00]}
+{ really cool. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ I, I mean, I, well, I can't even imagine how the hand is moving at three second speed to do the, because it's not a complex movement. Yeah.}
+{\pard  \line \par}
+{\b\cf1 Seth Art:\b0}
+{ So, so I learned the beginner, you know, algorithm, right? It's this like eight step thing that it's always gonna get you there, but there's gonna be a time limit.}
+{\pard  \line \par}
+{Okay? What my kids are starting to learn, Additional algorithms that save them instead of like, I'm always gonna do six moves at this step. Yeah. But they, if you learn like five different potential algorithms, yeah. Each one of 'em is only one move or two moves, and so they're kind of like, It's really cool.}
+{\pard  \line \par}
+{It's like what we do, right? They're just kind of learning more knowledge that helps them. Yeah. In a quick, I, }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ I love, well, we can actually bring that back to cybersecurity as well, technically. Like the whole, oh, that's algorithm approach as well. That's pretty awesome. Well, I need to find some more resources on this as well.}
+{\pard  \line \par}
+{I'm gonna definitely try and close that in five or less than five if I can. Last, what's your favorite cuisine or restaurant that you can share with us? Oh }
+{\pard  \line \par}
+{\b\cf1 Seth Art:\b0}
+{ man. I. All Asian cuisine. I love to cook. Chinese food was kind of the first thing I learned how to }
+{\cf2 [00:52:00]}
+{ cook proficiently at home, you know?}
+{\pard  \line \par}
+{Yeah. But I love, like Japanese food. I love, you know, Indian food, Vietnamese, Thai, like, I just, those flavors. I just, I could do that like every night. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Awesome man. I think I, I def, I, I think I've picked up cooking because of Covid. I was not, definitely not a cooking person before, but now since I feel like after Covid, I've become a bit of a cook.}
+{\pard  \line \par}
+{So I, I, I would totally relate to that. I think I would, and almost making something new as well. Again, experimental with life. That's pretty awesome. Yeah.}
+{\pard  \line \par}
+{\b\cf1 Seth Art:\b0}
+{ Yeah, for sure. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ That's pretty much what the interview was gonna be about. Where can people find you if they wanna reach out and like talk more about.}
+{\pard  \line \par}
+{internal pentesting and find resources and stuff. I mean, I put the resources for the open source report, the I am vulnerable, bad pods cloud Fox onto the show notes. So there's also, people can get there, but if people wanna reach out to you, where can they find you? Yeah, so }
+{\pard  \line \par}
+{I }
+{\pard  \line \par}
+{\b\cf1 Seth Art:\b0}
+{ go by sethsec on, I was on Twitter, I guess I still kind of am.}
+{\pard  \line \par}
+{But I move over actively to Mastodon InfoSec Exchange, Mastodon, and I'm always on LinkedIn, so, and I like talking about this stuff, so, so feel free to reach out and, and ask any questions . Awesome. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:53:00]}
+{ Well thank you so much for your time. I'm definitely looking forward to having you again, and thank you everyone who tuned in and contributed as well and asked interesting questions, shared resources as well.}
+{\pard  \line \par}
+{Thank you everyone. , this was the last episode for Breaking AWS Cloud, so we'll probably see you for next month when you're trying to build AWS Cloud. Now, we've been breaking quite a bit. Let's try to build it. All right, thanks everyone. I'll see you next episode.}
+{\pard  \line \par}
+{Thank you.}
+}

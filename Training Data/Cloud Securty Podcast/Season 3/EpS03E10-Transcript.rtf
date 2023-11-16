@@ -1,0 +1,474 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red250\green138\blue59;
+\red128\green128\blue128;
+\red216\green34\blue146;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ First of all, thank you so much for taking awake late and }
+{\pard  \line \par}
+{\b\cf3 Jonathan Brodie:\b0}
+{ I appreciate you've got your morning coffee and I've got my, my evening coffee. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So maybe it will , start with this. So how did you get into cloud Google cloud security? }
+{\pard  \line \par}
+{\b\cf3 Jonathan Brodie:\b0}
+{ It's a good question. My career has kind of spans of over. 10 years in computing in general. Google cloud is my latest iteration of my career.}
+{\pard  \line \par}
+{I originally started in a kind of traditional on-premise environment. Not like are a few of my other colleagues who started, who have come from more platform development environment and moved into cloud since. Right. So I came in from sort of like a traditional on-premise background where most organizations had physical on-premise, , they're either on their own data center or rented their own data center doing a mixture of kind of windows system administration.}
+{\pard  \line \par}
+{Yep. But I always had a a natural curiosity for security, and I think that a lot of people move into security because they have that kind of natural kind of That's a feel for security. If that's the way I could probably put it. What I mean? , you, when you all, always, you're curious You're always kind of thinking, oops, something's not right there.}
+{\pard  \line \par}
+{I'd like to investigate it }
+{\cf2 [00:01:00]}
+{ a bit more. So I always had this kind of like real natural interest in security. And then as my career progressed, I kind of moved into more, a focused role insecurity. So. Kind of, again, physical security, but firewalls. So like Cisco firewalls web application firewalls looking after sort of policies across the organization in terms of like password policies, , very security specific started then getting involved in a bit of compliance, worked for a financial firm.}
+{\pard  \line \par}
+{So I got really involved in PCI there. So again, PCI on like, On-premise environment and moved to a company that started doing a bit in AWS. And that's kind of where my interest in cloud or public cloud started. Got really enthusiastic, really excited about cloud security began just focusing purely on AWS.}
+{\pard  \line \par}
+{Then I moved to a company that had a large premise in Google. Running a data lake, which, , for many of our listeners, listeners might be the case for their company. , it's very, very heavy from the kind of data lake perspective is Google, , we're big query, , it's , very powerful BI and, and , that's kind of where Google started for me,}
+{\cf2 [00:02:00]}
+{ was it that company learning about Google cloud, seeing how I could improve it And yeah, I would say that out of all the kind of experience I have, it's probably my fault, my favorite area.}
+{\pard  \line \par}
+{Really. I think it's a really good cloud if it's, if it's implemented. Right? }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. And I'm glad we have you here as well. Cause I think last week we spoke about Google cloud fundamentals and we cannot serve started on building blocks on how people can go into, I guess, a bit more getting their feet wet for lack of a better word in Google cloud security.}
+{\pard  \line \par}
+{And I think , it's really interesting to kind of hear. The differences. Some people may experience coming from a different cloud provider or different kind of explain, like for yourself, you've been from an on-premise world and that you've done a bit of AWS as well. And now kind of going into the Google cloud space for some time.}
+{\pard  \line \par}
+{Yeah. So it's almost like a rarity of intense, I feel where you kind of hear these skills and like, oh my God, this person is working at AWS and GCP as well. Or sometimes you're just starting from one landing on the other. So. For me, I feel like a good place to start, could be for people who may not have worked with Google cloud enough, but have on-premise or }
+{\cf2 [00:03:00]}
+{ AWS experience. What are some of the building blocks for, I guess, a Google cloud security kind of a thing that you want to do for an environment? }
+{\pard  \line \par}
+{\b\cf3 Jonathan Brodie:\b0}
+{ So I think I probably break into two parts.}
+{\pard  \line \par}
+{So if you've got , your on premise folks look for kind of transferable skills. But they've got networking however, obstructive technology , is always going to be fundamentally still TCP IP. It's still going to be the same, regardless of whether it's between. To physically collected devices with a cable running between them or it's some sort of, , a Kubernetes cluster, it networking is still going to be fundamentally the same thing.}
+{\pard  \line \par}
+{So I think I think for like the on-premise folks, just looking at kind of transferable skills, I would say let's see actually how you can relate your skills to kind of cloud consumption. So things like databases, for example, if you come from a DBA background, , SQL query language is still gonna be query language in the cloud.}
+{\pard  \line \par}
+{However, the technology is , Linux, for example, , you might come from a kind of a Linux sys admin background. But actually you're running a container image, that's Alpine }
+{\cf2 [00:04:00]}
+{ the next, for example, it's still going to be Linux. So, , these are quite nice things.}
+{\pard  \line \par}
+{ If you're coming from an on premise background, look for ways in which cloud has been consumed, that hasn't relatable skills for the kind of either bless fork there will be very, there'll be a huge scenario. I wouldn't say necessarily in terms of how Google cloud is structured. I think that that is the main difference.}
+{\pard  \line \par}
+{I think if that's, if you get that right, you're winning. So I think that actually, how Google itself is structured is, is really important. But in terms of the services, the laws be relatable services with inside of GCP and AWS, , if it's , Identity access management, you identity access management need to be west.}
+{\pard  \line \par}
+{If you are running sort of a cubit at Kubernetes engine, it's going to be GQ versus ETS. So that they're very similar. So I think that, yeah, for on-premise guys look at your, kind of look at some of those core building blocks, online networking. The next for cloud people try and look at, and there's some really handy maps out there as well, where the map services and terminologies for you.}
+{\pard  \line \par}
+{They're really good to look at as well. I think that in }
+{\cf2 [00:05:00]}
+{ terms of that, the technology space, I think it's similar. It's just how it's laid out and how it's organized is where it differs. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah, and I think we'll definitely get into a bit more deeper into each one of these. I think there's definitely some juice in there for people who may be listening in as well.}
+{\pard  \line \par}
+{They might consider, I guess, already do certain things already. How much of it is I just can reuse and maybe not reuse have to rethink on how it is done, but maybe taking a step back on the whole technical skillset perspective. Right. A lot of people may be kind of wondering, I don't even know if I have the right skillset for it.}
+{\pard  \line \par}
+{The whole cloud world has kind of changed the frontier for what used to be. I guess COVID has big, maybe made people thinking what's normal. So even when it cloud as well, sometimes what is normal and Google cloud as well. So from a technical skill set perspective, what do people need for that in a group learning environment?}
+{\pard  \line \par}
+{So. }
+{\pard  \line \par}
+{\b\cf3 Jonathan Brodie:\b0}
+{ That's a good question. I, well, for me, myself personally, I don't actually have any formal qualifications , in GCP or div lesser. I've never done certifications in that route. There's many people who have, }
+{\cf2 [00:06:00]}
+{ and I think that it definitely benefits you from. , like a CV perspective, , if you're trying to actually go try and , get an actual job, if again, your moving from an on-premise background and you're trying to get into cloud, then nothing like a certification is very good.}
+{\pard  \line \par}
+{, it's going to grab the attention of the recruiter. Myself, I don't personally. Have any of those official certifications? The , reason why I've never really pursued one is that kind of trying to always kind of stay, I try and stay ahead of the game as, as I can. And the information space in cloud is so vital.}
+{\pard  \line \par}
+{It's something that kind of, it's looking at, , the right places for the right resources at the right time can give your business like the edge in terms of how you actually do cloud security. And I think just because of that fast paced environment, I don't think the certifications , can keep up.}
+{\pard  \line \par}
+{Let's just a personal opinion. What I would definitely recommend anybody to do, who's wanting to try and learn the skills of GC. Is that you can spin up a GCP project. Very simply you can. There's no barrier to entry apart from just having a gmail.com email address. , you can go on, you can actually, there is a limit and to start having to }
+{\cf2 [00:07:00]}
+{ pay very similar to AWS.}
+{\pard  \line \par}
+{That for me is the key is just get yourself a project and start actually trying out the services, get your hands }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ dirty, I guess. Indeed. }
+{\pard  \line \par}
+{\b\cf3 Jonathan Brodie:\b0}
+{ Absolutely. Yeah. Yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ That's a good advice as well, and probably works across all the technical skills that we want to learn in life as well. So that's pretty good advice, man.}
+{\pard  \line \par}
+{Solid one. So in terms of, I guess now kind of thinking back to what we spoke already, we started in terms of the I guess the building blocks now Obviously, there are certain you can, you can go into the whole, I guess, hard to protect an application, how to do this, how to do that. But before that, I kind of wanted to understand from a compute infrastructure perspective or a GCP in mine from a security perspective, what are some of the things that people should consider like any popular services in GCP ?}
+{\pard  \line \par}
+{Cause I feel like AWS kinda keeps talking about their popular sites. Like, oh, use cloud trail use, use a guard you used, as you said, what are some of the services that come to mind for GCP that you think people should be aware of and in the specifically any special reason for why those services as well?}
+{\pard  \line \par}
+{\b\cf3 Jonathan Brodie:\b0}
+{ So I think in terms of. As you said }
+{\cf2 [00:08:00]}
+{ for people who come from an it background we've got things like guard duty security, security. Yeah, exactly. Yeah. So GCP has a as a native security service called security command. So. But it's definitely something that you should have enabled within your organization that comes in two parts.}
+{\pard  \line \par}
+{There is a free version of it where you still get a good bit of information out of it. But they also do a premium version as well, which is going to give you enhanced detection. It's going to give you something called. ATD in front event, threat detection, which is very similar to what we have in guard duty.}
+{\pard  \line \par}
+{And then you also get something called container threat detection as well, which is kind of doing something which again, it's also is looking for then containerized workloads. That itself has probably a kind of, what I would say is is similar. The best space again, how it works , and how it operates within AWS is different in terms of the implementation.}
+{\pard  \line \par}
+{But yeah, native services like security command center are are very important. Cloud audit logs as well, which are kind of like Cloud trail. They themselves need to be. But inside of what's classes or }
+{\cf2 [00:09:00]}
+{ GCP project which is in some ways kind of similar to an AWS account, it's not really, but it's kind of the closest analogy that we have to kind of explain to people what is GCP.}
+{\pard  \line \par}
+{Yeah. But yeah, that's really good to have enabled. And of course having all your logging enabled as well, it could be centrally aggregated when, when you need it. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right. And to your point then with the. The way you mentioned producing. It's interesting because I imagine when people scale AWS accounts in their mind, they're thinking I'm scaling.}
+{\pard  \line \par}
+{I've got one, one, I guess if I'm people can see me from the audio, which in the podcast, I guess is a top level master account and kind of spreads into this little church, our accounts and stuff as well. You mentioned projects and projects to kind of way for accounts on Google. So what does, I guess, where does one, a startup would start in a Cloud kind of environment?}
+{\pard  \line \par}
+{What are some of the things that they would start with in terms of what you mentioned project and however it spreads out, and how does that scale into like a large enterprise that once you use GCP, what are some of the components over there? }
+{\pard  \line \par}
+{\b\cf3 Jonathan Brodie:\b0}
+{ That's actually a really good question. And I think actually when you're at.}
+{\pard  \line \par}
+{If you have the luxury of starting out in }
+{\cf2 [00:10:00]}
+{ GCP to try and get it right. First is really important. So before, if we go for the, the kind of architecture , of GCP and we'll try and relate it to AWS and then try and talk about the differences as well. So.}
+{\pard  \line \par}
+{GCP architecture kind of has three fundamental components to it. You have what is called at the organization. So when we talk about the organization, we kind of talk about the organization in general, as a new organization that consumes it. But from the technical term organization is talking about the organization layer, which is effectively, eh In fact, is it loud?}
+{\pard  \line \par}
+{There's probably a good way to describe it. It's a layer , of how GCP operates that covers everything that is that is work there's, there's been consumed inside of GCP. So if we kind of break that down into a further level, we've got something called a. Now a folded itself is is a way in which you group GCP projects.}
+{\pard  \line \par}
+{Okay. And you kind of group them inside. You can do this in any kind of logical way you want, you can group it in terms of the actual, like }
+{\cf2 [00:11:00]}
+{ might be the, product team's name, for example. It could be anything like that. So you just do it , into a word that's been significant to you.}
+{\pard  \line \par}
+{Th the difference between a GCP project and account people often, , I'm guilty of trying to use that word to explain like an account is a project. You're trying to actually use that to try and tell people what it is, but it's not actually the correct thing. A project itself is effectively just, I think, I think Google class it's a construct to contain a cloud resource, right? Google see a project rather than like, for example, if we set up an AWS account, we'll set up we'll probably have a number of things running that account. Google, see project. To ruin an individual resource inside of a project so that the nature of your architecture should be, do you have lots of projects, but the way that you centralize those in a way is by folders.}
+{\pard  \line \par}
+{Oh, so it's then by creating a folder. So you would, for example, have the prod folder. Yeah. You can have that for example. And then what you do is you would have }
+{\cf2 [00:12:00]}
+{ everything inside of that. So you'd have a team. , you'd have a naming convention for your folders. Of course. So you'd have something that identifies , the the actual team, whatever, but then it would actually be the production.}
+{\pard  \line \par}
+{And then inside of that, you would have, you'd have all the actual projects inside of that. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right. So do you find them inside a project? So to your point, if I'm starting, I'm turning company today and I've kind of gone, okay. I've got Johnny and I are starting a company and Johnny is a great deck guy. I can do this.}
+{\pard  \line \par}
+{He talk to corporate taco bed. So let's just say we make a folder structure called prod. One of the call it the call it dev underneath that we'll have a couple of projects. Now the project over there could either be. I guess one project is just for networking and another project is for identity and other project is for, I don't know, like I'm building a super amazing podcasting app.}
+{\pard  \line \par}
+{So is that how it would be certified? That's correct. }
+{\pard  \line \par}
+{\b\cf3 Jonathan Brodie:\b0}
+{ Yeah, that's correct. That's such a different way of thinking it is. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh, right. Okay. And, and kind of, so maybe a word about identity then how does identity fit into like, because how identity in an AWS context, like I have an IAM }
+{\cf2 [00:13:00]}
+{ user, I have my SAML, so I am zoom.}
+{\pard  \line \par}
+{Everything in Google cloud will be, Hey, sandwich Gmail, but what else happens over }
+{\pard  \line \par}
+{\b\cf3 Jonathan Brodie:\b0}
+{ there? That's actually, again, a really good point of actually putting it in because , you do still actually have you still actually do have. In a project level, , but the idea behind folders is that my way of thinking of Google is that Google is trying to go from a decentralized approach.}
+{\pard  \line \par}
+{So if we touch upon kind of, if we can quickly switch back to AWS, we kind of, , we understand kind of account. And in an organized and a native organization, we have an account where we will have an account that will sit at the top and then we'll kind of break it down and down and further into the fence with with Google.}
+{\pard  \line \par}
+{What we are looking to do is in a sense, still have a centralized approach, but decentralized at the same time. So if we go back to the folder project, exactly. The folder itself, because of all those little projects we've got into it, we actually start looking at the folder as an actual centralized way to do centralized security.}
+{\pard  \line \par}
+{So to what you said there when we actually start actually going above }
+{\cf2 [00:14:00]}
+{ individual projects into folders, we then start doing the centralized management there, which helps us when it comes to networking as well. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So you set up net networking with a project, but you still have individual identity.}
+{\pard  \line \par}
+{In each of the project }
+{\pard  \line \par}
+{\b\cf3 Jonathan Brodie:\b0}
+{ , you do, they're still there still exist, but when you actually set up a folder, the idea behind the folder is the folder that gives you a a centralized security plan to work with them. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right. Okay. Right. Cool. Actually, that's a good segway into the question that just came in from internal.}
+{\pard  \line \par}
+{I think it was dental life. Our tech support engineer does so forth matter in cloud sec, I'm assuming, or it a light over there. You mean so forth. Like then the endpoint protection. Or Scott's office has antivirus and informed production. So, I mean any talks on this journey, like I think product like so forth or any other antivirus or endpoint prediction software, would that be.}
+{\pard  \line \par}
+{At relevant in a cloud world, our world as well. }
+{\pard  \line \par}
+{\b\cf3 Jonathan Brodie:\b0}
+{ Well I suppose yes, if if it didn't like it, they'd be just, if there could be a bit more specific on where they think that so FOSS could manner, that will be really good. Just so when I'm answering, I'm assume that, that }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ question. So it was }
+{\cf2 [00:15:00]}
+{ firewall and point Diego.}
+{\pard  \line \par}
+{So for firewall, so forth endpoint protection, I'm assuming that's where it is. }
+{\pard  \line \par}
+{\b\cf3 Jonathan Brodie:\b0}
+{ Yeah. So in, in terms of, if you mean. On like on }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ for example, }
+{\pard  \line \par}
+{\b\cf3 Jonathan Brodie:\b0}
+{ yeah, in a compute structure. I would say probably it depends on what you're actually running. If you are running a container image, for example the footprint on that is going to be extremely light.}
+{\pard  \line \par}
+{So I would say, I would say. It probably depends on what you actually are running within static compute workload. If you're running like sort of a containerized workload, then it's not going to matter from that perspective. If you're running a VM, that's got a windows operating system on it, then yes.}
+{\pard  \line \par}
+{That's going to be beneficial. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. Awesome. . I might quickly add something in there as well. I think the It was very calling out some of those products. I definitely feel are relevant. And I also feel with endpoint protection, firewall is a bit questionable sometimes because you already have your cloud provider with their firewall.}
+{\pard  \line \par}
+{So a lot of people look at having another firewall in your current environment as a. And the pattern and not because it's a }
+{\cf2 [00:16:00]}
+{ bad thing, just because you already have an integrated firewall service from Amazon or Google cloud, why would you add another firewall? Especially because there's a specific reason for it as well because our traditional firewall relies more on IP addresses, whereas I'm sure in Google and all that, let Johnny can from the Google car cloud.}
+{\pard  \line \par}
+{In AWS and Azure, you kind of find that it's not the IP address is the identity or, Hey, who's running the stuff. The server is important. Is that the same including flag? }
+{\pard  \line \par}
+{\b\cf3 Jonathan Brodie:\b0}
+{ So I would still say that, , if we have got, if we've got a compute resource running that is That is actually again, most of the things that we actually expose is, is going to be via API.}
+{\pard  \line \par}
+{So necessarily I would say probably sort of Lear three, doesn't probably matter as much in, in that instance, even though I'm not a, I'm not an expert on API security by any stretch of imagination, but I would still say that, we still want to protect from. Any kind of services, maybe be a web server, for example, that we are, that we're running in the cloud.}
+{\pard  \line \par}
+{We still want to prevent that }
+{\cf2 [00:17:00]}
+{ from DDoS, for example. So we still need, so we still put, we have native services inside of inside a Google cloud to protect us against. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh, yeah, actually that's a good point as well. Cause another example of using firewall it's usually have, have DDoS protection, but most cloud providers have their own dedicated, I guess, content delivery network and attached.}
+{\pard  \line \par}
+{You can have DDoS protection to it as well. But yeah, it's, it's definitely I guess, depending on who you talk to, at least a firewall component may not be that. But from an endpoint perspective, I definitely feel this to close that loop as well. When do you have compute to Johnny's point earlier container images?}
+{\pard  \line \par}
+{Maybe not as much, but if you have a virtual machine where I guess it could be an app that's 20 years old, or you have compliance requirements, which requires you to have like IPS ideas in there. Maybe those kinds of scenarios, when you see people have to have something like endpoint protection are now, it could be so full.}
+{\pard  \line \par}
+{It could be anything else. That's probably mostly the scenario that I normally see people go down the path of when they think of endpoint. And unfortunately, or fortunately, even though it's an Andy }
+{\cf2 [00:18:00]}
+{ pan to have an agent on a virtual machine, cause you would want to go away from an agent.}
+{\pard  \line \par}
+{So you're as a, to Johnny's Parnelli decentralized and don't have to rely on one side. Unfortunately the S the security services in that end and production space, haven't really evolved at that point. So, yes, unfortunately we'll need that one day out, at least for now, hopefully to answer your question, Donald is done the light, let us know sort of, I don't even show the he or she, but I hope you're going to be answered.}
+{\pard  \line \par}
+{And if you didn't prefer drop in a follow-up question as well. Thank you. All right. That's a, that was a good sgway as well because we kind of spoke about the folder folders and how people talk about different folders cards, inquire folders. And I can map that to AWS, to some parts Azure as well.}
+{\pard  \line \par}
+{I think we have a few Azure exports here, so I'm sure they can give their perspective. Now we've kind of have set up the organization of grown is massive podcast platform. I've got a project which is for my production now in terms of. Computer-related security because it just made me think of, so what are the things people do from a compute perspective?}
+{\pard  \line \par}
+{Like, I think what are some of the options and, or some of the security things we can do. Yeah. }
+{\pard  \line \par}
+{\b\cf3 Jonathan Brodie:\b0}
+{ But again, it's a good }
+{\cf2 [00:19:00]}
+{ question. So so I think there's actually probably a good, a good was it having class, a class as a framework across, it may be like, kind of a research piece. So Google did a did a piece called beyond prod which I don't know.}
+{\pard  \line \par}
+{It's not the same as beyond core. It's different. It's different. Yeah. I'm trying to think now. Well, which one came first? I can't remember. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I think beyond corp came first because I think I heard them talk about that. Like a couple of years ago, where beyond prod was like last October and the Google X 21 or something because they were trying to do the whole zero trust.}
+{\pard  \line \par}
+{The only reason I know this is, and it's a spoiler because next week I've got next week mid-week I've got the Google Cloud , vice-president of the Google Cloid security coming in and he made the announcement. Of goo beyond fraud. That's not like, oh yeah, I know you're in Florida. Like I could like,}
+{\pard  \line \par}
+{\b\cf3 Jonathan Brodie:\b0}
+{ , they've got these kinds of research, probably research pieces as the kind of thing that I could, I could probably analogy probably kind of describe it as north side, I think so, so beyond, so yeah, as I understand. Beyond prod , is not incense like a, a product or service.}
+{\pard  \line \par}
+{If anybody on the call wants to, }
+{\cf2 [00:20:00]}
+{ wants to correct me on this, then please do. But my understanding is, is that beyond prod is more, it was more of a research piece around kind of container secure. Okay. And what they what Google track do is they try to kind of establish kind of security principles for it, which would affect , compute workload that we're actually running in Google cloud.}
+{\pard  \line \par}
+{So kind of things like kind of protection at the network edge. And we've kind of discussed that before. So what we're kind of discussing before about the, comment that was there was asked around endpoint protection. So beyond product covers things like protection of the network edge.}
+{\pard  \line \par}
+{So that would be things like cloud armor, which. It a blessed speak is, it a plus one? So again, it's providing that kind of less seven kind of protection for, , any kind of bad actors kind of externally exposed systems kind of working if you're running GTE, for example, make sure that your cost is a private , don't, don't configure them unnecessarily.}
+{\pard  \line \par}
+{If it's not required to be it just reduces the. Again, makes it more secure. Well, ask him to do what going to pick up on, on it, trying to think. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ What about in terms of like your , }
+{\cf2 [00:21:00]}
+{ how people build images in, I guess the AWS land, where you have your AMI and you have your and all that what's equal and on the Google cloud centers, and we can touch on the whole endpoint firewall thing, but outside of it, is there anything that people normally consider for that?}
+{\pard  \line \par}
+{\b\cf3 Jonathan Brodie:\b0}
+{ So in terms of Well, in terms of, so I'm aware of pre hardened images within the Amazon and the Amazon space. I'm not aware of anything similar in GCP, however, it's in terms of, wait, where are you going to go on your question? I think it's a good point. You've raised in terms of things like the CIS benchmarking.}
+{\pard  \line \par}
+{So, , you can actually, , if you're actually whatever workloads you're actually running in in Google cloud platform, Making sure that they idea to CIS benchmarking is really important. For people who aren't aware on the call CIS is is basically just best practice framework for, and it covers all aspects of technology, not just things that exist in the cloud on premise as well.}
+{\pard  \line \par}
+{And it goes across GCP. I need the best as well. Okay. Security command center has natively built into it, the CRS benchmarking as well. So if they want to get a reflection on their assets, that they have. Inside of }
+{\cf2 [00:22:00]}
+{ Google cloud, they can just go to the security command center and actually that the CS benchmark over there, if there's any drifting compliance.}
+{\pard  \line \par}
+{Oh yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Actually a good point, man. Cause I think I always look at when people start off in, Google-y not really another school with cloud, but in cloud secure in general, there's almost like two layers. One is like the layer that we were talking about earlier, where it's your folder, your product. Things like that nature where you have to protect and security command center maybe helps with that as well.}
+{\pard  \line \par}
+{But there's another layer after that, where, okay, I'll set up the environment. I feel uncomfortable that I've done enough for security. Now I start building applications in there. Now there's that? That's where the computer, your point, then we're going to go into this like spread of oil using serverless containers or watch machines or whatever, the thing that you want to use for making your project.}
+{\pard  \line \par}
+{And then there's later there of identity. I definitely feel there is different footprints that are required from a security perspective as well that you kind of have to grab across and see. One thing that kind of comes to mind in terms of privileged accounts. I know like in Azure, there's a whole or }
+{\cf2 [00:23:00]}
+{ use, you should use a privileged account, actually have a dedicated privileged accounts, but a very windows concept in Amazon, you just kind of go the IAM role parts area, as long as the, I am.}
+{\pard  \line \par}
+{Yeah, Johnny's admin. Yeah. He's admin everywhere. 24 7. Right. So is it, what's the thinking around identity and access management in like Google cloud space? }
+{\pard  \line \par}
+{\b\cf3 Jonathan Brodie:\b0}
+{ Actually kind of goes back to where I was talking about trying to actually get your hierarchal structure.}
+{\pard  \line \par}
+{I keep saying hierarchal structure. It isn't really. So if you, go back to, when we were talking about projects, for example, one of the things that you'll find is in many organizations, they will they will consume property G suite as a service that gives people effectively a Gmail account.}
+{\pard  \line \par}
+{As I said before, when we were talking about. People want to do a bit of training. They want to maybe spend their own project or for a bit of learning in, , to actually start to learn about Google cloud. The same is true in an organization. , if somebody has use an email address and a password for G suite they can create a project.}
+{\pard  \line \par}
+{And one of the traps you've got to try and not fall into is making sure that when people are actually spinning up projects, }
+{\cf2 [00:24:00]}
+{ that actually you control how or where, and when they become part of your organization as a company, because what will happen is as soon as someone actually creates a pro. They themselves will become the order of that project.}
+{\pard  \line \par}
+{And then , they themselves will have full autonomy over that project. So when they're actually giving people whether they belong to your organization or they're outside your organization, they have full control on who they bring in. If that project is linked to the to the billing account, if your organization.}
+{\pard  \line \par}
+{Which is why it's so important to figure out who your billing administrators are. If that account, sorry, I'm calling it account. If that GCP project is then obviously linked to the billing account of your organization, it becomes part of your organization that free tier of limited resource that someone is able to spin up free of charge.}
+{\pard  \line \par}
+{Unless of course they attach it to their own personal credit card or whatever like that. Yeah. It's not, it's going to be soft, built your organization. But of course then it's, there's liability on your site as well as if from a company's perspective. So Yeah. That's why I go back to about the idea of }
+{\cf2 [00:25:00]}
+{ folder levels as well.}
+{\pard  \line \par}
+{Folders are really important because once you actually get folders in place, it, you get not, you get that form of, again, it's not as centralized as AWS. Yeah. In terms of when someone goes through, when you've got your account provisioning process, generally, , from my observations and I'm sure for many of the people listening on this call and probably for you.}
+{\pard  \line \par}
+{When a team is looking for a new AWS account, that control is going to be very centralized. It will probably be your platform team that will actually be responsible for that. They'll be in charge of control tower, if that's the way that you're actually doing it. Yeah. And then they will go through and then there will then provision that account for someone.}
+{\pard  \line \par}
+{And then all they'll do is they'll just spend the resources up there require that team who is, , using. AWS ecosystem to build applications inside. They are not the owners of that project. That's right. Yeah. You've got that. Or I'm getting kind of mix of the terminologies now, the owners, they're not the owners of that ear to bless account.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yep. That's }
+{\pard  \line \par}
+{\b\cf3 Jonathan Brodie:\b0}
+{ right. Yes, exactly. But then book in Google }
+{\cf2 [00:26:00]}
+{ cloud. If you do not have a if you do not have a, a set and defined procedure over project creation projects that have touched the billing account, how projects are structured inside of folders, you're asking for trouble. So you need to get that.}
+{\pard  \line \par}
+{Resolved and sorted so that you actually have a proper framework of how things operate and to go back to it, just to go further on to, I am. So we're talking about sort of the provisioning of IRM on projects that are not associates or any folders, and when they're not associated to folders, we don't have that centralized management that we try to achieve fruitful.}
+{\pard  \line \par}
+{Yep. If you go to that next layer up with organization, when it comes to identity and access management within organization, everything that a person can do with an organizational level role transcends everything that is in both a folder and a project. So it's extremely important that when you are assigning to an individual rule that is not a folder level or project level, but is it an organization level that is extremely }
+{\cf2 [00:27:00]}
+{ powerful.}
+{\pard  \line \par}
+{So you have to make sure that you have a very tight procedure on who has that. Right. And the, and the, and the kind of, if you will, the kind of the super users. Of of the Google cloud space is the organization admin, right? That itself is very powerful. And if you are an organization, you get audited that is going to be the first thing that they're going to look for.}
+{\pard  \line \par}
+{They're going to look for who actually has that, that ability within your organization. So definitely recommend to anybody when they're looking to address IRM either when you're looking to build something from new or they're looking to address an existing And existing consumption within their business of GCP is to look at that organization permissions, make sure that, , who's got that permission and also make sure that you look for policy changes at an organization level as well.}
+{\pard  \line \par}
+{The guy who had on a week, I can't remember which one it was. Oh, yeah, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ yeah, yeah. He, }
+{\pard  \line \par}
+{\b\cf3 Jonathan Brodie:\b0}
+{ he he wrote an excellent script, which was to actually monitor for organization policy changes. Yeah. Fantastic. Brilliant. , that's amazing. That's exactly. And then when I actually found that I was really happy cause I was like, that's exactly what I've been }
+{\cf2 [00:28:00]}
+{ needing to do.}
+{\pard  \line \par}
+{I just need to see someone who's done that. It was just brilliant because again, those policy changes, I've got to have such a huge impact. Across your entire GCP space. So really good from a security standpoint that you understand what those policies are. Yup. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yup. So, so what's your point then? When someone is setting up a project and it's almost like Google wants you to think of it in a way that.}
+{\pard  \line \par}
+{I I'll just use a podcast platform that you're building as an example as well. So I just happened to be the product team. And you, are it security, I guess? So per game has the ownership of everything. So my team who will be using that product. Chord podcasts, I guess everyone in that I control the identity in in that particular project, as well as my team was, which is in that project with that project access guests access to every resource with.}
+{\pard  \line \par}
+{For lack of a better word, Gord level access for that service in that project. But there is another layer on top, which is the organization layer that you're referring to the organization policy. }
+{\pard  \line \par}
+{\b\cf3 Jonathan Brodie:\b0}
+{ So the folder level in between that as well. So the fourth level is where you would group, you would }
+{\cf2 [00:29:00]}
+{ group projects that are within the remit of your.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right, right. And okay, sweet. So you kind of have policies at that level, and then there's another layer above that, which is where everybody referring to the org admin being. }
+{\pard  \line \par}
+{\b\cf3 Jonathan Brodie:\b0}
+{ Yes. Yes, yes. Right. Transcends everything. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh, okay. Transcends everything. Okay. Or folders projects when you name it? Yes. Perfect. Cause that's a good segway into the next question as well then, because we just asked a question cause does GCP have a considered local.}
+{\pard  \line \par}
+{Read only delete which Azure has it helps you protect resources from accidentally delete or. So I'm assuming resources in a project versus four DeVos's says organization. Can you ask you do conduct kind of a }
+{\pard  \line \par}
+{\b\cf3 Jonathan Brodie:\b0}
+{ locking? That's a very good question. And I don't know that's }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ okay.}
+{\pard  \line \par}
+{\b\cf3 Jonathan Brodie:\b0}
+{ It's a great question. And I actually got to put that down as something for me to go research myself because I don't actually know it. It's actually a really nice idea. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I was going to say, if anyone else in the on the chat knows about it as well drop it in as well. But I think this is kind of where these things become interesting, right?}
+{\pard  \line \par}
+{Because you find out there's a certain way of thinking that other cloud providers that may have driven us down the path of, but }
+{\cf2 [00:30:00]}
+{ when you sort start, start talking about, say a third or fourth of the first cloud service providers, Yeah. We're not how that works in this context, but I, that's a great question.}
+{\pard  \line \par}
+{So hopefully we can get an answer for you from someone else in the crowd, but otherwise I can probably drop in an answer later on. We can do some research, but yeah, hopefully can answer that later, man. But thanks for the question. All right. I know we're kind of towards the tail end as well. So we've just got one more question and they can go into some fun questions.}
+{\pard  \line \par}
+{The so we spoke about project. We spoke or different lens. But I kind of find people asking me a lot of questions around trying to train themselves in Google cloud security, kind of from two aspects, one being there's a lot of conversations that a lot of services or security services within GCP are beta, I guess, for lack of a better word, the north three live.}
+{\pard  \line \par}
+{So people when they go into the Google cloud space and they're trying to jump onto it. A how do you kind of see like where do you see as the role of GCP with services pay primarily being better? Or is it like the majority services are good enough for you to build a }
+{\cf2 [00:31:00]}
+{ whole, I guess, podcast platform or whatever on it?}
+{\pard  \line \par}
+{\b\cf3 Jonathan Brodie:\b0}
+{ I can remember, I'm trying to build things with, with security command center when the FBI was still in bitter, I was actually doing it. And and I think that's another reason why.}
+{\pard  \line \par}
+{, people construct a lot trying to actually figure out what the right thing is to do how the best approach is. And GCP, when, , you're, you're looking at these native security services, which we rely on very heavily, inevitably Wes. And like we're looking at it and we're like, wow, this like, , the bottle three library it's still very, there's not much support in that.}
+{\pard  \line \par}
+{ I think Google is a platform I think is very mature. In terms of like the services, it has things like big query. For example, that I briefly mentioned before, that they've got this, they've proven themselves to be able to deliver.}
+{\pard  \line \par}
+{And have that kind of unique selling point than other cloud providers don't have, but from the security perspective I completely agree it's very difficult when a lot of these newer security services, like you said, you're looking in and many of them are in or a beat or a GA. What I would probably recommend to do is in terms of reading of resources yeah, we've }
+{\cf2 [00:32:00]}
+{ got like medium as well as it's a really good one.}
+{\pard  \line \par}
+{There's some really good stuff on there. Again, just look at Google cloud. It won't always be on security that, oh, she's just a general developer platform, but there'll be a few things on security there, which is really good. LinkedIn is an excellent resource as well to to try and like follow people, particularly people who are connected in some way to Google to try and see when they're releasing things.}
+{\pard  \line \par}
+{What else was I thinking? Google has some really good ghetto pages as well. I'm also with that projects I was just thinking one called tsunami, which is a really good project. Again, we can link that description if anybody's interested. Yeah. Cool. That's that's a, that's a, network's kind of that that's really good to use.}
+{\pard  \line \par}
+{Check out for settings. Which is a really good project as well. So if you, if you want to look that up, that was in I believe that was a collaboration between Falsetti between Spotify and Google themselves. So I, I think that the So to answer your question. It is difficult when a lot of the native security services that Google are offering is not in full release yet.}
+{\pard  \line \par}
+{I think the open source community is helping a lot. It's certainly in new ways }
+{\cf2 [00:33:00]}
+{ as mature as AWS or Azure, in fact. But there is some good stuff out. Some of the kinds of open source projects that Google ghetto F SETI again is a really good project. And then again, just look on medium, look on LinkedIn, follow some really good people on there.}
+{\pard  \line \par}
+{See how they are kind of engineering, Google to fulfill some, these. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Awesome. And what kind of certifications like this for people who may be curious about certifications as well for, are there any security, specific certifications in the workspace? }
+{\pard  \line \par}
+{\b\cf3 Jonathan Brodie:\b0}
+{ I do believe there is. , I've not myself actually study for instance certifications.}
+{\pard  \line \par}
+{But I do believe that there is a specific one for security. As as as I believe again, I think it's just a, it's just a movie choice. It's just a multi choice question exam. That it's again, just a personal view on, on the certifications. I think that that's one of the main reasons why I've kind of strayed away from specific security, because there just won't be choice.}
+{\pard  \line \par}
+{I am a big fan of what CNCF have done within sight within the Cuba. What I'm actually currently studying for my CPA is administrator. And to do my C K S S }
+{\cf2 [00:34:00]}
+{ after that, for two reasons, one it's cloud agnostic. So even though you've still got like your different flavors of Cuba, Yeah.}
+{\pard  \line \par}
+{Typically Wes and, and GCP and Azure and Oracle and all that kind of stuff. There's still a kind of core component of it. Like cube CTL is still keeps CTL regardless on, on whichever flavor you're using of it. So it's kind of a, it's a transferable skill across all clouds and yeah. And I think, secondly, because it is a practical assessment, there's like a demonstrable skill there as opposed to a multi choice answer.}
+{\pard  \line \par}
+{So I know I'm kind of not really answering specific I'll Google. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I think that was given it is still relevant for a Google cloud space as well. So we definitely. Yeah. Cool. Thanks for sharing that as well. }
+{\pard  \line \par}
+{Where can people find you and connect with you, man? , }
+{\pard  \line \par}
+{\b\cf3 Jonathan Brodie:\b0}
+{ I'm not much of an social media butterfly. I don't have Instagram or, or Facebook or anything like that. I have LinkedIn and I'm fairly active on LinkedIn. So please feel free to drop me a connection invite on, on LinkedIn and feel free to ask me any questions.}
+{\pard  \line \par}
+{ I'm by no means an expert I'm learning every day. So you never know you, you }
+{\cf2 [00:35:00]}
+{ hopefully you can teach me something about count security as well. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ There you go. Awesome. I'll leave your LinkedIn link onto the show notes as well as people can check that on our website. And yeah, that was kind of like the end of her man, but I think for everyone else who is joining us for Google cloud month or Google cloud security month, we have two more episodes this month.}
+{\pard  \line \par}
+{And I think it's going to be next week. So I know kind of, , it's going to be a month, but because of. So many more people to bring on for Google Cloud, security that I don't get. So I'm going to do two more episodes of this, but thank you so much, Johnny, for coming in. I don't remember it.}
+{\pard  \line \par}
+{This for you as well, man, but I really appreciate this. Thanks so much for this. }
+{\pard  \line \par}
+{\b\cf3 Jonathan Brodie:\b0}
+{ Thanks }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ again. Thank you for no problem, man. All right, thanks everyone else. We'll talk to you soon. Peace. }
+}

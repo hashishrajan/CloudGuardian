@@ -1,0 +1,283 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2639
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 TimesNewRomanPS-BoldMT;\f1\froman\fcharset0 TimesNewRomanPSMT;}
+{\colortbl;\red255\green255\blue255;\red97\green167\blue95;\red0\green0\blue0;\red109\green109\blue109;
+\red81\green0\blue192;}
+{\*\expandedcolortbl;;\cssrgb\c44706\c70196\c44706;\cssrgb\c0\c0\c0;\cssrgb\c50196\c50196\c50196;
+\cssrgb\c40000\c0\c80000;}
+\paperw11900\paperh16840\margl1440\margr1440
+\pard\sa360\partightenfactor0
+
+\f0\b\fs28 \cf2 \up0 \nosupersub \ulnone Ashish Rajan:
+\f1\b0 \cf3  \cf4 [00:00:00]\cf3  All right. I'm going to stop at this point. I'm just, I don't know where else has been copied, but I'm just going to assume that the team has done the right thing of deleting most secret management programs, usually talk about AWS secrets. They don't talk about the other ones. Should people expand their existing secret management program to know, Hey, is it just AWS or what am I looking for?\
+Would that be there as well? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ziad Ghalleb:
+\f1\b0 \cf3  So I think there's a discovery phase every. team that is having this discussion should be going through what services are we using? And I think it's all about going to those first principles when you're doing threat modeling Hey, what's our architecture today?\
+What types of services are we leveraging? \
+Time is the currency of the cloud. Companies move to the cloud to speed time to market and to drive revenue. Things are moving fast in the cloud. We're expected to be very innovative. It's really all about businesses staying competitive and remaining relevant. In the new world of the cloud, every second counts.\
+Every second needs to be secure. That's what we do at Sysdig. \cf4 [00:01:00]\cf3  Secure every single second. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Have you lost your secret? And by secret, not just your AWS token, your Azure token, your Google token, or maybe even your API access token that you just don't know existed. Until you find out that someone had access to it for GitHub, if that is something that you worry about.\
+And as CISO we started the DevSecOps program as, Hey, we should do some security integration. And we found out that the easiest way to get DevSecOps in to any CI CD pipeline or into developer workflow was to have the starting point being secret scanning. That way, at least I know this is something that everyone understands.\
+No one wants to have their secret out on the internet, specifically on GitHub in this scenario. So for this conversation, I had Ziad from GitGuardian. They have recently released a service called HasMySecretLeaked. This was inspired by HaveIBeenPwned. com, which is from a fellow Australian called Troy Hunt\
+if you haven't checked that out, definitely check that out as well. We used to have a subscription to haveibeenpwned. com through \cf4 [00:02:00]\cf3  the one password subscription. Basically, it would allow you to know that, Hey, by the way, their email was in a breach that was released. So you should reset your password. The similar concept inspiration for these people has my secret leak is a free tool that was released and the idea behind this is that you should be able to use your secret to identify whether this was ever leaked on GitHub or not.\
+Now, the idea is tricky because I was like, I don't know if I'm putting in a. my secret into a random website, but I tested mine for some of you who would have watched the YouTube video, which we have on our YouTube channel about losing AWS access secret keys and what security researcher could have done with it.\
+That definitely was an inspiration for us to go, okay, I'm going to use this. And turns out it did find it because the secret that we had was there for some time. And I think there's an average, it takes about 10 minutes or half an hour for once a secret is there on GitHub for malicious attackers on the internet to identify the secret and be able to use it.\
+To sum it up, if you are thinking of a DevSecOps program, Secret Management is a great place to start. Think of it as a capability \cf4 [00:03:00]\cf3  rather than a program that you're going to run. It is part of a bigger DevSecOps program that you normally run it. But because it's so easy for everyone in the organization to understand that hey, We should not have our secrets out on the internet.\
+That's a great way to start at least doing DevSecOps So easier to learn and kick it off and if you know someone who's looking at starting a secrets management program But they're probably looking for more on hey, I may have secrets that are already Exposed on the incident. How do I know if it has been exposed and I need to rotate them?\
+You could use something like this free tool from GitGuardian or GitHub has it as well and any of the provider, but definitely consider using secret management as a way to enter in DevSecOps, but also a way to minimize the risk if ever was a secret leaked. You are at least on top of it. If you know someone else who's probably thinking about doing secret management program as part of their DevSecOps or in general has a capability that they're trying to build, definitely share the episode with them.\
+Also, if you're here for a second or third time, definitely feel free to subscribe or follow on YouTube and LinkedIn. That's where we go live on videos. But if you are listening to this on Apple \cf4 [00:04:00]\cf3  Spotify, feel free to give us a five star rating interview. We would be at KubeCon in a few weeks time as well.\
+So if you are attending KubeCon North America in Chicago, definitely say hello. And I would love to say hello some of you or most of you who are attending and maybe hang out as well, but I hope you enjoy this episode as always. I will talk to you next episode, or I'll see you at KubeCon. North America in a few weeks time.\
+Enjoy the episode. I'll talk to you soon. Peace. Hello, welcome to another episode of Cloud Security Podcast. And today we're talking about secrets. I think we haven't lost enough secrets in our lives. So we're going to try and find some useful new ones, maybe on GitHub somewhere else. But for this, I'm not the one who's going to be an expert talking about this, of course.\
+Hey Ziad, how are you man? Hey Ashish, great. How are you? Thanks for coming on the show, man. I really appreciate you coming and talking about secrets. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ziad Ghalleb:
+\f1\b0 \cf3  Thank you. Thanks for having me. I know Mackenzie, our developer advocate, has been multiple times on the show, so I'm happy because my time has finally come.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  You finally made it happen. But I think for a few people on the internet who don't know who you are, if you'd like to share a bit about yourself, man. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ziad Ghalleb:
+\f1\b0 \cf3  Of course. For everyone \cf4 [00:05:00]\cf3  tuning in today, first, thank you. And second, Ziad here, I do all things product marketing at GitGuardian. I've been here for almost...\
+Three years now. And I think the best part has been seeing how developers, security engineers, and also their perception of secret security has shifted over the past three years during my time. And finally, the funny story is I joined GitGuardian a few weeks after leaking a secret on GitHub. That made the perfect solution for me.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  I have a whole thing that I did on losing my own secrets, my AWS secrets. So it's interesting to see where I land with that as well.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ziad Ghalleb:
+\f1\b0 \cf3  But it happens to everyone. No matter how senior you are as a developer or security engineer, you're bound to experience it at least once in your career or life.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  It definitely happens. Its almost like a, the going through file process, maybe to set the right tone for the conversation. What are secrets? Because most people think it's just username password, but. It's a lot more than that these days. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ziad Ghalleb:
+\f1\b0 \cf3  Where we're talking about Git, DevOps, cloud native application development. So secrets can mean a \cf4 [00:06:00]\cf3  lot of things and there are different categories of secrets beyond the username password you refer to. So we have, for example, data storage secrets. That's one category, for example, all the different credentials or secret URLs that you would use to connect to a database, whether it's a PostgreSQL database or a MongoDB database, et cetera. So we also have cloud provider secrets. Those are the secrets that give you access to your cloud infrastructure and resources, usually generated via your AWS console or your Google cloud console, et cetera.\
+You also have messaging systems. So these are the email services that you use to send emails to your users in your company, for example, chat apps for internal communication. Support applications. All of those use secrets and API keys to talk to each other. And also you have some developer tools that generate and use secrets.\
+Like your GitHub personal access token, for example, your circle CI API key. All those are our secrets. And GitGuardian actually supports about \cf4 [00:07:00]\cf3  350 different types of secrets. And there are more, even more than those. Then I think you have a second level distinction, which is okay. We have all these different categories, but we also have specific secrets where you have like a recognizable pattern. You can build a regular expression to find that secret. And then the second type would be generic secrets. You refer to the username passwords previously, most of the time, these are don't have a specific pattern, right? You come up with a secret it's randomly generated. So these are what we call high entropy secrets. And we should look for that level of randomness in that chain of characters to decide whether it's a secret or not. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  And I think to your point about everyone going through the fire process of at least leaking the secret once. Unfortunately, my team had a moment like this just about a month ago.\
+We made a whole video on it because the security researcher who got the key was nice enough to at least give us a snapshot of what they could have done. And that kind of became like a whole video on itself. Cause I think the main point of the conversation was also going to be around the \cf4 [00:08:00]\cf3  free tool that you guys have shared a glimpse of it over here, but for people who may not know about.\
+The whole concept of, Hey, I didn't find my secret. You guys have released a new tool. Is that right? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ziad Ghalleb:
+\f1\b0 \cf3  Yep. So it's called has my secret leak. We released this earlier last week, actually. And it's been getting lots of attention, so we're happy with it.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Yeah, I can imagine. Cause I think was the inspiration, haveibeenpwned.Com by any chance? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ziad Ghalleb:
+\f1\b0 \cf3  Oh yes. We definitely, it has been a huge inspiration for this project. And we talked a lot to the maintainer of the, and creator of that project, Troy Hunt to understand the underlying technology and mechanisms and how we could replicate that. But this time for developer secrets and not for those passwords or credentials you use to log into your personal accounts.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  So it's a lot more broader in the context and maybe, would I be right in saying that because now secrets a lot more expanded more than just username password, would it be possible that people don't even know that they have secrets leaked at the moment? Because there's nothing like a notification service at the moment, \cf4 [00:09:00]\cf3  right?\
+haveibeenpwned is like the, so when I was a CISO we had subscription to haveibeenpwned.com to know if any corporate emails in a breach that came out or any of the other ones. So there's nothing for that for secrets at this point in time. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ziad Ghalleb:
+\f1\b0 \cf3  So on GitHub, there are actually two services for that. We monitor GitHub around the clock and we see all public GitHub activities.\
+So all types of events, and we do scan GitHub for secrets and alert the developer who was the commit author of that specific piece of code, right? That commit. If we find the commit author email, we'll send them a pro bono alert. They don't have to be a user of the GitGuardian platform. GitHub also does this, but they alert the service provider.\
+So if you leak an AWS key, they will alert AWS. Now they also alert you on your own repository, but there's this specific case where sometimes a secret will leak and the owner of the secret will actually not find out or know about it. So last year, for example, Toyota \cf4 [00:10:00]\cf3  suffered a data breach where, when they ran the root cause analysis.\
+They found out that a contractor actually published a repository that was supposed to be a private repository from Toyota. And he published it under his personal account on GitHub. Oh. And, yes. And that repository contained the secrets, which gave access to a database in turn containing personal identifiable information of Toyota customers and users of one of their products.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Interesting. And maybe to extend that a bit further, because I feel like, the difference between haveibeenpwned.Com and I know you and I spoke about this last time as well, where I was asking this question and I'm curious, people would be curious about this as well. haveibeenpwned is just an email, like people are usually very blase or open about their emails.\
+Yeah. So take my email, send me notifications about whatever new offer you have. I probably use a fake email, people just give that actual email, cause you need the secret to be shared on this \cf4 [00:11:00]\cf3  service for it. It feels a bit counterintuitive. I have to put my secret in to know if I have lost a secret or not. So what's the risk here?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ziad Ghalleb:
+\f1\b0 \cf3  Okay. Again, we were heavily inspired from haveibeenpwned and we used a similar tech that they also used. What happens is when you're using, has my secret leaked, you're never revealing your secrets to get guardian or anyone else.\
+So the secret gets hashed in the browser. We have a JavaScript plugin in the browser that hashes the secret and then only sends the first five characters of that hash. So with that information, no one is able to reconstruct your secret or view it in the first place. No one can actually see it. So we get that five character hash that gets sent to our service where then we will try and look for potential matches.\
+And we'll actually find more matches that have the same prefix, and then we'll return all these matches again to the browser on the client side. But the thing is, these matches also contain some other secrets, right? Because they all start with the \cf4 [00:12:00]\cf3  first same five prefixes for that hash. The smart thing we implemented here is to encrypt all those secrets and their locations.\
+So you can't actually see them. Oh, if you get an encrypted response. And that response gets decrypted on the client side, again, in your browser. Since you own the full hash actually serves as a private key to decrypt that payload. And you can only see the perfect matches, whether your secrets have leaked and also where the first location was observed for that leak.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Awesome. So I started this conversation by saying that I was one of our team members actually did end up sharing a secret on GitHub some time ago.\
+And I was experimenting with this idea that should I put this in? I just probably found like a perfect opportunity for me to test it out. If it actually was there. My understanding is it was at least there for 24 hours or more. The secret on architect repository. By the way, I'm assuming you're looking only at public ones, not a private ones, right?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ziad Ghalleb:
+\f1\b0 \cf3  We don't have access to private, you don't have a secret key or something for that as well? No. , but we don't have a back door for GitHub private repositories\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  is that a back door for \cf4 [00:13:00]\cf3  GitHub? I was gonna do a live test of this because I think I definitely want to be more open about this to other people as well, as I think people are learning. So for people who will be listening to this on the podcast, I want to be able to at least, I would encourage you to go to the YouTube video so you can actually see me doing this. So I've copied my access secret. I pasted it.\
+So I'm just clicking on hash and search. Is that right? Oh, I'll get five tries. Okay. Oh, this is the first five characters you were talking about. Exactly. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ziad Ghalleb:
+\f1\b0 \cf3  So this is what gets sent to GitGuardian servers and nothing more, nothing less. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  So it was compromised. It was first owned by the connector, which is you guys have.\
+Great. Four locations as well. All right. I'm going to stop at this point. I don't know where else has been copied, but I'm just going to assume that the team has done the right thing.of deleting it. So for context of people who are listening to this, or we did get a copy off from a security researcher on the thing they could have done wrong with it, but they were kind enough to share us.\
+They did not do anything malicious with it. They basically shared what they could have done. So we've made the video available on our \cf4 [00:14:00]\cf3  YouTube. So for this particular one as well, you can definitely check it out. So based on what I've heard so far, I have a secret. Would it be for, say, if I use the example of AWS.\
+Would it work for client secret and client ID, or can I just use my client ID? And that would help as well. If my client ID itself is leaked. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ziad Ghalleb:
+\f1\b0 \cf3  You can just use the client secret to make sure if that has leaked or not. And in your particular case, so how did you find out about that leak? Did someone reach out to you?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Yeah. I guess maybe it's the nature of being public on the internet. So people just feel they can reach out. So that's a good thing. So they reached out and shared that, Hey, by the way, you might want to check on this. It was part of the running a cloud security bootcamp and as part of that happened but again, they were kind enough. I am grateful that they did not do any malicious and not give me a bill of a hundred thousand dollars chose to just let us know that what they could have done and how we can improve it. So it became a lesson for me and my team to go, Hey, if you're using cloud security, probably want to leave you on top of this.\
+Secret scanning has been included in our \cf4 [00:15:00]\cf3  branch, great. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ziad Ghalleb:
+\f1\b0 \cf3  The benefits of ethical hacking that's great. And in a scenario where you didn't know about that leak actually, or you weren't alerted. Maybe you would have found some suspicious activity in your AWS cloud trail logs, right?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  That's right. Yeah. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ziad Ghalleb:
+\f1\b0 \cf3  It's been used or there's someone spawning EC2 instances everywhere, someone living off the land and okay. That will trigger probably a response from your side. And I would say, has my secret leaked? Here comes in as a forensic tool, where you want to investigate, maybe you don't know how the secret has leaked actually, because no one told you so that's when you can use it and make sure that okay, it's actually not on GitHub or well, it was exposed on GitHub.\
+And that's how the attackers found it. So yeah, it can help post incident to investigate.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  So maybe a good question to ask for example, at least when I was a CISO we definitely went down the path of having secret scanning for our repository and for our context. Our repository didn't have something which was like state secret.\
+We were just trying to teach you how to use Kubernetes security or whatever. \cf4 [00:16:00]\cf3  But the context for me also is here that how do you see people use or manage secrets and on average, is there cause you guys did a, I think I remember talking to McKinsey about the whole, you guys did the scanners or entire GitHub for public repositories and there was like stuff that came out.\
+What do you see as the average thing that people do with secrets on the internet on public projects, public repositories? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ziad Ghalleb:
+\f1\b0 \cf3  Oh it really depends on the maturity of the organization, if they're doing tons of open source projects or not, but on public repositories, it's usually a mistake from the developer, right?\
+ Sometimes they will publish a repository that was private, turn it into a public repository because they want to share their project with the whole world and they might have forgotten that, Hey, this repository actually contains a ton of hard coded secrets, or maybe they forgot to put that dot ENV file in the dot gitignore file.\
+And all of a sudden you have that environment file in your repository. It contains all your secrets and it's published at once. And \cf4 [00:17:00]\cf3  most of the time it's a. fat finger error. I wouldn't say it's malicious or deliberate exposure of secrets. It just happens like that. And then when they get alerted, usually they pay attention to the gravity of the incident and simply go and revoke that secret to make sure no one can use it.\
+When it comes to secrets management, there are many tools out there today. All the vaults, the centralized storage systems. And of course we do recommend teams use those implement such tools within their organization, make sure that is the only way they can get access to secrets.\
+But unfortunately it's not a surefire way, right? You're not certain that secrets will not leak out of that vault and that developers will not be copy pasting that value in order to test very quickly if their code is working or not, because oftentimes there's a need for speed in development today.\
+That is quite important. Yeah. So that's not a gaurantee. And we always push for people to add that extra layer of protection. Okay, I have my vault in place, but I also need to have all those laser beams around it, and whenever a secret leaks something will get \cf4 [00:18:00]\cf3  triggered at that\
+ point.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Yeah. And to your point, then I guess most people look at secret management. Hey, I don't need to worry about it. I've got a password manager. And I think going back to what you were talking about, the secrets being not just username password, that probably brings up the question again, that if people are listening to this and if they feel, Oh, I don't have to listen to this episode because I've already, I've got of so much control over my secrets right now.\
+I think a lot of conversation in DevSecOps space also happens in terms of secret management being that first layer of. What do I do in my CI CD pipeline, which is basically to find out if your secrets are there in the first place. And that's probably the easiest way to get your developers on board as well.\
+That's when we run the DevSecOps. At least program the first thing we ended up doing was just, let's do secret scanning just to understand, Hey, are there any secrets in our repositories at the moment, which people look at? So people who might be thinking that, Hey, I've got a password manager or I've got vault, from a security program perspective, how do people go about keeping a tab on their secrets? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ziad Ghalleb:
+\f1\b0 \cf3  So I think \cf4 [00:19:00]\cf3  it boils down to observability. Actually, you want to make sure that, where all your secrets are and you also want to make sure that if they ever leak, you will get alerted, whether it's in code repository ,in your Slack workspaces, because developers are exchanging secrets and messages or a JIRA ticket, because they're fixing a bug or there's a support tickets and they put a secret for someone to test that code actually. So you want to make sure that you will be aware when such an incident happens. And that boils down to observability. You should be continuously monitoring all those tools that developers touch and interact with on a daily basis to make sure that there are no secrets in there.\
+And once you have that observability into place you want to make sure you have the right processes for responding to such an incident. Hey, who owns the secret? How do I go about rotating it and revoking it without interrupting any other services who are relying on the same secret. And also making sure \cf4 [00:20:00]\cf3  that in the next phase, how do we avoid this?\
+Okay. We've closed that incident. It's solved now. It's completely resolved. There is no risk. No one can use that secret anymore. It's been exposed. Okay, fine. Mistakes do happen, but how do we make sure that. We're not doing that mistake over, over and over again. You spoke about some of the scanners you can add into CI CD, but you can also shift secret security further left and include it in pre commit hooks, pre push hooks so that the developer is actually gets the feedback as soon as they put the secret in code before they've even committed the code or pushed it to the remotes, right?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  You're right. Absolutely on the money there with the pre commit thing as well, because. I don't imagine that many people want the secret to be in the first place and get detected later on. How would you draw the maturity curve for this? Because I think it's funny because many people talk about DevSecOps program.\
+They always talk about the big picture, which is a great idea. Yes. I need SAST. I need a SCA. I need all this. I need secret management. I need DAST and all of that as well. Now, my personal recommendation has always been to start with secret scanning because \cf4 [00:21:00]\cf3  everyone understands it. No one wants a secret to be out in the internet.\
+It's easier to start DevSecOps over there, in terms of just that component of the program, which is secret management, where do you see people start and what would that maturity look like as they go from whatever the level one is to, I don't know, level 200 for secret management. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ziad Ghalleb:
+\f1\b0 \cf3  So, we've been working on this maturity model where you have several levels that, so you just. Got started. You're not doing any scanning in place. You don't know where your secrets are. They're probably scattered all over developer tools. So you first want to measure, that sort of security debt. When it comes to secrets, you want to run that first scan, which is a snapshot Hey, okay, where do we stand today?\
+And then look at it from a perspective of we've been leaking this many secrets over time. And we actually want to get that down to almost zero. It will be very difficult to get there, but that is the ideal state. So now I like to think of it more as a more of a capability model rather than a maturity model.\
+Because when you talk about maturity, you just \cf4 [00:22:00]\cf3  measure activity all the time and whether certain tools or processes have been implemented. Whereas in a capability model, it's outcome based. And the good thing with secret security is you can measure this stuff, right? Once you have the continuous monitoring, you can measure and say, okay, I have some key outcomes that are checked.\
+So we used to leak 50 secrets a month in the previous 12 months. And now we're leaking about five secrets in our internal repositories. So that's the outcome you want to aim for. And of course you want to aim for a zero hard coded secrets policy at the end of the day. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Interesting. Yeah. And to your point about.\
+I love that manager secret, being a capability rather than a, outcome based rather than just being, what do you call it? A, this is what I'm gonna finish as a project. Yeah. A number of secrets are being released. So would you say as a project that kind of goes on to the advanced stage?\
+Of, I don't know, keeping tab of secrets because nowadays secrets could be across multiple repositories, across multiple organizations within GitHub as well. Would that still be applicable even then? I think a capability \cf4 [00:23:00]\cf3  model would still be applicable that can be scaled across, say, AWS, Azure, Google Cloud.\
+Nowadays people have private cloud as well. Cause those kinds of secrets are very different as well. They're not just your, because most secret management programs usually talk about AWS secrets. They don't talk about the other ones. So should people expand their existing secret management program to know, Hey, is it just AWS or what am I looking for?\
+Would that be there as well? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ziad Ghalleb:
+\f1\b0 \cf3  So I think there's a discovery phase every team that is having this discussion should be going through what services are we using? And I think it's all about going to those first principles when you're doing threat modeling. Hey, what's our architecture today?\
+What types of services are we leveraging? And at least if you're aware of those, then you know that, okay, these services are using these secrets. So let's focus on these types of secrets. But you shouldn't also overlook some shadow development or shadow code that happens on the side where the teams might be using some other services that you are not aware of.\
+And then the secrets of those \cf4 [00:24:00]\cf3  other services will also end up leaking. So you want to expand the coverage to as many secrets as possible out there because you never know what's the next service that the development team is actually going to onboard and roll out. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Yeah, I love the idea. I also feel that the shadow code is also a thing especially when people have their own personal, I think the example that you gave was the Toyota thing as well, where, just as a thought exercise, if people want to try this, if their developers are using their personal email versus their work email to commit to GitHub is a great test as well. Have you seen that yet?\
+As in people using more personal emails rather than... The work email for committing work code. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ziad Ghalleb:
+\f1\b0 \cf3  Yeah. Also the same account can be used for both professional projects and personal projects, of course. Yeah. And with multiple git commit emails used for the different projects, but you can tie them all up to the same user account, and then you know that, okay, this is a developer at this company, but they're also contributing to this open source project. And they're working on this weekend's project on \cf4 [00:25:00]\cf3  the side. So you can track all of that activity when you look at GitHub. GitHub is before being a developer platform.\
+It's actually a social network in some way. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Yeah. Yeah. Yeah, people can follow my GitHub repository as well. They want you like yours and everyone else basically can have a little bit of following with sponsorship and stuff as well. So yeah, like a full on community over there, but people probably have not seen it.\
+But so in terms of has my secret being leaked what do you recommend? Maybe where can people start learning about this as well? Because I think I feel. There is an awareness piece in terms of, Hey, I need to look after your secrets. And then there is a, to what you said, discovery and all of that.\
+How do people get more awareness about secret management and what they can do better? What's a good practice and all of that? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ziad Ghalleb:
+\f1\b0 \cf3  I think we have a learning center and great documentation. They can get started. Oh, oh, you guys have a learning centre, I didn't know that. Okay. I'll drop some links. But also if they want to use has my secret leaked, if they want to get full peace of mind that, Hey, their secrets are not anywhere in this database of 20 plus million secrets on GitHub.\
+There are two ways they \cf4 [00:26:00]\cf3  can actually either use the search console that you showed earlier, or also if they want to have be more in control, they can use the command line interface. And this will take a text file or a dot ENV file as an input locally, and then send them back those results in their terminal.\
+So it's our command line interface. And it's another way of interacting with, has my secret leaked? I think it's actually a better way because you can check all your secrets at once, right? Whereas in the search console, you just have to do it one secret at a time. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Oh, actually. Yeah, because fair enough, because the large organization would have multiple to work through as well.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ziad Ghalleb:
+\f1\b0 \cf3  What we also did is we're currently building specific commands in this command line interface for them to connect ggshield, so the GitGuardian CLI to HashiCorp Vault or to the AWS Secrets Manager instance and pull all those secrets for them. Stage them, prepare them locally, hash them, and then send those hashes for us to look for, to check them for leaks.\
+And then again, send the response back \cf4 [00:27:00]\cf3  on your end point where it gets decrypted and where you get the results shown to you locally and only you. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Interesting. That would be pretty cool, man. I'll definitely drop a link to have my secrets been leaked? So now you can share the links for learning center.\
+I'll put that in the show notes as well for everyone to go on to it. That was my last technique question. So I'm curious if you have any thoughts on, Hey, at least take away, walk away with this one thing from this episode.\
+Is there anything you want to share with everyone? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ziad Ghalleb:
+\f1\b0 \cf3  I would say that when it comes to secrets, you never know what might happen. Always operate under the assumption that, Hey, the secret might leak one day. And work your way from there to make sure that if it leaks, you know what to do.\
+And what can I do to make sure that, Hey, I'm reducing the risks of it getting leaked. So just operate under this one assumption that. It's going to leak one way or the other, and I don't know how exactly that will happen. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Hopefully it doesn't leak for anyone else out there, but if it does, at least they have a way to find out if the secret was leaked and what they should do about it aswell. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ziad Ghalleb:
+\f1\b0 \cf3  Well, we found 10 \
+million last year \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  you found 10 million \cf4 [00:28:00]\cf3  secrets in... \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ziad Ghalleb:
+\f1\b0 \cf3  Yes, on GitHub only, and we're not talking about Docker images on Docker Hub, we're not talking about packages on repositories such as PyPi or NPM, that's, yeah, it's, it will be a magnitude higher than 10 million. And we're coming back with another report next year.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Oh, okay, cool. I look forward to it then. I hope the 10 million reduces capability map you were talking. Hopefully people listening to this have a capability map and go, hopefully I'm not one of the 10 million. Exactly. I want to make sure I'm not in that 10 million as well. Exactly. Awesome. Man, this was great, man.\
+Thanks for coming on the show. Where can people find you to connect with you and know more about their secrets being leaked? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Ziad Ghalleb:
+\f1\b0 \cf3  LinkedIn. If they have any questions, I'm happy to connect and chat over there. So it's Ziad Ghalleb, and you can reach out to me anytime \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  I'll share your link over there as well. Thank you to everyone who logged in to see us and for everyone else, I'll see you in the next episode. Thank you for tuning in. All the show notes will be there. So thanks so much. And we'll see you next episode.\
+Thank you.\cf4 [00:29:00]\cf3  }

@@ -1,0 +1,235 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2639
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 TimesNewRomanPS-BoldMT;\f1\froman\fcharset0 TimesNewRomanPSMT;}
+{\colortbl;\red255\green255\blue255;\red97\green167\blue95;\red0\green0\blue0;\red109\green109\blue109;
+\red81\green0\blue192;}
+{\*\expandedcolortbl;;\cssrgb\c44706\c70196\c44706;\cssrgb\c0\c0\c0;\cssrgb\c50196\c50196\c50196;
+\cssrgb\c40000\c0\c80000;}
+\paperw11900\paperh16840\margl1440\margr1440
+\pard\sa360\partightenfactor0
+
+\f0\b\fs28 \cf2 \up0 \nosupersub \ulnone Ashish Rajan:
+\f1\b0 \cf3  \cf4 [00:00:00]\cf3  I can't be friends with you guys anymore.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Josh Lemos:
+\f1\b0 \cf3  I mean, this interview is over. Like, Oh, that's it. There are some really measured CISO perspectives out there that are saying, let's look at our existing acceptable use policies and let's lean on those. Let's look at our data governance program.\
+That's boring. It's not AI. It's not ML. Right? No one's talking about LLMs. They're thinking about what is our data? What is our data sensitivity? And sort of how do we manage that responsibly? I think that there are some very unintended uses or edge cases that CISOs aren't thinking about that may be incredibly useful to an employee, but may put that data at risk from a CISO right?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Hi everyone, this is a CISO perspective episode with Josh Lemos, and if you don't know this, he has been involved with the AI ML space way before it was cool and we spoke about things like, Hey, what do CISOs consider as a thing that they're taking away from Black Hat CISO Summit? We also spoke about what are some of the trends.\
+You could look at as part of building a road map. We spoke about some of the differences between what does a CISO of a B2B versus a B2C look like \cf4 [00:01:00]\cf3  and a lot more. I hope you enjoy this episode with Josh Lemos. He's a CISO of GitLab and was a CISO of Square before that, so had a wealth of experience.\
+And I'm so glad I could have him on the podcast and on the YouTube video as well just to show you the varied amount of skills that he brings to the table as a CISO and hopefully you get to learn something from that as well. As always, if you're watching this on YouTube or listening to this on Spotify or Apple, we really appreciate if you give us a like and follow, subscribe, maybe leave us a review as well if you're feeling very tempting.\
+It helps us find more guests like Josh and others who come in, find the podcast to be interesting enough to come as a guest. So we get to share their perspective on a CISO perspective with yourself and others on the podcast. I hope in this episode, I'll let you go to the episode. I'll see you in the next one. \
+Welcome to Cloud Security Podcast. Today, we have a CISO perspective with Josh. Welcome to the show, Josh. Thank you for coming over. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Josh Lemos:
+\f1\b0 \cf3  Thank you for having me. It's great to sit down with you.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  And for people who don't know who Josh is, can you tell a bit about how you got into cybersecurity and where you are today?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Josh Lemos:
+\f1\b0 \cf3  Yeah, sure. So I started back in cybersecurity through the systems engineering and \cf4 [00:02:00]\cf3  network engineering ranks. So a very long time ago, I was a network engineer who also did Unix administration.\
+From that, I entered into a new and emerging fields that was penetration testing, red teaming, ethical hacking, where the promise of being able to break into banks and casinos became incredibly exciting and compelling. Like who wouldn't want to do that in their twenties? Yeah. I followed that path. And from there, I realized I was proficient at managing teams of people in that space. So on the offensive security side, ultimately went through the consulting ranks to lead consulting groups before going in house. And I worked at ServiceNow and built out the product security team and function at ServiceNow. And around 2016 machine learning was starting to come into the fore..\
+I had the opportunity to join a startup that was solving malware problems through machine learning. And I went to Cylance to run research and intelligence at Cylance. \cf4 [00:03:00]\cf3  That ultimately led to an acquisition where I exited before joining Square to run product security. I moved from product security into the CISO role at Square, ultimately, you know, the conglomerate Block. And then I got a call from GitLab. To go run their security program and be their first CISO. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Wow. Congratulations on the role. And it's pretty awesome that you were working in ML before chat GPT was a thing. It's like, you can at least talk about the fact that I used to do AI ML when it was not as cool as it is right now.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Josh Lemos:
+\f1\b0 \cf3  Yeah. Yeah. I was telling someone earlier today, we were dealing with dimensionality of a million features by a million samples. And we call that high dimensionality at the time. And now that looks cute compared to chat GPT.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Yeah, basically. I mean, obviously computers come a long way as well as back then as well.\
+I had a question about cloud security as well. As a CISO, what does cloud security mean for you, I guess?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Josh Lemos:
+\f1\b0 \cf3  So I can give two different answers that, you know, so cloud security as a security practitioner, not as a \cf4 [00:04:00]\cf3  CISO to me, means how do we secure the underpinnings of our technology stack? Because inherently, when we're building software, we're not building cloud security software.\
+We're building software that rides on top of those cloud primitives. And so the practitioner side of me says, well, that's really about identity and access management and data security and how we focus our attention and our security spend on those problems. The CISO side of me draws up a point of delineation.\
+I bifurcate in the shared responsibility model. So I look at what is my responsibility as a CISO and what is the hyperscalers responsibility? And so I'm able to focus my security, time, energy, and investment on those layers above that point of delineation. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Oh, I love the definition and I love your call of shared responsibility because that also makes me think about the whole machine learning AI as well.\
+I feel like now because it's become popular, like I feel cloud security has been popular, but only fairly recently, it hasn't \cf4 [00:05:00]\cf3  really had that popularity. Now, AI/ML came in, it became even more popular. Is there something in cybersecurity that you see as emerging or because of the AI/ML popularity, something that pops to your mind as it's like, hey, we should look out for this?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Josh Lemos:
+\f1\b0 \cf3  I see a convergence on three dimensions. So the first dimension is how we build models internally as a company. So we had software supply chains. Now we have data supply chains. And we have to think about our data provenance. And we have to think about our model ops. And that is part of that AI ML revolution as people want to express more value from their machine learning.\
+The second is how do we sort of utilize those capabilities from the benefits, right? So there's risks and opportunities associated with AI and ML, like all things, right? It can sort of exacerbate the extremes of those ends. And so there's extreme opportunity and how we leverage that to better identify problems, to better have velocity and cycle time that increases our \cf4 [00:06:00]\cf3  security program, our time to detection, our time to remediation, all of those measures there.\
+And then the third aspect of that is how does that change offensive security? And so how do we start to think about. The fact that we can have lesser skilled attackers begin to sort of utilize those capabilities and what we would sort of, you know, consider like a lower skilled or script kitty type attacker.\
+And now all of a sudden they can go out to, you know, a public model and ask, Hey, how do I create some ransomware? Not in those words, right? They do some prompt injection. Like as sort of a test, I was looking at early versions of some models and asked it. Hey, what if I wanted to build encryption in JavaScript where I controlled the key and effectively gave me JavaScript ransomware that I could control the key for, and then all I had to do was ask it about building the infrastructure for phoning that home, and so I probably, maybe not anymore. It's been a few years since my coding skills were good, but I could probably go build that on my own in a \cf4 [00:07:00]\cf3  matter of weeks. I could build it now today at the velocity of minutes or hours. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Yeah, you could be a senior developer just thanks to these things as well. Yeah. Yeah. And do you find that the perspective for CISO on the whole AI ML space as well?\
+Like what's your take on in the space? Considering you already had a background before this was a cool experience.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Josh Lemos:
+\f1\b0 \cf3  I think that there are some really measured CISO perspectives out there that are saying, let's look at our existing acceptable use policies and let's lean on those. Let's look at our data governance program. That's boring. It's not AI. It's not ML, right? It's not, you know, no one's talking about LLMs.\
+They're thinking about what is our data, what is our data sensitivity and sort of how do we manage that responsibly? I think that there are some very unintended uses or edge cases that CISOs aren't thinking about that may be incredibly useful to an employee, but may put that data at risk from a CISO.\
+Right? So if someone said, I want to take all of my meeting notes and have those summarized by, you know, an LLM, I'm not going to be particularly thrilled about that \cf4 [00:08:00]\cf3  idea, right? that's going to be a violation of our acceptable use policy or data policy, but I get the benefit. And so I'm going to have to think about how I support that use case and enable the benefit for that employee base that wants to do those types of things. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Yeah, I feel like the jobs of people You know, every meeting has a person who takes notes. Yeah Like no way I am well, it's taking that job from yeah that was my dedicated job because I feel like as I talk about people who find their jobs being affected, Like so CISO's would have to build a five year roadmap 2 year roadmap, whatever the roadmap that they might be thinking of working on especially after attending the BlackHat CISO Summit.\
+They're going, Oh, okay. What's the things that I would want to have in my roadmap for the next three, five years? Are there things that come to mind as trends or things people should consider as similar to AI/ML, you mentioned the acceptable use case policy, which is fairly obvious one, but people would not think of, Oh yeah, I can start at my acceptable use policy.\
+Are there trends that you feel that are worthwhile calling out for people to consider for their next roadmap that \cf4 [00:09:00]\cf3  they're building as the new year starts? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Josh Lemos:
+\f1\b0 \cf3  I think that there are incredibly simple and boring use cases that provide a tremendous amount of value in the fundamentals. So if you think about developers, what are the things that they hate doing, right?\
+They hate writing documentation. A lot of times they hate writing integration tests, right? Like getting unit tests is enough of an ask. And then you're asking for integration tests on top of that. Those, I think are really meaningful opportunities to find ways to enable those use cases for your developers and your engineers and companies.\
+If you can go out and say, go write integration tests between these two services and have those generated for you and put into production. It allows you to increase your development velocity and the security benefit can be on the order of magnitude when you can start to think about things like bumping dependencies.\
+So if you had great unit test coverage, great integration test coverage, you could pull in dependencies, have the tests run. \cf4 [00:10:00]\cf3  And if it's all successful, you could patch it without having a developer necessarily look at it. Yeah, yeah. Those are dream states for a lot of people to not have to do that security hygiene and automate that away with AI.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Ooh, I love that. And I think that kind of goes in line with the whole DevSecOps thing people talk about as well, where it's almost like a dream that we want to achieve one day. Yeah,\
+it's here today, but like the reality of it not being included in a roadmap makes it sound like, oh, it's going to be a herculean task to finish. So I want to put that for five years, like just not right now.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Josh Lemos:
+\f1\b0 \cf3  Have an OKR to have your integration test written by AI. Yeah, I be great. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  I think because that makes me feel as part of the Black Hat CISO Summit as well. \
+Are there like two or three things that are taking away from it for people who could not attend the CISO summit? Like what was your few things that are taking away from it? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Josh Lemos:
+\f1\b0 \cf3  I think the problems that CISOs are facing are somewhat ubiquitous around identity. And this has proven out in a lot of the research papers we're seeing.\
+So we're \cf4 [00:11:00]\cf3  seeing CrowdStrike come out reports. Verizon has their data breach report. I think IBM has a report out. All of them speak to the problems with identity and access management that are higher up the stack from the problems that we've previously dealt with. So we think about zero trust. We think about identity in terms of device identity.\
+We think of human identity and service identity. And then all of the secrets management. For all of those different identity profiles matched up against the matrix of data and data sensitivity. And so all of us have those similar problem cases or similar challenges. And the opportunities are for us to look at being really thoughtful about the frameworks through which we provision identity, manage our data, and then have to think about the regulatory and compliance impact of those decisions.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  I think I like this because to your point, because identity is the new perimeter, as they're calling it, which, especially in a cloud world that people live in \cf4 [00:12:00]\cf3  now, it definitely makes sense to have that as your starting point to think about, Oh, okay. Yeah. I think I need to get my identity onboarding process, offboarding process, third parties that I'm working with that should be covered as well.\
+And then moving on to the data part, which is probably the most important thing for, I mean, if your server gets hacked. If it doesn't have any sensitive data in there, you don't have to worry too much. But if the data itself is out there, that's a lot more worrying. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Josh Lemos:
+\f1\b0 \cf3  Yeah, we worry about outcomes. Yeah, yeah.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  And do you find that being a CISO for a B2C versus a B2B, is that quite different? Because you've kind of gone to like the Cylance world, the Square, Block world as well, and now with GitLab. Is there a lot of difference between being a CISO for a B2C versus a B2B kind of space? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Josh Lemos:
+\f1\b0 \cf3  So I would say that the the differences are not necessarily on B2B or B2C because Block has B2C and B2B.\
+Oh, yeah And GitLab has a similar profile where I find that it's materially different is between fintech and non \cf4 [00:13:00]\cf3  fintech. So when you're dealing with finance, banking licenses, and money transfer, your regulatory bodies are more expansive and you're more highly regulated than you are in other non banking verticals.\
+We're still regulated or obviously regulated by the SEC as a publicly traded company. We have governance requirements that we need to abide by, but it's somewhat different in terms of the cadence and the things I have to worry about, you know, Square, I had to worry about a lot of PCI. None of those things are meaningful factors in the same way.\
+So I can really focus on the core security principles that I'm hoping we'll address. Emerging legislation on the privacy and data security side. We'll all see when that comes out, but right now we're still a ways away from that. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  And cause I think that Square makes me think of Square has these hardware devices everywhere as well.\
+Yeah. Was doing security or managing a security program for hardware versus a software first company like developer first, software first kind of company. What's the difference there in terms of the \cf4 [00:14:00]\cf3  way you think about security? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Josh Lemos:
+\f1\b0 \cf3  So hardware was another discipline. Right. So we had a hardware security team that's focused on the key material on devices and self terminating devices.\
+So, you know, in certain regions, they require you to basically destroy the memory. On device. It has like a little battery that basically fries the chip. If it anti tamper device, like a mission impossible, it's sort of neat. Right. If you choose to move forward, if you try and read the memory off this, yeah, well, the device will self destruct it.\
+So that's interesting, but it has the physical supply chain problems in hardware that are manifested as software supply chain problems, right? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  And do you find that maybe this is a question more for people who are listening to this and thinking that they want to be a CISO one day as well, and maybe a younger Josh somewhere?\
+What would you recommend as a skills they should work on to hopefully become a CISO one day? I mean, it could be foundational skills or technical skills. What do you recommend? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Josh Lemos:
+\f1\b0 \cf3  So the technical skills will move you through your career to a \cf4 [00:15:00]\cf3  point, and they're always an incredible asset to fall back on.\
+But what really makes the difference is, can you work cross functionally? Within an organization, meaningfully move people in a positive direction and to clearly articulate a message that resonates with your business to match the risk profile of the organization that you are hired into or supporting.\
+And I cannot overstate the value of relationship building in that process and credibility building before you walk in and tell someone, Hey, you can't deploy that on the cloud, right? You need to lay the groundwork first. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Yeah, fair enough. And I think that may mean that initially you might say. Okay. For things you may not be as comfortable with a pinch of salt sometime, maybe \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Josh Lemos:
+\f1\b0 \cf3  I think it's a yes, and \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  I love that. And the theme of the month for us is offensive security in cloud. And you have a pentesting background. One of the questions I have is where do you find the differentiation between cloud pentesting and the \cf4 [00:16:00]\cf3  general web app and network pentesting people talk about? Is there a lot of overlap or is it just config view? Where do you stand on that? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Josh Lemos:
+\f1\b0 \cf3  So we have a red team at GitLab, and they are very involved in thinking about access to both the underlying infrastructure, as well as the various other layers of the stack. So in a cloud centric pentest environment, much of that is about how do we dump environmental variables?\
+How do we get secrets and how do we get access to the underlying primitives of the cloud infrastructure such that we can affect outcomes, right? And they want negative outcomes. They want data, they want exfiltration. Getting onto a box is not particularly interesting. And so I think that cloud pentesting is not going to be about, you were able to compromise X, Y, or Z.\
+It's, I was able to get these outcomes, these persistence mechanisms. This data sources lateral movement between across the company or even between companies. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Oh \cf4 [00:17:00]\cf3  yeah. Oh, I love that perspective because to your point, most of the conversation about cloud pentest is like, Hey, it's a config review. I have a tool for that and I don't need to worry.\
+I love the outcome based approach because most red teams go with that where what's the outcome that I'm trying to achieve? Can I phish Ashish to get his credentials? Versus I'm just trying to find a config review on to a cloud provider. I love that perspective. And well, that's most of the technical question, but three fun questions that completely non technical.\
+The first one being, what do you spend time on when you're not working on technology? what's your hobbies like man? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Josh Lemos:
+\f1\b0 \cf3  Ah, so I have a wife and two kids, so I spend a lot of time traveling the world with them and just trying to play those roles. So I play the role of CISO at work, at home I play the role of father, and I play the role of husband, and I try and put equal effort into those roles as well.\
+I love traveling with them, we just got back from Mexico and had some amazing tacos. I teach Brazilian Jiu Jitsu. Oh nice. So that's something that I continue to do. Even as my body is telling me not to do it anymore. \cf4 [00:18:00]\cf3  And then we're avid skiers as well. Oh, nice. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Okay. Oh, I can't be friends, man. I'm a snowboarder.\
+So I can't be friends with you guys anymore. I mean, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Josh Lemos:
+\f1\b0 \cf3  this interview is over. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  The next question that I have is , what is something that you're proud of, but that is not on your social media? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Josh Lemos:
+\f1\b0 \cf3  What am I proud of? I think that the things I'm most proud of aren't on my social media at all. Especially at this point in my career, it's the people I've helped and folks I've worked with who have built their careers and who I've contributed in some small way to what they've done or been able to, you know, guide a decision that led to a good outcome for them.\
+So, the relationships that I've built in this industry probably mean more to me than anything I've done professionally in like any organization I've secured or anything else. I have a lot of loyalty to people. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  And that's a great answer as well. And the third one being from Seattle, I'll be really curious to know your answer for this.\
+Yeah. What's your favorite restaurant or cuisine that you can recommend to the audience? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Josh Lemos:
+\f1\b0 \cf3  I think that this is some recency bias coming in. I'm actually a California native. Oh, right. Okay. And so like, \cf4 [00:19:00]\cf3  I think that tacos might be the most perfect food and yeah. I mean, you went to Mexico for your trip as well.\
+I just got back from eating a bunch of delicious tacos. You can't ask me that question today. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  Have you tried the purple taco as well? You know, the purple colored ones? Made with the purple corn, I think, or whatever. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Josh Lemos:
+\f1\b0 \cf3  Oh yeah, so there's like the blue corn tortillas. Yeah, blue corn tortillas. The birria taco is the king of tacos though.\
+Oh! What are they made of? So birria is beef, and it's like in a rich red sauce. So, I also love... Indian food and because of sauces and because of spice and flavor so anything that's deeply rich like that It's something that sort of draws my attention fair enough, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  but no, that's most of the questions I had but where can people find you on the internet.\
+They want to connect with you. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Josh Lemos:
+\f1\b0 \cf3  Linkedin I think I've finished with X, is that what we're calling it now? Yeah, yeah. Finished with X. Yeah. But, Mastodon, maybe Blue Sky would be great. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Ashish Rajan:
+\f1\b0 \cf3  If someone has an invite there, please do send that over. Also, LinkedIn primarily. I'll probably drop that \cf4 [00:20:00]\cf3  link over there as well.\
+But thank you so much for coming on the show. Yeah. And thank you for the audience to watch as well. But we'll see you next time. Thanks, man. I appreciate that. Thank you. Good to see you.}

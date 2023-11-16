@@ -1,0 +1,588 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red216\green34\blue146;
+\red128\green128\blue128;
+\red250\green138\blue59;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\b\fs48 Luke Hinds\b0}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ If you wanted to make sure that the container used by the Kubernetes cluster that you're running is coming from GitHub Repository, which is from your organization, how would you do that today? We tried solving this problem. In this episode with Luke Hinds from Red Hat. We spoke about a software signing open source project called Sigstore with multiple projects underneath it, one of them being co-signed.}
+{\pard  \line \par}
+{The conversation that I had with Luke Hinds was around the fact of why is it important to think about software supply chain in today's day and age? If you are still wondering why we're talking about software supply chain, you should think about log4j and it still gives me, jitters that it came through Christmas and a lot more happened nowadays, software supply chain is the primary.}
+{\pard  \line \par}
+{Topic that people are interested in because of log4j, because of SBOM, because of a lot more things that are found through open source vulnerabilities these days than actually, , the old good old fashioned pen to finding a vulnerable journey front door. So this was a really important topic that I wanted to bring over.}
+{\pard  \line \par}
+{If you are someone who's trying to learn }
+{\cf2 [00:01:00]}
+{ about software, supply chain security in a kubernetes context, or maybe even a broader context for maintaining the chain of trust or the chain of custody for the software, from the origin of all the way to wherever you want to take it to kubernetes, the YAML file, whatever it may be, that's the promise that sigstores planning.}
+{\pard  \line \par}
+{It is a free software, as I mentioned, and it can be used and easily set up by folks who want to use it. Cloud native community is definitely behind it. If anyone who's trying to learn about signing software supply chain so they can have an insured chain of custody of the software that they're building and improving.}
+{\pard  \line \par}
+{This is the episode for you. If someone else who's doing it, please freely free to share this episode with them or share it on your LinkedIn or Twitter post or whatever you find that would be valuable for your friends and colleagues in the industry. Thank you for everyone who's been sharing the previous episodes.}
+{\pard  \line \par}
+{Been really valuable. It makes us really proud to know that we are sharing something just valuable. And as always, if you are hanging around onto the iTunes and Spotify of the. If you can }
+{\cf2 [00:02:00]}
+{ drop a say, rating or review, that would be awesome. I would love you more for it. Probably give you a virtual hug or a real hug if I see you at one of the conferences because it really means a lot.}
+{\pard  \line \par}
+{Many people share and it really review or rating. It means that we get to help a lot more people. So thank you so much for doing that. Shilpi and I were also at Cyber Con, which was the Australian Cybersecurity Conference, and we were giving a talk about zero trust and software supply chain. So this was very poignant to have this conversation around this weekend.}
+{\pard  \line \par}
+{We are gonna release the talks later on in the year as a video as well, so we probably get to see that around. Oh, talking about video. By the way, you're watching on Spotify, Do what? You can actually watch the video. Yes, you can actually watch, watch the video on Spotify if we actually have wanted to know that you're wanting to watch a video while you're doing your dishes or walking a dog.}
+{\pard  \line \par}
+{But in case if you wanted to do that, you can do that as well. I enjoy this episode with Luke Hinds }
+{\pard  \line \par}
+{\b\cf3 Luke Hinds:\b0}
+{ when you're developing an app, security might be treated as an afterthought with functionality, requirements and tight deadlines.}
+{\pard  \line \par}
+{It's easy to accidentally write vulnerable code or use a vulnerable }
+{\cf2 [00:03:00]}
+{ dependency, but Snyk can help you secure your code in real time so you don't need to slow down to build securely. Develop fast, stay secure. Good. Developer Snyk}
+{\pard  \line \par}
+{hey }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Luke, welcome for coming the show. }
+{\pard  \line \par}
+{\b\cf3 Luke Hinds:\b0}
+{ Hey, Ashish good to be here. Thank. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Oh my God, thank you so much. So just kick it off and I think I would be surprised if people don't know you in the kubernetes space, but for the two or three people who don't know you in that space}
+{\pard  \line \par}
+{tell us a bit about yourself and how'd you got your, where you are today, professionally? }
+{\pard  \line \par}
+{\b\cf3 Luke Hinds:\b0}
+{ Yeah, sure. So I've been around open source for quite a while predominantly security. . And been part of many different communities over the years. Originally started in something called Open Stack, which was another sort of cloud type orchestration platform.}
+{\pard  \line \par}
+{Did security there for a while, done stuff around the Linux kernel different parts of the ecosystem. And I got involved with Kubernetes, I guess three to four years ago, I believe. And what I currently do is several gigs }
+{\cf2 [00:04:00]}
+{ really, that I have. So I'm part of the Kubernetes security response team.}
+{\pard  \line \par}
+{. So we're a group of folks that, what we do is, Kubernetes has something called a Bug bounty program. So if somebody finds , a security risk of vulnerability, they can report it to this Bug Bounty program. And then if it proves to. , of a possible exploit, something that's of risk to Kubernetes users.}
+{\pard  \line \par}
+{They'll get some money. Essentially there'll be some cash that's given to them. And what we do is in the security response team, we sort of triage these security issues as they come in. So we look at, , is this actually exploitable? Mm-hmm , is this a real risk? And then if, if it is, we start to talk to developers and try to sort of work out a code fix and work with release management.}
+{\pard  \line \par}
+{The other stuff I do is sigstore, which has got quite a lot of attention recently. That's a big part of the, the Kubernetes ecosystem. My sort of job, so to say is at Red Hat and there we do a lot of upstream work in various types of security }
+{\cf2 [00:05:00]}
+{ areas within, mostly around cloud native.}
+{\pard  \line \par}
+{So yeah, that's generally sort of cloud native, but a lot of stuff around hardware trust as well. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ and sigstore is the reason why I definitely wanted you to come on the podcast and have a conversation as well. So maybe before we kind of jump into the whole space about software signing and stuff, what's the software supply chain and why is it important these days?}
+{\pard  \line \par}
+{That's a good }
+{\pard  \line \par}
+{\b\cf3 Luke Hinds:\b0}
+{ question. So consider any sort of supply chain. ? So let's look at automobile manufacturing cars. ? So you'll have your final product of a car that is sold to a consumer. But if you look at that car, then all the parts of that core car are sourced from different suppliers.}
+{\pard  \line \par}
+{? So you'll have rubber manufacturers, you have a plantation, a rubber plantation somewhere. You'll have , people that write design all of the, the circuitry, all of the embedded systems, all of these sort of brake monitoring systems. The engine, the iron, the steel, the aluminion, all of these parts are.}
+{\pard  \line \par}
+{Brought together to produce that }
+{\cf2 [00:06:00]}
+{ final artifact car. So you have this supply chain, and they're all very reliant upon each other. , there's a, I think they call it just in time manufacturing. So things have to arrive and the production line has to move. ? So if we think of a software supply chain, it's very similar.}
+{\pard  \line \par}
+{? So what you do is typically a, a modern piece of software will ingest other software systems, typically, we'll call them libraries or modules, ? To be able to allow them to build their software, ? These dependencies is another thing that we commonly use. So you have this source of developers, this kind of ecosystem of developers that all work on different projects.}
+{\pard  \line \par}
+{And then ultimately those will all be brought together into a. Single software project. . Right. And then that software will typically need to be in some sort of format that it can be released for, an end user. So that's where you start to build container images }
+{\cf2 [00:07:00]}
+{ or, you start to compile binaries and so forth.}
+{\pard  \line \par}
+{So you start to see how you've got this sort of supply chain. . And then there's other things. There's various sort of, Actors that are involved in the supply chain. So just as we get the guy that supplies the rubber for the tires. . Yeah. And then the person that makes the tires within a supply chain, we have both humans and machines as well.}
+{\pard  \line \par}
+{So you have what we call build service. . docker, OCI registries, and , GitHub actions and Travis and Jenkins, there's all these machines and there's humans as well. So you have developers mm-hmm. , but write the code. And then you have people that review that code so you have more humans that are involved.}
+{\pard  \line \par}
+{And so that, that is the software supply chain. Essentially it's this orchestration of all these components to ultimately produce an end product that is used by a, a user. So it's very similar to a traditional manufacturing supply chain in a ways. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Right. So I }
+{\cf2 [00:08:00]}
+{ mean, I guess probably from an importance perspective, what are some of the common supply chain attacks?}
+{\pard  \line \par}
+{Cause I feel like to what you said, if it's I guess a culmination of so many different components that are brought together in a systematic way so that we can, , do this magic software in front of us. Just so that people have a bit more context, what are some of the common supply chain attacks that maybe in a kubernetes context as well?}
+{\pard  \line \par}
+{\b\cf3 Luke Hinds:\b0}
+{ Yeah, there's a multitude of attacks and it, quite interestingly, if we go back to this analogy of machines and people mm-hmm. . The attack, the origin could be a, a human. . So it could be somebody could compromise my account. They might somehow get access to, let's say I have like an identity provider type service that I use.}
+{\pard  \line \par}
+{I don't, I'm not gonna pick on Google, but let's use Google as an example. ? Sure. If somebody compromise my Google account mm-hmm. , and then I might use single sign on to get. Access to my GitHub account. ? And, and then so somebody could compromise my identity, ? Mm-hmm. , and then they could backdoor code.}
+{\pard  \line \par}
+{So that's a sort of a human attack. Something else that we }
+{\cf2 [00:09:00]}
+{ see start to happen a lot more recently is what we call protest ware. So I'm, a software maintainer. I maintain an open source library. Something annoys me politically, or I wanna make a statement. So what I can do is I, I could compromise my own software so that it essentially is ingested by all these other systems, and then it causes draining of resources, , spikes a cpu, upper memory.}
+{\pard  \line \par}
+{And, and we've seen people do that, , for sometimes for understandable reasons to them. But it's the impact that it has on people that are, , perhaps innocent to the cause that they're protesting, . So, yeah, humans can be compromised and then, Machines can be compromised, build service can be compromised.}
+{\pard  \line \par}
+{That's something that's quite often is, , an access to , a machine is compromised. . Getting more into Kubernetes, a Kubernetes image or something like a Docker file could be compromised. That happened with, there was an attack there's a piece of software called Codecov. . Yep. Cove is short for coverage.}
+{\pard  \line \par}
+{Mm-hmm. . So with }
+{\cf2 [00:10:00]}
+{ codecov, it essentially, it will look at your code and it will somehow establish your test coverage. Yeah. So when we write. Code for any software, but particularly Kubernetes. . You would make sure that the code you write has what we call unit testing. Yeah. So we can make sure that if somebody makes a change, they don't break an existing piece of functionality.}
+{\pard  \line \par}
+{So this codecov it establishes what is your coverage for testing. . Yeah. And they had a docker file, an image that was exploited, and they changed like this bash script, which uploads the results and it started to leak secrets. . And so then we are moving into protecting of secrets. . So this is where people will use some form of token, to access a system.}
+{\pard  \line \par}
+{. Yeah. And it's something quite widely that we use in, ci, your generator secret token. And if these are leaked, Into the hands of somebody that's malicious and doesn't have your best interest }
+{\cf2 [00:11:00]}
+{ at heart. They can use that token for their own means, . Yeah. So within Kubernetes, a lot of the attacks that we see are not so much around the periphery of build systems and people.}
+{\pard  \line \par}
+{It tends to be more the APIs that we have. Cause we run a lot of APIs and Kubernetes, right? There can be various attacks that can perform what we call a privilege escalation. Yep. And somebody could have a certain access control level. . A service account and they're able to escalate. Another one is a denial service a lot.}
+{\pard  \line \par}
+{We see a lot of those. . Not many of them are exploitable. That's the difference. But we see a lot. Attacks where somebody can just throw large data sets, extremely large YAML files at an api, and then the API will either become over constrained, it's not able to function properly because the CPU usage is peaked up to 99, a hundred percent, or, or memory is flooded and so forth.}
+{\pard  \line \par}
+{Yeah. }
+{\cf2 [00:12:00]}
+{ Memory allocation is just completely maxed out. That's one of them. And there is also container escapes. That's another thing that can happen. So somebody's able to get a bit more rare here. Somebody's able to escape the confines of the container and access the host. So if you think about Kubernetes, you'll have a host operating system.}
+{\pard  \line \par}
+{. And then containers will run on top of that host. Yep. And they have a level of security. Seclusion that's meant to be in place , to separate the container from the host. . We use things like cgroups and this is principle and name spaces and Yeah. But somebody's able to escape the container and access the host underneath.}
+{\pard  \line \par}
+{So that's a kind of a lot of the attacks that we see around Kubernetes. But the kind of the wider supply chain attacks. Yeah, it's lots of things. It can be typo squatting. It's one that we see quite often. There might be a popular library in the }
+{\cf2 [00:13:00]}
+{ Python and ecosystem called widgets.}
+{\pard  \line \par}
+{ . Yeah. And then somebody will perhaps change the eye for a one, so it looks like widgets. . And then somebody will download the wrong one, which is compromised. And other things that happen is They will abandon packages and then somebody will somehow manage to do a password reset on their account.}
+{\pard  \line \par}
+{Right. And compromise the package. People forget to renew domains, which are often used as , a way of getting a password reset. ? So if I run my own email system Yeah. And I forget to renew my domain, somebody else will register it and then do a password reset request Yeah. To the package providers system, and then they manage to compromise the account.}
+{\pard  \line \par}
+{So there's a lot of different areas that a supply chain can be infiltrated. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So I think, cause that kind of leads to a question and I think similar question of what I was thinking about Vineet has thought about this as well. So first of all be was basically really happy with the }
+{\cf2 [00:14:00]}
+{ sca description analogy that you use.}
+{\pard  \line \par}
+{That was good. People asking a question around having vulnerability tools to scan docker images before production deployment helps or do recommend some extra controls. }
+{\pard  \line \par}
+{\b\cf3 Luke Hinds:\b0}
+{ Anything extra is good. So to scanner an image to see what's actually in there. .}
+{\pard  \line \par}
+{Mm-hmm. , what exploitable CVEs do you have? Any extra security controls are all good? I would say, I think , there is no silver bullet. . There is no killer single application that can provide security. , it's the layers of security. I mean, there's this quite old.}
+{\pard  \line \par}
+{ Security principle that we don't really say it so much now cuz network to topologies have changed, but we used to say defense in depth. . Yeah. So you build multilayers of defense comes originally from the military. If you had like somewhere where you had a gun, , Big gun, you would sort of put mines around the periphery and barb wire and then you would have folks on lookout with binoculars and you'd protect that, that area.}
+{\pard  \line \par}
+{? You'd have Oh, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ why they have mines. Cause I've watched movies. They have the, Why do you have }
+{\cf2 [00:15:00]}
+{ mines when you already have guns? But, , To your }
+{\pard  \line \par}
+{\b\cf3 Luke Hinds:\b0}
+{ point sense, it's, if one system fails, you have another system. ? So, so very much when I'm talking away today, if I don't mention vulnerability scanning doesn't mean it's not important.}
+{\pard  \line \par}
+{ These are all important. , the more layers of security you can have, the better. Definitely. Yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. Yeah. That's awesome. Now thank you for that and hopefully the answer your question as well vineet feel free to ask me more question if you want. I think we kind of explain the common supply chain attacks.}
+{\pard  \line \par}
+{We also spoke about, I guess what it is, one more thing that I normally get asked by a lot of people is around the importance of it. And I think there's whole. Conversation now that's brewing after the whole log4j happened for a while where, hey, , how do I know what dependencies that I have are vulnerable open source.}
+{\pard  \line \par}
+{There was all these conversations about this. , I guess having been a developer before, like you have had a career at least some years in as a developer, how would you explain the importance of software supply chain to someone on the other end? Cause I think one of the struggles that has a lot of security people have is to }
+{\cf2 [00:16:00]}
+{ explain to a developer, Hey, cause you can't just slap log4j on people's face and go, Well this is the reason why you should have it.}
+{\pard  \line \par}
+{Like, why is it important? Like, , you use the example of codecov, which is great for coverage. Any developer, they were like, Oh yeah, I need, I wanna know how much coverage that I have for the unit test that I'm running. How do you explain the software supply chain signing thing to people?}
+{\pard  \line \par}
+{I guess why is it important for developers. , like from a security perspective, I mean, for people who are interested in sigstore, I guess, which is the service you're gonna talk about, which is the open source service that you have for signing. So but my question is more around how do you normally explain to people why is it important? For the non converted, I guess. }
+{\pard  \line \par}
+{\b\cf3 Luke Hinds:\b0}
+{ I guess there's several avenues of approach there. , the first one is that being on the end of a successful exploit hack , is not pleasant at all. . It's companies. Feel a lot of pain from this. Cause it's their brand that's at stake here.}
+{\pard  \line \par}
+{ So if you have good security controls, you have a level }
+{\cf2 [00:17:00]}
+{ of brand protection. Because if a company's hacked, it's not the end of it, but , it's really not a good optic for you as a company, ? , if you happen to be the developer, that was, it's not about blaming people, but it's just not something that somebody wants to experience.}
+{\pard  \line \par}
+{. As that level. The other thing as well is Security's not a difficult thing. . I think some developers just think that's just not my area. I just write APIs or I'm a backend engineer, I'm a front end engineer. What I'd say to folks is, it's really not difficult to apply security principles to what you do.}
+{\pard  \line \par}
+{? Yeah. So you are not gonna have to learn how to do complicated mathematical computations and write your own cryptography or anything close to that. It's about some core basics. . If you're a developer and you're interested in this and it's very good for your knowledge, As a developer to understand these things, , when you are writing your code to have this as a context.}
+{\pard  \line \par}
+{But there's an organization called }
+{\cf2 [00:18:00]}
+{ oas, O W A S P. Yep. . And forgive me, I can't remember what the words are for that, the acronym, I think }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ it's open The application security Protocol Project. Sorry. Yeah, yeah, }
+{\pard  \line \par}
+{\b\cf3 Luke Hinds:\b0}
+{ there you go. So they have this top 10 secure coding, I can't remember what they call it, but they'll essentially, Yeah, they're not, they'll outline the things as a developer that you need to be careful of.}
+{\pard  \line \par}
+{So there are things like unsanitized input. Yep. . So when you are using a variable and you are pulling in that value from outside, can somebody exploit that? , there's privilege escalations, , they've got this really nice outline. Sequel injections, typical attacks that happen quite often around some sort of web facing application.}
+{\pard  \line \par}
+{So I would have a look at that and you'd be surprised this isn't really difficult stuff, it's all quite applicable and it's very good for a developer to learn this as , your growth as an }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ engineer. Yeah. And maybe for the leaders as well. Cause we have a lot of leaders who listen to the conversation as well that we have here.}
+{\pard  \line \par}
+{And we can talk about }
+{\cf2 [00:19:00]}
+{ log4j and use those examples as well. But do you feel like from people who are security leaders why they should start giving importance? I think maybe we can probably add the part of what the whole signing servicing is as well, so people understand the context for how to explain this to like a non-technical leader if thats even a word.}
+{\pard  \line \par}
+{Sure. }
+{\pard  \line \par}
+{\b\cf3 Luke Hinds:\b0}
+{ So I think for the leaders that , the previous point is probably even more prudent, which is, Brand protection. When an exploit happens, it's no good to retrospectively fit security. . so one thing , that is very common is , you can, , if, if somebody asks, When should I get started on securing my software supply chain?}
+{\pard  \line \par}
+{I would say last Tuesday, . , you should endeavor to get into good habits as soon as possible. . And that way you, preemptively start to embed the culture into your engineering teams around secure development. Your admins know how to understand how to have secure systems.}
+{\pard  \line \par}
+{? And Yeah. You can start to look at things like SLSA with the SLSA }
+{\cf2 [00:20:00]}
+{ levels. . So SLSA is around, it's a framework of standards for improving the security of your software supply chain. And you can kind of step up in levels. So the sooner you embed this culture, the easier it will be , to have a good robust security posture going forward.}
+{\pard  \line \par}
+{These things will become, an intrinsic part of, of what you do, , as an engineering team and how you function. So I would say don't be scared. Get jumping in early and yeah. And so, you were saying around signing and Yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ For what important service in today's day and age for people who consider supply chain challenge or a problem.}
+{\pard  \line \par}
+{\b\cf3 Luke Hinds:\b0}
+{ Just to get everybody up onto this, a level playing field, cryptography, modern key technologies, what we call a key pair because you have a private key and a public key. . And you can use these keys to encrypt content.}
+{\pard  \line \par}
+{? And then anybody that has the public key can verify that it's you }
+{\cf2 [00:21:00]}
+{ that encrypted or signed anything. It could be a, , it could be a tarball or a pdf, a container. ? Yeah. So you have this key pair and you can encrypt something or you can sign something. Now we are looking at the signin side, ?}
+{\pard  \line \par}
+{And what that allows you to do is verify that nobody's tampered with the object that's been signed. ? Yep. So I could take anything. Let's use the example of a pdf. I could sign that using my key. I could give my public key to you, Ashish, I could send you that file. I could put it on the internet, , like some website.}
+{\pard  \line \par}
+{Yeah. And then you can receive that file and then you can use my public key to verify that it's not been tampered with. And then it was actually me, I was the identity , that signed that PDF file. So that's something we call non-repudiation. You can't be disputed that I signed that particular PDF file.}
+{\pard  \line \par}
+{. And then the safe transit of that we call integrity. . So we ensure that not a single }
+{\cf2 [00:22:00]}
+{ bit of that file has changed. So nobody's managed to put some sort of weird PDF abode vulnerability in there, or, , so it, is very much you get those guarantees of non-repudiation and integrity.}
+{\pard  \line \par}
+{. Yeah. And that's where Software signing is immensely useful for the software supply chain. Cuz if we look at that earlier example that we gave , Of code. And artifacts moving along the chain to the end user, you can see multiple machines and humans are all interacting with your code and the artifacts that you produce.}
+{\pard  \line \par}
+{So if we bring it back to cube world, a container. . So what you can then do is using cryptography, Key cryptography, Yeah. You can verify who this thing is coming from. So for each stage of the chain, we can have an expectation that this machine with this key pair or this human with this key pair would }
+{\cf2 [00:23:00]}
+{ assign this artifact.}
+{\pard  \line \par}
+{So I know nobody's tampered with a tiny little bit of it and I know who it's coming from. So there's non-repudiation. So if you gave me something that's full of malware, I'd know, well, hey, Ashish signed this? , you signed this, you can't, there's non-repudiation, ? Yeah. So then that way you've got a very, a nice level of of transparency around who is interacted with what and the integrity of that.}
+{\pard  \line \par}
+{. And, that's what sigstore is all based on essentially, Right. , is the signing of things and making that easier. . So I'll start to really dig into sigstore now. . So traditionally with software signing or signing event, anything. . Yeah. It's the tools that we predominantly used are very old.}
+{\pard  \line \par}
+{. We're talking, I might be wrong here, somebody could fact check me, but we're talking sort of 25 odd years is when GPG was originally. Developed. . The first versions of it }
+{\cf2 [00:24:00]}
+{ and the protocol was designed, I might have got that wrong. So somebody's welcome to sort of, it's really all, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I mean, I definitely agree.}
+{\pard  \line \par}
+{It's been there for a long time. }
+{\pard  \line \par}
+{\b\cf3 Luke Hinds:\b0}
+{ And and it was amazing for its time. It was groundbreaking. Yeah. So I would never in any way speak badly of a gpg, but it was designed when things were very different. . We did not live in the current paradigm that we have now of many systems all connected together and reliant upon each other.}
+{\pard  \line \par}
+{? Mm-hmm. , GPG was bit more one to one in a lot of ways. . And to establish. A trust circle with gpg, you'd use something called a web of trust. It would be called, and these would typically be set up by people would meet in person to sign each other's keys. . And not to say that that's essential, but there was no trust authority, and unless you established one yourself.}
+{\pard  \line \par}
+{. Right. And so as a result, , what we noticed, so we started to look at software supply chain really started to get some attention about }
+{\cf2 [00:25:00]}
+{ two years back, maybe two, three years, . Mm-hmm. really started to come under the microscope. And so when we looked at the wide open source ecosystem, , so let's say for example we have Python and they have PyPi}
+{\pard  \line \par}
+{? You have Ruby Gems, . For the Ruby World, ? And then there's Maven. ? There's different sort of. Packaging ecosystems. . And then within Kubernetes, we have container images. . So when we looked at the adoption sign in, if a community actually introduced the code so that developers could sign things, generally the adoption rate would be around two to 3%, very low.}
+{\pard  \line \par}
+{So it might start off. People trying it, right? But they would just eventually, they would just fall away. . And then the actual people verifying were even less. . So we had a look at why that was. And it was generally because the tooling was cumbersome to use, ? Right. The UX was just less than desirable.}
+{\pard  \line \par}
+{Now I say that there's probably some security geek }
+{\cf2 [00:26:00]}
+{ cap, There's had a UBI key for years and they're absolutely fine doing that. And I would say, wonderful, that's great. But you are not the majority. You're, you are the outlier. You're the kind of the, the one 2%. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ You want the easy way. No one wants to be putting ubikeys every day.}
+{\pard  \line \par}
+{I mean, I, to your point, no hate against people using UBI Key, but you would wanna. }
+{\pard  \line \par}
+{\b\cf3 Luke Hinds:\b0}
+{ That's it. So most people do find this a challenge. They're thinking if I generate a key pair, , so these could be very smart engineers, , Yeah. I generate these cryptographic keys. , where do I keep them?}
+{\pard  \line \par}
+{Do I keep them on my laptop? If I want to sort of use a different machine, should I put them on a USB key, like a dongle and just swap it between machines? , I accidentally checked my key into my GitHub repo. So how do I erase that now? Do I just sort of make another commit? But it's in the commit history, , they have lots of fears.}
+{\pard  \line \par}
+{What happens in my laptop stolen? How do I tell everybody? And it's embarrassing to tell everybody, Hey, my private key, I left my laptop on the train. And, , , so }
+{\cf2 [00:27:00]}
+{ generally people were just apprehensive to get involved. And we realized this was because of the ux. ? Oh, right. If, if we were gonna solve this, we had to make it.}
+{\pard  \line \par}
+{Easy for developers to use. . To use cryptography to sign things. That has to be a simple ux. ? Yeah. And so we looked around for sort of other scenarios that had played out where a technology was that was cumbersome, was improved with the ux. ? And a great example here was let's encrypt. ?}
+{\pard  \line \par}
+{Now if we go all the way back to 2014, Yeah. . Which is seems recent, but it's, I guess that's sounds, I know like }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ go, kind of made a lot of things happen very quickly ago now }
+{\pard  \line \par}
+{\b\cf3 Luke Hinds:\b0}
+{ If we look back to around that time, So pre let's encrypt Yeah. Probably 2013, let's encrypt, I think started 2014.}
+{\pard  \line \par}
+{Around that time. Actually, maybe }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ what is Let Syncer for people who have some contact. }
+{\pard  \line \par}
+{\b\cf3 Luke Hinds:\b0}
+{ So lets encrypt. What let Encrypt do is, when you visit a website, ? You will see the URL prefix has }
+{\cf2 [00:28:00]}
+{ HTTP or HTT ps ? Mm-hmm. . So the s denotes secure. So it's using this cryptographic key system that we described earlier.}
+{\pard  \line \par}
+{? Yeah. And so when you visit a site and you see https and a green padlock, that generally means that your connection is. Secured with cryptography. ? Yep. And it is also the website that you expect to be talking to is the website that you are actually talking to. Now, there are little caveats to that.}
+{\pard  \line \par}
+{? There are little kind of, , attacks and, and so forth, dns, exploits, and so, but generally, if I go to bank of america.com and I see that green padlock, then I know somebody, an authority is communicating to me that I'm vouching that this is the Bank of america.com. ?}
+{\pard  \line \par}
+{Right Now, what, let's encrypted, so previous to Let's Encrypt, if I set up a, website, because I don't know. I like collecting model }
+{\cf2 [00:29:00]}
+{ trains or something like that. . So I I install a WordPress site on, on some hosting platform. . Yep. If I wanna run https, what I would have to do is I'd have to contact a provider, ?}
+{\pard  \line \par}
+{Mm-hmm. . And they would require me to generate some keys and some certificate signing requests. So right away I have to work out, my gosh, what are the open SSL commands? So I'm gonna get on Google and I'm gonna Google, how do I generate certificates for, , and I don't know anything about RSA or C D S A or, or any of that, but, , there's all these terms.}
+{\pard  \line \par}
+{So I have to work out how to run those. ? Yeah. Then I need to pay. So I gotta get my credit card. If I've got a credit card, what is, I'm a 14 year old developer , from London or Bangalore or Sydney, or, ? So I have to pay them and then I've got to send them this stuff.}
+{\pard  \line \par}
+{. And then I have to kind of like go through a challenge }
+{\cf2 [00:30:00]}
+{ sequence and make sure who I am, drop, fly a zip bundle. And then I'll be like, Right, how do I get this to work in Apache? So now I'm back to Googling stuff. ? And I've spent maybe a whole day doing this. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ The pain of self self sign certificate.}
+{\pard  \line \par}
+{\b\cf3 Luke Hinds:\b0}
+{ You Yeah, exactly. Yeah. And then you get a year later and you gotta do all again. Yep. , it was, the tooling was just not a good ux. Again, you got the security geeks. , we're not talking to you folks now. We're talking to the majority, the UX was poor. ? And there was cost due as well.}
+{\pard  \line \par}
+{, so Lets, Encrypt came along and they said, Let's make it free for everybody. You can get certificates for free. And then we will produce tooling and infrastructure services to help automate this. So they came up with Cert Bot. So now with Lets Encrypt, you can just set up a Chrome job, a command line thing runs called Cert Bot.}
+{\pard  \line \par}
+{And , it will even set up Apache and engines for you. Yeah, it will do all of that. ? You just need to do }
+{\cf2 [00:31:00]}
+{ an initial setup and it, when it comes to renewing, you can just automatically renew. Incredibly easy. So what happened was , again, I'm probably gonna get my figures wrong here, but.}
+{\pard  \line \par}
+{HTTPS usage was around 30%. . Yeah. And then after Less Encrypt got traction and established, it went up to 70%. . Wow. And the result of that is it made a safer internet for everybody. Yeah. Yeah. , so sigstore really hopes to replicate the trajectory that Lets Encrypt had.}
+{\pard  \line \par}
+{So we have this saying in sigstore to be to the software supply chain. What Lets Encrypt was to https. . All right. So that essentially everybody has the tool and to make it easy to sign things. . Is }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ the free project as well, right? This is same as my, }
+{\pard  \line \par}
+{\b\cf3 Luke Hinds:\b0}
+{ Yeah. Yeah. And there's one just, I just wanted to touch back on the Lets Encrypt thing.}
+{\pard  \line \par}
+{So what happened was when that proliferation of HTTPS skyrocketed up to 70% Yeah. It then became, Socially unacceptable to run a website on }
+{\cf2 [00:32:00]}
+{ http. , So even the browsers started to circle around http. So where we are now is if you go to a website and you put in http, I like model trains.com. ?}
+{\pard  \line \par}
+{Yeah. It kind of feels like E, this doesn't feel good. It doesn't feel safe. ? You're not gonna wanna sign up to that website, let alone put your credit card in there, or, So generally What they've managed to do is they've got , the mass adoption and the perception has changed now where the expectation is everything should run https, it should be TLS everywhere.}
+{\pard  \line \par}
+{ That that is how it should be, and the users expect that now. So what we want to do is do the same for software. ? So we get to the point that if somebody ingests something on the supply chain, Yeah, . Whatever that might be a dependency or a container. If it's not signed using cryptography technology, it kind of feels a bit, e I don't feel }
+{\cf2 [00:33:00]}
+{ comfortable with this, I don't want to trust this.}
+{\pard  \line \par}
+{? Yeah. Yeah. Dan Lawrence makes a really good analogy here, which is that when you run, get package from some open source package managers, Yeah. It's similar to picking up a USB key off the floor and just sticking it in your laptop. , the risk levels , are the same. ?}
+{\pard  \line \par}
+{Mm-hmm. . And so for, for sigstore, we hope to change the paradigm. ? So they, the expectations are signed by default and everything should be signed. And if it's not, you cannot trust it. . And so yeah, with sigstore itself, it's a group of open source projects. . Right. So it's a multi-vendor effort.}
+{\pard  \line \par}
+{. There's no single company that's behind sigstore. . And we all write the code in the community and the documentation for sigstore. . Right. And sigstore consists of services that we run. So we run some infrastructure to do things such as , to provide the certificates. . And we have something called a transparency log.}
+{\pard  \line \par}
+{I won't }
+{\cf2 [00:34:00]}
+{ deep dive into that too much, but it's a kind of a blockchain technology. Right. . Means things are transparent and open so you can see exactly. Who's been assigned what certificates to sign. What are, if that, So you've got this kind of open bookkeeping system, which is built upon cryptography.}
+{\pard  \line \par}
+{it can't be tampered or changed to cover up some sort of bad action, . Yeah. So we have , these services that we run. . And then at the same time, we also develop clients. And the clients are the tools that sign an artifact or some code specific to that language or that ecosystem.}
+{\pard  \line \par}
+{So one of the ones that we have that's most well known is called co-sign. . Oh yeah. And cosign is actually container sign in. . And with cosign, you can sign a container image using six. So you can use the six door infrastructure and the co-sign tool to sign a container for free. . So you'll get a free software signin certificate to sign your container image.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ . Wait, so can I have it }
+{\cf2 [00:35:00]}
+{ behind my firewall as well then? As in, it's not to your point, because a lot of people think https or it has to be always the internet facing. So you're saying that sigstore as an open source project, like how the example that I was giving of self sign certification?}
+{\pard  \line \par}
+{Sure. So this can still work behind the scene as well for personal use as in }
+{\pard  \line \par}
+{\b\cf3 Luke Hinds:\b0}
+{ Yeah, very much. , so co-sign will work with private registries, ACI registries. , nice. But you can, in fact, so with sigstore , we call it the public good service. . So we run this free to use publicly open service that anybody can use.}
+{\pard  \line \par}
+{. Yeah. But the technology that we run, To provide those services, that infrastructure, you can deploy that yourself within your own network. , so if I was speaking to, there's kind of a senior IT leader that has worked for a company and they need to implement something similar internally, then you can set up your own sigstore.}
+{\pard  \line \par}
+{You can have your own trust route. and don't mean }
+{\cf2 [00:36:00]}
+{ the public service. So , that is quite possible. And you can sign your own container images then, and you can use the public service for, if you pull a container image from outside of your organization, if that's signed with co-sign, then you can verify the source of that container image and then it's not being tampered with.}
+{\pard  \line \par}
+{Essentially you get guarantees around the tamper free structure of that container image. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ We were talking about the whole non-repudiation earlier as well, So how does that cover with knowing that, Oh, this is Luke who signed it, versus Sure. Ashish signed it. How does it verify that part?}
+{\pard  \line \par}
+{Right. That's }
+{\pard  \line \par}
+{\b\cf3 Luke Hinds:\b0}
+{ a really good question. So what we do in sigstore so if we go back to this concept of keys again. . Typically you'll generator key pair and , they're termed long lived. . Long you'll keep them for, , , however long you set the expiry for. But people tend to do 365 days.}
+{\pard  \line \par}
+{Again, I say that somebody's probably gonna say, }
+{\cf2 [00:37:00]}
+{ No, that's wrong. It should be 180 or, but that's generally the, the amount that people go for. Some people go for more. . Yeah. And those are long term keys. Now, most of the time, like in a corporate environment, they will have specialist hardware that will store that key.}
+{\pard  \line \par}
+{. Now, as said earlier, we realized this was problematic for a lot of users. So we utilize some other protocols, security protocols to allow us to have, we call this technology keyless. ? Right. Where you do not need to manage a long term private key. . So I'll probably get a little bit hand wavy here, but when use something called open Id connect.}
+{\pard  \line \par}
+{Yep, Yep. Which is a protocol that's part of Oauth two specific. Yep. . And what you're able to do is you can sign a container image with an open identity based account. So Google, GitHub run a a style. Idp, we call it an idp, an identity provider. . Yeah. Yeah. On Microsoft, , there's many.}
+{\pard  \line \par}
+{You can }
+{\cf2 [00:38:00]}
+{ even run your own one privately. . And, and what we do is we have this kind of clever switcheroo . Where the client will connect to our public infrastructure. . And it will request a signin certificate. What we do then is we present them with a page. Yeah. We open a browser where you can then, where you see sign in with Google?}
+{\pard  \line \par}
+{You will then click sign in with Google. . And then our system will then go off to talk to Google and we'll say, Hey, this users authorized us to request from you something called a scope. Yeah. . Now a scope is pretty simple. You've would've come across them a lot. A scope, if we use Google as an example, a scope could be access to your calendar.}
+{\pard  \line \par}
+{Cuz I wanna make entries in your calendar, access to your drive. Cause I wanna back stuff up to your drive, access to your email. ? Yep. What we do is we ask for the user's email address and that is all. So we get back lukehinds@gmail.com from Google. . Yeah. So then that }
+{\cf2 [00:39:00]}
+{ way we know that whoever has initiated this signing system is in control of this account.}
+{\pard  \line \par}
+{Mm-hmm. . And then with these accounts, you get lots of nice extra security. Extras, like two factor authentication to protect the accounts and so forth. . So we now know that whoever's signing is in charge of this account, they're logged into this account. So when we provide you with a software signing certificate, we will put the email address Yeah.}
+{\pard  \line \par}
+{Into that cryptographic certificate, which is signed by , our main certificate route that we have in sigstore. . Yep. Yep. And then you can then sign your container image. . And then that then goes into this technology that I described earlier called a transparency log. So you can think of it like a blockchain.}
+{\pard  \line \par}
+{When somebody's in there, you can't change it. So we put that transaction into the transparency log, and then immediately afterwards you can describe the private key. You don't need to keep it because we've frozen in time. That }
+{\cf2 [00:40:00]}
+{ moment where you, as in. You prove that you're in control of an account. Yep.}
+{\pard  \line \par}
+{You had a temporary keeper. We provided you with a software sign certificate, and you signed a container. So at a latter point, somebody can then verify that lukehinds@gmail.com signed a container image. ? So they can know that I or whoever was in charge of my account signed a container image. ?}
+{\pard  \line \par}
+{So then you can do things such as, you could say if a container image is signed by Luke, I'll let it run in staging, but I'm not gonna let it run in production until Ashish has signed it, ? Mm-hmm. . And you can build up a policy. So now what we have in Kubernetes are, these things called admission controllers.}
+{\pard  \line \par}
+{? And an admission controller will basically red or green light. Workload running on Kubernetes? Yeah. Based on whatever logic you develop specific for that emission controller. So we have a mission controllers that will look for a }
+{\cf2 [00:41:00]}
+{ sigstore signature, something that's signed by co-sign. . Right.}
+{\pard  \line \par}
+{And they could, an admission controller could say, I'm not gonna allow this pod to instantiate until I know it's been signed by Ashish. Mm-hmm. , what I mean? Or signed or signed by Luke. So you can build up policy then around something being signed so the source of where it's coming from.}
+{\pard  \line \par}
+{. And we do other things as well, so you don't just have to sign it with , your Gmail account. . So in, in the context of GitHub Yep. They run an O idc. Yeah. So you can get guarantees that a container was built within a certain GitHub repository. Oh wow. All of that stuff is put into the certificate.}
+{\pard  \line \par}
+{So you have source origin, then you can see where a container image was built. Yeah, and we do the same thing. We've Teton, so folks that are using Kubernetes native Tecton, there's a project called Chains. So when chains builds a container image, , a pipeline is }
+{\cf2 [00:42:00]}
+{ executed. Yep. Then that image can be signed by that machine.}
+{\pard  \line \par}
+{. And and there's many other things as well. , we work with Spiffy as well. Spiffy Inspire. Yes. That, that can interact with sigstore around the, the signing of things and an establishing of trust and so forth. So sigstores become very multi embedded into the Kubernetes ecosystem. There are other folks using sigstore to sign CRDs.}
+{\pard  \line \par}
+{So you have a CRD where you describe your deployment. Your deployment you can sign that and then an admission controller can check that that's been signed before it's allowed to run on your cluster, . Like so like an }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ artifact signing. . Yeah, very }
+{\pard  \line \par}
+{\b\cf3 Luke Hinds:\b0}
+{ much. Yeah. You effectively signed the yaml.}
+{\pard  \line \par}
+{Yep. Yeah, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ yeah, yeah. Fair enough. }
+{\pard  \line \par}
+{\b\cf3 Luke Hinds:\b0}
+{ So that way that if somebody managed a tamper with a bit of YAML somehow Yeah. They got access to a system somewhere and they changed an API slightly changed the IP }
+{\cf2 [00:43:00]}
+{ address or, Yeah, yeah. Or, or did something to exploit, possibly exploit a system you would know because it would break the integrity of that signature.}
+{\pard  \line \par}
+{. That }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ is pretty awesome. So I, in my mind, I'm thinking like a good use case already is the fact that if you're using sigstore, having the signing, you almost building like , a chain of custody for. Like from the point of origin of GitHub, all the way to this is our GitHub organization, whatever, X, Y, Z.}
+{\pard  \line \par}
+{And Ashish kicked off a process to use a container which is produced by the YAML in that GitHub Repository. And then I send to Luke to approve it and then it goes into production. }
+{\pard  \line \par}
+{\b\cf3 Luke Hinds:\b0}
+{ Exactly. Yeah. And then if we consider where we kicked off the conversation around the supply chain. Yeah. Humans and machines all interacting with things, then we have that chain of providence.}
+{\pard  \line \par}
+{ And that's what sigstore helps to happen because there are other things as well. People start to hear the term SBOM and attestations, software attestations . And an }
+{\cf2 [00:44:00]}
+{ SBOM is essentially, think of it like a recipe of the supply chain. Yeah. So if I have chocolate cake. . That chocolate cake required chocolate flour, sugar milk.}
+{\pard  \line \par}
+{I'm not very good at baking, but I believe those, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I'm good at eating though, . }
+{\pard  \line \par}
+{\b\cf3 Luke Hinds:\b0}
+{ Yeah. So you could then an SBOM could describe the chocolate. I got that from Walmart. The flower was from here. It was originally milled in, I don't know, some country. . And then it was put on this ship and it went to there.}
+{\pard  \line \par}
+{And ,}
+{\pard  \line \par}
+{so an SBOM seeks to do the same with software. What are the dependencies that were ingested to build this software? . And with the more kind of attestation based, this is where we start to get into labels. SLSA uses a project called in Toto. . And it has attestations and that has lots of cryptographic guarantees built in there.}
+{\pard  \line \par}
+{Like a digest of the particular artifact that you're right with. So what we can do with, a SBOM. And in toto style attestations. }
+{\cf2 [00:45:00]}
+{ SLSA attestations, we can start to record all of the steps and the individuals in the machines can start to cryptographically sign off to the next person or machine and they can verify that who they're receiving it from is the person that is authorized to do that.}
+{\pard  \line \par}
+{. Yeah. Yeah. And we build that trust system on cryptography. . And sigstore's able to really nicely interact with these components and look after the sign inside. So you haven't gotta have these long-term keys , and you can kind of start to automate things using sigstore tooling. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Awesome. It sounds like there are a lot of awesome use cases for, from a business perspective, for sigstore. I'm almost wondering, because, how. A lot of us have been doing this for a long time. Like, I mean, , I've created a lot of self sign certificate for a long time as well. Sure. As people are kind of going into the journey of using say something like sigstore to sign containers for now and hopefully a lot more as they kind of progress }
+{\cf2 [00:46:00]}
+{ and mature, what do you see people do as a, I guess, , they've heard you talk like software signing is the future.}
+{\pard  \line \par}
+{Yes. I wanna contribute to that growing chart. Where does one start from a maturity perspective, What would day one or what can day one look, look like? And then, I don't know, day 365, when you've done across all the board at scale, how does it work in a scale comparative com? I mean, I guess cause I mean, Enterprise have a lot of applications to manage and look after.}
+{\pard  \line \par}
+{\b\cf3 Luke Hinds:\b0}
+{ If somebody wants to get started day one. . I would recommend SLSA. It's the source that they go to. So SLSA is very good with these. It has this step to approach these levels. So level one for SLSA, I believe, if I recall correctly, it's like you should have some sort of, your build system should be scripted.}
+{\pard  \line \par}
+{Mm-hmm. . And should produce some level of providence in SBOM so that gets you to step one. You don't have to sign it. ? That comes in step two. So step two, you need to start having signatures. ? }
+{\cf2 [00:47:00]}
+{ Right. And and then level three, four, it starts to become, controls become tighter.}
+{\pard  \line \par}
+{You have matic builds, reproducible builds, all the, these sorts of elements start to come in. So source is a very good map, really to improving your supply chain. Now when it comes to. At scale, , multisite, multi data center, Multi cluster value. Multi cluster, , we've made good progress in sigstore.}
+{\pard  \line \par}
+{. And cuz I think the good thing that we did was we built the systems from the beginning to be conducive to those environments, . So but it is stuff that we are working on improving at the same time is, , running up at large scale as well. So I guess we're about just over two years old now, the project.}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Wow. Oh wow. This }
+{\pard  \line \par}
+{\b\cf3 Luke Hinds:\b0}
+{ it's two years old. Yeah. It's been absolutely incredible the, the speed that things have moved at very much. Yeah. So, Wow. I mean, since we've launched we've a lot Kubernetes release images are all signed with sigstore. Yeah. So they standardized onto }
+{\cf2 [00:48:00]}
+{ sigstore and we have.}
+{\pard  \line \par}
+{Organizations such as GitHub are looking to introduce sigstore for sign in of mpm. We have the Maven community who are looking to do the same. So there's lots of open source communities, the Python community, who are looking to onboard sigstore as this means of generating sign providence within , their ecosystem.}
+{\pard  \line \par}
+{So yeah, a lot has happened in the, the past couple of years. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. So it's not just kubernetes. You can do it for anything. Yeah, very much. }
+{\pard  \line \par}
+{\b\cf3 Luke Hinds:\b0}
+{ We are kind of , the Kubernetes cloud native system have been very good. They've helped carry us up, , we've rode wave on the CNCF type technology.}
+{\pard  \line \par}
+{Yeah. But , the big picture has always been that sigstores much bigger than that. ? So, yeah. We, we have libraries for rust. We have libraries for JavaScript, for Ruby Gems. So the folks at Spotify were looking at introducing this for Ruby Gems. There is work looking at using sigstore signing }
+{\cf2 [00:49:00]}
+{ machine attestations as well and all sorts of interesting stuff.}
+{\pard  \line \par}
+{So, as I say, we've got a lot of success and , we are grateful to what the cloud native world has done. But yeah, sigstore should have a larger area of impact , than just that ecosystem. That's }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ what we hope. That's pretty awesome. I think after listening to all the analogies that you've shared and , what we have shared talking about as well, kind of agree with what Vineet said.}
+{\pard  \line \par}
+{If Luke plans to start kubernetes community training, I'm happy to join this training. Thank }
+{\pard  \line \par}
+{\b\cf3 Luke Hinds:\b0}
+{ you. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ So I kinda agree with it. I love the analogy so far as well. And have you kind of map it back to like the basics as well. I }
+{\pard  \line \par}
+{thank you so much for this Oh no, }
+{\pard  \line \par}
+{\b\cf3 Luke Hinds:\b0}
+{ for having me. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. And it's been a great session. I kind of agree with all the sentiment being shared in the chat messages as well. And where can people find you to know more about you and what you do in the sigstore and otherwise cloud native space? }
+{\pard  \line \par}
+{\b\cf3 Luke Hinds:\b0}
+{ Sure. Yeah, so I've, I've got my Twitter account tagged there, decodebytes, so anybody's welcome to send me a direct message, , and }
+{\cf2 [00:50:00]}
+{ you can reach me through there.}
+{\pard  \line \par}
+{I'm on various Slack channels as well, so I'm always happy to talk to people on there and, that's the best way to, reach out to me. Awesome. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I will make sure I put that in the show notes as well. But thank you so much for this and I'm looking forward to when we have the next version of sigstore, when it's being used globally, not just for kubernetes, but for a lot more things.}
+{\pard  \line \par}
+{Yeah, }
+{\pard  \line \par}
+{\b\cf3 Luke Hinds:\b0}
+{ I'd love to come }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ back. Yeah. Awesome. Now thanks so much for this and thank you everyone for tuning in. We'll be back with another episode of kubernetes Security next weekend as well. So I'll see you on next episode. Thanks Luke, and thanks everyone enough. }
+{\pard  \line \par}
+{\b\cf3 Luke Hinds:\b0}
+{ See you.}
+}

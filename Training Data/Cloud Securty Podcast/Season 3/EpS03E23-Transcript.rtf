@@ -1,0 +1,463 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red128\green128\blue128;
+\red250\green138\blue59;
+\red216\green34\blue146;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\pard  \line \par}
+{\cf1 [00:00:00]}
+{ }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Hey, thanks for coming in. }
+{\pard  \line \par}
+{\b\cf3 Yoav Alon:\b0}
+{ Thank }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ you for having. So first of all, I know we're going to talk about researching security holes in Azure and probably broader cloud security as well, cloud service providers as well.}
+{\pard  \line \par}
+{But for people who may not know who about with yourself, could you share a bit about yourself and what was your journey to your current role? }
+{\pard  \line \par}
+{\b\cf3 Yoav Alon:\b0}
+{ Sure. So my name is Yoav and I'm the CTO at Orca security, which is a cloud security. My journey into the world of security is my joke is that I was indoctrinated or I didn't really have a choice.}
+{\pard  \line \par}
+{Like I am Israeli. And most Israeli is at the age of 18 are drafted to the army. And I was lucky to be chosen to two unit 8,200, where I was a security researcher and an officer when I finished my military service. I joined the private sector and worked in various small and big companies. My last few roles were I was an architect at a startup, which was acquired by checkpoint.}
+{\pard  \line \par}
+{So I wasn't a checkpoint for a couple of years. I was a tech lead and architect and an architect that the office of the CTO and the research lead for all of }
+{\cf1 [00:01:00]}
+{ checkpoint. And I joined Orca as CTO three years. So it's been a hell of a journey, }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Yeah, a hundred percent, especially when you guys have been discovering all these Azure vulnerabilities as well, which is something that I'm sure a lot of people are curious about as well.}
+{\pard  \line \par}
+{ I want to probably want to let the set the level playing field, , for everyone, because a lot of people would hear this and go, well, this sounds like bug bounties sounds like pen testing is research in cloud security. The same as I be really pen testing AWS, Azure, Google cloud, or whatever you think you're doing. }
+{\pard  \line \par}
+{\b\cf3 Yoav Alon:\b0}
+{ in the strictest level, it's very much the same. you choose a target, which you believe is valuable and you try to find holes in it, and then , you report it to.}
+{\pard  \line \par}
+{To the vendor and then some, and it depends on the program that they have, you might get found. But I would say that in our case, we don't do it for the bounty because we operate our research mainly for finding and improving the state of cloud security because we were a cloud security citizen and we want to improve , the state. but at the base level, it's very much the same. I wouldn't say , it's a different }
+{\cf1 [00:02:00]}
+{ world. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Right? And so when, and I think because we were talking about this offline as well, cause it's such a new thing to hear research specifically in cloud security. I mean, we did a couple of episodes when we were running AWS month and Google cloud month.}
+{\pard  \line \par}
+{They were someone who came on the podcast. He got the. The bounty price from Google cloud on, I think we're discovering something, which is like a, an a one-sentence 73. And it was really interesting to kind of hear how we kind of went down that process. So all three cloud sized service providers have some kind of a way to report vulnerability.}
+{\pard  \line \par}
+{So what people think, and if they find something they can just report through a genuine professional channel and not be sued by that, , by the company, how there's a fear around if I tell them honorable. }
+{\pard  \line \par}
+{\b\cf3 Yoav Alon:\b0}
+{ So-so yet all cloud providers have have a language in their user agreement that allows for a security testing.}
+{\pard  \line \par}
+{And if you report it to them and it's great that , we have all the major vendors aligning to that standard. And I would say that like the, what you said about the Google bounty, , they're very much. Active in the bounty space and they really want to target the security efforts }
+{\cf1 [00:03:00]}
+{ towards , their products.}
+{\pard  \line \par}
+{And they have one of the earliest bounty programs and they're very quick to respond and give you great feedback. So it's a very recommended bounty program. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Sweet and maybe as a good segway into my next couple of questions as well. So, because for people who probably are working in the Azure space, maybe defending this, or maybe just curious about from a research perspective, we will definitely touch on Autowarp the Azure automation thing that you guys discovered.}
+{\pard  \line \par}
+{What is it? And what can people do about it? So maybe let's start with, what is it first, ? }
+{\pard  \line \par}
+{\b\cf3 Yoav Alon:\b0}
+{ So I just say, I'll take one step back and then I'll dive. Right? There is all cloud vendors have something which they call the shared responsibility model, , where they put the very strict line, , where is the responsibility of the cloud provider and where is the responsibility of the.}
+{\pard  \line \par}
+{And most of the cloud research until recently was very much targeted at a customer side of the shared responsibility, what a mistake you as a customer did in your cloud environment to allow attackers to. One of the innovations in the space recently was }
+{\cf1 [00:04:00]}
+{ to, to actually also look at what the cloud provider, the cloud vendors themselves are doing in the space where they're responsible for it.}
+{\pard  \line \par}
+{Right? So if you look in the last year, there were many new discoveries in the vendors side of the business. , and Autowarp was one of those. It was a bag in the Azure automation service , which was found by , an Orca researcher named Yanir Tsarimi from from my team are very smart and talented researcher.}
+{\pard  \line \par}
+{And you should definitely follow him on Twitter. He has also great advice , Anyway that the vulnerability was one of those, , head scratchers, which you don't expect to find in a large cloud provider. And so, what he discovered was that when you're running an automation pipeline, there's actually an HTP server running the local.}
+{\pard  \line \par}
+{And where you can request you're the token that you are using yourself. So think about the new one to have a pipeline and you want it to have a managed identity and this managed identity could be used to access. I don't know, Azure blob storage, or any other service that you want.}
+{\pard  \line \par}
+{Right. So, but what he discovered is }
+{\cf1 [00:05:00]}
+{ that alongside his HTTP servers, serving his token were other customers running on the same machine that they have their HTTP servers running on other ports. So he just scanned the entire report space and just grab tokens from other customs. So essentially, if you've got lucky and you ran on the same machine as a big customer with a huge cloud estate and , you essentially got their tokens.}
+{\pard  \line \par}
+{And so, and we actually, since this is an automation service, we could run an automation to just count the different tenant ideas that we got. And we got like a few hundreds. Yeah. So this was definitely and we could use those tokens to actually move the pivot into the cloud, the state of the organization.}
+{\pard  \line \par}
+{Get there from a to more interesting targets, but the few tokens that we did have a look we're admin, so we didn't have to do a lot of work. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Right. And it's an interesting one because I mean, just to peel off a few more layers so people understand the risk behind this, because basically what we're }
+{\cf1 [00:06:00]}
+{ saying is I'm Netflix and.}
+{\pard  \line \par}
+{I don't know if it's random. They just say LinkedIn, for like, because your LinkedIn, but technically because you were on LinkedIn or Azure automation, there was a local cell running, which allowed you to potentially access Netflix. }
+{\pard  \line \par}
+{\b\cf3 Yoav Alon:\b0}
+{ Yeah. So you can think about it like this. They want, this is the automation service allows you to run like a Python script and you don't want to spin up a new machine for each Python script.}
+{\pard  \line \par}
+{So we have a few machines that are. And there they're supposed to be sandboxed from each other, but they missed this one thing in the sandboxing layer. So essentially if my job and your job were a co scheduled on the same machine at the same time, I could just grab , your managed identity , and just do whatever your managed identity could do in your account.}
+{\pard  \line \par}
+{So }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ so the Azure service automation service by itself would not know any difference between, is it or is it Ashish or ? Well, I have a request. I'm just going to push it }
+{\pard  \line \par}
+{\b\cf3 Yoav Alon:\b0}
+{ through. Yeah. , it's more subtle than that. You don't get like a men's identity to the automation service. You get the manager identity for the entire Azure }
+{\cf1 [00:07:00]}
+{ state.}
+{\pard  \line \par}
+{Yep. And so , this is one of those things that we reported and Microsoft fixed very quickly. Like in one or two days, it was also already. Yes. But we have , one of abilities, which are usually easy to explain and big into, and we have a. , on the vulnerability and our website, and also the near has done a great Twitter, Fred to explain the entire thought process around finding the vulnerability.}
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ So yeah, I will definitely link up that. Cause I've got a question here from Vineet as well. He was asking about, is it an article or paper to know more about it and the details. So I'll link up the Orca blog that you mentioned as well. So that is so, cause I think that to me is like, Million dollar question.}
+{\pard  \line \par}
+{Every time we hear a vulnerability being discovered, like what was the thought process of the individual kind of going through, like, even to think about from a local history, the B-cell running. Cause I, and this is probably a one education piece for a lot of people because when you are given a service by a cloud provider in this case, Azure.}
+{\pard  \line \par}
+{You're always thinking about the positive scenario, nor thinking about from a research perspective. So maybe that's where a lot of us don't really poke the bear, , for lack }
+{\cf1 [00:08:00]}
+{ of a better word to see what else is going on there. So, so it's resort for the moment. }
+{\pard  \line \par}
+{\b\cf3 Yoav Alon:\b0}
+{ Yes. It's resolved at the moment and, and Microsoft had the facility to make sure that.}
+{\pard  \line \par}
+{, , no one else could have exploited it at the same time. actually , they went ahead and went through the logs and made sure that no one else said this could do that. But, I would just say that you have to think thinking about the cloud is something abstract is definitely not the it's the right way to use the cloud.}
+{\pard  \line \par}
+{It's not the right way to research. , because , cloud is software and software has a bugs and , you have to ask yourself, , how would you have done it? And, if you don't know, how would you have done it? You can try to poke it and see how they have done it and ask yourself whether the there's there's problems in the implement.}
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ it's true. Because a lot of the understanding, because to your point, shared responsibility, a lot of people misunderstand that to be well, AWS or Azure or Google cloud taking care of security from their side. So I don't need to test anything like, I don't remember how many times or at least in the beginning, we used to get this question where, oh, is cloud }
+{\cf1 [00:09:00]}
+{ secure, because to your point, it is.}
+{\pard  \line \par}
+{And how do if something's like you or not? Cause you don't get a pen test report from AWS or Azure or Google cloud what's to believe }
+{\pard  \line \par}
+{\b\cf3 Yoav Alon:\b0}
+{ them. I would try to refine your points. I think that comparing to alternatives the cloud is a lot more secure than any other deployment methods I've seen think about it.}
+{\pard  \line \par}
+{Let's compare all the work to for two log for J for example. All the work we reported the bugs a few hours later. It was mitigated by for any, every insured customer out there. And without most customers having to do anything. And after that, they went ahead and did a full incident response and looking if someone could have done something bad with it and reported it to two customers and they came out empty handed, but they've done all the.}
+{\pard  \line \par}
+{Yeah, let's log4j is on the other side. We, are the Orca security product can one of its features is that I can see which vulnerabilities you have in your cloud estate. So we're still working with some customers helping them to migrate off of vulnerable. LOG4j until this day and it's been a while, }
+{\cf1 [00:10:00]}
+{ so }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ December man, it's like, may , so it's been a while. Yeah. }
+{\pard  \line \par}
+{\b\cf3 Yoav Alon:\b0}
+{ Yeah. But it's hard, like, , doing this at scale for companies with an estate of hundreds of thousands of the virtual machines and millions of containers. It's a very big undertaking to update them all. In the sense you have to be in awe of how fast some cloud providers are doing this turnaround, like from bug reports to patch in production. And it's a Marvel of engineering that , you have to look and say to yourself, , they're really doing a great job with that.}
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Yeah, I agree with you on this as well, because one of the reasons why a lot of people move from the data center, the cloud, we're just this, the speed to market and speed to even the resolution as well. For , for lack of a better word, that is just amazing. Like, I think at the scale of you're going to have to imagine it is a mammoth, right?}
+{\pard  \line \par}
+{It is this big organization and they're serving the likes of Netflix, LinkedIn, all these big people out there. I imagine every major organization is hosted on cloud. At least some parts. That's a pretty big undertaking and to be able to resolve that in a few hours, that that is definitely a commendable.}
+{\pard  \line \par}
+{\b\cf3 Yoav Alon:\b0}
+{ }
+{\cf1 [00:11:00]}
+{ Yes. So we have to remember that although cloud security vulnerabilities exist it's not saying that , if a security issue exists, then the software should be for. It doesn't work like that. we have to look at like the entire security landscape and ask ourselves whether it's a risk that we are willing to take or unwilling to take.}
+{\pard  \line \par}
+{And I think the cloud as a risk , is comparatively low against running your own data centers and having your own private cloud and operating it. So. Yeah, a hundred }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ percent. And I think , I've got a few question here as well, and I think I've got a request on from Shreyas as well as coming from the what's its called from the Twitter spaces as well }
+{\pard  \line \par}
+{so I'll go to Vineet's question first. So when you do your research, what is the approach to finding vulnerabilities in discovery stage? }
+{\pard  \line \par}
+{\b\cf3 Yoav Alon:\b0}
+{ Okay. So , it's very much we, since the cloud is very big,, there are hundreds of servers. Each cloud provider has a different offering what we usually do is that we just pick something that sounds interesting.}
+{\pard  \line \par}
+{And it's usually it's sometimes directed from , the customer request or product. And so the }
+{\cf1 [00:12:00]}
+{ researcher starts to look at, I dunno, the automation's a service because it sounds like an interesting service. And then it goes and reads the documentation and tries to play around with the service, see how it's supposed to work.}
+{\pard  \line \par}
+{ how is it intended to work? And so usually it's something like. Playing with it, making, trying to see how the different parts interact and, and trying to shake up the interesting behavior from that error messages and different versions of dependencies. Looking at the API itself to see if the public API is comparable with the SDK and, and what were the different documentation changes.}
+{\pard  \line \par}
+{So those things really guide us towards finding interesting. And after that, we try to shake things like, , you can think about it as a tree and you just shake the tree in sometimes we get fruits and sometimes we don't, you }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ get leaves. That's a good way to put it in, man.}
+{\pard  \line \par}
+{I love it. Sorry. I'll let you finish. }
+{\pard  \line \par}
+{\b\cf3 Yoav Alon:\b0}
+{ I know, that's it. We, we that's our approach. Cool. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ All right. Hopefully you need, feel free to ask a follow-up question. If you have one as well, man. Thanks for that. Ive got Shreyas thanks. }
+{\pard  \line \par}
+{\b\cf3 Yoav Alon:\b0}
+{ Hey, }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Whats the question you want to ask? }
+{\pard  \line \par}
+{\b\cf3 Yoav Alon:\b0}
+{ }
+{\cf1 [00:13:00]}
+{ My question is regarding like multi-cloud scenarios. So then you're working to my cloud environment. There are lot of different APS in board. , is it valuable from a security perspective, creating like a standardized, API in between, because for every APR, for every provider that is, are different API and from a security, such as perspective it is really tough.}
+{\pard  \line \par}
+{Because you need specialization for each cloud provider. So for example we have TCP IP for networking and then email or SMTP for emails and everything. So it'd be attained long-term do you see , be some standardization of, for interacting with }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ cloud services, you }
+{\pard  \line \par}
+{\b\cf3 Yoav Alon:\b0}
+{ have that that's interesting. I'll say that. Yes and no. Okay. And yes, we will. We are having like a standard API for accessing cloud providers. We just don't call it cloud provider. We call it. And Kubernetes, this is fast approaching, could be like the standard cloud, which runs on Yorktown. There are a lot of }
+{\cf1 [00:14:00]}
+{ customers , who look at that as their entire cloud platform, which happens to run on AWS, or which happens to run on GCP or.}
+{\pard  \line \par}
+{But, but they have a lot of, and they use this standard API to deploy and run and run their services. And they're very happy , with the mode there where they don't have to think about the specific cloud provider, but on the other hand I don't see the Cloud providers going on the standardization route. They've, verged pretty early into very different operating modes for their clouds. So it would be , very difficult to reconcile them all. And I think that from a security perspective, there are, a lot of tools that their job is to take the different cloud provider concepts and give you abstractions around. So you can build security rules on top of them. I would mention a few for some, so the earlier CSBM data, we also do it. So you can write queries like. Give me a VM with a privileged identity and manage the identity, or give me a vulnerable VM who is all internet facing and privileged management entities.}
+{\pard  \line \par}
+{So these are }
+{\cf1 [00:15:00]}
+{ things that third-party tools , already support these days. The market has created tools like that. It's not just a cloud providers there. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ So you're saying that this would be more, it would not be the cloud service provider themselves, but it will be like people who are not, , the consumers of the cloud service provider, they have to go down the path of creating it instead of, cause it would not work in their business model to do that because for them, they don't really care.}
+{\pard  \line \par}
+{ Amazon doesn't really care about Microsoft or IBM or the way. }
+{\pard  \line \par}
+{\b\cf3 Yoav Alon:\b0}
+{ They don't mention the names of other cloud providers in their documentation or press releases it's as if they don't exist. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ So, oh, right. There you go. Well, that was a great question as well. Shreyas, thanks so much for this man.}
+{\pard  \line \par}
+{I'll let him know, let us know if you have a pretty heavy question, but thanks so much for this. All right. Sweet. Okay. Back to our question. And it's also interesting for me to know about the other vulnerability that you have, but before we get into this. So for example, when you guys discovered Autowarp was that as straightforward as reach out to Azure and Hey, we have vulnerability and I just goes out from there.}
+{\pard  \line \par}
+{And how does that. }
+{\pard  \line \par}
+{\b\cf3 Yoav Alon:\b0}
+{ So you there's Azure is part of Microsoft and Microsoft has a }
+{\cf1 [00:16:00]}
+{ secure@microsoft.com, which is the email that you have been able to send the vulnerability reports from, I don't know, early two thousands. And, but they also have a new portal and you open you open a new case at the border.}
+{\pard  \line \par}
+{You submit your. Which was what was the issue, the impact and how to reproduce it. And we also are available to, for them to contact us if they have any questions, because usually like any other form of communication, , you might get a miscommunication. So we tried to be very, very. And Microsoft, and then there's usually a Mo silence and you, you get updates via emails or the portal and a few days later, or a few weeks later, depending on the case and the severe.}
+{\pard  \line \par}
+{You get updates. And the, usually we ask them to tell us when they attach it so we can test the patch and make sure that it holds and, and that's it. And they usually, ask you if there you want to be mentioned in their security advisories, and we pretty much it , that's the happy path.}
+{\pard  \line \par}
+{That's not }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ true. So if you don't hear back, that's the sad part, . }
+{\pard  \line \par}
+{\b\cf3 Yoav Alon:\b0}
+{ , no. If, if they don't }
+{\cf1 [00:17:00]}
+{ respond to you in a timely manner, we usually pick them and we ask them , to engage, to acknowledge that they have the report, then they understood the severity. But we, we tried to be very, very from the case, think about it from Microsoft side, Microsoft gets a lot of vulnerability reports each day and most of them are are low quality and very hard to reproduce.}
+{\pard  \line \par}
+{So if you're able to help Microsoft reproduce or any other cloud vendor reproduce the issue and have a very. Well-written report you are much more likely to get prioritized and people will look at your report and acknowledge it a lot faster. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Interesting. Oh, okay. So, so the one of the ways to get , quicker responses to have like a proof of concept in your, , email to them as well.}
+{\pard  \line \par}
+{\b\cf3 Yoav Alon:\b0}
+{ Yeah. Yeah. We usually include a proof of concept, which is just usually a Python script where you can just run it, then it reproduces. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Sweet. It's funny. It's a, it's a double-edged sword. What if someone's giving you a wireless in the email as well to download this machine would be fine. }
+{\pard  \line \par}
+{\b\cf3 Yoav Alon:\b0}
+{ Yeah. So, I think Microsoft has a Microsoft and oh, the cloud providers.}
+{\pard  \line \par}
+{Have a, have a mode two to deal with. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Yeah. Fair }
+{\cf1 [00:18:00]}
+{ enough. I mean, it's not sandboxing this I've got another question from Vineet here. Any future plans on research in ISC tools like Terraform integration with Azure? }
+{\pard  \line \par}
+{\b\cf3 Yoav Alon:\b0}
+{ , so usually the infrastructure is code tools. They just run API APIs on the cloud itself.}
+{\pard  \line \par}
+{So. , we don't need like the middlemen to run APIs for us. , we run it directly, , from this is from the vulnerability perspective, but from the, as a cloud security vendor, , we provide tools to work with and help you write better infrastructures code tools and prevent misconfiguration.}
+{\pard  \line \par}
+{And correlate the chain, the proposed changes to your current cloud environment. So these are things that we were planning and we also are doing so }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ right. I live in the cloud space, . Cause I think you guys are already enabling IAC , so it doesn't make sense for you to kind of get on the IAC research board }
+{\pard  \line \par}
+{\b\cf3 Yoav Alon:\b0}
+{ and in that IAC itself, like, , think about it.}
+{\pard  \line \par}
+{Like what malicious IAS. Or a malicious Terraform while it's possible. It's, it's essentially code. So so, but it's not the same as. Finding }
+{\cf1 [00:19:00]}
+{ looking at the architecture from the cloud provider side and then trying to shake it up a bit. Yup. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Yup. Actually that's a good point. Sweet.}
+{\pard  \line \par}
+{Thanks for hopefully that answered your question Vineet so another vulnerability that I wanted to quickly go on was the Synlapse one that you guys just go with recently? What? I don't know how it is that how you say it? Sylapse Synlapse . Yes. So what is Synlapse? And what's the story there?}
+{\pard  \line \par}
+{\b\cf3 Yoav Alon:\b0}
+{ So synlapse is a vulnerability in the Azure sign-ups service and the vulnerability itself allowed us to to run code on shared the environment and use and pivot from there to get certificates to Azure's own services. So from, if you think about it, the cloud services in Azure needs to talk to other services. and they do this with a certificate. So what we were able to do is we were able to extract the certificate that was used by the cloud, by the service itself and, have the permission that the service has into another service in Azure. So we were able to actually. Very high level access to, }
+{\cf1 [00:20:00]}
+{ to Azure data factory and Azure automation, pipeline, signups automation pipelines which is the equivalent of Redshift in AWS.}
+{\pard  \line \par}
+{And it's the place where you keep lots and lots of data, }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ probably did as well, }
+{\pard  \line \par}
+{\b\cf3 Yoav Alon:\b0}
+{ most likely a lot of very important data. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Right. And was this similar to the Azure automation? One where you're able to kind of look at the whole Netflix example that we went to the earlier.}
+{\pard  \line \par}
+{So, or is it more just that you get access to entire Netflix Redshift for lack of a better word, . }
+{\pard  \line \par}
+{\b\cf3 Yoav Alon:\b0}
+{ So, if I were to take your example, , we were able to exploit this bug and we were able to get good, which left us look at peak in era, nothing just Netflix or LinkedIn happened to be in the same machine.}
+{\pard  \line \par}
+{It was just to pick , which customer we want to target and just take , their data. Right. Yeah, which is more critical }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ because this is not resolved yet. Right. }
+{\pard  \line \par}
+{\b\cf3 Yoav Alon:\b0}
+{ So no it's resolved on the, there, two points here. , the initial bug that we reported was resolved by Microsoft and, , we identified an architecture issue in the product where it, there }
+{\cf1 [00:21:00]}
+{ is a lot of attack surface which we can exploit again and again, we were able to bypass the patch a few times and this architecture issue is still not resolved. So as a company, we are advising Azure customers.}
+{\pard  \line \par}
+{To not use the Azure sign-ups service until this issue is resolved from Microsoft. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Right. Okay. And okay. So people who are listening in probably if they use Azure sign-ups they should definitely be checking in or they should just avoid using the service period for them. }
+{\pard  \line \par}
+{\b\cf3 Yoav Alon:\b0}
+{ I'm aware that it's a big ask for a lot of people, not, , so , it's hard to migrate from service to service, but I would check very closely what's in the service and how things are.}
+{\pard  \line \par}
+{, which data you have there. And I would say that there's a high risk there, , of this data leaking or being targeted by attackers. Because }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ , because I'm just going by your example, there, if I can target Netflix, LinkedIn, whatever, I'm assuming some kind of an identifier ID or some kind of ID that allows me to kind of flick between them.}
+{\pard  \line \par}
+{would this be a scenario where if I have the basic defense of making it private versus public, would that be a helpful thing or just really }
+{\cf1 [00:22:00]}
+{ matter? Cause you have my credentials, you have my ID, so you can, I could be private or public. }
+{\pard  \line \par}
+{\b\cf3 Yoav Alon:\b0}
+{ You can do a few things , to better situate yourself against this, but it's one of those things that you, as a customer.}
+{\pard  \line \par}
+{Don't don't have a lot of things that you can do and you can endure, and we need to wait for Microsoft , to finish doing the architectural changes that they need to do enable better separation there. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ All right. Also. Wow. Okay. So it's definitely like a big work from their side as well. So it's not just the customers, but also on their, on Microsoft side as well.}
+{\pard  \line \par}
+{That needs to be architectural. }
+{\pard  \line \par}
+{\b\cf3 Yoav Alon:\b0}
+{ ? Yes. So the thing here is that it's not as simple as just the patching, a small bug. It's, it's really one of those things where the separation between tenants. And originally architected correctly. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Right? Okay. That, that would definitely scare people. I imagine.}
+{\pard  \line \par}
+{So maybe one question I, as we kind of talking about different vulnerabilities that were discovered, some resolved others not resolved. One thing that I keep coming back to, and this has just been bothering me for a while is why do we have names for vulnerabilties? ? I don't just go CVEE or }
+{\cf1 [00:23:00]}
+{ CWE or whatever.}
+{\pard  \line \par}
+{Like, why is that not being used in this Context? }
+{\pard  \line \par}
+{\b\cf3 Yoav Alon:\b0}
+{ So that's a great question. , CVEE is has, you can issue a CVE for everything you can issue a CVE for only in specific conditions. And one of those conditions is that the software you're targeting has a distributed version means that I can, I get the software and the software has a version.}
+{\pard  \line \par}
+{If the software doesn't have a version or it's not distributed. Then we cannot issue a CVE and cloud services in general are not, don't fall into either of those categories. I don't get like a CVE with with Azure on it. Technically you get, but it's not the same. And the problem is that without the CVE or other identities, It's really hard to differentiate.}
+{\pard  \line \par}
+{If we have five issues in, I don't know, Azure automation, which one we're talking about? So we have to like come up with names so we can have a meaningful conversation about those. Right. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ So you're saying when it's, when you say it's distributed, it isn't like the cloud service provided services also distributed or is it before.}
+{\pard  \line \par}
+{It would not have like a version one version two, because mostly we use would be like, }
+{\cf1 [00:24:00]}
+{ well, if we were to kind of take the whole security research field to the very basic, when I was running for, it was more like, I know I have a really old version of PHP, web application. I find a CVE for that version of PHP.}
+{\pard  \line \par}
+{And that I use that to exploit the web application, which is running on that one version. But what you're saying is basically because Azure Google cloud native, yes. They probably all running on the same version for every. Yeah. Once you update, it's a beard for everyone. Doesn't really, you're not really actively, I can't find an older version of Azure to explode.}
+{\pard  \line \par}
+{\b\cf3 Yoav Alon:\b0}
+{ Autowarp that's right. This is one of those things, where the CVEE system doesn't really work. So we are currently missing a different system to do identify big cloud issues and. And there are a few proposals and we'll see how this goes.}
+{\pard  \line \par}
+{There's a proposal to have like identifiers for cloud, for cloud vulnerabilities . So we can have meaningful conversations. Right. Oh, }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ so is that, I don't know who's running is, do we know who's driving it as in, is that like an organization or is }
+{\pard  \line \par}
+{\b\cf3 Yoav Alon:\b0}
+{ it no, it's it's other commercial companies there.}
+{\pard  \line \par}
+{They have this so we have a proposal from our side. }
+{\cf1 [00:25:00]}
+{ The other companies have also proposal from their side. It's, it's something, it's a conversation going on. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ Right. Who do you even submit this to? I don't like you support, like, is there a body. }
+{\pard  \line \par}
+{\b\cf3 Yoav Alon:\b0}
+{ No, it that that's one of the things that we're working towards having like a, a joint.}
+{\pard  \line \par}
+{Yeah. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ I would not even know who to submit this to. Like I am I just calling out under the president of the United States, , Hey man, I'd love to start a CVE for cloud, but no, but thanks for that. I appreciate the insight into this field as well. And maybe it's also time to go kind of quickly switch gears into the whole context of P for people who've been listening.}
+{\pard  \line \par}
+{And they understand, Autowarp and they understand Synlapse as well. They understand the approach you have taken to identify some of these vulnerabilities. This is such a new field, almost like to the point that you almost have to ask the question, why is there a need for this now versus like, , because I think people have been talking about bug bounty for long.}
+{\pard  \line \par}
+{They still focus on bug bounty for individual applications, but not for. And this was never, ever highlighted. Like, why do you feel suddenly there's a lot more attention , to your point. A lot of people have security research teams in this space. Now it's not }
+{\cf1 [00:26:00]}
+{ just, , one or two individuals independently doing it, which was the case until last year or maybe a few years before that.}
+{\pard  \line \par}
+{But now there are organizations that are getting behind the idea to your point, everyone's a cloud security citizen and everyone's taking up the, , I'm going to take my Baton as well. I'm going to find out what their what's there. So why do you think now is there so much. Spotlight on it.}
+{\pard  \line \par}
+{\b\cf3 Yoav Alon:\b0}
+{ So one thing is the focus on the cloud provider side and not only on the customer side. There was a general feeling that all providers are infallible and, but they're not they're software organization, like the rest of us, then they have bugs which is a good thing.}
+{\pard  \line \par}
+{But their approach on handling their side of the architecture and making sure things are this privileged and you cannot make great create huge issues from small bugs is on their side. This is one thing. The other thing is that to your point there is not a big difference between being a bug bounty, a attacker, and being a secure.}
+{\pard  \line \par}
+{Cloud security researcher. It's just, you use different tools, you don't and , your ability , to find the same issue many times. It's not really out there. On }
+{\cf1 [00:27:00]}
+{ the other hand,, you get to look at the most advanced and software trusted. Millions and millions of customers. So , it's up there with the hardest things you want to do.}
+{\pard  \line \par}
+{So it's, it's a great achievement. Yeah. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ And I think to your point being so commonly used it w obviously this takes a lot higher as well, because if you're worried about the autowarp example it having access to, and we keep using the example of Netflix and LinkedIn, but it could be government organizations as well.}
+{\pard  \line \par}
+{It could be other people like no with sensitive information about you and I individuals as citizens. And like, you probably want to be more aware of that, especially when you're trusting a lot of that information on a, for lack of a better word. It is a third-party cloud service provider. You sound really like you, you don't own the cloud.}
+{\pard  \line \par}
+{Someone else owns it. Do you have a contract with them? So. Makes sense to cross your T's and the T's and C's I, I'm also curious for people who may be listening and going, okay, Yoav has definitely inspired me for doing this research thing. where does one even start, like, learning about this?}
+{\pard  \line \par}
+{Like, so we've obviously clearly got a question from and other people as well, who are quite keen on understanding }
+{\cf1 [00:28:00]}
+{ the space. How does even one start like into this. }
+{\pard  \line \par}
+{\b\cf3 Yoav Alon:\b0}
+{ So th that's a great question. I think that, , I I'll separate it to two parts. The first one is getting into security research.}
+{\pard  \line \par}
+{There's a lot of CTX and cloud goats and a lot of other ways to spin up vulnerable infrastructure and try to work through it and understand how things are working. And this is generic. It's not cloud provider specific. But if you want to know, to look at cloud providers issues specifically, you can definitely check the Orca blog.}
+{\pard  \line \par}
+{We have a lot of information there, which is not just fleshy big title vulnerabilities, like synlapse and autowarp , but also common sense. Day-to-day how to configure to less privilege, how to understand the relationship between resources in New York. And, and things through that to that effect.}
+{\pard  \line \par}
+{So it's a great resource. There's also on Twitter, there's Scott Piper and and the cloud 400 cloud sec, which is a conference dedicated for for cloud security. And and definitely just following, }
+{\cf1 [00:29:00]}
+{ along, being part of the conversation and trying to. To, to engage with new ideas.}
+{\pard  \line \par}
+{I think that's the bike sweeper. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ That's really a great advice as well, man. For people who may have up questions and whatever, what does the research space, or just to get to know you a bit more, where can they find you on social media? Where can they connect }
+{\pard  \line \par}
+{\b\cf3 Yoav Alon:\b0}
+{ with you? So I'm on Twitter at Yoav Alon and I'm also available at my email.}
+{\pard  \line \par}
+{so yoav@orca.com So you can definitely reach out. And also I also advise you to to reach out to my researchers , the one who found Autowarp and one who found synlapse and they're both really very active on social media and really want to engage with other researchers.}
+{\pard  \line \par}
+{Awesome. }
+{\pard  \line \par}
+{\b\cf2 Ashish Rajan:\b0}
+{ And , I'll put the links in there as well as definitely shout out to your team as well for finding those as well. But thank you so much for this and thank you everyone for who was listening in on the Twitter space and YouTube, but that is pretty much what we had for the show. Thank you so much.}
+{\pard  \line \par}
+{And we'll see you next weekend. I was in marshy midweek episode next week. So I'll see you next week for another episode on Azure security, but thank you so much, everyone. We will see you soon. }
+}

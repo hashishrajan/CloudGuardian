@@ -1,0 +1,452 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red102\green0\blue204;
+\red128\green128\blue128;
+\red114\green179\blue114;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\b\fs48 Mackenzie Jackson\b0}
+{\pard  \line \par}
+{\b\cf1 Mackenzie Jackson:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ We found 10 million secrets last year. Just last year. 10 million secrets in public repositories on GitHub. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ what you're referring to is more like, well, all the commits you've done so far, I can still as a public person click on this link. Yeah. And see what you've done in the past, all the way to the very first day you started working on it. Yeah, exactly. If you uploaded that }
+{\pard  \line \par}
+{\b\cf1 Mackenzie Jackson:\b0}
+{ And so there's lots of ways that secrets kind of get leaked too, so, GitHub has a public api.}
+{\pard  \line \par}
+{Yeah. Anyone can view it. Yeah. You don't need authentication. That's a public ledger of every single repository. Yeah. And everything that's happening. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ I just wanted say thank you for all the love you showed, Shilpi and I at KubeconEU in Amsterdam, as well as RSA in San Francisco over the past couple of weeks. I cannot be grateful enough that you're showing so much love to us. You've supported us to grow on social media and on Spotify and all these podcast platforms, so thank you so much for all the love and support he showed us.}
+{\pard  \line \par}
+{Thank you so much for coming and saying hello and taking selfies with us. And some of you are grateful enough to come on my daily vlog, which I post on LinkedIn and Twitter. Thank }
+{\cf2 [00:01:00]}
+{ you so much for being part of our life and making it what it is today. Alright, let's get to the episode. Before I get emotional, have you ever wondered, are there more secrets than simple username password?}
+{\pard  \line \par}
+{In a world of cloud APIs, microservices, and everything else that comes with machine to machine communication, we have developed a lot more kinds of secrets that kind of float around. Whether it's AWS access keys, or it's your API access token, there's a lot more information that floats around on the Internet of Secrets.}
+{\pard  \line \par}
+{In this episode, we had Mackenzie Jackson from GitGuardian. They recently released a report after scanning all the public repositories on GitHub, on how many repositories had secrets just lying around, and I'm not talking username, password, or AWS access keys, a lot more different kind. So in this conversation we spoke about what are the kind of secrets, what can you do about finding secrets?}
+{\pard  \line \par}
+{Why sometimes the only option you have is just to recycle the keys instead of just trying to go and removing them. Let's be honest, if a key is on the internet, it's just on the internet. You never know how many copies have been made of it. So you're better off just recycling the keys in the first place, }
+{\cf2 [00:02:00]}
+{ and as.}
+{\pard  \line \par}
+{Easy as it sounds, and I say it, it's a lot more difficult. So when you're developing some keys, make sure you have a recycled process that you're evolving as well. In case of a compromise, you can recycle those keys. Even if you just do that, at least you're in a much better state than a lot more people.}
+{\pard  \line \par}
+{They find a lot more in the report. So Mackenzie and I went into the details of what are secrets, what kind of secrets are they seeing more publicly used. GitGuardian is a very popular open source project that you can participate in. The number of stars in in the GitHub Repo would be a good enough proof that, hey, it's a popular software.}
+{\pard  \line \par}
+{Which is used by a lot of people and its a free one as well. So definitely check that out. It's an open source software, which you can use to find out secrets in your repository, public and private. I think I've been using the open source version a couple of times and I think it's been very valuable atleast for me to identify that I had access keys in my github history, which I had to delete, so please don't look into my github history for my github repository, but I have made sure that those keys don't work anymore, so it was really valuable. I hope you find this episode valuable with Mackenzie Jackson, and if you know someone who's trying }
+{\cf2 [00:03:00]}
+{ to work on a secret management strategy or thinking about doing secret management in the organization, definitely share this episode with them.}
+{\pard  \line \par}
+{And if you're here for the second or third time, I've really appreciate if you can leave us a review on iTunes or subscribe or follow on Spotify, Google podcasts, like audio platforms or video platforms like YouTube and LinkedIn, where by the way, we are about to hit 10 K or maybe 20 K depending on how.}
+{\pard  \line \par}
+{Quickly this kind of spreads. We are looking at getting the 10 K mark in YouTube very soon, so I would really appreciate if you can help us cross across that. And if you have any questions, feel free to reach out as well because we talk about cloud security all day every day. I hope you enjoy this episode with Mackenzie Jackson and I will see you in next episode.}
+{\pard  \line \par}
+{Peace }
+{\pard  \line \par}
+{Welcome to Cloud Security Podcast. This is a virtual coffee edition with Mackenzie, and for people who don't know who you are, what's your name and what are you doing in cybersecurity man? }
+{\pard  \line \par}
+{\b\cf1 Mackenzie Jackson:\b0}
+{ Yeah, I think a lot of people probably dunno who I am. Yeah. I'm Mackenzie Jackson. So we are here in the Netherlands at Kubecon}
+{\pard  \line \par}
+{ I work for a company called GitGuardian. Yeah. We're a code security platform. And yeah, we're all about code security. My role }
+{\cf2 [00:04:00]}
+{ as a developer and security advocate really sharing the good world of how to build more secure applications. Interesting }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ and talking about applications and secrets together cuz a lot of our audiences, developer first.}
+{\pard  \line \par}
+{Mm-hmm. Security first. , we have a good mix of it as well. What are secrets, actually, let me start there first. Just level the playing field. What are secrets for people who don't think it's just, at least, I think it's just passwords. Are they just }
+{\pard  \line \par}
+{\b\cf1 Mackenzie Jackson:\b0}
+{ passwords? Well, yeah, I mean the technical term for it is the digital authentication credentials.}
+{\pard  \line \par}
+{Yeah. Right. So they're typically passwords, but they're passwords that are mostly made to be used by other machines. So machine to machine identity Now, password peers. You know, for an FTP server or a database are still secrets. Yeah. The majority of of secrets though, are things like API keys, security certificates encryption keys.}
+{\pard  \line \par}
+{And these are all used not by humans Yeah. But by other machines. And how we've ended up with so many secrets is that we've moved away from an architecture of the }
+{\cf2 [00:05:00]}
+{ monolith. Yeah. Like the. The giant software written in cobble that you know, like is millions of lines long.}
+{\pard  \line \par}
+{We're have an architecture of Microsystems. Yeah. Microservices. Microservices. Yeah. You know, SaaS platforms, everything's interconnected. Yeah. It makes it much more scalable. It makes it faster to develop. We can focus on what we are doing. We can palm off authentication to Okta and search to Algolia. Yeah.}
+{\pard  \line \par}
+{But it means we need to authenticate. That's why we end up with so many of these secrets. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Ah, okay. Cool. To your point then, because we moved on from monolithic architecture to microservices and have more access keys access tokens, API keys, AWS access keys, multicloud. So how are we dealing with this right now?}
+{\pard  \line \par}
+{Cuz clearly it's been going on for some time. It's like identity and access management, where identity in my mind was solved but then he found, oh wait, cloud identity is different. Yeah. is that the same case here as well, where. It's not just as simple as I've got a password manager.}
+{\pard  \line \par}
+{\b\cf1 Mackenzie Jackson:\b0}
+{ Yeah. So I mean, and this is kind of some of the challenges of it, is that you have these systems called secrets managers. Yeah. Which }
+{\cf2 [00:06:00]}
+{ manage secrets, funnily enough. And the idea behind it is that , you wanna have all your secrets centralized, wrapped, and lots of authentication layer Yeah. With logs and everything.}
+{\pard  \line \par}
+{And once you have that component, then you know, you would think job done. Yeah. But the problem is, is that all your developers. All your team leads, different engineers. Your DevOps teams need access to these secrets. Ah, the more tightly strapped down they are, the more likely it is that I'm gonna create secret dot text on my desktop file.}
+{\pard  \line \par}
+{Right. And let's talk about the scenario of you're a developer. Yeah. And I say, Hey, build me this feature. I need you to connect to this database. Yeah. And I just, you know, so the first thing you do is you just, Hard code those credentials in, because all you want to do is just quickly test it.}
+{\pard  \line \par}
+{That's pretty much it. Yeah. You know, get it done. Yeah. And then later on you remove them. You use environment variables. Of course you do it properly, right? Of course. Of course. Yeah. Yeah, of course. But the problem is that in Git, your entire history is tracked. Yep. So when you go to code review your passwords, your secrets are not there.}
+{\pard  \line \par}
+{\cf2 [00:07:00]}
+{ The reviewer doesn't see them. But a hundred commits ago when you first started out, you hard coded the secrets they're in, you git history. Yeah. They've. Moved on from that secret manager. Now they're backed up in your code backup systems. Yeah. You know, they may be copied onto messaging systems. They may be in your wikis, but ultimately you don't know.}
+{\pard  \line \par}
+{Yeah, that's right. Because git doesn't have intense logs of who's accessed what and where your codes sprawled to. So now your secrets are sprawled, but you don't understand it. You still think they're in your secrets manager. Yeah. But they're running around everywhere causing all kinds of trouble. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ And it's funny you mentioned secret sprawl, cuz that was kind of one of the reasons why I kind of thought of you to talk about cuz you guys came up with a report as well.}
+{\pard  \line \par}
+{Yeah. Like a secret sprawl report. , I'm gonna talk about the finding, I'll let you talk about the findings, but what are some of the highlights for you, considering you've been in the secret space for a long }
+{\pard  \line \par}
+{\b\cf1 Mackenzie Jackson:\b0}
+{ time? Yeah, so the state of secret sprawl this is the third year we've released it.}
+{\pard  \line \par}
+{And essentially it's come about because, you know, at GitGuardian we build these different. Services and systems, and as a result, we find a lot of secrets. Yeah. }
+{\cf2 [00:08:00]}
+{ So we decided that we would create some pro bono a learning. So when we find something Yeah. If we know who's leaked, it will message them.}
+{\pard  \line \par}
+{And then essentially what we do every year is we put in a report what we've found. Yeah. Yeah. So the highlight of the report is, you know, basically that just in public repositories on GitHub. So there was, you know, tens of millions of developers used GitHub. Yeah. Last year there was over a billion commits.}
+{\pard  \line \par}
+{So a billion contributions made Really publicly to GitHub? Yeah. Wow. We scanned all of them. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Oh, right, okay. Public ones. We }
+{\pard  \line \par}
+{\b\cf1 Mackenzie Jackson:\b0}
+{ scanned all of them. Yeah. Publicly. We found 10 million secrets last year. Just last year. 10 million secrets in public repositories on GitHub. Wow. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Wait cause we've been working in the git space for a long time, like all a lot of people have, and I would've thought the part you called out where, hey make sure you don't put your secrets in and, but it's already in git history somewhere.}
+{\pard  \line \par}
+{Yeah. Is that true that you can't take it }
+{\pard  \line \par}
+{\b\cf1 Mackenzie Jackson:\b0}
+{ out? Well, not easily. The main thing is that you don't know they're there. }
+{\cf2 [00:09:00]}
+{ Yeah. That's so they're in your history, you don't not really know they're there. Yeah. Can you rewrite your history? Yeah. Yes. If you are in a team. That but like a team of, of multiple people rewriting your history is totally a pain because if your history is different to my history, it throws an error.}
+{\pard  \line \par}
+{Yeah. So to be able to do that is, you know, , and, but also once it's in git, if it goes to your remote repository Yeah. You don't know where it's ended up, what machines it's on, you know? So even if you got rid of it, yeah. It's still compromised }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ actually, I think the. That's a good point as well, because the clear delineation over here, a lot of people would say, look at GitHub and go, well, my current master branch doesn't have any secrets.}
+{\pard  \line \par}
+{Yeah. But what you're referring to is more like, well, all the commits you've done so far, I can still as a public person click on this link. Yeah. And see what you've done in the past, all the way to the very first day you started working on it. Yeah, exactly. If you uploaded that }
+{\pard  \line \par}
+{\b\cf1 Mackenzie Jackson:\b0}
+{ , and so there's, there's lots of ways that secrets kind of get leaked too, so, GitHub has a public api.}
+{\pard  \line \par}
+{Yeah. Anyone can view it. Yeah. You don't need authentication. That's a public ledger of every single repository. }
+{\cf2 [00:10:00]}
+{ Yeah. And everything that's happening. Yeah. Live. Yeah. Very easy to scan. One of the most interesting events that you can scan for is what they call the public event. This is when a private repository Yeah.}
+{\pard  \line \par}
+{Is now made public. Remember that when you make a repository public, you're making all of its history public too. Ah. That's something that often contains secrets. Yeah. But There's also lots of other scenarios where secrets get leaked publicly. So you say, okay, you are not silly enough to ever hard code a secret and push it publicly.}
+{\pard  \line \par}
+{Okay, fair enough. I'll believe you. Yeah. But in the scenario where you are trying to debug something. Yeah. So you create a debug log. Yeah. That debug log might have your environment variables printed in it. Yeah. You git it all, like, you know, just capture everything. Now that debug log is in your git repository.}
+{\pard  \line \par}
+{Ah, you know, there's all these types of accidental leakages, accidental leakages that can happen as a result of just code. And it happens. You know, there's, this is a funny story. A friend of mine was telling me he's a senior developer. He's one of the best developers that I know.}
+{\pard  \line \par}
+{Yeah. And like if you asked him, should I hard code }
+{\cf2 [00:11:00]}
+{ secrets, he would say no. Yeah. His wife was pregnant, he was working from home. His wife went into labor. He just thought, oh crap. He had just kind of been issued a key for an Amazon. Web services. Right, right. And then wife is in labour, git add all, git push out the door}
+{\pard  \line \par}
+{he came back from maternity leave two weeks later and realized that he had pushed publicly admin access keys for aws. Oh my God. Now, like nothing actually came of that. The team caught them and that, you know, but still, this is like a scenario where a very experienced developer Yeah.}
+{\pard  \line \par}
+{Still makes it, you know, and it just happened. Right. You know, I've done it. Yeah. And I am like, , I did it whilst making a video about why you shouldn't do it. I accidentally pushed the wrong keys to github. Yeah. So, so }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ reckon can, if there are individuals who are listening to this, who maybe just individually working on it may not be working on, I guess like with that as a team, it's still easy for them to rewrite their history.}
+{\pard  \line \par}
+{They can just delete that. But as a team, Because I'm also thinking as a business, you have multiple business units. Yeah. It's not }
+{\cf2 [00:12:00]}
+{ just like, and you're all feeding into one repository as well. Yeah, yeah. Yeah. So that makes it even more so, what do people do then? Because I think I, I don't know what people would do at that point.}
+{\pard  \line \par}
+{The only }
+{\pard  \line \par}
+{\b\cf1 Mackenzie Jackson:\b0}
+{ thing that you can do, this is the only thing that you can do if the secret gets into your git repository. Yeah. Private or public or wherever you've lost track of it. Yeah. The secret now needs to be revoked. Okay. Right, right. You need to issue a new secret. Right. Right. There's lots of people get a credential. Strip back all of its permissions. Yeah. Leak it on GitHub. Yeah. See how long it takes for someone to find it. It'll be less than a minute. Less than a minute. Less than a minute. We've done this experiment. It's lots of times, right? }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Wait. Oh, I, I think it'll be, it'll be funny if anyone who's watching or listening, they should definitely try and put a fake key in it and see.}
+{\pard  \line \par}
+{Yeah, definitely actually. Cause isn't there like a concept }
+{\pard  \line \par}
+{\b\cf1 Mackenzie Jackson:\b0}
+{ honey token as well? Yeah, so, this year we actually created honey tokens on a new concept. Right, right, right. They've been around for a little bit, but this year we created a couple of projects around honey tokens. So there's.}
+{\pard  \line \par}
+{An open source project called ggcanary . And that's a way that you can, this is }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ like the Justin Bieber's wife gigi Canary. I don't,}
+{\pard  \line \par}
+{what }
+{\pard  \line \par}
+{\b\cf1 Mackenzie Jackson:\b0}
+{ are we }
+{\cf2 [00:13:00]}
+{ gonna get sued by Justin Bieber now }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ It's an open source project. Justin Bieber. Yeah. Yeah. Bieber. Yeah. No one owns it. We just, it's for the community }
+{\pard  \line \par}
+{\b\cf1 Mackenzie Jackson:\b0}
+{ That will create, you know, you need an AWS account, but it will create tokens with the correct amount of permissions. Yeah. And then what will happen is they will trigger, if someone tries to use them.}
+{\pard  \line \par}
+{And it will give you lots of information. So you can use that to leak them on GitHub. Yeah. But why these tokens exist is that one of the first things that a malicious actor does in any kind of breach is that immediately when they gain access to something they want to persist access. That's right.}
+{\pard  \line \par}
+{Yeah. They wanna move into different systems. The easiest way to do that is with secrets. Yeah. So the first thing that they're gonna do is numerate all the data and just try and find low hanging fruit secrets. Yep. Like persist access. If you leave secrets intentionally that are honey tokens in lots of different places, then your alerting systems will light up like a Christmas tree if someone makes access, and you'll know exactly where they are and you'll know that you have a breach.}
+{\pard  \line \par}
+{Right. And if you're worried about your }
+{\cf2 [00:14:00]}
+{ source code getting leaked somewhere, then you can put them in your source code. Yeah. And if they ever get leaked, If that, if that source code's ever made public Yeah. Then you'll also know about it. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Interesting. Was there like a common set of secrets in the, I don't, a hundred million repository that you kind of scanned?}
+{\pard  \line \par}
+{Yeah. Was there a common type of secret that was identified, which is like, Hey, there's more API tokens versus more AWS }
+{\pard  \line \par}
+{\b\cf1 Mackenzie Jackson:\b0}
+{ access token? Yeah, so we have some interesting results. There's lots of different types of secrets. The number one most common type of secret is database credentials.}
+{\pard  \line \par}
+{Okay. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Like an RDS or something? Like a database. Actual }
+{\pard  \line \par}
+{\b\cf1 Mackenzie Jackson:\b0}
+{ like, oh, wow. Like username, password, or data. In the GitHub? In the GitHub. Wow. That's about 25% of what we found. 20% of what we saw found was for cloud infrastructure. so that's over a million. That's 2 million actually.}
+{\pard  \line \par}
+{Yeah. And we validate these. Oh, right. Oh, so it's not just like you find, oh, it's a secret. So a lot of people kind of say like, okay, but like, how do you really know it's a secret? Because secrets are high Entropy strings. They're random strings, right? But URLs, unique identifiers, all high entropy strings.}
+{\pard  \line \par}
+{So how's, can we }
+{\cf2 [00:15:00]}
+{ be Sure. Yeah. So we validate secrets, we have lots of post validation and we check what they actually do before marking them as a positive. So 2 million Cloud provider keys that were valid were leaked publicly on github.com. That's like huge because even if they're just for you personally.}
+{\pard  \line \par}
+{Yeah. I can still rack up a huge bill for you. Yeah. Yeah. And then there's lots of other interests and the full report will show you, we find them for messaging systems. Attackers love thesed cuz you can do internal phishing campaigns. Yeah, yeah. Post it from within your own slack. Yeah.}
+{\pard  \line \par}
+{You know, that's and about 1% of the, nearly 2% of the secrets that we found were GitHub access tokens. So your access token for your private repositories, you have just made public Wow. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Oh, that's why you're talking the public event that you were talking about. Yeah, yeah, yeah. Everything you've done so far has suddenly become public.}
+{\pard  \line \par}
+{Yeah. Yeah. Wow. And is there like some sense of responsibility that GitHub or AWS or all these people should be taking over this as well? Cause you almost feel like, and I don't want to say that, hey, it's all their }
+{\cf2 [00:16:00]}
+{ responsibility. Because I guess you can't know every scenario in the world.}
+{\pard  \line \par}
+{You're just providing a service. Yeah, yeah, yeah, yeah. So like are they doing }
+{\pard  \line \par}
+{\b\cf1 Mackenzie Jackson:\b0}
+{ something about it Actually, yes. And, and so there's the concept of the shared responsibility model. Yeah. And there are a few organizations that do this, particularly in the public space. Now, public is interesting to talk about because we throw up big numbers and yeah.}
+{\pard  \line \par}
+{Wow. 10 million. The real threat is private, but. Just focusing on public if you leak an AWS credential Yeah. AWS are actively looking for them. Yeah. And they will quarantine them if they find them. Right. Right. Which means that they will reduce their permission someone else can't run up a huge bill or something like that.}
+{\pard  \line \par}
+{But that's not without its risk because you leak a real AWS key, and if it gets quarantined all of a sudden that key doesn't work. You could have just broken production. That's right. Yeah. You know, so these things come with risk. Yeah, that as well. Now there are some other providers that also look for their own secrets, but it's a lot to scan GitHub, there's a lot of information.}
+{\pard  \line \par}
+{It's a fire hose, and if you are looking for, like, you know, }
+{\cf2 [00:17:00]}
+{ AWS is just looking for one type of key Yeah. That they know. But we look for, you know, nearly 400 different types of credentials on these places. We're scanning code 400 times with different detectors. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Interesting. Wait, so, cause you know how we've kind of started the conversation with developer first and talked about developers as well.}
+{\pard  \line \par}
+{One of the challenges, and we had a couple of conversations through kubecon and RSA as well, where the conversation always revolves around the fact that you can make a security tool, but to have an adoption at the developer side is always challenging. And secrets is probably clearly as you called out is, there are hundred million or even a million secrets out there. Yeah. Clearly someone, somewhere, when they find out about it, they like alarm bells is going off. But if they do use open source software, honey tokens or whatever, do you feel people are ready to even respond to those kind of things?}
+{\pard  \line \par}
+{\b\cf1 Mackenzie Jackson:\b0}
+{ Oh yeah. This is a really interesting stat. To answer this, we have to kind of take a look away from public infrastructure and go into internal infrastructure. Yeah. So at gitguardian like the products that }
+{\cf2 [00:18:00]}
+{ we sell, we scan internal infrastructure for, right.}
+{\pard  \line \par}
+{For secrets. Right, right, right. Let's move away from that quick. Yeah. But that we also have stats on what we find. In these companies when we scan them for secrets, right? So typically when we first scan a company on an average size company, let's say they have 400 developers. It's fairly small, but up there, right?}
+{\pard  \line \par}
+{Yeah, yeah, yeah. We'll find about 13,000 secrets in their repositories. 1000 of those will be completely unique. Yeah. But if you are a security engineer, you don't know. You just see secrets. Yeah. So you're seeing 13,000 secrets. 400 developers, you'll probably have four AppSec engineers. One per 100.}
+{\pard  \line \par}
+{Yeah. So you do the maths that's over, there's about three and a half thousand secrets that each AppSec engineer has to deal with every year. So being aware of the problem Yeah. Is like, is almost worse than just living in bliss of not knowing that it exists. Yeah. Because now you have to investigate each one, find out what the secrets does, you need to rotate it, you need to redeploy it, and you need to do all of that.}
+{\pard  \line \par}
+{Three and a half thousand times without causing a servers outage. That's right. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Yeah. }
+{\cf2 [00:19:00]}
+{ And without, without pissing off people as well. Without pissing off people as well. So, and maybe not updating your linkedin profile }
+{\pard  \line \par}
+{\b\cf1 Mackenzie Jackson:\b0}
+{ after that. Sorry, I should done that. So the harder thing is kind of remediating that. Yeah.}
+{\pard  \line \par}
+{And, and you know, that's secret detection is important cause you need to know, but you need to know to be able to remediate it as well. But there are things going back to individual developers. Yeah. What can developers do is that this is from the security point of view. Yeah. But developers. Can stop the bleeding.}
+{\pard  \line \par}
+{Yeah. Yeah. And there's simple things that they can do, like creating a git hook. Mm-hmm. Like a pre-commit git hook, which checks your commits before your remote repository accepts them for secrets. Right, right, right. Then if you've got something in a debug log that you didn't know about then you are gonna be aware of it and you can change it, and you don't need to rewrite your history because it hasn't entered the history yet.}
+{\pard  \line \par}
+{You know, you can be proactive and then that stops the bleeding. Yeah. So there are things like from the individual developer, that shift left mentality. There's lots of things that they can do. Yeah. But you need also need it from the top. You need visibility over where these }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ secrets }
+{\cf2 [00:20:00]}
+{ are.}
+{\pard  \line \par}
+{Yeah. And I think the reason I ask that is also because, A lot of the conversation we have around cloud and cloud security, a lot of people are not even ready for incident response. Like that's why it's not spoken about. Yeah. Probably if going by that stat as well, a number one reason could also be off your incident is a secret was found on the }
+{\pard  \line \par}
+{internet somewhere someone's using it in order to figure out who owns this. Yeah. And where do I take this and what do I do with it? And all of that as well. So it's a lot more complexity around just what you called out you're aware of the problem. Yeah. Now you're like, oh, I should probably just quit my job and walk away.}
+{\pard  \line \par}
+{Exactly. Yeah. The problem is too big. Are there any interesting breaches that you would've heard and not that I'm not trying to have like a fear uncertainty, doubt kind of a mindset, but more from a understanding that, hey, this has happened. It's not just a, well, we don't really have anything }
+{\pard  \line \par}
+{\b\cf1 Mackenzie Jackson:\b0}
+{ important.}
+{\pard  \line \par}
+{Yeah. Yeah. So there's like so many to look at. , there's one interesting one. That happened last year and it's interesting because it illustrates a few things. It happened from with Toyota. Okay. Car manufacturer. Yeah. They have a }
+{\cf2 [00:21:00]}
+{ product called T Connect Mobile application. Connects to your car.}
+{\pard  \line \par}
+{Yeah. Important. Yeah, of course. Toyota had a consultants working on this as well. Contractors working on the code. It wasn't Toyota, it was actually a contractor that accidentally made code public. Inside that code was the access credentials, database, credentials to. All of the users using T connect. Oh, wow.}
+{\pard  \line \par}
+{All of their information. Now that was public for many years before our security researcher found it and let them know. But who knows who found that secret beforehand. But in terms of impact, there's much worse than that. That's an interesting one because Toyota didn't really do anything wrong.}
+{\pard  \line \par}
+{Yeah, yeah, yeah. You know, it was a contractor that was supply chain disconnected. Supply chain issues. Right. But if you know, like another recent one, Uber, they had a worst case scenario where. Credentials were sold on the dark web to, that were for an employee. For the VPN service? Yeah. Okay. They had mfa.}
+{\pard  \line \par}
+{MFA was bypassed just by spamming it. So the employees whose credentials were lost accepted the MFA request. Hackers made it onto the network. }
+{\cf2 [00:22:00]}
+{ The first thing they did, like we talked about, they tried to find more secrets. Yeah. There was a PowerShell script. This PowerShell script was used for when a new employee started.}
+{\pard  \line \par}
+{So you started Yeah. I run this PowerShell script and it created accounts. For you on everything that you needed. Ah, inside that PowerShell script was the worst credentials that you could ever leak. It was for the PAM system, the privileged access manager system. Yep. Basically the keys to the kingdom. So what do the attackers do?}
+{\pard  \line \par}
+{The attackers created accounts for themselves in every single one of Uber's services. Oh, worst case scenario. You know, and this is a secret that's in an internal network, you know, so this is secrets. We're talking about public a lot, but internally as well. And just like very quickly, there's ones like Code Cove, it's a supply chain tool.}
+{\pard  \line \par}
+{Yeah. They leaked a secret secret was discovered. Yeah. Application turned malicious attackers were then able to access a private source code of code Cove's customers. So like all of this, like secrets are just kind of everywhere and like they're always used in attacks because maybe not as initial access, but definitely to elevate privileges, to }
+{\cf2 [00:23:00]}
+{ move laterally to persist the attack and.}
+{\pard  \line \par}
+{If you don't have good alerting, if you're correctly authenticated, how do you even know that an attack is there? Right? They're using the systems in a way that they're designed to it. So alarm bells aren't even going off }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ Fair enough, considering we've pulled down the vibe . How about you raise it up? Is there a funny story to the whole secret thing as well?}
+{\pard  \line \par}
+{Like, let's just raise the bar back up again to be happy again. Well, yeah. Before people get depressed, like, wow. It's like, that's a lot of secrets, Mackenzie. You're like, I'm feeling so depressed right now. But is there a funny story as well? Yes. It's a funny }
+{\pard  \line \par}
+{\b\cf1 Mackenzie Jackson:\b0}
+{ stories, but I don't know if they raise the vibe. I think they might bring down the vibe again.}
+{\pard  \line \par}
+{But one of the funniest things that I have found in doing this state of secret sprawl report is that, Every year , we find secrets in the weirdest of places. Yeah. And so we found 500 commits where their commit message was the private GitHub access token. So this is essentially like I'm sending an email and the subject line of my email is my password.}
+{\pard  \line \par}
+{So obviously some people have been }
+{\cf2 [00:24:00]}
+{ confused of how git works and authenticates and the message they think is maybe a header and. They're passing a credential through the commit message, but we find secrets everywhere. Ah. That's the story that I }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ told that that did not bring it up. It took, it took it for doubt, like every security person should is going Wait, so it gets worse.}
+{\pard  \line \par}
+{It's not just that it's everywhere, but now I have to look out for people sending emails as well. Yeah, yeah, yeah. Cause cause I think that's a good point as well. Cause I think was it Verizon, the report that they did for data breach, they had, I think number one or number two reason was accidental.}
+{\pard  \line \par}
+{Information like, so I'm typing in Mackenzie Jackson, but I know another Mackenzie and how does like tries an auto fill. Yeah. And people just like, well, oh well I guess it's Mackenzie, but it's not McKenzie Jackson. It's like Mackenzie, I don't know. Something else. Yeah, yeah, yeah, yeah. And Johnson or something.}
+{\pard  \line \par}
+{I guess I'll just go with that and without even realizing, you send like sensitive information to another person who just happens to be one Mackenzie that you knew from eight years ago at Gmail address and like, oh, next thing you know they're public }
+{\cf2 [00:25:00]}
+{ and. I think that to me was quite surprising where even no matter how hard a lot of people have tried, secret sprawl is gonna happen.}
+{\pard  \line \par}
+{Yeah. So I guess where I'm going with this is like, where do people start? , }
+{\pard  \line \par}
+{\b\cf1 Mackenzie Jackson:\b0}
+{ the first thing that important thing to know is identify where your secrets are. Right? So, or should be, at least it should be. Right. You know, like, so you've got your Secrets manager. So get a good Secrets manager and one that you're, is actually gonna use.}
+{\pard  \line \par}
+{There's lots of great ones out there, but some of them are too heavy for what you need. You got 10 developers. You don't need hashicorp vault. Yeah, yeah. You can have it, it's great, but maybe don't, and then identify where they've leaked, right? Yeah. Look in your systems, understand where your code's leaking, because that's gonna give you an idea of how they're leaking.}
+{\pard  \line \par}
+{Yeah. What repositories, what teams maybe need more training and more understanding about secrets. Yeah. And then once you have visibility , over where your secrets are, start putting in some gates of to block it. git hooks. Requests on your C I C D pipelines. Yeah. Make sure , that you've found this pool of blood Yeah.}
+{\pard  \line \par}
+{That stopped the bleeding. Yeah. Whilst we're working on }
+{\cf2 [00:26:00]}
+{ that , as well. And so I get that's, really the, best way of trying to combat this situation. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ You mentioned githooks Hook a couple of times. Yeah. With security people trying to do this listening on the other side or watching on the other side.}
+{\pard  \line \par}
+{How hard is implementing git Hook without say if you were a developer? Mm-hmm. Do I have to have access to your laptop to do }
+{\pard  \line \par}
+{\b\cf1 Mackenzie Jackson:\b0}
+{ git Hook? Yeah. I don't like this question. Git hooks are fantastic. They're probably the most effective way of stopping something early, but they're problematic.}
+{\pard  \line \par}
+{ They're part of the solution. You also need to have scanning on the infrastructure. The reason why is that, git hooks are configured locally, so yes, you need to set them up on a developer's machine. There are ways that you can kind of automate this, but they need some kind of, you know, trigger from trigger trigger.}
+{\pard  \line \par}
+{The other thing is that hooks can be bypassed, you know, ah, you put a dash in at the end of your commit and the hook will still run, so they're not fullproof. Right, right. That's nice. What is foolproof is scanning in real time your infrastructure. Yeah. Knowing when secrets leaking, in your git repositories }
+{\cf2 [00:27:00]}
+{ knowing where they end up.}
+{\pard  \line \par}
+{So that's kind of like, that's the most important part. Scan this visibility and knowing where your threats are. And then there's things that you can do to prevent the bleedings, but you can't rely on them. That's }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ right. Yeah. Yeah. And maybe education could be one way, but it's still Oh, education's great.}
+{\pard  \line \par}
+{Yeah. Yeah. Yeah. I think it definitely doesn't solve the problem. But there are tools of, I guess what I'm going with is there are tools available which should be native to a developer platform. Yeah. Which security teams can use to enable themselves from finding secrets and doing all of }
+{\pard  \line \par}
+{\b\cf1 Mackenzie Jackson:\b0}
+{ that as well.}
+{\pard  \line \par}
+{Yeah, absolutely. There's lots of tools that you can use. So there's open source secrets, detections. , they give great coverage, some of the problems when you get too big, . You're gonna have a lot of noise. Yeah. So the problem comes reducing that noise.}
+{\pard  \line \par}
+{But you know what, like if that's where you start, that's where you start. Like start with an open source solution. Yeah. Doesn't require you to talk to the accounting department like you can get started, right? Yeah. Yeah. And so this is , the main thing, and that's may sound weird coming from someone that works from a vendor, but at the end of the day, like just start somewhere. When you get big enough, you're gonna have issues with remediation and stuff. And Then look what's available on the market, }
+{\cf2 [00:28:00]}
+{ but start an open source. Yeah. Keep it simple because at least then you're gonna be more aware of the problem. I think that's , the key take away.}
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ ] my second last question cuz I find that a lot of conversation security are harder to sell to people to believe in the idea that, hey, you gave a couple of examples for how breaches have actually Yeah. Been caused by secrets. But the bigger challenge over here also becomes that. Making people realize it's important to care about secrets and it's not just, Hey, I've got a password manager, and data sprawl is not a good thing.}
+{\pard  \line \par}
+{Yeah, yeah, yeah. Have you found some insights over there as well? Where, what can people use as a tool or mechanism to highlight, to say a broader non security audience as well? That, Hey, we should care about secrets and without using the whole, I guess, which is important to know that there's something happened.}
+{\pard  \line \par}
+{Yeah, yeah. But have you found any other way of identifying it or apart from us just finding, Hey, there's a secret. You probably should look at that, like in the crown jewel somewhere, }
+{\pard  \line \par}
+{\b\cf1 Mackenzie Jackson:\b0}
+{ I guess. Absolutely. If you're struggling to convince management that you need to invest in like some security tools, then like start open source and, and }
+{\cf2 [00:29:00]}
+{ prove the problem.}
+{\pard  \line \par}
+{But there's other areas too, like vendors will often give you a report of the problem. So one thing that like GitGuardian can do is that we scan all public information. Yeah. We can let you know how many secrets have been leaked from your employee. Ah, you know, like things like that to like show you that this is actually not a hypothetical issue and if we can't find any, great.}
+{\pard  \line \par}
+{You don't need the tool. That's right. You know, like, you're good, you're good, you're good. Right? Yeah. I mean, I shouldn't say that, but, you know. Yeah. , that really illustrates , the problem. And I think once anyone understands how big of the problem is in internal infrastructure, you know, because secret just leak.}
+{\pard  \line \par}
+{Yeah. They just do. Yeah. Right. , and secrets managers are important and they help solve the problem, but the secrets are gonna leak. Yeah. And so once you start scanning your infrastructure and just simple, like your git repositories are a good place to start, you're gonna find that you have a problem.}
+{\pard  \line \par}
+{Yeah. It's a good place to start, you know, and. Last year we saw so many companies have their private source code leaked, like Microsoft Nvidia. Samsung's to name a few. Yeah. They all had secrets from in the source code. Big }
+{\cf2 [00:30:00]}
+{ companies like that with great security posture.}
+{\pard  \line \par}
+{Yeah. Like I'm not picking on them. If they have secrets in their source code, everyone will. Yeah. Wait, }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ so where can people learn about it? Cause I think that's kind of like my question. Cause I also feel like there's clearly an education piece missing in the fact that secrets are not just username, password.}
+{\pard  \line \par}
+{Yeah, there are a lot more than that and people have to go down the journey of identifying, Hey, what kind of secrets do I have? Yeah, yeah. Which are more than my username password. Is there like resources for these that you normally point people }
+{\pard  \line \par}
+{\b\cf1 Mackenzie Jackson:\b0}
+{ to? Yeah, for sure. I mean, , we try and create a lot of resources like the state of Secrets Sprawl report.}
+{\pard  \line \par}
+{It's great. We have a blog that has, you know, endless information about detecting secrets , and areas like that. But in terms of like general resources, I would say like the OWASP Top 10 . Yeah. They talk endlessly about secrets. There's the API and secrets cheat sheet from OWASP. Okay.}
+{\pard  \line \par}
+{You know, like you look at like how do you actually manage and handle these secrets? Yeah. That's a great resource. So there's areas like that. Where , there's lots going on. There's a really cool project called }
+{\cf2 [00:31:00]}
+{ Wrong Secrets. Okay. by OWASP again. And it's an application that where it gives you challenges to try and find secrets in the application.}
+{\pard  \line \par}
+{Oh, get progressively harder. Right. But it lets you know actually like, oh my God, like I can have a secret in my running application and I didn't even know. Yeah. How can you, you find that? So there's, there's some great educational tools if you wanna learn out more. From the GitGuardian website, but on OWASP and also on lots of other resources as well.}
+{\pard  \line \par}
+{Awesome. }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ No. Well that was all the questions I had. Where can people find you on socials to know more about secrets and maybe, ignore than vibe before? }
+{\pard  \line \par}
+{\b\cf1 Mackenzie Jackson:\b0}
+{ I should have, ah, damn it. Yes. But I'm everywhere on social media. At advocatemack, so on LinkedIn on Twitter, advocate. advocatemack }
+{\pard  \line \par}
+{\b\cf3 Ashish Rajan:\b0}
+{ .}
+{\pard  \line \par}
+{Yeah. Fair. Awesome. I'll put that link on the shownotes as well. Thank you so much for watching everyone. Yeah, thank you Mackenzie, and we'll see you next episode.}
+{\pard  \line \par}
+{\b\cf1 Mackenzie Jackson:\b0}
+{ When you're developing an app, security might be treated as an afterthought with functionality, requirements and tight deadlines. It's easy to accidentally write vulnerable code or use a vulnerable dependency, }
+{\cf2 [00:32:00]}
+{ but Snyk can help you secure your code in real time, so you don't need to slow down to build securely.}
+{\pard  \line \par}
+{Develop fast, stay secure. Good developer Snyk.}
+}

@@ -1,0 +1,402 @@
+{\rtf1\ansi\deff0
+\margl1800\margr1800\margb1440\margt1440\deflang1033\lndscpsxn
+{\colortbl;
+\red114\green179\blue114;
+\red128\green128\blue128;
+\red102\green0\blue204;
+\red222\green74\blue29;
+}
+{\fonttbl;
+{\f0 Arial}
+}
+{\b\fs48 V4 CISO Panel - Caroline & Tanya-\b0}
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ }
+{\cf2 [00:00:00]}
+{ Cloud security will become cybersecurity. Would you agree? Disagree. What are your thoughts are on }
+{\pard  \line \par}
+{\b\cf3 Caroline Wong:\b0}
+{ that? I like the idea and I like the opportunity and I like the innovation. And I also think that for those of us that work primarily in tech, I think it's easy to think like everything's in the cloud, are moving to the cloud, but like actually there's a broader, wider view of like, All the software on the planet and there is so much that's still not cloud.}
+{\pard  \line \par}
+{And I think there's actually so much change management that would require it to move to the cloud, that there will be this rapid evolution for a big chunk, but there will be another big chunk that's either gonna move super slowly or like kind of never at all. Interesting. }
+{\pard  \line \par}
+{\b\cf4 Tanya Janca:\b0}
+{ Oh yeah, no, I agree. I still see job requirements for cobalt and they're so.}
+{\pard  \line \par}
+{Delicate that even doing a pen test is utterly terrifying. And rather than they're like, oh, well we could move it to the cloud, but it'll cost so much. It costs more than we make from the }
+{\cf2 [00:01:00]}
+{ thing.}
+{\pard  \line \par}
+{\b\cf3 Caroline Wong:\b0}
+{ And we are going live in 3, 2, 1. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Hello and welcome to Cloud Security Podcast welcome to everyone watching the show. I have two lovely people over here who's gonna talk about why is application security, eating cloud, security for lunch, breakfast, dinner, whatever suits they fancy. But before we go into it, we would love to know a bit about yourself as well.}
+{\pard  \line \par}
+{So audience and the people on behind the camera get to know a bit part of yourself as well. }
+{\pard  \line \par}
+{\b\cf3 Caroline Wong:\b0}
+{ Cool. Hi, I'm Caroline. I'm the Chief Strategy Officer at Cobalt. I began my information security career in 2005, leading security teams at eBay and Zynga, and since that time I've held product management leadership roles and done management consulting.}
+{\pard  \line \par}
+{And for the last seven years I've been on the Cobalt team. We do pen testing as a service. I host a podcast called Humans of InfoSec, and I'm really interested in }
+{\cf2 [00:02:00]}
+{ security metrics. Awesome. }
+{\pard  \line \par}
+{\b\cf4 Tanya Janca:\b0}
+{ Tanya. Hi, I'm Tanya Janca and I'm the CEO and founder of We Hack Purple. I also do all sorts of things like Caroline.}
+{\pard  \line \par}
+{ I'm listening to you. I'm like, oh, I really need to like up my anti and my bio. I wrote a book I like. I do lots of stuff as well, but }
+{\pard  \line \par}
+{\b\cf3 Caroline Wong:\b0}
+{ both of us love app sec. She was once mentioned in Rolling Stone. Oh, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ by the way, she has a fun fact. She }
+{\pard  \line \par}
+{\b\cf3 Caroline Wong:\b0}
+{ used to have a band as well. Tanya Janca on Spotify. Check it out.}
+{\pard  \line \par}
+{Canadian Ani DiFranco. But better. Oh, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ now, now that we have that out of the way and maybe we can have a singing session later on as well, if people are up for it. }
+{\pard  \line \par}
+{But lets just basically level up the plane field for people. Because a couple of the conversations that I had were more around, Hey, application security, cloud security, don't really agree, but many people look at those as, how would you define it? I think that's where I'm coming from because a lot of people just hear application security.}
+{\pard  \line \par}
+{They have a version in their mind. Cloud security. I have a version in my mind, would love to hear , from both of you, as to what do you feel is application }
+{\cf2 [00:03:00]}
+{ security according to you and how would you define it? }
+{\pard  \line \par}
+{\b\cf3 Caroline Wong:\b0}
+{ So people say application security. I actually like the term software security. Ah-huh. Software doesn't just include.}
+{\pard  \line \par}
+{Applications. The way that I look at it is there's a process to build and then test and then maintain and operate software, and there's stuff that you need to do to make it secure. Yeah. Cloud is just like a place where it lives and is it on-prem? Do you have control over the server or is it in the cloud?}
+{\pard  \line \par}
+{And is that actually a shared responsibility between the person who's building the app or owning the app and the cloud provider? Yeah, so that's just how I think of it. Awesome. }
+{\pard  \line \par}
+{\b\cf4 Tanya Janca:\b0}
+{ I love it. I love it. Every single thing you do to try to ensure that the software is secure is part of AppSec and that could mean listening to a podcast and realizing, oh crap, we have that super vulnerable version of that library and we should update it.}
+{\pard  \line \par}
+{It means fixing bugs, it means testing. Exactly. Good }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ job Log4J }
+{\cf2 [00:04:00]}
+{ can be scary. Well, I think so. Maybe I, my version of cloud security is more around, like, I used to have a team called product security. And the idea was because we are more going towards like the more digital transformation you do, the more products you're building and the more products you have.}
+{\pard  \line \par}
+{Ultimately our goal is to be product security people. And so I would have a team which is product security team, which had AppSec people and the cloud security engineers as well, which somehow is not a very popular concept. Mainly cuz like, why are we working together? We should be like doing two different things.}
+{\pard  \line \par}
+{But hey, that's my definition of cloud security. So getting into the whole eating, why do you feel application security is eating cloud }
+{\pard  \line \par}
+{\b\cf3 Caroline Wong:\b0}
+{ security? Did you just say, Getting into the whole eating. That's right. That's so great. I actually think that in this field we have a lot of different metaphors. This is a new one.}
+{\pard  \line \par}
+{I feel like the traditional metaphor is like a castle with a wall and and a moat Sometimes. We've got vitamin metaphors, painkiller metaphors, bolt on }
+{\cf2 [00:05:00]}
+{ metaphors, injection metaphors, the eating metaphor. Is a new one to me. I'm actually, I'm gonna go with a dance metaphor. I love that. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Let, let's go with a dance one.}
+{\pard  \line \par}
+{So why is application security dancing around cloud security? Is that, }
+{\pard  \line \par}
+{\b\cf3 Caroline Wong:\b0}
+{ so AppSec and Cloud SEC are dancing together? Oh, yeah. Because what happens is there's moving parts. Yeah. There's lots of different dancers and maybe they're moving together or moving separately, but the outcome is as a result of a lot of different people.}
+{\pard  \line \par}
+{Taking a lot of different decisions and performing a lot of different actions, and it's very dynamic. It does not stay the same. So I'm curious about the eating thing. I like the eating thing. And I'm gonna, I'm just gonna propose a dance thing. Alright. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I love that. What are you going for? Eating or dancing?}
+{\pard  \line \par}
+{What are you, or }
+{\pard  \line \par}
+{\b\cf3 Caroline Wong:\b0}
+{ singing maybe. }
+{\pard  \line \par}
+{\b\cf4 Tanya Janca:\b0}
+{ So I'm gonna, I'm gonna go for both. So I feel like application security is eating cloud security because I. We used to be }
+{\cf2 [00:06:00]}
+{ really, really crappy at security in general. Yeah. And I feel like the industry really, really focused on network security. And then as we built cloud, they focused on cloud security.}
+{\pard  \line \par}
+{And I feel like now is the time for securing the software. Basically. Bad guys also known as malicious actors. It used to be really easy because firewalls sucked and people weren't doing a good job. But now that's a hard way to get in. Yeah. And the easier ways to get in through software. And at first it was through the web app.}
+{\pard  \line \par}
+{Then it's through the API and now we're seeing supply chain attacks and it's just what is the easiest, cheapest way to attack the people I wanna attack. And that's what they're doing. And so that's why I believe that AppSec is eating Cloud sec cuz it's just getting way more attention because unfortunately we're not doing quite as good of a }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ job.}
+{\pard  \line \par}
+{Interesting. And so my analogy for saying the eating part was also because Amazon recently, They had their cloud security conference and I think the first 10 minutes, the CISO of Amazon kind of called out that, Hey, we need a security champions program now for people who are ding, ding, ding. But what?}
+{\pard  \line \par}
+{When you first hear that, suddenly it's like, wait, why is he talking about }
+{\cf2 [00:07:00]}
+{ security champions program? And then there was another CISO who's a customer, Amazon came in bit later. She spoke about how she's been running devsecops program security champions program for such a long time. And they kind of have become almost the first cloud provider to talk about openly.}
+{\pard  \line \par}
+{Like recently they also added application security as a pillar for if you are designing something or building something to what he said, software where it's living, you should consider application security as well. Cuz to what he said, network security unfortunately was like a great safe haven. }
+{\pard  \line \par}
+{So my thinking about the eating part is more around the fact that we are realizing slowly. That, Hey, I'm on a diet, I should be paleo, or I, I should be eating only meat and only no carbs, basically. That's kind of where I going. So carbs in this context is just not caring about the network security aspect of it.}
+{\pard  \line \par}
+{There's a lot more like, you know, get the protein in I guess, cuz you can imagine I'm into health. Well, I probably called that out, but that's kind of where it's coming from. Where now, we're at that stage in cloud security where they're realizing, oh, we need to care about application security as well, }
+{\cf2 [00:08:00]}
+{ because I can show you the alert.}
+{\pard  \line \par}
+{Yes, I can show you a dashboard, I can show you how much of it is wrong in your cloud, but ultimately I need to talk to a developer to solve that problem. And I can't just walk up to a developer and, Hey, Mr or Ms developer or developer person, please solve this. They, well, I've got a sprint I'm running at the moment, so there is no way I'm gonna work on this right now.}
+{\pard  \line \par}
+{So that's kinda where I feel there is, even though we talk about cloud security all day, I think , it is changing. But not everyone is there. And that leads me to another question for the DevSecOps space. In this world that we live in now, for people who probably would've never heard the word DevSecOps and going, cuz we love acronyms as cybersecurity, we're amazing like that.}
+{\pard  \line \par}
+{Just keep throwing another acronym in there. How do you define DevSecOps? Like both of you talk about DevSecOps so much. So maybe one of you can never, like }
+{\pard  \line \par}
+{\b\cf3 Caroline Wong:\b0}
+{ So the way that people used to make software was called Waterfall.}
+{\pard  \line \par}
+{And it was like you do a phase. And then you have to go through a gate, and then you do a phase and you have to go through a gate. And then after a while they were like, we're gonna do agile, so we're gonna do it }
+{\cf2 [00:09:00]}
+{ faster. And then DevSecOps is like, there's devs and there's security. And there's operations and they're all doing it together all at the same time.}
+{\pard  \line \par}
+{So that's how I see DevSecOps and I just see it as any big project. In this case, we're talking about software development that requires lots of different people with specialized skill sets. If those people work together, then you can just do cooler things. Yeah. Mm-hmm. And if you're fighting with each other, then you're just gonna be less effective.}
+{\pard  \line \par}
+{So that's how I think of DevSecOps. Awesome. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Security Champions program. }
+{\pard  \line \par}
+{\b\cf4 Tanya Janca:\b0}
+{ Okay, so security champions were developed because there's one AppSec person according to GitHub, for each 500 developers. So we're grossly outnumbered. And so as a result, it doesn't matter how hard we work, we could never, ever keep up.}
+{\pard  \line \par}
+{And so when I did my first AppSec program, I just started talking to, you know, all the dev teams. But very quickly there was that one person on the team. That was like my person. }
+{\cf2 [00:10:00]}
+{ And eventually I taught them how to use the tools. I would just talk to them each time. And eventually we would have meetings and we would do things together and I train them on all the stuff.}
+{\pard  \line \par}
+{And then someone told me, oh, that's called Security Champions program. And so you teach them about all the things you need, and they do the security work for each one of their teams. And I give them the message, they relate the message and vice versa. They tell me, they're like, oh my gosh. This team's doing this thing help.}
+{\pard  \line \par}
+{And so they're sort of like your advocate on each dev team, and they help you scale your program. Oh, }
+{\pard  \line \par}
+{\b\cf3 Caroline Wong:\b0}
+{ and they're wonderful. Like an influencer, like a social media influencer. Totally. But security champion wait. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Mean the three of us. }
+{\pard  \line \par}
+{\b\cf3 Caroline Wong:\b0}
+{ Because like, okay, so I'm scrolling Instagram and I'm just like looking for clothes to buy, and I see like a clothing brand and they're like, buy our clothes.}
+{\pard  \line \par}
+{And then I see like a person who looks great and she's like, or he's like, check out my clothes. Don't you want to buy them? And so I feel like when you're talking about security champions, you're seeking the }
+{\cf2 [00:11:00]}
+{ influencers Yes. That all the other devs are gonna think is cool. And then, Get them hooked onto what you're trying to teach.}
+{\pard  \line \par}
+{Yes. And }
+{\pard  \line \par}
+{\b\cf4 Tanya Janca:\b0}
+{ also so like when the message is delivered. From your peer, it's totally different than the stranger from the security team. So like if it's the person that you have coffee with every day that you have team meetings with every day and they're like, Hey, I thought we weren't supposed to do that anymore.}
+{\pard  \line \par}
+{It's completely different than big bad security person coming in and being like, bad dev, right? Like to have your peers say to you it's completely different than some stranger from another team, even another building. So what she said, }
+{\pard  \line \par}
+{\b\cf3 Caroline Wong:\b0}
+{ I need to make extra good friends. With the kids that my kids look up to, namely their older cousins, and instead of me saying like, eat broccoli, it's cool.}
+{\pard  \line \par}
+{I'll just say to my niece, whom my daughter thinks is the coolest person on the planet, Hey, can you just tell her that broccoli is cool and it's gonna be way more effective than, I don't }
+{\pard  \line \par}
+{\b\cf4 Tanya Janca:\b0}
+{ know. You might need to give her ice }
+{\cf2 [00:12:00]}
+{ cream before }
+{\pard  \line \par}
+{\b\cf3 Caroline Wong:\b0}
+{ she agrees to, I could maybe bribe the niece. To have the conversation with my daughter, but would it be worth it if I instill in her like a passionate desire for leafy }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ greens?}
+{\pard  \line \par}
+{Could be, because I think I look at it a bit differently. I look at it more from a firefighter perspective, like I look at all cyber security people most likely at this point of some kind of fire, almost like whether you take it, any acronym that comes outta the cloud, CSPM ASPM whatever acronym, whether it's application security, cloud security, casb, csp, casb.}
+{\pard  \line \par}
+{Yeah. You throw all the C names that people don't care about. I think i's funny enough, I did a talk in Amsterdam. I was a keynote and I spoke about the four Cs of Gartner that no one cares about. And the first thing I ask say, who knows CSP M, who knows casb? Who knows cnapp? Not a single hand raise.}
+{\pard  \line \par}
+{And I was like, who's this guy? Like what? Just throwing names at us. I'm like, well, welcome to my talk cuz these are the four C's apparently really important, but no one cares about. But it is really interesting. But if you look at the vendor space, They have put so }
+{\cf2 [00:13:00]}
+{ much effort into it, but this whole market that has no idea whether they need any of this, but because, I mean, the reason I use a firefighter analogy is because it's kind of like the same concept where if you go to any town or city firefighters, primarily volunteers, right?}
+{\pard  \line \par}
+{You cannot need to bring your society in community, and they're all in there without one mission. But I can't recruit every person to be a firefighter. But there's some people would have that, I guess, inner ethos to be, I wanna protect this. I want to be part of this society cuz I want this to be a great, the way I draw the line to a development is like everyone wants to create great quality code.}
+{\pard  \line \par}
+{No one wants to be told later on from production that, Hey, by the way, that thing that you wrote has vulnerability. Can you go back and fix it? Like I wrote that six months ago. I've already done like, I don't know, four sprints since then. I don't even remember what that is. I'm working in a completely different language now, so, and you want me to go back and fix it?}
+{\pard  \line \par}
+{Good luck. Talk to my product manager and let's talk later. So I think that's kind of how I draw that parallel. I don't know if, would you both agree or }
+{\pard  \line \par}
+{\b\cf4 Tanya Janca:\b0}
+{ so I do, but you have to incentivize }
+{\cf2 [00:14:00]}
+{ them. So when you're a firefighter, it's like exciting. You get to like fight fires and fires endanger. But also like, I don't know if you know about like firefighters have like a zillion women around them that love them , and men, they're very attracted to them cuz they're heroes.}
+{\pard  \line \par}
+{Right? }
+{\pard  \line \par}
+{But we need to figure out a way to make it like attractive and exciting and have lots of incentives. And so I'll be like, I gave you a security book and a high five in it. So like we have to figure out ways to attract them to do like, }
+{\pard  \line \par}
+{ well, I tried to tell them like I'm turning you into like a developer hero. Like you are the person that not only is an awesome person that writes kick ass code. Yeah. But you also know how to make sure that it's safe and that it's reliable and that it will be available for your customers.}
+{\pard  \line \par}
+{And you can share this knowledge with your peers and be like, yeah, that's right. I'm the person that knows the answers. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. So maybe to your example is stretching that a bit more than what would devsecops look like in the cloud world according to you both. Like what do you think? Like, would that be different?}
+{\pard  \line \par}
+{Cause I mean, it's }
+{\pard  \line \par}
+{\b\cf4 Tanya Janca:\b0}
+{ just a, it's slightly different. So I love infrastructure's code. Like as soon as I saw it, I was like, oh, it's code. It makes sense to me now. Before I was like copying }
+{\cf2 [00:15:00]}
+{ images for two hours at a time. Like it's 30 days old. That's not golden anymore. It's rusty and tarnished. And so infrastructure's code really excited me because I could do all the same things like version control.}
+{\pard  \line \par}
+{I could scan it, I could add the code. I'm like, haha, I can add my own code. So I really liked. That, and that's much easier in the cloud, right? Right. You can also do a lot more automation in the cloud, like cloud events. So whether it be like a Logic app or whatever. But I remember like with Azure, I was making an intentionally vulnerable demo, and I checked in like a fake username password connection string, and it's like, oh, I don't think you should do that.}
+{\pard  \line \par}
+{And I was like, yeah, yeah, yeah, do it. And I was like, no, no, no. And so if you were doing DevOps on prem, Then, so I just forced it and I was like, go away. I'm a dev. You'll do as I say, cuz devs can do that. We can do it. We obey policies just to be nice. We don't have to Yeah, they're all hackers. Yeah, just no one told them.}
+{\pard  \line \par}
+{It's called a workaround or an exploit. Same thing. So I was like, oh, okay. Just go. And then I get a phone call from my boss and Azure had called him. Yeah. And then him and I were laughing. He's like, }
+{\cf2 [00:16:00]}
+{ haha, you made Azure angry. Ha. And we're, and we're laughing. I'm like, oh, I have a beep. One second. And it's the real incident response team.}
+{\pard  \line \par}
+{Oh, wow. And they didn't think it was funny at all. And I'd gotten them up at like 10 30 at night on a Sunday. Oh. And no one thought I was cool. It took me a long time to make friends with the incident Response team. But the point of the story is that that wouldn't happen on-prem. If you need the cloud to be able to get that level of interaction.}
+{\pard  \line \par}
+{Yeah, like Azure can literally make a phone call and I'm not saying run own by Azure, blah, blah, blah. I'm not trying to say one is better than the other, but just that the cloud can do that and on-prem you'd have to think to automate that, whereas cloud vendors are providing this as a service just generally.}
+{\pard  \line \par}
+{Yeah. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ I was gonna add another layer to there because you have the security assurance kind of space in your landscape as well. , Do you see impacts of DevSecOps in the security assurance aspect as well? Because we spoke all this earlier where people are expecting to be releasing more frequently, but can you really do pentest like 5 pentest, five, five minutes kind of a thing.}
+{\pard  \line \par}
+{devsecops }
+{\pard  \line \par}
+{\b\cf3 Caroline Wong:\b0}
+{ }
+{\cf2 [00:17:00]}
+{ you. So I have been studying technical manual security effort for a lot of years, and in the past, a security team that needed pen testing for example, basically had two options. You could either hire an internal team, which is hard to do because that talent isn't really high demand.}
+{\pard  \line \par}
+{Or you could call up a consulting company and say, Hey, can I do a project? And they would say, yeah, you know, and we've got. At such and such rates and we've got such and such bench, and we'll like get to your project. Like you'll go into the queue. So one of the really cool things about cloud native apps is they're just fast.}
+{\pard  \line \par}
+{Yeah. They're just, you make 'em fast. You change 'em fast. You can also test 'em fast because you can give remote access to a really skilled person who can then go and perform testing on it, and that can actually happen. So much quicker than flying a consultant from halfway around the }
+{\cf2 [00:18:00]}
+{ world to your headquarters and physically badging them in and then getting them physical access to your on-prem thing.}
+{\pard  \line \par}
+{I think there's also this ownership piece that I alluded to before, and I think it's really interesting. I think in some ways for organizations that were born into the cloud and that are cloud native, like. It's just easier. I think that for organizations that started out or maybe still have tons of legacy on-prem infrastructure and are like moving into the cloud, there's a lot of transition to be managed because it's a different tech.}
+{\pard  \line \par}
+{It's different business processes. It's different skillsets, and so I think that, yeah, just being able to start fresh is way easier than having a thing that's been existing for a really long time and trying to completely shift the model in which }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ you do things. I was gonna say, do you feel that a lot of people are saying cloud security is gonna become cyber security?}
+{\pard  \line \par}
+{As in, because if you think about what truly cloud security is to what both of you called out as well, the intention over there was more along the lines of if everything is }
+{\cf2 [00:19:00]}
+{ moving to the cloud and as everything gets digitally transformed, more products, more microservices, more all of that, are we looking forward to a world with more abstraction cloud security will become cybersecurity?}
+{\pard  \line \par}
+{Would you agree? Disagree? What are }
+{\pard  \line \par}
+{\b\cf3 Caroline Wong:\b0}
+{ your thoughts are on the. I think it's a really interesting question. I like the idea and I like the opportunity and I like the innovation. And I also think that for those of us that work primarily in tech, I think it's easy to think like everything's in the cloud or moving to the cloud, but like actually there's a broader, wider view of like, All the software on the planet and there is so much that's still not cloud.}
+{\pard  \line \par}
+{And I think there's actually so much change management that would require it to move to the cloud, that there will be this rapid evolution for a big chunk, but there will be another big chunk that's either gonna move super slowly or like kind of never at all. Interesting. Oh yeah. }
+{\pard  \line \par}
+{\b\cf4 Tanya Janca:\b0}
+{ No, I agree. There's still, so, like I got to work on an app two years ago that was }
+{\cf2 [00:20:00]}
+{ 38 years old, so not quite as old as me, but almost.}
+{\pard  \line \par}
+{And, and I was just like, whoa, we need to be gentle with this elderly application that's not going to the cloud. Or if it does, it's gonna be in like this beautiful container with a giant cage around it and like we're just gonna like be like, it's okay. It's okay all the time. Right? Yeah. To keep it going.}
+{\pard  \line \par}
+{And so I think that, And there's just some stuff that is too sensitive to ever, ever, ever, ever go to the cloud. Like I used to do counterterrorism work. I'm sorry. I remember saying to a lawyer like, you can't have your windows open. And they're like, this isn't a movie. And then I informed them of all the different times that the course of a case has changed.}
+{\pard  \line \par}
+{Because like in Canada, there was this one case that was in the newspapers where they had a telescope and two kilometers away they're reading over their shoulder and then it. Basically a criminal about to go free as a result. And so I'm like, so switch your monitor around. Do this, do that. Or I'm calling, CCCS on you again.}
+{\pard  \line \par}
+{Oh. And so I feel like there's certain things that will never be appropriate to go to the cloud. No offense, but it's just matters of }
+{\cf2 [00:21:00]}
+{ national security or such important intellectual property or innovation that's just completely unacceptable. Like even just that tiny risk cuz it's so valuable that it would be worth it to a cloud employee to steal it.}
+{\pard  \line \par}
+{Insider threats are real. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah. Because I think one of the reason why I find fascinating is also because there's also a movement in parallel, where a lot of companies saying, we're going back to data center, we're building our own data center as well. Oh, so and so like }
+{\pard  \line \par}
+{\b\cf3 Caroline Wong:\b0}
+{ return to the office? Yeah. But for servers, }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ yeah.}
+{\pard  \line \par}
+{Return three days a week only. That would be amazing. Three days a week, but once a month. But I, I guess there is definitely a movement in that space as well, where people who were the first movers in the cloud, they're all coming back and going, wait, wait. Why this was, yeah. Oh, actually, so a lot of people said, couple of examples where some people said cost optimization.}
+{\pard  \line \par}
+{Some people had, I think one of the companies we met, what they said is so if Amazon has a latency period of, I don't know, half an hour, an hour, They just can't deal with it. Sometimes it's a billion people ordering groceries online and, oh, well you want a half an hour }
+{\cf2 [00:22:00]}
+{ maintenance window?}
+{\pard  \line \par}
+{Great. Like that's just not gonna fly for them. So they believe that if they have access to the hardware, they can manage all that before maintenance and all of that. So the large scale companies sometimes would choose to go down the path, I'm just gonna own the infrastructure. And also then there is a conflict of interest part as well.}
+{\pard  \line \par}
+{Like for example, home Depot , or staples, they would not go for Amazon. Oh }
+{\pard  \line \par}
+{\b\cf4 Tanya Janca:\b0}
+{ yeah, because none, none of the realtors ever will go with Amazon. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ They're like, that's right. Yeah. And then at what point, because I think someone described the cloud service providers as like octopus with all these tentacles everywhere, where suddenly you see all these new business units starting on the wait, like they're now, they're all doing automation now.}
+{\pard  \line \par}
+{Now Apple has a savings account. So you're going, wait, so all they're looking for is where else can we go into this space and how else can we go? I mean, I guess absorb into it if you want to as well. That's kind of where we are going from this as well. But that's kind of where it's coming from. And I have two more questions. What would be a biggest challenge if someone was to start DevSecOps today? They've never done this before. And they go on }
+{\cf2 [00:23:00]}
+{ the path of just doing DevSecOps. What would be the biggest challenge? }
+{\pard  \line \par}
+{\b\cf3 Caroline Wong:\b0}
+{ according to you. I'm gonna twist my answer to the question just a bit and say, my biggest advice is to be really curious and to listen and learn.}
+{\pard  \line \par}
+{I think that especially if you're a security professional, there's an opportunity to say to dev folks and to ops folks, tell me about how you work. Tell me about what's important to you. That's like a radically different thing than coming in and saying, you're doing this wrong. You should do this instead.}
+{\pard  \line \par}
+{And so I think the challenge is, When people are not willing to understand someone else's point of view. And then the counterpoint advice that I would give is be really curious. Ask a lot of questions. Ask with the intention to learn and try and figure out like what will work with what's already there.}
+{\pard  \line \par}
+{\b\cf4 Tanya Janca:\b0}
+{ Okay, so you sort of stole my biggest challenge, cuz I was gonna say, learning what to do can be really hard. But I would say another big challenge that I see is you see the way }
+{\cf2 [00:24:00]}
+{ other security people behave. That's not necessarily the way you need to behave. And I remember starting with a team where they would just say no all the time.}
+{\pard  \line \par}
+{And so then I started saying no. And then I was like, Why am I saying no? Is that really the right answer right now? Maybe it's like, oh, actually, so if we do that, there's a lot of risk to our org and here's why there's risk, but there's like these three other options that all present less risk. Are any of these possible for you?}
+{\pard  \line \par}
+{Like, can we afford them? Do we have time to implement them? Is this allowed like. Could we talk about these? And sometimes we still have to do this thing and I throw a WAF or something else in front of it because I'm really afraid. But most of the time we can find ways to compromise. And so just cuz you see someone else doing it this way think as you learn, like, is that the way I wanna act?}
+{\pard  \line \par}
+{Cuz when I first started I worked with a lot of pen testers and some of them, quite frankly, I had very few ethics and did a lot of things where I'm like, That seems illegal. That's probably, turns out it was illegal. So stuff like subcontracting me to work on systems, I had no permission, and just giving me all the prod credentials on everything and setting }
+{\cf2 [00:25:00]}
+{ me loose with all sorts of hacker tools in data center should not have been in.}
+{\pard  \line \par}
+{And I was like, are you sure you have permission? And like they put it to me that they did. Client had no idea. And so like ask yourself like, does this seem like the right thing? Hmm. And this could be as much as like saying no or just saying yes blindly. So think about it and think like, would this work for me?}
+{\pard  \line \par}
+{Do I feel I'm being fair, et cetera. }
+{\pard  \line \par}
+{\b\cf3 Caroline Wong:\b0}
+{ Yeah, there's a little trust but verify involved in that a little bit. Like ask. And then just go and check it out for yourself and like see if it matches. }
+{\pard  \line \par}
+{\b\cf4 Tanya Janca:\b0}
+{ Mm-hmm. Yes. And I wanna add one more thing, along with learning everything, like Caroline said, if you can find a mentor.}
+{\pard  \line \par}
+{So sometimes I would just ask my mentor. So I, my first mentor and I broke up spectacularly because of ethics. My next one, like, he would always be like, no, obviously you can't do that. That's crap. And he helped steer me in much more ethical ways where I felt proud of all my decisions. And I think that's really important.}
+{\pard  \line \par}
+{And so, yes, trust, but verify, like }
+{\pard  \line \par}
+{\b\cf3 Caroline Wong:\b0}
+{ she said. I want to comment on something Tanya said, which is that it is the year 2023. We are figuring this }
+{\cf2 [00:26:00]}
+{ out. There is not one way to do this. If you're getting into this, you have an opportunity to really check it out for yourself and really decide for yourself what is the right thing for you.}
+{\pard  \line \par}
+{And maybe your organization to do this is innovation, this is pioneering, and this is I think why cloud security is so exciting to us. Yeah. Because we're kind of making it up as we go along and there's something extremely fun about that. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Awesome. Well, the final question was actually for the audience because do you feel cloud security is being eaten by application security or dancing around it or singing around it?}
+{\pard  \line \par}
+{ You got three choices. Comment below. Thank you for coming on the show. Where can people find you on the internets of the world? So if }
+{\pard  \line \par}
+{\b\cf3 Caroline Wong:\b0}
+{ they wanna follow, oh, I'm on LinkedIn. Caroline Wong Cobalt.io is the company that I work for. Those are my, I don't like do Twitter anymore. Maybe I should. It's okay.}
+{\pard  \line \par}
+{\b\cf4 Tanya Janca:\b0}
+{ Okay. Anyway. I'm shehackspuple all over the internet, so if you look up she hacks purple. There is an impersonator I have now, so I }
+{\cf2 [00:27:00]}
+{ am not the busty cleavage lady trying to sell you online gambling. So as long as you don't see that, it's probably me. If you see geeky, nerdy content bout appsec, that is me.}
+{\pard  \line \par}
+{Wow. I've gone to that level where I have an imitator now. Wow. Yes. Oh, that, }
+{\pard  \line \par}
+{\b\cf3 Caroline Wong:\b0}
+{ yeah. I wish it was ai. }
+{\pard  \line \par}
+{\b\cf1 Ashish Rajan:\b0}
+{ Yeah, I was gonna say that sounds like AI at that point in time. Yeah. Oh, that's alright. But I will leave those links in the comment as well in the show notes of the episode. But thank you everyone for joining in.}
+}

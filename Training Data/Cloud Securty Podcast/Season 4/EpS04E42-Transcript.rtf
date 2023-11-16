@@ -1,0 +1,576 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2639
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 TimesNewRomanPS-BoldMT;\f1\froman\fcharset0 TimesNewRomanPSMT;}
+{\colortbl;\red255\green255\blue255;\red97\green167\blue95;\red0\green0\blue0;\red109\green109\blue109;
+\red81\green0\blue192;\red211\green52\blue23;}
+{\*\expandedcolortbl;;\cssrgb\c44706\c70196\c44706;\cssrgb\c0\c0\c0;\cssrgb\c50196\c50196\c50196;
+\cssrgb\c40000\c0\c80000;\cssrgb\c87059\c29020\c11373;}
+\paperw11900\paperh16840\margl1440\margr1440
+\pard\sa360\partightenfactor0
+
+\f0\b\fs28 \cf2 \up0 \nosupersub \ulnone Nick Frichette:
+\f1\b0 \cf3  \cf4 [00:00:00]\cf3  So when it comes to defense evasion in something like an AWS environment or the cloud in general, there seems to always be options. So one of the first ones that maybe some folks in the audience might've caught out is Hey, if you're accessing the metadata service of the underlying node and you're trying to use those credentials remotely I'm going to catch you because of GuardDuty\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Christophe Tafani-Dereeper:
+\f1\b0 \cf3  that's super interesting because it's not even a matter only of container security, right? It's a matter of if you have a role assigned to an instance, you can actually, you want to only make that role available to this instance that runs in the cloud in this space, right? So I think it's interesting that you have detective controls like that, but I think now with AWS, you have ways to restrict, to say this role that's attached to the instance can only be used from this instance.\
+That's maybe something to look into as well.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  You may have heard about container escape, but you probably would not have heard about escaping a Kubernetes cluster, specifically a managed Kubernetes cluster. on to the cloud account. That's what we're going to talk about in this episode. We have Christophe and Nick from Datadog who are security \cf4 [00:01:00]\cf3  researchers, and they are going to share the research around how can you escape a managed Kubernetes cluster in AWS Azure GCP and come out of the Kubernetes cluster and become potentially a cluster admin, or maybe even a cloud admin, or maybe even just access to the account itself.\
+So this was a great conversation. We got to know about the different kinds of managed kubernetes that exist, the different low hanging fruits you may have. Also some of the interesting questions around what are the benchmarks you can use and what resources to look at if you are thinking about at least making sure the security posture of your managed kubernetes is to the point that you want to, because I bet you didn't know this because I'm pretty sure little nuances that came out, like for example, your IAM role in AWS it's not the same role that defines whether you are an admin on the cluster itself as well or not. So that was a big surprise for a lot of people who were listening to the conversation. Similar nuances do exist for Azure and GCP as well. We got to talk about a lot of that. We also spoke about how do you evade being detected as well.\
+So Nick bringing his magic with that. How do you \cf4 [00:02:00]\cf3  escape CloudTrail and not be detected if you're trying to do something? Let's just say a little bit gray in the AWS land. So all that and a lot more in this episode of Cloud Security Podcast. I hope you enjoy this episode. If you are someone who's listening to us for the second or third time, definitely give us a follow on our social media channels, like YouTube and LinkedIn, where we live stream and maybe on the audio platform, like Apple and Spotify where you have been kind enough to give us a lot of reviews and make us top hundred in the US, UK, Australia, and European countries.\
+I do really appreciate the support. Thank you so much for supporting us. It really means a lot when we get to see so much support coming in from everyone. By the way, we are also at KubeCon North America in a couple of weeks in Chicago. So if you are hanging out over there, definitely come and say hello.\
+We would love to talk to you and say hello in there as well. And maybe take some pictures as well. If you're there, I would love to say hello to you at KubeCon North America. In the meanwhile, enjoy this episode Kubernetes clusters in a public cloud environment. And I will see you in next episode. See ya.\
+Peace.\
+Hey, what's up everyone, briefly interrupting the program for sharing something that would save your inbox and your phone from vendor spam. Now, as a CISO, I would get hundreds of pitches \cf4 [00:03:00]\cf3  from vendors in my inbox and over voicemail. I get why they do it, but the endless stream is exhausting for both sides.\
+I recently learned about SageTap, who may have a better way of dealing with this complicated yet delicate relationship. Think of SageTap like blind dating for vendors and buyers. You get matched to meet with few relevant security vendors anonymously, meaning no spam or unwelcoming follow ups. You only reveal your identity to the vendors if their pitch interests you.\
+If you're tired of vendor spam, you may want to check out SageTap. io, your secret weapon for vendor discovery. Now back to the program.\
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  Welcome to another episode of Cloud Security Podcast. That's my dog in the background, but that was a different Ashish who was just there before . Clearly a lot more cleaner over there. But I just wanna welcome you to another episode, today we're talking about escaping clusters, specifically managed Kubernetes clusters. In case you don't know what they are. This is what we're going to talk about and how to escape them. So for this, I have two awesome people here. Hey, Christophe. Hey, Nick. Welcome to the show. Hey. Awesome to have you guys over here.\
+And hopefully, I guess at least open up the Pandora's box for what the hell is \cf4 [00:04:00]\cf3  Kubernetes and managed Kubernetes and How do people like avoid the common pittfalls in it? But before we go into it, I would love to hear a bit about yourself, Christophe, and then about Nick as well. Nick has obviously come on the show before.\
+Christophe, did you want to give a bit of intro about yourself? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Christophe Tafani-Dereeper:
+\f1\b0 \cf3  Yeah, sure. So I'm Christophe. I'm a French. I've been living in Switzerland for the past 11 years now. And in the past I've worked as a developer, I did some pentesting, and then I moved to a cloud security role. And now since about two years, I'm working at Datalog where I'm focusing on open source and cloud security.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  Awesome. By the way, there was no way I could have make out your French by just by listening to you. But I appreciate your intro and I appreciate you coming on the show as well. What about yourself, Nick? If you're going to intro. Yeah. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nick Frichette:
+\f1\b0 \cf3  Hi, my name is Nick Frichette. I have backgrounds in penetration testing and I'm currently a security researcher over at Datadog.\
+I specialize in AWS offensive security. So trying to understand how an adversary can compromise or exploit AWS services how they can be commonly misconfigured. And as a result of that research, sometimes I find vulnerabilities in the underlying AWS services and work with Amazon \cf4 [00:05:00]\cf3  to make sure they get fixed.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  Awesome. To start off with, because people sometimes may not even know what managed Kubernetes is, and what are the other kinds of Kubernetes that exist.\
+Maybe Christophe, do you want to share what is a managed Kubernetes for people who have no idea? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Christophe Tafani-Dereeper:
+\f1\b0 \cf3  Yeah, sure. So basically, and to make it short, when you set up Kubernetes yourself, you have to set up many things. You have to set up the control plane, the API server, the database that it uses, which is called etcd, and you have to manage that yourself.\
+Which means that it's very hard to do. It takes a lot of engineering effort and sometimes, maybe most of the time, it's not worth it. So back in 2015, Google Cloud introduced Google Kubernetes engine. It went GA in 2015. And then Amazon introduced the Elastic Kubernetes service in 2018, as well as Azure with Azure Kubernetes service in 2018 as well.\
+So you can see that Google is a bit earlier from that front, probably because they were very involved into the development of Kubernetes. And so managed Kubernetes is basically, you don't have to manage that yourself. So you go to the cloud console and you create a cluster. You say, I want \cf4 [00:06:00]\cf3  five nodes.\
+And then you can directly use kubectl basically, which means that the provider is going to take care of managing the control plane in CD. And even most of the time, you don't have to customize the node. So you don't have to install yourself the node components, such as kubeproxy or the kubelet. It's mostly a matter of abstractions.\
+The control plane is managed by the provider. It's going to be scaled by the provider, monitored by the provider, and it's easier to get started with Kubernetes.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  Great summary over there, man.\
+But what about pitfalls though? Cause I think one of the best ways people learn about how to secure something is probably by knowing what the gaps are and where can they fix it as well. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nick Frichette:
+\f1\b0 \cf3  So I think the interesting thing about managed Kubernetes as opposed to on prem is that it comes with a lot of benefits.\
+In particular, when it comes to manage Kubernetes, a lot of the technologies you're likely already familiar with, you can take with you. So if you need a load balancer for your Kubernetes cluster in EKS, Hey, why don't you use the elastic load balancer that you're already familiar with? You need a place to store your containers.\
+You could roll your own and use something like Harbor or something \cf4 [00:07:00]\cf3  else, but no, why don't you just use ECR, which is Elastic Container Registry, AWS's own container store. So you benefit a lot from having all of those components already there that you're likely familiar with, but those exact same components have their own security concerns, right?\
+How are you controlling who has the ability to push containers into ECR? How are you controlling access to your cluster and things like that. So the security of the cloud that you're already familiar , you do still have to consider. And additionally, with managed Kubernetes, there are little nuances that you don't typically see on prem.\
+So for instance, in EKS. Whoever created that cluster secretly has administrator access to the cluster. It's not something you can see by describing it or really any API calls. It's just whoever did it now has the secret control. And you want to make sure that role or that user, whoever did so is properly locked down and monitored so that they don't come back in and get abused by an adversary. So I'd say that managed Kubernetes is interesting from a security perspective, because it's like grafting on a \cf4 [00:08:00]\cf3  second cloud provider onto your existing one, where you already have to worry about the security of it\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Christophe Tafani-Dereeper:
+\f1\b0 \cf3  yeah, I think the fact that you get less easily shot in the foot with managed Kubernetes is pretty right, because typically when you have to set it up yourself, you have many components to install. So if we talk about the control plane, you are going to have the API server to configure and to install, etcd, and these are all things that you can misconfigure, that you can expose to the internet by mistake.\
+Same for the things that you install on the worker nodes, you have things like the kubelet, which is a small binary with the REST API that's going to accept incoming requests to run containers. And right, if you are doing that yourself, there's a chance that you're going to mess it up and to expose it to internet without authentication.\
+And attackers know that, and if you look at Honeypots, if you look at attack reports, you will see a lot of attackers that are scanning internet for that, which means that people do it, right? So I think that's one thing that you get very nicely when you use managed communities is that the provider is going to set that up for you.\
+So you're not going to screw up the basics. There are other ways that you can screw up and, but these ones you should be covered. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  Interesting. And \cf4 [00:09:00]\cf3  would you say, because what you said as well, Christophe, I think the pitfalls are fairly obvious in terms of like the abstraction makes it really interesting because what I was gonna come up with was the three major cloud service providers, they all have their own flavor of managed Kubernetes.\
+Is there like a stark difference? Would the pitfalls be same across the board? Are they vary? Or is the offering quite different? \
+But in terms of the differences between the managed Kubernetes that's offered by say EKS and Amazon or by AWS or Azure or Google Cloud, what's the difference that we're talking? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Christophe Tafani-Dereeper:
+\f1\b0 \cf3  Yeah, I can try to say that one, even if it's a tricky one. So I think most of the time you have to look at it from the lens of users. So people who are accessing the cluster, accessing the control plane and, running pods, things like that, there's just workloads that are, in your cluster, and that may be compromised and used by an attacker to escalate or to pivot. So I think in both cases, so in the three cases, it's really a matter of what are you exposing to the internet?\
+Are you exposing your cluster to the internet? What workloads do you have in your cluster? And \cf4 [00:10:00]\cf3  the different, pivot points that they might have. I would say that in many cases, the main issue is when you have a workload that sits inside of a pod that can basically steal the credentials of the worker nodes that it runs on.\
+And that's applicable to AWS, Azure and GCP they just have different kind of protections around it. But basically, if you are inside of a pod, there are many ways that you can get access to the credentials of a node and then pivot to the cloud with that. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  Oh, and I guess I think people will understand because my thinking over here was at least getting the foundational pieces out before we go into the whole container escape and how do you escape out of the cluster as well so maybe let's just start with the first one. Then I think another thing that I wanted to talk about was also the whole, the service account token thing. Cause I imagine, and maybe Nick, because you're from a pentesting background and I think Christophe you've been a developer before.\
+When people are looking at how do I take over a system, they usually talk about the fact that, Hey I need to get domain admin. That's what the conversation used to be in a on premise context, is service account, like the same thing in Kubernetes? Cause I imagine it was \cf4 [00:11:00]\cf3  what you guys were saying earlier.\
+There's a lot of stuff that is abstracted. When I say I have pawned a managed Kubernetes, what am I really saying? have I taken over the service account or what have I done at that point in time? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nick Frichette:
+\f1\b0 \cf3  Likely the best equivalent would be cluster admin. So rather than domain admin for ED on prem in a Kubernetes cluster, you want to escalate to cluster administrator, which would theoretically give you access to everything in the cluster. What's interesting is in a managed Kubernetes context, to some extent, the identity or the authorization and privileges are decoupled from the traditional IEM structure. For example, you could be a cluster administrator and not be an IEM admin, what we would traditionally classify as game over or like the highest level. So to some extent they can be separate. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Christophe Tafani-Dereeper:
+\f1\b0 \cf3  And that's a good call out. The main difference between the providers is going to be how they give an identity to people that are accessing the cluster.\
+So typically in AWS, you're going to use your AWS identity. And then you have a \cf4 [00:12:00]\cf3  mapping in the Kubernetes configuration that's going to say this AWS role has these Kubernetes permissions. Whereas in GCP, so you have one way of doing that, but you can also directly define at the GCP level who has permissions inside of kubernetes.\
+So you have to go to see who has access to what is going to be different based on these cloud providers. And sometimes you have to go look in different places.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  Oh, okay. So it's not that my AWS IAM role is the not the same as cluster admin in EKS? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Christophe Tafani-Dereeper:
+\f1\b0 \cf3  Basically, as of today, if you look at the permissions of an IAM role, you don't know if this role has access to your cluster.\
+You have to go inside the configuration of your cluster to be more specific inside the Kubernetes config map to see, has this role been explicitly mapped to some permissions in Kubernetes? What? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  Okay. So that would be very confusing for a lot of people. Oh, is that the same in Azure and GCP as well?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Christophe Tafani-Dereeper:
+\f1\b0 \cf3  So in GCP, you have two ways of doing that.\
+You can either grant the permissions at the role level on the GCP side, or you can also \cf4 [00:13:00]\cf3  grant it inside of the cluster. In Azure, I think you can also do both, but you can also grant it outside or inside. I will need to check, but. I'm pretty sure you can do both. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  So this is actually interesting because as I was saying in the beginning, I think best way people learn how to protect something is understanding what the gaps are.\
+This is obviously a gap starting out straight away in my face, which is like, Oh, if I'm using AWS, you can definitely look at this from a perspective of, Hey, I have an obvious gap where my role management of identity that I do across the board in AWS. Yes. It's not the same as Kubernetes, which is where people get scared with the whole, Hey, this is a data center within a data center that people say what Kubernetes is, that is still true in the managed Kubernetes part.\
+Then that would, that'd be right.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Christophe Tafani-Dereeper:
+\f1\b0 \cf3  Yeah, I guess that's true. And also you have to account for the fact that. When you use two different cloud providers, you have to keep in mind how each works and you have to keep up with the changes to, and also I think the fact that you have multiple ways of doing it.\
+So we were just saying that in Asia you can grant the permissions to a cluster from inside the cluster. So from a config map or from a cluster \cf4 [00:14:00]\cf3  mapping. Yep. Or from outside. So from the Azure AD configuration. But I think that's confusing because if you just look one of these spaces, you're going to miss the other one.\
+So I think having this complexity is quite bad for the practitioners. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  Actually, I wonder people who are listening in, how many of you already knew about this, that there is the mapping between IAM role and specifically what the role of your cluster is actually his separate. So that's obviously already something that glaring for me in terms of another thing people keep talking about in that container space and kubernetes spaces, something called container escape. And I almost sometimes get confused what people talk about when they say container escape, what's the container escape in the context of this managed kubernetes world, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nick Frichette:
+\f1\b0 \cf3  I think it depends and we can probably argue like the specifics of what we mean by container escape. So on its simplest level to escape a container, there's a couple options. Probably the most common would be to abuse a kernel level vulnerability. So one of the unique things about containers is that they all share the kernel of the host.\
+If you can exploit that, \cf4 [00:15:00]\cf3  you can pop out of the container and land on the host. And that would be like the traditional container escape. There have been vulnerabilities that have led to being able to abuse that. So I think most recently the most popular certainly was Dirty Pipe, which I believe was early last year release.\
+Which was certainly a lot of fun at the time. There are some other things. that you can abuse. So things like Linux capabilities that are designed to divvy up permissions so that it's not running as like user land versus root, you can use capabilities and certain capabilities can be used to escape out of a container and land on a host and take advantage of it.\
+But you also have the opportunity of I guess you would refer to it like indirect container escape. So perhaps if you land on a pod and you're able to pull a service account token, if that pod is privileged in the sense that it can run other pods or it can interact with the Kubernetes API server that could be a way to escape in the sense that you can start maybe launching your own pods. You can access secrets. You can access other resources so you can escape onto other hosts and perhaps do \cf4 [00:16:00]\cf3  not niceties there. So there's a lot of options and there's a lot of potential ways.\
+And of course there's security best practices around each of those trying to ensure that you don't overprivilege things, you limit access to the kernel and things like that.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Christophe Tafani-Dereeper:
+\f1\b0 \cf3  And then when you're in the context of managed kubernetes and environments, you have other things to consider because as Nick, you pointed out, you are in the cloud, so you have integrations, right?\
+Your worker nodes, they need to be able to pull containers. They need to be able to do different things, talking to the cloud providers API. And so the nodes, they have privileges, right? They can do various things, which is going to depend on the cloud provider. And the way that this works is that basically there is something called the instance metadata service, and this is true for these three clouds, which is a magical service that listens on a link, local address.\
+It's like one, six, nine, two, five, four, one, six, nine, two, five, four, but anything that runs on the node can talk to including the pods in a lot of basically if you are from inside a pod, in many cases, you're going to be able to \cf4 [00:17:00]\cf3  call this metadata service with something like curl and pull the cloud credentials for the node that you are working on, which means that you can basically from a workload that runs inside of the pod, authenticate as the node to the cloud environment sometimes to the cluster and you have pretty much a lot of bad things that you can do from there. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nick Frichette:
+\f1\b0 \cf3  Yeah. And this probably sounds familiar to what we've always been talking about from a cloud security perspective of trying to prevent access to the metadata service. If you get service side request forgery, if you get XML external entity vulnerabilities in an application running on a pod in the exact same way you could pivot from an EC2 instance, the metadata service, you can do that here in EKS too, depending on the configuration.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Christophe Tafani-Dereeper:
+\f1\b0 \cf3  Yeah, that's a very good call out to specify the stage a little bit. So let's say that you are hosting a web application inside of a pod. This web application is vulnerable to server side request forgery. So that's a kind of vulnerability where an attacker can have the application request anything on their behalf.\
+So the attacker can just ask, Hey, give me the response of the instance metadata service. And they get back AWS \cf4 [00:18:00]\cf3  credentials, for instance, of the worker node where the pod runs. So you can see how this can very quickly go wrong. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  Ooh, this is like the juicy part of the interview as well. We got a question from Steeven George. How crucial is to enable IMDSv2 in the context of EKS environment? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Christophe Tafani-Dereeper:
+\f1\b0 \cf3  So I would say that it's very important, but it's very important because it means if you have an application that's vulnerable to server side request forgery an attacker is going to have a very hard time stealing the worker node credentials. That said, if your application is vulnerable to something else, like a remote code execution, a command injection, you are not protected. Because even if you have IMDSv2, if someone can run commands inside of the pod, they can just use IMDSv2, right?\
+So the root cause of the problem, like what you really need to solve is something that runs inside the pod should not be able to get the worker nodes credentials. And so the way that you are ideally supposed to solve that is by blocking the pod access to the instance metadata service. So it's not only IMDSv2 even if you should absolutely do that, so it's going to be deploying a network \cf4 [00:19:00]\cf3  policy to block access to the IMDS from the pod and on AWS and GCP, you have other options too.\
+So on AWS is going to be setting the IMDS hop count to one. It's an option that you can set when you start on EC2 instance. And on GCP is going to be. And enabling GCP workload identity, which is going to make sure that the pods, they can still talk to the metadata service, but they cannot steal their worker nodes\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  oh, okay. So I think that's a good point to call it. Because you mentioned there is a difference. It's more important to know what's actually running inside the node. If thats vulnerable IMDSv2 doesn't really make a difference. Would that be the same across the board for AKS and GKE as well? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Christophe Tafani-Dereeper:
+\f1\b0 \cf3  So it's a bit different because, so since recently in AWS, you have ways to enable IMDSv2 by default on specific AMIs. So for instance, Amazon Linux 2023 was released in March this year and enforces IMDSv2 by default. Oh, on Azure and GCP by default, you have to add a specific header when you talk to the \cf4 [00:20:00]\cf3  IMDS, so it's not really vulnerable to SSLF. So I think that's the main difference is that in AWS you have to watch out for it. You have to enforce IMDSv2 or to make sure that the AMI you are using is enabling by default on GKE and AKS. You should move to the over layer of protection, which is blocking the access to the IMDS. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  Okay. So this might be multifacted \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nick Frichette:
+\f1\b0 \cf3  just a bit selfishly, since I'm very focused on like a cloud AWS specific thing. I think it's funny that we're having this conversation about, the differences between the three major providers and since AWS was a little bit late to the party with having a metadata service, even though it's been out since I believe 2019, there's still in some way, still playing catch up to the other providers.\
+In the sense that we're still talking about instance version one versus V2. And it's really shows the importance of like defaults and trying to build things secure by default. Hopefully they'll catch up in the near future, but for now we'll keep harping on this. , \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Christophe Tafani-Dereeper:
+\f1\b0 \cf3  I'm sure they will catch it because that, They are \cf4 [00:21:00]\cf3  adding new ways that to make it easier to enforce IMDSv2 by default. But there's also the fact that AWS has a lot of focus on stability and sometimes enforcing IMDSv2 might break some things.\
+You have some vendors that don't support it, things like that. But I think like having a way to provide practitioners to enable secure default is going to be super helpful. Just to give a number, last year, we had to look at a bunch of environments in the context of the data study. And we saw that we had 93 percent of EC2 instances that were not enforcing IMDSv2.\
+This was in October, 2022. Things have improved since then, but this is just to show that to Nick's point, if you don't enforce something by default, it's going to have people to do it. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  which is actually a good segway into the next question that came in from Abhishek here, which was, what are the benchmark compliances that we need to fulfill to be more secured about Kubernetes architecture?\
+Does it OPA, Rego works there any thoughts on OPA or actually just the benchmark compliance in that context \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Christophe Tafani-Dereeper:
+\f1\b0 \cf3  I was going to \cf4 [00:22:00]\cf3  say CIS, but it's a bit easy. So CIS has a benchmark specifically for managed Kubernetes, which is pretty good.\
+if you have to secure Kubernetes in the cloud, use the managed version. Don't take the CIS for Kubernetes and try to apply it in the cloud, because you don't have access to many of the things that CIS for Kubernetes tells you to do. I think that's one important point. And you have some provider specific guidance.\
+So from AWS, you have something called the EKS best practices guide for AKS you have some things as well. So I think trying to have that mix of what CIS tells you, even if you shouldn't apply it blindly and what the provider specifically is going to tell you is very helpful. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nick Frichette:
+\f1\b0 \cf3  I think that's a good way to summarize it.\
+Being sure not to apply it blindly is also a good call out. Your users have to have certain needs and they may conflict with some of the guidance. So you may have to come up with alternative ways to try and support that and make sure it's still secure. Yeah. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  And I think to what both of you called out as well, not everything in CIS is technically applicable for everyone.\
+You just have to make the right guess for what is applicable for yourself as well. Good call out there. I think it was a \cf4 [00:23:00]\cf3  response to the question from Ozzy as well, where Ozzy called out OPA rego functions as an admission control that helps with enabling and enforcing policies. So you need to know what policies you need like to have in place and whether OPA rego fits your use case as well. So I don't know if you guys had any comments on it, but I think that's pretty straightforward in terms of what. OPA can be used for, I wish I mentioned the version of CIS as well. And Justin had a comment saying depending on the version of kubernetes, one can look at pod security admissions, which has a few policies that depended on workload as well.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Christophe Tafani-Dereeper:
+\f1\b0 \cf3  One point is that you can use, port security admission which is one way to block dangerous workloads and OPA admission controller is one way also that you can do that or something like Kyverno. That's applicable to cloud and non cloud clusters, for cloud clusters might have opportunities to have cloud specific rules too.\
+Typically, if you are trying to protect the IMDS from the pods that run in the cluster, you need to make sure that the pods don't run under the host network. Otherwise, the network policies that you deploy Don't apply.\cf4 [00:24:00]\cf3  If we want to take like a very cloudy stance on that, I would say that you can use pod security admission or something like Kyverno admission control to make sure that you don't have privileged or host network pods that would bypass the restrictions that you specifically put in place for the cloud environment.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  And by the way, this is applicable for managed kubernetes. Is that right? That's where you're referring to, right? As in managed kubernetes and like AKS or EKS. Oh, awesome. And I think Ozzy just called out that the same thing that you had called it earlier, that there is an EKS benchmark available as well, which kind of makes, begs the question.\
+I think we're in that territory of also what are some of the low hanging fruits, because I think we're also in that territory for, yes, there are capabilities to manage policies. What are some of the low hanging fruits in the managed Kubernetes space so that you can escape the cluster to the actual account subscription?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nick Frichette:
+\f1\b0 \cf3  Yeah, so I think we talked a little bit about ensuring at the very least having preventing access to the nodes metadata service. So you can't steal credentials and impersonate the node. But there are other things as well. Following least privilege is something, I think in every single cloud \cf4 [00:25:00]\cf3  security thing ever, right?\
+Following least privileges, what we keep harping on, and that applies to Kubernetes as well, right? You don't want to have every single pod have a service account token that has, cluster admin or something like that, something, or default access, right? To have that level of permission. Other things to be aware of, is the types of workloads that you have. In your cluster, what's internet facing, what's maybe internal only and prioritizing and understanding like, Hey, it probably doesn't make sense if we have an internet facing pod or a group of pods that have a high level of privilege or are at higher risk, things like that.\
+And also being mindful that we maintain best practices in terms of least privilege. On the nodes themselves, right? So Christophe mentioned the EKS nodes need to have certain privileges in order to operate. They need to be able to access the container registry. They need to be able to create network interfaces.\
+And so we want to make sure those are scoped as tightly as possible so that we don't run into the risk of Hey, and in addition to pulling containers, you might be able to if its misconfigured, push containers as well. And that can lead to a whole \cf4 [00:26:00]\cf3  lot of headaches. So being mindful of following least privilege will always be a sort of a core a thing in the cloud for sure. . \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Christophe Tafani-Dereeper:
+\f1\b0 \cf3  You asked about low hanging fruit. So I want to try and make, if you have one thing that you need to take away from today and you are running in the cloud, I think it would be four things. So it says when it's four, don't put hard coded cloud credentials in your cluster because people are going to discover that and to pivot to the cloud. Make sure to enforce IMDSv2 if you're on AWS. Three, restrict the pod access to the metadata service. So on AWS, it means blocking it with a network policy on Azure too. And on GCP, it means enabling workload identity on GKE. And finally, just be careful about whatever is in your cluster that has access to the cloud, for instance, through workload identity or through IAM roles for service accounts in AWS, make sure to understand that something in your cluster can pivot to the cloud.\
+So you have to understand, how these things fit together.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  All right. Cause this also begs the question that, people always harp on the whole shared responsibility model. Cause in my mind, I imagine a \cf4 [00:27:00]\cf3  lot of people when they hear managed kubernetes, it's also a gray area where people are just saying, Oh, isn't AWS or Azure, Google cloud taking care of security?\
+So what is the part that they control? Sounds like we are controlling everything. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nick Frichette:
+\f1\b0 \cf3  They do still manage the control plane. So they run all those components for you. So from that perspective, you don't have to worry about it while you can update the version of Kubernetes you're using.\
+It's not like you have to do each individual one or each individual component. So that's something that you do get from managed Kubernetes. Additionally, if you want to spin up a new node or you're taking on more and more workload. You're going to have to add new hosts, which in the cloud is way easier than trying to rack and stack stuff in a data center somewhere.\
+So there are a lot of benefits. The primary security impact from the customer side of the shared responsibility model are those configurations and trying to ensure that you're following least privilege. You're not giving everybody access to control the cluster or have high privileges. And then being mindful of what the attack surface is, what can an adversary do if they compromise \cf4 [00:28:00]\cf3  a pod, how can they pivot, what can they access and things like that.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Christophe Tafani-Dereeper:
+\f1\b0 \cf3  You said the shared responsibility model. And there's something that I think Scott Piper said that I like, which is. It's already shared, it's split. You're not going to share the responsibility of managing the nodes with AWS.\
+They do it or you do it, right? So I think trying to frame that this way helps. And I think it's, if you want to make it very simple, basically, yeah. AWS manages the control plane and you do everything else, including what runs on the nodes. So I think it can be... The trick can be that to think that AWS or GCP or Azure, they do manage everything on the nodes.\
+And depending on what you do, it's not true. So if you use AWS EKS, the default version, you have to patch your nodes, right? You have to update the OS packages that run on the worker node, things like that. Yeah. So you have other things like AWS, EKS on Fargate for GKE, you have GKE autopilot, where the nodes are also going to be managed themselves.\
+So you don't even see the worker nodes, which, brings a lot of security benefits. You have also less \cf4 [00:29:00]\cf3  flexibility. Maybe it's more expensive. I think being aware that you have, even in managed kubernetes, you have different levels of abstractions is very helpful. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  I think that's an interesting point. I forgot to mention that there are actually layers to that managed kubernetes part as well, where some of that can be controlled by the cloud service provider. So do all three cloud service providers have capability for that? Where similar to Fargate. And the, I think it was autopilot that you mentioned so that exists in all three cloud service providers where the split quote unquote responsibility, the split responsibility is a lot more taken away from us. I didn't realize cause maybe just for the Fargate perspective. Which is my understanding is it's a serverless version of that you don't have to manage the infrastructure or the host.\
+What other things go away when you go for a Fargate option for managed kubernetes? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Christophe Tafani-Dereeper:
+\f1\b0 \cf3  So I think you have a few security benefits. So all the operational things that you don't have to manage, right? Like I said, all the batching, things like that. I think if I'm not mistaken, Fargate also blocks pod access to the IMDS or enforces IMDSv2 like you have some security benefits.\cf4 [00:30:00]\cf3  \
+For GKE, when you use GKE Autopilot, you have also workload identity that's enabled by default. Again, your pods, they cannot get the worker nodes current shares. And I think it's a matter of, if you can focus on building stuff instead of having to patch your worker nodes, and if it makes sense for you.\
+I think , it's a great deal. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  You don't feel comfortable with it, take it if you feel like going for it. But would you say the reason I asked that question is because the low hanging fruit that we just spoke about this before, I feel like that would still apply. Like to what you said earlier, if your node by itself is vulnerable by default, it doesn't matter if it's a Fargate or if it's a EKS.\
+Would that be right? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Christophe Tafani-Dereeper:
+\f1\b0 \cf3  It matters in the sense that it's much less likely than AWS takes more time to patch their nodes than you do, right? So if you use like AWS Fargate and you don't even see the worker nodes, you don't even have to patch them. You can assume that AWS is going to patch them to secure them at least as good as you would do it.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nick Frichette:
+\f1\b0 \cf3  The one thing I wanted to mention since you mentioned container escapes and whatnot, one of, or a couple of the benefits of a Fargate is that in \cf4 [00:31:00]\cf3  some ways they they do restrict what you would otherwise expect on like a Linux server.\
+For example, they do limit access to certain Linux capabilities. So that would mitigate a lot of the risk with privilege escalation or escaping a container. I believe Fargate also either disallows or blocks privileged containers as well. Again, mitigating the risk of container escapes or accessing things that would be problematic.\
+so I think in those senses something like Fargate does help mitigate some concerns you might have around container escapes in a Kubernetes environment. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  In the context of just running containers as well? I think there's a something to be said Christophe did you have something on there as well in terms of the 17 ways to run containers as you called out?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Christophe Tafani-Dereeper:
+\f1\b0 \cf3  Yeah. Because we're talking about managed kubernetes here, which is part of the problem because there's someone that you might know called Corey Quinn and he basically wrote a way to go something called 17 ways to run containers in AWS, which is fun by itself. But then a few months later, he wrote a second blog post, 17 more ways to run containers in AWS, which I think shows that, you \cf4 [00:32:00]\cf3  were talking about EKS, AKS, GKE, there are a lot of other services too, but operate at different layers, so if you just want to take AWS, we have lambda, you can run container images on Lambda. We have ECS, Elastic Container Service, but are all running containers, even if it's not in like traditional Kubernetes. And sometimes the same things apply, right? If you can talk to the IMDS in ECS, you can also steal credentials, things like that. So there's some complexity for people who need to use these services because sometimes they're not as well researched or there are not as many security guidelines, so just wanted to call out that.\
+There are many ways to run containers. EKS, GKE, AKS are very popular, but you have a lot of other options too. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nick Frichette:
+\f1\b0 \cf3  Yeah. And a lot of those other options are certainly a lot simpler as well. Kubernetes has a lot of benefits, but one of those is definitely not being simple and easy. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  Yeah. I definitely get that much.\
+And I also feel that the whole notion of, I can see why people get nervous when they talk about Kubernetes as well, because it's almost like you took some time to learn \cf4 [00:33:00]\cf3  cloud. And now you have to add another layer on top of that as well. That definitely would make me a bit nervous as well. Okay.\
+Cause maybe this also begs the question. I think if we fall further deep into the whole managed Kubernetes part, I named the title to be a lot more on escaping the managed Kubernetes cluster, and I think you guys had some research on this as well. With that initial understanding of what escaping containers is, what is escaping a managed Kubernetes cluster?\
+What does that mean?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Christophe Tafani-Dereeper:
+\f1\b0 \cf3  So mostly when we say escaping in the context of managed Kubernetes, it can mean you escape from the container to the node, but you can also mean, and I think that's one of the most interesting vectors for an attacker.\
+You escape from the pod to the cloud environment. So one way that we can do it as we saw is by accessing the instance metadata service. Then you are authenticated as the node against the cloud environment. So first of the impact of that in AWS, by default, you don't have a lot of permissions as a node, but you can do things like describe instances.\
+You can destroy network interfaces, in GCP \cf4 [00:34:00]\cf3  by default, you are using the default compute service account with read only scope, which basically means that you can read any bucket GCS bucket or big query dataset in the project. It can easily be used to pivot from a pod to authenticating to GCP and stealing stuff in GCS for instance.\
+Oh wow. For Azure, it depends a little bit more on the setup, because by default it doesn't have permissions. But in all the clouds you can do the stuff that the worker nodes need to do. So pull the container images. And from there you have some opportunities to re look at the source code maybe find secrets in the container images.\
+There was a very nice paper a few months ago from, I think someone in a German university, they looked at a lot of container images and they showed that, many of them had credentials in them, including AWS access keys or stuff like that. And it can feel very dumb, but when you use things like multi layered builds.\
+I promise you, you can get hit by that. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  Oh, really? So it's actually quite common.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Christophe Tafani-Dereeper:
+\f1\b0 \cf3  Like I wouldnt say common, but I think the numbers \cf4 [00:35:00]\cf3  they had and we can link to the paper in the show notes was eight, 8. 8 percent each, something like that. So 8 percent of the containers that they looked at had some credentials in there.\
+Not all of them were cloud credentials, some of them were TLS keys or things like that, but they were also some cloud keys. So I think that covers the first attack vector. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nick Frichette:
+\f1\b0 \cf3  In a EKS environment, if you get access to a pod, you get access to file system, if there may be a service account token sitting on the file system at slash far run secrets, that token is super interesting because there's the potential that you can exchange that for normal IEM credentials using a particular API call, and that could potentially help you go from sitting inside of a Kubernetes cluster, and now you're able to assume a role inside the AWS account itself.\
+And then from there, you can do all the types of fun stuff that we normally try and look for. Privilege escalation, lateral movement, accessing resources, and so much more. So even if you are landing on a pod, you can still move \cf4 [00:36:00]\cf3  into that cloud control plane, which is super interesting. Another thing to consider or think about would be something like a Kubernetes operator.\
+So being mindful, like what you deploy into your cluster, say you want to take advantage of something like the kubernetes secret store to CSI driver or a project like external secrets. If you deploy something into your cluster, if a attacker is able to steal the credentials of the node, they might be able to coerce a certain pod to run on it.\
+They could try and steal the service account token from that pod, and then they may be authenticating in the example of like external secrets, potentially having access to every secrets running in something like secrets manager, things like that. So being mindful of the types of things that you're deploying into your environment may also give you an idea of the attack service that could be abused.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Christophe Tafani-Dereeper:
+\f1\b0 \cf3  I just want to go into a bit more depth into what you said about when you are authenticated as a worker node. So if you stole credentials from a worker node, what you can do. And in some cases, so \cf4 [00:37:00]\cf3  for instance, on EKS, you can do it.\
+When you are authenticated to AWS as a worker node. It means you are also authenticated to the cluster as a worker node. So which means that you can do in the cluster two things that the nodes can do, including one of the things that they need to do is to create service account tokens for the pod that they run, right?\
+If you are a node and you run a specific pod, Specific Kubernetes service account, you need to first ask the API server, Hey, can you give me a service account token for this pod? And then you inject it into that part. Now, as a attacker, the way you can abuse it is that you can basically use kubecuddle or the Kubernetes API to say, Hey, give me a service account token for this pod.\
+And then you are authenticated as a pod, which means that if you find a privileged PO on the cluster, you are able to go from. Authenticated as a node to authenticate it as a privilege pod, but could do things like create pods or look at big maps or secrets or things like that. So I think that's interesting because it means you start from the cluster, you pivot to the cloud, and then you go back to the cluster, try and do.\cf4 [00:38:00]\cf3  \
+Other things. So it's yeah, you're like bouncing around between the cluster and the cloud. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  So is this attack path actually logged somewhere? Because I'm also thinking from a, I guess people listening in I imagine some of them also going, is there a way to pick that up somewhere as well.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nick Frichette:
+\f1\b0 \cf3  That's a really excellent question. So when it comes to defense evasion in something like an 80 percent environment or the cloud in general, there seems to always be options. So one of the, probably one of the first ones that maybe some folks in the audience might have caught out is Hey, if you're accessing the metadata service. of the underlying node and you're trying to use those credentials remotely I'm going to catch you because of GuardDuty. For those perhaps not familiar, GuardDuty is a managed threat detection service offered by AWS. And due to some of the sort of well known tactics and techniques that we use against AWS environments AWS has built some detection rules for using stolen credentials remotely.\
+These are the instance credential exfiltration findings. And If you steal a pair of access keys from an \cf4 [00:39:00]\cf3  EC2 instance and try to use them from your home network, that's going to trigger an alert in the GuardDuty service that, Hey, these credentials are stolen. They're being used off the host. And , that's not good because that isn't good, certainly that's pretty suspicious. What's interesting is, obviously as an attacker, we don't want to get caught. And there is a way around it. For whatever reason, VPC endpoints, which is a service offered by AWS to allow air gapped networks the ability to still interact with the AWS API.\
+By using a VPC endpoint and routing your API traffic Through it using those stolen credentials, it doesn't trigger the GuardDuty alert. Yeah. Presumably it's like missing some metadata or something else that they use, or perhaps they're only accounting for like the VPC traffic and the general internet traffic.\
+They're not thinking about VPC endpoints, this is a method that we can use to bypass that detection and operate a lot more stealthily then there's always CloudTrail bypasses, which I'm very fond of for those not aware over time, what started with a singular, hey, you can bypass CloudTrail in this very specific \cf4 [00:40:00]\cf3  way.\
+And it was shocking at the time. Now it's here's a whole bunch of ways we've found to bypass CloudTrail for a variety of services and more coming out soon. Wink, nudge, nudge. So when we talk about CloudTrail bypass. That can take either the form of permission enumeration. So typically adversaries don't have a way to know what level of permission they have.\
+And so what they ended up doing is they will brute force and be very noisy to figure out what they can access. There are certain ways that you can bypass CloudTrail and do that a lot stealthier. So that's one option. And then of course there are just pure bypasses where you can interact with a particular AWS service without logging the CloudTrail. And so that from the victim's perspective, they have no way of knowing that activity has occurred. So for a attacker who's trying to evade detection, these are some of the things that they would probably use, or they'd be interested in, and there's definitely a lot of other opportunities as well.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  And I think someone just shared the link for your hacking the cloud website as well. I was going to say, how about other cloud? I don't know if you had some chance to \cf4 [00:41:00]\cf3  research onto some of the other cloud providers as well in terms of, does it get picked up by them? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nick Frichette:
+\f1\b0 \cf3  It's funny because I personally only do AWS. That's the only thing I'm focused on. But when I was at, fwd:cloudsec, I had the opportunity to meet an engineer at GCP who describe to me that he's been working on the exact same thing internally and it worked as well.\
+So I know that there are other folks working on this research or applying the idea of trying to evade the logging set up of the cloud provider they're working on. So it's definitely applicable to other cloud providers for sure. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Christophe Tafani-Dereeper:
+\f1\b0 \cf3  That's super interesting because it's not even a matter only of container security, right? It's a matter of if you have a role assigned to an instance. You want to only make that role available to this instance that runs in the cloud, in this page, right? So I think it's interesting that you have detective controls like that, but I think now at AWS, you have ways to restrict, to say this role that's attached , to instance can only be used from this instance. I think that's maybe something to look into as well. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  Maybe taking that leap forward further because you had \cf4 [00:42:00]\cf3  escalation privilege as in the EKS cluster that you had called out in one of your talks as well. Did you want to talk about that as well, man? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Christophe Tafani-Dereeper:
+\f1\b0 \cf3  Yeah, sure. So I think one that's interesting is that we said it before, but the way that in AWS EKS you manage permissions is from inside the cluster. So you have a config map. That's called AWS auth in the kube system namespace that maps AWS roles to Kubernetes permissions, right? And so it's interesting because if you have the rights to edit config maps in the cluster, it means that you can actually map your own AWS role to being a cluster admin.\
+And then you can escalate this way from whatever access you might have to cluster admin. So I think it's something to know and to be aware of that. If you are getting something or someone edit ConfigMap permissions, you might not be aware that you're actually granting a cluster admin to the cluster as well.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  So the ConfigMap is pretty interesting. Would I be able to change that if I was using Fargate versus EKS as well? Or is that just a EKS only thing? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Christophe Tafani-Dereeper:
+\f1\b0 \cf3  That's a great question. So you have EKS and Fargate. I think for EKS and \cf4 [00:43:00]\cf3  Fargate, it would work the same for other things. Yeah, so for EKS and Fargate, it should work the same.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  Okay. It should work the same. . And so would this escalation privilege of config map would be applicable for Azure as well cause you can manage that there as well. Would that be right? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Christophe Tafani-Dereeper:
+\f1\b0 \cf3  So it would be different because the way that you manage these permissions in Azure, it's not through a config map. In Azure, the way you would find that is for a cluster role binding. So if you are able to modify cluster role bindings anyway, you're going to be able to escalate your privileges .For GCP. It's the same, the way that you can grant, access to a cloud in your cluster is also through a cluster hold binding. So it's a bit different in that sense. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  Okay, cool. Thanks for sharing that as well. So Ozzy had a question around the fact that if an application requires an automated service account token, besides creating a custom service account and preventing the use of default Kubernetes service accounts, what else can we do to reduce the Kubernetes attack surface?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nick Frichette:
+\f1\b0 \cf3  Yep. So I think these are all great things to call out, especially preventing the use of the default Kubernetes service account token. The big thing, I'll say it again, following least privilege \cf4 [00:44:00]\cf3  ensuring that if the pod needs to access three things, make sure it can only access those three things and being mindful that in the event that it does get compromised, that an adversary may have access to those things.\
+So you want to ensure that they don't escalate privileges or access things that you're not expecting. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  So Steeven had a question. How, and this is a good one as well, how Managed Kubernetes Auditing Toolkit, MKAT can help identifying common security issues in Managed Kubernetes environment.\
+Maybe for a share what MKAT is, and you can talk about how you can use it? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Christophe Tafani-Dereeper:
+\f1\b0 \cf3  Yeah, sure. So it's an open source tool that we released a few months ago. And basically it's trying to help with a few pain points and manage Kubernetes. So for now it's only focused on EKS, but I'm hoping to add support for GKE too.\
+And basically one of the things that it does is you run it in your cloud environment, and it's going to look at your Kubernetes service accounts and your IAM roles. And it's going to show you this specific service account, this specific pod can actually assume this AWS role. And it's going to generate a visual map of that to be able to show very quickly, what are the pivots that you \cf4 [00:45:00]\cf3  have from your pods to your cloud.\
+That's one of the things that it does. And it does also two other things to test if you probably blocked pod access to the IMDS. And it's also going to try and find AWS hard coded secrets in your Kubernetes clusters. So it looks at config maps, secrets, and pod definitions. So yeah, that's the goal.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  Awesome. And thank you for calling it out, Steeven. Also, shout out to Steeven for calling out Nick's blog as well, which is Hacking the cloud version as well. You can look out for. the GuardDuty bypass. I'll make sure I'll have both the links in the show notes as well. I had a comment from Abhishek around the whole secret leak detection as well.\
+I think it's called the Semgrep rules. So what a secret manager, how you mentioned MKAT can look at secrets as well. So would that be just the secrets by, in terms of there's an AWS secret manager, there's a. Kubernetes secrets, which one are we referring to over here, at least in the context of MKAT.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Christophe Tafani-Dereeper:
+\f1\b0 \cf3  So in the context of MKAT, it only looks at hard coded AWS access keys, which you should typically not have in a Kubernetes cluster, even in AWS, because there are much better ways to get your \cf4 [00:46:00]\cf3  pods access to the cloud and your own launch namely it's called IAM roles for service accounts, which allow you to easily do that in a secure way with no hard coded and long lived credentials.\
+In general about hard coded credentials and how to find them, I think the easiest way to not leak static cloud credentials is to not have them. So I would try to put an emphasis in fixing the root cause. If you are leaking access keys, it means that you have access keys. So how do you get rid of that?\
+AWS, it means not using IAM users, trying to do something like an ADP, like Azure ID or Okta redirecting to the accounts and then making sure that you block the creation of IAM users because. Many people might think that you need them to run stuff on your laptop on AWS. And then you can move into the detective controls, like using something like GitLeaks, GitGuardian, or something that you can run in your safe pipelines on your source code to find secrets.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nick Frichette:
+\f1\b0 \cf3  When it comes to secrets detection, one thing I always want to stress because I used to run into this a lot as a pentester is if you \cf4 [00:47:00]\cf3  are a security engineer or perhaps developers are listening, having a well defined plan for rotating those secrets is super important because you don't want to, you don't want a situation where the pentest team finds creds or they find secrets and they go to the team and report them and the team goes.\
+Listen, if we were to rotate these right now, we'd have to take out all of prod for a day. And even then we don't know what will happen. So building those game plans around a resetting, revoking credentials is super important so that when they do get leaked, because they will get leaked eventually, having that plan ready to go that you could execute in literal minutes, what will save you a lot of hassle down the road.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  Awesome. And I think I've got a question from Rajesh as well. Thank you for sharing that Nick, by the way. By default, if a cluster creation has admin privileges for a long time, that is too much threat. How do we avoid this? And since if we delete that role with System Master, then will we lose access? How to prevent AWS AuthConfig map based attack?\
+And I guess there's a follow up from Ozzy just below that was around the more. I'm not sure you can delete the \cf4 [00:48:00]\cf3  system master role. Best you can do is make no assume that the role, it's unavoidable to adequately monitor. But would you agree, Christophe, or do you not have to do it? Yeah, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Christophe Tafani-Dereeper:
+\f1\b0 \cf3  I think that's a great call out.\
+And if some people join the issue is that when you create an EKS cluster, by default, you have admin access to it. Even if you don't see it anywhere. So it's hidden. So I think one of the recommendations that AWS has somewhere, or one option that you have at least is to create a role, create your EKS cluster from that role, then configure your AWS config map so that you map specific roles and then delete the role.\
+That's one option. Maybe it's a bit extreme, but that's one way of doing that. Otherwise, yeah, trying to make sure that you are protecting this role. But as far as I'm aware, as of today, there is no way to remove that. Shadow Admin. It's probable or maybe AWS has plans for that though.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  Would you say a user access review, like a period, it's probably a manual way to do it. You know how people have been doing user access review for some time where, or maybe it gets a bit tricky because you do user access review for AWS, but that's not necessarily access review for Kubernetes.\
+You're in that gray area \cf4 [00:49:00]\cf3  for someone who's going to go deeper or not as well. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Christophe Tafani-Dereeper:
+\f1\b0 \cf3  So in that case, it's not going to help because you cannot see who created the cluster. If you look at AWS console, you don't see who created the cluster. So you would have to look at in CloudTrail logs, who originally created that cluster, what role.\
+And from there, you can see who still has access to it. Does the role still exist? And try to figure out, who is using that role, basically. But you have to look in the logs to be able to figure that out currently. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  Oh, and Rajesh had a follow up, even if you rotate the secret, should they be propagated to individual workload?\
+Do you have any recommendation for propagation security? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Christophe Tafani-Dereeper:
+\f1\b0 \cf3  I think the best way is to not treat secret rotation as something that you have to, engineer, right? It should be short lived credentials by default. When you have a lived credentials it means that there is a built in mechanism to do that, right? If we take the example of IAM roles for service accounts, which is the way recommended to get your pods access to AWS stuff, the way it works is through the native Kubernetes service accounts.\
+So you have a kubelet that's going to inject the Kubernetes service account in the pod, and frequently \cf4 [00:50:00]\cf3  refresh that. So I think overall it's more a matter of trying to have that mindset of All the credentials are temporary and by default, this is getting rotated by design as opposed to having, very hard to follow processes.\
+Like you have to rotate this access key in this config map, and then you have to restart all your pods you have to watch the files that are in the pod and to restart your application. I think it's more a matter of mindset and trying to use mechanisms that. But you bought that by design, \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nick Frichette:
+\f1\b0 \cf3  That's always the optimal, if it's built in and supported for some things that may not be there. So for example, like GitHub or GitLab access tokens and other API keys, similar to that, when it comes to propagation, something to keep in mind is assessing the situation. So as an example, say you can rotate a secret in a minute. That's great. You don't want to do that. If there's still an adversary in your network or in your environment, because then you're just handing them the new keys. That's something I've experienced as a pen tester of them not realizing like, no, I still have a shell on this box and I see that what you're doing, so that can be something to keep in mind is \cf4 [00:51:00]\cf3  making sure that you assess the situation, try and assess if the adversary is still it has access to your systems if they're still around and try and force them out first before you rotate and things like that. And of course, maybe you're in a situation where if you were to not rotate, you're going to lose money or there's going to be some other impact to the business because of course, at the end of the day, we're all trying to support the business, right?\
+Bearing in mind that you have to operate around that and perhaps you do have to rotate and maybe you'll have to do a second time being mindful of what the situation is for sure. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  And I guess to your point that you can always use a secret manager, which is outside of the cloud context as well to manage it.\
+So I think because Rajesh asked about the secret rotation outside of the cluster, I guess it's just a general advice, secret manager could be non cloud specific as well. You can use HashiCorp Vault or other providers as well to manage and rotate secrets outside and without hard coding as well.\
+We're towards the tail end of this as well, and I want to make sure at least I got most of the questions out in terms of, I guess we spoke about some of the low hanging fruit. We spoke about things that are obvious. People should look out for I think the \cf4 [00:52:00]\cf3  biggest question people normally don't have an answer for is where do I start learning about this?\
+But I mean they can obviously listen to your talk Christophe and Nick and you guys did a talk at SANS I think it was earlier this week and Kubecon EU as well But is this information usually like I know Nick you have a blog as well Christophe you have a blog is Where do people learn about this man?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nick Frichette:
+\f1\b0 \cf3  Yeah, honestly, I think the best thing to do is to get your hands dirty and try it out for yourself. If you're interested in doing managed Kubernetes, spin up a cluster in the cloud of your choosing, bearing in mind the potential costs, of course. The, if I recall correctly, the EKS control plane is not cheap to run. So being sure to tear it down when you're done. If you'd like to get a little sort of local experience, we've talked a lot about managed Kubernetes, but you can also run Kubernetes on your own home network. I know within the self hosted community, things like K3s, which I believe is a rancher product is very popular, a single binary to spin up a cluster for you.\
+There's also things like Minikube that you can run in like a VM on your local workstation, while Kubernetes can scale to, massive enterprise \cf4 [00:53:00]\cf3  levels. You can also totally run it at home on your laptop or on your desktop and get a lot of experience that way. So I think, getting that hands on will definitely help.\
+And you can apply that knowledge to when you want to start building a crazy enterprise cluster in AWS or other cloud providers. Yeah. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  Or maybe get some cloud credit from people so I can just spin up an expensive one if they want you. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Christophe Tafani-Dereeper:
+\f1\b0 \cf3  I think getting your hands dirty is very important, to be able to secure something, you need to actually use it in the way that it was intended to. So for managed Kubernetes, it means really creating your own cluster, trying to how do you authenticate to that cluster?\
+How do you have things in that cluster authenticate to the cloud? And trying to figure out how these things work together. For EKS specifically, I took some time to try and wrote a blog post that describes how these different things work. So we can share that in the show notes, but that's really a matter of how do humans and things authenticate to the API server?\
+How do workloads get access to the cloud environment? And what does the integration between the cluster and the cloud looks like? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  Awesome. Thank you for sharing that. And I'll make sure I'll have those links as \cf4 [00:54:00]\cf3  well on to the show notes. So that's most of the technical question. I appreciate everyone joining in as well.\
+So I've got three more questions that are non technical for both of you, for people who are probably regular to the show, listening in to probably know the answers. Oh, they know the questions already, not the answers. Answer is what are you going to give me? So first one being, what do you spend most time on when you're not working on researching cloud and technology?\
+Maybe I'll start with Christophe first because it's your first time on the podcast. What do you spend most time on when you're not working on researching cloud and tech and all of that, man? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Christophe Tafani-Dereeper:
+\f1\b0 \cf3  Yeah. I love being outdoors doing a skiing, hiking, things like that. I also have a one year and a half daughter.\
+So that's also a big part of my free time. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  She'll definitely take most of your time with the board. I imagine. What about yourself, Nick? Thanks for sharing that man. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nick Frichette:
+\f1\b0 \cf3  Yeah, for me recently, when I'm not doing like cloud related stuff, just recently, and I don't, this will apply to the 0 percent of the audience who lives in Bloomington, Illinois, just recently a cat cafe opened in town called the Cat's Meow.\
+And it's a place you can go to get coffee and then hang out with 10 to 15 cats. And my girlfriend and I have been going \cf4 [00:55:00]\cf3  like I don't want to say every day, but pretty close just to hang out for a bit. It's been a lot of fun for sure. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  Oh, wow. I've heard that in Japan.\
+I've never heard that in the US. So it's pretty awesome that you guys have that close by. Thanks for sharing that. Next question. What is something that you're proud of, but that is not on your social media account? And maybe Nick, do you want to start first this \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nick Frichette:
+\f1\b0 \cf3  time? Oh, okay. Something I'm proud of. See, the thing is I post everything on social media.\
+I don't think this is on social media. I. built a server rack and I'm very big on self hosted like running my own infrastructure at home which is somewhat silly since I do cloud security all the time. Yeah, maybe that's because I do cloud security research.\
+I choose to run everything at home, but I've built a fairly elaborate server rack with a UPS, a couple servers and some networking that I'm pretty proud of running an entire cloud at home for sure. Wow. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  What about you, Christophe? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Christophe Tafani-Dereeper:
+\f1\b0 \cf3  That's a very hard one because same as Nick, everything that I'm proud of, I post it on my social media.\
+Yeah. So I don't have a good answer for you. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  Okay. Final question. \cf4 [00:56:00]\cf3  What's your favorite cuisine or restaurant that you can share with us? Christophe, you could probably start with. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Christophe Tafani-Dereeper:
+\f1\b0 \cf3  So I added something that I really like is called Siu Mai it's a kind of traditional Chinese dumpling, which is very nice.\
+So if you ever see that, it looks a bit round, a bit yellow. It has like shrimps in that. I loved eating it. I tried baking it once, twice. It didn't work very well. , but maybe someday. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  Yeah. Dumpling making dumplings is super hard. I don't know how those Chinese aunties do it. Like in the restaurants that you go to, they're just basically making it up and they're like, wow.\
+By the way, if you haven't tried it, I would definitely recommend trying Xiaolongbao as the dumpling type as well, I don't know if you've tried that because these are dumplings with some a little bit of soup inside. So when you bite into them, there's a little hot soup that comes out.\
+I'm so hungry right now after this, but Nick, what about yourself, man? What's your favorite cuisine or restaurant? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nick Frichette:
+\f1\b0 \cf3  It's funny you mentioned it. I was about to say just recently, I've been pretty fond of Bao in general, but there's a nice place in town that we've been getting it. It's been pretty great. So big fan of that for sure.\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  Oh, awesome. By the way, while we were discussing our actually non technical lives, there are a couple of things that came up as well. There was a question around the whole, \cf4 [00:57:00]\cf3  what are the blogs that you refer to for latest security updates and Kubernetes, I think Steven mentioned cloudseclist, I'll definitely recommend that as well from Marco.\
+Any other, I guess I've got the blog that you wrote Christophe, but is there a central point that you guys direct people for latest security updates on Kubernetes? I don't know what that would be apart from the TLDR sec, cloud sec list. Is there any other that comes to mind? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nick Frichette:
+\f1\b0 \cf3  Those are both excellent.\
+If I can self plug, if you're looking for general cloud security, I'd encourage you to take a look at Hacking the Cloud. Hacking the dot cloud is the domain. The intention is to be an open source encyclopedia of cloud offensive security techniques. We have a lot of AWS content. Because I happen to do a lot of AWS stuff, but if you're ever interested in, say, Hey, how can somebody escalate privileges in IEM or, what central attack surface is there for something like Lambda, hacking the cloud might be a good avenue.\
+We were definitely missing quite a lot of material, but we're adding more over time and trying to get there until where we finally cover everything, which I don't think we'll get there, \cf4 [00:58:00]\cf3  but Maybe someday. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  No, but I'll definitely refer that in the show notes as well. But that's what we had time for. Thank you both for joining in.\
+ If you have any questions, feel free to reach out to Christophe and Nick on social media, considering everything that you guys do on social media, you might as well share your social media link as well. Nick, did you want to share first?\
+\pard\sa360\partightenfactor0
+
+\f0\b \cf2 Nick Frichette:
+\f1\b0 \cf3  Yep. So you could find me on Twitter and I still call it Twitter at Frichette underscore N. And then you can also find me on Mastodon. I'm on the Fostodon server and my handle is at FrichetteN, all one word. Oh, awesome. I'll add that in. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  What about you, Christophe? \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf5 Christophe Tafani-Dereeper:
+\f1\b0 \cf3  Yeah, so it's ChristopheTD, like my name, fr because I'm French and the same on Twitter and on Infosec. exchange. I'm even on BlueSky. So ChristopheTD, I'm there. Feel free to PM me. I'm happy to talk about anything. \
+\pard\sa360\partightenfactor0
+
+\f0\b \cf6 Ashish Rajan:
+\f1\b0 \cf3  So I know why the fr is for that makes sense. Okay. That actually makes sense. \
+I appreciate you both coming on the show and sharing all this. I will be back with another episode later next week, but thanks everyone for joining in I will see you all in the next episode and I'll see you both Nick and Christophe \cf4 [00:59:00]\cf3  soon as well. Thanks everyone.}
