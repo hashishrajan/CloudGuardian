@@ -1,6 +1,8 @@
 # CloudGuardian
 Cloud Guardian is an AI based Cybersecurity Assistant with deep knowledge for Cloud Security in Public &amp; Hybrid Cloud environments.
 
+In other words, Cloud Guardian is a Custom AI agent which is trained on interviews from guests across 150+ episodes that are in the Cloud Security Engineering, Cloud Security Architecture, Cloud Security Directors, CISOs, Cloud Security Researchers that have been interviewed on Cloud Security Podcast a Top 10 ranked podcast & YouTube channel for Cloud Security.
+
 ![DALL·E 2023-11-14 22 36 05 - A professional and friendly cloud character for 'Cloud Guardian', with a builder's hat featuring a cybersecurity shield logo  The cloud is designed in](https://github.com/hashishrajan/CloudGuardian/assets/10039370/743ad8a6-cb56-41a9-b797-6b5a61c9aec1)
 
 
